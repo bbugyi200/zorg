@@ -1,0 +1,16 @@
+---
+version: '3.7'
+services:
+  bbugyi200.zorg:
+    build:
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/zorg:delegated
+    working_dir: /zorg
+    environment:
+      - BETTER_EXCEPTIONS
+      - CC_REPO_URL
