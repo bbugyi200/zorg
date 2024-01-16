@@ -226,8 +226,10 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-structlog==24.1.0
-    # via bolton-logrus
+structlog==22.3.0
+    # via
+    #   -r requirements-dev.in
+    #   bolton-logrus
 syrupy==4.6.0
     # via -r requirements-dev.in
 text-unidecode==1.3
