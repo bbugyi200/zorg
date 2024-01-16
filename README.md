@@ -64,7 +64,7 @@ usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
 
 Contains the zorg package's main entry point.
 
-optional arguments:
+options:
   -c CONFIG_FILE, --config CONFIG_FILE
                         Absolute or relative path to a YAML file that contains
                         this application's configuration.
