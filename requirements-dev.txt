@@ -26,7 +26,7 @@ bolton-eris==0.2.3
     # via bolton-clack
 bolton-ion==0.1.0
     # via bolton-eris
-bolton-logrus==0.1.1
+bolton-logrus==0.1.2
     # via
     #   -r requirements.in
     #   bolton-clack
@@ -226,7 +226,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-structlog==22.3.0
+structlog==24.1.0
     # via bolton-logrus
 syrupy==4.6.0
     # via -r requirements-dev.in
