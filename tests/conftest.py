@@ -40,7 +40,9 @@ def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
             if key not in kwargs:
                 template_path: Path = kwargs["zettel_dir"] / f"{stem}.zo"
                 template_path.parent.mkdir(parents=True, exist_ok=True)
-                test_data_template_path = Path(__file__).parent / Path(f"data/{stem}.zo")
+                test_data_template_path = Path(__file__).parent / Path(
+                    f"data/{stem}.zo"
+                )
                 template_path.write_text(test_data_template_path.read_text())
                 kwargs[key] = template_path.name
 
