@@ -62,7 +62,7 @@ print("```", stdout.decode().strip(), "```", sep="\n")
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [-d ZETTEL_DIR]
-            {edit} ...
+            {day} ...
 
 The zettel note manager of the future.
 
@@ -91,8 +91,9 @@ options:
                         specified multiple times (e.g. -v, -vv, -vvv, ...).
 
 subcommands:
-  {edit}
-    edit                Open day log in editor.
+  {day}
+    day                 Generate new day logs from templates and open the main
+                        day log in your system's editor.
 ```
 <!-- [[[[[end]]]]] -->
 
