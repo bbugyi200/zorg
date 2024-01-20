@@ -1,0 +1,30 @@
+# {{today.strftime('%Y-%m-%d.%a')}}
+#
+# @ = [[day_log_tmpl]]
+# < = [[{{yesterday.strftime('%Y%m%d')}}.zo]]
+# > = [[{{tomorrow.strftime('%Y%m%d')}}.zo]]
+#
+# H = [[{{today.strftime('%Y%m%d')}}_habit.zo]]
+# X = [[{{today.strftime('%Y%m%d')}}_done.zo]]
+
+o #gtd pomodoro
+  * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+  * Copy any important gchat convos from yesterday into chat/*.txt
+  * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+  * Check today's tickler file: [[tick_{{today.day}}]]
+  * Fill out yesterday's habit tracker: [[{{yesterday.strftime('%Y%m%d')}}_habit.zo]]
+  * go/g3co
+  * Review '@A' todos (are any >=7d old? which should you do today?)
+  * Set 2-5 goals / "highlights" for today
+  * Add [[act]] file links to this day log
+  * <50 emails in bryanbugyi34@gmail
+  * <100 emails in bbugyi@google
+  * inbox: Google Keep
+  * inbox: ~/org/box.zo
+  * Review ~/org diffs from yesterday and commit them to git
+
+##### Goals #####
+
+##### Events #####
+
+##### Pomodoros #####

@@ -1,0 +1,29 @@
+# Habits | {{yesterday.strftime('%Y-%m-%d.%a')}}
+#
+# @ = [[habit_log_tmpl]]
+# < = [[{{two_days_ago.strftime('%Y%m%d')}}_habit.zo]]
+# > = [[{{today.strftime('%Y%m%d')}}_habit.zo]]
+#
+# 0 = [[{{yesterday.strftime('%Y%m%d')}}.zo]]
+
+meds: ?
+run: ?
+time_of_1st_pomodoro: ????
+w: ?
+wfo: ?
+----- CL -----
+R0 bounces: ?
+RN bounces: ?
+submits: ?
+----- pm routine -----
+picked clothes: ?
+brush teeth: ?
+rubber bands: ?
+----- pomodoros -----
+all: ?
+overflow: ?
+work: ?
+
+##### expenses #####
+
+total:

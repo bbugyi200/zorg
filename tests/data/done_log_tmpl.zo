@@ -1,0 +1,9 @@
+# {{today.strftime('%Y-%m-%d.%a')}} | Done Tasks / Projects
+#
+# @ = [[done_log_tmpl]]
+# < = [[{{yesterday.strftime('%Y%m%d')}}_done.zo]]
+# > = [[{{tomorrow.strftime('%Y%m%d')}}_done.zo]]
+#
+# 0 = [[{{today.strftime('%Y%m%d')}}.zo]]
+
+

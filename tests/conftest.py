@@ -32,18 +32,17 @@ def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
     def inner_main(*args: str, **kwargs: Any) -> int:
         kwargs.setdefault("zettel_dir", default_zettel_dir)
         kwargs.setdefault("edit_day_log", False)
-        for key, fname in [
+        for key, stem in [
             ("day_log_template", "day_log_tmpl"),
             ("habit_log_template", "habit_log_tmpl"),
             ("done_log_template", "done_log_tmpl"),
         ]:
             if key not in kwargs:
-                day_log_template_path: Path = (
-                    kwargs["zettel_dir"] / f"{fname}.zo"
-                )
-                day_log_template_path.parent.mkdir(parents=True, exist_ok=True)
-                day_log_template_path.touch()
-                kwargs[key] = day_log_template_path.name
+                template_path: Path = kwargs["zettel_dir"] / f"{stem}.zo"
+                template_path.parent.mkdir(parents=True, exist_ok=True)
+                test_data_template_path = Path(__file__).parent / Path(f"data/{stem}.zo")
+                template_path.write_text(test_data_template_path.read_text())
+                kwargs[key] = template_path.name
 
         cfg_kwargs = {k: str(v) for (k, v) in kwargs.items()}
 
