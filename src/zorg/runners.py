@@ -50,9 +50,7 @@ def run_day(cfg: DayConfig) -> int:
     if not day_log_path.exists():
         day_log_path.write_text(day_log_contents)
 
-    habit_log_path = _get_day_path(
-        cfg.zettel_dir, yesterday, suffix="habit"
-    )
+    habit_log_path = _get_day_path(cfg.zettel_dir, yesterday, suffix="habit")
     habit_log_path.parent.mkdir(parents=True, exist_ok=True)
     if not habit_log_path.exists():
         habit_log_path.write_text(habit_tracker_contents)
