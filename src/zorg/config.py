@@ -56,7 +56,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "day",
         help=(
             "Generate new day logs from templates and open the main day log in"
-            " your system's editor."
+            " your system's editor. This is the default subcommand."
         ),
     )
     edit_parser.add_argument(

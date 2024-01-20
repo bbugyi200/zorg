@@ -93,7 +93,8 @@ options:
 subcommands:
   {day}
     day                 Generate new day logs from templates and open the main
-                        day log in your system's editor.
+                        day log in your system's editor. This is the default
+                        subcommand.
 ```
 <!-- [[[[[end]]]]] -->
 
