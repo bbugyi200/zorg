@@ -12,7 +12,7 @@ from logrus import Logger
 import metaman
 import vimala
 
-from .config import EditConfig
+from .config import DayConfig
 
 
 RUNNERS: List[ClackRunner] = []
@@ -22,8 +22,8 @@ logger = Logger(__name__)
 
 
 @runner
-def run_edit(cfg: EditConfig) -> int:
-    """Runner for the 'edit' command."""
+def run_day(cfg: DayConfig) -> int:
+    """Runner for the 'day' command."""
     template_loader = jinja2.FileSystemLoader(searchpath=cfg.zettel_dir)
     template_env = jinja2.Environment(loader=template_loader)
     day_log_template = template_env.get_template(cfg.day_log_template)
@@ -46,23 +46,27 @@ def run_edit(cfg: EditConfig) -> int:
     habit_tracker_contents = habit_log_template.render(day_log_vars)
 
     day_log_path = _get_day_path(cfg.zettel_dir, today)
+    day_log_path.parent.mkdir(parents=True, exist_ok=True)
     if not day_log_path.exists():
         day_log_path.write_text(day_log_contents)
 
-    habit_tracker_path = _get_day_path(
+    habit_log_path = _get_day_path(
         cfg.zettel_dir, yesterday, suffix="habit"
     )
-    if not habit_tracker_path.exists():
-        habit_tracker_path.write_text(habit_tracker_contents)
+    habit_log_path.parent.mkdir(parents=True, exist_ok=True)
+    if not habit_log_path.exists():
+        habit_log_path.write_text(habit_tracker_contents)
 
     done_log_path = _get_day_path(cfg.zettel_dir, today, suffix="done")
+    done_log_path.parent.mkdir(parents=True, exist_ok=True)
     if not done_log_path.exists():
         done_log_path.write_text(done_log_contents)
 
-    vimala.vim(
-        day_log_path,
-        commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
-    )
+    if cfg.edit_day_log:
+        vimala.vim(
+            day_log_path,
+            commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
+        )
     return 0
 
 

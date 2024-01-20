@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import itertools as it
 from pathlib import Path
 from typing import Any, Literal, Sequence
@@ -9,7 +10,7 @@ from typing import Any, Literal, Sequence
 import clack
 
 
-Command = Literal["edit"]
+Command = Literal["day"]
 
 
 class Config(clack.Config):
@@ -20,22 +21,26 @@ class Config(clack.Config):
     zettel_dir: Path = Path.home() / "org"
 
 
-class EditConfig(Config):
-    """Clack config for the 'edit' command."""
+class DayConfig(Config):
+    """Clack config for the 'day' command."""
 
-    command: Literal["edit"]
+    command: Literal["day"]
 
+    # ----- CONFIG
+    vim_commands: list[str] = []
+
+    # ----- ARGUMENTS
     day_log_template: str = "day_log_tmpl.zo"
     habit_log_template: str = "habit_log_tmpl.zo"
     done_log_template: str = "done_log_tmpl.zo"
-    vim_commands: list[str]
+    edit_day_log: bool = True
 
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Parser we pass to the `main_factory()` `parser` kwarg."""
     # HACK: Make 'tui' the default sub-command.
     if not list(it.dropwhile(lambda x: x.startswith("-"), argv[1:])):
-        argv = list(argv) + ["edit"]
+        argv = list(argv) + ["day"]
 
     parser = clack.Parser(description="The zettel note manager of the future.")
     parser.add_argument(
@@ -47,7 +52,13 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     )
 
     new_command = clack.new_command_factory(parser)
-    edit_parser = new_command("edit", help="Open day log in editor.")
+    edit_parser = new_command(
+        "day",
+        help=(
+            "Generate new day logs from templates and open the main day log in"
+            " your system's editor."
+        ),
+    )
     edit_parser.add_argument(
         "-D",
         "--day-log-template",
@@ -62,6 +73,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "-X",
         "--done-log-template",
         help="Template used to generate files for done todos.",
+    )
+    edit_parser.add_argument(
+        "--edit-day-log",
+        action=argparse.BooleanOptionalAction,
+        help=(
+            "Do not open the main day log for editing. Useful for testing day"
+            " log generation from templates."
+        ),
     )
 
     args = parser.parse_args(argv[1:])
