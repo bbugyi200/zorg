@@ -61,13 +61,17 @@ print("```", stdout.decode().strip(), "```", sep="\n")
 ]]]]] -->
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
+            [-d ZETTEL_DIR]
+            {edit} ...
 
-Contains the zorg package's main entry point.
+The zettel note manager of the future.
 
 options:
   -c CONFIG_FILE, --config CONFIG_FILE
                         Absolute or relative path to a YAML file that contains
                         this application's configuration.
+  -d ZETTEL_DIR, --dir ZETTEL_DIR
+                        The directory where all of your notes are stored.
   -h, --help            show this help message and exit
   -L [FILE[:LEVEL][@FORMAT]], --log [FILE[:LEVEL][@FORMAT]]
                         This option can be used to enable a new logging
@@ -85,6 +89,10 @@ options:
                         multiple times and has a default argument of '+'.
   -v, --verbose         How verbose should the output be? This option can be
                         specified multiple times (e.g. -v, -vv, -vvv, ...).
+
+subcommands:
+  {edit}
+    edit                Open day log in editor.
 ```
 <!-- [[[[[end]]]]] -->
 
