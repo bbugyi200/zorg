@@ -26,33 +26,24 @@ def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
     template_loader = jinja2.FileSystemLoader(searchpath=cfg.zettel_dir)
     template_env = jinja2.Environment(loader=template_loader)
-    template = template_env.get_template(cfg.day_log_template)
-    habit_template = template_env.get_template(cfg.habit_template)
-    done_template = template_env.get_template(cfg.done_template)
+    day_log_template = template_env.get_template(cfg.day_log_template)
+    habit_log_template = template_env.get_template(cfg.habit_log_template)
+    done_log_template = template_env.get_template(cfg.done_log_template)
 
     today = dt.datetime.now()
-    yesterday = today - dt.timedelta(days=1)
     two_days_ago = today - dt.timedelta(days=2)
+    yesterday = today - dt.timedelta(days=1)
     tomorrow = today + dt.timedelta(days=1)
 
     day_log_vars = {
-        "year": str(today.year),
-        "month": f"{today.month:02d}",
-        "day": f"{today.day:02d}",
-        "weekday": today.strftime("%a"),
-        "yesterday": yesterday.strftime("%Y%m%d"),
-        "tomorrow": tomorrow.strftime("%Y%m%d"),
+        "two_days_ago": two_days_ago,
+        "yesterday": yesterday,
+        "today": today,
+        "tomorrow": tomorrow,
     }
-    day_log_contents = template.render(day_log_vars)
-    done_log_contents = done_template.render(day_log_vars)
-    habit_tracker_contents = habit_template.render(
-        year=str(yesterday.year),
-        month=f"{yesterday.month:02d}",
-        day=f"{yesterday.day:02d}",
-        weekday=yesterday.strftime("%a"),
-        day_before=two_days_ago.strftime("%Y%m%d"),
-        day_after=today.strftime("%Y%m%d"),
-    )
+    day_log_contents = day_log_template.render(day_log_vars)
+    done_log_contents = done_log_template.render(day_log_vars)
+    habit_tracker_contents = habit_log_template.render(day_log_vars)
 
     day_log_path = _get_day_path(cfg.zettel_dir, today)
     if not day_log_path.exists():

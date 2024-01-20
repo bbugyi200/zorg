@@ -25,9 +25,9 @@ class EditConfig(Config):
 
     command: Literal["edit"]
 
-    day_log_template: str = "bujo_day_log_tmpl.zo"
-    habit_template: str = "habit_tmpl.zo"
-    done_template: str = "done_tmpl.zo"
+    day_log_template: str = "day_log_tmpl.zo"
+    habit_log_template: str = "habit_log_tmpl.zo"
+    done_log_template: str = "done_log_tmpl.zo"
     vim_commands: list[str]
 
 
@@ -50,17 +50,17 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     edit_parser = new_command("edit", help="Open day log in editor.")
     edit_parser.add_argument(
         "-D",
-        "--day-log-template-name",
+        "--day-log-template",
         help="Template used to generate day logs.",
     )
     edit_parser.add_argument(
         "-H",
-        "--habit-template",
+        "--habit-log-template",
         help="Template used to generate habit trackers.",
     )
     edit_parser.add_argument(
         "-X",
-        "--done-template",
+        "--done-log-template",
         help="Template used to generate files for done todos.",
     )
 
@@ -68,8 +68,8 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     kwargs = clack.filter_cli_args(args)
 
     _preprocess_template_name(kwargs, "day_log_template")
-    _preprocess_template_name(kwargs, "habit_template")
-    _preprocess_template_name(kwargs, "done_template")
+    _preprocess_template_name(kwargs, "habit_log_template")
+    _preprocess_template_name(kwargs, "done_log_template")
 
     return kwargs
 
