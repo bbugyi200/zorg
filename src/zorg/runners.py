@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+from functools import partial
 from pathlib import Path
 from typing import Iterable, Iterator, List
 
@@ -43,22 +44,12 @@ def run_day(cfg: DayConfig) -> int:
     }
     day_log_contents = day_log_template.render(day_log_vars)
     done_log_contents = done_log_template.render(day_log_vars)
-    habit_tracker_contents = habit_log_template.render(day_log_vars)
+    habit_log_contents = habit_log_template.render(day_log_vars)
 
-    day_log_path = _get_day_path(cfg.zettel_dir, today)
-    day_log_path.parent.mkdir(parents=True, exist_ok=True)
-    if not day_log_path.exists():
-        day_log_path.write_text(day_log_contents)
-
-    habit_log_path = _get_day_path(cfg.zettel_dir, yesterday, suffix="habit")
-    habit_log_path.parent.mkdir(parents=True, exist_ok=True)
-    if not habit_log_path.exists():
-        habit_log_path.write_text(habit_tracker_contents)
-
-    done_log_path = _get_day_path(cfg.zettel_dir, today, suffix="done")
-    done_log_path.parent.mkdir(parents=True, exist_ok=True)
-    if not done_log_path.exists():
-        done_log_path.write_text(done_log_contents)
+    ensureDayLogFileExists = partial(_ensureDayLogFileExists, cfg.zettel_dir)
+    day_log_path = ensureDayLogFileExists(day_log_contents, today)
+    ensureDayLogFileExists(habit_log_contents, yesterday, suffix="habit")
+    ensureDayLogFileExists(done_log_contents, today, suffix="done")
 
     if cfg.edit_day_log:
         vimala.vim(
@@ -66,6 +57,16 @@ def run_day(cfg: DayConfig) -> int:
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
     return 0
+
+
+def _ensureDayLogFileExists(
+    zettel_dir: Path, contents: str, date: dt.date, *, suffix: str = None
+) -> Path:
+    path = _get_day_path(zettel_dir, date, suffix=suffix)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists():
+        path.write_text(contents)
+    return path
 
 
 def _get_day_path(
