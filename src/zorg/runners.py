@@ -58,10 +58,12 @@ def run_day(cfg: DayConfig) -> int:
     done_log_contents = done_log_template.render(day_log_vars)
     habit_log_contents = habit_log_template.render(day_log_vars)
 
-    ensureDayLogFileExists = partial(_ensureDayLogFileExists, cfg.zettel_dir)
-    day_log_path = ensureDayLogFileExists(day_log_contents, today)
-    ensureDayLogFileExists(habit_log_contents, yesterday, suffix="habit")
-    ensureDayLogFileExists(done_log_contents, today, suffix="done")
+    ensureDailyLogFileExists = partial(
+        _ensureDailyLogFileExists, cfg.zettel_dir
+    )
+    day_log_path = ensureDailyLogFileExists(day_log_contents, today)
+    ensureDailyLogFileExists(habit_log_contents, yesterday, suffix="habit")
+    ensureDailyLogFileExists(done_log_contents, today, suffix="done")
 
     if cfg.edit_day_log:
         vimala.vim(
@@ -88,12 +90,17 @@ def _build_template_in_dir(temp_dir: Path, template_path: Path) -> None:
     temp_template_path.write_text("".join(new_lines))
 
 
-def _ensureDayLogFileExists(
+def _ensureDailyLogFileExists(
     zettel_dir: Path, contents: str, date: dt.date, *, suffix: str = None
 ) -> Path:
     path = _get_day_path(zettel_dir, date, suffix=suffix)
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
+        logger.info(
+            "Constructing new day log file from template",
+            date=date.strftime("%Y-%m-%d"),
+            path=str(path),
+        )
         path.write_text(contents)
     return path
 
