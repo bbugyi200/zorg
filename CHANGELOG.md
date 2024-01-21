@@ -9,9 +9,16 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.1.1...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.1.2...HEAD)
 
 No notable changes have been made.
+
+## [0.1.2](https://github.com/bbugyi200/zorg/compare/0.1.1...0.1.2) - 2024-01-21
+
+* Add support for initial template # comments. These comments MUST be followed
+  by a blank line and are NOT included in generated files (which is the point).
+  Comments that we want to be included in generated files should use ## instead
+  of #.
 
 ## [0.1.1](https://github.com/bbugyi200/zorg/compare/0.1.0...0.1.1) - 2024-01-20
 
