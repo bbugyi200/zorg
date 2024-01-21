@@ -97,9 +97,7 @@ def _ensureDailyLogFileExists(
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
         logger.info(
-            "Constructing new day log file from template",
-            date=date.strftime("%Y-%m-%d"),
-            path=str(path),
+            "Constructing new day log file from template", path=str(path)
         )
         path.write_text(contents)
     return path
