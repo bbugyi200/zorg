@@ -78,8 +78,8 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "--edit-day-log",
         action=argparse.BooleanOptionalAction,
         help=(
-            "Do not open the main day log for editing. Useful for testing day"
-            " log generation from templates."
+            "Should we open the main day log for editing? It is useful to"
+            " disable editing when testing day log generation from templates."
         ),
     )
 
