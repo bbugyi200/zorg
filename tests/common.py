@@ -13,6 +13,7 @@ hhmm: Final = f"{hh}{mm}"
 YYYY: Final = "2000"
 MM: Final = "01"
 DD: Final = "03"
+YEST_DD: Final = "02"
 TODAY: Final = f"{YYYY}-{MM}-{DD}"
 
 

@@ -1,0 +1,81 @@
+# serializer version: 1
+# name: test_day_basic[YAMLConfigFile]
+  '''
+  # 2000-01-03.Mon
+  #
+  # @ = [[day_log_tmpl]]
+  # < = [[20000102.zo]]
+  # > = [[20000104.zo]]
+  #
+  # H = [[20000103_habit.zo]]
+  # X = [[20000103_done.zo]]
+  
+  o #gtd pomodoro
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Check today's tickler file: [[tick_3]]
+    * Fill out yesterday's habit tracker: [[20000102_habit.zo]]
+    * go/g3co
+    * Review '@A' todos (are any >=7d old? which should you do today?)
+    * Set 2-5 goals / "highlights" for today
+    * Add [[act]] file links to this day log
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * inbox: Google Keep
+    * inbox: ~/org/box.zo
+    * Review ~/org diffs from yesterday and commit them to git
+  
+  ##### Goals #####
+  
+  ##### Events #####
+  
+  ##### Pomodoros #####
+  '''
+# ---
+# name: test_day_basic[YAMLConfigFile].1
+  '''
+  # Habits | 2000-01-02.Sun
+  #
+  # @ = [[habit_log_tmpl]]
+  # < = [[20000101_habit.zo]]
+  # > = [[20000103_habit.zo]]
+  #
+  # 0 = [[20000102.zo]]
+  
+  meds: ?
+  run: ?
+  time_of_1st_pomodoro: ????
+  w: ?
+  wfo: ?
+  ----- CL -----
+  R0 bounces: ?
+  RN bounces: ?
+  submits: ?
+  ----- pm routine -----
+  picked clothes: ?
+  brush teeth: ?
+  rubber bands: ?
+  ----- pomodoros -----
+  all: ?
+  overflow: ?
+  work: ?
+  
+  ##### expenses #####
+  
+  total:
+  '''
+# ---
+# name: test_day_basic[YAMLConfigFile].2
+  '''
+  # 2000-01-03.Mon | Done Tasks / Projects
+  #
+  # @ = [[done_log_tmpl]]
+  # < = [[20000102_done.zo]]
+  # > = [[20000104_done.zo]]
+  #
+  # 0 = [[20000103.zo]]
+  
+  
+  '''
+# ---
