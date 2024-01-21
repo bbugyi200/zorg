@@ -1,11 +1,15 @@
-# {{today.strftime('%Y-%m-%d.%a')}}
+# Template for day log files.
 #
-# @ = [[day_log_tmpl]]
-# < = [[{{yesterday.strftime('%Y%m%d')}}.zo]]
-# > = [[{{tomorrow.strftime('%Y%m%d')}}.zo]]
-#
-# H = [[{{today.strftime('%Y%m%d')}}_habit.zo]]
-# X = [[{{today.strftime('%Y%m%d')}}_done.zo]]
+# @ = [[template]]
+
+## {{today.strftime('%Y-%m-%d.%a')}}
+##
+## @ = [[day_log_tmpl]]
+## < = [[{{yesterday.strftime('%Y%m%d')}}.zo]]
+## > = [[{{tomorrow.strftime('%Y%m%d')}}.zo]]
+##
+## H = [[{{today.strftime('%Y%m%d')}}_habit.zo]]
+## X = [[{{today.strftime('%Y%m%d')}}_done.zo]]
 
 o #gtd pomodoro
   * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
