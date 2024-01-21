@@ -6,7 +6,7 @@ import datetime as dt
 from functools import partial
 from pathlib import Path
 import tempfile
-from typing import Iterable, Iterator, List
+from typing import Iterable, Iterator
 
 from clack.types import ClackRunner
 import jinja2
@@ -17,7 +17,7 @@ import vimala
 from .config import DayConfig
 
 
-RUNNERS: List[ClackRunner] = []
+RUNNERS: list[ClackRunner] = []
 runner = metaman.register_function_factory(RUNNERS)
 
 logger = Logger(__name__)
