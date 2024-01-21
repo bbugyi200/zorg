@@ -9,13 +9,8 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 from . import common as c
 
 
-def test_day_basic(
-    main: c.MainType, tmp_path: Path, snapshot: Snapshot
-) -> None:
-    """Basic test of the 'day' subcommand.
-
-    Tests that zorg exits successfully (e.g. does not throw any exceptions).
-    """
+def test_day(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
+    """Test the 'day' subcommand."""
     zettel_dir = tmp_path / "org"
     kwargs = {}
     for key, stem in [
