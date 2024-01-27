@@ -16,7 +16,7 @@ babel==2.14.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==23.12.1
+black==24.1.0
     # via -r requirements-dev.in
 bolton-clack==0.3.4
     # via
@@ -65,7 +65,7 @@ cogapp==3.3.0
     # via -r requirements-dev.in
 cookiecutter==2.5.0
     # via cruft
-coverage[toml]==7.4.0
+coverage[toml]==7.4.1
     # via
     #   coverage
     #   pytest-cov
@@ -147,7 +147,7 @@ platformdirs==4.1.0
     #   black
     #   pylint
     #   virtualenv
-pluggy==1.3.0
+pluggy==1.4.0
     # via
     #   pytest
     #   tox
@@ -183,7 +183,7 @@ python-dateutil==2.8.2
     # via
     #   arrow
     #   freezegun
-python-slugify==8.0.1
+python-slugify==8.0.2
     # via cookiecutter
 pyyaml==6.0.1
     # via
@@ -213,7 +213,7 @@ sphinx==7.2.6
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==1.25.2
+sphinx-autodoc-typehints==1.25.3
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
