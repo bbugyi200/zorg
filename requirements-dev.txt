@@ -16,7 +16,7 @@ babel==2.14.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.1.0
+black==24.1.1
     # via -r requirements-dev.in
 bolton-clack==0.3.4
     # via
@@ -71,7 +71,7 @@ coverage[toml]==7.4.1
     #   pytest-cov
 cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
-dill==0.3.7
+dill==0.3.8
     # via pylint
 distlib==0.3.8
     # via virtualenv
