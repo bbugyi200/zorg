@@ -142,7 +142,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.3.0
     # via -r requirements-dev.in
-platformdirs==4.1.0
+platformdirs==4.2.0
     # via
     #   black
     #   pylint
@@ -183,7 +183,7 @@ python-dateutil==2.8.2
     # via
     #   arrow
     #   freezegun
-python-slugify==8.0.2
+python-slugify==8.0.3
     # via cookiecutter
 pyyaml==6.0.1
     # via
@@ -272,7 +272,7 @@ typing-extensions==4.9.0
     #   pydantic
     #   setuptools-scm
     #   typer
-urllib3==2.1.0
+urllib3==2.2.0
     # via requests
 vimala==0.1.2
     # via
