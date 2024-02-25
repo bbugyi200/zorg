@@ -10,13 +10,13 @@ alabaster==0.7.16
     # via sphinx
 arrow==1.3.0
     # via cookiecutter
-astroid==3.0.3
+astroid==3.1.0
     # via pylint
 babel==2.14.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.1.1
+black==24.2.0
     # via -r requirements-dev.in
 bolton-clack==0.3.4
     # via
@@ -63,9 +63,9 @@ click==8.1.7
     #   typer
 cogapp==3.3.0
     # via -r requirements-dev.in
-cookiecutter==2.5.0
+cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.4.1
+coverage[toml]==7.4.3
     # via
     #   coverage
     #   pytest-cov
@@ -92,7 +92,7 @@ freezegun==1.4.0
     # via -r requirements-dev.in
 gitdb==4.0.11
     # via gitpython
-gitpython==3.1.41
+gitpython==3.1.42
     # via cruft
 idna==3.6
     # via requests
@@ -140,7 +140,7 @@ packaging==23.2
     #   tox
 pathspec==0.12.1
     # via black
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements-dev.in
 platformdirs==4.2.0
     # via
@@ -165,11 +165,13 @@ pygments==2.17.2
     # via
     #   rich
     #   sphinx
-pylint==3.0.3
+pylint==3.1.0
     # via -r requirements-dev.in
 pyproject-hooks==1.0.0
-    # via build
-pytest==7.4.4
+    # via
+    #   build
+    #   pip-tools
+pytest==8.0.2
     # via
     #   -r requirements-dev.in
     #   pytest-cov
@@ -183,7 +185,7 @@ python-dateutil==2.8.2
     # via
     #   arrow
     #   freezegun
-python-slugify==8.0.3
+python-slugify==8.0.4
     # via cookiecutter
 pyyaml==6.0.1
     # via
@@ -213,7 +215,7 @@ sphinx==7.2.6
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==1.25.3
+sphinx-autodoc-typehints==2.0.0
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
@@ -233,7 +235,7 @@ sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 structlog==24.1.0
     # via bolton-logrus
-syrupy==4.6.0
+syrupy==4.6.1
     # via -r requirements-dev.in
 text-unidecode==1.3
     # via python-slugify
@@ -272,13 +274,13 @@ typing-extensions==4.9.0
     #   pydantic
     #   setuptools-scm
     #   typer
-urllib3==2.2.0
+urllib3==2.2.1
     # via requests
 vimala==0.1.2
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via tox
 wheel==0.42.0
     # via pip-tools
@@ -286,7 +288,7 @@ wheel==0.42.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.0
     # via pip-tools
-setuptools==69.0.3
+setuptools==69.1.1
     # via
     #   pip-tools
     #   setuptools-scm
