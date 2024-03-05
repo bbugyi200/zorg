@@ -61,8 +61,8 @@ print("```", stdout.decode().strip(), "```", sep="\n")
 ]]]]] -->
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
-            [-d ZETTEL_DIR]
-            {day} ...
+            [--version] [-d ZETTEL_DIR]
+            {edit} ...
 
 The zettel note manager of the future.
 
@@ -89,10 +89,11 @@ options:
                         multiple times and has a default argument of '+'.
   -v, --verbose         How verbose should the output be? This option can be
                         specified multiple times (e.g. -v, -vv, -vvv, ...).
+  --version             show program's version number and exit
 
 subcommands:
-  {day}
-    day                 Generate new day logs from templates and open the main
+  {edit}
+    edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
 ```
