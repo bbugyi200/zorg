@@ -10,7 +10,7 @@ from typing import Any, Literal, Sequence
 import clack
 
 
-Command = Literal["day"]
+Command = Literal["edit"]
 
 
 class Config(clack.Config):
@@ -21,10 +21,10 @@ class Config(clack.Config):
     zettel_dir: Path = Path.home() / "org"
 
 
-class DayConfig(Config):
-    """Clack config for the 'day' command."""
+class EditConfig(Config):
+    """Clack config for the 'edit' command."""
 
-    command: Literal["day"]
+    command: Literal["edit"]
 
     # ----- CONFIG
     vim_commands: list[str] = []
@@ -40,7 +40,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Parser we pass to the `main_factory()` `parser` kwarg."""
     # HACK: Make 'tui' the default sub-command.
     if not list(it.dropwhile(lambda x: x.startswith("-"), argv[1:])):
-        argv = list(argv) + ["day"]
+        argv = list(argv) + ["edit"]
 
     parser = clack.Parser(description="The zettel note manager of the future.")
     parser.add_argument(
@@ -53,7 +53,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
     new_command = clack.new_command_factory(parser)
     edit_parser = new_command(
-        "day",
+        "edit",
         help=(
             "Generate new day logs from templates and open the main day log in"
             " your system's editor. This is the default subcommand."

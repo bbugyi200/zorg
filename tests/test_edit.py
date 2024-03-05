@@ -1,4 +1,4 @@
-"""Tests the zorg project's 'day' CLI command."""
+"""Tests the zorg project's 'edit' CLI command."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 from . import common as c
 
 
-def test_day(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
-    """Test the 'day' subcommand."""
+def test_edit(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
+    """Test the 'edit' subcommand."""
     zettel_dir = tmp_path / "org"
     kwargs = {}
     for key, stem in [
@@ -26,7 +26,7 @@ def test_day(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
         template_path.write_text(test_data_template_path.read_text())
         kwargs[key] = template_path.name
 
-    assert main("--dir", str(zettel_dir), "day", **kwargs) == 0
+    assert main("--dir", str(zettel_dir), "edit", **kwargs) == 0
 
     day_log_path = zettel_dir / c.YYYY / (c.YYYY + c.MM + c.DD + ".zo")
     habit_log_path = (

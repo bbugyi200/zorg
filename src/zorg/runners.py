@@ -14,7 +14,7 @@ from logrus import Logger
 import metaman
 import vimala
 
-from .config import DayConfig
+from .config import EditConfig
 
 
 RUNNERS: list[ClackRunner] = []
@@ -24,8 +24,8 @@ logger = Logger(__name__)
 
 
 @runner
-def run_day(cfg: DayConfig) -> int:
-    """Runner for the 'day' command."""
+def run_edit(cfg: EditConfig) -> int:
+    """Runner for the 'edit' command."""
     temp_dir = tempfile.TemporaryDirectory()
     temp_dir_path = Path(temp_dir.name)
     template_loader = jinja2.FileSystemLoader(searchpath=temp_dir_path)
