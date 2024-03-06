@@ -23,7 +23,7 @@ No notable changes have been made.
 
 ### Changed
 
-* Renamed the 'day' command to 'edit'.
+* *BREAKING CHANGE*: Renamed the 'day' command to 'edit'.
 
 
 ## [0.1.2](https://github.com/bbugyi200/zorg/compare/0.1.1...0.1.2) - 2024-01-21
