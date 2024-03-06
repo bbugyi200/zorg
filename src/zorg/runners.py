@@ -58,6 +58,10 @@ def run_edit(cfg: EditConfig) -> int:
 def _start_vim_loop(*paths: Path, zdir: Path, vim_cmds: list[str]) -> None:
     keep_alive_file = Path(tempfile.gettempdir()) / "zorg_keep_alive"
     keep_alive_file.touch()
+    logger.debug(
+        "Vim loop will run as long as the keep alive file exists.",
+        keep_alive_file=keep_alive_file,
+    )
     while keep_alive_file.exists():
         keep_alive_file.unlink()
         vimala.vim(*paths, commands=_process_vim_commands(zdir, vim_cmds))
