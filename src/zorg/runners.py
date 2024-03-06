@@ -64,7 +64,8 @@ def _start_vim_loop(*paths: Path, zdir: Path, vim_cmds: list[str]) -> None:
     tmp_dir = Path("/tmp")
     if not tmp_dir.exists():
         logger.warn(
-            "No /tmp directory exists on this systm so no keep alive file will be used!",
+            "No /tmp directory exists on this systm so no keep alive file will"
+            " be used!",
             local=locals(),
         )
         vim()
