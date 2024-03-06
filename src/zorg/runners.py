@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import datetime as dt
 from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator
@@ -26,11 +27,11 @@ logger = Logger(__name__)
 def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
     tmpl_manager = _ZorgTemplateManager(cfg)
-
-    for path in cfg.zo_paths:
+    zo_paths = _compile_file_groups(cfg.zo_paths, cfg.file_group_map)
+    for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
-            if match := pattern.match(path.stem):
-                full_path = cfg.zettel_dir / path
+            if match := pattern.match(zo_path.stem):
+                full_path = cfg.zettel_dir / zo_path
                 if not full_path.exists():
                     logger.info(
                         "Creating new file using registered template.",
@@ -42,13 +43,52 @@ def run_edit(cfg: EditConfig) -> int:
                     )
                     full_path.parent.mkdir(parents=True, exist_ok=True)
                     full_path.write_text(contents)
+                break
 
     if cfg.edit_day_log:
-        _start_vim_loop(cfg=cfg)
+        _start_vim_loop(zo_paths, cfg=cfg)
     return 0
 
 
-def _start_vim_loop(cfg: EditConfig) -> None:
+# TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()
+def _compile_file_groups(
+    zo_paths: list[Path],
+    file_group_map: dict[str, list[str]],
+) -> list[Path]:
+    new_zo_paths = []
+    for zo_path in zo_paths:
+        if str(zo_path).startswith("@"):
+            group_name = str(zo_path)[1:]
+            file_group = file_group_map[group_name]
+            new_zo_paths.extend(
+                _paths_from_file_group(file_group, file_group_map)
+            )
+        else:
+            new_zo_paths.append(zo_path)
+    return new_zo_paths
+
+
+def _paths_from_file_group(
+    file_group: list[str], file_group_map: dict[str, list[str]]
+) -> list[Path]:
+    today = dt.datetime.now()
+    yyyymmdd = []
+    days = []
+    for i in range(7):
+        date = today - dt.timedelta(days=i)
+        days.append(date)
+        yyyymmdd.append(date.strftime("%Y%m%d"))
+
+    paths = []
+    for fname in file_group:
+        if fname.startswith("@"):
+            paths.extend(_compile_file_groups([Path(fname)], file_group_map))
+        else:
+            paths.append(Path(fname.format(days=days, yyyymmdd=yyyymmdd)))
+    return paths
+
+
+def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
     cfg.keep_alive_file.parent.mkdir(parents=True, exist_ok=True)
     cfg.keep_alive_file.touch()
     logger.debug(
@@ -58,7 +98,7 @@ def _start_vim_loop(cfg: EditConfig) -> None:
     while cfg.keep_alive_file.exists():
         cfg.keep_alive_file.unlink()
         vimala.vim(
-            *[cfg.zettel_dir / p for p in cfg.zo_paths],
+            *[cfg.zettel_dir / p for p in zo_paths],
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
 

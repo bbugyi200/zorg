@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import itertools as it
+import os
 from pathlib import Path
 from typing import Any, Literal, Pattern, Sequence
 
@@ -30,6 +32,7 @@ class EditConfig(Config):
     command: Literal["edit"]
 
     # ----- CONFIG
+    file_group_map: dict[str, list[str]] = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
 
@@ -51,7 +54,7 @@ class NewConfig(Config):
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Parser we pass to the `main_factory()` `parser` kwarg."""
-    # HACK: Make 'tui' the default sub-command.
+    # HACK: Make 'edit' the default sub-command.
     if not list(it.dropwhile(lambda x: x.startswith("-"), argv[1:])):
         argv = list(argv) + ["edit"]
 
@@ -102,9 +105,18 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     kwargs = clack.filter_cli_args(args)
 
     _convert_variables_to_var_map(kwargs)
+    _process_zo_paths(kwargs)
 
     return kwargs
 
+
+def _process_zo_paths(kwargs: dict[str, Any]) -> None:
+    if kwargs["command"] != "edit":
+        return
+
+    if "zo_paths" not in kwargs:
+        kwargs["zo_paths"] = [f"@default"]
+        
 
 def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
     if "variables" in kwargs:
