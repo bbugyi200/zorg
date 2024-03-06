@@ -57,7 +57,9 @@ def run_edit(cfg: EditConfig) -> int:
 
 def _start_vim_loop(*paths: Path, zdir: Path, vim_cmds: list[str]) -> None:
     vim = partial(
-        vimala.vim, *paths, commands=_process_vim_commands(zdir, vim_cmds)
+        vimala.vim,
+        *paths,
+        commands=list(_process_vim_commands(zdir, vim_cmds)),
     )
     tmp_dir = Path("/tmp")
     if not tmp_dir.exists():
