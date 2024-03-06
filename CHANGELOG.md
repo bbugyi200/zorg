@@ -9,7 +9,17 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.1.2...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.2.0...HEAD)
+
+No notable changes have been made.
+
+
+## [0.2.0](https://github.com/bbugyi200/zorg/compare/0.1.2...0.2.0) - 2024-03-06
+
+### Added
+
+* Added the 'new' subcommand, which can be used to render zorg templates from
+  the command-line.
 
 ### Changed
 
