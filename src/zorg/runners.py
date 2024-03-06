@@ -49,11 +49,18 @@ def run_edit(cfg: EditConfig) -> int:
     ensure_daily_log_file_exists(done_log_contents, today, suffix="done")
 
     if cfg.edit_day_log:
-        vimala.vim(
-            day_log_path,
-            commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
+        _start_vim_loop(
+            day_log_path, zdir=cfg.zettel_dir, vim_cmds=cfg.vim_commands
         )
     return 0
+
+
+def _start_vim_loop(*paths: Path, zdir: Path, vim_cmds: list[str]) -> None:
+    keep_alive_file = Path(tempfile.gettempdir()) / "zorg_keep_alive"
+    keep_alive_file.touch()
+    while keep_alive_file.exists():
+        keep_alive_file.unlink()
+        vimala.vim(*paths, commands=_process_vim_commands(zdir, vim_cmds))
 
 
 def _date_var_map(date: dt.datetime) -> dict[str, Any]:
