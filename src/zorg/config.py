@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
 import itertools as it
 from pathlib import Path
-import re
-from typing import Any, Literal, Sequence
+from typing import Any, Literal, Pattern, Sequence
 
 import clack
+
+from . import common
 
 
 Command = Literal["edit", "new"]
@@ -20,6 +20,7 @@ class Config(clack.Config):
 
     command: Command
 
+    template_pattern_map: dict[Pattern, Path]
     zettel_dir: Path = Path.home() / "org"
 
 
@@ -33,9 +34,8 @@ class EditConfig(Config):
     vim_commands: list[str] = []
 
     # ----- ARGUMENTS
-    day_log_template: Path = Path("day_log_tmpl.zo")
-    habit_log_template: Path = Path("habit_log_tmpl.zo")
-    done_log_template: Path = Path("done_log_tmpl.zo")
+    zo_paths: list[Path]
+    # TODO(bugyi): Rename to dry_run
     edit_day_log: bool = True
 
 
@@ -73,22 +73,10 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         ),
     )
     edit_parser.add_argument(
-        "-D",
-        "--day-log-template",
+        "zo_paths",
         type=Path,
-        help="Template used to generate day logs.",
-    )
-    edit_parser.add_argument(
-        "-H",
-        "--habit-log-template",
-        type=Path,
-        help="Template used to generate habit trackers.",
-    )
-    edit_parser.add_argument(
-        "-X",
-        "--done-log-template",
-        type=Path,
-        help="Template used to generate files for done todos.",
+        nargs="*",
+        help="The .zo files we want to open in an editor.",
     )
     edit_parser.add_argument(
         "--edit-day-log",
@@ -113,10 +101,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     args = parser.parse_args(argv[1:])
     kwargs = clack.filter_cli_args(args)
 
-    _preprocess_template_name(kwargs, "day_log_template")
-    _preprocess_template_name(kwargs, "habit_log_template")
-    _preprocess_template_name(kwargs, "done_log_template")
-
     _convert_variables_to_var_map(kwargs)
 
     return kwargs
@@ -127,19 +111,7 @@ def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
         var_map = {}
         for var_spec in kwargs["variables"].split(","):
             k, v = var_spec.split("=")
-            var_map[k] = _var_map_value(v)
-        if any(isinstance(v, dt.datetime) for v in var_map.values()):
-            var_map["one_day"] = dt.timedelta(days=1)
+            var_map[k] = v
+        var_map = common.process_var_map(var_map)
         kwargs["var_map"] = var_map
         del kwargs["variables"]
-
-
-def _var_map_value(value: str) -> Any:
-    if re.match("^[0-9]{4}[01][0-9][0-3][0-9]$", value):
-        return dt.datetime.strptime(value, "%Y%m%d")
-    return value
-
-
-def _preprocess_template_name(kwargs: dict[str, Any], key: str) -> None:
-    if key in kwargs:
-        kwargs[key] = kwargs[key] + "_tmpl.zo"

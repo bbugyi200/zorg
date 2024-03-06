@@ -26,14 +26,30 @@ def test_edit(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
         template_path.write_text(test_data_template_path.read_text())
         kwargs[key] = template_path.name
 
-    assert main("--dir", str(zettel_dir), "edit", **kwargs) == 0
-
-    day_log_path = zettel_dir / c.YYYY / (c.YYYY + c.MM + c.DD + ".zo")
-    habit_log_path = (
-        zettel_dir / c.YYYY / (c.YYYY + c.MM + c.YEST_DD + "_habit.zo")
+    day_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.DD}.zo"
+    habit_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.YEST_DD}_habit.zo"
+    done_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.DD}_done.zo"
+    re_date_group = "(?P<date>[0-9]{4}[01][0-9][0-3][0-9])"
+    exit_code = main(
+        "--dir",
+        str(zettel_dir),
+        "edit",
+        day_log,
+        habit_log,
+        done_log,
+        template_pattern_map={
+            f"^{re_date_group}_habit$": "habit_log_tmpl.zo",
+            f"^{re_date_group}_done$": "done_log_tmpl.zo",
+            f"^{re_date_group}$": "day_log_tmpl.zo",
+        },
+        **kwargs,
     )
-    done_log_path = zettel_dir / c.YYYY / (c.YYYY + c.MM + c.DD + "_done.zo")
 
+    day_log_path = zettel_dir / day_log
+    habit_log_path = zettel_dir / habit_log
+    done_log_path = zettel_dir / done_log
+
+    assert exit_code == 0
     assert day_log_path.read_text() == snapshot
     assert habit_log_path.read_text() == snapshot
     assert done_log_path.read_text() == snapshot

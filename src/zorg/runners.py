@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import datetime as dt
-from functools import partial
 from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator
@@ -14,6 +12,7 @@ from logrus import Logger
 import metaman
 import vimala
 
+from . import common
 from .config import Config, EditConfig, NewConfig
 
 
@@ -28,32 +27,28 @@ def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
     tmpl_manager = _ZorgTemplateManager(cfg)
 
-    today = dt.datetime.now()
-    yesterday = today - dt.timedelta(days=1)
-
-    day_log_contents = tmpl_manager.render(
-        cfg.day_log_template, _date_var_map(today)
-    )
-    done_log_contents = tmpl_manager.render(
-        cfg.done_log_template, _date_var_map(today)
-    )
-    habit_log_contents = tmpl_manager.render(
-        cfg.habit_log_template, _date_var_map(yesterday)
-    )
-
-    ensure_daily_log_file_exists = partial(
-        _ensure_daily_log_file_exists, cfg.zettel_dir
-    )
-    day_log_path = ensure_daily_log_file_exists(day_log_contents, today)
-    ensure_daily_log_file_exists(habit_log_contents, yesterday, suffix="habit")
-    ensure_daily_log_file_exists(done_log_contents, today, suffix="done")
+    for path in cfg.zo_paths:
+        for pattern, tmpl_path in cfg.template_pattern_map.items():
+            if match := pattern.match(path.stem):
+                full_path = cfg.zettel_dir / path
+                if not full_path.exists():
+                    logger.info(
+                        "Creating new file using registered template.",
+                        new_file=full_path,
+                        template=tmpl_path,
+                    )
+                    contents = tmpl_manager.render(
+                        tmpl_path, common.process_var_map(match.groupdict())
+                    )
+                    full_path.parent.mkdir(parents=True, exist_ok=True)
+                    full_path.write_text(contents)
 
     if cfg.edit_day_log:
-        _start_vim_loop(day_log_path, cfg=cfg)
+        _start_vim_loop(cfg=cfg)
     return 0
 
 
-def _start_vim_loop(*paths: Path, cfg: EditConfig) -> None:
+def _start_vim_loop(cfg: EditConfig) -> None:
     cfg.keep_alive_file.parent.mkdir(parents=True, exist_ok=True)
     cfg.keep_alive_file.touch()
     logger.debug(
@@ -63,13 +58,9 @@ def _start_vim_loop(*paths: Path, cfg: EditConfig) -> None:
     while cfg.keep_alive_file.exists():
         cfg.keep_alive_file.unlink()
         vimala.vim(
-            *paths,
+            *[cfg.zettel_dir / p for p in cfg.zo_paths],
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
-
-
-def _date_var_map(date: dt.datetime) -> dict[str, Any]:
-    return {"date": date, "one_day": dt.timedelta(days=1)}
 
 
 @runner
@@ -117,26 +108,6 @@ class _ZorgTemplateManager:
                     else line
                 )
         temp_template_path.write_text("".join(new_lines))
-
-
-def _ensure_daily_log_file_exists(
-    zettel_dir: Path, contents: str, date: dt.date, *, suffix: str = None
-) -> Path:
-    path = _get_day_path(zettel_dir, date, suffix=suffix)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if not path.exists():
-        logger.info(
-            "Constructing new day log file from template", path=str(path)
-        )
-        path.write_text(contents)
-    return path
-
-
-def _get_day_path(
-    zettel_dir: Path, date: dt.date, *, suffix: str = None
-) -> Path:
-    suffix = f"_{suffix}" if suffix else ""
-    return zettel_dir / str(date.year) / date.strftime(f"%Y%m%d{suffix}.zo")
 
 
 # TODO(bugyi): Move to config.py?

@@ -33,8 +33,12 @@ def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
     def inner_main(*args: str, **kwargs: Any) -> int:
         kwargs.setdefault("zettel_dir", default_zettel_dir)
         kwargs.setdefault("edit_day_log", False)
+        kwargs.setdefault("template_pattern_map", {".*": "default.zo"})
 
-        cfg_kwargs = {k: str(v) for (k, v) in kwargs.items()}
+        cfg_kwargs = {
+            k: v if isinstance(v, dict) else str(v)
+            for (k, v) in kwargs.items()
+        }
 
         config_file = make_config_file("zorg_test_config", **cfg_kwargs)
         argv = ["zorg", "-c", str(config_file.path)] + list(args)
