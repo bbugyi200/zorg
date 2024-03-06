@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 import datetime as dt
 from functools import partial
 from pathlib import Path
@@ -44,26 +45,22 @@ def run_edit(cfg: EditConfig) -> int:
     done_log_template = template_env.get_template(cfg.done_log_template)
 
     today = dt.datetime.now()
-    two_days_ago = today - dt.timedelta(days=2)
-    yesterday = today - dt.timedelta(days=1)
-    tomorrow = today + dt.timedelta(days=1)
-
+    past_present_future = _get_past_present_future(today, 2, 2)
     day_log_vars = {
-        "two_days_ago": two_days_ago,
-        "yesterday": yesterday,
-        "today": today,
-        "tomorrow": tomorrow,
+        "dates": past_present_future,
     }
     day_log_contents = day_log_template.render(day_log_vars)
     done_log_contents = done_log_template.render(day_log_vars)
     habit_log_contents = habit_log_template.render(day_log_vars)
 
-    ensureDailyLogFileExists = partial(
-        _ensureDailyLogFileExists, cfg.zettel_dir
+    ensure_daily_log_file_exists = partial(
+        _ensure_daily_log_file_exists, cfg.zettel_dir
     )
-    day_log_path = ensureDailyLogFileExists(day_log_contents, today)
-    ensureDailyLogFileExists(habit_log_contents, yesterday, suffix="habit")
-    ensureDailyLogFileExists(done_log_contents, today, suffix="done")
+    day_log_path = ensure_daily_log_file_exists(day_log_contents, today)
+    ensure_daily_log_file_exists(
+        habit_log_contents, past_present_future.past[0], suffix="habit"
+    )
+    ensure_daily_log_file_exists(done_log_contents, today, suffix="done")
 
     if cfg.edit_day_log:
         vimala.vim(
@@ -71,6 +68,39 @@ def run_edit(cfg: EditConfig) -> int:
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
     return 0
+
+
+@dataclass(frozen=True)
+class _PastPresentFuture:
+    past: list[dt.datetime]
+    present: dt.datetime
+    future: list[dt.datetime]
+
+    @property
+    def yesterday(self) -> dt.datetime:
+        return self.past[0]
+
+    @property
+    def today(self) -> dt.datetime:
+        return self.present
+
+    @property
+    def tomorrow(self) -> dt.datetime:
+        return self.future[0]
+
+
+def _get_past_present_future(
+    present: dt.datetime, past_count: int, future_count: int
+) -> _PastPresentFuture:
+    past = []
+    for p in range(past_count):
+        past.append(present - dt.timedelta(days=p + 1))
+
+    future = []
+    for f in range(future_count):
+        future.append(present + dt.timedelta(days=f + 1))
+
+    return _PastPresentFuture(past, present, future)
 
 
 def _build_template_in_dir(temp_dir: Path, template_path: Path) -> None:
@@ -90,7 +120,7 @@ def _build_template_in_dir(temp_dir: Path, template_path: Path) -> None:
     temp_template_path.write_text("".join(new_lines))
 
 
-def _ensureDailyLogFileExists(
+def _ensure_daily_log_file_exists(
     zettel_dir: Path, contents: str, date: dt.date, *, suffix: str = None
 ) -> Path:
     path = _get_day_path(zettel_dir, date, suffix=suffix)
