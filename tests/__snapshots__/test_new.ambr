@@ -1,0 +1,36 @@
+# serializer version: 1
+# name: test_new[YAMLConfigFile]
+  '''
+  # 1991-03-04.Mon
+  #
+  # @ = [[day_log_tmpl]]
+  # < = [[19910303.zo]]
+  # > = [[19910305.zo]]
+  #
+  # H = [[19910304_habit.zo]]
+  # X = [[19910304_done.zo]]
+  
+  o #gtd pomodoro
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Check today's tickler file: [[tick_4]]
+    * Fill out yesterday's habit tracker: [[19910303_habit.zo]]
+    * go/g3co
+    * Review '@A' todos (are any >=7d old? which should you do today?)
+    * Set 2-5 goals / "highlights" for today
+    * Add [[act]] file links to this day log
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * inbox: Google Keep
+    * inbox: ~/org/box.zo
+    * Review ~/org diffs from yesterday and commit them to git
+  
+  ##### Goals #####
+  
+  ##### Events #####
+  
+  ##### Pomodoros #####
+  
+  '''
+# ---

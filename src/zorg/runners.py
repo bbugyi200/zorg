@@ -81,28 +81,30 @@ class _ZorgTemplateManager:
 
     def render(self, template_path: Path, var_map: dict[str, Any]) -> str:
         """Renders {template_path} using {var_map} for template variables."""
-        _build_template_in_dir(
+        self._build_template_in_dir(
             self._temp_dir_path, self._cfg.zettel_dir / template_path
         )
         template = self._template_env.get_template(template_path.name)
         return template.render(var_map)
 
-
-def _build_template_in_dir(tmp_dir: Path, template_path: Path) -> None:
-    temp_template_path = tmp_dir / template_path.name
-    new_lines = []
-    blank_line_found = False
-    for line in template_path.open("r"):
-        if not blank_line_found and not line.strip():
-            blank_line_found = True
-            continue
-        if blank_line_found:
-            new_lines.append(
-                line[1:]
-                if line.startswith("## ") or line.strip() == "##"
-                else line
-            )
-    temp_template_path.write_text("".join(new_lines))
+    @classmethod
+    def _build_template_in_dir(
+        cls, tmp_dir: Path, template_path: Path
+    ) -> None:
+        temp_template_path = tmp_dir / template_path.name
+        new_lines = []
+        blank_line_found = False
+        for line in template_path.open("r"):
+            if not blank_line_found and not line.strip():
+                blank_line_found = True
+                continue
+            if blank_line_found:
+                new_lines.append(
+                    line[1:]
+                    if line.startswith("## ") or line.strip() == "##"
+                    else line
+                )
+        temp_template_path.write_text("".join(new_lines))
 
 
 def _ensure_daily_log_file_exists(
