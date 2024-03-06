@@ -56,15 +56,26 @@ def run_edit(cfg: EditConfig) -> int:
 
 
 def _start_vim_loop(*paths: Path, zdir: Path, vim_cmds: list[str]) -> None:
-    keep_alive_file = Path(tempfile.gettempdir()) / "zorg_keep_alive"
-    keep_alive_file.touch()
-    logger.debug(
-        "Vim loop will run as long as the keep alive file exists.",
-        keep_alive_file=keep_alive_file,
+    vim = partial(
+        vimala.vim, *paths, commands=_process_vim_commands(zdir, vim_cmds)
     )
-    while keep_alive_file.exists():
-        keep_alive_file.unlink()
-        vimala.vim(*paths, commands=_process_vim_commands(zdir, vim_cmds))
+    tmp_dir = Path("/tmp")
+    if not tmp_dir.exists():
+        logger.warn(
+            "No /tmp directory exists on this systm so no keep alive file will be used!",
+            local=locals(),
+        )
+        vim()
+    else:
+        keep_alive_file = tmp_dir / "zorg_keep_alive"
+        keep_alive_file.touch()
+        logger.debug(
+            "Vim loop will run as long as the keep alive file exists.",
+            keep_alive_file=keep_alive_file,
+        )
+        while keep_alive_file.exists():
+            keep_alive_file.unlink()
+            vim()
 
 
 def _date_var_map(date: dt.datetime) -> dict[str, Any]:
