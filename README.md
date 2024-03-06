@@ -62,7 +62,7 @@ print("```", stdout.decode().strip(), "```", sep="\n")
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {edit} ...
+            {edit,new} ...
 
 The zettel note manager of the future.
 
@@ -92,10 +92,11 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {edit}
+  {edit,new}
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
+    new                 Render a new .zo file using a .zot template.
 ```
 <!-- [[[[[end]]]]] -->
 

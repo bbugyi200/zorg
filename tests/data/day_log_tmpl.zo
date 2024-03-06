@@ -2,21 +2,23 @@
 #
 # @ = [[template]]
 
-## {{dates.today.strftime('%Y-%m-%d.%a')}}
+{% set day_after = date + one_day -%}
+{% set day_before = date - one_day -%}
+## {{date.strftime('%Y-%m-%d.%a')}}
 ##
 ## @ = [[day_log_tmpl]]
-## < = [[{{dates.yesterday.strftime('%Y%m%d')}}.zo]]
-## > = [[{{dates.tomorrow.strftime('%Y%m%d')}}.zo]]
+## < = [[{{day_before.strftime('%Y%m%d')}}.zo]]
+## > = [[{{day_after.strftime('%Y%m%d')}}.zo]]
 ##
-## H = [[{{dates.today.strftime('%Y%m%d')}}_habit.zo]]
-## X = [[{{dates.today.strftime('%Y%m%d')}}_done.zo]]
+## H = [[{{date.strftime('%Y%m%d')}}_habit.zo]]
+## X = [[{{date.strftime('%Y%m%d')}}_done.zo]]
 
 o #gtd pomodoro
   * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
   * Copy any important gchat convos from yesterday into chat/*.txt
   * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
-  * Check today's tickler file: [[tick_{{dates.today.day}}]]
-  * Fill out yesterday's habit tracker: [[{{dates.yesterday.strftime('%Y%m%d')}}_habit.zo]]
+  * Check today's tickler file: [[tick_{{date.day}}]]
+  * Fill out yesterday's habit tracker: [[{{day_before.strftime('%Y%m%d')}}_habit.zo]]
   * go/g3co
   * Review '@A' todos (are any >=7d old? which should you do today?)
   * Set 2-5 goals / "highlights" for today

@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import datetime as dt
 from functools import partial
 from pathlib import Path
 import tempfile
-from typing import Iterable, Iterator
+from typing import Any, Iterable, Iterator
 
 from clack.types import ClackRunner
 import jinja2
@@ -15,7 +14,7 @@ from logrus import Logger
 import metaman
 import vimala
 
-from .config import EditConfig
+from .config import Config, EditConfig, NewConfig
 
 
 RUNNERS: list[ClackRunner] = []
@@ -27,39 +26,26 @@ logger = Logger(__name__)
 @runner
 def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
-    temp_dir = tempfile.TemporaryDirectory()
-    temp_dir_path = Path(temp_dir.name)
-    template_loader = jinja2.FileSystemLoader(searchpath=temp_dir_path)
-    template_env = jinja2.Environment(loader=template_loader)
-    _build_template_in_dir(
-        temp_dir_path, cfg.zettel_dir / cfg.day_log_template
-    )
-    _build_template_in_dir(
-        temp_dir_path, cfg.zettel_dir / cfg.habit_log_template
-    )
-    _build_template_in_dir(
-        temp_dir_path, cfg.zettel_dir / cfg.done_log_template
-    )
-    day_log_template = template_env.get_template(cfg.day_log_template)
-    habit_log_template = template_env.get_template(cfg.habit_log_template)
-    done_log_template = template_env.get_template(cfg.done_log_template)
+    tmpl_manager = _ZorgTemplateManager(cfg)
 
     today = dt.datetime.now()
-    past_present_future = _get_past_present_future(today, 2, 2)
-    day_log_vars = {
-        "dates": past_present_future,
-    }
-    day_log_contents = day_log_template.render(day_log_vars)
-    done_log_contents = done_log_template.render(day_log_vars)
-    habit_log_contents = habit_log_template.render(day_log_vars)
+    yesterday = today - dt.timedelta(days=1)
+
+    day_log_contents = tmpl_manager.render(
+        cfg.day_log_template, _date_var_map(today)
+    )
+    done_log_contents = tmpl_manager.render(
+        cfg.done_log_template, _date_var_map(today)
+    )
+    habit_log_contents = tmpl_manager.render(
+        cfg.habit_log_template, _date_var_map(yesterday)
+    )
 
     ensure_daily_log_file_exists = partial(
         _ensure_daily_log_file_exists, cfg.zettel_dir
     )
     day_log_path = ensure_daily_log_file_exists(day_log_contents, today)
-    ensure_daily_log_file_exists(
-        habit_log_contents, past_present_future.past[0], suffix="habit"
-    )
+    ensure_daily_log_file_exists(habit_log_contents, yesterday, suffix="habit")
     ensure_daily_log_file_exists(done_log_contents, today, suffix="done")
 
     if cfg.edit_day_log:
@@ -70,41 +56,40 @@ def run_edit(cfg: EditConfig) -> int:
     return 0
 
 
-@dataclass(frozen=True)
-class _PastPresentFuture:
-    past: list[dt.datetime]
-    present: dt.datetime
-    future: list[dt.datetime]
-
-    @property
-    def yesterday(self) -> dt.datetime:
-        return self.past[0]
-
-    @property
-    def today(self) -> dt.datetime:
-        return self.present
-
-    @property
-    def tomorrow(self) -> dt.datetime:
-        return self.future[0]
+def _date_var_map(date: dt.datetime) -> dict[str, Any]:
+    return {"date": date, "one_day": dt.timedelta(days=1)}
 
 
-def _get_past_present_future(
-    present: dt.datetime, past_count: int, future_count: int
-) -> _PastPresentFuture:
-    past = []
-    for p in range(past_count):
-        past.append(present - dt.timedelta(days=p + 1))
-
-    future = []
-    for f in range(future_count):
-        future.append(present + dt.timedelta(days=f + 1))
-
-    return _PastPresentFuture(past, present, future)
+@runner
+def run_new(cfg: NewConfig) -> int:
+    """Runner for the 'new' command."""
+    tmpl_manager = _ZorgTemplateManager(cfg)
+    print(tmpl_manager.render(cfg.template, cfg.var_map))
+    return 0
 
 
-def _build_template_in_dir(temp_dir: Path, template_path: Path) -> None:
-    temp_template_path = temp_dir / template_path.name
+class _ZorgTemplateManager:
+    tmp_dir = tempfile.TemporaryDirectory()
+
+    def __init__(self, cfg: Config) -> None:
+        tmp_dir_path = Path(self.tmp_dir.name)
+        loader = jinja2.FileSystemLoader(searchpath=tmp_dir_path)
+
+        self._temp_dir_path = tmp_dir_path
+        self._template_env = jinja2.Environment(loader=loader)
+        self._cfg = cfg
+
+    def render(self, template_path: Path, var_map: dict[str, Any]) -> str:
+        """Renders {template_path} using {var_map} for template variables."""
+        _build_template_in_dir(
+            self._temp_dir_path, self._cfg.zettel_dir / template_path
+        )
+        template = self._template_env.get_template(template_path.name)
+        return template.render(var_map)
+
+
+def _build_template_in_dir(tmp_dir: Path, template_path: Path) -> None:
+    temp_template_path = tmp_dir / template_path.name
     new_lines = []
     blank_line_found = False
     for line in template_path.open("r"):
@@ -140,6 +125,7 @@ def _get_day_path(
     return zettel_dir / str(date.year) / date.strftime(f"%Y%m%d{suffix}.zo")
 
 
+# TODO(bugyi): Move to config.py?
 def _process_vim_commands(
     zettel_dir: Path, vim_commands: Iterable[str]
 ) -> Iterator[str]:

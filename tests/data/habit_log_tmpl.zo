@@ -2,13 +2,15 @@
 #
 # @ = [[template]]
 
-## Habits | {{dates.past[0].strftime('%Y-%m-%d.%a')}}
+{% set day_after = date + one_day -%}
+{% set day_before = date - one_day -%}
+## Habits | {{date.strftime('%Y-%m-%d.%a')}}
 ##
 ## @ = [[habit_log_tmpl]]
-## < = [[{{dates.past[1].strftime('%Y%m%d')}}_habit.zo]]
-## > = [[{{dates.present.strftime('%Y%m%d')}}_habit.zo]]
+## < = [[{{day_before.strftime('%Y%m%d')}}_habit.zo]]
+## > = [[{{day_after.strftime('%Y%m%d')}}_habit.zo]]
 ##
-## 0 = [[{{dates.past[0].strftime('%Y%m%d')}}.zo]]
+## 0 = [[{{date.strftime('%Y%m%d')}}.zo]]
 
 meds: ?
 run: ?

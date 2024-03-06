@@ -2,12 +2,14 @@
 #
 # @ = [[template]]
 
-## {{dates.today.strftime('%Y-%m-%d.%a')}} | Done Tasks / Projects
+{% set day_after = date + one_day -%}
+{% set day_before = date - one_day -%}
+## {{date.strftime('%Y-%m-%d.%a')}} | Done Tasks / Projects
 ##
 ## @ = [[done_log_tmpl]]
-## < = [[{{dates.yesterday.strftime('%Y%m%d')}}_done.zo]]
-## > = [[{{dates.tomorrow.strftime('%Y%m%d')}}_done.zo]]
+## < = [[{{day_before.strftime('%Y%m%d')}}_done.zo]]
+## > = [[{{day_after.strftime('%Y%m%d')}}_done.zo]]
 ##
-## 0 = [[{{dates.today.strftime('%Y%m%d')}}.zo]]
+## 0 = [[{{date.strftime('%Y%m%d')}}.zo]]
 
 
