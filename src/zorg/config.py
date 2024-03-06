@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
 import itertools as it
-import os
 from pathlib import Path
 from typing import Any, Literal, Pattern, Sequence
 
@@ -115,8 +113,8 @@ def _process_zo_paths(kwargs: dict[str, Any]) -> None:
         return
 
     if "zo_paths" not in kwargs:
-        kwargs["zo_paths"] = [f"@default"]
-        
+        kwargs["zo_paths"] = ["@default"]
+
 
 def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
     if "variables" in kwargs:
