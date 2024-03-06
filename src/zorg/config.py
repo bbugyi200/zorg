@@ -29,6 +29,7 @@ class EditConfig(Config):
     command: Literal["edit"]
 
     # ----- CONFIG
+    keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
 
     # ----- ARGUMENTS
