@@ -125,6 +125,11 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
     if kwargs["command"] == "edit" and "zo_paths" not in kwargs:
+        logger.debug(
+            "The 'edit' command was invoked, but no file paths were specified."
+            " Auto-adding the @default file group paths.",
+            kwargs=kwargs,
+        )
         kwargs["zo_paths"] = ["@default"]
 
 
