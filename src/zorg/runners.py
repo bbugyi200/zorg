@@ -59,12 +59,31 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
         "Vim loop will run as long as the keep alive file exists.",
         keep_alive_file=cfg.keep_alive_file,
     )
+    last_paths = zo_paths
     while cfg.keep_alive_file.exists():
+        if cfg.keep_alive_file.stat().st_size == 0:
+            paths = last_paths
+        else:
+            paths = last_paths = [
+                Path(p.strip())
+                for p in cfg.keep_alive_file.read_text().split()
+            ]
+
         cfg.keep_alive_file.unlink()
         vimala.vim(
-            *[cfg.zettel_dir / p for p in zo_paths],
+            *[cfg.zettel_dir / p for p in paths],
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
+
+
+def _process_vim_commands(
+    zettel_dir: Path, vim_commands: Iterable[str]
+) -> Iterator[str]:
+    for vim_cmd in vim_commands:
+        if "{zdir}" in vim_cmd:
+            yield vim_cmd.format(zdir=zettel_dir)
+        else:
+            yield vim_cmd
 
 
 @runner
@@ -112,14 +131,3 @@ class _ZorgTemplateManager:
                     else line
                 )
         temp_template_path.write_text("".join(new_lines))
-
-
-# TODO(bugyi): Move to config.py?
-def _process_vim_commands(
-    zettel_dir: Path, vim_commands: Iterable[str]
-) -> Iterator[str]:
-    for vim_cmd in vim_commands:
-        if "{zdir}" in vim_cmd:
-            yield vim_cmd.format(zdir=zettel_dir)
-        else:
-            yield vim_cmd

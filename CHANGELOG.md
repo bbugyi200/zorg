@@ -11,7 +11,10 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.2.1...HEAD)
 
-No notable changes have been made.
+### Added
+
+* Add support for changing the paths opened in vim by writing those file paths
+  to `/tmp/zorg_keep_alive`.
 
 
 ## [0.2.1](https://github.com/bbugyi200/zorg/compare/0.2.0...0.2.1) - 2024-03-07
