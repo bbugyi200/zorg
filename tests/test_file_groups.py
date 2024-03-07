@@ -7,7 +7,7 @@ from zorg.file_groups import expand_file_group_paths
 from . import common as c
 
 
-def test_expand_file_group_paths():
+def test_expand_file_group_paths() -> None:
     """Tests that file group path expansion is WAI."""
     paths = expand_file_group_paths(
         ["@foo", Path("buz.zo")],

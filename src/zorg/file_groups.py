@@ -2,6 +2,7 @@
 
 import datetime as dt
 from pathlib import Path
+from typing import Sequence
 
 from typist import PathLike
 
@@ -10,7 +11,7 @@ from .types import FileGroupMapType
 
 # TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()
 def expand_file_group_paths(
-    zo_paths: list[PathLike],
+    zo_paths: Sequence[PathLike],
     *,
     file_group_map: FileGroupMapType,
 ) -> list[Path]:
@@ -33,12 +34,12 @@ def expand_file_group_paths(
                 _paths_from_file_group(file_group, file_group_map)
             )
         else:
-            new_zo_paths.append(zo_path)
+            new_zo_paths.append(Path(zo_path))
     return new_zo_paths
 
 
 def _paths_from_file_group(
-    file_group: list[str], file_group_map: FileGroupMapType
+    file_group: Sequence[str], file_group_map: FileGroupMapType
 ) -> list[Path]:
     today = dt.datetime.now()
     yyyymmdd = []

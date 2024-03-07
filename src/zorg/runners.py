@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import tempfile
-from typing import Any, Iterable, Iterator
+from typing import Any, Iterable, Iterator, Mapping
 
 from clack.types import ClackRunner
 import jinja2
@@ -86,7 +86,7 @@ class _ZorgTemplateManager:
         self._template_env = jinja2.Environment(loader=loader)
         self._cfg = cfg
 
-    def render(self, template_path: Path, var_map: dict[str, Any]) -> str:
+    def render(self, template_path: Path, var_map: Mapping[str, Any]) -> str:
         """Renders {template_path} using {var_map} for template variables."""
         self._build_template_in_dir(
             self._temp_dir_path, self._cfg.zettel_dir / template_path

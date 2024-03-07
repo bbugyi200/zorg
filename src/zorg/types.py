@@ -1,3 +1,6 @@
 """Custom types used by zorg."""
 
-FileGroupMapType = dict[str, list[str]]
+from typing import Mapping, Sequence
+
+
+FileGroupMapType = Mapping[str, Sequence[str]]
