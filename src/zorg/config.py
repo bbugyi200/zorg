@@ -109,10 +109,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
-    if kwargs["command"] != "edit":
-        return
-
-    if "zo_paths" not in kwargs:
+    if kwargs["command"] == "edit" and "zo_paths" not in kwargs:
         kwargs["zo_paths"] = ["@default"]
 
 
