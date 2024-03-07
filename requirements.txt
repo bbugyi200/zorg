@@ -4,7 +4,7 @@
 #
 #    "make update-requirements"
 #
-bolton-clack==0.3.8
+bolton-clack==0.3.9
     # via -r requirements.in
 bolton-eris==0.2.3
     # via
@@ -24,6 +24,7 @@ bolton-proctor==0.2.2
     # via vimala
 bolton-typist==0.2.0
     # via
+    #   -r requirements.in
     #   bolton-clack
     #   bolton-eris
     #   vimala
