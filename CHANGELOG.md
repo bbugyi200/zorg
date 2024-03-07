@@ -9,9 +9,20 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.2.0...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.2.1...HEAD)
 
 No notable changes have been made.
+
+
+## [0.2.1](https://github.com/bbugyi200/zorg/compare/0.2.0...0.2.1) - 2024-03-07
+
+### Added
+
+* Add support for touching a "keep alive" file (e.g. `/tmp/zorg_keep_alive`) to
+  signal to `zorg edit` that the same vim command should be re-run after the
+  current vim instance exits.
+* Add support `zorg edit` to accept file paths and/or file group names (e.g.
+  `@foo`) as CLI arguments.
 
 
 ## [0.2.0](https://github.com/bbugyi200/zorg/compare/0.1.2...0.2.0) - 2024-03-06
