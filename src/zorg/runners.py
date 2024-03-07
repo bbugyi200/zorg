@@ -64,10 +64,17 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
         if cfg.keep_alive_file.stat().st_size == 0:
             paths = last_paths
         else:
-            paths = last_paths = [
+            new_paths = [
                 Path(p.strip())
                 for p in cfg.keep_alive_file.read_text().split()
             ]
+            logger.debug(
+                "Editing files specified in the keep alive file.",
+                keep_alive_file=cfg.keep_alive_file,
+                old_paths=last_paths,
+                new_paths=new_paths,
+            )
+            paths = last_paths = new_paths
 
         cfg.keep_alive_file.unlink()
         vimala.vim(
