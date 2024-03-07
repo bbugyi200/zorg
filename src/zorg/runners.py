@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import datetime as dt
 from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator
@@ -15,9 +14,8 @@ import vimala
 
 from . import common
 from .config import Config, EditConfig, NewConfig
+from .file_groups import expand_file_group_paths
 
-
-FileGroupMapType = dict[str, list[str]]
 
 logger = Logger(__name__)
 
@@ -29,7 +27,9 @@ runner = metaman.register_function_factory(RUNNERS)
 def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
     tmpl_manager = _ZorgTemplateManager(cfg)
-    zo_paths = _compile_file_groups(cfg.zo_paths, cfg.file_group_map)
+    zo_paths = expand_file_group_paths(
+        cfg.zo_paths, file_group_map=cfg.file_group_map
+    )
     for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
             if match := pattern.match(zo_path.stem):
@@ -50,44 +50,6 @@ def run_edit(cfg: EditConfig) -> int:
     if cfg.edit_day_log:
         _start_vim_loop(zo_paths, cfg=cfg)
     return 0
-
-
-# TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()
-def _compile_file_groups(
-    zo_paths: list[Path],
-    file_group_map: FileGroupMapType,
-) -> list[Path]:
-    new_zo_paths = []
-    for zo_path in zo_paths:
-        if str(zo_path).startswith("@"):
-            group_name = str(zo_path)[1:]
-            file_group = file_group_map[group_name]
-            new_zo_paths.extend(
-                _paths_from_file_group(file_group, file_group_map)
-            )
-        else:
-            new_zo_paths.append(zo_path)
-    return new_zo_paths
-
-
-def _paths_from_file_group(
-    file_group: list[str], file_group_map: FileGroupMapType
-) -> list[Path]:
-    today = dt.datetime.now()
-    yyyymmdd = []
-    days = []
-    for i in range(7):
-        date = today - dt.timedelta(days=i)
-        days.append(date)
-        yyyymmdd.append(date.strftime("%Y%m%d"))
-
-    paths = []
-    for fname in file_group:
-        if fname.startswith("@"):
-            paths.extend(_compile_file_groups([Path(fname)], file_group_map))
-        else:
-            paths.append(Path(fname.format(days=days, yyyymmdd=yyyymmdd)))
-    return paths
 
 
 def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:

@@ -11,6 +11,7 @@ import clack
 from logrus import Logger
 
 from . import common
+from .types import FileGroupMapType
 
 
 Command = Literal["edit", "new"]
@@ -33,7 +34,7 @@ class EditConfig(Config):
     command: Literal["edit"]
 
     # ----- CONFIG
-    file_group_map: dict[str, list[str]] = {}
+    file_group_map: FileGroupMapType = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
 
@@ -130,7 +131,7 @@ def _process_zo_paths(kwargs: dict[str, Any]) -> None:
             " Auto-adding the @default file group paths.",
             kwargs=kwargs,
         )
-        kwargs["zo_paths"] = ["@default"]
+        kwargs["zo_paths"] = [Path("@default")]
 
 
 def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
