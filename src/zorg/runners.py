@@ -17,10 +17,12 @@ from . import common
 from .config import Config, EditConfig, NewConfig
 
 
-RUNNERS: list[ClackRunner] = []
-runner = metaman.register_function_factory(RUNNERS)
+FileGroupMapType = dict[str, list[str]]
 
 logger = Logger(__name__)
+
+RUNNERS: list[ClackRunner] = []
+runner = metaman.register_function_factory(RUNNERS)
 
 
 @runner
@@ -53,7 +55,7 @@ def run_edit(cfg: EditConfig) -> int:
 # TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()
 def _compile_file_groups(
     zo_paths: list[Path],
-    file_group_map: dict[str, list[str]],
+    file_group_map: FileGroupMapType,
 ) -> list[Path]:
     new_zo_paths = []
     for zo_path in zo_paths:
@@ -69,7 +71,7 @@ def _compile_file_groups(
 
 
 def _paths_from_file_group(
-    file_group: list[str], file_group_map: dict[str, list[str]]
+    file_group: list[str], file_group_map: FileGroupMapType
 ) -> list[Path]:
     today = dt.datetime.now()
     yyyymmdd = []
