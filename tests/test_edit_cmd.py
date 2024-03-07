@@ -9,8 +9,10 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 from . import common as c
 
 
-def test_edit(main: c.MainType, tmp_path: Path, snapshot: Snapshot) -> None:
-    """Test the 'edit' subcommand."""
+def test_edit_day_logs(
+    main: c.MainType, tmp_path: Path, snapshot: Snapshot
+) -> None:
+    """Test that we properly generate test day, habit, and done logs."""
     zettel_dir = tmp_path / "org"
     kwargs = {}
     for key, stem in [
