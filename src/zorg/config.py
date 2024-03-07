@@ -8,11 +8,14 @@ from pathlib import Path
 from typing import Any, Literal, Pattern, Sequence
 
 import clack
+from logrus import Logger
 
 from . import common
 
 
 Command = Literal["edit", "new"]
+
+logger = Logger(__name__)
 
 
 class Config(clack.Config):
@@ -53,8 +56,20 @@ class NewConfig(Config):
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Parser we pass to the `main_factory()` `parser` kwarg."""
     # HACK: Make 'edit' the default sub-command.
-    if not list(it.dropwhile(lambda x: x.startswith("-"), argv[1:])):
+    argv_after_opts = list(it.dropwhile(lambda x: x.startswith("-"), argv[1:]))
+    if not argv_after_opts:
+        logger.debug(
+            "Inferring 'edit' command since no subcommand was specified."
+        )
         argv = list(argv) + ["edit"]
+    elif argv_after_opts[0].startswith("@"):
+        argv_opts = list(it.takewhile(lambda x: x.startswith("-"), argv[1:]))
+        argv = [argv[0]] + argv_opts + ["edit"] + argv_after_opts
+        logger.debug(
+            "Inferring 'edit' command since we found a file group name.",
+            file_group_name=argv_after_opts[0],
+            new_args=argv[1:],
+        )
 
     parser = clack.Parser(description="The zettel note manager of the future.")
     parser.add_argument(
