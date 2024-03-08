@@ -31,7 +31,7 @@ def run_edit(cfg: EditConfig) -> int:
     zo_paths = expand_file_group_paths(
         cfg.zo_paths, file_group_map=cfg.file_group_map
     )
-    zo_paths = _zdir_paths(cfg.zettel_dir, zo_paths)
+    zo_paths = _add_paths_to_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
             if match := pattern.match(zo_path.stem):
@@ -53,8 +53,17 @@ def run_edit(cfg: EditConfig) -> int:
     return 0
 
 
-def _zdir_paths(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
-    return [p if zdir in p.parents else zdir / p for p in paths]
+def _add_paths_to_zdir(
+    zdir: PathLike, paths: Iterable[PathLike]
+) -> list[Path]:
+    zdir_path = Path(zdir)
+    new_paths = []
+    for p in paths:
+        path = Path(p)
+        new_paths.append(
+            path if zdir_path in path.parents else zdir_path / path
+        )
+    return new_paths
 
 
 def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
@@ -83,7 +92,7 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
 
         cfg.keep_alive_file.unlink()
         vimala.vim(
-            *_zdir_paths(cfg.zettel_dir, paths),
+            *_add_paths_to_zdir(cfg.zettel_dir, paths),
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
 
