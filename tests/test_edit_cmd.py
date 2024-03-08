@@ -70,8 +70,15 @@ def test_whenEmptyKeepAliveFileExists_shouldRestartVim(
     """Test that we can use the keep alive file to have zorg re-run vim."""
     zettel_dir = tmp_path / "org"
 
-    c.keep_alive_file_path.touch()
-    exit_code = main("--dir", str(zettel_dir), "edit", "foobar.zo")
+    keep_alive_file = tmp_path / "zorg_keep_alive"
+    keep_alive_file.touch()
+    exit_code = main(
+        "--dir",
+        str(zettel_dir),
+        "edit",
+        "foobar.zo",
+        keep_alive_file=keep_alive_file,
+    )
 
     assert exit_code == 0
     vim_proc_mock.assert_called_with(
@@ -81,7 +88,7 @@ def test_whenEmptyKeepAliveFileExists_shouldRestartVim(
         timeout=None,
     )
     assert vim_proc_mock.call_count == 2
-    assert not c.keep_alive_file_path.exists()
+    assert not keep_alive_file.exists()
 
 
 def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
@@ -90,8 +97,15 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
     """Test that we can use the keep alive file to change our vim file args."""
     zettel_dir = tmp_path / "org"
 
-    c.keep_alive_file_path.write_text("baz.zo buz.zo")
-    exit_code = main("--dir", str(zettel_dir), "edit", "foobar.zo")
+    keep_alive_file = tmp_path / "zorg_keep_alive"
+    keep_alive_file.write_text("baz.zo buz.zo")
+    exit_code = main(
+        "--dir",
+        str(zettel_dir),
+        "edit",
+        "foobar.zo",
+        keep_alive_file=keep_alive_file,
+    )
 
     assert exit_code == 0
     vim_proc_mock.assert_has_calls([
@@ -111,4 +125,4 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
         call().unwrap(),
     ])
     assert vim_proc_mock.call_count == 2
-    assert not c.keep_alive_file_path.exists()
+    assert not keep_alive_file.exists()

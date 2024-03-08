@@ -6,7 +6,6 @@ https://docs.pytest.org/en/6.2.x/fixture.html#conftest-py-sharing-fixtures-acros
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING, Any, Iterator
 
 from freezegun import freeze_time
@@ -25,15 +24,10 @@ if TYPE_CHECKING:  # fixes pytest warning
 
 
 @fixture
-def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
+def main(make_config_file: MakeConfigFile) -> c.MainType:
     """Returns a wrapper around zorg's main() function."""
 
-    default_zettel_dir = tmp_path / "org"
-
     def inner_main(*args: str, **kwargs: Any) -> int:
-        kwargs.setdefault("zettel_dir", default_zettel_dir)
-        kwargs.setdefault("keep_alive_file", c.keep_alive_file_path)
-
         cfg_kwargs = {
             k: v if isinstance(v, dict) else str(v)
             for (k, v) in kwargs.items()

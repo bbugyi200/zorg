@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any, Final, Protocol
 
 
@@ -16,8 +15,6 @@ MM: Final = "01"
 DD: Final = "03"
 YEST_DD: Final = "02"
 TODAY: Final = f"{YYYY}-{MM}-{DD}"
-
-keep_alive_file_path = Path("/tmp/zorg_test_keep_alive")
 
 
 class MainType(Protocol):
