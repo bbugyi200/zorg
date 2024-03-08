@@ -2,7 +2,7 @@
 
 import datetime as dt
 from pathlib import Path
-from typing import Sequence
+from typing import Iterable, Sequence
 
 from typist import PathLike
 
@@ -11,7 +11,7 @@ from .types import FileGroupMapType
 
 # TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()
 def expand_file_group_paths(
-    zo_paths: Sequence[PathLike],
+    zo_paths: Iterable[PathLike],
     *,
     file_group_map: FileGroupMapType,
 ) -> list[Path]:

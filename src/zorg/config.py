@@ -40,8 +40,6 @@ class EditConfig(Config):
 
     # ----- ARGUMENTS
     zo_paths: list[Path]
-    # TODO(bugyi): Rename to dry_run
-    edit_day_log: bool = True
 
 
 class TemplateRenderConfig(Config):

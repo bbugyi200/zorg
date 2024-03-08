@@ -17,7 +17,7 @@ from zorg.__main__ import main as zorg_main
 from . import common as c
 
 
-pytest_plugins = ["clack.pytest_plugin"]
+pytest_plugins = ["clack.pytest_plugin", "vimala.pytest_plugin"]
 
 
 if TYPE_CHECKING:  # fixes pytest warning
@@ -32,7 +32,6 @@ def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
 
     def inner_main(*args: str, **kwargs: Any) -> int:
         kwargs.setdefault("zettel_dir", default_zettel_dir)
-        kwargs.setdefault("edit_day_log", False)
         kwargs.setdefault("template_pattern_map", {".*": "default.zo"})
 
         cfg_kwargs = {

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from unittest.mock import Mock
 
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
@@ -10,7 +11,7 @@ from . import common as c
 
 
 def test_edit_day_logs(
-    main: c.MainType, tmp_path: Path, snapshot: Snapshot
+    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path, snapshot: Snapshot
 ) -> None:
     """Test that we properly generate test day, habit, and done logs."""
     zettel_dir = tmp_path / "org"
@@ -55,3 +56,9 @@ def test_edit_day_logs(
     assert day_log_path.read_text() == snapshot
     assert habit_log_path.read_text() == snapshot
     assert done_log_path.read_text() == snapshot
+    vim_proc_mock.assert_called_once_with(
+        ["vim", str(day_log_path), str(habit_log_path), str(done_log_path)],
+        stdout=None,
+        stderr=None,
+        timeout=None,
+    )

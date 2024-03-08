@@ -48,8 +48,7 @@ def run_edit(cfg: EditConfig) -> int:
                     zo_path.write_text(contents)
                 break
 
-    if cfg.edit_day_log:
-        _start_vim_loop(zo_paths, cfg=cfg)
+    _start_vim_loop(zo_paths, cfg=cfg)
     return 0
 
 
@@ -94,7 +93,7 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
         vimala.vim(
             *_add_paths_to_zdir(cfg.zettel_dir, paths),
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
-        )
+        ).unwrap()
 
 
 def _process_vim_commands(
