@@ -2,4 +2,4 @@ bolton-clack ~= 0.3.9
 bolton-logrus ~= 0.1.1
 bolton-typist ~= 0.2.0
 jinja2
-vimala ~= 0.1.2
+vimala ~= 0.2.0

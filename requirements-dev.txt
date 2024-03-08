@@ -124,7 +124,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.8.0
+mypy==1.9.0
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
@@ -276,7 +276,7 @@ typing-extensions==4.10.0
     #   typer
 urllib3==2.2.1
     # via requests
-vimala==0.1.2
+vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org

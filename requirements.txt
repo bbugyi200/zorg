@@ -40,5 +40,5 @@ structlog==24.1.0
     # via bolton-logrus
 typing-extensions==4.10.0
     # via pydantic
-vimala==0.1.2
+vimala==0.2.0
     # via -r requirements.in
