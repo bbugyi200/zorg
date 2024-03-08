@@ -10,6 +10,7 @@ from clack.types import ClackRunner
 import jinja2
 from logrus import Logger
 import metaman
+from typist import PathLike
 import vimala
 
 from . import common
@@ -30,26 +31,30 @@ def run_edit(cfg: EditConfig) -> int:
     zo_paths = expand_file_group_paths(
         cfg.zo_paths, file_group_map=cfg.file_group_map
     )
+    zo_paths = _zdir_paths(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
             if match := pattern.match(zo_path.stem):
-                full_path = cfg.zettel_dir / zo_path
-                if not full_path.exists():
+                if not zo_path.exists():
                     logger.info(
                         "Creating new file using registered template.",
-                        new_file=full_path,
+                        new_file=zo_path,
                         template=tmpl_path,
                     )
                     contents = tmpl_manager.render(
                         tmpl_path, common.process_var_map(match.groupdict())
                     )
-                    full_path.parent.mkdir(parents=True, exist_ok=True)
-                    full_path.write_text(contents)
+                    zo_path.parent.mkdir(parents=True, exist_ok=True)
+                    zo_path.write_text(contents)
                 break
 
     if cfg.edit_day_log:
         _start_vim_loop(zo_paths, cfg=cfg)
     return 0
+
+
+def _zdir_paths(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
+    return [p if zdir in p.parents else zdir / p for p in paths]
 
 
 def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
@@ -78,7 +83,7 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
 
         cfg.keep_alive_file.unlink()
         vimala.vim(
-            *[cfg.zettel_dir / p for p in paths],
+            *_zdir_paths(cfg.zettel_dir, paths),
             commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
         )
 
