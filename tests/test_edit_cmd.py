@@ -81,6 +81,7 @@ def test_whenEmptyKeepAliveFileExists_shouldRestartVim(
         timeout=None,
     )
     assert vim_proc_mock.call_count == 2
+    assert not c.keep_alive_file_path.exists()
 
 
 def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
@@ -110,3 +111,4 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
         call().unwrap(),
     ])
     assert vim_proc_mock.call_count == 2
+    assert not c.keep_alive_file_path.exists()
