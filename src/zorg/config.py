@@ -14,7 +14,7 @@ from . import common
 from .types import FileGroupMapType
 
 
-Command = Literal["edit", "new"]
+Command = Literal["edit", "render"]
 
 logger = Logger(__name__)
 
@@ -44,10 +44,10 @@ class EditConfig(Config):
     edit_day_log: bool = True
 
 
-class NewConfig(Config):
-    """Clack config for the 'new' command."""
+class TemplateRenderConfig(Config):
+    """Clack config for the 'template' command."""
 
-    command: Literal["new"]
+    command: Literal["render"]
 
     # ----- ARGUMENTS
     template: Path
@@ -104,15 +104,20 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         ),
     )
 
-    new_parser = new_command(
-        "new", help="Render a new .zo file using a .zot template."
+    template_parser = new_command(
+        "template", help="Commands for managing .zot templates."
     )
-    new_parser.add_argument(
+    new_template_command = clack.new_command_factory(template_parser)
+    template_render_parser = new_template_command(
+        "render", help="Render a new .zo file using a .zot template."
+    )
+    template_render_parser.add_argument(
         "template", type=Path, help="Path to the .zot template."
     )
-    new_parser.add_argument(
+    template_render_parser.add_argument(
         "variables",
-        help="A list of comma-separated variable specs of the form key=value.",
+        nargs="*",
+        help="A list of variable specs of the form of key=value.",
     )
 
     args = parser.parse_args(argv[1:])
@@ -137,7 +142,7 @@ def _process_zo_paths(kwargs: dict[str, Any]) -> None:
 def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
     if "variables" in kwargs:
         var_map = {}
-        for var_spec in kwargs["variables"].split(","):
+        for var_spec in kwargs["variables"]:
             k, v = var_spec.split("=")
             var_map[k] = v
         var_map = common.process_var_map(var_map)

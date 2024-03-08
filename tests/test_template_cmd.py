@@ -1,4 +1,4 @@
-"""Tests for the zorg project's 'new' CLI command."""
+"""Tests for the zorg project's 'template' CLI command."""
 
 from __future__ import annotations
 
@@ -10,26 +10,28 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 from . import common as c
 
 
-def test_new(
+def test_template_render(
     main: c.MainType,
     capsys: CaptureFixture,
     tmp_path: Path,
     snapshot: Snapshot,
 ) -> None:
-    """Test the 'new' subcommand."""
+    """Test the 'template render' subcommand."""
     zettel_dir = tmp_path / "org"
-    template_path: Path = zettel_dir / "day_log_tmpl.zo"
+    zot_basename = "day_log_tmpl.zo"
+    template_path: Path = zettel_dir / zot_basename
     template_path.parent.mkdir(parents=True, exist_ok=True)
     test_data_template_path = Path(__file__).parent / Path(
-        "data/day_log_tmpl.zo"
+        f"data/{zot_basename}"
     )
     template_path.write_text(test_data_template_path.read_text())
 
     argv = [
         "--dir",
         str(zettel_dir),
-        "new",
-        "day_log_tmpl.zo",
+        "template",
+        "render",
+        zot_basename,
         "date=19910304",
     ]
     assert main(*argv) == 0

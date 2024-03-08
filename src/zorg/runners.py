@@ -14,7 +14,7 @@ from typist import PathLike
 import vimala
 
 from . import common
-from .config import Config, EditConfig, NewConfig
+from .config import Config, EditConfig, TemplateRenderConfig
 from .file_groups import expand_file_group_paths
 
 
@@ -108,8 +108,8 @@ def _process_vim_commands(
 
 
 @runner
-def run_new(cfg: NewConfig) -> int:
-    """Runner for the 'new' command."""
+def run_template_render(cfg: TemplateRenderConfig) -> int:
+    """Runner for the 'template' command."""
     tmpl_manager = _ZorgTemplateManager(cfg)
     print(tmpl_manager.render(cfg.template, cfg.var_map))
     return 0

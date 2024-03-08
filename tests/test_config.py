@@ -6,7 +6,7 @@ from typing import Any, Sequence, cast
 from clack import clack_envvars_set
 from clack.types import ClackConfig
 
-from zorg.config import EditConfig, NewConfig, clack_parser
+from zorg.config import EditConfig, TemplateRenderConfig, clack_parser
 
 
 def test_defaultToEdit_whenNoCommandIsGiven() -> None:
@@ -33,6 +33,7 @@ def test_defaultToEdit_whenFileGroupNameIsFirstArg() -> None:
 def wrapped_clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Thin wrapper around clack_parser()."""
     with clack_envvars_set(
-        "zorg", cast(list[type[ClackConfig]], [EditConfig, NewConfig])
+        "zorg",
+        cast(list[type[ClackConfig]], [EditConfig, TemplateRenderConfig]),
     ):
         return clack_parser(argv)
