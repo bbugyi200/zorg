@@ -102,7 +102,7 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
         ),
         call().unwrap(),
         call(
-            ["vim", "baz.zo", "buz.zo"],
+            ["vim", str(zettel_dir / "baz.zo"), str(zettel_dir / "buz.zo")],
             stdout=None,
             stderr=None,
             timeout=None,
