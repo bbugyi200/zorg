@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog], and this project adheres to
 * Add support for changing the paths opened in vim by writing those file paths
   to `/tmp/zorg_keep_alive`.
 
+### Changed
+
+* *BREAKING CHANGE*: Renamed the `zorg new` command to `zorg template render`.
+
 
 ## [0.2.1](https://github.com/bbugyi200/zorg/compare/0.2.0...0.2.1) - 2024-03-07
 
