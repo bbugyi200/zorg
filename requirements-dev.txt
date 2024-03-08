@@ -63,7 +63,7 @@ click==8.1.7
     #   cruft
     #   pip-tools
     #   typer
-cogapp==3.3.0
+cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
