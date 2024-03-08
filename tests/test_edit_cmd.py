@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
@@ -62,3 +62,51 @@ def test_edit_day_logs(
         stderr=None,
         timeout=None,
     )
+
+
+def test_whenEmptyKeepAliveFileExists_shouldRestartVim(
+    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path
+) -> None:
+    """Test that we can use the keep alive file to have zorg re-run vim."""
+    zettel_dir = tmp_path / "org"
+
+    c.keep_alive_file_path.touch()
+    exit_code = main("--dir", str(zettel_dir), "edit", "foobar.zo")
+
+    assert exit_code == 0
+    vim_proc_mock.assert_called_with(
+        ["vim", str(zettel_dir / "foobar.zo")],
+        stdout=None,
+        stderr=None,
+        timeout=None,
+    )
+    assert vim_proc_mock.call_count == 2
+
+
+def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
+    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path
+) -> None:
+    """Test that we can use the keep alive file to change our vim file args."""
+    zettel_dir = tmp_path / "org"
+
+    c.keep_alive_file_path.write_text("baz.zo buz.zo")
+    exit_code = main("--dir", str(zettel_dir), "edit", "foobar.zo")
+
+    assert exit_code == 0
+    vim_proc_mock.assert_has_calls([
+        call(
+            ["vim", str(zettel_dir / "foobar.zo")],
+            stdout=None,
+            stderr=None,
+            timeout=None,
+        ),
+        call().unwrap(),
+        call(
+            ["vim", "baz.zo", "buz.zo"],
+            stdout=None,
+            stderr=None,
+            timeout=None,
+        ),
+        call().unwrap(),
+    ])
+    assert vim_proc_mock.call_count == 2

@@ -24,7 +24,7 @@ class Config(clack.Config):
 
     command: Command
 
-    template_pattern_map: dict[Pattern, Path]
+    template_pattern_map: dict[Pattern, Path] = {}
     zettel_dir: Path = Path.home() / "org"
 
 

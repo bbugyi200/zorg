@@ -32,7 +32,7 @@ def main(make_config_file: MakeConfigFile, tmp_path: Path) -> c.MainType:
 
     def inner_main(*args: str, **kwargs: Any) -> int:
         kwargs.setdefault("zettel_dir", default_zettel_dir)
-        kwargs.setdefault("template_pattern_map", {".*": "default.zo"})
+        kwargs.setdefault("keep_alive_file", c.keep_alive_file_path)
 
         cfg_kwargs = {
             k: v if isinstance(v, dict) else str(v)

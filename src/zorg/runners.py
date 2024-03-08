@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from functools import partial
 from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator, Mapping
@@ -66,8 +67,12 @@ def _add_paths_to_zdir(
 
 
 def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
-    cfg.keep_alive_file.parent.mkdir(parents=True, exist_ok=True)
-    cfg.keep_alive_file.touch()
+    zvim = partial(
+        vimala.vim,
+        commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
+    )
+    zvim(*zo_paths).unwrap()
+
     logger.debug(
         "Vim loop will run as long as the keep alive file exists.",
         keep_alive_file=cfg.keep_alive_file,
@@ -90,10 +95,7 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
             paths = last_paths = new_paths
 
         cfg.keep_alive_file.unlink()
-        vimala.vim(
-            *_add_paths_to_zdir(cfg.zettel_dir, paths),
-            commands=_process_vim_commands(cfg.zettel_dir, cfg.vim_commands),
-        ).unwrap()
+        zvim(*paths).unwrap()
 
 
 def _process_vim_commands(
