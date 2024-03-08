@@ -19,7 +19,7 @@ def expand_file_group_paths(
 
     Args:
         zo_paths: The initial set of file paths and/or file group names.
-        file_group_map: A mapping from file group names to a set of file paths.
+        file_group_map: A mapping from file group names to sets of file paths.
 
     Returns:
         A new list of paths constructed from {zo_paths} with all file group
