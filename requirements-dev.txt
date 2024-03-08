@@ -8,6 +8,10 @@
     # via -r requirements-dev.in
 alabaster==0.7.16
     # via sphinx
+antlr4-python3-runtime==4.13.1
+    # via
+    #   -r requirements.in
+    #   zettel-org
 arrow==1.3.0
     # via cookiecutter
 astroid==3.1.0
