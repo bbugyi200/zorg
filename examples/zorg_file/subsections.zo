@@ -1,0 +1,27 @@
+# A file with subsections.
+
+######### A1
+- Note about A1
+
+======= A2.1
+- Note about something
+- Another note
+
+======= A2.2
+o A todo for something
+
+######### B1
+- A note on the second section.
+
+======= B2
+- A sub-note.
+- And another note.
+
+***** B3
+o Some foobar todo.
+
+@@@ B4
+- This is inside of h4_section!
+
+-- B5
+- This is the final section.
