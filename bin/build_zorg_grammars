@@ -13,19 +13,29 @@ trap "rm -f '$TMPFILE'; exit 1" 2       # INT
 trap "rm -f '$TMPFILE'; exit 1" 1 15    # HUP TERM
 
 function run() {
-    for dir in "zorg_file"; do
-      log::info "Generating %s parser using antlr4." $dir
-      antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
-      for f in examples/$dir/*.zo; do
-        log::info "Parsing tokens and contructing syntax tree from %s example file." $f
-        antlr4-parse src/zorg/grammar/$dir/*.g4 prog -tokens -tree $f 2>> $TMPFILE
-      done
+  parse_cmds=('-tree')
+  if [[ "$1" == "-v" || "$1" == "--verbose" ]]; then
+    shift
+    VERBOSE=1
+    parse_cmds+=('-tokens')
+    log::debug "Verbose mode enabled!"
+  fi
 
-      if [ -s $TMPFILE ]; then
-        log::error "Errors were logged while parsing some of the example files."
-        return 1
-      fi
+  for dir in "zorg_file"; do
+    log::info "Generating %s parser using antlr4." $dir
+    antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
+    for f in examples/$dir/*.zo; do
+      log::info "Contructing syntax tree from %s example file." $f
+      antlr4-parse src/zorg/grammar/$dir/*.g4 prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMPFILE
     done
+
+    if [ -s $TMPFILE ]; then
+      log::error "Errors were logged while parsing some of the example files."
+      return 1
+    else
+      log::info "All example files were parsed without error!"
+    fi
+  done
 }
 
 if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then
