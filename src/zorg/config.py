@@ -93,14 +93,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         nargs="*",
         help="The .zo files we want to open in an editor.",
     )
-    edit_parser.add_argument(
-        "--edit-day-log",
-        action=argparse.BooleanOptionalAction,
-        help=(
-            "Should we open the main day log for editing? It is useful to"
-            " disable editing when testing day log generation from templates."
-        ),
-    )
 
     template_parser = new_command(
         "template", help="Commands for managing .zot templates."
