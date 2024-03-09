@@ -58,6 +58,12 @@ import subprocess
 popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
+
+for cmd in []:
+    popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
+    stdout, _ = popen.communicate()
+    print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
+    print("```", stdout.decode().strip(), "```", sep="\n")
 ]]]]] -->
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
