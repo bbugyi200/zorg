@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in []:
+for cmd in ['edit', 'template', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -103,6 +103,50 @@ subcommands:
                         day log in your system's editor. This is the default
                         subcommand.
     template            Commands for managing .zot templates.
+```
+
+The output from running `zorg edit --help` is shown below:
+
+```
+usage: zorg edit [-h] [zo_paths ...]
+
+Generate new day logs from templates and open the main day log in your system's editor. This is the default subcommand.
+
+positional arguments:
+  zo_paths    The .zo files we want to open in an editor.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+The output from running `zorg template --help` is shown below:
+
+```
+usage: zorg template [-h] {render} ...
+
+Commands for managing .zot templates.
+
+options:
+  -h, --help  show this help message and exit
+
+subcommands:
+  {render}
+    render    Render a new .zo file using a .zot template.
+```
+
+The output from running `zorg template render --help` is shown below:
+
+```
+usage: zorg template render [-h] template [variables ...]
+
+Render a new .zo file using a .zot template.
+
+positional arguments:
+  template    Path to the .zot template.
+  variables   A list of variable specs of the form of key=value.
+
+options:
+  -h, --help  show this help message and exit
 ```
 <!-- [[[[[end]]]]] -->
 
