@@ -1,13 +1,16 @@
 grammar ZorgFile;
 
-prog    : head NEWLINE blocks NEWLINE (section)* ;
-head    : COMMENT_LINE+ ;
-blocks  : ANY_LINE* ;
-section : H1_HEADER_LINE (todo|note)* ;
-todo    :  ;
-note    : '- ' ;
+prog      : head NL+ block* section* EOF ;
+head      : comment+ ;
+comment   : '# ' (WORD ' '?)+ NL
+          | '#' NL
+          ;
+block     : (todo|note)+ NL? ;
+section   : h1_header block+ ;
+todo      : 'o ' (WORD ' '?)+ NL ;
+note      : '- ' (WORD ' '?)+ NL ;
+h1_header : '######### ' (WORD ' '?)+ NL ;
 
-ANY_LINE       : ~([\r\n#]) ~([\r\n])* NEWLINE ;
-COMMENT_LINE   : '# ' ~([\r\n])* NEWLINE ;
-H1_HEADER_LINE : '######### ' ~([\r\n])* NEWLINE ;
-NEWLINE        : [\r\n] ;
+NL             : '\r'? '\n' ;
+CHAR           : ~[\r\n ] ;
+WORD           : CHAR+ ;
