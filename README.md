@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['edit', 'template', 'template render']:
+for cmd in ['action', 'edit', 'template', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -68,7 +68,7 @@ for cmd in ['edit', 'template', 'template render']:
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {edit,template} ...
+            {action,edit,template} ...
 
 The zettel note manager of the future.
 
@@ -98,11 +98,32 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {edit,template}
+  {action,edit,template}
+    action              Used to interface with an editor via an action
+                        protocol.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
     template            Commands for managing .zot templates.
+```
+
+The output from running `zorg action --help` is shown below:
+
+```
+usage: zorg action [-h] action path line_number column_number
+
+Used to interface with an editor via an action protocol.
+
+positional arguments:
+  action         The type of action that you are requesting.
+  column_number  The column number that your editor cursor is currently
+                 located on.
+  line_number    The line number that your editor cursor is currently located
+                 on.
+  path           The file that your editor currently has open.
+
+options:
+  -h, --help     show this help message and exit
 ```
 
 The output from running `zorg edit --help` is shown below:

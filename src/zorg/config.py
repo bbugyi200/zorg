@@ -11,10 +11,10 @@ import clack
 from logrus import Logger
 
 from . import common
-from .types import FileGroupMapType
+from .types import Action, FileGroupMapType
 
 
-Command = Literal["edit", "render"]
+Command = Literal["action", "edit", "render"]
 
 logger = Logger(__name__)
 
@@ -26,6 +26,17 @@ class Config(clack.Config):
 
     template_pattern_map: dict[Pattern, Path] = {}
     zettel_dir: Path = Path.home() / "org"
+
+
+class ActionConfig(Config):
+    """Clack config for the 'action' command."""
+
+    command: Literal["action"]
+
+    action: Action
+    path: Path
+    line_number: int
+    column_number: int
 
 
 class EditConfig(Config):
@@ -71,6 +82,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         )
 
     parser = clack.Parser(description="The zettel note manager of the future.")
+    # --- Global Options
     parser.add_argument(
         "-d",
         "--dir",
@@ -80,6 +92,35 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     )
 
     new_command = clack.new_command_factory(parser)
+
+    # --- 'action' command
+    action_parser = new_command(
+        "action",
+        help="Used to interface with an editor via an action protocol.",
+    )
+    action_parser.add_argument(
+        "action", help="The type of action that you are requesting."
+    )
+    action_parser.add_argument(
+        "path", type=Path, help="The file that your editor currently has open."
+    )
+    action_parser.add_argument(
+        "line_number",
+        type=int,
+        help=(
+            "The line number that your editor cursor is currently located on."
+        ),
+    )
+    action_parser.add_argument(
+        "column_number",
+        type=int,
+        help=(
+            "The column number that your editor cursor is currently"
+            " located on."
+        ),
+    )
+
+    # --- 'edit' command
     edit_parser = new_command(
         "edit",
         help=(
@@ -94,6 +135,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         help="The .zo files we want to open in an editor.",
     )
 
+    # --- 'template' command
     template_parser = new_command(
         "template", help="Commands for managing .zot templates."
     )

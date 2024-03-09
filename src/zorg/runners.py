@@ -14,7 +14,7 @@ from typist import PathLike
 import vimala
 
 from . import common
-from .config import Config, EditConfig, TemplateRenderConfig
+from .config import ActionConfig, Config, EditConfig, TemplateRenderConfig
 from .file_groups import expand_file_group_paths
 
 
@@ -22,6 +22,16 @@ logger = Logger(__name__)
 
 RUNNERS: list[ClackRunner] = []
 runner = metaman.register_function_factory(RUNNERS)
+
+
+@runner
+def run_action(cfg: ActionConfig) -> int:
+    """Runner for the 'action' command."""
+    print(cfg.action)
+    print(str(cfg.path))
+    print(f"line no: {cfg.line_number}")
+    print(f"col no: {cfg.column_number}")
+    return 0
 
 
 @runner
