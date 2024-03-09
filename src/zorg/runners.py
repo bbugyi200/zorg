@@ -63,6 +63,7 @@ def run_action(cfg: ActionConfig) -> int:
                     link_path.write_text(contents)
                     break
             print(f"EDIT {link_path}")
+            break
     return 0
 
 
