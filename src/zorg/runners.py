@@ -35,6 +35,23 @@ def run_action(cfg: ActionConfig) -> int:
             if not link_base.endswith(".zo"):
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
+            # TODO(bugyi): Factor this out into a function that can be shared with run_edit()
+            for pattern, tmpl_path in cfg.template_pattern_map.items():
+                if not link_path.exists() and (
+                    match := pattern.match(link_path.stem)
+                ):
+                    logger.info(
+                        "Creating new file using registered template.",
+                        new_file=link_path,
+                        template=tmpl_path,
+                    )
+                    tmpl_manager = _ZorgTemplateManager(cfg)
+                    contents = tmpl_manager.render(
+                        tmpl_path, common.process_var_map(match.groupdict())
+                    )
+                    link_path.parent.mkdir(parents=True, exist_ok=True)
+                    link_path.write_text(contents)
+                    break
             print(f"EDIT {link_path}")
     return 0
 
@@ -49,18 +66,17 @@ def run_edit(cfg: EditConfig) -> int:
     zo_paths = _prepend_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
-            if match := pattern.match(zo_path.stem):
-                if not zo_path.exists():
-                    logger.info(
-                        "Creating new file using registered template.",
-                        new_file=zo_path,
-                        template=tmpl_path,
-                    )
-                    contents = tmpl_manager.render(
-                        tmpl_path, common.process_var_map(match.groupdict())
-                    )
-                    zo_path.parent.mkdir(parents=True, exist_ok=True)
-                    zo_path.write_text(contents)
+            if not zo_path.exists() and (match := pattern.match(zo_path.stem)):
+                logger.info(
+                    "Creating new file using registered template.",
+                    new_file=zo_path,
+                    template=tmpl_path,
+                )
+                contents = tmpl_manager.render(
+                    tmpl_path, common.process_var_map(match.groupdict())
+                )
+                zo_path.parent.mkdir(parents=True, exist_ok=True)
+                zo_path.write_text(contents)
                 break
 
     _start_vim_loop(zo_paths, cfg=cfg)
