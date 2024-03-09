@@ -1,0 +1,3 @@
+#!/bin/bash
+
+antlr4 -Dlanguage=Python3 src/zorg/grammar/zorg_file/ZorgFile.g4
