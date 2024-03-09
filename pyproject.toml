@@ -6,9 +6,11 @@ build-backend = "setuptools.build_meta"
 line-length = 79
 preview = true
 unstable = true
+exclude = "src/zorg/grammar/"
 
 [tool.pydocstyle]
 match = '.*\.py'
+match-dir = '(?!src/zorg/grammar)'
 select = [
     "D100",
     "D101",
