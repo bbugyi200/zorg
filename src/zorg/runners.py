@@ -27,10 +27,15 @@ runner = metaman.register_function_factory(RUNNERS)
 @runner
 def run_action(cfg: ActionConfig) -> int:
     """Runner for the 'action' command."""
-    print(cfg.action)
-    print(str(cfg.path))
-    print(f"line no: {cfg.line_number}")
-    print(f"col no: {cfg.column_number}")
+    zpath = _prepend_zdir(cfg.zettel_dir, [cfg.path])[0]
+    line = zpath.read_text().split("\n")[cfg.line_number - 1]
+    for word in line.split(" "):
+        if word.startswith("[[") and word.endswith("]]"):
+            link_base = word[2:-2].split("::")[0]
+            if not link_base.endswith(".zo"):
+                link_base = f"{link_base}.zo"
+            link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
+            print(f"EDIT {link_path}")
     return 0
 
 
@@ -41,7 +46,7 @@ def run_edit(cfg: EditConfig) -> int:
     zo_paths = expand_file_group_paths(
         cfg.zo_paths, file_group_map=cfg.file_group_map
     )
-    zo_paths = _add_paths_to_zdir(cfg.zettel_dir, zo_paths)
+    zo_paths = _prepend_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
         for pattern, tmpl_path in cfg.template_pattern_map.items():
             if match := pattern.match(zo_path.stem):
@@ -62,9 +67,7 @@ def run_edit(cfg: EditConfig) -> int:
     return 0
 
 
-def _add_paths_to_zdir(
-    zdir: PathLike, paths: Iterable[PathLike]
-) -> list[Path]:
+def _prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
     zdir_path = Path(zdir)
     new_paths = []
     for p in paths:
@@ -93,7 +96,7 @@ def _start_vim_loop(zo_paths: Iterable[Path], cfg: EditConfig) -> None:
         if cfg.keep_alive_file.stat().st_size == 0:
             paths = last_paths
         else:
-            new_paths = _add_paths_to_zdir(
+            new_paths = _prepend_zdir(
                 cfg.zettel_dir,
                 [
                     Path(p.strip())
