@@ -1,4 +1,12 @@
 #!/bin/bash
+#
+# Helper script for generating and validating ANTLR4 grammars. Namely, for each
+# FOOBAR.g4 ANTLR4 grammar file, this script:
+#
+# 1) Uses ANTLR to generate Python modules (e.g. parsers, lexers,
+#    listeners) from FOOBAR.g4 files.
+#
+# 2) Iterates over and attempts to parse all FOOBAR example files.
 
 readonly BIN="$(dirname "$0")"
 readonly ROOT="$(dirname "${BIN}")"
