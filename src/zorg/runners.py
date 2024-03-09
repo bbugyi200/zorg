@@ -47,7 +47,17 @@ def run_action(cfg: ActionConfig) -> int:
                     )
                     tmpl_manager = _ZorgTemplateManager(cfg)
                     contents = tmpl_manager.render(
-                        tmpl_path, common.process_var_map(match.groupdict())
+                        tmpl_path,
+                        common.process_var_map(
+                            match.groupdict()
+                            | {
+                                "parent": (
+                                    str(zpath)
+                                    .replace(".zo", "")
+                                    .replace(str(cfg.zettel_dir) + "/", "")
+                                )
+                            }
+                        ),
                     )
                     link_path.parent.mkdir(parents=True, exist_ok=True)
                     link_path.write_text(contents)
