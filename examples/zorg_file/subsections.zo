@@ -25,3 +25,15 @@ o Some foobar todo.
 
 -- B5
 - This is the final section.
+
+######### C1
+- A note on the third section.
+======= C2
+- A sub-note.
+- And another note.
+***** C3
+o Some foobar todo.
+@@@ C4
+- This is inside of h4_section!
+-- C5
+- This is the final section.
