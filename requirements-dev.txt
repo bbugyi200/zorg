@@ -12,6 +12,8 @@ antlr4-python3-runtime==4.13.1
     # via
     #   -r requirements.in
     #   zettel-org
+antlr4-tools==0.2.1
+    # via -r requirements-dev.in
 arrow==1.3.0
     # via cookiecutter
 astroid==3.1.0
@@ -104,6 +106,8 @@ imagesize==1.4.1
     # via sphinx
 iniconfig==2.0.0
     # via pytest
+install-jdk==1.1.0
+    # via antlr4-tools
 isort==5.13.2
     # via
     #   -r requirements-dev.in

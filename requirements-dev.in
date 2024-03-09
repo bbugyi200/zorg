@@ -28,3 +28,4 @@ bump2version
 cruft[pyproject]
 pip-tools
 setuptools_scm
+antlr4-tools  # for the 'antlr4' and 'antlr4-parse' commands
