@@ -15,7 +15,11 @@ params = mark.parametrize
 
 @params("lineno,expected", [(3, "foo.zo"), (5, "bar.sh"), (6, "baz.zo")])
 def test_open_action(
-    main: c.MainType, capsys: CaptureFixture, tmp_path: Path, lineno: int, expected: str
+    main: c.MainType,
+    capsys: CaptureFixture,
+    tmp_path: Path,
+    lineno: int,
+    expected: str,
 ) -> None:
     """Test that the OPEN_LINK action is WAI."""
     zettel_dir = tmp_path / "org"
