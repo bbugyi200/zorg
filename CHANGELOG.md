@@ -9,12 +9,19 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.2.1...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.3.0...HEAD)
+
+No notable changes have been made.
+
+
+## [0.3.0](https://github.com/bbugyi200/zorg/compare/0.2.1...0.3.0) - 2024-03-10
 
 ### Added
 
 * Add support for changing the paths opened in vim by writing those file paths
   to `/tmp/zorg_keep_alive`.
+* Add the `zorg action` command.
+* Add the `zorg template init` command.
 
 ### Changed
 
