@@ -40,10 +40,8 @@ def run_action(cfg: ActionConfig) -> int:
         right_find = word.find("]")
         if left_find >= 0 and right_find >= 0:
             link_base = word[left_find + 2 : right_find].split("::")[0]
-            if "." not in link_base:
-                link_base = f"{link_base}.zo"
+            link_base = link_base if "." in link_base else f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
-
             _run_template_init(
                 cfg.zettel_dir,
                 cfg.template_pattern_map,

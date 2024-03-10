@@ -8,6 +8,7 @@ from typing import Any, Literal, Optional, Sequence
 
 import clack
 from logrus import Logger
+from typist import literal_to_list
 
 from . import common
 from .types import Action, FileGroupMapType, TemplatePatternMapType, VarMapType
@@ -109,7 +110,11 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         help="Used to interface with vim via an action protocol.",
     )
     action_parser.add_argument(
-        "action", help="The type of action that you are requesting."
+        "action",
+        help=(
+            "The type of action that you are requesting. Valid values:"
+            f" {literal_to_list(Action)}"
+        ),
     )
     action_parser.add_argument(
         "path", type=Path, help="The file that your editor currently has open."

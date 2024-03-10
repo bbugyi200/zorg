@@ -114,7 +114,8 @@ usage: zorg action [-h] action path line_number column_number
 Used to interface with vim via an action protocol.
 
 positional arguments:
-  action         The type of action that you are requesting.
+  action         The type of action that you are requesting. Valid values:
+                 ['OPEN_LINK']
   column_number  The column number that your editor cursor is currently
                  located on.
   line_number    The line number that your editor cursor is currently located
