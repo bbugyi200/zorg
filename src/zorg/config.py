@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import itertools as it
 from pathlib import Path
-from typing import Any, Literal, Sequence
+from typing import Any, Literal, Optional, Sequence
 
 import clack
 from logrus import Logger
@@ -69,8 +69,8 @@ class TemplateInitConfig(Config):
 
     # ----- ARGUMENTS
     new_path: Path
-    template: Path | None = None
-    var_map: VarMapType | None = None
+    template: Optional[Path] = None
+    var_map: Optional[VarMapType] = None
 
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
