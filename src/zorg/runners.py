@@ -94,7 +94,7 @@ def _run_template_init(
             break
 
     if matched_template is None:
-        logger.debug(
+        logger.warn(
             "Unable to match new filename with any registered templates.",
             template_pattern_map=template_pattern_map,
             new_path=new_path,
