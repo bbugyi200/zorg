@@ -88,7 +88,7 @@ def _run_template_init(
 
     matched_template = template
     for pattern, tmpl_path in template_pattern_map.items():
-        if match := pattern.match(new_path.stem):
+        if match := pattern.match(new_path.name):
             matched_template = tmpl_path
             var_map |= match.groupdict()
             break
