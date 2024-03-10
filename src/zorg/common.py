@@ -4,8 +4,10 @@ import datetime as dt
 import re
 from typing import Any
 
+from .types import VarMapType
 
-def process_var_map(var_map: dict[str, Any]) -> dict[str, Any]:
+
+def process_var_map(var_map: VarMapType) -> dict[str, Any]:
     """Processes and potentially adds to {var_map}."""
     new_var_map = {}
     for k, v in var_map.items():

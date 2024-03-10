@@ -14,7 +14,7 @@ from typist import PathLike
 import vimala
 
 from . import common
-from .config import ActionConfig, Config, EditConfig, TemplateRenderConfig
+from .config import ActionConfig, EditConfig, TemplateRenderConfig
 from .file_groups import expand_file_group_paths
 from .types import TemplatePatternMapType, VarMapType
 
@@ -62,7 +62,7 @@ def _run_template_init(
 ) -> None:
     zettel_dir = Path(zettel_dir)
     new_path = Path(new_path)
-    var_map = {} if var_map is None else var_map
+    var_map = {} if var_map is None else dict(var_map)
 
     if new_path.exists():
         return
