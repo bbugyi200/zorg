@@ -38,7 +38,7 @@ def run_action(cfg: ActionConfig) -> int:
     for word in line.split(" "):
         if word.startswith("[[") and word.endswith("]]"):
             link_base = word[2:-2].split("::")[0]
-            if not "." in link_base:
+            if "." not in link_base:
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
 
