@@ -38,21 +38,23 @@ def run_action(cfg: ActionConfig) -> int:
     for word in line.split(" "):
         if word.startswith("[[") and word.endswith("]]"):
             link_base = word[2:-2].split("::")[0]
-            if not link_base.endswith(".zo"):
+            if not "." in link_base:
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
-            _run_template_init(
-                cfg.zettel_dir,
-                cfg.template_pattern_map,
-                link_path,
-                var_map={
-                    "parent": (
-                        str(zpath)
-                        .replace(".zo", "")
-                        .replace(str(cfg.zettel_dir) + "/", "")
-                    )
-                },
-            )
+
+            if link_base.endswith(".zo"):
+                _run_template_init(
+                    cfg.zettel_dir,
+                    cfg.template_pattern_map,
+                    link_path,
+                    var_map={
+                        "parent": (
+                            str(zpath)
+                            .replace(".zo", "")
+                            .replace(str(cfg.zettel_dir) + "/", "")
+                        )
+                    },
+                )
             print(f"EDIT {link_path}")
             break
     return 0
