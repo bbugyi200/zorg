@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'edit', 'template', 'template render']:
+for cmd in ['action', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -142,16 +142,36 @@ options:
 The output from running `zorg template --help` is shown below:
 
 ```
-usage: zorg template [-h] {render} ...
+usage: zorg template [-h] {render,init} ...
 
 Commands for managing .zot templates.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help     show this help message and exit
 
 subcommands:
-  {render}
-    render    Render a new .zo file using a .zot template.
+  {render,init}
+    render       Render a new .zo file using a .zot template.
+    init         Initialize a new file using a zorg template.
+```
+
+The output from running `zorg template init --help` is shown below:
+
+```
+usage: zorg template init [-h] [-t TEMPLATE] new_path [variables ...]
+
+Initialize a new file using a zorg template.
+
+positional arguments:
+  new_path              Path to the new file you would like to create.
+  variables             A list of variable specs of the form of key=value.
+
+options:
+  -h, --help            show this help message and exit
+  -t TEMPLATE, --template TEMPLATE
+                        Optional path to the .zot template. If a template is
+                        not provided, we will infer what template to use based
+                        off of the new file's name.
 ```
 
 The output from running `zorg template render --help` is shown below:

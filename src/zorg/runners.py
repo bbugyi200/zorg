@@ -14,7 +14,12 @@ from typist import PathLike
 import vimala
 
 from . import common
-from .config import ActionConfig, EditConfig, TemplateRenderConfig
+from .config import (
+    ActionConfig,
+    EditConfig,
+    TemplateInitConfig,
+    TemplateRenderConfig,
+)
 from .file_groups import expand_file_group_paths
 from .types import TemplatePatternMapType, VarMapType
 
@@ -53,35 +58,59 @@ def run_action(cfg: ActionConfig) -> int:
     return 0
 
 
+@runner
+def run_template_init(cfg: TemplateInitConfig) -> int:
+    _run_template_init(
+        cfg.zettel_dir,
+        cfg.template_pattern_map,
+        cfg.new_path,
+        template=cfg.template,
+        var_map=cfg.var_map,
+    )
+    return 0
+
+
 def _run_template_init(
     zettel_dir: PathLike,
     template_pattern_map: TemplatePatternMapType,
     new_path: PathLike,
     *,
+    template: Path = None,
     var_map: VarMapType = None,
 ) -> None:
     zettel_dir = Path(zettel_dir)
-    new_path = Path(new_path)
+    new_path = _prepend_zdir(zettel_dir, [Path(new_path)])[0]
     var_map = {} if var_map is None else dict(var_map)
 
     if new_path.exists():
         return
 
+    matched_template = template
     for pattern, tmpl_path in template_pattern_map.items():
         if match := pattern.match(new_path.stem):
-            logger.info(
-                "Creating new file using registered template.",
-                new_file=new_path,
-                template=tmpl_path,
-            )
-            tmpl_manager = _ZorgTemplateManager(zettel_dir)
-            contents = tmpl_manager.render(
-                tmpl_path,
-                common.process_var_map(match.groupdict() | var_map),
-            )
-            new_path.parent.mkdir(parents=True, exist_ok=True)
-            new_path.write_text(contents)
+            matched_template = tmpl_path
+            var_map |= match.groupdict()
             break
+
+    if matched_template is None:
+        logger.error(
+            "Unable to match new filename with any registered templates.",
+            local=locals(),
+        )
+        return
+
+    logger.info(
+        "Creating new file using zorg template.",
+        new_file=new_path,
+        template=matched_template,
+    )
+    tmpl_manager = _ZorgTemplateManager(zettel_dir)
+    contents = tmpl_manager.render(
+        _prepend_zdir(zettel_dir, [matched_template])[0],
+        common.process_var_map(var_map),
+    )
+    new_path.parent.mkdir(parents=True, exist_ok=True)
+    new_path.write_text(contents)
 
 
 @runner

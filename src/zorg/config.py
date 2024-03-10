@@ -13,7 +13,7 @@ from . import common
 from .types import Action, FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
-Command = Literal["action", "edit", "render"]
+Command = Literal["action", "edit", "init", "render"]
 
 logger = Logger(__name__)
 
@@ -60,6 +60,17 @@ class TemplateRenderConfig(Config):
     # ----- ARGUMENTS
     template: Path
     var_map: VarMapType
+
+
+class TemplateInitConfig(Config):
+    """Clack config for the 'template' command."""
+
+    command: Literal["init"]
+
+    # ----- ARGUMENTS
+    new_path: Path
+    template: Path | None = None
+    var_map: VarMapType | None = None
 
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
@@ -139,6 +150,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "template", help="Commands for managing .zot templates."
     )
     new_template_command = clack.new_command_factory(template_parser)
+    # --- 'template render' command
     template_render_parser = new_template_command(
         "render", help="Render a new .zo file using a .zot template."
     )
@@ -146,6 +158,31 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "template", type=Path, help="Path to the .zot template."
     )
     template_render_parser.add_argument(
+        "variables",
+        nargs="*",
+        help="A list of variable specs of the form of key=value.",
+    )
+    # --- 'template init' command
+    template_init_parser = new_template_command(
+        "init", help="Initialize a new file using a zorg template."
+    )
+    template_init_parser.add_argument(
+        "new_path",
+        type=Path,
+        help="Path to the new file you would like to create.",
+    )
+    template_init_parser.add_argument(
+        "-t",
+        "--template",
+        type=Path,
+        nargs=1,
+        help=(
+            "Optional path to the .zot template. If a template is not"
+            " provided, we will infer what template to use based off of the"
+            " new file's name."
+        ),
+    )
+    template_init_parser.add_argument(
         "variables",
         nargs="*",
         help="A list of variable specs of the form of key=value.",
