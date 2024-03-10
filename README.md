@@ -99,8 +99,7 @@ options:
 
 subcommands:
   {action,edit,template}
-    action              Used to interface with an editor via an action
-                        protocol.
+    action              Used to interface with vim via an action protocol.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
@@ -112,7 +111,7 @@ The output from running `zorg action --help` is shown below:
 ```
 usage: zorg action [-h] action path line_number column_number
 
-Used to interface with an editor via an action protocol.
+Used to interface with vim via an action protocol.
 
 positional arguments:
   action         The type of action that you are requesting.

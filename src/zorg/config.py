@@ -95,7 +95,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     # --- 'action' command
     action_parser = new_command(
         "action",
-        help="Used to interface with an editor via an action protocol.",
+        help="Used to interface with vim via an action protocol.",
     )
     action_parser.add_argument(
         "action", help="The type of action that you are requesting."
