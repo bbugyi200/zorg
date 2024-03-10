@@ -42,19 +42,18 @@ def run_action(cfg: ActionConfig) -> int:
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
 
-            if link_base.endswith(".zo"):
-                _run_template_init(
-                    cfg.zettel_dir,
-                    cfg.template_pattern_map,
-                    link_path,
-                    var_map={
-                        "parent": (
-                            str(zpath)
-                            .replace(".zo", "")
-                            .replace(str(cfg.zettel_dir) + "/", "")
-                        )
-                    },
-                )
+            _run_template_init(
+                cfg.zettel_dir,
+                cfg.template_pattern_map,
+                link_path,
+                var_map={
+                    "parent": (
+                        str(zpath)
+                        .replace(".zo", "")
+                        .replace(str(cfg.zettel_dir) + "/", "")
+                    )
+                },
+            )
             print(f"EDIT {link_path}")
             break
     return 0
@@ -95,9 +94,10 @@ def _run_template_init(
             break
 
     if matched_template is None:
-        logger.error(
+        logger.debug(
             "Unable to match new filename with any registered templates.",
-            local=locals(),
+            template_pattern_map=template_pattern_map,
+            new_path=new_path,
         )
         return
 
