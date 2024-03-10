@@ -36,8 +36,10 @@ def run_action(cfg: ActionConfig) -> int:
     zpath = _prepend_zdir(cfg.zettel_dir, [cfg.path])[0]
     line = zpath.read_text().split("\n")[cfg.line_number - 1]
     for word in line.split(" "):
-        if word.startswith("[[") and (right_idx := word.find("]")):
-            link_base = word[2:right_idx].split("::")[0]
+        left_find = word.find("[[")
+        right_find = word.find("]")
+        if left_find >= 0 and right_find >= 0:
+            link_base = word[left_find + 2 : right_find].split("::")[0]
             if "." not in link_base:
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]

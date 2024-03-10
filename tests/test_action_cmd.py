@@ -13,7 +13,10 @@ from . import common as c
 params = mark.parametrize
 
 
-@params("lineno,expected", [(3, "foo.zo"), (5, "bar.sh"), (6, "baz.zo")])
+@params(
+    "lineno,expected",
+    [(3, "foo.zo"), (5, "bar.sh"), (6, "baz.zo"), (7, "buz.zo")],
+)
 def test_open_action(
     main: c.MainType,
     capsys: CaptureFixture,

@@ -4,3 +4,4 @@
 
 - Some note with a [[bar.sh]] link to a bash script.
 - Some note with a link in parens (see [[baz]]).
+- Some note with a link in parens and a block-level link ([[buz::fuzz]]).
