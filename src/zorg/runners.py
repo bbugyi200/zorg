@@ -16,6 +16,7 @@ import vimala
 from . import common
 from .config import ActionConfig, Config, EditConfig, TemplateRenderConfig
 from .file_groups import expand_file_group_paths
+from .types import TemplatePatternMapType, VarMapType
 
 
 logger = Logger(__name__)
@@ -35,60 +36,63 @@ def run_action(cfg: ActionConfig) -> int:
             if not link_base.endswith(".zo"):
                 link_base = f"{link_base}.zo"
             link_path = _prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
-            # TODO(bugyi): Factor this out into a function that can be shared with run_edit()
-            for pattern, tmpl_path in cfg.template_pattern_map.items():
-                if not link_path.exists() and (
-                    match := pattern.match(link_path.stem)
-                ):
-                    logger.info(
-                        "Creating new file using registered template.",
-                        new_file=link_path,
-                        template=tmpl_path,
+            _run_template_init(
+                cfg.zettel_dir,
+                cfg.template_pattern_map,
+                link_path,
+                var_map={
+                    "parent": (
+                        str(zpath)
+                        .replace(".zo", "")
+                        .replace(str(cfg.zettel_dir) + "/", "")
                     )
-                    tmpl_manager = _ZorgTemplateManager(cfg)
-                    contents = tmpl_manager.render(
-                        tmpl_path,
-                        common.process_var_map(
-                            match.groupdict()
-                            | {
-                                "parent": (
-                                    str(zpath)
-                                    .replace(".zo", "")
-                                    .replace(str(cfg.zettel_dir) + "/", "")
-                                )
-                            }
-                        ),
-                    )
-                    link_path.parent.mkdir(parents=True, exist_ok=True)
-                    link_path.write_text(contents)
-                    break
+                },
+            )
             print(f"EDIT {link_path}")
             break
     return 0
 
 
+def _run_template_init(
+    zettel_dir: PathLike,
+    template_pattern_map: TemplatePatternMapType,
+    new_path: PathLike,
+    *,
+    var_map: VarMapType = None,
+) -> None:
+    zettel_dir = Path(zettel_dir)
+    new_path = Path(new_path)
+    var_map = {} if var_map is None else var_map
+
+    if new_path.exists():
+        return
+
+    for pattern, tmpl_path in template_pattern_map.items():
+        if match := pattern.match(new_path.stem):
+            logger.info(
+                "Creating new file using registered template.",
+                new_file=new_path,
+                template=tmpl_path,
+            )
+            tmpl_manager = _ZorgTemplateManager(zettel_dir)
+            contents = tmpl_manager.render(
+                tmpl_path,
+                common.process_var_map(match.groupdict() | var_map),
+            )
+            new_path.parent.mkdir(parents=True, exist_ok=True)
+            new_path.write_text(contents)
+            break
+
+
 @runner
 def run_edit(cfg: EditConfig) -> int:
     """Runner for the 'edit' command."""
-    tmpl_manager = _ZorgTemplateManager(cfg)
     zo_paths = expand_file_group_paths(
         cfg.zo_paths, file_group_map=cfg.file_group_map
     )
     zo_paths = _prepend_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
-        for pattern, tmpl_path in cfg.template_pattern_map.items():
-            if not zo_path.exists() and (match := pattern.match(zo_path.stem)):
-                logger.info(
-                    "Creating new file using registered template.",
-                    new_file=zo_path,
-                    template=tmpl_path,
-                )
-                contents = tmpl_manager.render(
-                    tmpl_path, common.process_var_map(match.groupdict())
-                )
-                zo_path.parent.mkdir(parents=True, exist_ok=True)
-                zo_path.write_text(contents)
-                break
+        _run_template_init(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
 
     _start_vim_loop(zo_paths, cfg=cfg)
     return 0
@@ -155,7 +159,7 @@ def _process_vim_commands(
 @runner
 def run_template_render(cfg: TemplateRenderConfig) -> int:
     """Runner for the 'template' command."""
-    tmpl_manager = _ZorgTemplateManager(cfg)
+    tmpl_manager = _ZorgTemplateManager(cfg.zettel_dir)
     print(tmpl_manager.render(cfg.template, cfg.var_map))
     return 0
 
@@ -163,18 +167,18 @@ def run_template_render(cfg: TemplateRenderConfig) -> int:
 class _ZorgTemplateManager:
     tmp_dir = tempfile.TemporaryDirectory()
 
-    def __init__(self, cfg: Config) -> None:
+    def __init__(self, zettel_dir: Path) -> None:
         tmp_dir_path = Path(self.tmp_dir.name)
         loader = jinja2.FileSystemLoader(searchpath=tmp_dir_path)
 
         self._temp_dir_path = tmp_dir_path
         self._template_env = jinja2.Environment(loader=loader)
-        self._cfg = cfg
+        self._zettel_dir = zettel_dir
 
     def render(self, template_path: Path, var_map: Mapping[str, Any]) -> str:
         """Renders {template_path} using {var_map} for template variables."""
         self._build_template_in_dir(
-            self._temp_dir_path, self._cfg.zettel_dir / template_path
+            self._temp_dir_path, self._zettel_dir / template_path
         )
         template = self._template_env.get_template(template_path.name)
         return template.render(var_map)

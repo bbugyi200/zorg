@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import itertools as it
 from pathlib import Path
-from typing import Any, Literal, Pattern, Sequence
+from typing import Any, Literal, Sequence
 
 import clack
 from logrus import Logger
 
 from . import common
-from .types import Action, FileGroupMapType
+from .types import Action, FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
 Command = Literal["action", "edit", "render"]
@@ -23,7 +23,7 @@ class Config(clack.Config):
 
     command: Command
 
-    template_pattern_map: dict[Pattern, Path] = {}
+    template_pattern_map: TemplatePatternMapType = {}
     zettel_dir: Path = Path.home() / "org"
 
 
@@ -59,7 +59,7 @@ class TemplateRenderConfig(Config):
 
     # ----- ARGUMENTS
     template: Path
-    var_map: dict[str, Any]
+    var_map: VarMapType
 
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:

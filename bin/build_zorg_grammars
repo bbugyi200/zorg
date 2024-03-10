@@ -7,6 +7,15 @@
 #    listeners) from FOOBAR.g4 files.
 #
 # 2) Iterates over and attempts to parse all FOOBAR example files.
+#
+# Usage
+# -----
+# build_zorg_grammars [-v]
+#
+# Optional Arguments
+# ------------------
+#     -v | --verbose
+#         Enable more verbose output (e.g. print tokens).
 
 readonly BIN="$(dirname "$0")"
 readonly ROOT="$(dirname "${BIN}")"

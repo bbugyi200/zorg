@@ -14,13 +14,11 @@ words      : ((WORD|CHAR) ' '?)+ ;
 h1_section : h1_header block+ (NL? h2_section)* ;
 h2_section : h2_header block+ (NL? h3_section)* ;
 h3_section : h3_header block+ (NL? h4_section)* ;
-h4_section : h4_header block+ (NL? h5_section)* ;
-h5_section : h5_header block+ ;
+h4_section : h4_header block+ ;
 h1_header  : '######### ' words NL ;
 h2_header  : '======= ' words NL ;
 h3_header  : '***** ' words NL ;
-h4_header  : '@@@ ' words NL ;
-h5_header  : '-- ' words NL ;
+h4_header  : '--- ' words NL ;
 
 // lexer rules
 NL             : '\r'? '\n' ;

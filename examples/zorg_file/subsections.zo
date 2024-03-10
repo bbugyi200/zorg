@@ -20,11 +20,8 @@ o A todo for something
 ***** B3
 o Some foobar todo.
 
-@@@ B4
+--- B4
 - This is inside of h4_section!
-
--- B5
-- This is the final section.
 
 ######### C1
 - A note on the third section.
@@ -33,7 +30,5 @@ o Some foobar todo.
 - And another note.
 ***** C3
 o Some foobar todo.
-@@@ C4
-- This is inside of h4_section!
--- C5
-- This is the final section.
+--- C4
+- This is the final section!
