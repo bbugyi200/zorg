@@ -29,7 +29,7 @@ def main(make_config_file: MakeConfigFile) -> c.MainType:
 
     def inner_main(*args: str, **kwargs: Any) -> int:
         cfg_kwargs = {
-            k: v if isinstance(v, dict) else str(v)
+            k: v if isinstance(v, (dict, list)) else str(v)
             for (k, v) in kwargs.items()
         }
 

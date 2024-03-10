@@ -34,8 +34,9 @@ def test_template_render_day_log(
         zot_basename,
         "date=19910304",
     ]
-    assert main(*argv) == 0
+    exit_code = main(*argv)
 
+    assert exit_code == 0
     capture = capsys.readouterr()
     assert capture.out == snapshot
 

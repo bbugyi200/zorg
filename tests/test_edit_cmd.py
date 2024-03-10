@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 from unittest.mock import Mock, call
 
 from syrupy.assertion import SnapshotAssertion as Snapshot
@@ -15,7 +16,7 @@ def test_edit_day_logs(
 ) -> None:
     """Test that we properly generate test day, habit, and done logs."""
     zettel_dir = tmp_path / "org"
-    kwargs = {}
+    kwargs: dict[str, Any] = {"vim_commands": ["source {zdir}/vimrc"]}
     for key, stem in [
         ("day_log_template", "day_log_tmpl"),
         ("habit_log_template", "habit_log_tmpl"),
@@ -26,7 +27,7 @@ def test_edit_day_logs(
         test_data_template_path = Path(__file__).parent / Path(
             f"data/{stem}.zo"
         )
-        template_path.write_text(test_data_template_path.read_text())
+        template_path.write_bytes(test_data_template_path.read_bytes())
         kwargs[key] = template_path.name
 
     day_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.DD}.zo"
@@ -57,7 +58,14 @@ def test_edit_day_logs(
     assert habit_log_path.read_text() == snapshot
     assert done_log_path.read_text() == snapshot
     vim_proc_mock.assert_called_once_with(
-        ["vim", str(day_log_path), str(habit_log_path), str(done_log_path)],
+        [
+            "vim",
+            str(day_log_path),
+            str(habit_log_path),
+            str(done_log_path),
+            "-c",
+            f"source {zettel_dir}/vimrc",
+        ],
         stdout=None,
         stderr=None,
         timeout=None,
