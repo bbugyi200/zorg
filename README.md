@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'edit', 'template', 'template init', 'template render']:
+for cmd in ['action', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -68,7 +68,7 @@ for cmd in ['action', 'edit', 'template', 'template init', 'template render']:
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,edit,template} ...
+            {action,db,edit,template} ...
 
 The zettel note manager of the future.
 
@@ -98,8 +98,9 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,edit,template}
+  {action,db,edit,template}
     action              Used to interface with vim via an action protocol.
+    db                  Commands for managing Zorg's SQL database.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
@@ -124,6 +125,32 @@ positional arguments:
 
 options:
   -h, --help     show this help message and exit
+```
+
+The output from running `zorg db --help` is shown below:
+
+```
+usage: zorg db [-h] {info} ...
+
+Commands for managing Zorg's SQL database.
+
+options:
+  -h, --help  show this help message and exit
+
+subcommands:
+  {info}
+    info      Display some useful stats related to your Zorg notes and todos.
+```
+
+The output from running `zorg db info --help` is shown below:
+
+```
+usage: zorg db info [-h]
+
+Display some useful stats related to your Zorg notes and todos.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
 The output from running `zorg edit --help` is shown below:

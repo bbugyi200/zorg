@@ -16,6 +16,7 @@ import vimala
 from . import common
 from .config import (
     ActionConfig,
+    DbInfoConfig,
     EditConfig,
     TemplateInitConfig,
     TemplateRenderConfig,
@@ -60,6 +61,26 @@ def run_action(cfg: ActionConfig) -> int:
 
 
 @runner
+def run_db_info(cfg: DbInfoConfig) -> int:
+    """Runner for the 'db info' command."""
+    return 0
+
+
+@runner
+def run_edit(cfg: EditConfig) -> int:
+    """Runner for the 'edit' command."""
+    zo_paths = expand_file_group_paths(
+        cfg.zo_paths, file_group_map=cfg.file_group_map
+    )
+    zo_paths = _prepend_zdir(cfg.zettel_dir, zo_paths)
+    for zo_path in zo_paths:
+        _run_template_init(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
+
+    _start_vim_loop(zo_paths, cfg=cfg)
+    return 0
+
+
+@runner
 def run_template_init(cfg: TemplateInitConfig) -> int:
     _run_template_init(
         cfg.zettel_dir,
@@ -68,6 +89,14 @@ def run_template_init(cfg: TemplateInitConfig) -> int:
         template=cfg.template,
         var_map=cfg.var_map,
     )
+    return 0
+
+
+@runner
+def run_template_render(cfg: TemplateRenderConfig) -> int:
+    """Runner for the 'template' command."""
+    tmpl_manager = _ZorgTemplateManager(cfg.zettel_dir)
+    print(tmpl_manager.render(cfg.template, cfg.var_map))
     return 0
 
 
@@ -113,20 +142,6 @@ def _run_template_init(
     )
     new_path.parent.mkdir(parents=True, exist_ok=True)
     new_path.write_text(contents)
-
-
-@runner
-def run_edit(cfg: EditConfig) -> int:
-    """Runner for the 'edit' command."""
-    zo_paths = expand_file_group_paths(
-        cfg.zo_paths, file_group_map=cfg.file_group_map
-    )
-    zo_paths = _prepend_zdir(cfg.zettel_dir, zo_paths)
-    for zo_path in zo_paths:
-        _run_template_init(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
-
-    _start_vim_loop(zo_paths, cfg=cfg)
-    return 0
 
 
 def _prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
@@ -185,14 +200,6 @@ def _process_vim_commands(
             yield vim_cmd.format(zdir=zettel_dir)
         else:
             yield vim_cmd
-
-
-@runner
-def run_template_render(cfg: TemplateRenderConfig) -> int:
-    """Runner for the 'template' command."""
-    tmpl_manager = _ZorgTemplateManager(cfg.zettel_dir)
-    print(tmpl_manager.render(cfg.template, cfg.var_map))
-    return 0
 
 
 class _ZorgTemplateManager:

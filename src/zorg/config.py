@@ -14,7 +14,7 @@ from . import common
 from .types import Action, FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
-Command = Literal["action", "edit", "init", "render"]
+Command = Literal["action", "edit", "info", "init", "render"]
 
 logger = Logger(__name__)
 
@@ -37,6 +37,12 @@ class ActionConfig(Config):
     path: Path
     line_number: int
     column_number: int
+
+
+class DbInfoConfig(Config):
+    """Clack config for the 'db info' command."""
+
+    command: Literal["info"]
 
 
 class EditConfig(Config):
@@ -133,6 +139,17 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
             "The column number that your editor cursor is currently"
             " located on."
         ),
+    )
+
+    # --- 'db' command
+    db_parser = new_command(
+        "db", help="Commands for managing Zorg's SQL database."
+    )
+    new_db_command = clack.new_command_factory(db_parser)
+    # --- 'db info' command
+    new_db_command(
+        "info",
+        help="Display some useful stats related to your Zorg notes and todos.",
     )
 
     # --- 'edit' command
