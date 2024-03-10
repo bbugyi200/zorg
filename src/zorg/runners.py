@@ -63,6 +63,7 @@ def run_action(cfg: ActionConfig) -> int:
 @runner
 def run_db_info(cfg: DbInfoConfig) -> int:
     """Runner for the 'db info' command."""
+    del cfg
     return 0
 
 
