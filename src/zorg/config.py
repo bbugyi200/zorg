@@ -32,6 +32,7 @@ class OpenActionConfig(Config):
 
     command: Literal["open"]
 
+    zo_line: str
     zo_path: Path
     line_number: int
     column_number: int
@@ -120,6 +121,9 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         help=(
             "Open a zettel link if one exists on the provided zorg file line."
         ),
+    )
+    action_open_parser.add_argument(
+        "zo_line", help="We will search this zorg file line for links to open."
     )
     action_open_parser.add_argument(
         "zo_path",
