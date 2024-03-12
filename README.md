@@ -110,7 +110,7 @@ subcommands:
     template            Commands for managing .zot templates.
 ```
 
-The output from running `zorg action --help` is shown below:
+### `zorg action --help`
 
 ```
 usage: zorg action [-h] {open} ...
@@ -125,7 +125,7 @@ subcommands:
     open      Open a zettel link if one exists on the provided zorg file line.
 ```
 
-The output from running `zorg action open --help` is shown below:
+### `zorg action open --help`
 
 ```
 usage: zorg action open [-h] zo_path line_number
@@ -141,7 +141,7 @@ options:
   -h, --help   show this help message and exit
 ```
 
-The output from running `zorg compile --help` is shown below:
+### `zorg compile --help`
 
 ```
 usage: zorg compile [-h] zo_path
@@ -155,7 +155,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-The output from running `zorg db --help` is shown below:
+### `zorg db --help`
 
 ```
 usage: zorg db [-h] {info} ...
@@ -170,7 +170,7 @@ subcommands:
     info      Display some useful stats related to your Zorg notes and todos.
 ```
 
-The output from running `zorg db info --help` is shown below:
+### `zorg db info --help`
 
 ```
 usage: zorg db info [-h]
@@ -181,7 +181,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-The output from running `zorg edit --help` is shown below:
+### `zorg edit --help`
 
 ```
 usage: zorg edit [-h] [zo_paths ...]
@@ -195,7 +195,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-The output from running `zorg template --help` is shown below:
+### `zorg template --help`
 
 ```
 usage: zorg template [-h] {render,init} ...
@@ -211,7 +211,7 @@ subcommands:
     init         Initialize a new file using a zorg template.
 ```
 
-The output from running `zorg template init --help` is shown below:
+### `zorg template init --help`
 
 ```
 usage: zorg template init [-h] [-t TEMPLATE] new_path [variables ...]
@@ -230,7 +230,7 @@ options:
                         off of the new file's name.
 ```
 
-The output from running `zorg template render --help` is shown below:
+### `zorg template render --help`
 
 ```
 usage: zorg template render [-h] template [variables ...]
