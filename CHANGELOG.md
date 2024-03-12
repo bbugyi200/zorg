@@ -11,6 +11,11 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.4.0...HEAD)
 
+### Added
+
+* Added the `zorg compile` command, which will be used to compile zorg (*.zo)
+  files into zorc (*.zoc) files.
+
 ### Changed
 
 * *BREAKING CHANGE*: Removed `zorg action open` command's column number
