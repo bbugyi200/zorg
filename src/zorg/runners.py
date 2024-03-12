@@ -24,8 +24,8 @@ from .config import (
     TemplateRenderConfig,
 )
 from .file_groups import expand_file_group_paths
-from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
+from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from .types import TemplatePatternMapType, VarMapType
 
