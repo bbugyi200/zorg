@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator, Mapping
 
+import antlr4
 from clack.types import ClackRunner
 import jinja2
 from logrus import Logger
@@ -15,6 +16,7 @@ import vimala
 
 from . import common
 from .config import (
+    CompileConfig,
     DbInfoConfig,
     EditConfig,
     OpenActionConfig,
@@ -22,6 +24,9 @@ from .config import (
     TemplateRenderConfig,
 )
 from .file_groups import expand_file_group_paths
+from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
+from .grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
+from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from .types import TemplatePatternMapType, VarMapType
 
 
@@ -29,6 +34,29 @@ logger = Logger(__name__)
 
 RUNNERS: list[ClackRunner] = []
 runner = metaman.register_function_factory(RUNNERS)
+
+
+class ZorgFileCompiler(ZorgFileListener):
+    """Listener that compiles zorg files into zorc files."""
+
+    def enterBlock(self, ctx: ZorgFileParser.BlockContext) -> None:
+        del ctx
+        return
+
+
+
+@runner
+def run_compile(cfg: CompileConfig) -> int:
+    """Runner for the 'compile' command."""
+    stream = antlr4.FileStream(str(cfg.zo_path))
+    lexer = ZorgFileLexer(stream)
+    tokens = antlr4.CommonTokenStream(lexer)
+    parser = ZorgFileParser(tokens)
+    tree = parser.prog()
+    compiler = ZorgFileCompiler()
+    walker = antlr4.ParseTreeWalker()
+    walker.walk(compiler, tree)
+    return 0
 
 
 @runner

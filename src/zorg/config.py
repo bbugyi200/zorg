@@ -13,7 +13,7 @@ from . import common
 from .types import FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
-Command = Literal["edit", "info", "init", "open", "render"]
+Command = Literal["compile", "edit", "info", "init", "open", "render"]
 
 logger = Logger(__name__)
 
@@ -34,6 +34,14 @@ class OpenActionConfig(Config):
 
     zo_path: Path
     line_number: int
+
+
+class CompileConfig(Config):
+    """Clack config for the 'compile' command."""
+
+    command: Literal["compile"]
+
+    zo_path: Path
 
 
 class DbInfoConfig(Config):
@@ -131,6 +139,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         help=(
             "The line number that your editor cursor is currently located on."
         ),
+    )
+
+    # --- 'compile' command
+    compile_parser = new_command(
+        "compile", help="Compiles zorg (*.zo) files into zorc (*.zoc) files."
+    )
+    compile_parser.add_argument(
+        "zo_path", help="Path to the zorg file you want to compile."
     )
 
     # --- 'db' command

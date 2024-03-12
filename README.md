@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'action open', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
+for cmd in ['action', 'action open', 'compile', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -68,7 +68,7 @@ for cmd in ['action', 'action open', 'db', 'db info', 'edit', 'template', 'templ
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,db,edit,template} ...
+            {action,compile,db,edit,template} ...
 
 The zettel note manager of the future.
 
@@ -98,8 +98,9 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,db,edit,template}
+  {action,compile,db,edit,template}
     action              Used to interface with vim via an action protocol.
+    compile             Compiles zorg (*.zo) files into zorc (*.zoc) files.
     db                  Commands for managing Zorg's SQL database.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
@@ -136,6 +137,20 @@ positional arguments:
 
 options:
   -h, --help   show this help message and exit
+```
+
+The output from running `zorg compile --help` is shown below:
+
+```
+usage: zorg compile [-h] zo_path
+
+Compiles zorg (*.zo) files into zorc (*.zoc) files.
+
+positional arguments:
+  zo_path     Path to the zorg file you want to compile.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
 The output from running `zorg db --help` is shown below:
