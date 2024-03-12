@@ -17,7 +17,7 @@ params = mark.parametrize
     "lineno,expected",
     [(3, "foo.zo"), (5, "bar.sh"), (6, "baz.zo"), (7, "buz.zo")],
 )
-def test_open_action(
+def test_action_open(
     main: c.MainType,
     capsys: CaptureFixture,
     tmp_path: Path,
@@ -35,7 +35,7 @@ def test_open_action(
         "--dir",
         str(zettel_dir),
         "action",
-        "OPEN_LINK",
+        "open",
         str(zpath_to_links),
         str(lineno),
         "1",

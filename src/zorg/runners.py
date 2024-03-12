@@ -15,7 +15,7 @@ import vimala
 
 from . import common
 from .config import (
-    ActionConfig,
+    OpenActionConfig,
     DbInfoConfig,
     EditConfig,
     TemplateInitConfig,
@@ -32,9 +32,9 @@ runner = metaman.register_function_factory(RUNNERS)
 
 
 @runner
-def run_action(cfg: ActionConfig) -> int:
-    """Runner for the 'action' command."""
-    zpath = _prepend_zdir(cfg.zettel_dir, [cfg.path])[0]
+def run_action_open(cfg: OpenActionConfig) -> int:
+    """Runner for the 'action open' command."""
+    zpath = _prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
     line = zpath.read_text().split("\n")[cfg.line_number - 1]
     for word in line.split(" "):
         left_find = word.find("[[")

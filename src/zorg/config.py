@@ -11,10 +11,10 @@ from logrus import Logger
 from typist import literal_to_list
 
 from . import common
-from .types import Action, FileGroupMapType, TemplatePatternMapType, VarMapType
+from .types import FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
-Command = Literal["action", "edit", "info", "init", "render"]
+Command = Literal["edit", "info", "init", "open", "render"]
 
 logger = Logger(__name__)
 
@@ -28,13 +28,12 @@ class Config(clack.Config):
     zettel_dir: Path = Path.home() / "org"
 
 
-class ActionConfig(Config):
+class OpenActionConfig(Config):
     """Clack config for the 'action' command."""
 
-    command: Literal["action"]
+    command: Literal["open"]
 
-    action: Action
-    path: Path
+    zo_path: Path
     line_number: int
     column_number: int
 
@@ -115,24 +114,20 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "action",
         help="Used to interface with vim via an action protocol.",
     )
-    action_parser.add_argument(
-        "action",
-        help=(
-            "The type of action that you are requesting. Valid values:"
-            f" {literal_to_list(Action)}"
-        ),
+    # --- 'action open' command
+    new_action_command = clack.new_command_factory(action_parser)
+    action_open_parser = new_action_command("open", help="")
+    action_open_parser.add_argument(
+        "zo_path", type=Path, help="The file that your editor currently has open."
     )
-    action_parser.add_argument(
-        "path", type=Path, help="The file that your editor currently has open."
-    )
-    action_parser.add_argument(
+    action_open_parser.add_argument(
         "line_number",
         type=int,
         help=(
             "The line number that your editor cursor is currently located on."
         ),
     )
-    action_parser.add_argument(
+    action_open_parser.add_argument(
         "column_number",
         type=int,
         help=(
