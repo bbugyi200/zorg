@@ -34,7 +34,6 @@ class OpenActionConfig(Config):
 
     zo_path: Path
     line_number: int
-    column_number: int
 
 
 class DbInfoConfig(Config):
@@ -131,14 +130,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         type=int,
         help=(
             "The line number that your editor cursor is currently located on."
-        ),
-    )
-    action_open_parser.add_argument(
-        "column_number",
-        type=int,
-        help=(
-            "The column number that your editor cursor is currently"
-            " located on."
         ),
     )
 

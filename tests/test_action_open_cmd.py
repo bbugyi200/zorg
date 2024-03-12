@@ -38,7 +38,6 @@ def test_action_open(
         "open",
         str(zpath_to_links),
         str(lineno),
-        "1",
     )
 
     assert exit_code == 0

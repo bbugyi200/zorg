@@ -11,7 +11,10 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.4.0...HEAD)
 
-No notable changes have been made.
+### Changed
+
+* *BREAKING CHANGE*: Removed `zorg action open` command's column number
+  positional argument.
 
 
 ## [0.4.0](https://github.com/bbugyi200/zorg/compare/0.3.0...0.4.0) - 2024-03-11

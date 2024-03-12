@@ -125,19 +125,17 @@ subcommands:
 The output from running `zorg action open --help` is shown below:
 
 ```
-usage: zorg action open [-h] zo_path line_number column_number
+usage: zorg action open [-h] zo_path line_number
 
 Open a zettel link if one exists on the provided zorg file line.
 
 positional arguments:
-  column_number  The column number that your editor cursor is currently
-                 located on.
-  line_number    The line number that your editor cursor is currently located
-                 on.
-  zo_path        The file that your editor currently has open.
+  line_number  The line number that your editor cursor is currently located
+               on.
+  zo_path      The file that your editor currently has open.
 
 options:
-  -h, --help     show this help message and exit
+  -h, --help   show this help message and exit
 ```
 
 The output from running `zorg db --help` is shown below:
