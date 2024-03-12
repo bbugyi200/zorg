@@ -15,9 +15,9 @@ import vimala
 
 from . import common
 from .config import (
-    OpenActionConfig,
     DbInfoConfig,
     EditConfig,
+    OpenActionConfig,
     TemplateInitConfig,
     TemplateRenderConfig,
 )
