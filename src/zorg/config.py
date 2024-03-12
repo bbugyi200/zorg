@@ -115,7 +115,12 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     )
     # --- 'action open' command
     new_action_command = clack.new_command_factory(action_parser)
-    action_open_parser = new_action_command("open", help="")
+    action_open_parser = new_action_command(
+        "open",
+        help=(
+            "Open a zettel link if one exists on the provided zorg file line."
+        ),
+    )
     action_open_parser.add_argument(
         "zo_path",
         type=Path,

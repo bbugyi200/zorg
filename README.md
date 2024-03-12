@@ -59,7 +59,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
+for cmd in ['action', 'action open', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\nThe output from running `zorg {cmd} --help` is shown below:\n")
@@ -110,18 +110,31 @@ subcommands:
 The output from running `zorg action --help` is shown below:
 
 ```
-usage: zorg action [-h] action path line_number column_number
+usage: zorg action [-h] {open} ...
 
 Used to interface with vim via an action protocol.
 
+options:
+  -h, --help  show this help message and exit
+
+subcommands:
+  {open}
+    open      Open a zettel link if one exists on the provided zorg file line.
+```
+
+The output from running `zorg action open --help` is shown below:
+
+```
+usage: zorg action open [-h] zo_path line_number column_number
+
+Open a zettel link if one exists on the provided zorg file line.
+
 positional arguments:
-  action         The type of action that you are requesting. Valid values:
-                 ['OPEN_LINK']
   column_number  The column number that your editor cursor is currently
                  located on.
   line_number    The line number that your editor cursor is currently located
                  on.
-  path           The file that your editor currently has open.
+  zo_path        The file that your editor currently has open.
 
 options:
   -h, --help     show this help message and exit
