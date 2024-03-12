@@ -1,7 +1,7 @@
 """Custom types used by zorg."""
 
 from pathlib import Path
-from typing import Any, Literal, Mapping, Pattern, Sequence
+from typing import Any, Mapping, Pattern, Sequence
 
 
 FileGroupMapType = Mapping[str, Sequence[str]]

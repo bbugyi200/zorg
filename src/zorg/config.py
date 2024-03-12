@@ -8,7 +8,6 @@ from typing import Any, Literal, Optional, Sequence
 
 import clack
 from logrus import Logger
-from typist import literal_to_list
 
 from . import common
 from .types import FileGroupMapType, TemplatePatternMapType, VarMapType
