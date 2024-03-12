@@ -34,9 +34,9 @@ runner = metaman.register_function_factory(RUNNERS)
 @runner
 def run_action_open(cfg: OpenActionConfig) -> int:
     """Runner for the 'action open' command."""
-    zpath = _prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
-    line = zpath.read_text().split("\n")[cfg.line_number - 1]
-    for word in line.split(" "):
+    zo_path = _prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
+    zo_line = zo_path.read_text().split("\n")[cfg.line_number - 1]
+    for word in zo_line.split(" "):
         left_find = word.find("[[")
         right_find = word.find("]")
         if left_find >= 0 and right_find >= 0:
@@ -49,7 +49,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 link_path,
                 var_map={
                     "parent": (
-                        str(zpath)
+                        str(zo_path)
                         .replace(".zo", "")
                         .replace(str(cfg.zettel_dir) + "/", "")
                     )
