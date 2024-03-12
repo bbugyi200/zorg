@@ -44,7 +44,6 @@ class ZorgFileCompiler(ZorgFileListener):
         return
 
 
-
 @runner
 def run_compile(cfg: CompileConfig) -> int:
     """Runner for the 'compile' command."""
