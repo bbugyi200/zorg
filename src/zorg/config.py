@@ -118,7 +118,9 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     new_action_command = clack.new_command_factory(action_parser)
     action_open_parser = new_action_command("open", help="")
     action_open_parser.add_argument(
-        "zo_path", type=Path, help="The file that your editor currently has open."
+        "zo_path",
+        type=Path,
+        help="The file that your editor currently has open.",
     )
     action_open_parser.add_argument(
         "line_number",
