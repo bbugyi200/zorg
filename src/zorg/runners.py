@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import datetime as dt
 from pathlib import Path
 import tempfile
 from typing import Any, Iterable, Iterator, Mapping
@@ -246,7 +247,7 @@ class _ZorgTemplateManager:
             self._temp_dir_path, self._zettel_dir / template_path
         )
         template = self._template_env.get_template(template_path.name)
-        return template.render(var_map)
+        return template.render(var_map | {"dt": dt})
 
     @classmethod
     def _build_template_in_dir(
