@@ -4,15 +4,16 @@ grammar ZorgFile;
 prog       : head NL+ block* h1_section* EOF ;
 
 head       : comment+ ;
-comment    : '#' (' ' words)? NL ;
+comment    : '#' atoms? NL ;
 
-block      : (item)+ NL? ;
+block      : item+ NL? ;
 item       : (todo|note) ;
-todo       : 'o ' words NL ;
-note       : '- ' words NL ;
-words      : (((WORD|CHAR)) ' '?)+ ;
+todo       : 'o' atoms NL ;
+note       : '-' atoms NL ;
+atom       : (' ' tag|WORD) ;
+atoms      : atom+ ;
 
-tag        : (context|hash|person|project) ;
+tag        : (context|hash|person|project) SYMBOL?;
 context    : '@' ID ;
 hash       : '#' ID ;
 person     : '%' ID ;
@@ -22,13 +23,19 @@ h1_section : h1_header block+ (NL? h2_section)* ;
 h2_section : h2_header block+ (NL? h3_section)* ;
 h3_section : h3_header block+ (NL? h4_section)* ;
 h4_section : h4_header block+ ;
-h1_header  : '######### ' words NL ;
-h2_header  : '======= ' words NL ;
-h3_header  : '***** ' words NL ;
-h4_header  : '--- ' words NL ;
+h1_header  : '#########' atoms NL ;
+h2_header  : '=======' atoms NL ;
+h3_header  : '*****' atoms NL ;
+h4_header  : '---' atoms NL ;
 
 // lexer rules
-NL   : '\r'? '\n' ;
-CHAR : ~[\r\n ] ;
-WORD : CHAR+ ;
-ID   : [A-Za-z/_.]+ ;
+NL     : '\r'? '\n' ;
+WORD   : ' ' ~[@#%+\r\n ] NON_WS_CHAR* ;
+ID     : (LETTER | DIGIT | SLASH)+ ;
+SYMBOL : [),.?!;:] ;
+
+// fragments
+fragment NON_WS_CHAR : ~[\r\n ] ;
+fragment LETTER      : [A-Za-z] ;
+fragment DIGIT       : [0-9] ;
+fragment SLASH       : '/' ;
