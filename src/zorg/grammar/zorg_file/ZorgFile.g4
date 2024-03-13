@@ -10,12 +10,13 @@ block      : item+ NL? ;
 item       : (todo|note) ;
 todo       : 'o' atoms NL ;
 note       : '-' atoms NL ;
-atom       : (' ' tag|WORD) ;
-atoms      : atom+ ;
 
-tag        : (context|hash|person|project) SYMBOL?;
+atoms      : atom+ ;
+atom       : (' ' tag|WORD) ;
+
+tag        : (area|context|person|project) SYMBOL*;
+area       : '#' ID ;
 context    : '@' ID ;
-hash       : '#' ID ;
 person     : '%' ID ;
 project    : '+' ID ;
 
