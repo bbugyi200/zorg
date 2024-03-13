@@ -41,7 +41,6 @@ class ZorgFileCompiler(ZorgFileListener):
 
     def enterBlock(self, ctx: ZorgFileParser.BlockContext) -> None:
         del ctx
-        return
 
 
 @runner
