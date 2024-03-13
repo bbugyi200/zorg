@@ -12,7 +12,7 @@ todo       : 'o' atoms NL ;
 note       : '-' atoms NL ;
 
 atoms      : atom+ ;
-atom       : (' ' tag|WORD) ;
+atom       : (' ' tag|SPACE_WORD) ;
 
 tag        : (area|context|person|project) SYMBOL*;
 area       : '#' ID ;
@@ -30,10 +30,10 @@ h3_header  : '*****' atoms NL ;
 h4_header  : '---' atoms NL ;
 
 // lexer rules
-NL     : '\r'? '\n' ;
-WORD   : ' ' ~[@#%+\r\n ] NON_WS_CHAR* ;
-ID     : (LETTER | DIGIT | SLASH)+ ;
-SYMBOL : [),.?!;:] ;
+NL         : '\r'? '\n' ;
+SPACE_WORD : ' ' ~[@#%+\r\n ] NON_WS_CHAR* ;
+ID         : (LETTER | DIGIT | SLASH)+ ;
+SYMBOL     : [),.?!;:] ;
 
 // fragments
 fragment NON_WS_CHAR : ~[\r\n ] ;
