@@ -13,8 +13,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Added
 
-* Added the `zorg compile` command, which will be used to compile zorg (*.zo)
-  files into zorc (*.zoc) files.
+* Added the `zorg compile` command, which will be used to compile zorg (\*.zo)
+  files into zorc (\*.zoc) files.
 
 ### Changed
 
