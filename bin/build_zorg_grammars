@@ -39,7 +39,12 @@ function run() {
     log::debug "Verbose mode enabled!"
   fi
 
-  for dir in "zorg_file"; do
+  for dir in $(find src/zorg/grammar -maxdepth 1 -mindepth 1 -type d | xargs -I_ basename _); do
+    if [[ "${dir}" == "_"* ]]; then
+      log::debug "Skipping the %s directory." "${dir}"
+      continue
+    fi
+
     log::info "Generating %s parser using antlr4." $dir
     antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
     for f in examples/$dir/*.zo; do
@@ -50,7 +55,6 @@ function run() {
     done
 
     perl -nE 'print if not /^##/ and not /^$/' $TMP_ERROR_FILE > $TMP_ERROR_FILE_NO_HEADERS 
-    cat $TMP_ERROR_FILE_NO_HEADERS
     if [ -s $TMP_ERROR_FILE_NO_HEADERS ]; then
       log::error "Errors were logged while parsing some of the example files:"
       echo
