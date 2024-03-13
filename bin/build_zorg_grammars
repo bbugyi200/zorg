@@ -24,10 +24,11 @@ source "${ROOT}"/lib/bugyi.sh
 
 set -e
 
-TMPFILE="$(mktemp -t --suffix=.SUFFIX build_zorg_grammars.XXXXXX)"
-trap "rm -f '$TMPFILE'" 0               # EXIT
-trap "rm -f '$TMPFILE'; exit 1" 2       # INT
-trap "rm -f '$TMPFILE'; exit 1" 1 15    # HUP TERM
+TMP_ERROR_FILE="$(mktemp -t --suffix=.SUFFIX build_zorg_grammars.XXXXXX)"
+TMP_ERROR_FILE_NO_HEADERS="$(mktemp -t --suffix=.SUFFIX build_zorg_grammars.XXXXXX)"
+trap "rm -f '$TMP_ERROR_FILE' '$TMP_ERROR_FILE_NO_HEADERS'" 0               # EXIT
+trap "rm -f '$TMP_ERROR_FILE' '$TMP_ERROR_FILE_NO_HEADERS'; exit 1" 2       # INT
+trap "rm -f '$TMP_ERROR_FILE' '$TMP_ERROR_FILE_NO_HEADERS'; exit 1" 1 15    # HUP TERM
 
 function run() {
   parse_cmds=('-tree')
@@ -43,11 +44,17 @@ function run() {
     antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
     for f in examples/$dir/*.zo; do
       log::info "Contructing syntax tree from %s example file." $f
-      antlr4-parse src/zorg/grammar/$dir/*.g4 prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMPFILE
+      echo "##### $f" >> $TMP_ERROR_FILE
+      antlr4-parse src/zorg/grammar/$dir/*.g4 prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMP_ERROR_FILE
+      echo >> $TMP_ERROR_FILE
     done
 
-    if [ -s $TMPFILE ]; then
-      log::error "Errors were logged while parsing some of the example files."
+    perl -nE 'print if not /^##/ and not /^$/' $TMP_ERROR_FILE > $TMP_ERROR_FILE_NO_HEADERS 
+    cat $TMP_ERROR_FILE_NO_HEADERS
+    if [ -s $TMP_ERROR_FILE_NO_HEADERS ]; then
+      log::error "Errors were logged while parsing some of the example files:"
+      echo
+      cat $TMP_ERROR_FILE
       return 1
     else
       log::info "All example files were parsed without error!"
