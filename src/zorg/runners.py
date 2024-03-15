@@ -243,6 +243,7 @@ class _ZorgTemplateManager:
 
     def render(self, template_path: Path, var_map: Mapping[str, Any]) -> str:
         """Renders {template_path} using {var_map} for template variables."""
+        var_map = {} if var_map is None else dict(var_map)
         self._build_template_in_dir(
             self._temp_dir_path, self._zettel_dir / template_path
         )
