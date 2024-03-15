@@ -54,7 +54,7 @@ function run() {
       echo >> $TMP_ERROR_FILE
     done
 
-    perl -nE 'print if not /^##/ and not /^$/' $TMP_ERROR_FILE > $TMP_ERROR_FILE_NO_HEADERS 
+    remove_header $TMP_ERROR_FILE > $TMP_ERROR_FILE_NO_HEADERS
     if [ -s $TMP_ERROR_FILE_NO_HEADERS ]; then
       log::error "Errors were logged while parsing some of the example files:"
       echo
@@ -64,6 +64,10 @@ function run() {
       log::info "All example files were parsed without error!"
     fi
   done
+}
+
+function remove_header() {
+  perl -nE 'print if not /^##/ and not /^$/' "$@"
 }
 
 if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then

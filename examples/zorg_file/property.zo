@@ -1,0 +1,4 @@
+# A zorg file containing properties.
+
+- This note contains a key::value pair.
+o This todo is due today! | due::2024-03-13
