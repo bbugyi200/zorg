@@ -9,12 +9,19 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.4.0...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.5.0...HEAD)
+
+No notable changes have been made.
+
+
+## [0.5.0](https://github.com/bbugyi200/zorg/compare/0.4.0...0.5.0) - 2024-03-17
 
 ### Added
 
 * Added the `zorg compile` command, which will be used to compile zorg (\*.zo)
   files into zorc (\*.zoc) files.
+* New `ZorgFile.g4` ANTLR4 grammar and auto-generate corresponding parser, lexer, and
+  listener as apart of CI.
 
 ### Changed
 
