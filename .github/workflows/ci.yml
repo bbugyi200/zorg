@@ -86,6 +86,10 @@ jobs:
         run: |
           python -m pip install --user build setuptools_scm
 
+      - name: Build ANTLR4 Grammars
+        run: |
+          bin/build_zorg_grammars
+
       - name: Build a binary wheel and a source tarball
         run: |
           python -m build --sdist --wheel --outdir dist/

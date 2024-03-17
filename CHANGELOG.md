@@ -9,9 +9,16 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.5.0...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.5.1...HEAD)
 
 No notable changes have been made.
+
+
+## [0.5.1](https://github.com/bbugyi200/zorg/compare/0.5.0...0.5.1) - 2024-03-17
+
+### Fixed
+
+* Build ANTLR grammars before publishing a new release to PyPI.
 
 
 ## [0.5.0](https://github.com/bbugyi200/zorg/compare/0.4.0...0.5.0) - 2024-03-17
