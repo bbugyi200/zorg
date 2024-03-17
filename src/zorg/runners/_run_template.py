@@ -1,7 +1,10 @@
 """Contains runners for the 'zorg template' command."""
 
 from ..config import TemplateInitConfig, TemplateRenderConfig
-from ._common import run_template_init as _run_template_init, ZorgTemplateManager
+from ._common import (
+    ZorgTemplateManager,
+    run_template_init as _run_template_init,
+)
 from ._registry import runner
 
 
