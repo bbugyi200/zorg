@@ -5,6 +5,8 @@ import datetime as dt
 from pathlib import Path
 from typing import Optional
 
+from .types import TodoPriorityType, TodoStatus
+
 
 @dataclass(frozen=True)
 class Note:
@@ -25,13 +27,13 @@ class Note:
     role_tags: list[str] = field(default_factory=lambda: [])
 
 
-# TODO(bugyi): Add 'status' field
-# TODO(bugyi): Add 'priority' field
-# TODO(bugyi): Add 'done_date' field
 @dataclass(frozen=True)
 class Todo(Note):
     """A Zorg todo."""
 
+    done_date: Optional[dt.date] = None
+    priority: TodoPriorityType = 'C'
+    status: TodoStatus = TodoStatus.OPEN
 
 @dataclass(frozen=True)
 class ZorgFile:
