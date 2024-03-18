@@ -2,10 +2,17 @@
 
 from dataclasses import dataclass, field
 import datetime as dt
-from pathlib import Path
 from typing import Optional
 
 from .types import TodoPriorityType, TodoStatus
+
+
+@dataclass(frozen=True)
+class ZorgFile:
+    """A Zorg (i.e. *.zo) file."""
+
+    notes: list["ZorgNote"]
+    todos: list["ZorgTodo"]
 
 
 @dataclass(frozen=True)
@@ -13,7 +20,7 @@ class ZorgNote:
     """A Zorg note."""
 
     body: str
-    file: Path
+    file: ZorgFile
 
     child_notes: list["ZorgNote"] = field(default_factory=lambda: [])
     context_tags: list[str] = field(default_factory=lambda: [])
@@ -34,7 +41,3 @@ class ZorgTodo(ZorgNote):
     done_date: Optional[dt.date] = None
     priority: TodoPriorityType = 'C'
     status: TodoStatus = TodoStatus.OPEN
-
-@dataclass(frozen=True)
-class ZorgFile:
-    """A Zorg (i.e. *.zo) file."""
