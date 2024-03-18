@@ -39,5 +39,5 @@ class ZorgTodo(ZorgNote):
     """A Zorg todo."""
 
     done_date: Optional[dt.date] = None
-    priority: TodoPriorityType = 'C'
+    priority: TodoPriorityType = "C"
     status: TodoStatus = TodoStatus.OPEN

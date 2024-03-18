@@ -17,6 +17,7 @@ def _get_default_tags_map() -> dict[str, list[str]]:
 
 class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
+
     in_h1_header: bool = False
     h1_section_tags: dict[str, list[str]] = _get_default_tags_map()
 
