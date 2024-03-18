@@ -1,7 +1,5 @@
 """Contains runners for the 'zorg compile' command."""
 
-from typing import cast
-
 import antlr4
 
 from ..config import CompileConfig
