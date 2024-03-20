@@ -88,7 +88,7 @@ jobs:
 
       - name: Build ANTLR4 Grammars
         run: |
-          bin/build_zorg_grammars
+          make build-grammars
 
       - name: Build a binary wheel and a source tarball
         run: |

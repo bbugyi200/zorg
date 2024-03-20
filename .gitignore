@@ -123,8 +123,3 @@ pyrightconfig.json
 
 # local sqlite databases
 *.db
-
-# ANTLR auto-generated files (see bin/build_zorg_grammars)
-src/zorg/grammar/*
-!src/zorg/grammar/**/*.g4
-!src/zorg/grammar/**/__init__.py
