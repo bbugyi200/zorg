@@ -220,6 +220,8 @@ class ZorgFileCompiler(ZorgFileListener):
         self.zorg_file.todos.append(
             ZorgTodo(ctx.space_atoms().getText(), self.zorg_file, **kwargs)
         )
+        # Reset priority back to default.
+        self._state.priority = "C"
         self._state.note_properties = {}
 
     def _add_tags(
