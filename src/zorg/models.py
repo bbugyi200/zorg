@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 import datetime as dt
+from pathlib import Path
 from typing import Optional
 
 from .types import TodoPriorityType, TodoStatus
@@ -11,8 +12,9 @@ from .types import TodoPriorityType, TodoStatus
 class ZorgFile:
     """A Zorg (i.e. *.zo) file."""
 
-    notes: list["ZorgNote"]
-    todos: list["ZorgTodo"]
+    path: Path
+    notes: list["ZorgNote"] = field(default_factory=lambda: [])
+    todos: list["ZorgTodo"] = field(default_factory=lambda: [])
 
 
 @dataclass(frozen=True)
@@ -22,16 +24,16 @@ class ZorgNote:
     body: str
     file: ZorgFile
 
+    areas: list[str] = field(default_factory=lambda: [])
     child_notes: list["ZorgNote"] = field(default_factory=lambda: [])
-    context_tags: list[str] = field(default_factory=lambda: [])
+    contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = dt.date.today()
     next_note: Optional["ZorgNote"] = None
     parent_note: Optional["ZorgNote"] = None
-    people_tags: list[str] = field(default_factory=lambda: [])
+    people: list[str] = field(default_factory=lambda: [])
     prev_note: Optional["ZorgNote"] = None
-    project_tags: list[str] = field(default_factory=lambda: [])
+    projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
-    role_tags: list[str] = field(default_factory=lambda: [])
 
 
 @dataclass(frozen=True)
