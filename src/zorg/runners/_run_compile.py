@@ -54,7 +54,7 @@ class ZorgFileCompilerState:
     h4_properties: dict[str, Any] = field(default_factory=lambda: {})
     note_properties: dict[str, Any] = field(default_factory=lambda: {})
 
-    priority: TodoPriorityType = 'C'
+    priority: TodoPriorityType = "C"
 
     @property
     def areas(self) -> list[str]:
@@ -215,7 +215,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "people": self._state.people,
             "projects": self._state.projects,
             "properties": self._state.properties,
-            "priority": self._state.priority
+            "priority": self._state.priority,
         }
         self.zorg_file.todos.append(
             ZorgTodo(ctx.space_atoms().getText(), self.zorg_file, **kwargs)
