@@ -52,31 +52,31 @@ cogs: sync-dev-requirements
 lint: black isort pydocstyle flake8 mypy pylint quick-lints  ## Run all linting checks.
 
 .PHONY: quick-lints
-quick-lints: build-grammars sync-dev-requirements  ## Run miscellaneous linting tasks.
+quick-lints: sync-dev-requirements  ## Run miscellaneous linting tasks.
 	$(SOURCE_VENV) ./bin/quick-lints
 
 .PHONY: black
-black: build-grammars sync-dev-requirements  ## Run black checks.
+black: sync-dev-requirements  ## Run black checks.
 	$(PYTHON) -m black --diff --check -q --color src
 	$(PYTHON) -m black --diff --check -q --color tests
 
 .PHONY: isort
-isort: build-grammars sync-dev-requirements  ## Run isort checks. 
+isort: sync-dev-requirements  ## Run isort checks. 
 	$(PYTHON) -m isort --check-only src
 	$(PYTHON) -m isort --check-only tests
 
 .PHONY: pydocstyle
-pydocstyle: build-grammars sync-dev-requirements  ## Run pydocstyle checks.
+pydocstyle: sync-dev-requirements  ## Run pydocstyle checks.
 	$(PYTHON) -m pydocstyle src
 	$(PYTHON) -m pydocstyle tests
 
 .PHONY: flake8
-flake8: build-grammars sync-dev-requirements  ## Run flake8 checks.
+flake8: sync-dev-requirements  ## Run flake8 checks.
 	$(PYTHON) -m flake8 src
 	$(PYTHON) -m flake8 tests
 
 .PHONY: mypy
-mypy: build-grammars sync-dev-requirements  ## Run mypy checks.
+mypy: sync-dev-requirements  ## Run mypy checks.
 	@# HACK: Because mypy's cache has been terrible lately.
 	@rm -rf .mypy_cache
 	$(PYTHON) -m mypy src
@@ -84,12 +84,12 @@ mypy: build-grammars sync-dev-requirements  ## Run mypy checks.
 	bash -c "$(SOURCE_VENV) { python -m mypy tests || python -m mypy tests; }"
 
 .PHONY: pylint
-pylint: build-grammars sync-dev-requirements  ## Run pylint checks.
+pylint: sync-dev-requirements  ## Run pylint checks.
 	$(PYTHON) -m pylint src
 	$(PYTHON) -m pylint tests
 
 .PHONY: test
-test: build-grammars sync-dev-requirements  ## Run this project's test suite.
+test: sync-dev-requirements  ## Run this project's test suite.
 	$(call runtests,ALL)
 
 ### Test a single python version.
@@ -97,12 +97,8 @@ test: build-grammars sync-dev-requirements  ## Run this project's test suite.
 # Examples:
 #   // run tests on python3.8 _only_
 #   make test-py38
-test-%: build-grammars sync-dev-requirements
+test-%: sync-dev-requirements
 	$(call runtests,$*)
-
-build-grammars: sync-dev-requirements
-build-grammars:  ## Generate parsers, lexers, and listeners for all Zorg ANTLR4 grammars.
-	$(BUILD_GRAMMARS)
 
 .PHONY: build
 build: sync-dev-requirements
