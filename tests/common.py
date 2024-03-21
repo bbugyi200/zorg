@@ -6,7 +6,7 @@ from typing import Any, Final, Protocol
 
 
 # datetime info used by freezegun (and tests)
-hh: Final = "00"
+hh: Final = "12"
 mm: Final = "00"
 hhmm: Final = f"{hh}{mm}"
 
