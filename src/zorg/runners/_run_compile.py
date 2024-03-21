@@ -1,6 +1,6 @@
 """Contains runners for the 'zorg compile' command."""
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pprint import pprint
 from typing import Any, Literal
 
@@ -199,9 +199,9 @@ class ZorgFileCompiler(ZorgFileListener):
             "properties": self._state.properties,
         }
         self.zorg_file.notes.append(
-            ZorgNote(ctx.space_atoms().getText(), self.zorg_file, **kwargs)
+            ZorgNote(ctx.space_atoms().getText(), **kwargs)
         )
-        self._state.note_properties = {}
+        self._reset_note_context()
 
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:
         self._state.in_note = True
@@ -218,10 +218,14 @@ class ZorgFileCompiler(ZorgFileListener):
             "priority": self._state.priority,
         }
         self.zorg_file.todos.append(
-            ZorgTodo(ctx.space_atoms().getText(), self.zorg_file, **kwargs)
+            ZorgTodo(ctx.space_atoms().getText(), **kwargs)
         )
         # Reset priority back to default.
         self._state.priority = "C"
+        self._reset_note_context()
+
+    def _reset_note_context(self) -> None:
+        self._state.note_tags = _get_default_tags_map()
         self._state.note_properties = {}
 
     def _add_tags(
@@ -240,6 +244,7 @@ class ZorgFileCompiler(ZorgFileListener):
             self._state.note_tags[tag_name].append(text)
 
 
+# TODO(bugyi): Move everything in this file except for 2-3 lines of this function to src/zorg/compiler.py?
 @runner
 def run_compile(cfg: CompileConfig) -> int:
     """Runner for the 'compile' command."""
@@ -251,5 +256,7 @@ def run_compile(cfg: CompileConfig) -> int:
     compiler = ZorgFileCompiler(ZorgFile(cfg.zo_path))
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
-    pprint(compiler.zorg_file)
+    zorg_file_dict = asdict(compiler.zorg_file)
+    del zorg_file_dict["path"]
+    pprint(zorg_file_dict)
     return 0

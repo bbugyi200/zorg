@@ -22,7 +22,6 @@ class ZorgNote:
     """A Zorg note."""
 
     body: str
-    file: ZorgFile
 
     areas: list[str] = field(default_factory=lambda: [])
     child_notes: list["ZorgNote"] = field(default_factory=lambda: [])
