@@ -1,0 +1,33 @@
+# 2024-03-23.Sat
+#
+# ^ = [[2024/20240323]]
+# < = [[2024/20240322_day]]
+# > = [[2024/20240324_day]]
+# @ = [[day_log_tmpl]]
+#
+# C = [[act_com]]
+# D = [[act_dcs_pie]]
+# H = [[act_home]]
+# Z = [[act_zorg]]
+
+
+######### @pomodoro
+======= p::1   1015 +00
+- location::table
+- #gtd pomodoro
+
+======= p::2   1055 +00
+- location::table
+- #own Buy rubber duck
+- +zorg Parametrize test_run_compile()
+
+======= p::3   1120 +00
+- location::table
+- +zorg Move models.py and file_groups.py
+- +zorg Add links to grammar
+
+======= p::4   1145 +00
+- location::table
+- +zorg Fix grammar so it works with this file
+
+======= p::5   1210
