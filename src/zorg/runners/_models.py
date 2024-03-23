@@ -5,7 +5,7 @@ import datetime as dt
 from pathlib import Path
 from typing import Optional
 
-from .types import TodoPriorityType, TodoStatus
+from ..types import TodoPriorityType, TodoStatus
 
 
 @dataclass(frozen=True)

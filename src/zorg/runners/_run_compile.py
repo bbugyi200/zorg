@@ -10,8 +10,8 @@ from ..config import CompileConfig
 from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from ..models import ZorgFile, ZorgNote, ZorgTodo
 from ..types import TodoPriorityType
+from ._models import ZorgFile, ZorgNote, ZorgTodo
 from ._registry import runner
 
 
