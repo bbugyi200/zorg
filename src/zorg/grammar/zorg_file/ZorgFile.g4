@@ -36,8 +36,8 @@ h4_header  : '---' space_atoms NL ;
 
 // lexer rules
 NL           : '\r'? '\n' ;
-ID           : ALPANUM+ (ID_SYMBOL ALPANUM*)* ;
-SYMBOL       : ([^(),?!;:|[\]=]|ID_SYMBOL) ;
+ID           : ALPANUM+ (ID_SYMBOL ALPANUM*)* '('? ')'? ;
+SYMBOL       : ([^()[\]<>,?!;:|=]|ID_SYMBOL) ;
 
 // fragments
 fragment UPPER_LETTER : ('A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z') ;
