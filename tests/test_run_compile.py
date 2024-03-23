@@ -30,8 +30,7 @@ def _get_all_zo_paths() -> list[Path]:
 
 
 def _get_zo_path_iter(src_dir: Path) -> Iterator[Path]:
-    for zo_path in src_dir.rglob("*.zo"):
-        yield zo_path
+    yield from src_dir.rglob("*.zo")
 
 
 @params(
