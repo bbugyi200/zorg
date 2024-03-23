@@ -54,6 +54,8 @@ class ZorgFileCompilerState:
     h4_properties: dict[str, Any] = field(default_factory=lambda: {})
     note_properties: dict[str, Any] = field(default_factory=lambda: {})
 
+    note_links: list[str] = field(default_factory=lambda: [])
+
     priority: TodoPriorityType = "C"
 
     @property
@@ -97,6 +99,7 @@ class ZorgFileCompilerState:
         return tags
 
 
+# TODO(bugyi): Sort methods alphabetically.
 class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
@@ -157,6 +160,11 @@ class ZorgFileCompiler(ZorgFileListener):
         self._state.h4_section_tags = _get_default_tags_map()
         self._state.h4_properties = {}
 
+    def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:
+        if self._state.in_note:
+            link_text = ctx.children[1].getText()
+            self._state.note_links.append(link_text)
+
     def enterProject(self, ctx: ZorgFileParser.ProjectContext) -> None:
         self._add_tags(ctx, "projects")
 
@@ -194,6 +202,7 @@ class ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._state.areas,
             "contexts": self._state.contexts,
+            "links": self._state.note_links,
             "people": self._state.people,
             "projects": self._state.projects,
             "properties": self._state.properties,
@@ -212,6 +221,7 @@ class ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._state.areas,
             "contexts": self._state.contexts,
+            "links": self._state.note_links,
             "people": self._state.people,
             "projects": self._state.projects,
             "properties": self._state.properties,
@@ -227,6 +237,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def _reset_note_context(self) -> None:
         self._state.note_tags = _get_default_tags_map()
         self._state.note_properties = {}
+        self._state.note_links = []
 
     def _add_tags(
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName

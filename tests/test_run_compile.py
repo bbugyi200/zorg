@@ -17,7 +17,11 @@ params = mark.parametrize
 
 
 def _get_all_zo_stems(src_dir: PathLike = None) -> list[str]:
-    return list(_get_zo_stem_iter(src_dir))
+    return list(
+        stem
+        for stem in _get_zo_stem_iter(src_dir)
+        if not stem.endswith("_tmpl")
+    )
 
 
 def _get_zo_stem_iter(src_dir: PathLike = None) -> Iterator[str]:

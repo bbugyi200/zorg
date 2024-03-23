@@ -27,6 +27,7 @@ class ZorgNote:
     child_notes: list["ZorgNote"] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
+    links: list[str] = field(default_factory=lambda: [])
     next_note: Optional["ZorgNote"] = None
     parent_note: Optional["ZorgNote"] = None
     people: list[str] = field(default_factory=lambda: [])

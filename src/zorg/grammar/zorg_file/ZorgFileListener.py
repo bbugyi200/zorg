@@ -107,6 +107,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#tag_symbol.
+    def enterTag_symbol(self, ctx:ZorgFileParser.Tag_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#tag_symbol.
+    def exitTag_symbol(self, ctx:ZorgFileParser.Tag_symbolContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#tag.
     def enterTag(self, ctx:ZorgFileParser.TagContext):
         pass
@@ -149,6 +158,15 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#project.
     def exitProject(self, ctx:ZorgFileParser.ProjectContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#link.
+    def enterLink(self, ctx:ZorgFileParser.LinkContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#link.
+    def exitLink(self, ctx:ZorgFileParser.LinkContext):
         pass
 
 

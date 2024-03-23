@@ -13,14 +13,17 @@ priority   : '[#' ID ']' ;
 note       : '-' space_atoms NL ;
 
 space_atoms : space_atom+ ;
-space_atom  : ' ' (tag|property|ID)? SYMBOL* ;
+space_atom  : ' ' '('? (tag|tag_symbol|link|property|ID)? SYMBOL* ;
 property    : ID '::' ID ;
 
+tag_symbol  : '#' | '@' | '%' | '+' ;
 tag        : (area|context|person|project) ;
 area       : '#' ID ;
 context    : '@' ID ;
 person     : '%' ID ;
 project    : '+' ID ;
+
+link       : '[[' (ID|property) ']]' ;
 
 h1_section : h1_header block+ (NL? h2_section)* ;
 h2_section : h2_header block+ (NL? h3_section)* ;
@@ -34,7 +37,7 @@ h4_header  : '---' space_atoms NL ;
 // lexer rules
 NL           : '\r'? '\n' ;
 ID           : ALPANUM+ (ID_SYMBOL ALPANUM*)* ;
-SYMBOL       : ([(),?!;:|]|ID_SYMBOL) ;
+SYMBOL       : ([^(),?!;:|[\]=]|ID_SYMBOL) ;
 
 // fragments
 fragment UPPER_LETTER : ('A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z') ;
