@@ -98,6 +98,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#atom.
+    def enterAtom(self, ctx:ZorgFileParser.AtomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#atom.
+    def exitAtom(self, ctx:ZorgFileParser.AtomContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#property.
     def enterProperty(self, ctx:ZorgFileParser.PropertyContext):
         pass
@@ -158,6 +167,15 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#project.
     def exitProject(self, ctx:ZorgFileParser.ProjectContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#quoted.
+    def enterQuoted(self, ctx:ZorgFileParser.QuotedContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#quoted.
+    def exitQuoted(self, ctx:ZorgFileParser.QuotedContext):
         pass
 
 

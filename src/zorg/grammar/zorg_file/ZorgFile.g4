@@ -13,7 +13,8 @@ priority   : '[#' ID ']' ;
 note       : '-' space_atoms NL ;
 
 space_atoms : space_atom+ ;
-space_atom  : ' ' '('? (tag|tag_symbol|link|property|ID)? SYMBOL* ;
+space_atom  : ' ' '('? (atom|quoted)? SYMBOL* ;
+atom        : (tag_symbol|tag|link|property|ID) ;
 property    : ID '::' ID ;
 
 tag_symbol  : '#' | '@' | '%' | '+' ;
@@ -22,6 +23,8 @@ area       : '#' ID ;
 context    : '@' ID ;
 person     : '%' ID ;
 project    : '+' ID ;
+
+quoted     : '\'' atom+ '\'' ;
 
 link       : '[[' (ID|property) ']]' ;
 

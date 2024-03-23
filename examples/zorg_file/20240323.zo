@@ -30,4 +30,17 @@
 - location::table
 - +zorg Fix grammar so it works with this file
 
-======= p::5   1210
+======= p::5   1210 +00
+- +zorg Add this file to test data
+- +zorg Filter out all numeric tag names
+
+======= p::6   1300 +00
+- +zorg Test against all examples/ files
+- +zorg wip: Replace 'john@' with '%john'
+
+======= p::7   1330 +00
+- +laundry dry whites
+- +zorg wip: migrate people
+
+======= p::8   1355 +00
+- +zorg Finished 'john@' to '%john' migration
