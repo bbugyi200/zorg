@@ -116,7 +116,7 @@ class ZorgFileLexer(Lexer):
                   "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", "T__13", 
                   "T__14", "T__15", "T__16", "NL", "ID", "SYMBOL", "UPPER_LETTER", 
                   "LOWER_LETTER", "DIGIT", "LETTER", "ALPANUM", "DASH", 
-                  "DOT", "SLASH", "UNDERSCORE", "ID_SYMBOL" ]
+                  "DOT", "FSLASH", "UNDERSCORE", "ID_SYMBOL" ]
 
     grammarFileName = "ZorgFile.g4"
 

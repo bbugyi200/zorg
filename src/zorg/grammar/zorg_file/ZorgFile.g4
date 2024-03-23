@@ -48,6 +48,6 @@ fragment ALPANUM      : (LETTER|DIGIT) ;
 
 fragment DASH         : '-' ;
 fragment DOT          : '.' ;
-fragment SLASH        : '/' ;
+fragment FSLASH       : '/' ;
 fragment UNDERSCORE   : '_' ;
-fragment ID_SYMBOL    : (DASH|DOT|SLASH|UNDERSCORE) ;
+fragment ID_SYMBOL    : (DASH|DOT|FSLASH|UNDERSCORE) ;
