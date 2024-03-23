@@ -1,7 +1,7 @@
 grammar ZorgFile;
 
 // parser rules
-prog       : head NL+ block* h1_section* EOF ;
+prog       : head (NL+ block* h1_section*)? EOF ;
 
 head       : comment+ ;
 comment    : '#' space_atoms? NL ;
