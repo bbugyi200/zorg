@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Iterator
 
 from _pytest.capture import CaptureFixture
 from pytest import mark
@@ -15,7 +16,18 @@ from . import common as c
 params = mark.parametrize
 
 
-@params("zo_path", ["day_log_tmpl"])
+def _get_all_zo_stems(src_dir: PathLike = None) -> list[str]:
+    return list(_get_zo_stem_iter(src_dir))
+
+
+def _get_zo_stem_iter(src_dir: PathLike = None) -> Iterator[str]:
+    if src_dir is None:
+        src_dir = Path(__file__).parent / "data"
+    for zo_path in src_dir.glob("*.zo"):
+        yield zo_path.stem
+
+
+@params("zo_path", _get_all_zo_stems())
 def test_compile(
     main: c.MainType,
     capsys: CaptureFixture,
