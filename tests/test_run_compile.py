@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
+import itertools as it
 from pathlib import Path
 from typing import Iterator
 
 from _pytest.capture import CaptureFixture
-from pytest import mark
+from pytest import mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
-from typist import PathLike
 
 from . import common as c
 
@@ -16,36 +16,37 @@ from . import common as c
 params = mark.parametrize
 
 
-def _get_all_zo_stems(src_dir: PathLike = None) -> list[str]:
-    return list(
-        stem
-        for stem in _get_zo_stem_iter(src_dir)
-        if not stem.endswith("_tmpl")
+def _get_all_zo_paths() -> list[Path]:
+    tests_dir = Path(__file__).parent
+    data_dir = tests_dir / "data"
+    examples_dir = tests_dir.parent / "examples"
+    return sorted(
+        path
+        for path in it.chain(
+            _get_zo_path_iter(data_dir), _get_zo_path_iter(examples_dir)
+        )
+        if not path.stem.endswith("_tmpl")
     )
 
 
-def _get_zo_stem_iter(src_dir: PathLike = None) -> Iterator[str]:
-    if src_dir is None:
-        src_dir = Path(__file__).parent / "data"
-    else:
-        src_dir = Path(src_dir)
-    for zo_path in src_dir.glob("*.zo"):
-        yield zo_path.stem
+def _get_zo_path_iter(src_dir: Path) -> Iterator[Path]:
+    for zo_path in src_dir.rglob("*.zo"):
+        yield zo_path
 
 
-@params("zo_path", _get_all_zo_stems())
+@params(
+    "zo_path",
+    [param(zo_path, id=zo_path.stem) for zo_path in _get_all_zo_paths()],
+)
 def test_compile(
     main: c.MainType,
     capsys: CaptureFixture,
     tmp_path: Path,
     snapshot: Snapshot,
-    zo_path: PathLike,
+    zo_path: Path,
 ) -> None:
     """Test that the all *.zo test data files compile as expected."""
     zettel_dir = tmp_path / "org"
-    zo_with_ext = str(zo_path).replace(".zo", "") + ".zo"
-    zo_path = Path(__file__).parent / f"data/{zo_with_ext}"
-
     argv = [
         "--dir",
         str(zettel_dir),
