@@ -109,64 +109,64 @@ class ZorgFileCompiler(ZorgFileListener):
     def __init__(self, zorg_file: ZorgFile) -> None:
         self.zorg_file = zorg_file
 
-        self._state = ZorgFileCompilerState()
+        self._s = ZorgFileCompilerState()
 
     def enterH1_header(self, ctx: ZorgFileParser.H1_headerContext) -> None:
         del ctx
-        self._state.in_h1_header = True
+        self._s.in_h1_header = True
 
     def exitH1_header(self, ctx: ZorgFileParser.H1_headerContext) -> None:
         del ctx
-        self._state.in_h1_header = False
+        self._s.in_h1_header = False
 
     def exitH1_section(self, ctx: ZorgFileParser.H1_headerContext) -> None:
         del ctx
-        self._state.h1_section_tags = _get_default_tags_map()
-        self._state.h1_properties = {}
+        self._s.h1_section_tags = _get_default_tags_map()
+        self._s.h1_properties = {}
 
     def enterH2_header(self, ctx: ZorgFileParser.H2_headerContext) -> None:
         del ctx
-        self._state.in_h2_header = True
+        self._s.in_h2_header = True
 
     def exitH2_header(self, ctx: ZorgFileParser.H2_headerContext) -> None:
         del ctx
-        self._state.in_h2_header = False
+        self._s.in_h2_header = False
 
     def exitH2_section(self, ctx: ZorgFileParser.H2_headerContext) -> None:
         del ctx
-        self._state.h2_section_tags = _get_default_tags_map()
-        self._state.h2_properties = {}
+        self._s.h2_section_tags = _get_default_tags_map()
+        self._s.h2_properties = {}
 
     def enterH3_header(self, ctx: ZorgFileParser.H3_headerContext) -> None:
         del ctx
-        self._state.in_h3_header = True
+        self._s.in_h3_header = True
 
     def exitH3_header(self, ctx: ZorgFileParser.H3_headerContext) -> None:
         del ctx
-        self._state.in_h3_header = False
+        self._s.in_h3_header = False
 
     def exitH3_section(self, ctx: ZorgFileParser.H3_headerContext) -> None:
         del ctx
-        self._state.h3_section_tags = _get_default_tags_map()
-        self._state.h3_properties = {}
+        self._s.h3_section_tags = _get_default_tags_map()
+        self._s.h3_properties = {}
 
     def enterH4_header(self, ctx: ZorgFileParser.H4_headerContext) -> None:
         del ctx
-        self._state.in_h4_header = True
+        self._s.in_h4_header = True
 
     def exitH4_header(self, ctx: ZorgFileParser.H4_headerContext) -> None:
         del ctx
-        self._state.in_h4_header = False
+        self._s.in_h4_header = False
 
     def exitH4_section(self, ctx: ZorgFileParser.H4_headerContext) -> None:
         del ctx
-        self._state.h4_section_tags = _get_default_tags_map()
-        self._state.h4_properties = {}
+        self._s.h4_section_tags = _get_default_tags_map()
+        self._s.h4_properties = {}
 
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:
-        if self._state.in_note:
+        if self._s.in_note:
             link_text = ctx.children[1].getText()
-            self._state.note_links.append(link_text)
+            self._s.note_links.append(link_text)
 
     def enterProject(self, ctx: ZorgFileParser.ProjectContext) -> None:
         self._add_tags(ctx, "projects")
@@ -181,34 +181,34 @@ class ZorgFileCompiler(ZorgFileListener):
         self._add_tags(ctx, "areas")
 
     def enterPriority(self, ctx: ZorgFileParser.PriorityContext) -> None:
-        self._state.priority = ctx.ID().getText()[0].upper()
+        self._s.priority = ctx.ID().getText()[0].upper()
 
     def enterProperty(self, ctx: ZorgFileParser.PropertyContext) -> None:
         key, value = [x.getText() for x in ctx.ID()]
-        if self._state.in_h1_header:
-            self._state.h1_properties[key] = value
-        elif self._state.in_h2_header:
-            self._state.h2_properties[key] = value
-        elif self._state.in_h3_header:
-            self._state.h3_properties[key] = value
-        elif self._state.in_h4_header:
-            self._state.h4_properties[key] = value
-        elif self._state.in_note:
-            self._state.note_properties[key] = value
+        if self._s.in_h1_header:
+            self._s.h1_properties[key] = value
+        elif self._s.in_h2_header:
+            self._s.h2_properties[key] = value
+        elif self._s.in_h3_header:
+            self._s.h3_properties[key] = value
+        elif self._s.in_h4_header:
+            self._s.h4_properties[key] = value
+        elif self._s.in_note:
+            self._s.note_properties[key] = value
 
     def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:
-        self._state.in_note = True
+        self._s.in_note = True
         del ctx
 
     def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:
-        self._state.in_note = False
+        self._s.in_note = False
         kwargs: dict[str, Any] = {
-            "areas": self._state.areas,
-            "contexts": self._state.contexts,
-            "links": self._state.note_links,
-            "people": self._state.people,
-            "projects": self._state.projects,
-            "properties": self._state.properties,
+            "areas": self._s.areas,
+            "contexts": self._s.contexts,
+            "links": self._s.note_links,
+            "people": self._s.people,
+            "projects": self._s.projects,
+            "properties": self._s.properties,
         }
         self.zorg_file.notes.append(
             ZorgNote(ctx.space_atoms().getText(), **kwargs)
@@ -216,31 +216,31 @@ class ZorgFileCompiler(ZorgFileListener):
         self._reset_note_context()
 
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:
-        self._state.in_note = True
+        self._s.in_note = True
         del ctx
 
     def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:
-        self._state.in_note = False
+        self._s.in_note = False
         kwargs: dict[str, Any] = {
-            "areas": self._state.areas,
-            "contexts": self._state.contexts,
-            "links": self._state.note_links,
-            "people": self._state.people,
-            "projects": self._state.projects,
-            "properties": self._state.properties,
-            "priority": self._state.priority,
+            "areas": self._s.areas,
+            "contexts": self._s.contexts,
+            "links": self._s.note_links,
+            "people": self._s.people,
+            "projects": self._s.projects,
+            "properties": self._s.properties,
+            "priority": self._s.priority,
         }
         self.zorg_file.todos.append(
             ZorgTodo(ctx.space_atoms().getText(), **kwargs)
         )
         # Reset priority back to default.
-        self._state.priority = "C"
+        self._s.priority = "C"
         self._reset_note_context()
 
     def _reset_note_context(self) -> None:
-        self._state.note_tags = _get_default_tags_map()
-        self._state.note_properties = {}
-        self._state.note_links = []
+        self._s.note_tags = _get_default_tags_map()
+        self._s.note_properties = {}
+        self._s.note_links = []
 
     def _add_tags(
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName
@@ -253,16 +253,16 @@ class ZorgFileCompiler(ZorgFileListener):
                 ID=text,
             )
             return
-        if self._state.in_h1_header:
-            self._state.h1_section_tags[tag_name].append(text)
-        elif self._state.in_h2_header:
-            self._state.h2_section_tags[tag_name].append(text)
-        elif self._state.in_h3_header:
-            self._state.h3_section_tags[tag_name].append(text)
-        elif self._state.in_h4_header:
-            self._state.h4_section_tags[tag_name].append(text)
-        elif self._state.in_note:
-            self._state.note_tags[tag_name].append(text)
+        if self._s.in_h1_header:
+            self._s.h1_section_tags[tag_name].append(text)
+        elif self._s.in_h2_header:
+            self._s.h2_section_tags[tag_name].append(text)
+        elif self._s.in_h3_header:
+            self._s.h3_section_tags[tag_name].append(text)
+        elif self._s.in_h4_header:
+            self._s.h4_section_tags[tag_name].append(text)
+        elif self._s.in_note:
+            self._s.note_tags[tag_name].append(text)
 
 
 # TODO(bugyi): Move everything in this file except for 2-3 lines of this function to src/zorg/compiler.py?
