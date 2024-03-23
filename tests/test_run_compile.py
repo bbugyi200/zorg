@@ -23,6 +23,8 @@ def _get_all_zo_stems(src_dir: PathLike = None) -> list[str]:
 def _get_zo_stem_iter(src_dir: PathLike = None) -> Iterator[str]:
     if src_dir is None:
         src_dir = Path(__file__).parent / "data"
+    else:
+        src_dir = Path(src_dir)
     for zo_path in src_dir.glob("*.zo"):
         yield zo_path.stem
 
