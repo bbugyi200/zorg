@@ -2,8 +2,8 @@
 #
 # @ = [[template]]
 
-{% set day_after = date + one_day -%}
-{% set day_before = date - one_day -%}
+{% set day_after = date + dt.timedelta(days=1) -%}
+{% set day_before = date - dt.timedelta(days=1) -%}
 ## {{date.strftime('%Y-%m-%d.%a')}} | Done Tasks / Projects
 ##
 ## @ = [[done_log_tmpl]]

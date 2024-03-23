@@ -11,7 +11,10 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.5.1...HEAD)
 
-No notable changes have been made.
+### Changed
+
+* *BREAKING CHANGE*: Stop injecting `one_day` template variable.
+* Several improvements to the grammar used by `zorg compile`.
 
 
 ## [0.5.1](https://github.com/bbugyi200/zorg/compare/0.5.0...0.5.1) - 2024-03-17

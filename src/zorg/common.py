@@ -12,8 +12,6 @@ def process_var_map(var_map: VarMapType) -> dict[str, Any]:
     new_var_map = {}
     for k, v in var_map.items():
         new_var_map[k] = _var_map_value(v)
-    if any(isinstance(v, dt.datetime) for v in new_var_map.values()):
-        new_var_map["one_day"] = dt.timedelta(days=1)
     return new_var_map
 
 
