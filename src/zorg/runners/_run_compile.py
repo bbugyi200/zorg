@@ -5,6 +5,7 @@ from pprint import pprint
 from typing import Any, Literal
 
 import antlr4
+from logrus import Logger
 
 from ..config import CompileConfig
 from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
@@ -16,6 +17,8 @@ from ._registry import runner
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
+
+logger = Logger(__name__)
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:
@@ -243,6 +246,13 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName
     ) -> None:
         text = ctx.children[1].getText()
+        if all(ch.isdigit() for ch in text):
+            logger.debug(
+                "Tag identifiers cannot contain only digits.",
+                tag_name=tag_name,
+                ID=text,
+            )
+            return
         if self._state.in_h1_header:
             self._state.h1_section_tags[tag_name].append(text)
         elif self._state.in_h2_header:
