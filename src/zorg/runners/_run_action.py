@@ -2,8 +2,8 @@
 
 from pathlib import Path
 
-from ..config import OpenActionConfig
 from ..common import prepend_zdir
+from ..config import OpenActionConfig
 from ..templates import run_template_init
 from ._runners import runner
 
