@@ -3,14 +3,14 @@
 import datetime as dt
 from pathlib import Path
 import tempfile
-from typing import Any, Iterable, Mapping
+from typing import Any, Mapping
 
 import jinja2
 from logrus import Logger
 from typist import PathLike
 
-from .. import common
-from ..types import TemplatePatternMapType, VarMapType
+from . import common
+from .types import TemplatePatternMapType, VarMapType
 
 
 logger = Logger(__name__)
@@ -25,7 +25,7 @@ def run_template_init(
     var_map: VarMapType = None,
 ) -> None:
     zettel_dir = Path(zettel_dir)
-    new_path = prepend_zdir(zettel_dir, [Path(new_path)])[0]
+    new_path = common.prepend_zdir(zettel_dir, [Path(new_path)])[0]
     var_map = {} if var_map is None else dict(var_map)
 
     if new_path.exists():
@@ -53,22 +53,11 @@ def run_template_init(
     )
     tmpl_manager = ZorgTemplateManager(zettel_dir)
     contents = tmpl_manager.render(
-        prepend_zdir(zettel_dir, [matched_template])[0],
+        common.prepend_zdir(zettel_dir, [matched_template])[0],
         common.process_var_map(var_map),
     )
     new_path.parent.mkdir(parents=True, exist_ok=True)
     new_path.write_text(contents)
-
-
-def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
-    zdir_path = Path(zdir)
-    new_paths = []
-    for p in paths:
-        path = Path(p)
-        new_paths.append(
-            path if zdir_path in path.parents else zdir_path / path
-        )
-    return new_paths
 
 
 class ZorgTemplateManager:

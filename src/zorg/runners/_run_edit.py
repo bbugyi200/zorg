@@ -6,9 +6,10 @@ from typing import Iterable, Iterator
 from logrus import Logger
 import vimala
 
+from ..common import prepend_zdir
 from ..config import EditConfig
 from ..file_groups import expand_file_group_paths
-from ._common import prepend_zdir, run_template_init
+from ..templates import run_template_init
 from ._runners import runner
 
 
