@@ -6,7 +6,7 @@ from typing import Iterable, Sequence
 
 from typist import PathLike
 
-from ..types import FileGroupMapType
+from .types import FileGroupMapType
 
 
 # TODO(bugyi): See if you can reduce complexity between this and _paths_from_file_group()

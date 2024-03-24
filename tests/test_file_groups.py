@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from zorg.runners._file_groups import expand_file_group_paths
+from zorg.file_groups import expand_file_group_paths
 
 from . import common as c
 
