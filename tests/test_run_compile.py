@@ -25,7 +25,6 @@ def _get_all_zo_paths() -> list[Path]:
         for path in it.chain(
             _get_zo_path_iter(data_dir), _get_zo_path_iter(examples_dir)
         )
-        if not path.stem.endswith("_tmpl")
     )
 
 

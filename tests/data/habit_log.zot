@@ -1,35 +1,36 @@
 # Templae for daily habit tracker files.
 #
-# @ = [[template]]
+# ^ = [[template]]
+# < = [[done_log.zot]]
+# > = [[day_log.zot]]
 
 {% set day_after = date + dt.timedelta(days=1) -%}
 {% set day_before = date - dt.timedelta(days=1) -%}
-## Habits | {{date.strftime('%Y-%m-%d.%a')}}
+## Habits | {{ date.strftime('%Y-%m-%d.%a') }}
 ##
-## @ = [[habit_log_tmpl]]
-## < = [[{{day_before.strftime('%Y%m%d')}}_habit.zo]]
-## > = [[{{day_after.strftime('%Y%m%d')}}_habit.zo]]
+## ^ = [[{{ date.strftime("%Y/%Y%m%d") }}]]
+## < = [[{{ day_before.strftime('%Y/%Y%m%d') }}_habit]]
+## > = [[{{ day_after.strftime('%Y/%Y%m%d') }}_habit]]
+## @ = [[habit_log.zot]]
 ##
-## 0 = [[{{date.strftime('%Y%m%d')}}.zo]]
+## 0 = [[{{ date.strftime('%Y/%Y%m%d') }}_day]]
 
-meds: ?
-run: ?
+meds: ? / ?
+run (miles): ? / ?
 time_of_1st_pomodoro: ????
-w: ?
-wfo: ?
------ CL -----
-R0 bounces: ?
-RN bounces: ?
-submits: ?
------ pm routine -----
-picked clothes: ?
-brush teeth: ?
-rubber bands: ?
------ pomodoros -----
-all: ?
-overflow: ?
-work: ?
+wfo: ? / ?
+======= CL
+R0 bounces: ? / ?
+RN bounces: ? / ?
+submits:    ? / ?
+======= pm routine
+brush teeth:  ? / ?
+rubber bands: ? / ?
+======= pomodoros
+all:  ? / ?
+work: ? / ?
+overflow: ? / ?
 
-##### expenses #####
+######### Expenses
 
-total:
+total: 0.00 / 0.00

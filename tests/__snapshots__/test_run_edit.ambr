@@ -3,78 +3,72 @@
   '''
   # 2000-01-03.Mon
   #
-  # @ = [[day_log_tmpl]]
-  # < = [[20000102.zo]]
-  # > = [[20000104.zo]]
-  #
-  # H = [[20000103_habit.zo]]
-  # X = [[20000103_done.zo]]
+  # ^ = [[2000/20000103]]
+  # < = [[2000/20000102_day]]
+  # > = [[2000/20000104_day]]
+  # @ = [[day_log.zot]]
   
   o #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
     * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
     * Copy any important gchat convos from yesterday into chat/*.txt
-    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
-    * Check today's tickler file: [[tick_3]]
-    * Fill out yesterday's habit tracker: [[20000102_habit.zo]]
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
     * go/g3co
-    * Review '@A' todos (are any >=7d old? which should you do today?)
-    * Set 2-5 goals / "highlights" for today
-    * Add [[act]] file links to this day log
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
     * <50 emails in bryanbugyi34@gmail
     * <100 emails in bbugyi@google
-    * inbox: Google Keep
-    * inbox: ~/org/box.zo
     * Review ~/org diffs from yesterday and commit them to git
   
-  ##### Goals #####
+  ######### @event
   
-  ##### Events #####
-  
-  ##### Pomodoros #####
+  ######### @pomodoro
   '''
 # ---
 # name: test_edit_day_logs[YAMLConfigFile].1
   '''
   # Habits | 2000-01-02.Sun
   #
-  # @ = [[habit_log_tmpl]]
-  # < = [[20000101_habit.zo]]
-  # > = [[20000103_habit.zo]]
+  # ^ = [[2000/20000102]]
+  # < = [[2000/20000101_habit]]
+  # > = [[2000/20000103_habit]]
+  # @ = [[habit_log.zot]]
   #
-  # 0 = [[20000102.zo]]
+  # 0 = [[2000/20000102_day]]
   
-  meds: ?
-  run: ?
+  meds: ? / ?
+  run (miles): ? / ?
   time_of_1st_pomodoro: ????
-  w: ?
-  wfo: ?
-  ----- CL -----
-  R0 bounces: ?
-  RN bounces: ?
-  submits: ?
-  ----- pm routine -----
-  picked clothes: ?
-  brush teeth: ?
-  rubber bands: ?
-  ----- pomodoros -----
-  all: ?
-  overflow: ?
-  work: ?
+  wfo: ? / ?
+  ======= CL
+  R0 bounces: ? / ?
+  RN bounces: ? / ?
+  submits:    ? / ?
+  ======= pm routine
+  brush teeth:  ? / ?
+  rubber bands: ? / ?
+  ======= pomodoros
+  all:  ? / ?
+  work: ? / ?
+  overflow: ? / ?
   
-  ##### expenses #####
+  ######### Expenses
   
-  total:
+  total: 0.00 / 0.00
   '''
 # ---
 # name: test_edit_day_logs[YAMLConfigFile].2
   '''
   # 2000-01-03.Mon | Done Tasks / Projects
   #
-  # @ = [[done_log_tmpl]]
-  # < = [[20000102_done.zo]]
-  # > = [[20000104_done.zo]]
+  # ^ = [[2000/20000103]]
+  # < = [[2000/20000102_done]]
+  # > = [[2000/20000104_done]]
+  # @ = [[done_log.zot]]
   #
-  # 0 = [[20000103.zo]]
+  # 0 = [[2000/20000103_day]]
   
   
   '''

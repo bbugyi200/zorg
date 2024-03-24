@@ -17,15 +17,15 @@ def test_edit_day_logs(
     """Test that we properly generate test day, habit, and done logs."""
     zettel_dir = tmp_path / "org"
     kwargs: dict[str, Any] = {"vim_commands": ["source {zdir}/vimrc"]}
-    for key, stem in [
-        ("day_log_template", "day_log_tmpl"),
-        ("habit_log_template", "habit_log_tmpl"),
-        ("done_log_template", "done_log_tmpl"),
+    for key, template_stem in [
+        ("day_log_template", "day_log"),
+        ("habit_log_template", "habit_log"),
+        ("done_log_template", "done_log"),
     ]:
-        template_path: Path = zettel_dir / f"{stem}.zo"
+        template_path: Path = zettel_dir / f"{template_stem}.zot"
         template_path.parent.mkdir(parents=True, exist_ok=True)
         test_data_template_path = Path(__file__).parent / Path(
-            f"data/{stem}.zo"
+            f"data/{template_stem}.zot"
         )
         template_path.write_bytes(test_data_template_path.read_bytes())
         kwargs[key] = template_path.name
@@ -42,9 +42,9 @@ def test_edit_day_logs(
         habit_log,
         done_log,
         template_pattern_map={
-            f"^{re_date_group}_habit.zo$": "habit_log_tmpl.zo",
-            f"^{re_date_group}_done.zo$": "done_log_tmpl.zo",
-            f"^{re_date_group}.zo$": "day_log_tmpl.zo",
+            f"^{re_date_group}_habit.zo$": "habit_log.zot",
+            f"^{re_date_group}_done.zo$": "done_log.zot",
+            f"^{re_date_group}.zo$": "day_log.zot",
         },
         **kwargs,
     )

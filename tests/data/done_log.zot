@@ -1,15 +1,18 @@
 # Template for logs that hold completed todos / project for a single day.
 #
-# @ = [[template]]
+# ^ = [[template]]
+# < = [[day_log.zot]]
+# > = [[habit_log.zot]]
 
 {% set day_after = date + dt.timedelta(days=1) -%}
 {% set day_before = date - dt.timedelta(days=1) -%}
-## {{date.strftime('%Y-%m-%d.%a')}} | Done Tasks / Projects
+## {{ date.strftime('%Y-%m-%d.%a') }} | Done Tasks / Projects
 ##
-## @ = [[done_log_tmpl]]
-## < = [[{{day_before.strftime('%Y%m%d')}}_done.zo]]
-## > = [[{{day_after.strftime('%Y%m%d')}}_done.zo]]
+## ^ = [[{{ date.strftime("%Y/%Y%m%d") }}]]
+## < = [[{{ day_before.strftime('%Y/%Y%m%d') }}_done]]
+## > = [[{{ day_after.strftime('%Y/%Y%m%d') }}_done]]
+## @ = [[done_log.zot]]
 ##
-## 0 = [[{{date.strftime('%Y%m%d')}}.zo]]
+## 0 = [[{{ date.strftime('%Y/%Y%m%d') }}_day]]
 
 

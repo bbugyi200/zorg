@@ -16,9 +16,9 @@ def test_template_render_day_log(
     tmp_path: Path,
     snapshot: Snapshot,
 ) -> None:
-    """Test that the 'day_log_tmpl.zo' template renders as expected."""
+    """Test that the 'day_log.zot' template renders as expected."""
     zettel_dir = tmp_path / "org"
-    zot_basename = "day_log_tmpl.zo"
+    zot_basename = "day_log.zot"
     template_path: Path = zettel_dir / zot_basename
     template_path.parent.mkdir(parents=True, exist_ok=True)
     test_data_template_path = Path(__file__).parent / Path(
@@ -46,9 +46,9 @@ def test_template_render_hello(
     capsys: CaptureFixture,
     tmp_path: Path,
 ) -> None:
-    """Test that the 'hello_tmpl.zo' template renders as expected."""
+    """Test that the 'hello.zot' template renders as expected."""
     zettel_dir = tmp_path / "org"
-    zot_basename = "hello_tmpl.zo"
+    zot_basename = "hello.zot"
     template_path: Path = zettel_dir / zot_basename
     template_path.parent.mkdir(parents=True, exist_ok=True)
     test_data_template_path = Path(__file__).parent / Path(
