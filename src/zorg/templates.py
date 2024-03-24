@@ -16,7 +16,7 @@ from .types import TemplatePatternMapType, VarMapType
 logger = Logger(__name__)
 
 
-def run_template_init(
+def init_from_template(
     zettel_dir: PathLike,
     template_pattern_map: TemplatePatternMapType,
     new_path: PathLike,

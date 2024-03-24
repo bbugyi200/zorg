@@ -9,7 +9,7 @@ import vimala
 from ..common import prepend_zdir
 from ..config import EditConfig
 from ..file_groups import expand_file_group_paths
-from ..templates import run_template_init
+from ..templates import init_from_template
 from ._runners import runner
 
 
@@ -24,7 +24,7 @@ def run_edit(cfg: EditConfig) -> int:
     )
     zo_paths = prepend_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
-        run_template_init(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
+        init_from_template(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
 
     _start_vim_loop(zo_paths, cfg=cfg)
     return 0

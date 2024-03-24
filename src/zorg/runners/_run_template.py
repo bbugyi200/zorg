@@ -3,7 +3,7 @@
 from ..config import TemplateInitConfig, TemplateRenderConfig
 from ..templates import (
     ZorgTemplateManager,
-    run_template_init as _run_template_init,
+    init_from_template,
 )
 from ._runners import runner
 
@@ -11,7 +11,7 @@ from ._runners import runner
 @runner
 def run_template_init(cfg: TemplateInitConfig) -> int:
     """Runner for the 'template init' command."""
-    _run_template_init(
+    init_from_template(
         cfg.zettel_dir,
         cfg.template_pattern_map,
         cfg.new_path,

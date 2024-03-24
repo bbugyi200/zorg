@@ -4,7 +4,7 @@ from pathlib import Path
 
 from ..common import prepend_zdir
 from ..config import OpenActionConfig
-from ..templates import run_template_init
+from ..templates import init_from_template
 from ._runners import runner
 
 
@@ -20,7 +20,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             link_base = word[left_find + 2 : right_find].split("::")[0]
             link_base = link_base if "." in link_base else f"{link_base}.zo"
             link_path = prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
-            run_template_init(
+            init_from_template(
                 cfg.zettel_dir,
                 cfg.template_pattern_map,
                 link_path,
