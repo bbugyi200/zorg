@@ -26,79 +26,113 @@ class ZorgFileCompiler(ZorgFileListener):
 
         self._s = _ZorgFileCompilerState()
 
-    def enterH1_header(self, ctx: ZorgFileParser.H1_headerContext) -> None:
+    def enterH1_header(
+        self, ctx: ZorgFileParser.H1_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h1_header = True
 
-    def exitH1_header(self, ctx: ZorgFileParser.H1_headerContext) -> None:
+    def exitH1_header(
+        self, ctx: ZorgFileParser.H1_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h1_header = False
 
-    def exitH1_section(self, ctx: ZorgFileParser.H1_headerContext) -> None:
+    def exitH1_section(
+        self, ctx: ZorgFileParser.H1_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.h1_section_tags = _get_default_tags_map()
         self._s.h1_properties = {}
 
-    def enterH2_header(self, ctx: ZorgFileParser.H2_headerContext) -> None:
+    def enterH2_header(
+        self, ctx: ZorgFileParser.H2_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h2_header = True
 
-    def exitH2_header(self, ctx: ZorgFileParser.H2_headerContext) -> None:
+    def exitH2_header(
+        self, ctx: ZorgFileParser.H2_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h2_header = False
 
-    def exitH2_section(self, ctx: ZorgFileParser.H2_headerContext) -> None:
+    def exitH2_section(
+        self, ctx: ZorgFileParser.H2_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.h2_section_tags = _get_default_tags_map()
         self._s.h2_properties = {}
 
-    def enterH3_header(self, ctx: ZorgFileParser.H3_headerContext) -> None:
+    def enterH3_header(
+        self, ctx: ZorgFileParser.H3_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h3_header = True
 
-    def exitH3_header(self, ctx: ZorgFileParser.H3_headerContext) -> None:
+    def exitH3_header(
+        self, ctx: ZorgFileParser.H3_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h3_header = False
 
-    def exitH3_section(self, ctx: ZorgFileParser.H3_headerContext) -> None:
+    def exitH3_section(
+        self, ctx: ZorgFileParser.H3_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.h3_section_tags = _get_default_tags_map()
         self._s.h3_properties = {}
 
-    def enterH4_header(self, ctx: ZorgFileParser.H4_headerContext) -> None:
+    def enterH4_header(
+        self, ctx: ZorgFileParser.H4_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h4_header = True
 
-    def exitH4_header(self, ctx: ZorgFileParser.H4_headerContext) -> None:
+    def exitH4_header(
+        self, ctx: ZorgFileParser.H4_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.in_h4_header = False
 
-    def exitH4_section(self, ctx: ZorgFileParser.H4_headerContext) -> None:
+    def exitH4_section(
+        self, ctx: ZorgFileParser.H4_headerContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.h4_section_tags = _get_default_tags_map()
         self._s.h4_properties = {}
 
-    def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:
+    def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
             link_text = ctx.children[1].getText()
             self._s.note_links.append(link_text)
 
-    def enterProject(self, ctx: ZorgFileParser.ProjectContext) -> None:
+    def enterProject(
+        self, ctx: ZorgFileParser.ProjectContext
+    ) -> None:  # noqa: D102
         self._add_tags(ctx, "projects")
 
-    def enterPerson(self, ctx: ZorgFileParser.PersonContext) -> None:
+    def enterPerson(
+        self, ctx: ZorgFileParser.PersonContext
+    ) -> None:  # noqa: D102
         self._add_tags(ctx, "people")
 
-    def enterContext(self, ctx: ZorgFileParser.ContextContext) -> None:
+    def enterContext(
+        self, ctx: ZorgFileParser.ContextContext
+    ) -> None:  # noqa: D102
         self._add_tags(ctx, "contexts")
 
-    def enterArea(self, ctx: ZorgFileParser.AreaContext) -> None:
+    def enterArea(self, ctx: ZorgFileParser.AreaContext) -> None:  # noqa: D102
         self._add_tags(ctx, "areas")
 
-    def enterPriority(self, ctx: ZorgFileParser.PriorityContext) -> None:
+    def enterPriority(
+        self, ctx: ZorgFileParser.PriorityContext
+    ) -> None:  # noqa: D102
         self._s.priority = ctx.ID().getText()[0].upper()
 
-    def enterProperty(self, ctx: ZorgFileParser.PropertyContext) -> None:
+    def enterProperty(
+        self, ctx: ZorgFileParser.PropertyContext
+    ) -> None:  # noqa: D102
         key, value = [x.getText() for x in ctx.ID()]
         if self._s.in_h1_header:
             self._s.h1_properties[key] = value
@@ -111,11 +145,11 @@ class ZorgFileCompiler(ZorgFileListener):
         elif self._s.in_note:
             self._s.note_properties[key] = value
 
-    def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:
+    def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         self._s.in_note = True
         del ctx
 
-    def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:
+    def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
@@ -130,11 +164,11 @@ class ZorgFileCompiler(ZorgFileListener):
         )
         self._reset_note_context()
 
-    def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:
+    def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = True
         del ctx
 
-    def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:
+    def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,

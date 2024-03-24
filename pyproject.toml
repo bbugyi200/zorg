@@ -10,7 +10,7 @@ exclude = "src/zorg/grammar/"
 
 [tool.pydocstyle]
 match = '.*\.py'
-match-dir = '(?!src/zorg/grammar)'
+match-dir = '(?!grammar).*'
 select = [
     "D100",
     "D101",

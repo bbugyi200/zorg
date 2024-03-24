@@ -10,6 +10,7 @@ from ._runners import runner
 
 @runner
 def run_template_init(cfg: TemplateInitConfig) -> int:
+    """Runner for the 'template init' command."""
     _run_template_init(
         cfg.zettel_dir,
         cfg.template_pattern_map,
@@ -22,7 +23,7 @@ def run_template_init(cfg: TemplateInitConfig) -> int:
 
 @runner
 def run_template_render(cfg: TemplateRenderConfig) -> int:
-    """Runner for the 'template' command."""
+    """Runner for the 'template render' command."""
     tmpl_manager = ZorgTemplateManager(cfg.zettel_dir)
     print(tmpl_manager.render(cfg.template, cfg.var_map))
     return 0

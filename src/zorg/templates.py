@@ -24,6 +24,18 @@ def run_template_init(
     template: Path = None,
     var_map: VarMapType = None,
 ) -> None:
+    """Initialize a new file by rendering a template if necessary.
+
+    Args:
+        zettel_dir: The zettel directory where this file will be created.
+        template_pattern_map: A map of filename patterns to .zot template files
+            used to determine which template to use if the {template} argument
+            is not provided.
+        new_path: The path of the file you want to initialize.
+        template: Optional path to a .zot template file that should be used to
+            render {new_path}.
+        var_map: A map of template variable keys to values.
+    """
     zettel_dir = Path(zettel_dir)
     new_path = common.prepend_zdir(zettel_dir, [Path(new_path)])[0]
     var_map = {} if var_map is None else dict(var_map)
@@ -61,6 +73,8 @@ def run_template_init(
 
 
 class ZorgTemplateManager:
+    """Manages the rendering of all zorg (i.e. *.zot) templates."""
+
     tmp_dir = tempfile.TemporaryDirectory()
 
     def __init__(self, zettel_dir: Path) -> None:
