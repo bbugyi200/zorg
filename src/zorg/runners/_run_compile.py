@@ -13,7 +13,7 @@ from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from ..models import ZorgFile, ZorgNote, ZorgTodo
 from ..types import TodoPriorityType
-from ._registry import runner
+from ._runners import runner
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]

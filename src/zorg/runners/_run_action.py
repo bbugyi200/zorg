@@ -4,7 +4,7 @@ from pathlib import Path
 
 from ..config import OpenActionConfig
 from ._common import prepend_zdir, run_template_init
-from ._registry import runner
+from ._runners import runner
 
 
 @runner

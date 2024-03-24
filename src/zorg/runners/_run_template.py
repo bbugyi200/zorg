@@ -5,7 +5,7 @@ from ._common import (
     ZorgTemplateManager,
     run_template_init as _run_template_init,
 )
-from ._registry import runner
+from ._runners import runner
 
 
 @runner

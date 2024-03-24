@@ -1,7 +1,7 @@
 """Contains runners for the 'zorg db' command."""
 
 from ..config import DbInfoConfig
-from ._registry import runner
+from ._runners import runner
 
 
 @runner

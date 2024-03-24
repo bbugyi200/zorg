@@ -9,7 +9,7 @@ import vimala
 from ..config import EditConfig
 from ..file_groups import expand_file_group_paths
 from ._common import prepend_zdir, run_template_init
-from ._registry import runner
+from ._runners import runner
 
 
 logger = Logger(__name__)
