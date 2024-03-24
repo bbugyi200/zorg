@@ -20,7 +20,7 @@ def run_compile(cfg: CompileConfig) -> int:
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgFileParser(tokens)
-    tree = parser.prog()
+    tree = parser.prog()  # type: ignore[no-untyped-call]
     compiler = ZorgFileCompiler(ZorgFile(cfg.zo_path))
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
