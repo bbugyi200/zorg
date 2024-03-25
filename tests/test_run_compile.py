@@ -45,6 +45,7 @@ def test_compile(
 ) -> None:
     """Test that the all *.zo test data files compile as expected."""
     zettel_dir = tmp_path / "org"
+
     argv = [
         "--dir",
         str(zettel_dir),
@@ -52,7 +53,8 @@ def test_compile(
         str(zo_path),
     ]
     exit_code = main(*argv)
+    capture = capsys.readouterr()
 
     assert exit_code == 0
-    capture = capsys.readouterr()
+    assert capture.err == ""
     assert capture.out == snapshot
