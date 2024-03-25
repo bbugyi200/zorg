@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 * Several improvements to the grammar used by `zorg compile`.
 
 
-## [0.5.1](https://github.com/bbugyi200/zorg/compare/0.5.0...0.5.1) - 2024-03-17
+## [0.5.1](https://github.com/bbugyi200/zorg/compare/0.5.0...0.5.1) - 2024-03-21
 
 ### Fixed
 
