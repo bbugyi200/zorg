@@ -16,7 +16,9 @@ def test_edit_day_logs(
 ) -> None:
     """Test that we properly generate test day, habit, and done logs."""
     zettel_dir = tmp_path / "org"
-    kwargs: dict[str, Any] = {"vim_commands": ["source {zdir}/vimrc"]}
+    kwargs: dict[str, Any] = {
+        "vim_commands": ["echo hi", "source {zdir}/vimrc"]
+    }
     for key, template_stem in [
         ("day_log_template", "day_log"),
         ("habit_log_template", "habit_log"),
@@ -63,6 +65,8 @@ def test_edit_day_logs(
             str(day_log_path),
             str(habit_log_path),
             str(done_log_path),
+            "-c",
+            "echo hi",
             "-c",
             f"source {zettel_dir}/vimrc",
         ],
