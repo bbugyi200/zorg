@@ -23,8 +23,11 @@ class Config(clack.Config):
 
     command: Command
 
-    template_pattern_map: TemplatePatternMapType = {}
+    # ----- ARGUMENTS
     zettel_dir: Path = Path.home() / "org"
+
+    # ----- CONFIG
+    template_pattern_map: TemplatePatternMapType = {}
 
 
 class OpenActionConfig(Config):
@@ -32,6 +35,7 @@ class OpenActionConfig(Config):
 
     command: Literal["open"]
 
+    # ----- ARGUMENTS
     zo_path: Path
     line_number: int
 
@@ -41,6 +45,7 @@ class CompileConfig(Config):
 
     command: Literal["compile"]
 
+    # ----- ARGUMENTS
     zo_path: Path
 
 
@@ -55,13 +60,13 @@ class EditConfig(Config):
 
     command: Literal["edit"]
 
+    # ----- ARGUMENTS
+    zo_paths: list[Path]
+
     # ----- CONFIG
     file_group_map: FileGroupMapType = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
-
-    # ----- ARGUMENTS
-    zo_paths: list[Path]
 
 
 class TemplateRenderConfig(Config):
