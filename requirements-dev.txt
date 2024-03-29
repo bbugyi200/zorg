@@ -52,7 +52,7 @@ bolton-typist==0.2.0
     #   bolton-eris
     #   vimala
     #   zettel-org
-build==1.1.1
+build==1.2.1
     # via pip-tools
 bump2version==1.0.1
     # via -r requirements-dev.in
@@ -270,7 +270,7 @@ tox==3.28.0
     #   tox-pyenv
 tox-pyenv==1.1.0
     # via -r requirements-dev.in
-typer==0.11.0
+typer==0.11.1
     # via cruft
 types-python-dateutil==2.9.0.20240316
     # via arrow
