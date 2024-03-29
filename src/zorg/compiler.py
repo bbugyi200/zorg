@@ -84,7 +84,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterProperty(
         self, ctx: ZorgFileParser.PropertyContext
     ) -> None:  # noqa: D102
-        key, value = [x.getText() for x in ctx.ID()]
+        key, value = ctx.ID().getText(), ctx.id_group().getText()
         if self._s.in_h1_header:
             self._s.h1_properties[key] = value
         elif self._s.in_h2_header:

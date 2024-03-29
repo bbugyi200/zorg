@@ -19,7 +19,7 @@ property    : ID '::' id_group ;
 
 id_group    : ID (id_symbol+ ID)* ;
 id_symbol   : (DASH|DOT|FSLASH|UNDERSCORE|COLON) ;
-any_symbol  : (SYMBOL|LPAREN|RPAREN|id_symbol|tag_symbol|ID) ;
+any_symbol  : (SYMBOL|LPAREN|RPAREN|id_symbol|tag_symbol) ;
 
 tag_symbol : '#' | '@' | '%' | '+' ;
 tag        : (area|context|person|project) ;
