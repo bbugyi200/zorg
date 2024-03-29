@@ -996,31 +996,35 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.AtomContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_atom)
         try:
-            self.enterOuterAlt(localctx, 1)
             self.state = 171
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
             if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
                 self.state = 166
                 self.tag_symbol()
                 pass
 
             elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
                 self.state = 167
                 self.tag()
                 pass
 
             elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
                 self.state = 168
                 self.link()
                 pass
 
             elif la_ == 4:
+                self.enterOuterAlt(localctx, 4)
                 self.state = 169
                 self.property_()
                 pass
 
             elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
                 self.state = 170
                 self.id_group()
                 pass

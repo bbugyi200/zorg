@@ -16,8 +16,8 @@ note       : (SPACE SPACE)* DASH space_atoms NL ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE LPAREN? (atom|quoted)? any_symbol* RPAREN? ;
-atom        : (tag_symbol|tag|link|property|id_group) ;
+space_atom  : SPACE LPAREN? (atom | quoted)? any_symbol* RPAREN? ;
+atom        : tag_symbol | tag | link | property | id_group ;
 
 // property
 property    : ID '::' id_group ;
@@ -25,7 +25,7 @@ id_group    : ID (id_symbol+ ID)* ;
 
 // symbols
 any_symbol  : SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol | tag_symbol ;
-id_symbol   : DASH|DOT|FSLASH|COLON ;
+id_symbol   : DASH | DOT | FSLASH | COLON ;
 tag_symbol : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // tag
@@ -70,5 +70,5 @@ PERCENT      : '%' ;
 fragment UPPER_LETTER : ('A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z') ;
 fragment LOWER_LETTER : ('a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'|'o'|'p'|'q'|'r'|'s'|'t'|'u'|'v'|'w'|'x'|'y'|'z') ;
 fragment DIGIT        : ('0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9') ;
-fragment LETTER       : (UPPER_LETTER|LOWER_LETTER) ;
-fragment ALPANUM      : (LETTER|DIGIT) ;
+fragment LETTER       : (UPPER_LETTER | LOWER_LETTER) ;
+fragment ALPANUM      : (LETTER | DIGIT) ;
