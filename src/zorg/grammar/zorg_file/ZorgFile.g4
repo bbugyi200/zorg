@@ -8,25 +8,29 @@ comment    : '#' space_atoms? NL ;
 
 block      : item+ NL? ;
 item       : (todo|note) ;
-todo       : 'o' (' ' priority)? space_atoms NL ;
+todo       : (SPACE SPACE)* 'o' (' ' priority)? space_atoms NL ;
 priority   : '[#' ID ']' ;
-note       : '-' space_atoms NL ;
+note       : (SPACE SPACE)* DASH space_atoms NL ;
 
 space_atoms : space_atom+ ;
-space_atom  : ' ' '('? (atom|quoted)? SYMBOL* ;
-atom        : (tag_symbol|tag|link|property|ID) ;
-property    : ID '::' ID ;
+space_atom  : SPACE LPAREN? (atom|quoted)? any_symbol* RPAREN? ;
+atom        : (tag_symbol|tag|link|property|id_group) ;
+property    : ID '::' id_group ;
 
-tag_symbol  : '#' | '@' | '%' | '+' ;
+id_group    : ID (id_symbol+ ID)* ;
+id_symbol   : (DASH|DOT|FSLASH|UNDERSCORE|COLON) ;
+any_symbol  : (SYMBOL|LPAREN|RPAREN|id_symbol|tag_symbol|ID) ;
+
+tag_symbol : '#' | '@' | '%' | '+' ;
 tag        : (area|context|person|project) ;
 area       : '#' ID ;
 context    : '@' ID ;
 person     : '%' ID ;
 project    : '+' ID ;
 
-quoted     : '\'' atom+ '\'' ;
+quoted     : ('\'' atom+ '\'' | '"' atom+ '"') ;
 
-link       : '[[' (ID|property) ']]' ;
+link       : '[[' (id_group|property) ']]' ;
 
 h1_section : h1_header block* (NL? h2_section)* ;
 h2_section : h2_header block* (NL? h3_section)* ;
@@ -39,8 +43,16 @@ h4_header  : '---' space_atoms NL ;
 
 // lexer rules
 NL           : '\r'? '\n' ;
-ID           : ALPANUM+ (ID_SYMBOL ALPANUM*)* '('? ')'? ;
-SYMBOL       : ([^()[\]<>,?!;:|=]|ID_SYMBOL) ;
+ID           : ALPANUM+ ;
+SYMBOL       : [^[\]<>,?!;|=\\] ;
+DASH         : '-' ;
+DOT          : '.' ;
+FSLASH       : '/' ;
+UNDERSCORE   : '_' ;
+COLON        : ':' ;
+SPACE        : ' ' ;
+LPAREN       : '(' ;
+RPAREN       : ')' ;
 
 // fragments
 fragment UPPER_LETTER : ('A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z') ;
@@ -48,9 +60,3 @@ fragment LOWER_LETTER : ('a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'
 fragment DIGIT        : ('0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9') ;
 fragment LETTER       : (UPPER_LETTER|LOWER_LETTER) ;
 fragment ALPANUM      : (LETTER|DIGIT) ;
-
-fragment DASH         : '-' ;
-fragment DOT          : '.' ;
-fragment FSLASH       : '/' ;
-fragment UNDERSCORE   : '_' ;
-fragment ID_SYMBOL    : (DASH|DOT|FSLASH|UNDERSCORE) ;
