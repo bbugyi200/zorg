@@ -25,7 +25,7 @@ def serializedATN():
         9,156,8,9,1,9,5,9,159,8,9,10,9,12,9,162,9,9,1,9,3,9,165,8,9,1,10,
         1,10,1,10,1,10,1,10,3,10,172,8,10,1,11,1,11,1,11,1,11,1,12,1,12,
         4,12,180,8,12,11,12,12,12,181,1,12,1,12,5,12,186,8,12,10,12,12,12,
-        189,9,12,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,3,14,199,8,14,1,
+        189,9,12,1,13,1,13,1,13,1,13,1,13,1,13,3,13,197,8,13,1,14,1,14,1,
         15,1,15,1,16,1,16,1,16,1,16,3,16,207,8,16,1,17,1,17,1,17,1,18,1,
         18,1,18,1,19,1,19,1,19,1,20,1,20,1,20,1,21,1,21,4,21,223,8,21,11,
         21,12,21,224,1,21,1,21,1,21,1,21,4,21,231,8,21,11,21,12,21,232,1,
@@ -42,7 +42,7 @@ def serializedATN():
         0,2,2,0,14,16,18,18,1,0,22,25,342,0,62,1,0,0,0,2,91,1,0,0,0,4,95,
         1,0,0,0,6,102,1,0,0,0,8,111,1,0,0,0,10,117,1,0,0,0,12,128,1,0,0,
         0,14,137,1,0,0,0,16,145,1,0,0,0,18,149,1,0,0,0,20,171,1,0,0,0,22,
-        173,1,0,0,0,24,177,1,0,0,0,26,190,1,0,0,0,28,198,1,0,0,0,30,200,
+        173,1,0,0,0,24,177,1,0,0,0,26,196,1,0,0,0,28,198,1,0,0,0,30,200,
         1,0,0,0,32,206,1,0,0,0,34,208,1,0,0,0,36,211,1,0,0,0,38,214,1,0,
         0,0,40,217,1,0,0,0,42,236,1,0,0,0,44,238,1,0,0,0,46,245,1,0,0,0,
         48,261,1,0,0,0,50,277,1,0,0,0,52,293,1,0,0,0,54,300,1,0,0,0,56,312,
@@ -73,39 +73,39 @@ def serializedATN():
         148,1,0,0,0,148,17,1,0,0,0,149,151,5,19,0,0,150,152,5,20,0,0,151,
         150,1,0,0,0,151,152,1,0,0,0,152,155,1,0,0,0,153,156,3,20,10,0,154,
         156,3,42,21,0,155,153,1,0,0,0,155,154,1,0,0,0,155,156,1,0,0,0,156,
-        160,1,0,0,0,157,159,3,28,14,0,158,157,1,0,0,0,159,162,1,0,0,0,160,
+        160,1,0,0,0,157,159,3,26,13,0,158,157,1,0,0,0,159,162,1,0,0,0,160,
         158,1,0,0,0,160,161,1,0,0,0,161,164,1,0,0,0,162,160,1,0,0,0,163,
         165,5,21,0,0,164,163,1,0,0,0,164,165,1,0,0,0,165,19,1,0,0,0,166,
         172,3,30,15,0,167,172,3,32,16,0,168,172,3,44,22,0,169,172,3,22,11,
         0,170,172,3,24,12,0,171,166,1,0,0,0,171,167,1,0,0,0,171,168,1,0,
         0,0,171,169,1,0,0,0,171,170,1,0,0,0,172,21,1,0,0,0,173,174,5,12,
         0,0,174,175,5,4,0,0,175,176,3,24,12,0,176,23,1,0,0,0,177,187,5,12,
-        0,0,178,180,3,26,13,0,179,178,1,0,0,0,180,181,1,0,0,0,181,179,1,
+        0,0,178,180,3,28,14,0,179,178,1,0,0,0,180,181,1,0,0,0,181,179,1,
         0,0,0,181,182,1,0,0,0,182,183,1,0,0,0,183,184,5,12,0,0,184,186,1,
         0,0,0,185,179,1,0,0,0,186,189,1,0,0,0,187,185,1,0,0,0,187,188,1,
-        0,0,0,188,25,1,0,0,0,189,187,1,0,0,0,190,191,7,0,0,0,191,27,1,0,
-        0,0,192,199,5,13,0,0,193,199,5,20,0,0,194,199,5,21,0,0,195,199,5,
-        17,0,0,196,199,3,26,13,0,197,199,3,30,15,0,198,192,1,0,0,0,198,193,
-        1,0,0,0,198,194,1,0,0,0,198,195,1,0,0,0,198,196,1,0,0,0,198,197,
-        1,0,0,0,199,29,1,0,0,0,200,201,7,1,0,0,201,31,1,0,0,0,202,207,3,
-        34,17,0,203,207,3,36,18,0,204,207,3,38,19,0,205,207,3,40,20,0,206,
-        202,1,0,0,0,206,203,1,0,0,0,206,204,1,0,0,0,206,205,1,0,0,0,207,
-        33,1,0,0,0,208,209,5,22,0,0,209,210,5,12,0,0,210,35,1,0,0,0,211,
-        212,5,23,0,0,212,213,5,12,0,0,213,37,1,0,0,0,214,215,5,25,0,0,215,
-        216,5,12,0,0,216,39,1,0,0,0,217,218,5,24,0,0,218,219,5,12,0,0,219,
-        41,1,0,0,0,220,222,5,5,0,0,221,223,3,20,10,0,222,221,1,0,0,0,223,
-        224,1,0,0,0,224,222,1,0,0,0,224,225,1,0,0,0,225,226,1,0,0,0,226,
-        227,5,5,0,0,227,237,1,0,0,0,228,230,5,6,0,0,229,231,3,20,10,0,230,
-        229,1,0,0,0,231,232,1,0,0,0,232,230,1,0,0,0,232,233,1,0,0,0,233,
-        234,1,0,0,0,234,235,5,6,0,0,235,237,1,0,0,0,236,220,1,0,0,0,236,
-        228,1,0,0,0,237,43,1,0,0,0,238,241,5,7,0,0,239,242,3,24,12,0,240,
-        242,3,22,11,0,241,239,1,0,0,0,241,240,1,0,0,0,242,243,1,0,0,0,243,
-        244,5,8,0,0,244,45,1,0,0,0,245,249,3,54,27,0,246,248,3,6,3,0,247,
-        246,1,0,0,0,248,251,1,0,0,0,249,247,1,0,0,0,249,250,1,0,0,0,250,
-        258,1,0,0,0,251,249,1,0,0,0,252,254,5,11,0,0,253,252,1,0,0,0,253,
-        254,1,0,0,0,254,255,1,0,0,0,255,257,3,48,24,0,256,253,1,0,0,0,257,
-        260,1,0,0,0,258,256,1,0,0,0,258,259,1,0,0,0,259,47,1,0,0,0,260,258,
-        1,0,0,0,261,265,3,56,28,0,262,264,3,6,3,0,263,262,1,0,0,0,264,267,
+        0,0,0,188,25,1,0,0,0,189,187,1,0,0,0,190,197,5,13,0,0,191,197,5,
+        20,0,0,192,197,5,21,0,0,193,197,5,17,0,0,194,197,3,28,14,0,195,197,
+        3,30,15,0,196,190,1,0,0,0,196,191,1,0,0,0,196,192,1,0,0,0,196,193,
+        1,0,0,0,196,194,1,0,0,0,196,195,1,0,0,0,197,27,1,0,0,0,198,199,7,
+        0,0,0,199,29,1,0,0,0,200,201,7,1,0,0,201,31,1,0,0,0,202,207,3,34,
+        17,0,203,207,3,36,18,0,204,207,3,38,19,0,205,207,3,40,20,0,206,202,
+        1,0,0,0,206,203,1,0,0,0,206,204,1,0,0,0,206,205,1,0,0,0,207,33,1,
+        0,0,0,208,209,5,22,0,0,209,210,5,12,0,0,210,35,1,0,0,0,211,212,5,
+        23,0,0,212,213,5,12,0,0,213,37,1,0,0,0,214,215,5,25,0,0,215,216,
+        5,12,0,0,216,39,1,0,0,0,217,218,5,24,0,0,218,219,5,12,0,0,219,41,
+        1,0,0,0,220,222,5,5,0,0,221,223,3,20,10,0,222,221,1,0,0,0,223,224,
+        1,0,0,0,224,222,1,0,0,0,224,225,1,0,0,0,225,226,1,0,0,0,226,227,
+        5,5,0,0,227,237,1,0,0,0,228,230,5,6,0,0,229,231,3,20,10,0,230,229,
+        1,0,0,0,231,232,1,0,0,0,232,230,1,0,0,0,232,233,1,0,0,0,233,234,
+        1,0,0,0,234,235,5,6,0,0,235,237,1,0,0,0,236,220,1,0,0,0,236,228,
+        1,0,0,0,237,43,1,0,0,0,238,241,5,7,0,0,239,242,3,24,12,0,240,242,
+        3,22,11,0,241,239,1,0,0,0,241,240,1,0,0,0,242,243,1,0,0,0,243,244,
+        5,8,0,0,244,45,1,0,0,0,245,249,3,54,27,0,246,248,3,6,3,0,247,246,
+        1,0,0,0,248,251,1,0,0,0,249,247,1,0,0,0,249,250,1,0,0,0,250,258,
+        1,0,0,0,251,249,1,0,0,0,252,254,5,11,0,0,253,252,1,0,0,0,253,254,
+        1,0,0,0,254,255,1,0,0,0,255,257,3,48,24,0,256,253,1,0,0,0,257,260,
+        1,0,0,0,258,256,1,0,0,0,258,259,1,0,0,0,259,47,1,0,0,0,260,258,1,
+        0,0,0,261,265,3,56,28,0,262,264,3,6,3,0,263,262,1,0,0,0,264,267,
         1,0,0,0,265,263,1,0,0,0,265,266,1,0,0,0,266,274,1,0,0,0,267,265,
         1,0,0,0,268,270,5,11,0,0,269,268,1,0,0,0,269,270,1,0,0,0,270,271,
         1,0,0,0,271,273,3,50,25,0,272,269,1,0,0,0,273,276,1,0,0,0,274,272,
@@ -124,7 +124,7 @@ def serializedATN():
         0,317,318,3,16,8,0,318,319,5,11,0,0,319,59,1,0,0,0,320,321,5,14,
         0,0,321,322,5,14,0,0,322,323,5,14,0,0,323,324,3,16,8,0,324,325,5,
         11,0,0,325,61,1,0,0,0,37,66,71,77,83,86,93,97,104,107,111,117,123,
-        137,147,151,155,160,164,171,181,187,198,206,224,232,236,241,249,
+        137,147,151,155,160,164,171,181,187,196,206,224,232,236,241,249,
         253,258,265,269,274,281,285,290,297
     ]
 
@@ -163,8 +163,8 @@ class ZorgFileParser ( Parser ):
     RULE_atom = 10
     RULE_property = 11
     RULE_id_group = 12
-    RULE_id_symbol = 13
-    RULE_any_symbol = 14
+    RULE_any_symbol = 13
+    RULE_id_symbol = 14
     RULE_tag_symbol = 15
     RULE_tag = 16
     RULE_area = 17
@@ -184,7 +184,7 @@ class ZorgFileParser ( Parser ):
 
     ruleNames =  [ "prog", "head", "comment", "block", "item", "todo", "priority", 
                    "note", "space_atoms", "space_atom", "atom", "property", 
-                   "id_group", "id_symbol", "any_symbol", "tag_symbol", 
+                   "id_group", "any_symbol", "id_symbol", "tag_symbol", 
                    "tag", "area", "context", "person", "project", "quoted", 
                    "link", "h1_section", "h2_section", "h3_section", "h4_section", 
                    "h1_header", "h2_header", "h3_header", "h4_header" ]
@@ -1159,62 +1159,6 @@ class ZorgFileParser ( Parser ):
         return localctx
 
 
-    class Id_symbolContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def DASH(self):
-            return self.getToken(ZorgFileParser.DASH, 0)
-
-        def DOT(self):
-            return self.getToken(ZorgFileParser.DOT, 0)
-
-        def FSLASH(self):
-            return self.getToken(ZorgFileParser.FSLASH, 0)
-
-        def COLON(self):
-            return self.getToken(ZorgFileParser.COLON, 0)
-
-        def getRuleIndex(self):
-            return ZorgFileParser.RULE_id_symbol
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterId_symbol" ):
-                listener.enterId_symbol(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitId_symbol" ):
-                listener.exitId_symbol(self)
-
-
-
-
-    def id_symbol(self):
-
-        localctx = ZorgFileParser.Id_symbolContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_id_symbol)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 190
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 376832) != 0)):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
     class Any_symbolContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -1259,39 +1203,100 @@ class ZorgFileParser ( Parser ):
     def any_symbol(self):
 
         localctx = ZorgFileParser.Any_symbolContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_any_symbol)
+        self.enterRule(localctx, 26, self.RULE_any_symbol)
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 198
+            self.state = 196
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [13]:
-                self.state = 192
+                self.enterOuterAlt(localctx, 1)
+                self.state = 190
                 self.match(ZorgFileParser.SYMBOL)
                 pass
             elif token in [20]:
-                self.state = 193
+                self.enterOuterAlt(localctx, 2)
+                self.state = 191
                 self.match(ZorgFileParser.LPAREN)
                 pass
             elif token in [21]:
-                self.state = 194
+                self.enterOuterAlt(localctx, 3)
+                self.state = 192
                 self.match(ZorgFileParser.RPAREN)
                 pass
             elif token in [17]:
-                self.state = 195
+                self.enterOuterAlt(localctx, 4)
+                self.state = 193
                 self.match(ZorgFileParser.UNDERSCORE)
                 pass
             elif token in [14, 15, 16, 18]:
-                self.state = 196
+                self.enterOuterAlt(localctx, 5)
+                self.state = 194
                 self.id_symbol()
                 pass
             elif token in [22, 23, 24, 25]:
-                self.state = 197
+                self.enterOuterAlt(localctx, 6)
+                self.state = 195
                 self.tag_symbol()
                 pass
             else:
                 raise NoViableAltException(self)
 
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Id_symbolContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def DASH(self):
+            return self.getToken(ZorgFileParser.DASH, 0)
+
+        def DOT(self):
+            return self.getToken(ZorgFileParser.DOT, 0)
+
+        def FSLASH(self):
+            return self.getToken(ZorgFileParser.FSLASH, 0)
+
+        def COLON(self):
+            return self.getToken(ZorgFileParser.COLON, 0)
+
+        def getRuleIndex(self):
+            return ZorgFileParser.RULE_id_symbol
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterId_symbol" ):
+                listener.enterId_symbol(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitId_symbol" ):
+                listener.exitId_symbol(self)
+
+
+
+
+    def id_symbol(self):
+
+        localctx = ZorgFileParser.Id_symbolContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 28, self.RULE_id_symbol)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 198
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 376832) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1399,23 +1404,26 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.TagContext(self, self._ctx, self.state)
         self.enterRule(localctx, 32, self.RULE_tag)
         try:
-            self.enterOuterAlt(localctx, 1)
             self.state = 206
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [22]:
+                self.enterOuterAlt(localctx, 1)
                 self.state = 202
                 self.area()
                 pass
             elif token in [23]:
+                self.enterOuterAlt(localctx, 2)
                 self.state = 203
                 self.context()
                 pass
             elif token in [25]:
+                self.enterOuterAlt(localctx, 3)
                 self.state = 204
                 self.person()
                 pass
             elif token in [24]:
+                self.enterOuterAlt(localctx, 4)
                 self.state = 205
                 self.project()
                 pass

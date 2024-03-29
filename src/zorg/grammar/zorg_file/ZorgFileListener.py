@@ -125,21 +125,21 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#id_symbol.
-    def enterId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#id_symbol.
-    def exitId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#any_symbol.
     def enterAny_symbol(self, ctx:ZorgFileParser.Any_symbolContext):
         pass
 
     # Exit a parse tree produced by ZorgFileParser#any_symbol.
     def exitAny_symbol(self, ctx:ZorgFileParser.Any_symbolContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#id_symbol.
+    def enterId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#id_symbol.
+    def exitId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
         pass
 
 
