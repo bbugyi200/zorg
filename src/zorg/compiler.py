@@ -123,7 +123,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         if not self._s.in_subnote:
-            self._s.parent_id = self._s.next_id
+            self._s.parent_id = self._s.next_id - 1
         self._s.in_subnote = True
         self._reset_note_context()
 
@@ -132,7 +132,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         if not self._s.in_subsubnote:
-            self._s.parent_id = self._s.next_id
+            self._s.parent_id = self._s.next_id - 1
         self._s.in_subsubnote = True
         self._reset_note_context()
 
@@ -203,7 +203,10 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_noteContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs = self._get_note_kwargs()
+        extra_kwargs = {}
+        if self._s.parent_id is not None:
+            extra_kwargs["parent_note_id"] = self._s.parent_id
+        kwargs = self._get_note_kwargs(extra_kwargs)
         note = ZorgNote(ctx.item_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
@@ -222,7 +225,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
 
-    def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
+    def exitBase_todo(self, ctx: ZorgFileParser.Base_todoContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({"priority": self._s.priority})
         todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
@@ -245,8 +248,6 @@ class ZorgFileCompiler(ZorgFileListener):
             "properties": self._s.properties,
         }
         self._s.next_id += 1
-        if self._s.parent_id is not None:
-            kwargs["parent_note_id"] = self._s.parent_id
         if self._s.note_date is not None:
             kwargs["create_date"] = self._s.note_date
         return kwargs | extra_kwargs
