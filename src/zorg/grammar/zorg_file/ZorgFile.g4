@@ -64,7 +64,7 @@ NL           : '\r'? '\n' ;
 LOWER_O      : 'o' ;
 LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
-DATE         : NUM NUM NUM NUM DASH NUM NUM DASH NUM NUM ;
+DATE         : '2' NUM NUM NUM DASH ('0' | '1' | '2') NUM DASH ('0' | '1' | '2' | '3') NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 TWO_SPACE_DASH : '  -' ;
 FOUR_SPACE_DASH : '    -' ;
