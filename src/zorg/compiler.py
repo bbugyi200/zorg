@@ -199,12 +199,16 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._s.last_note = self._s.last_base_note
 
-    def exitSubnote(self, ctx: ZorgFileParser.SubnoteContext) -> None:  # noqa: D102
+    def exitSubnote(
+        self, ctx: ZorgFileParser.SubnoteContext
+    ) -> None:  # noqa: D102
         del ctx
         self._s.last_subnote = self._s.last_base_note
         self.zorg_file.notes[-1].parent_note = self._s.last_note
 
-    def exitSubsubnote(self, ctx: ZorgFileParser.SubsubnoteContext) -> None:  # noqa: D102
+    def exitSubsubnote(
+        self, ctx: ZorgFileParser.SubsubnoteContext
+    ) -> None:  # noqa: D102
         del ctx
         self.zorg_file.notes[-1].parent_note = self._s.last_subnote
 
