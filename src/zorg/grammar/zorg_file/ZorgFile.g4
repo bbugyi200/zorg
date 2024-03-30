@@ -17,12 +17,14 @@ item_body  : space_atoms (NL SPACE+ space_atoms)* ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | ID)*)? ;
+space_atom  : SPACE (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ;
 atom        : tag_symbol | tag | link | property | id_group ;
 
 // property
 property    : ID COLON COLON id_group ;
-id_group    : ID (id_symbol+ ID)* ;
+id_group    : id (id_symbol+ id)* ;
+id          : ID | NUM_ID | date ;
+date        : DATE ;
 
 // symbols
 any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol ;
@@ -53,7 +55,9 @@ h4_header  : DASH DASH DASH space_atoms NL ;
 
 //// lexer rules
 NL           : '\r'? '\n' ;
-ID           : (ALPHANUM|UNDERSCORE)+ ;
+ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
+DATE         : NUM NUM NUM NUM DASH NUM NUM DASH NUM NUM ;
+NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 SYMBOL       : [^[\]<>,?!;|=\\] ;
 DASH         : '-' ;
 DOT          : '.' ;
@@ -73,6 +77,6 @@ DQUOTE       : '"' ;
 //// fragments
 fragment UPPER_LETTER : 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z' ;
 fragment LOWER_LETTER : 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'|'o'|'p'|'q'|'r'|'s'|'t'|'u'|'v'|'w'|'x'|'y'|'z' ;
-fragment DIGIT        : '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9' ;
-fragment LETTER       : UPPER_LETTER | LOWER_LETTER ;
-fragment ALPHANUM     : LETTER | DIGIT ;
+fragment NUM          : '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9' ;
+fragment ALPHA        : UPPER_LETTER | LOWER_LETTER ;
+fragment ALPHANUM     : ALPHA | NUM ;

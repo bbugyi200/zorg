@@ -1,7 +1,8 @@
 """Contains the ZorgFileCompiler class."""
 
 from dataclasses import dataclass, field
-from typing import Any, Literal
+import datetime as dt
+from typing import Any, Literal, Optional
 
 import antlr4
 from logrus import Logger
@@ -33,6 +34,12 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._add_tags(ctx, "contexts")
 
+    def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
+        if self._s.in_note and self._s.id_count == 1:
+            self._s.note_date = dt.datetime.strptime(
+                ctx.DATE().getText(), "%Y-%m-%d"
+            )
+
     def enterH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
     ) -> None:  # noqa: D102
@@ -56,6 +63,18 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.in_h4_header = True
+
+    def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
+        del ctx
+        self._s.id_count += 1
+
+    def enterItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
+        del ctx
+        self._s.id_count = 0
+        self._s.note_tags = _get_default_tags_map()
+        self._s.note_properties = {}
+        self._s.note_links = []
+        self._s.note_date = None
 
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
@@ -154,41 +173,36 @@ class ZorgFileCompiler(ZorgFileListener):
 
     def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs: dict[str, Any] = {
-            "areas": self._s.areas,
-            "contexts": self._s.contexts,
-            "links": self._s.note_links,
-            "people": self._s.people,
-            "projects": self._s.projects,
-            "properties": self._s.properties,
-        }
+        kwargs = self._get_note_kwargs()
         self.zorg_file.notes.append(
             ZorgNote(ctx.item_body().getText(), **kwargs)
         )
-        self._reset_note_context()
 
     def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs: dict[str, Any] = {
-            "areas": self._s.areas,
-            "contexts": self._s.contexts,
-            "links": self._s.note_links,
-            "people": self._s.people,
-            "projects": self._s.projects,
-            "properties": self._s.properties,
-            "priority": self._s.priority,
-        }
+        kwargs = self._get_note_kwargs({"priority": self._s.priority})
         self.zorg_file.todos.append(
             ZorgTodo(ctx.item_body().getText(), **kwargs)
         )
         # Reset priority back to default.
         self._s.priority = "C"
-        self._reset_note_context()
 
-    def _reset_note_context(self) -> None:
-        self._s.note_tags = _get_default_tags_map()
-        self._s.note_properties = {}
-        self._s.note_links = []
+    def _get_note_kwargs(
+        self, extra_kwargs: dict[str, Any] = None
+    ) -> dict[str, Any]:
+        if extra_kwargs is None:
+            extra_kwargs = {}
+        kwargs: dict[str, Any] = {
+            "areas": self._s.areas,
+            "contexts": self._s.contexts,
+            "links": self._s.note_links,
+            "people": self._s.people,
+            "projects": self._s.projects,
+            "properties": self._s.properties,
+        }
+        if self._s.note_date is not None:
+            kwargs["create_date"] = self._s.note_date
+        return kwargs | extra_kwargs
 
     def _add_tags(
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName
@@ -221,6 +235,8 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
 class _ZorgFileCompilerState:
     """Serves as a data store while parsing zorg files."""
 
+    id_count: int = 0
+
     in_h1_header: bool = False
     in_h2_header: bool = False
     in_h3_header: bool = False
@@ -250,6 +266,7 @@ class _ZorgFileCompilerState:
     note_properties: dict[str, Any] = field(default_factory=lambda: {})
 
     note_links: list[str] = field(default_factory=lambda: [])
+    note_date: Optional[dt.date] = None
 
     priority: TodoPriorityType = "C"
 
