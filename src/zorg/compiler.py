@@ -141,7 +141,9 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.parent_id = None
         del ctx
 
-    def exitBase_todo(self, ctx: ZorgFileParser.Base_todoContext) -> None:  # noqa: D102
+    def exitBase_todo(
+        self, ctx: ZorgFileParser.Base_todoContext
+    ) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({"priority": self._s.priority})
         todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
