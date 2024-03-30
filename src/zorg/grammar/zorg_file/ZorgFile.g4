@@ -10,10 +10,13 @@ comment    : HASH space_atoms? NL ;
 // block
 block      : item+ NL* ;
 item       : todo | note | footnote | comment ;
-todo       : (SPACE SPACE)* (LOWER_O | LOWER_X | STAR | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
+todo       : (LOWER_O | LOWER_X | STAR | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL subnote* ;
 priority   : '[' HASH ID ']' ;
-note       : (SPACE SPACE)* DASH item_body NL ;
-item_body  : space_atoms (NL SPACE+ space_atoms)* ;
+note       : base_note subnote* ;
+base_note  : DASH item_body NL ;
+subnote    : SPACE SPACE base_note subsubnote*;
+subsubnote : SPACE SPACE SPACE SPACE base_note ;
+item_body  : space_atoms (NL SPACE SPACE+ LPAREN? atom SYMBOL? space_atom*)* ;
 footnote   : ref COLON space_atoms ;
 
 // atoms

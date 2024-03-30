@@ -181,7 +181,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_note = False
         kwargs = self._get_note_kwargs()
         self.zorg_file.notes.append(
-            ZorgNote(ctx.item_body().getText(), **kwargs)
+            ZorgNote(ctx.base_note().item_body().getText(), **kwargs)
         )
 
     def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102

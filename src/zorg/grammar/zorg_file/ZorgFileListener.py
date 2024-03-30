@@ -80,6 +80,33 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#base_note.
+    def enterBase_note(self, ctx:ZorgFileParser.Base_noteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#base_note.
+    def exitBase_note(self, ctx:ZorgFileParser.Base_noteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#subnote.
+    def enterSubnote(self, ctx:ZorgFileParser.SubnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#subnote.
+    def exitSubnote(self, ctx:ZorgFileParser.SubnoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#subsubnote.
+    def enterSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#subsubnote.
+    def exitSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#item_body.
     def enterItem_body(self, ctx:ZorgFileParser.Item_bodyContext):
         pass
