@@ -134,6 +134,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#non_tag_symbol.
+    def enterNon_tag_symbol(self, ctx:ZorgFileParser.Non_tag_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#non_tag_symbol.
+    def exitNon_tag_symbol(self, ctx:ZorgFileParser.Non_tag_symbolContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#id_symbol.
     def enterId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
         pass
