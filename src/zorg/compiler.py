@@ -366,7 +366,7 @@ class _ZorgFileCompilerState:
             inner_project = project_list[0]
             if project is None:
                 project = inner_project
-            else:
+            elif project != inner_project:
                 project = f"{project}/{inner_project}"
 
         return [] if project is None else [project]
