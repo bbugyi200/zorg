@@ -80,6 +80,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#item_body.
+    def enterItem_body(self, ctx:ZorgFileParser.Item_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#item_body.
+    def exitItem_body(self, ctx:ZorgFileParser.Item_bodyContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#space_atoms.
     def enterSpace_atoms(self, ctx:ZorgFileParser.Space_atomsContext):
         pass

@@ -163,7 +163,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "properties": self._s.properties,
         }
         self.zorg_file.notes.append(
-            ZorgNote(ctx.space_atoms().getText(), **kwargs)
+            ZorgNote(ctx.item_body().getText(), **kwargs)
         )
         self._reset_note_context()
 
@@ -179,7 +179,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "priority": self._s.priority,
         }
         self.zorg_file.todos.append(
-            ZorgTodo(ctx.space_atoms().getText(), **kwargs)
+            ZorgTodo(ctx.item_body().getText(), **kwargs)
         )
         # Reset priority back to default.
         self._s.priority = "C"

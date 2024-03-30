@@ -10,9 +10,10 @@ comment    : HASH space_atoms? NL ;
 // block
 block      : item+ NL? ;
 item       : todo | note ;
-todo       : (SPACE SPACE)* 'o' (' ' priority)? space_atoms NL ;
+todo       : (SPACE SPACE)* ('o' | 'x' | '~') (' ' priority)? item_body NL ;
 priority   : '[' HASH ID ']' ;
-note       : (SPACE SPACE)* DASH space_atoms NL ;
+note       : (SPACE SPACE)* DASH item_body NL ;
+item_body  : space_atoms (NL SPACE SPACE+ space_atoms)* ;
 
 // atoms
 space_atoms : space_atom+ ;
