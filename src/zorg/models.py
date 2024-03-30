@@ -24,14 +24,15 @@ class ZorgNote:
     body: str
 
     areas: list[str] = field(default_factory=lambda: [])
-    child_notes: list["ZorgNote"] = field(default_factory=lambda: [])
+    child_note_ids: list[int] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
+    ident: Optional[int] = None
     links: list[str] = field(default_factory=lambda: [])
-    next_note: Optional["ZorgNote"] = None
-    parent_note: Optional["ZorgNote"] = None
+    next_note_id: Optional[int] = None
+    parent_note_id: Optional[int] = None
     people: list[str] = field(default_factory=lambda: [])
-    prev_note: Optional["ZorgNote"] = None
+    prev_note_id: Optional[int] = None
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
 

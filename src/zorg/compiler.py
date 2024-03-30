@@ -29,6 +29,12 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterArea(self, ctx: ZorgFileParser.AreaContext) -> None:  # noqa: D102
         self._add_tags(ctx, "areas")
 
+    def enterBase_note(
+        self, ctx: ZorgFileParser.Base_noteContext
+    ) -> None:  # noqa: D102
+        self._s.in_note = True
+        del ctx
+
     def enterContext(
         self, ctx: ZorgFileParser.ContextContext
     ) -> None:  # noqa: D102
@@ -73,26 +79,14 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._reset_note_context()
 
-    def enterSubnote(
-        self, ctx: ZorgFileParser.SubnoteContext
-    ) -> None:  # noqa: D102
-        del ctx
-        self._reset_note_context()
-
-    def enterSubsubnote(
-        self, ctx: ZorgFileParser.SubsubnoteContext
-    ) -> None:  # noqa: D102
-        del ctx
-        self._reset_note_context()
-
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
             link_text = ctx.children[1].getText()
             self._s.note_links.append(link_text)
 
     def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
-        self._s.in_note = True
         del ctx
+        self._s.parent_id = None
 
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
@@ -124,8 +118,27 @@ class ZorgFileCompiler(ZorgFileListener):
         elif self._s.in_note:
             self._s.note_properties[key] = value
 
+    def enterSubnote(
+        self, ctx: ZorgFileParser.SubnoteContext
+    ) -> None:  # noqa: D102
+        del ctx
+        if not self._s.in_subnote:
+            self._s.parent_id = self._s.next_id
+        self._s.in_subnote = True
+        self._reset_note_context()
+
+    def enterSubsubnote(
+        self, ctx: ZorgFileParser.SubsubnoteContext
+    ) -> None:  # noqa: D102
+        del ctx
+        if not self._s.in_subsubnote:
+            self._s.parent_id = self._s.next_id
+        self._s.in_subsubnote = True
+        self._reset_note_context()
+
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = True
+        self._s.parent_id = None
         del ctx
 
     def exitH1_header(
@@ -192,32 +205,28 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_note = False
         kwargs = self._get_note_kwargs()
         note = ZorgNote(ctx.item_body().getText(), **kwargs)
-        self._s.last_base_note = note
         self.zorg_file.notes.append(note)
 
     def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         del ctx
-        self._s.last_note = self._s.last_base_note
+        self._s.in_subnote = False
 
     def exitSubnote(
         self, ctx: ZorgFileParser.SubnoteContext
     ) -> None:  # noqa: D102
+        self._s.in_subsubnote = False
         del ctx
-        self._s.last_subnote = self._s.last_base_note
-        self.zorg_file.notes[-1].parent_note = self._s.last_note
 
     def exitSubsubnote(
         self, ctx: ZorgFileParser.SubsubnoteContext
     ) -> None:  # noqa: D102
         del ctx
-        self.zorg_file.notes[-1].parent_note = self._s.last_subnote
 
     def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({"priority": self._s.priority})
         todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
         self.zorg_file.todos.append(todo)
-        self._s.last_note = todo
         # Reset priority back to default.
         self._s.priority = "C"
 
@@ -229,11 +238,15 @@ class ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
             "contexts": self._s.contexts,
+            "ident": self._s.next_id,
             "links": self._s.note_links,
             "people": self._s.people,
             "projects": self._s.projects,
             "properties": self._s.properties,
         }
+        self._s.next_id += 1
+        if self._s.parent_id is not None:
+            kwargs["parent_note_id"] = self._s.parent_id
         if self._s.note_date is not None:
             kwargs["create_date"] = self._s.note_date
         return kwargs | extra_kwargs
@@ -280,9 +293,8 @@ class _ZorgFileCompilerState:
 
     ids_in_note: int = 0
 
-    last_base_note: Optional[ZorgNote] = None
-    last_note: Optional[ZorgNote] = None
-    last_subnote: Optional[ZorgNote] = None
+    next_id: int = 1
+    parent_id: Optional[int] = None
 
     in_first_comment: bool = True
     in_h1_header: bool = False
@@ -290,6 +302,8 @@ class _ZorgFileCompilerState:
     in_h3_header: bool = False
     in_h4_header: bool = False
     in_note: bool = False
+    in_subnote: bool = False
+    in_subsubnote: bool = False
 
     file_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
