@@ -295,7 +295,7 @@ class _ZorgFileCompilerState:
     @property
     def projects(self) -> list[str]:
         """Project tags that are currently in-scope."""
-        project = None
+        project: Optional[str] = None
         for tag_map in [
             self.file_tags,
             self.h1_section_tags,
