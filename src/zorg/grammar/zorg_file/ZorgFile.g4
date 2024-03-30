@@ -8,27 +8,28 @@ head       : comment+ ;
 comment    : HASH space_atoms? NL ;
 
 // block
-block      : item+ NL? ;
-item       : todo | note ;
-todo       : (SPACE SPACE)* ('o' | 'x' | TILDE) (' ' priority)? item_body NL ;
+block      : item+ NL* ;
+item       : todo | note | footnote | comment ;
+todo       : (SPACE SPACE)* (LOWER_O | LOWER_X | STAR | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
 priority   : '[' HASH ID ']' ;
 note       : (SPACE SPACE)* DASH item_body NL ;
 item_body  : space_atoms (NL SPACE+ space_atoms)* ;
+footnote   : ref COLON space_atoms ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ;
+space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
 atom        : tag_symbol | tag | link | property | id_group | ref ;
 
 // property
 property    : ID COLON COLON id_group ;
 id_group    : id (id_symbol+ id)* ;
-id          : ID | NUM_ID | date ;
+id          : ID | NUM_ID | date | LOWER_O | LOWER_X ;
 date        : DATE ;
 
 // symbols
 any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol ;
-non_tag_symbol : TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol ;
+non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol ;
 id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
@@ -40,9 +41,9 @@ person     : PERCENT ID ;
 project    : PLUS ID ;
 
 // quotes and links
-quoted     : (SQUOTE atom+ SQUOTE | DQUOTE atom+ DQUOTE) ;
+quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
 link       : '[[' id_group ']]' ;
-ref        : '[' NUM_ID ']' ;
+ref        : '[' id_group ']' ;
 
 // sections
 h1_section : h1_header block* (NL? h2_section)* ;
@@ -56,10 +57,12 @@ h4_header  : DASH DASH DASH space_atoms NL ;
 
 //// lexer rules
 NL           : '\r'? '\n' ;
+LOWER_O      : 'o' ;
+LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : NUM NUM NUM NUM DASH NUM NUM DASH NUM NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
-SYMBOL       : [^[\]<>,?!;|=\\`] ;
+SYMBOL       : [^[\],?!;|=\\`{}$&] ;
 DASH         : '-' ;
 DOT          : '.' ;
 FSLASH       : '/' ;
@@ -75,6 +78,9 @@ PERCENT      : '%' ;
 SQUOTE       : '\'' ;
 DQUOTE       : '"' ;
 TILDE        : '~' ;
+STAR         : '*' ;
+LANGLE       : '<' ;
+RANGLE       : '>' ;
 
 //// fragments
 fragment UPPER_LETTER : 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z' ;

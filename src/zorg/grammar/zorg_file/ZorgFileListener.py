@@ -89,6 +89,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#footnote.
+    def enterFootnote(self, ctx:ZorgFileParser.FootnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#footnote.
+    def exitFootnote(self, ctx:ZorgFileParser.FootnoteContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#space_atoms.
     def enterSpace_atoms(self, ctx:ZorgFileParser.Space_atomsContext):
         pass
