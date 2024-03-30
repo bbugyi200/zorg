@@ -18,7 +18,7 @@ item_body  : space_atoms (NL SPACE+ space_atoms)* ;
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ;
-atom        : tag_symbol | tag | link | property | id_group ;
+atom        : tag_symbol | tag | link | property | id_group | ref ;
 
 // property
 property    : ID COLON COLON id_group ;
@@ -42,6 +42,7 @@ project    : PLUS ID ;
 // quotes and links
 quoted     : (SQUOTE atom+ SQUOTE | DQUOTE atom+ DQUOTE) ;
 link       : '[[' id_group ']]' ;
+ref        : '[' NUM_ID ']' ;
 
 // sections
 h1_section : h1_header block* (NL? h2_section)* ;
@@ -58,7 +59,7 @@ NL           : '\r'? '\n' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : NUM NUM NUM NUM DASH NUM NUM DASH NUM NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
-SYMBOL       : [^[\]<>,?!;|=\\] ;
+SYMBOL       : [^[\]<>,?!;|=\\`] ;
 DASH         : '-' ;
 DOT          : '.' ;
 FSLASH       : '/' ;

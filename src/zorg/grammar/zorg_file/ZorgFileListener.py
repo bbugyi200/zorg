@@ -251,6 +251,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#ref.
+    def enterRef(self, ctx:ZorgFileParser.RefContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#ref.
+    def exitRef(self, ctx:ZorgFileParser.RefContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#h1_section.
     def enterH1_section(self, ctx:ZorgFileParser.H1_sectionContext):
         pass
