@@ -12,12 +12,12 @@ block      : item+ NL* ;
 item       : todo | note | footnote | comment ;
 todo       : base_todo subnote* ;
 priority   : '[' HASH ID ']' ;
-note       : base_note subnote* ;
-base_note  : DASH item_body NL ;
+note       : DASH base_note subnote* ;
+base_note  : item_body NL ;
 base_todo  : (LOWER_O | LOWER_X | STAR | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
-subnote    : SPACE SPACE base_note subsubnote*;
-subsubnote : SPACE SPACE SPACE SPACE base_note ;
-item_body  : space_atoms (NL SPACE SPACE+ LPAREN? atom SYMBOL? space_atom*)* ;
+subnote    : TWO_SPACE_DASH base_note subsubnote*;
+subsubnote : FOUR_SPACE_DASH base_note ;
+item_body  : space_atoms (NL SPACE+ space_atoms)* ;
 footnote   : ref COLON space_atoms ;
 
 // atoms
@@ -32,8 +32,8 @@ id          : ID | NUM_ID | date | LOWER_O | LOWER_X ;
 date        : DATE ;
 
 // symbols
-any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol ;
-non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol ;
+any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol | id_symbol ;
+non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
@@ -66,6 +66,8 @@ LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : NUM NUM NUM NUM DASH NUM NUM DASH NUM NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
+TWO_SPACE_DASH : '  -' ;
+FOUR_SPACE_DASH : '    -' ;
 SYMBOL       : [^[\],?!;|=\\`{}$&] ;
 DASH         : '-' ;
 DOT          : '.' ;
