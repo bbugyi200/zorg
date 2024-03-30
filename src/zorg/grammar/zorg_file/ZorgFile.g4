@@ -21,7 +21,7 @@ space_atom  : SPACE (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any
 atom        : tag_symbol | tag | link | property | id_group ;
 
 // property
-property    : ID '::' id_group ;
+property    : ID COLON COLON id_group ;
 id_group    : ID (id_symbol+ ID)* ;
 
 // symbols
@@ -39,7 +39,7 @@ project    : PLUS ID ;
 
 // quotes and links
 quoted     : (SQUOTE atom+ SQUOTE | DQUOTE atom+ DQUOTE) ;
-link       : '[[' (id_group|property) ']]' ;
+link       : '[[' id_group ']]' ;
 
 // sections
 h1_section : h1_header block* (NL? h2_section)* ;

@@ -303,7 +303,7 @@
               'people': [],
               'prev_note': None,
               'projects': [],
-              'properties': {'buz': 'fuzz'}}],
+              'properties': {}}],
    'todos': []}
   
   '''
