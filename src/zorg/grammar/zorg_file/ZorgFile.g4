@@ -10,7 +10,7 @@ comment    : HASH space_atoms? NL ;
 // block
 block      : item+ NL? ;
 item       : todo | note ;
-todo       : (SPACE SPACE)* ('o' | 'x' | '~') (' ' priority)? item_body NL ;
+todo       : (SPACE SPACE)* ('o' | 'x' | TILDE) (' ' priority)? item_body NL ;
 priority   : '[' HASH ID ']' ;
 note       : (SPACE SPACE)* DASH item_body NL ;
 item_body  : space_atoms (NL SPACE+ space_atoms)* ;
@@ -28,7 +28,7 @@ date        : DATE ;
 
 // symbols
 any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol ;
-non_tag_symbol : SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol ;
+non_tag_symbol : TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE | id_symbol ;
 id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
@@ -74,6 +74,7 @@ PLUS         : '+' ;
 PERCENT      : '%' ;
 SQUOTE       : '\'' ;
 DQUOTE       : '"' ;
+TILDE        : '~' ;
 
 //// fragments
 fragment UPPER_LETTER : 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z' ;
