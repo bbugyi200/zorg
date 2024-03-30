@@ -1,7 +1,6 @@
 """Contains runners for the 'zorg compile' command."""
 
 from dataclasses import asdict
-import json
 from pprint import pprint
 
 import antlr4
