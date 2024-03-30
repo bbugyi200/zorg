@@ -141,6 +141,14 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.parent_id = None
         del ctx
 
+    def exitBase_todo(self, ctx: ZorgFileParser.Base_todoContext) -> None:  # noqa: D102
+        self._s.in_note = False
+        kwargs = self._get_note_kwargs({"priority": self._s.priority})
+        todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
+        self.zorg_file.todos.append(todo)
+        # Reset priority back to default.
+        self._s.priority = "C"
+
     def exitH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
     ) -> None:  # noqa: D102
@@ -210,7 +218,7 @@ class ZorgFileCompiler(ZorgFileListener):
         note = ZorgNote(ctx.item_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
-    def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
+    def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
         del ctx
         self._s.in_subnote = False
 
@@ -224,14 +232,6 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.SubsubnoteContext
     ) -> None:  # noqa: D102
         del ctx
-
-    def exitBase_todo(self, ctx: ZorgFileParser.Base_todoContext) -> None:  # noqa: D102
-        self._s.in_note = False
-        kwargs = self._get_note_kwargs({"priority": self._s.priority})
-        todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
-        self.zorg_file.todos.append(todo)
-        # Reset priority back to default.
-        self._s.priority = "C"
 
     def _get_note_kwargs(
         self, extra_kwargs: dict[str, Any] = None
