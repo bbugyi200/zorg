@@ -68,7 +68,7 @@ click==8.1.7
     #   cookiecutter
     #   cruft
     #   pip-tools
-    #   typer
+    #   typer-slim
 cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
@@ -204,9 +204,13 @@ requests==2.31.0
     #   cookiecutter
     #   sphinx
 rich==13.7.1
-    # via cookiecutter
+    # via
+    #   cookiecutter
+    #   typer-slim
 setuptools-scm==8.0.4
     # via -r requirements-dev.in
+shellingham==1.5.4
+    # via typer-slim
 six==1.16.0
     # via
     #   python-dateutil
@@ -270,8 +274,14 @@ tox==3.28.0
     #   tox-pyenv
 tox-pyenv==1.1.0
     # via -r requirements-dev.in
-typer==0.11.1
+typer==0.12.0
     # via cruft
+typer-cli==0.12.0
+    # via typer
+typer-slim[standard]==0.12.0
+    # via
+    #   typer
+    #   typer-cli
 types-python-dateutil==2.9.0.20240316
     # via arrow
 typing-extensions==4.10.0
@@ -281,7 +291,7 @@ typing-extensions==4.10.0
     #   mypy
     #   pydantic
     #   setuptools-scm
-    #   typer
+    #   typer-slim
 urllib3==2.2.1
     # via requests
 vimala==0.2.0
