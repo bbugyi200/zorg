@@ -171,6 +171,12 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.h4_section_tags = _get_default_tags_map()
         self._s.h4_properties = {}
 
+    def exitComment(
+        self, ctx: ZorgFileParser.CommentContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._s.in_first_comment = False
+
     def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs()
@@ -215,7 +221,9 @@ class ZorgFileCompiler(ZorgFileListener):
                 ID=text,
             )
             return
-        if self._s.in_h1_header:
+        if self._s.in_first_comment:
+            self._s.file_tags[tag_name].append(text)
+        elif self._s.in_h1_header:
             self._s.h1_section_tags[tag_name].append(text)
         elif self._s.in_h2_header:
             self._s.h2_section_tags[tag_name].append(text)
@@ -237,12 +245,16 @@ class _ZorgFileCompilerState:
 
     id_count: int = 0
 
+    in_first_comment: bool = True
     in_h1_header: bool = False
     in_h2_header: bool = False
     in_h3_header: bool = False
     in_h4_header: bool = False
     in_note: bool = False
 
+    file_tags: dict[TagName, list[str]] = field(
+        default_factory=_get_default_tags_map
+    )
     h1_section_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
@@ -283,7 +295,25 @@ class _ZorgFileCompilerState:
     @property
     def projects(self) -> list[str]:
         """Project tags that are currently in-scope."""
-        return self._get_current_tags("projects")
+        project = None
+        for tag_map in [
+            self.file_tags,
+            self.h1_section_tags,
+            self.h2_section_tags,
+            self.h3_section_tags,
+            self.h4_section_tags,
+            self.note_tags,
+        ]:
+            project_list = tag_map["projects"]
+            if not project_list:
+                continue
+            inner_project = project_list[0]
+            if project is None:
+                project = inner_project
+            else:
+                project = f"{project}/{inner_project}"
+
+        return [] if project is None else [project]
 
     @property
     def people(self) -> list[str]:
@@ -303,6 +333,7 @@ class _ZorgFileCompilerState:
 
     def _get_current_tags(self, tag_name: TagName) -> list[str]:
         tags = []
+        tags.extend(self.file_tags[tag_name])
         tags.extend(self.h1_section_tags[tag_name])
         tags.extend(self.h2_section_tags[tag_name])
         tags.extend(self.h3_section_tags[tag_name])
