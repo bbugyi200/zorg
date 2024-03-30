@@ -35,7 +35,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._add_tags(ctx, "contexts")
 
     def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
-        if self._s.in_note and self._s.id_count == 1:
+        if self._s.in_note and self._s.ids_in_note == 1:
             self._s.note_date = dt.datetime.strptime(
                 ctx.DATE().getText(), "%Y-%m-%d"
             )
@@ -66,15 +66,24 @@ class ZorgFileCompiler(ZorgFileListener):
 
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
         del ctx
-        self._s.id_count += 1
+        if self._s.in_note:
+            self._s.ids_in_note += 1
 
     def enterItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
         del ctx
-        self._s.id_count = 0
-        self._s.note_tags = _get_default_tags_map()
-        self._s.note_properties = {}
-        self._s.note_links = []
-        self._s.note_date = None
+        self._reset_note_context()
+
+    def enterSubnote(
+        self, ctx: ZorgFileParser.SubnoteContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._reset_note_context()
+
+    def enterSubsubnote(
+        self, ctx: ZorgFileParser.SubsubnoteContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._reset_note_context()
 
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
@@ -177,19 +186,34 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._s.in_first_comment = False
 
-    def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
+    def exitBase_note(
+        self, ctx: ZorgFileParser.Base_noteContext
+    ) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs()
-        self.zorg_file.notes.append(
-            ZorgNote(ctx.base_note().item_body().getText(), **kwargs)
-        )
+        note = ZorgNote(ctx.item_body().getText(), **kwargs)
+        self._s.last_base_note = note
+        self.zorg_file.notes.append(note)
+
+    def exitNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
+        del ctx
+        self._s.last_note = self._s.last_base_note
+
+    def exitSubnote(self, ctx: ZorgFileParser.SubnoteContext) -> None:  # noqa: D102
+        del ctx
+        self._s.last_subnote = self._s.last_base_note
+        self.zorg_file.notes[-1].parent_note = self._s.last_note
+
+    def exitSubsubnote(self, ctx: ZorgFileParser.SubsubnoteContext) -> None:  # noqa: D102
+        del ctx
+        self.zorg_file.notes[-1].parent_note = self._s.last_subnote
 
     def exitTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({"priority": self._s.priority})
-        self.zorg_file.todos.append(
-            ZorgTodo(ctx.item_body().getText(), **kwargs)
-        )
+        todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
+        self.zorg_file.todos.append(todo)
+        self._s.last_note = todo
         # Reset priority back to default.
         self._s.priority = "C"
 
@@ -209,6 +233,13 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.note_date is not None:
             kwargs["create_date"] = self._s.note_date
         return kwargs | extra_kwargs
+
+    def _reset_note_context(self) -> None:
+        self._s.ids_in_note = 0
+        self._s.note_tags = _get_default_tags_map()
+        self._s.note_properties = {}
+        self._s.note_links = []
+        self._s.note_date = None
 
     def _add_tags(
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName
@@ -243,7 +274,11 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
 class _ZorgFileCompilerState:
     """Serves as a data store while parsing zorg files."""
 
-    id_count: int = 0
+    ids_in_note: int = 0
+
+    last_base_note: Optional[ZorgNote] = None
+    last_note: Optional[ZorgNote] = None
+    last_subnote: Optional[ZorgNote] = None
 
     in_first_comment: bool = True
     in_h1_header: bool = False

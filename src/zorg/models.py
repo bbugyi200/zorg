@@ -17,7 +17,7 @@ class ZorgFile:
     todos: list["ZorgTodo"] = field(default_factory=lambda: [])
 
 
-@dataclass(frozen=True)
+@dataclass
 class ZorgNote:
     """A Zorg note."""
 
@@ -36,7 +36,7 @@ class ZorgNote:
     properties: dict[str, str] = field(default_factory=lambda: {})
 
 
-@dataclass(frozen=True)
+@dataclass
 class ZorgTodo(ZorgNote):
     """A Zorg todo."""
 
