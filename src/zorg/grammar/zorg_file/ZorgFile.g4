@@ -14,7 +14,7 @@ todo       : base_todo subnote* ;
 priority   : '[' HASH ID ']' ;
 note       : DASH base_note subnote* ;
 base_note  : item_body NL ;
-base_todo  : (LOWER_O | LOWER_X | STAR | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
+base_todo  : (LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
 subnote    : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote : FOUR_SPACE_DASH base_note ;
 item_body  : space_atoms (NL SPACE+ space_atoms)* ;
