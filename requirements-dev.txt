@@ -33,6 +33,7 @@ bolton-eris==0.2.3
     #   -r requirements.in
     #   bolton-clack
     #   bolton-proctor
+    #   potoroo
     #   zettel-org
 bolton-ion==0.1.0
     # via bolton-eris
@@ -163,6 +164,10 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
+potoroo==0.4.1
+    # via
+    #   -r requirements.in
+    #   zettel-org
 py==1.11.0
     # via tox
 pycodestyle==2.11.1
