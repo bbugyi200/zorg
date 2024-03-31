@@ -4,7 +4,7 @@
 import datetime as dt
 from typing import List, Optional
 
-from sqlmodel import Column, Field, Relationship, SQLModel, String
+from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
 
