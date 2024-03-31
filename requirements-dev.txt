@@ -8,6 +8,8 @@
     # via -r requirements-dev.in
 alabaster==0.7.16
     # via sphinx
+annotated-types==0.6.0
+    # via pydantic
 antlr4-python3-runtime==4.13.1
     # via
     #   -r requirements.in
@@ -24,7 +26,7 @@ binaryornot==0.4.4
     # via cookiecutter
 black==24.3.0
     # via -r requirements-dev.in
-bolton-clack==0.3.9
+bolton-clack==0.3.10
     # via
     #   -r requirements.in
     #   zettel-org
@@ -172,10 +174,15 @@ py==1.11.0
     # via tox
 pycodestyle==2.11.1
     # via flake8
-pydantic==1.10.14
+pydantic==2.6.4
     # via
     #   bolton-clack
+    #   pydantic-settings
     #   sqlmodel
+pydantic-core==2.16.3
+    # via pydantic
+pydantic-settings==2.2.1
+    # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
 pyflakes==3.2.0
@@ -204,6 +211,8 @@ python-dateutil==2.9.0.post0
     # via
     #   arrow
     #   freezegun
+python-dotenv==1.0.1
+    # via pydantic-settings
 python-slugify==8.0.4
     # via cookiecutter
 pyyaml==6.0.1
@@ -307,6 +316,7 @@ typing-extensions==4.10.0
     #   black
     #   mypy
     #   pydantic
+    #   pydantic-core
     #   setuptools-scm
     #   sqlalchemy
     #   typer-slim
