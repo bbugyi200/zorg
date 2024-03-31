@@ -19,10 +19,11 @@ class ZorgSession(UnitOfWork[ZorgSQLRepo]):
 
     def __init__(
         self,
+        db_url: str,
         *,
         verbose: int = 0,
     ) -> None:
-        self._repo = ZorgSQLRepo(self.db_url, verbose=verbose)
+        self._repo = ZorgSQLRepo(db_url, verbose=verbose)
 
     def __enter__(self) -> ZorgSession:
         """Called before entering a ZorgSession with-block."""
