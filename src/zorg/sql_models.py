@@ -1,4 +1,4 @@
-"""Contains greatday's SQL model class definitions."""
+"""Contains zorg's SQL model class definitions."""
 
 # WARNING: Don't bother importing __future__.annotations in this module!
 import datetime as dt
@@ -22,11 +22,11 @@ class Base(SQLModel):
     id: Optional[int] = Field(default=None, primary_key=True)
 
 
-class TodoLink(SQLModel):
+class NoteLink(SQLModel):
     """Abstract model for association/link models."""
 
-    todo_id: Optional[int] = Field(
-        default=None, foreign_key="todo.id", primary_key=True
+    note_id: Optional[int] = Field(
+        default=None, foreign_key="note.id", primary_key=True
     )
 
 
@@ -39,48 +39,56 @@ class Tag(Base):
 ###############################################################################
 # link models (i.e. assocation tables for many-to-many relationships)
 ###############################################################################
-class ProjectLink(TodoLink, table=True):
-    """Association model for todos-to-projects relationships."""
+class ProjectLink(NoteLink, table=True):
+    """Association model for notes-to-projects relationships."""
 
     project_id: Optional[int] = Field(
         default=None, foreign_key="project.id", primary_key=True
     )
 
 
-class ContextLink(TodoLink, table=True):
-    """Association model for todos-to-contexts relationships."""
+class ContextLink(NoteLink, table=True):
+    """Association model for notes-to-contexts relationships."""
 
     context_id: Optional[int] = Field(
         default=None, foreign_key="context.id", primary_key=True
     )
 
 
-class EpicLink(TodoLink, table=True):
-    """Association model for todos-to-epics relationships."""
+class AreaLink(NoteLink, table=True):
+    """Association model for notes-to-areas relationships."""
 
-    epic_id: Optional[int] = Field(
-        default=None, foreign_key="epic.id", primary_key=True
+    area_id: Optional[int] = Field(
+        default=None, foreign_key="area.id", primary_key=True
     )
 
 
-class MetatagLink(TodoLink, table=True):
-    """Association model for todos-to-metatags relationships."""
+class PersonLink(NoteLink, table=True):
+    """Association model for notes-to-areas relationships."""
+
+    person_id: Optional[int] = Field(
+        default=None, foreign_key="person.id", primary_key=True
+    )
+
+
+class PropertyLink(NoteLink, table=True):
+    """Association model for notes-to-metatags relationships."""
 
     metatag_id: Optional[int] = Field(
-        default=None, foreign_key="metatag.id", primary_key=True
+        default=None, foreign_key="prop.id", primary_key=True
     )
 
-    todo: "Todo" = Relationship(back_populates="metatag_links")
-    metatag: "Metatag" = Relationship(back_populates="links")
+    note: "Note" = Relationship(back_populates="property_links")
+    prop: "Property" = Relationship(back_populates="links")
 
     value: str
 
 
 ###############################################################################
-# model used to store todos
+# model used to store notes
 ###############################################################################
-class Todo(Base, table=True):
-    """Model class for greatday Todos."""
+class Note(Base, table=True):
+    """Model class for zorg notes."""
 
     # table columns
     create_date: dt.date
@@ -91,24 +99,27 @@ class Todo(Base, table=True):
 
     # relationships
     contexts: List["Context"] = Relationship(
-        back_populates="todos", link_model=ContextLink
+        back_populates="notes", link_model=ContextLink
     )
-    epics: List["Epic"] = Relationship(
-        back_populates="todos", link_model=EpicLink
+    areas: List["Area"] = Relationship(
+        back_populates="notes", link_model=AreaLink
+    )
+    people: List["Person"] = Relationship(
+        back_populates="notes", link_model=PersonLink
     )
     projects: List["Project"] = Relationship(
-        back_populates="todos", link_model=ProjectLink
+        back_populates="notes", link_model=ProjectLink
     )
-    metatag_links: List["MetatagLink"] = Relationship(back_populates="todo")
+    property_links: List["PropertyLink"] = Relationship(back_populates="note")
 
 
 ###############################################################################
 # tag models
 ###############################################################################
 class Project(Tag, table=True):
-    """Model class for todo.txt project tags (e.g. +greatday)."""
+    """Model class for todo.txt project tags (e.g. +zorg)."""
 
-    todos: List[Todo] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="projects", link_model=ProjectLink
     )
 
@@ -116,20 +127,28 @@ class Project(Tag, table=True):
 class Context(Tag, table=True):
     """Model class for todo.txt context tags (e.g. @home)."""
 
-    todos: List[Todo] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="contexts", link_model=ContextLink
     )
 
 
-class Epic(Tag, table=True):
-    """Model class for (magodo extended) todo.txt epic tags (e.g. #gtd)."""
+class Area(Tag, table=True):
+    """Model class for todo.txt area tags (e.g. #gtd)."""
 
-    todos: List[Todo] = Relationship(
-        back_populates="epics", link_model=EpicLink
+    notes: List[Note] = Relationship(
+        back_populates="areas", link_model=AreaLink
     )
 
 
-class Metatag(Tag, table=True):
+class Person(Tag, table=True):
+    """Model class for todo.txt person tags (e.g. %john)."""
+
+    notes: List[Note] = Relationship(
+        back_populates="people", link_model=PersonLink
+    )
+
+
+class Property(Tag, table=True):
     """Model class for metadata tags (e.g. due:2022-06-01)."""
 
-    links: List[MetatagLink] = Relationship(back_populates="metatag")
+    links: List[PropertyLink] = Relationship(back_populates="prop")
