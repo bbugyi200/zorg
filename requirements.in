@@ -3,4 +3,5 @@ bolton-clack ~= 0.3.9
 bolton-logrus ~= 0.1.1
 bolton-typist ~= 0.2.0
 jinja2
+sqlmodel ~= 0.0.16
 vimala ~= 0.2.0

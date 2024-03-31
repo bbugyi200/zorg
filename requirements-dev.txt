@@ -100,6 +100,8 @@ gitdb==4.0.11
     # via gitpython
 gitpython==3.1.42
     # via cruft
+greenlet==3.0.3
+    # via sqlalchemy
 idna==3.6
     # via requests
 imagesize==1.4.1
@@ -164,7 +166,9 @@ py==1.11.0
 pycodestyle==2.11.1
     # via flake8
 pydantic==1.10.14
-    # via bolton-clack
+    # via
+    #   bolton-clack
+    #   sqlmodel
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
 pyflakes==3.2.0
@@ -245,6 +249,12 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
+sqlalchemy==2.0.29
+    # via sqlmodel
+sqlmodel==0.0.16
+    # via
+    #   -r requirements.in
+    #   zettel-org
 structlog==24.1.0
     # via bolton-logrus
 syrupy==4.6.1
@@ -291,6 +301,7 @@ typing-extensions==4.10.0
     #   mypy
     #   pydantic
     #   setuptools-scm
+    #   sqlalchemy
     #   typer-slim
 urllib3==2.2.1
     # via requests
