@@ -7,6 +7,8 @@ from typing import List, Optional
 from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
+from .types import NoteStatus
+
 
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
 Select.inherit_cache = True
@@ -71,6 +73,14 @@ class PersonLink(NoteLink, table=True):
     )
 
 
+class ZorgFileLink(NoteLink, table=True):
+    """Association model for notes to zorg files."""
+
+    zorg_file_id: Optional[int] = Field(
+        default=None, foreign_key="zorg_file.id", primary_key=True
+    )
+
+
 class PropertyLink(NoteLink, table=True):
     """Association model for notes-to-metatags relationships."""
 
@@ -85,6 +95,17 @@ class PropertyLink(NoteLink, table=True):
 
 
 ###############################################################################
+# model used to track zorg (*.zo) files
+###############################################################################
+class ZorgFile(Base, table=True):
+    """Model class for zorg (*.zo) files."""
+
+    notes: List["Note"] = Relationship(
+        back_populates="zorg_file", link_model=ZorgFileLink
+    )
+
+
+###############################################################################
 # model used to store notes
 ###############################################################################
 class Note(Base, table=True):
@@ -96,8 +117,12 @@ class Note(Base, table=True):
     done: bool
     done_date: Optional[dt.date]
     priority: str
+    status: NoteStatus
 
     # relationships
+    zorg_file: ZorgFile = Relationship(
+        back_populates="notes", link_model=ZorgFileLink
+    )
     contexts: List["Context"] = Relationship(
         back_populates="notes", link_model=ContextLink
     )

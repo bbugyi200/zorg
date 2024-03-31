@@ -40,12 +40,13 @@ TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
 
 
-class TodoStatus(enum.Enum):
-    """Status of a Zorg todo."""
+class NoteStatus(enum.Enum):
+    """Status of a Zorg note."""
 
-    OPEN = enum.auto()
-    CLOSED = enum.auto()
-    CANCELED = enum.auto()
+    NOTE = enum.auto()
+    OPEN_TODO = enum.auto()
+    CLOSED_TODO = enum.auto()
+    CANCELED_TODO = enum.auto()
 
 
 class CreateEngineType(Protocol):

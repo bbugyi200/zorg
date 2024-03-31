@@ -282,7 +282,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---
@@ -466,7 +466,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' Another related todo',
               'child_note_ids': [],
@@ -482,7 +482,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' Some other todo',
               'child_note_ids': [],
@@ -498,7 +498,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---
@@ -520,7 +520,7 @@
               'priority': 'A',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' 2024-03-13 Medium Priority TODO',
               'child_note_ids': [],
@@ -536,7 +536,7 @@
               'priority': 'B',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' 2024-03-13 Low Priority TODO',
               'child_note_ids': [],
@@ -552,7 +552,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---
@@ -586,7 +586,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {'due': '2024-03-13', 'p': '1'},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---
@@ -1607,7 +1607,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {'due': '2024-03-30', 'p': '1'},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---
@@ -1771,7 +1771,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' Some foobar todo.',
               'child_note_ids': [],
@@ -1787,7 +1787,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>},
+              'status': <NoteStatus.OPEN_TODO: 2>},
              {'areas': [],
               'body': ' Some foobar todo.',
               'child_note_ids': [],
@@ -1803,7 +1803,7 @@
               'priority': 'C',
               'projects': [],
               'properties': {},
-              'status': <TodoStatus.OPEN: 1>}]}
+              'status': <NoteStatus.OPEN_TODO: 2>}]}
   
   '''
 # ---

@@ -10,7 +10,7 @@ from .types import (
     MetatagOperator,
     MetatagValueType,
     TodoPriorityType,
-    TodoStatus,
+    NoteStatus,
 )
 
 
@@ -57,7 +57,7 @@ class ZorgTodo(ZorgNote):
 
     done_date: Optional[dt.date] = None
     priority: TodoPriorityType = "C"
-    status: TodoStatus = TodoStatus.OPEN
+    status: NoteStatus = NoteStatus.OPEN_TODO
 
 
 @dataclass(frozen=True)
