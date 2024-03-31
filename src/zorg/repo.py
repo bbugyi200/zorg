@@ -10,9 +10,7 @@ from potoroo import TaggedRepo
 
 from . import db
 from .models import OrZorgQuery, ZorgNote
-from .types import (
-    CreateEngineType,
-)
+from .types import CreateEngineType
 
 
 logger = Logger(__name__)
