@@ -15,6 +15,14 @@ from .types import (
 
 
 @dataclass(frozen=True)
+class DateRange:
+    """Represents a range of dates."""
+
+    start: dt.date
+    end: Optional[dt.date] = None
+
+
+@dataclass(frozen=True)
 class ZorgFile:
     """A Zorg (i.e. *.zo) file."""
 
@@ -71,21 +79,6 @@ class MetatagFilter:
     value_type: MetatagValueType = MetatagValueType.STRING
 
 
-@dataclass(frozen=True)
-class OrZorgQuery:
-    """A collection of `Tag`s that have been ORed together."""
-
-    and_queries: Iterable["AndZorgQuery"]
-
-
-@dataclass(frozen=True)
-class DateRange:
-    """Represents a range of dates."""
-
-    start: dt.date
-    end: Optional[dt.date] = None
-
-
 @dataclass
 class AndZorgQuery:
     """Tag used to filter ZorgNotes."""
@@ -99,3 +92,10 @@ class AndZorgQuery:
     metatag_filters: list[MetatagFilter] = field(default_factory=list)
     priorities: list[TodoPriorityType] = field(default_factory=list)
     projects: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class OrZorgQuery:
+    """A collection of `Tag`s that have been ORed together."""
+
+    and_queries: Iterable[AndZorgQuery]
