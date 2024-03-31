@@ -9,12 +9,20 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.5.1...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.0...HEAD)
+
+No notable changes have been made.
+
+
+## [0.6.0](https://github.com/bbugyi200/zorg/compare/0.5.1...0.6.0) - 2024-03-31
 
 ### Changed
 
 * *BREAKING CHANGE*: Stop injecting `one_day` template variable.
 * Several improvements to the grammar used by `zorg compile`.
+* A lot of changes were made to the grammar and application logic that powers
+  the `zorg compile` command, which has not yet been integrated into a useful
+  workflow (but will be).
 
 
 ## [0.5.1](https://github.com/bbugyi200/zorg/compare/0.5.0...0.5.1) - 2024-03-21
