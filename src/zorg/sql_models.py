@@ -7,6 +7,8 @@ from typing import List, Optional
 from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
+from .types import TodoPriorityType
+
 
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
 Select.inherit_cache = True
@@ -87,15 +89,13 @@ class PropertyLink(NoteLink, table=True):
 ###############################################################################
 # model used to store notes
 ###############################################################################
-class Note(Base, table=True):
-    """Model class for zorg notes."""
+class BaseNote(Base):
+    """Abstract model class for zorg notes."""
 
     # table columns
     create_date: dt.date
     desc: str
     done: bool
-    done_date: Optional[dt.date]
-    priority: str
 
     # relationships
     contexts: List["Context"] = Relationship(
@@ -111,6 +111,17 @@ class Note(Base, table=True):
         back_populates="notes", link_model=ProjectLink
     )
     property_links: List["PropertyLink"] = Relationship(back_populates="note")
+
+
+class Note(BaseNote, table=True):
+    """Model class for zorg notes."""
+
+
+class Todo(BaseNote, table=True):
+    """Model class for zorg notes."""
+
+    done_date: Optional[dt.date]
+    priority: TodoPriorityType
 
 
 ###############################################################################
