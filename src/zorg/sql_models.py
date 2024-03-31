@@ -33,7 +33,7 @@ class NoteLink(SQLModel):
 class Tag(Base):
     """Abstract model class for todo.txt tags."""
 
-    name: str = Field(sa_column=Column(String, unique=True))
+    name: str = Field(sa_type=String)
 
 
 ###############################################################################
