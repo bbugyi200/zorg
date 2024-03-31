@@ -96,6 +96,6 @@ class AndZorgQuery:
 
 @dataclass(frozen=True)
 class OrZorgQuery:
-    """A collection of `Tag`s that have been ORed together."""
+    """A collection of `AndZorgQuery`s that have been ORed together."""
 
     and_queries: Iterable[AndZorgQuery]
