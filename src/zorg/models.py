@@ -9,8 +9,8 @@ from .types import (
     DescOperator,
     PropertyOperator,
     PropertyValueType,
-    TodoStatus,
     TodoPriorityType,
+    TodoStatus,
 )
 
 

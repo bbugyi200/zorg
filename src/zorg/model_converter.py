@@ -18,6 +18,7 @@ def todo_to_sql_model(model: models.ZorgTodo) -> sql_models.ZorgNote:
 def sql_note_to_todo_model(sql_model: sql_models.ZorgNote) -> models.ZorgTodo:
     """Model-to-SQL-model converter for a ZorgFile."""
 
+
 def note_to_sql_model(model: models.ZorgNote) -> sql_models.ZorgNote:
     """Model-to-SQL-model converter for a ZorgFile."""
 
