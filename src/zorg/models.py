@@ -9,7 +9,7 @@ from .types import (
     DescOperator,
     PropertyOperator,
     PropertyValueType,
-    NoteStatus,
+    TodoStatus,
     TodoPriorityType,
 )
 
@@ -57,7 +57,7 @@ class ZorgTodo(ZorgNote):
 
     done_date: Optional[dt.date] = None
     priority: TodoPriorityType = "C"
-    status: NoteStatus = NoteStatus.OPEN_TODO
+    status: TodoStatus = TodoStatus.OPEN
 
 
 @dataclass(frozen=True)

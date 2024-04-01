@@ -88,7 +88,7 @@ class PropertyLink(NoteLink, table=True):
         default=None, foreign_key="prop.id", primary_key=True
     )
 
-    note: "Note" = Relationship(back_populates="property_links")
+    note: "ZorgNote" = Relationship(back_populates="property_links")
     prop: "Property" = Relationship(back_populates="links")
 
     value: str
@@ -100,7 +100,7 @@ class PropertyLink(NoteLink, table=True):
 class ZorgFile(Base, table=True):
     """Model class for zorg (*.zo) files."""
 
-    notes: List["Note"] = Relationship(
+    notes: List["ZorgNote"] = Relationship(
         back_populates="zorg_file", link_model=ZorgFileLink
     )
 
@@ -108,7 +108,7 @@ class ZorgFile(Base, table=True):
 ###############################################################################
 # model used to store notes
 ###############################################################################
-class Note(Base, table=True):
+class ZorgNote(Base, table=True):
     """Model class for zorg notes."""
 
     # table columns
@@ -144,7 +144,7 @@ class Note(Base, table=True):
 class Project(Tag, table=True):
     """Model class for todo.txt project tags (e.g. +zorg)."""
 
-    notes: List[Note] = Relationship(
+    notes: List[ZorgNote] = Relationship(
         back_populates="projects", link_model=ProjectLink
     )
 
@@ -152,7 +152,7 @@ class Project(Tag, table=True):
 class Context(Tag, table=True):
     """Model class for todo.txt context tags (e.g. @home)."""
 
-    notes: List[Note] = Relationship(
+    notes: List[ZorgNote] = Relationship(
         back_populates="contexts", link_model=ContextLink
     )
 
@@ -160,7 +160,7 @@ class Context(Tag, table=True):
 class Area(Tag, table=True):
     """Model class for todo.txt area tags (e.g. #gtd)."""
 
-    notes: List[Note] = Relationship(
+    notes: List[ZorgNote] = Relationship(
         back_populates="areas", link_model=AreaLink
     )
 
@@ -168,7 +168,7 @@ class Area(Tag, table=True):
 class Person(Tag, table=True):
     """Model class for todo.txt person tags (e.g. %john)."""
 
-    notes: List[Note] = Relationship(
+    notes: List[ZorgNote] = Relationship(
         back_populates="people", link_model=PersonLink
     )
 
