@@ -9,8 +9,8 @@ from .types import (
     DescOperator,
     MetatagOperator,
     MetatagValueType,
-    TodoPriorityType,
     NoteStatus,
+    TodoPriorityType,
 )
 
 
