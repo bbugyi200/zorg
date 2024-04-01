@@ -63,7 +63,7 @@ class DescOperator(enum.Enum):
     NOT_CONTAINS = enum.auto()
 
 
-class MetatagOperator(enum.Enum):
+class PropertyOperator(enum.Enum):
     """Used to determine what kind of metatag constraint has been specified."""
 
     # exists / not exists
@@ -79,8 +79,8 @@ class MetatagOperator(enum.Enum):
     GE = enum.auto()
 
 
-class MetatagValueType(enum.Enum):
-    """Specifies the data type of a MetatagFilter's value."""
+class PropertyValueType(enum.Enum):
+    """Specifies the data type of a PropertyFilter's value."""
 
     DATE = enum.auto()
     INTEGER = enum.auto()

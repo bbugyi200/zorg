@@ -7,8 +7,8 @@ from typing import Iterable, Optional
 
 from .types import (
     DescOperator,
-    MetatagOperator,
-    MetatagValueType,
+    PropertyOperator,
+    PropertyValueType,
     NoteStatus,
     TodoPriorityType,
 )
@@ -70,26 +70,26 @@ class DescFilter:
 
 
 @dataclass(frozen=True)
-class MetatagFilter:
-    """Represents a single metatag filter (e.g. 'due<=0d' or '!recur')."""
+class PropertyFilter:
+    """Represents a single property filter (e.g. 'due<=0d' or '!recur')."""
 
     key: str
     value: str = ""
-    op: MetatagOperator = MetatagOperator.EXISTS
-    value_type: MetatagValueType = MetatagValueType.STRING
+    op: PropertyOperator = PropertyOperator.EXISTS
+    value_type: PropertyValueType = PropertyValueType.STRING
 
 
 @dataclass
 class AndZorgQuery:
     """Tag used to filter ZorgNotes."""
 
+    areas: list[str] = field(default_factory=list)
     contexts: list[str] = field(default_factory=list)
     create_date_ranges: list[DateRange] = field(default_factory=list)
     desc_filters: list[DescFilter] = field(default_factory=list)
-    done_date_ranges: list[DateRange] = field(default_factory=list)
     done: Optional[bool] = None
-    epics: list[str] = field(default_factory=list)
-    metatag_filters: list[MetatagFilter] = field(default_factory=list)
+    done_date_ranges: list[DateRange] = field(default_factory=list)
+    property_filters: list[PropertyFilter] = field(default_factory=list)
     priorities: list[TodoPriorityType] = field(default_factory=list)
     projects: list[str] = field(default_factory=list)
 
