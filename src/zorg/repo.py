@@ -50,18 +50,13 @@ class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
         del key
         return Ok(None)
 
-    def remove(self, key: str) -> ErisResult[ZorgNote | None]:
+    def remove(self, note: ZorgNote) -> ErisResult[ZorgNote | None]:
         """Remove a note from the DB."""
-        del key
+        del note
         return Ok(None)
 
     def get_by_tag(self, tag: OrZorgQuery) -> ErisResult[list[ZorgNote]]:
         """Get note(s) from DB by using a tag."""
-        del tag
-        return Ok([])
-
-    def remove_by_tag(self, tag: OrZorgQuery) -> ErisResult[list[ZorgNote]]:
-        """Removes note(s) from DB by using a tag."""
         del tag
         return Ok([])
 
