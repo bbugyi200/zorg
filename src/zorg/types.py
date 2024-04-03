@@ -40,16 +40,12 @@ TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
 
 
-class NoteStatus(enum.Enum):
-    """Status of a Zorg note.
+class TodoStatus(enum.Enum):
+    """Zorg todo status."""
 
-    Used by SQL models.
-    """
-
-    NOTE = enum.auto()
-    OPEN_TODO = enum.auto()
-    CLOSED_TODO = enum.auto()
-    CANCELED_TODO = enum.auto()
+    OPEN = enum.auto()
+    CLOSED = enum.auto()
+    CANCELED = enum.auto()
 
 
 class CreateEngineType(Protocol):

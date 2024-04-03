@@ -7,10 +7,10 @@ from typing import Iterable, Optional
 
 from .types import (
     DescOperator,
-    NoteStatus,
     PropertyOperator,
     PropertyValueType,
     TodoPriorityType,
+    TodoStatus,
 )
 
 
@@ -20,6 +20,14 @@ class DateRange:
 
     start: dt.date
     end: Optional[dt.date] = None
+
+
+@dataclass(frozen=True)
+class TodoPayload:
+    """Extra fields that are added to ZorgNotes that are todos."""
+
+    priority: TodoPriorityType = "C"
+    status: TodoStatus = TodoStatus.OPEN
 
 
 @dataclass(frozen=True)
@@ -46,10 +54,9 @@ class ZorgNote:
     parent_note_id: Optional[int] = None
     people: list[str] = field(default_factory=lambda: [])
     prev_note_id: Optional[int] = None
-    priority: TodoPriorityType = "C"
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
-    status: NoteStatus = NoteStatus.NOTE
+    todo_payload: Optional[TodoPayload] = None
 
 
 @dataclass(frozen=True)

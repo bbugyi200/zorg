@@ -9,8 +9,8 @@ from logrus import Logger
 
 from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from .models import ZorgFile, ZorgNote
-from .types import NoteStatus, TodoPriorityType
+from . import models
+from .types import TodoPriorityType, TodoStatus
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
@@ -21,7 +21,7 @@ logger = Logger(__name__)
 class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
-    def __init__(self, zorg_file: ZorgFile) -> None:
+    def __init__(self, zorg_file: models.ZorgFile) -> None:
         self.zorg_file = zorg_file
 
         self._s = _ZorgFileCompilerState()
@@ -145,10 +145,12 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs = self._get_note_kwargs(
-            {"priority": self._s.priority, "status": NoteStatus.OPEN_TODO}
-        )
-        todo = ZorgNote(ctx.note_body().getText(), **kwargs)
+        kwargs = self._get_note_kwargs({
+            "todo_payload": models.TodoPayload(
+                priority=self._s.priority, status=TodoStatus.OPEN
+            )
+        })
+        todo = models.ZorgNote(ctx.note_body().getText(), **kwargs)
         self.zorg_file.notes.append(todo)
         # Reset priority back to default.
         self._s.priority = "C"
@@ -219,7 +221,7 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        note = ZorgNote(ctx.note_body().getText(), **kwargs)
+        note = models.ZorgNote(ctx.note_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
