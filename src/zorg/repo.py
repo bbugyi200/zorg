@@ -50,7 +50,7 @@ class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
         del key
         return Ok(None)
 
-    def remove(self, note: ZorgNote) -> ErisResult[ZorgNote | None]:
+    def remove(self, note: ZorgNote, /) -> ErisResult[ZorgNote | None]:
         """Remove a note from the DB."""
         del note
         return Ok(None)
