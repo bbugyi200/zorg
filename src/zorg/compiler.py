@@ -9,8 +9,8 @@ from logrus import Logger
 
 from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from .models import ZorgFile, ZorgNote, ZorgTodo
-from .types import TodoPriorityType
+from .models import ZorgFile, ZorgNote
+from .types import NoteStatus, TodoPriorityType
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
@@ -145,9 +145,11 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs = self._get_note_kwargs({"priority": self._s.priority})
-        todo = ZorgTodo(ctx.note_body().getText(), **kwargs)
-        self.zorg_file.todos.append(todo)
+        kwargs = self._get_note_kwargs(
+            {"priority": self._s.priority, "status": NoteStatus.OPEN_TODO}
+        )
+        todo = ZorgNote(ctx.note_body().getText(), **kwargs)
+        self.zorg_file.notes.append(todo)
         # Reset priority back to default.
         self._s.priority = "C"
 

@@ -7,10 +7,10 @@ from typing import Iterable, Optional
 
 from .types import (
     DescOperator,
+    NoteStatus,
     PropertyOperator,
     PropertyValueType,
     TodoPriorityType,
-    TodoStatus,
 )
 
 
@@ -28,7 +28,6 @@ class ZorgFile:
 
     path: Path
     notes: list["ZorgNote"] = field(default_factory=lambda: [])
-    todos: list["ZorgTodo"] = field(default_factory=lambda: [])
 
 
 @dataclass
@@ -47,17 +46,10 @@ class ZorgNote:
     parent_note_id: Optional[int] = None
     people: list[str] = field(default_factory=lambda: [])
     prev_note_id: Optional[int] = None
+    priority: TodoPriorityType = "C"
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
-
-
-@dataclass
-class ZorgTodo(ZorgNote):
-    """A Zorg todo."""
-
-    done_date: Optional[dt.date] = None
-    priority: TodoPriorityType = "C"
-    status: TodoStatus = TodoStatus.OPEN
+    status: NoteStatus = NoteStatus.NOTE
 
 
 @dataclass(frozen=True)

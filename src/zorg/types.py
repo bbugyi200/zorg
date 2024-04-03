@@ -40,17 +40,6 @@ TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
 
 
-class TodoStatus(enum.Enum):
-    """Status of a Zorg todo.
-
-    Used by domain models.
-    """
-
-    OPEN = enum.auto()
-    CLOSED = enum.auto()
-    CANCELED = enum.auto()
-
-
 class NoteStatus(enum.Enum):
     """Status of a Zorg note.
 
@@ -58,8 +47,6 @@ class NoteStatus(enum.Enum):
     """
 
     NOTE = enum.auto()
-
-    # TodoStatus values
     OPEN_TODO = enum.auto()
     CLOSED_TODO = enum.auto()
     CANCELED_TODO = enum.auto()
