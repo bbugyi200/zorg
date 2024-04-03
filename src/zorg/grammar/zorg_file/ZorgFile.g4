@@ -11,13 +11,13 @@ comment    : HASH space_atoms? NL ;
 block      : item+ NL* ;
 item       : todo | note | footnote | comment ;
 todo       : base_todo subnote* ;
-base_todo  : (LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE) (' ' priority)? item_body NL ;
+base_todo  : (LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE) (' ' priority)? note_body NL ;
 priority   : '[' HASH ID ']' ;
 note       : DASH base_note subnote* ;
-base_note  : item_body NL ;
+base_note  : note_body NL ;
 subnote    : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote : FOUR_SPACE_DASH base_note ;
-item_body  : space_atoms (NL SPACE+ space_atoms)* ;
+note_body  : space_atoms (NL SPACE+ space_atoms)* ;
 footnote   : ref COLON space_atoms ;
 
 // atoms
@@ -64,7 +64,7 @@ NL           : '\r'? '\n' ;
 LOWER_O      : 'o' ;
 LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
-DATE         : '2' NUM NUM NUM DASH ('0' | '1' | '2') NUM DASH ('0' | '1' | '2' | '3') NUM ;
+DATE         : '2' NUM NUM NUM DASH ('0' | '1') NUM DASH ('0' | '1' | '2' | '3') NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 TWO_SPACE_DASH : '  -' ;
 FOUR_SPACE_DASH : '    -' ;

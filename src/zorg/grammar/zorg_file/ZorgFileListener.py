@@ -116,12 +116,12 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#item_body.
-    def enterItem_body(self, ctx:ZorgFileParser.Item_bodyContext):
+    # Enter a parse tree produced by ZorgFileParser#note_body.
+    def enterNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#item_body.
-    def exitItem_body(self, ctx:ZorgFileParser.Item_bodyContext):
+    # Exit a parse tree produced by ZorgFileParser#note_body.
+    def exitNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
         pass
 
 

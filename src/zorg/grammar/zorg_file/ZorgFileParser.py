@@ -196,7 +196,7 @@ class ZorgFileParser ( Parser ):
     RULE_base_note = 9
     RULE_subnote = 10
     RULE_subsubnote = 11
-    RULE_item_body = 12
+    RULE_note_body = 12
     RULE_footnote = 13
     RULE_space_atoms = 14
     RULE_space_atom = 15
@@ -228,7 +228,7 @@ class ZorgFileParser ( Parser ):
 
     ruleNames =  [ "prog", "head", "comment", "block", "item", "todo", "base_todo", 
                    "priority", "note", "base_note", "subnote", "subsubnote", 
-                   "item_body", "footnote", "space_atoms", "space_atom", 
+                   "note_body", "footnote", "space_atoms", "space_atom", 
                    "atom", "property", "id_group", "id", "date", "any_symbol", 
                    "non_tag_symbol", "id_symbol", "tag_symbol", "tag", "area", 
                    "context", "person", "project", "quoted", "link", "ref", 
@@ -736,8 +736,8 @@ class ZorgFileParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def item_body(self):
-            return self.getTypedRuleContext(ZorgFileParser.Item_bodyContext,0)
+        def note_body(self):
+            return self.getTypedRuleContext(ZorgFileParser.Note_bodyContext,0)
 
 
         def NL(self):
@@ -804,7 +804,7 @@ class ZorgFileParser ( Parser ):
 
 
             self.state = 150
-            self.item_body()
+            self.note_body()
             self.state = 151
             self.match(ZorgFileParser.NL)
         except RecognitionException as re:
@@ -938,8 +938,8 @@ class ZorgFileParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def item_body(self):
-            return self.getTypedRuleContext(ZorgFileParser.Item_bodyContext,0)
+        def note_body(self):
+            return self.getTypedRuleContext(ZorgFileParser.Note_bodyContext,0)
 
 
         def NL(self):
@@ -966,7 +966,7 @@ class ZorgFileParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 166
-            self.item_body()
+            self.note_body()
             self.state = 167
             self.match(ZorgFileParser.NL)
         except RecognitionException as re:
@@ -1090,7 +1090,7 @@ class ZorgFileParser ( Parser ):
         return localctx
 
 
-    class Item_bodyContext(ParserRuleContext):
+    class Note_bodyContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1117,23 +1117,23 @@ class ZorgFileParser ( Parser ):
                 return self.getToken(ZorgFileParser.SPACE, i)
 
         def getRuleIndex(self):
-            return ZorgFileParser.RULE_item_body
+            return ZorgFileParser.RULE_note_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterItem_body" ):
-                listener.enterItem_body(self)
+            if hasattr( listener, "enterNote_body" ):
+                listener.enterNote_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitItem_body" ):
-                listener.exitItem_body(self)
+            if hasattr( listener, "exitNote_body" ):
+                listener.exitNote_body(self)
 
 
 
 
-    def item_body(self):
+    def note_body(self):
 
-        localctx = ZorgFileParser.Item_bodyContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_item_body)
+        localctx = ZorgFileParser.Note_bodyContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_note_body)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 180

@@ -146,7 +146,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({"priority": self._s.priority})
-        todo = ZorgTodo(ctx.item_body().getText(), **kwargs)
+        todo = ZorgTodo(ctx.note_body().getText(), **kwargs)
         self.zorg_file.todos.append(todo)
         # Reset priority back to default.
         self._s.priority = "C"
@@ -217,7 +217,7 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        note = ZorgNote(ctx.item_body().getText(), **kwargs)
+        note = ZorgNote(ctx.note_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
