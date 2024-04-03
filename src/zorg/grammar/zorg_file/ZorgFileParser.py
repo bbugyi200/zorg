@@ -21,8 +21,8 @@ def serializedATN():
         0,105,9,0,3,0,107,8,0,1,0,1,0,1,1,4,1,112,8,1,11,1,12,1,113,1,2,
         1,2,3,2,118,8,2,1,2,1,2,1,3,4,3,123,8,3,11,3,12,3,124,1,3,5,3,128,
         8,3,10,3,12,3,131,9,3,1,4,1,4,1,4,1,4,3,4,137,8,4,1,5,1,5,5,5,141,
-        8,5,10,5,12,5,144,9,5,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,5,7,154,8,
-        7,10,7,12,7,157,9,7,1,8,1,8,1,8,1,9,1,9,1,9,3,9,165,8,9,1,9,1,9,
+        8,5,10,5,12,5,144,9,5,1,6,1,6,1,6,3,6,149,8,6,1,6,1,6,1,6,1,7,1,
+        7,1,7,1,7,1,7,1,8,1,8,1,8,5,8,162,8,8,10,8,12,8,165,9,8,1,9,1,9,
         1,9,1,10,1,10,1,10,5,10,173,8,10,10,10,12,10,176,9,10,1,11,1,11,
         1,11,1,12,1,12,1,12,4,12,184,8,12,11,12,12,12,185,1,12,5,12,189,
         8,12,10,12,12,12,192,9,12,1,13,1,13,1,13,1,13,1,14,4,14,199,8,14,
@@ -49,8 +49,8 @@ def serializedATN():
         50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,0,4,3,0,8,9,30,30,
         32,33,4,0,15,15,19,19,22,23,30,33,2,0,16,18,20,20,1,0,24,27,427,
         0,82,1,0,0,0,2,111,1,0,0,0,4,115,1,0,0,0,6,122,1,0,0,0,8,136,1,0,
-        0,0,10,138,1,0,0,0,12,145,1,0,0,0,14,150,1,0,0,0,16,158,1,0,0,0,
-        18,161,1,0,0,0,20,169,1,0,0,0,22,177,1,0,0,0,24,180,1,0,0,0,26,193,
+        0,0,10,138,1,0,0,0,12,145,1,0,0,0,14,153,1,0,0,0,16,158,1,0,0,0,
+        18,166,1,0,0,0,20,169,1,0,0,0,22,177,1,0,0,0,24,180,1,0,0,0,26,193,
         1,0,0,0,28,198,1,0,0,0,30,202,1,0,0,0,32,237,1,0,0,0,34,239,1,0,
         0,0,36,244,1,0,0,0,38,262,1,0,0,0,40,264,1,0,0,0,42,271,1,0,0,0,
         44,273,1,0,0,0,46,275,1,0,0,0,48,277,1,0,0,0,50,283,1,0,0,0,52,285,
@@ -71,20 +71,20 @@ def serializedATN():
         5,1,0,0,0,121,123,3,8,4,0,122,121,1,0,0,0,123,124,1,0,0,0,124,122,
         1,0,0,0,124,125,1,0,0,0,125,129,1,0,0,0,126,128,5,7,0,0,127,126,
         1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,129,130,1,0,0,0,130,7,1,
-        0,0,0,131,129,1,0,0,0,132,137,3,10,5,0,133,137,3,14,7,0,134,137,
+        0,0,0,131,129,1,0,0,0,132,137,3,10,5,0,133,137,3,16,8,0,134,137,
         3,26,13,0,135,137,3,4,2,0,136,132,1,0,0,0,136,133,1,0,0,0,136,134,
-        1,0,0,0,136,135,1,0,0,0,137,9,1,0,0,0,138,142,3,18,9,0,139,141,3,
+        1,0,0,0,136,135,1,0,0,0,137,9,1,0,0,0,138,142,3,12,6,0,139,141,3,
         20,10,0,140,139,1,0,0,0,141,144,1,0,0,0,142,140,1,0,0,0,142,143,
-        1,0,0,0,143,11,1,0,0,0,144,142,1,0,0,0,145,146,5,1,0,0,146,147,5,
-        24,0,0,147,148,5,10,0,0,148,149,5,2,0,0,149,13,1,0,0,0,150,151,5,
-        16,0,0,151,155,3,16,8,0,152,154,3,20,10,0,153,152,1,0,0,0,154,157,
-        1,0,0,0,155,153,1,0,0,0,155,156,1,0,0,0,156,15,1,0,0,0,157,155,1,
-        0,0,0,158,159,3,24,12,0,159,160,5,7,0,0,160,17,1,0,0,0,161,164,7,
-        0,0,0,162,163,5,21,0,0,163,165,3,12,6,0,164,162,1,0,0,0,164,165,
-        1,0,0,0,165,166,1,0,0,0,166,167,3,24,12,0,167,168,5,7,0,0,168,19,
-        1,0,0,0,169,170,5,13,0,0,170,174,3,16,8,0,171,173,3,22,11,0,172,
+        1,0,0,0,143,11,1,0,0,0,144,142,1,0,0,0,145,148,7,0,0,0,146,147,5,
+        21,0,0,147,149,3,14,7,0,148,146,1,0,0,0,148,149,1,0,0,0,149,150,
+        1,0,0,0,150,151,3,24,12,0,151,152,5,7,0,0,152,13,1,0,0,0,153,154,
+        5,1,0,0,154,155,5,24,0,0,155,156,5,10,0,0,156,157,5,2,0,0,157,15,
+        1,0,0,0,158,159,5,16,0,0,159,163,3,18,9,0,160,162,3,20,10,0,161,
+        160,1,0,0,0,162,165,1,0,0,0,163,161,1,0,0,0,163,164,1,0,0,0,164,
+        17,1,0,0,0,165,163,1,0,0,0,166,167,3,24,12,0,167,168,5,7,0,0,168,
+        19,1,0,0,0,169,170,5,13,0,0,170,174,3,18,9,0,171,173,3,22,11,0,172,
         171,1,0,0,0,173,176,1,0,0,0,174,172,1,0,0,0,174,175,1,0,0,0,175,
-        21,1,0,0,0,176,174,1,0,0,0,177,178,5,14,0,0,178,179,3,16,8,0,179,
+        21,1,0,0,0,176,174,1,0,0,0,177,178,5,14,0,0,178,179,3,18,9,0,179,
         23,1,0,0,0,180,190,3,28,14,0,181,183,5,7,0,0,182,184,5,21,0,0,183,
         182,1,0,0,0,184,185,1,0,0,0,185,183,1,0,0,0,185,186,1,0,0,0,186,
         187,1,0,0,0,187,189,3,28,14,0,188,181,1,0,0,0,189,192,1,0,0,0,190,
@@ -123,7 +123,7 @@ def serializedATN():
         53,1,0,0,0,288,289,5,25,0,0,289,290,5,10,0,0,290,55,1,0,0,0,291,
         292,5,27,0,0,292,293,5,10,0,0,293,57,1,0,0,0,294,295,5,26,0,0,295,
         296,5,10,0,0,296,59,1,0,0,0,297,302,5,28,0,0,298,303,3,32,16,0,299,
-        303,3,12,6,0,300,303,5,3,0,0,301,303,5,4,0,0,302,298,1,0,0,0,302,
+        303,3,14,7,0,300,303,5,3,0,0,301,303,5,4,0,0,302,298,1,0,0,0,302,
         299,1,0,0,0,302,300,1,0,0,0,302,301,1,0,0,0,303,304,1,0,0,0,304,
         302,1,0,0,0,304,305,1,0,0,0,305,306,1,0,0,0,306,316,5,28,0,0,307,
         309,5,29,0,0,308,310,3,32,16,0,309,308,1,0,0,0,310,311,1,0,0,0,311,
@@ -154,7 +154,7 @@ def serializedATN():
         395,77,1,0,0,0,396,397,5,6,0,0,397,398,3,28,14,0,398,399,5,7,0,0,
         399,79,1,0,0,0,400,401,5,16,0,0,401,402,5,16,0,0,402,403,5,16,0,
         0,403,404,3,28,14,0,404,405,5,7,0,0,405,81,1,0,0,0,45,86,91,97,103,
-        106,113,117,124,129,136,142,155,164,174,185,190,200,205,209,211,
+        106,113,117,124,129,136,142,148,163,174,185,190,200,205,209,211,
         216,221,223,226,229,237,248,254,262,271,283,302,304,311,315,329,
         333,338,345,349,354,361,365,370,377
     ]
@@ -190,10 +190,10 @@ class ZorgFileParser ( Parser ):
     RULE_block = 3
     RULE_item = 4
     RULE_todo = 5
-    RULE_priority = 6
-    RULE_note = 7
-    RULE_base_note = 8
-    RULE_base_todo = 9
+    RULE_base_todo = 6
+    RULE_priority = 7
+    RULE_note = 8
+    RULE_base_note = 9
     RULE_subnote = 10
     RULE_subsubnote = 11
     RULE_item_body = 12
@@ -226,8 +226,8 @@ class ZorgFileParser ( Parser ):
     RULE_h3_header = 39
     RULE_h4_header = 40
 
-    ruleNames =  [ "prog", "head", "comment", "block", "item", "todo", "priority", 
-                   "note", "base_note", "base_todo", "subnote", "subsubnote", 
+    ruleNames =  [ "prog", "head", "comment", "block", "item", "todo", "base_todo", 
+                   "priority", "note", "base_note", "subnote", "subsubnote", 
                    "item_body", "footnote", "space_atoms", "space_atom", 
                    "atom", "property", "id_group", "id", "date", "any_symbol", 
                    "non_tag_symbol", "id_symbol", "tag_symbol", "tag", "area", 
@@ -729,168 +729,6 @@ class ZorgFileParser ( Parser ):
         return localctx
 
 
-    class PriorityContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def HASH(self):
-            return self.getToken(ZorgFileParser.HASH, 0)
-
-        def ID(self):
-            return self.getToken(ZorgFileParser.ID, 0)
-
-        def getRuleIndex(self):
-            return ZorgFileParser.RULE_priority
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPriority" ):
-                listener.enterPriority(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPriority" ):
-                listener.exitPriority(self)
-
-
-
-
-    def priority(self):
-
-        localctx = ZorgFileParser.PriorityContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_priority)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 145
-            self.match(ZorgFileParser.T__0)
-            self.state = 146
-            self.match(ZorgFileParser.HASH)
-            self.state = 147
-            self.match(ZorgFileParser.ID)
-            self.state = 148
-            self.match(ZorgFileParser.T__1)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class NoteContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def DASH(self):
-            return self.getToken(ZorgFileParser.DASH, 0)
-
-        def base_note(self):
-            return self.getTypedRuleContext(ZorgFileParser.Base_noteContext,0)
-
-
-        def subnote(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ZorgFileParser.SubnoteContext)
-            else:
-                return self.getTypedRuleContext(ZorgFileParser.SubnoteContext,i)
-
-
-        def getRuleIndex(self):
-            return ZorgFileParser.RULE_note
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterNote" ):
-                listener.enterNote(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitNote" ):
-                listener.exitNote(self)
-
-
-
-
-    def note(self):
-
-        localctx = ZorgFileParser.NoteContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_note)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 150
-            self.match(ZorgFileParser.DASH)
-            self.state = 151
-            self.base_note()
-            self.state = 155
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==13:
-                self.state = 152
-                self.subnote()
-                self.state = 157
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class Base_noteContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def item_body(self):
-            return self.getTypedRuleContext(ZorgFileParser.Item_bodyContext,0)
-
-
-        def NL(self):
-            return self.getToken(ZorgFileParser.NL, 0)
-
-        def getRuleIndex(self):
-            return ZorgFileParser.RULE_base_note
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBase_note" ):
-                listener.enterBase_note(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBase_note" ):
-                listener.exitBase_note(self)
-
-
-
-
-    def base_note(self):
-
-        localctx = ZorgFileParser.Base_noteContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_base_note)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 158
-            self.item_body()
-            self.state = 159
-            self.match(ZorgFileParser.NL)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
     class Base_todoContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -944,27 +782,189 @@ class ZorgFileParser ( Parser ):
     def base_todo(self):
 
         localctx = ZorgFileParser.Base_todoContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_base_todo)
+        self.enterRule(localctx, 12, self.RULE_base_todo)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 161
+            self.state = 145
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 13958644480) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 164
+            self.state = 148
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
             if la_ == 1:
-                self.state = 162
+                self.state = 146
                 self.match(ZorgFileParser.SPACE)
-                self.state = 163
+                self.state = 147
                 self.priority()
 
 
+            self.state = 150
+            self.item_body()
+            self.state = 151
+            self.match(ZorgFileParser.NL)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PriorityContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def HASH(self):
+            return self.getToken(ZorgFileParser.HASH, 0)
+
+        def ID(self):
+            return self.getToken(ZorgFileParser.ID, 0)
+
+        def getRuleIndex(self):
+            return ZorgFileParser.RULE_priority
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPriority" ):
+                listener.enterPriority(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPriority" ):
+                listener.exitPriority(self)
+
+
+
+
+    def priority(self):
+
+        localctx = ZorgFileParser.PriorityContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_priority)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 153
+            self.match(ZorgFileParser.T__0)
+            self.state = 154
+            self.match(ZorgFileParser.HASH)
+            self.state = 155
+            self.match(ZorgFileParser.ID)
+            self.state = 156
+            self.match(ZorgFileParser.T__1)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NoteContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def DASH(self):
+            return self.getToken(ZorgFileParser.DASH, 0)
+
+        def base_note(self):
+            return self.getTypedRuleContext(ZorgFileParser.Base_noteContext,0)
+
+
+        def subnote(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ZorgFileParser.SubnoteContext)
+            else:
+                return self.getTypedRuleContext(ZorgFileParser.SubnoteContext,i)
+
+
+        def getRuleIndex(self):
+            return ZorgFileParser.RULE_note
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNote" ):
+                listener.enterNote(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNote" ):
+                listener.exitNote(self)
+
+
+
+
+    def note(self):
+
+        localctx = ZorgFileParser.NoteContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_note)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 158
+            self.match(ZorgFileParser.DASH)
+            self.state = 159
+            self.base_note()
+            self.state = 163
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==13:
+                self.state = 160
+                self.subnote()
+                self.state = 165
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Base_noteContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def item_body(self):
+            return self.getTypedRuleContext(ZorgFileParser.Item_bodyContext,0)
+
+
+        def NL(self):
+            return self.getToken(ZorgFileParser.NL, 0)
+
+        def getRuleIndex(self):
+            return ZorgFileParser.RULE_base_note
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBase_note" ):
+                listener.enterBase_note(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBase_note" ):
+                listener.exitBase_note(self)
+
+
+
+
+    def base_note(self):
+
+        localctx = ZorgFileParser.Base_noteContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 18, self.RULE_base_note)
+        try:
+            self.enterOuterAlt(localctx, 1)
             self.state = 166
             self.item_body()
             self.state = 167

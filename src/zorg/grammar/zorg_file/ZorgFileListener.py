@@ -62,6 +62,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#base_todo.
+    def enterBase_todo(self, ctx:ZorgFileParser.Base_todoContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#base_todo.
+    def exitBase_todo(self, ctx:ZorgFileParser.Base_todoContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#priority.
     def enterPriority(self, ctx:ZorgFileParser.PriorityContext):
         pass
@@ -86,15 +95,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#base_note.
     def exitBase_note(self, ctx:ZorgFileParser.Base_noteContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#base_todo.
-    def enterBase_todo(self, ctx:ZorgFileParser.Base_todoContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#base_todo.
-    def exitBase_todo(self, ctx:ZorgFileParser.Base_todoContext):
         pass
 
 
