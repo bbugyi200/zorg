@@ -7,9 +7,9 @@ from typing import Any, Literal, Optional
 import antlr4
 from logrus import Logger
 
+from . import models
 from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from . import models
 from .types import TodoPriorityType, TodoStatus
 
 
