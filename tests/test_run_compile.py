@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import itertools as it
 from pathlib import Path
-from typing import Iterator
 
 from _pytest.capture import CaptureFixture
 from pytest import mark, param
@@ -17,19 +15,8 @@ params = mark.parametrize
 
 
 def _get_all_zo_paths() -> list[Path]:
-    tests_dir = Path(__file__).parent
-    data_dir = tests_dir / "data"
-    examples_dir = tests_dir.parent / "examples"
-    return sorted(
-        path
-        for path in it.chain(
-            _get_zo_path_iter(data_dir), _get_zo_path_iter(examples_dir)
-        )
-    )
-
-
-def _get_zo_path_iter(src_dir: Path) -> Iterator[Path]:
-    yield from src_dir.rglob("*.zo")
+    root_dir = Path(__file__).parent.parent
+    return sorted(root_dir.rglob("*.zo"))
 
 
 @params(
