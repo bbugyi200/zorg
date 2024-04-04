@@ -61,7 +61,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'action open', 'compile', 'db', 'db info', 'edit', 'template', 'template init', 'template render']:
+for cmd in ['action', 'action open', 'compile', 'db', 'db create', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\n### `zorg {cmd} --help`\n")
@@ -158,7 +158,7 @@ options:
 ### `zorg db --help`
 
 ```
-usage: zorg db [-h] {info} ...
+usage: zorg db [-h] {create} ...
 
 Commands for managing Zorg's SQL database.
 
@@ -166,16 +166,16 @@ options:
   -h, --help  show this help message and exit
 
 subcommands:
-  {info}
-    info      Display some useful stats related to your Zorg notes and todos.
+  {create}
+    create    Create zorg's backend database from scratch.
 ```
 
-### `zorg db info --help`
+### `zorg db create --help`
 
 ```
-usage: zorg db info [-h]
+usage: zorg db create [-h]
 
-Display some useful stats related to your Zorg notes and todos.
+Create zorg's backend database from scratch.
 
 options:
   -h, --help  show this help message and exit
