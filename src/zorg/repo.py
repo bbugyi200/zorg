@@ -7,10 +7,9 @@ from typing import TypeVar
 from eris import ErisResult, Ok
 from logrus import Logger
 from potoroo import TaggedRepo
+from sqlmodel import Session
 
-from . import db
 from .models import OrZorgQuery, ZorgNote
-from .types import CreateEngineType
 
 
 logger = Logger(__name__)
@@ -23,19 +22,9 @@ class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
 
     def __init__(
         self,
-        url: str,
-        *,
-        engine_factory: CreateEngineType = db.create_cached_engine,
-        verbose: int = 0,
+        session: Session,
     ) -> None:
-        # echo SQL statements to console if -vvv or greater is specified on the
-        # command-line
-        engine_kwargs = {}
-        if verbose > 2:
-            engine_kwargs["echo"] = True
-
-        self.url = url
-        self.engine = engine_factory(url, **engine_kwargs)
+        self.session = session
 
     def add(self, note: ZorgNote, /, *, key: str = None) -> ErisResult[str]:
         """Adds a new note to the DB.
