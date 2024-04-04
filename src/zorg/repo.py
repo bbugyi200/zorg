@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TypeVar
-
 from eris import ErisResult, Ok
 from logrus import Logger
 from potoroo import TaggedRepo
@@ -13,8 +11,6 @@ from . import model_converter, models, sql_models
 
 
 logger = Logger(__name__)
-
-T = TypeVar("T")
 
 
 class ZorgSQLRepo(TaggedRepo[str, models.ZorgNote, models.OrZorgQuery]):
