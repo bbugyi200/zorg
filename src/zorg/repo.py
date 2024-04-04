@@ -38,7 +38,7 @@ class ZorgSQLRepo(TaggedRepo[str, models.ZorgNote, models.OrZorgQuery]):
         return Ok(note.ident)
 
     def remove(
-        self, note: models.ZorgNote, /
+        self, note: models.ZorgNote, /  # noqa: W504
     ) -> ErisResult[models.ZorgNote | None]:
         """Remove a note from the DB."""
         self._session.delete(note)
