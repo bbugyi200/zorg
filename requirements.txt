@@ -61,6 +61,8 @@ sqlmodel==0.0.16
     # via -r requirements.in
 structlog==24.1.0
     # via bolton-logrus
+tqdm==4.66.2
+    # via -r requirements.in
 typing-extensions==4.10.0
     # via
     #   pydantic
