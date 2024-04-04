@@ -35,7 +35,8 @@ class ZorgSQLRepo(TaggedRepo[str, models.ZorgNote, models.OrZorgQuery]):
         """
         del key
         self._session.add(note)
-        return Ok(note.ident)
+        assert note.ident is not None
+        return Ok(str(note.ident))
 
     def remove(
         self, note: models.ZorgNote, /  # noqa: W504

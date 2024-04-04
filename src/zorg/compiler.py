@@ -305,7 +305,7 @@ def walk_zorg_file(zo_path: Path) -> models.ZorgFile:
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgFileParser(tokens)
-    tree = parser.prog()  # type: ignore[no-untyped-call]
+    tree = parser.prog()
     compiler = ZorgFileCompiler(zorg_file)
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
