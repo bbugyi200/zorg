@@ -27,7 +27,10 @@ def run_db_create(cfg: DbCreateConfig) -> int:
         logger.info(
             "Finished walking zorg file",
             zorg_file=zo_path.name,
-            notes=len(zorg_file.notes),
+            num_notes=len(zorg_file.notes),
+            num_todos=len(
+                [note for note in zorg_file.notes if note.todo_payload]
+            ),
         )
         zorg_files.append(zorg_file)
     logger.info(

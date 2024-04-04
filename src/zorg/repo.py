@@ -31,6 +31,7 @@ class ZorgSQLRepo(TaggedRepo[str, models.ZorgNote, models.OrZorgQuery]):
         """
         del key
         self._session.add(note)
+        # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         assert note.ident is not None
         return Ok(str(note.ident))
 
