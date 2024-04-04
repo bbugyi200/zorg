@@ -17,6 +17,9 @@ mypy
 pydocstyle[toml]
 pylint
 
+### Types
+types-tqdm ~= 4.66
+
 ### Docs
 m2r2 != 0.3.3  # since this version requires docutils>=0.19 (see https://github.com/CrossNox/m2r2/compare/v0.3.2...v0.3.3)
 sphinx
