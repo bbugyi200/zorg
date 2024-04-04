@@ -7,9 +7,9 @@ from typing import TypeVar
 from eris import ErisResult, Ok
 from logrus import Logger
 from potoroo import TaggedRepo
-from sqlmodel import Session
+from sqlmodel import Session, select
 
-from .models import OrZorgQuery, ZorgNote
+from . import model_converter, models, sql_models
 
 
 logger = Logger(__name__)
@@ -17,38 +17,56 @@ logger = Logger(__name__)
 T = TypeVar("T")
 
 
-class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
+class ZorgSQLRepo(TaggedRepo[str, models.ZorgNote, models.OrZorgQuery]):
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
         self,
         session: Session,
     ) -> None:
-        self.session = session
+        self._session = session
 
-    def add(self, note: ZorgNote, /, *, key: str = None) -> ErisResult[str]:
+    def add(
+        self, note: models.ZorgNote, /, *, key: str = None
+    ) -> ErisResult[str]:
         """Adds a new note to the DB.
 
         Returns a unique identifier that has been associated with this note.
         """
-        del note, key
-        return Ok("")
-
-    def remove(self, note: ZorgNote, /) -> ErisResult[ZorgNote | None]:
-        """Remove a note from the DB."""
-        del note
-        return Ok(None)
-
-    def get(self, key: str) -> ErisResult[ZorgNote | None]:
-        """Retrieve a note from the DB."""
         del key
-        return Ok(None)
+        self._session.add(note)
+        return Ok(note.ident)
 
-    def get_by_tag(self, tag: OrZorgQuery) -> ErisResult[list[ZorgNote]]:
+    def remove(
+        self, note: models.ZorgNote, /
+    ) -> ErisResult[models.ZorgNote | None]:
+        """Remove a note from the DB."""
+        self._session.delete(note)
+        return Ok(note)
+
+    def get(self, key: str) -> ErisResult[models.ZorgNote | None]:
+        """Retrieve a note from the DB."""
+        stmt = select(sql_models.ZorgNote).where(
+            sql_models.ZorgNote.id == int(key)
+        )
+        results = self._session.exec(stmt)
+        sql_note = results.first()
+        if sql_note:
+            return Ok(model_converter.sql_note_to_model(sql_note))
+        else:
+            return Ok(None)
+
+    def get_by_tag(
+        self, tag: models.OrZorgQuery
+    ) -> ErisResult[list[models.ZorgNote]]:
         """Get note(s) from DB by using a tag."""
         del tag
         return Ok([])
 
-    def all(self) -> ErisResult[list[ZorgNote]]:
+    def all(self) -> ErisResult[list[models.ZorgNote]]:
         """Returns all zorg notes contained in the underlying SQL database."""
-        return Ok([])
+        stmt = select(sql_models.ZorgNote)
+        return Ok([
+            model_converter.sql_note_to_model(sql_note)
+            for sql_note in self._session.exec(stmt).all()
+        ])
