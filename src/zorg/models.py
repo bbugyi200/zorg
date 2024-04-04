@@ -30,14 +30,6 @@ class TodoPayload:
     status: TodoStatus = TodoStatus.OPEN
 
 
-@dataclass(frozen=True)
-class ZorgFile:
-    """A Zorg (i.e. *.zo) file."""
-
-    path: Path
-    notes: list["ZorgNote"] = field(default_factory=lambda: [])
-
-
 @dataclass
 class ZorgNote:
     """A Zorg note."""
@@ -57,6 +49,14 @@ class ZorgNote:
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
     todo_payload: Optional[TodoPayload] = None
+
+
+@dataclass(frozen=True)
+class ZorgFile:
+    """A Zorg (i.e. *.zo) file."""
+
+    path: Path
+    notes: list[ZorgNote] = field(default_factory=lambda: [])
 
 
 @dataclass(frozen=True)

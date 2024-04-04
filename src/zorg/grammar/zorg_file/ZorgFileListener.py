@@ -71,6 +71,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#x_or_tilde.
+    def enterX_or_tilde(self, ctx:ZorgFileParser.X_or_tildeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#x_or_tilde.
+    def exitX_or_tilde(self, ctx:ZorgFileParser.X_or_tildeContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#priority.
     def enterPriority(self, ctx:ZorgFileParser.PriorityContext):
         pass
@@ -194,6 +203,15 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#date.
     def exitDate(self, ctx:ZorgFileParser.DateContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#time.
+    def enterTime(self, ctx:ZorgFileParser.TimeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#time.
+    def exitTime(self, ctx:ZorgFileParser.TimeContext):
         pass
 
 

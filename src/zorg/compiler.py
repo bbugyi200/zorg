@@ -2,12 +2,14 @@
 
 from dataclasses import dataclass, field
 import datetime as dt
+from pathlib import Path
 from typing import Any, Literal, Optional
 
 import antlr4
 from logrus import Logger
 
 from . import models
+from .grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from .types import TodoPriorityType, TodoStatus
@@ -150,8 +152,14 @@ class ZorgFileCompiler(ZorgFileListener):
                 priority=self._s.priority, status=TodoStatus.OPEN
             )
         })
-        todo = models.ZorgNote(ctx.note_body().getText(), **kwargs)
-        self.zorg_file.notes.append(todo)
+        note_body = ctx.note_body()
+        if note_body is None:
+            logger.warning(
+                "Skipping todo with no note body", todo=ctx.getText()
+            )
+        else:
+            todo = models.ZorgNote(note_body.getText(), **kwargs)
+            self.zorg_file.notes.append(todo)
         # Reset priority back to default.
         self._s.priority = "C"
 
@@ -288,6 +296,20 @@ class ZorgFileCompiler(ZorgFileListener):
             self._s.h4_section_tags[tag_name].append(text)
         elif self._s.in_note:
             self._s.note_tags[tag_name].append(text)
+
+
+def walk_zorg_file(zo_path: Path) -> models.ZorgFile:
+    """Create a new ZorgFileCompiler and walk through notes in {zorg_file}."""
+    zorg_file = models.ZorgFile(zo_path)
+    stream = antlr4.FileStream(zorg_file.path, errors="ignore")
+    lexer = ZorgFileLexer(stream)
+    tokens = antlr4.CommonTokenStream(lexer)
+    parser = ZorgFileParser(tokens)
+    tree = parser.prog()  # type: ignore[no-untyped-call]
+    compiler = ZorgFileCompiler(zorg_file)
+    walker = antlr4.ParseTreeWalker()
+    walker.walk(compiler, tree)
+    return zorg_file
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:

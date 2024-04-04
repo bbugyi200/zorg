@@ -39,6 +39,7 @@ class ZorgSession(UnitOfWork[ZorgSQLRepo]):
         del exc_type
         del exc_value
         del traceback
+        self.rollback()
 
     def commit(self) -> None:
         """Commit our changes."""

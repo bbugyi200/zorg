@@ -11,7 +11,8 @@ comment    : HASH space_atoms? NL ;
 block      : item+ NL* ;
 item       : todo | note | footnote | comment ;
 todo       : base_todo subnote* ;
-base_todo  : (LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE) (' ' priority)? note_body NL ;
+base_todo  : (LOWER_O | x_or_tilde | LANGLE | RANGLE) (' ' priority)? note_body NL ;
+x_or_tilde : (LOWER_X | TILDE) (COLON time)? ;
 priority   : '[' HASH ID ']' ;
 note       : DASH base_note subnote* ;
 base_note  : note_body NL ;
@@ -28,8 +29,9 @@ atom        : tag_symbol | tag | link | property | id_group | ref ;
 // property
 property    : ID COLON COLON id_group ;
 id_group    : id (id_symbol+ id)* ;
-id          : ID | NUM_ID | date | LOWER_O | LOWER_X ;
+id          : ID | NUM_ID | date | time | LOWER_O | LOWER_X ;
 date        : DATE ;
+time        : TIME ;
 
 // symbols
 any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol | id_symbol ;
@@ -65,6 +67,7 @@ LOWER_O      : 'o' ;
 LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : '2' NUM NUM NUM DASH ('0' | '1') NUM DASH ('0' | '1' | '2' | '3') NUM ;
+TIME         : ('0' | '1' | '2') NUM ('0' | '1' | '2' | '3' | '4' | '5') NUM ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 TWO_SPACE_DASH : '  -' ;
 FOUR_SPACE_DASH : '    -' ;

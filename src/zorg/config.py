@@ -7,15 +7,18 @@ from pathlib import Path
 from typing import Any, Literal, Optional, Sequence
 
 import clack
+from clack import xdg
 from logrus import Logger
 
-from . import common
+from . import APP_NAME, common
 from .types import FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
-Command = Literal["compile", "edit", "info", "init", "open", "render"]
+Command = Literal["compile", "create", "edit", "init", "open", "render"]
 
 logger = Logger(__name__)
+
+DEFAULT_DATA_DIR = xdg.get_full_dir("data", APP_NAME)
 
 
 class Config(clack.Config):
@@ -27,6 +30,8 @@ class Config(clack.Config):
     zettel_dir: Path = Path.home() / "org"
 
     # ----- CONFIG
+    data_dir: Path = DEFAULT_DATA_DIR
+    database_url: str = "sqlite:///" + str(DEFAULT_DATA_DIR / f"{APP_NAME}.db")
     template_pattern_map: TemplatePatternMapType = {}
 
 
@@ -49,10 +54,10 @@ class CompileConfig(Config):
     zo_path: Path
 
 
-class DbInfoConfig(Config):
-    """Clack config for the 'db info' command."""
+class DbCreateConfig(Config):
+    """Clack config for the 'db create' command."""
 
-    command: Literal["info"]
+    command: Literal["create"]
 
 
 class EditConfig(Config):
@@ -159,10 +164,10 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "db", help="Commands for managing Zorg's SQL database."
     )
     new_db_command = clack.new_command_factory(db_parser)
-    # --- 'db info' command
+    # --- 'db create' command
     new_db_command(
-        "info",
-        help="Display some useful stats related to your Zorg notes and todos.",
+        "create",
+        help="Create zorg's backend database from scratch.",
     )
 
     # --- 'edit' command
