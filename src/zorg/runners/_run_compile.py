@@ -3,7 +3,6 @@
 from dataclasses import asdict
 from pprint import pprint
 
-from .. import models
 from ..compiler import walk_zorg_file
 from ..config import CompileConfig
 from ._runners import runner
