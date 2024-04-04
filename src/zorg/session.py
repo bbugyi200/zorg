@@ -35,6 +35,8 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
             engine_kwargs["echo"] = True
 
         self._engine_factory = partial(engine_factory, db_url, **engine_kwargs)
+        self._session: Session
+        self._repo: ZorgSQLRepo
 
     def __enter__(self) -> ZorgSQLSession:
         """Called before entering a ZorgSQLSession with-block."""
@@ -59,7 +61,6 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
     def commit(self) -> None:
         """Commit our changes."""
         self._session.commit()
-        return
 
     def rollback(self) -> None:
         """Revert any changes made while in this ZorgSQLSession's with-block."""
