@@ -1,10 +1,24 @@
 """Custom types used by zorg."""
 
+import abc
 import enum
 from pathlib import Path
-from typing import Any, Literal, Mapping, Pattern, Protocol, Sequence
+from typing import (
+    Any,
+    Generic,
+    Literal,
+    Mapping,
+    Pattern,
+    Protocol,
+    Sequence,
+    TypeVar,
+)
 
 from sqlalchemy.future import Engine
+
+
+E = TypeVar("E")
+T = TypeVar("T")
 
 
 FileGroupMapType = Mapping[str, Sequence[str]]
@@ -84,3 +98,15 @@ class PropertyValueType(enum.Enum):
     DATE = enum.auto()
     INTEGER = enum.auto()
     STRING = enum.auto()
+
+
+class DomainConverter(Generic[E, T], abc.ABC):
+    """Abstract interface for domain model converters."""
+
+    @abc.abstractmethod
+    def to_domain(self, item: T) -> E:
+        """Converts some non-domain object into a domain model."""
+
+    @abc.abstractmethod
+    def from_domain(self, entity: E) -> T:
+        """Converts some domain entity into something else."""

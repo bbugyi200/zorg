@@ -7,8 +7,9 @@ from logrus import Logger
 from potoroo import QueryRepo
 from sqlmodel import Session, select
 
-from . import converters, models as sql
+from . import models as sql
 from ...domain.models import OrZorgQuery, ZorgFile
+from .converters import ZorgFileConverter
 
 
 logger = Logger(__name__)
@@ -22,6 +23,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         session: Session,
     ) -> None:
         self._session = session
+        self._converter = ZorgFileConverter()
 
     def add(self, file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
         """Adds a new file to the DB.
@@ -29,7 +31,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._session.add(converters.file_to_sql_model(file))
+        self._session.add(self._converter.from_domain(file))
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
 
@@ -37,7 +39,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self, file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
         """Remove a file from the DB."""
-        self._session.delete(converters.file_to_sql_model(file))
+        self._session.delete(self._converter.from_domain(file))
         return Ok(file)
 
     def get(self, key: str) -> ErisResult[ZorgFile | None]:
@@ -46,7 +48,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
-            return Ok(converters.sql_file_to_model(sql_zorg_file))
+            return Ok(self._converter.to_domain(sql_zorg_file))
         else:
             return Ok(None)
 
@@ -59,6 +61,6 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         """Returns all zorg notes contained in the underlying SQL database."""
         stmt = select(sql.ZorgFile)
         return Ok([
-            converters.sql_file_to_model(sql_note)
+            self._converter.to_domain(sql_note)
             for sql_note in self._session.exec(stmt).all()
         ])

@@ -4,27 +4,32 @@ from pathlib import Path
 
 from . import models as sql
 from ...domain.models import ZorgFile, ZorgNote
+from ...domain.types import DomainConverter
 
 
-def file_to_sql_model(model: ZorgFile) -> sql.ZorgFile:
-    """Model-to-SQL-model converter for a ZorgFile."""
-    del model
-    return sql.ZorgFile()
+class ZorgFileConverter(DomainConverter[ZorgFile, sql.ZorgFile]):
+    """Converts ZorgFile domain entities to/from ZorgFile sqlmodels."""
+
+    def from_domain(self, entity: ZorgFile) -> sql.ZorgFile:
+        """Model-to-SQL-model converter for a ZorgFile."""
+        del entity
+        return sql.ZorgFile()
+
+    def to_domain(self, sql_model: sql.ZorgFile) -> ZorgFile:
+        """Model-to-SQL-model converter for a ZorgFile."""
+        del sql_model
+        return ZorgFile(Path("."))
 
 
-def sql_file_to_model(sql_model: sql.ZorgFile) -> ZorgFile:
-    """Model-to-SQL-model converter for a ZorgFile."""
-    del sql_model
-    return ZorgFile(Path("."))
+class ZorgNoteConverter(DomainConverter[ZorgNote, sql.ZorgNote]):
+    """Converts ZorgNote domain entities to/from ZorgNote sqlmodels."""
 
+    def from_domain(self, entity: ZorgNote) -> sql.ZorgNote:
+        """Model-to-SQL-model converter for a ZorgNote."""
+        del entity
+        return sql.ZorgNote(desc="")
 
-def note_to_sql_model(model: ZorgNote) -> sql.ZorgNote:
-    """Model-to-SQL-model converter for a ZorgFile."""
-    del model
-    return sql.ZorgNote(desc="")
-
-
-def sql_note_to_model(sql_model: sql.ZorgNote) -> ZorgNote:
-    """Model-to-SQL-model converter for a ZorgFile."""
-    del sql_model
-    return ZorgNote("")
+    def to_domain(self, sql_model: sql.ZorgNote) -> ZorgNote:
+        """Model-to-SQL-model converter for a ZorgNote."""
+        del sql_model
+        return ZorgNote("")
