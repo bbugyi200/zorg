@@ -100,13 +100,13 @@ class PropertyValueType(enum.Enum):
     STRING = enum.auto()
 
 
-class DomainConverter(Generic[E, T], abc.ABC):
-    """Abstract interface for domain model converters."""
+class EntityConverter(Generic[E, T], abc.ABC):
+    """Abstract interface for domain entity converters."""
 
     @abc.abstractmethod
-    def to_domain(self, item: T) -> E:
-        """Converts some non-domain object into a domain model."""
+    def to_entity(self, item: T) -> E:
+        """Converts some non-domain object into a domain entity."""
 
     @abc.abstractmethod
-    def from_domain(self, entity: E) -> T:
+    def from_entity(self, entity: E) -> T:
         """Converts some domain entity into something else."""
