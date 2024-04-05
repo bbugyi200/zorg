@@ -8,10 +8,10 @@ from typing import Any, Literal, Optional
 import antlr4
 from logrus import Logger
 
-from . import models
 from .grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from .models import TodoPayload, ZorgFile, ZorgNote
 from .types import TodoPriorityType, TodoStatus
 
 
@@ -23,7 +23,7 @@ logger = Logger(__name__)
 class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
-    def __init__(self, zorg_file: models.ZorgFile) -> None:
+    def __init__(self, zorg_file: ZorgFile) -> None:
         self.zorg_file = zorg_file
 
         self._s = _ZorgFileCompilerState()
@@ -148,7 +148,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({
-            "todo_payload": models.TodoPayload(
+            "todo_payload": TodoPayload(
                 priority=self._s.priority, status=TodoStatus.OPEN
             )
         })
@@ -158,7 +158,7 @@ class ZorgFileCompiler(ZorgFileListener):
                 "Skipping todo with no note body", todo=ctx.getText()
             )
         else:
-            todo = models.ZorgNote(note_body.getText(), **kwargs)
+            todo = ZorgNote(note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
         # Reset priority back to default.
         self._s.priority = "C"
@@ -229,7 +229,7 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        note = models.ZorgNote(ctx.note_body().getText(), **kwargs)
+        note = ZorgNote(ctx.note_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
@@ -298,9 +298,9 @@ class ZorgFileCompiler(ZorgFileListener):
             self._s.note_tags[tag_name].append(text)
 
 
-def walk_zorg_file(zo_path: Path) -> models.ZorgFile:
+def walk_zorg_file(zo_path: Path) -> ZorgFile:
     """Create a new ZorgFileCompiler and walk through notes in {zorg_file}."""
-    zorg_file = models.ZorgFile(zo_path)
+    zorg_file = ZorgFile(zo_path)
     stream = antlr4.FileStream(zorg_file.path, errors="ignore")
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
