@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from eris import ErisResult, Ok
 from logrus import Logger
-from potoroo import TaggedRepo
+from potoroo import QueryRepo
 from sqlmodel import Session, select
 
 from . import converters, models as sql
@@ -14,7 +14,7 @@ from ...domain.models import OrZorgQuery, ZorgNote
 logger = Logger(__name__)
 
 
-class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
+class ZorgSQLRepo(QueryRepo[str, ZorgNote, OrZorgQuery]):
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
@@ -51,9 +51,9 @@ class ZorgSQLRepo(TaggedRepo[str, ZorgNote, OrZorgQuery]):
         else:
             return Ok(None)
 
-    def get_by_tag(self, tag: OrZorgQuery) -> ErisResult[list[ZorgNote]]:
-        """Get note(s) from DB by using a tag."""
-        del tag
+    def get_by_query(self, query: OrZorgQuery) -> ErisResult[list[ZorgNote]]:
+        """Get note(s) from DB by using a query."""
+        del query
         return Ok([])
 
     def all(self) -> ErisResult[list[ZorgNote]]:
