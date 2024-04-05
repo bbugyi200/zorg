@@ -1,4 +1,4 @@
-"""Contains the ZorgFileCompiler class."""
+"""Contains service logic used to compile zorg files."""
 
 from dataclasses import dataclass, field
 import datetime as dt
@@ -20,7 +20,7 @@ TagName = Literal["areas", "contexts", "people", "projects"]
 logger = Logger(__name__)
 
 
-class ZorgFileCompiler(ZorgFileListener):
+class _ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
     def __init__(self, zorg_file: ZorgFile) -> None:
@@ -299,14 +299,14 @@ class ZorgFileCompiler(ZorgFileListener):
 
 
 def walk_zorg_file(zo_path: Path) -> ZorgFile:
-    """Create a new ZorgFileCompiler and walk through notes in {zorg_file}."""
+    """Create a new _ZorgFileCompiler and walk through notes in {zorg_file}."""
     zorg_file = ZorgFile(zo_path)
     stream = antlr4.FileStream(zorg_file.path, errors="ignore")
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgFileParser(tokens)
     tree = parser.prog()
-    compiler = ZorgFileCompiler(zorg_file)
+    compiler = _ZorgFileCompiler(zorg_file)
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
     return zorg_file
