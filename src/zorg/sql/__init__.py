@@ -1,4 +1,4 @@
 """zorg.sql
 
-SQLAlchemy and SQLModel code lives here.
+Code related to Zorg's SQL database (e.g. SQLAlchemy, SQLModel) lives here.
 """

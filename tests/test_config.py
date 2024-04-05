@@ -6,7 +6,7 @@ from typing import Any, Sequence, cast
 from clack import clack_envvars_set
 from clack.types import ClackConfig
 
-from zorg.config import EditConfig, TemplateRenderConfig, clack_parser
+from zorg.app.config import EditConfig, TemplateRenderConfig, clack_parser
 
 
 def test_defaultToEdit_whenNoCommandIsGiven() -> None:
