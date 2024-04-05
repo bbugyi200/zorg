@@ -23,25 +23,25 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
     ) -> None:
         self._session = session
 
-    def add(self, note: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
-        """Adds a new note to the DB.
+    def add(self, file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
+        """Adds a new file to the DB.
 
-        Returns a unique identifier that has been associated with this note.
+        Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._session.add(note)
+        self._session.add(file)
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
 
     def remove(
-        self, note: ZorgFile, /  # noqa: W504
+        self, file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
-        """Remove a note from the DB."""
-        self._session.delete(note)
-        return Ok(note)
+        """Remove a file from the DB."""
+        self._session.delete(file)
+        return Ok(file)
 
     def get(self, key: str) -> ErisResult[ZorgFile | None]:
-        """Retrieve a note from the DB."""
+        """Retrieve a file from the DB."""
         stmt = select(sql.ZorgFile).where(sql.ZorgFile.id == int(key))
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
@@ -51,7 +51,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
             return Ok(None)
 
     def get_by_query(self, query: OrZorgQuery) -> ErisResult[list[ZorgFile]]:
-        """Get note(s) from DB by using a query."""
+        """Get file(s) from DB by using a query."""
         del query
         return Ok([])
 
