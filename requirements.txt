@@ -63,7 +63,7 @@ structlog==24.1.0
     # via bolton-logrus
 tqdm==4.66.2
     # via -r requirements.in
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   pydantic
     #   pydantic-core
