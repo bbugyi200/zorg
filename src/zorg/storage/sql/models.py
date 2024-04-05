@@ -28,7 +28,7 @@ class NoteLink(SQLModel):
     """Abstract model for association/link models."""
 
     note_id: Optional[int] = Field(
-        default=None, foreign_key="note.id", primary_key=True
+        default=None, foreign_key="zorgnote.id", primary_key=True
     )
 
 
@@ -77,15 +77,15 @@ class ZorgFileLink(NoteLink, table=True):
     """Association model for notes to zorg files."""
 
     zorg_file_id: Optional[int] = Field(
-        default=None, foreign_key="zorg_file.id", primary_key=True
+        default=None, foreign_key="zorgfile.id", primary_key=True
     )
 
 
 class PropertyLink(NoteLink, table=True):
-    """Association model for notes-to-metatags relationships."""
+    """Association model for note-to-property relationships."""
 
-    metatag_id: Optional[int] = Field(
-        default=None, foreign_key="prop.id", primary_key=True
+    prop_id: Optional[int] = Field(
+        default=None, foreign_key="property.id", primary_key=True
     )
 
     note: "ZorgNote" = Relationship(back_populates="property_links")

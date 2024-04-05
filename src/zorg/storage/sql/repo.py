@@ -29,7 +29,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._session.add(file)
+        self._session.add(converters.file_to_sql_model(file))
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
 
@@ -37,7 +37,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self, file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
         """Remove a file from the DB."""
-        self._session.delete(file)
+        self._session.delete(converters.file_to_sql_model(file))
         return Ok(file)
 
     def get(self, key: str) -> ErisResult[ZorgFile | None]:
