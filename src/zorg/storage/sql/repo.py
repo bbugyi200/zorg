@@ -31,7 +31,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._session.add(self._converter.from_domain(file))
+        self._session.add(self._converter.from_entity(file))
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
 
@@ -39,7 +39,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self, file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
         """Remove a file from the DB."""
-        self._session.delete(self._converter.from_domain(file))
+        self._session.delete(self._converter.from_entity(file))
         return Ok(file)
 
     def get(self, key: str) -> ErisResult[ZorgFile | None]:
@@ -48,7 +48,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
-            return Ok(self._converter.to_domain(sql_zorg_file))
+            return Ok(self._converter.to_entity(sql_zorg_file))
         else:
             return Ok(None)
 
@@ -61,6 +61,6 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         """Returns all zorg notes contained in the underlying SQL database."""
         stmt = select(sql.ZorgFile)
         return Ok([
-            self._converter.to_domain(sql_note)
+            self._converter.to_entity(sql_note)
             for sql_note in self._session.exec(stmt).all()
         ])
