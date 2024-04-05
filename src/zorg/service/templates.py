@@ -10,7 +10,7 @@ from logrus import Logger
 from typist import PathLike
 
 from . import common
-from .types import TemplatePatternMapType, VarMapType
+from ..domain.types import TemplatePatternMapType, VarMapType
 
 
 logger = Logger(__name__)

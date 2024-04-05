@@ -2,9 +2,9 @@
 
 from pathlib import Path
 
-from ..common import prepend_zdir
+from ..service.common import prepend_zdir
 from ..config import OpenActionConfig
-from ..templates import init_from_template
+from ..service.templates import init_from_template
 from ._runners import runner
 
 

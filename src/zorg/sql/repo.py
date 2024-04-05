@@ -8,7 +8,7 @@ from potoroo import TaggedRepo
 from sqlmodel import Session, select
 
 from . import converters, models as sql
-from ..models import OrZorgQuery, ZorgNote
+from ..domain.models import OrZorgQuery, ZorgNote
 
 
 logger = Logger(__name__)

@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from . import models as sql
-from ..models import ZorgFile, ZorgNote
+from ..domain.models import ZorgFile, ZorgNote
 
 
 def file_to_sql_model(model: ZorgFile) -> sql.ZorgFile:

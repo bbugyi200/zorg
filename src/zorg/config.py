@@ -10,8 +10,9 @@ import clack
 from clack import xdg
 from logrus import Logger
 
-from . import APP_NAME, common
-from .types import FileGroupMapType, TemplatePatternMapType, VarMapType
+from . import APP_NAME
+from .service import common
+from .domain.types import FileGroupMapType, TemplatePatternMapType, VarMapType
 
 
 Command = Literal["compile", "create", "edit", "init", "open", "render"]

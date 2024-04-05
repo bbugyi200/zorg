@@ -7,7 +7,7 @@ from typing import Any, Iterable
 
 from typist import PathLike
 
-from .types import VarMapType
+from ..domain.types import VarMapType
 
 
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:

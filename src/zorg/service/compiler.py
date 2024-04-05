@@ -8,11 +8,11 @@ from typing import Any, Literal, Optional
 import antlr4
 from logrus import Logger
 
-from .grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
-from .grammar.zorg_file.ZorgFileListener import ZorgFileListener
-from .grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from .models import TodoPayload, ZorgFile, ZorgNote
-from .types import TodoPriorityType, TodoStatus
+from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
+from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
+from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from ..domain.models import TodoPayload, ZorgFile, ZorgNote
+from ..domain.types import TodoPriorityType, TodoStatus
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
