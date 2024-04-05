@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Any, Iterator
 from freezegun import freeze_time
 from pytest import fixture
 
-from zorg.__main__ import main as zorg_main
+from zorg.app.__main__ import main as zorg_main
 
 from . import common as c
 

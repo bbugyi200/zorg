@@ -94,7 +94,7 @@ setup(
     description=DESCRIPTION,
     entry_points={
         "console_scripts": [
-            "zorg = zorg.__main__:main",
+            "zorg = zorg.app.__main__:main",
         ]
     },
     include_package_data=True,
