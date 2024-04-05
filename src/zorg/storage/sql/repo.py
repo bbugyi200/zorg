@@ -44,9 +44,9 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         """Retrieve a note from the DB."""
         stmt = select(sql.ZorgFile).where(sql.ZorgFile.id == int(key))
         results = self._session.exec(stmt)
-        sql_note = results.first()
-        if sql_note:
-            return Ok(converters.sql_note_to_model(sql_note))
+        sql_zorg_file = results.first()
+        if sql_zorg_file:
+            return Ok(converters.sql_file_to_model(sql_zorg_file))
         else:
             return Ok(None)
 
@@ -59,6 +59,6 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         """Returns all zorg notes contained in the underlying SQL database."""
         stmt = select(sql.ZorgFile)
         return Ok([
-            converters.sql_note_to_model(sql_note)
+            converters.sql_file_to_model(sql_note)
             for sql_note in self._session.exec(stmt).all()
         ])
