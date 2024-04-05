@@ -73,7 +73,7 @@ click==8.1.7
     #   cookiecutter
     #   cruft
     #   pip-tools
-    #   typer-slim
+    #   typer
 cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
@@ -226,11 +226,11 @@ requests==2.31.0
 rich==13.7.1
     # via
     #   cookiecutter
-    #   typer-slim
+    #   typer
 setuptools-scm==8.0.4
     # via -r requirements-dev.in
 shellingham==1.5.4
-    # via typer-slim
+    # via typer
 six==1.16.0
     # via
     #   python-dateutil
@@ -304,14 +304,8 @@ tqdm==4.66.2
     # via
     #   -r requirements.in
     #   zettel-org
-typer==0.12.0
+typer==0.12.1
     # via cruft
-typer-cli==0.12.0
-    # via typer
-typer-slim[standard]==0.12.0
-    # via
-    #   typer
-    #   typer-cli
 types-python-dateutil==2.9.0.20240316
     # via arrow
 types-tqdm==4.66.0.20240106
@@ -325,7 +319,7 @@ typing-extensions==4.10.0
     #   pydantic-core
     #   setuptools-scm
     #   sqlalchemy
-    #   typer-slim
+    #   typer
 urllib3==2.2.1
     # via requests
 vimala==0.2.0
