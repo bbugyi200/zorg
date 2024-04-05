@@ -12,7 +12,7 @@ from sqlmodel import Session
 
 from . import db
 from .repo import ZorgSQLRepo
-from .types import CreateEngineType
+from ..types import CreateEngineType
 
 
 logger = Logger(__name__)
