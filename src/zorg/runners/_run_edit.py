@@ -6,8 +6,8 @@ from typing import Iterable, Iterator
 from logrus import Logger
 import vimala
 
-from ..service.common import prepend_zdir
 from ..config import EditConfig
+from ..service.common import prepend_zdir
 from ..service.file_groups import expand_file_group_paths
 from ..service.templates import init_from_template
 from ._runners import runner

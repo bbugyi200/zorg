@@ -3,8 +3,8 @@
 from dataclasses import asdict
 from pprint import pprint
 
-from ..service.compiler import walk_zorg_file
 from ..config import CompileConfig
+from ..service.compiler import walk_zorg_file
 from ._runners import runner
 
 

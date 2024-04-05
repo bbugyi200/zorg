@@ -5,8 +5,8 @@ import sys
 from logrus import Logger
 from tqdm import tqdm
 
-from ..service.compiler import walk_zorg_file
 from ..config import DbCreateConfig
+from ..service.compiler import walk_zorg_file
 from ._runners import runner
 
 
