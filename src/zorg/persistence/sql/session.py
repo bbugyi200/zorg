@@ -10,8 +10,8 @@ from logrus import Logger
 from potoroo import UnitOfWork
 from sqlmodel import Session
 
-from . import db
-from ..domain.types import CreateEngineType
+from ...domain.types import CreateEngineType
+from .engine import create_cached_engine
 from .repo import ZorgSQLRepo
 
 
@@ -25,7 +25,7 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         self,
         db_url: str,
         *,
-        engine_factory: CreateEngineType = db.create_cached_engine,
+        engine_factory: CreateEngineType = create_cached_engine,
         verbose: int = 0,
     ) -> None:
         # echo SQL statements to console if -vvv or greater is specified on the

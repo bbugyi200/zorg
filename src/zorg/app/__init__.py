@@ -1,4 +1,4 @@
 """zorg.app
 
-Zorg's application code (e.g. clack config and runners) lives here.
+Zorg's application layer (e.g. clack config and runners) lives here.
 """

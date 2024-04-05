@@ -7,7 +7,7 @@ from typing import List, Optional
 from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
-from ..domain.types import TodoStatus
+from ...domain.types import TodoStatus
 
 
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
