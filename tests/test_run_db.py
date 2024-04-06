@@ -103,3 +103,33 @@ def test_run_db_create__properties(
     """Check what properties are indexed by running 'zorg db create'."""
     sql_cursor.execute("SELECT name FROM property")
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
+
+
+def test_run_db_create__create_dates(
+    sql_cursor: sqlite3.Cursor, snapshot: Snapshot
+) -> None:
+    """Check what create dates are indexed by running 'zorg db create'."""
+    sql_cursor.execute("SELECT DISTINCT create_date FROM zorgnote")
+    assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
+
+
+def test_run_db_create__todo_priorities(
+    sql_cursor: sqlite3.Cursor, snapshot: Snapshot
+) -> None:
+    """Check what todo priorities are indexed by running 'zorg db create'."""
+    sql_cursor.execute(
+        "SELECT DISTINCT todo_priority FROM zorgnote WHERE todo_priority IS"
+        " NOT NULL"
+    )
+    assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
+
+
+def test_run_db_create__todo_statuses(
+    sql_cursor: sqlite3.Cursor, snapshot: Snapshot
+) -> None:
+    """Check what todo statuses are indexed by running 'zorg db create'."""
+    sql_cursor.execute(
+        "SELECT DISTINCT todo_status FROM zorgnote WHERE todo_status IS NOT"
+        " NULL"
+    )
+    assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())

@@ -16,6 +16,13 @@
     'puke',
   ])
 # ---
+# name: test_run_db_create__create_dates[YAMLConfigFile]
+  list([
+    '2000-01-03',
+    '2024-03-13',
+    '2024-03-30',
+  ])
+# ---
 # name: test_run_db_create__file_count[YAMLConfigFile]
   10
 # ---
@@ -86,4 +93,16 @@
 # ---
 # name: test_run_db_create__todo_count[YAMLConfigFile]
   12
+# ---
+# name: test_run_db_create__todo_priorities[YAMLConfigFile]
+  list([
+    'A',
+    'B',
+    'C',
+  ])
+# ---
+# name: test_run_db_create__todo_statuses[YAMLConfigFile]
+  list([
+    'OPEN',
+  ])
 # ---
