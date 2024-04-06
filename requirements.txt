@@ -8,7 +8,7 @@ annotated-types==0.6.0
     # via pydantic
 antlr4-python3-runtime==4.13.1
     # via -r requirements.in
-bolton-clack==0.3.11
+bolton-clack==0.3.12
     # via -r requirements.in
 bolton-eris==0.2.3
     # via
