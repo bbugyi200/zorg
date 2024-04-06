@@ -365,22 +365,22 @@ class _ZorgFileCompilerState:
     priority: TodoPriorityType = "C"
 
     @property
-    def areas(self) -> set[str]:
+    def areas(self) -> list[str]:
         """Area tags that are currently in-scope."""
         return self._get_current_tags("areas")
 
     @property
-    def contexts(self) -> set[str]:
+    def contexts(self) -> list[str]:
         """Context tags that are currently in-scope."""
         return self._get_current_tags("contexts")
 
     @property
-    def projects(self) -> set[str]:
+    def projects(self) -> list[str]:
         """Project tags that are currently in-scope."""
         return self._get_current_tags("projects")
 
     @property
-    def people(self) -> set[str]:
+    def people(self) -> list[str]:
         """People tags that are currently in-scope."""
         return self._get_current_tags("people")
 
@@ -395,7 +395,7 @@ class _ZorgFileCompilerState:
             | self.note_properties
         )
 
-    def _get_current_tags(self, tag_name: TagName) -> set[str]:
+    def _get_current_tags(self, tag_name: TagName) -> list[str]:
         tags = []
         tags.extend(self.file_tags[tag_name])
         tags.extend(self.h1_section_tags[tag_name])
@@ -403,4 +403,4 @@ class _ZorgFileCompilerState:
         tags.extend(self.h3_section_tags[tag_name])
         tags.extend(self.h4_section_tags[tag_name])
         tags.extend(self.note_tags[tag_name])
-        return set(tags)
+        return sorted(set(tags))
