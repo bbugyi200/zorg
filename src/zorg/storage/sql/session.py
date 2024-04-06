@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from functools import partial
 from types import TracebackType
-from typing import Type
+from typing import Iterator, Type
 
 from logrus import Logger
 from potoroo import UnitOfWork
 from sqlmodel import Session
 
-from ...domain.types import CreateEngineType
+from ...domain.types import CreateEngineType, Message
 from .engine import create_cached_engine
 from .repo import ZorgSQLRepo
 
@@ -70,3 +70,9 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
     def repo(self) -> ZorgSQLRepo:
         """Returns the GreatRepo object associated with this ZorgSQLSession."""
         return self._repo
+
+    def collect_new_messages(self) -> Iterator[Message]:
+        """Collect new events/commands for our messagebus to process."""
+        for zorg_file in self.repo.seen:
+            while zorg_file.messages:
+                yield zorg_file.messages.pop(0)

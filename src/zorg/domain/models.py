@@ -7,6 +7,7 @@ from typing import Iterable, Optional
 
 from .types import (
     DescOperator,
+    Message,
     PropertyOperator,
     PropertyValueType,
     TodoPriorityType,
@@ -49,6 +50,7 @@ class ZorgFile:
 
     path: Path
     notes: list[ZorgNote] = field(default_factory=lambda: [])
+    messages: list[Message] = field(default_factory=lambda: [])
 
 
 @dataclass(frozen=True)

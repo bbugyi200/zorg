@@ -25,22 +25,25 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self._session = session
         self._converter = ZorgFileConverter(session)
 
-    def add(self, file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
+        self.seen: list[ZorgFile] = []
+
+    def add(self, zorg_file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
         """Adds a new file to the DB.
 
         Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._session.add(self._converter.from_entity(file))
+        self._remember_zorg_file(zorg_file)
+        self._session.add(self._converter.from_entity(zorg_file))
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
 
     def remove(
-        self, file: ZorgFile, /  # noqa: W504
+        self, zorg_file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
         """Remove a file from the DB."""
-        self._session.delete(self._converter.from_entity(file))
-        return Ok(file)
+        self._session.delete(self._converter.from_entity(zorg_file))
+        return Ok(zorg_file)
 
     def get(self, key: str) -> ErisResult[ZorgFile | None]:
         """Retrieve a file from the DB."""
@@ -48,19 +51,29 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
-            return Ok(self._converter.to_entity(sql_zorg_file))
+            zorg_file = self._converter.to_entity(sql_zorg_file)
+            self._remember_zorg_file(zorg_file)
+            return Ok(zorg_file)
         else:
             return Ok(None)
 
     def get_by_query(self, query: OrZorgQuery) -> ErisResult[list[ZorgFile]]:
         """Get file(s) from DB by using a query."""
         del query
-        return Ok([])
+        result = []
+        for zorg_file in result:
+            self._remember_zorg_file(zorg_file)
+        return Ok(result)
 
     def all(self) -> ErisResult[list[ZorgFile]]:
         """Returns all zorg notes contained in the underlying SQL database."""
         stmt = select(sql.ZorgFile)
-        return Ok([
-            self._converter.to_entity(sql_note)
-            for sql_note in self._session.exec(stmt).all()
-        ])
+        result = []
+        for sql_zorg_file in self._session.exec(stmt).all():
+            zorg_file = self._converter.to_entity(sql_zorg_file)
+            self._remember_zorg_file(zorg_file)
+        return Ok(result)
+
+    def _remember_zorg_file(self, zorg_file: ZorgFile) -> None:
+        if str(zorg_file.path) not in set(str(zf.path) for zf in self.seen):
+            self.seen.append(zorg_file)

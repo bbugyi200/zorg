@@ -14,5 +14,6 @@ def run_compile(cfg: CompileConfig) -> int:
     zorg_file = walk_zorg_file(cfg.zo_path)
     zorg_file_dict = asdict(zorg_file)
     del zorg_file_dict["path"]
+    del zorg_file_dict["messages"]
     pprint(zorg_file_dict)
     return 0
