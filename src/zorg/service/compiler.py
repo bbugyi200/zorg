@@ -377,25 +377,7 @@ class _ZorgFileCompilerState:
     @property
     def projects(self) -> list[str]:
         """Project tags that are currently in-scope."""
-        project: Optional[str] = None
-        for tag_map in [
-            self.file_tags,
-            self.h1_section_tags,
-            self.h2_section_tags,
-            self.h3_section_tags,
-            self.h4_section_tags,
-            self.note_tags,
-        ]:
-            project_list = tag_map["projects"]
-            if not project_list:
-                continue
-            inner_project = project_list[0]
-            if project is None:
-                project = inner_project
-            elif project != inner_project:
-                project = f"{project}/{inner_project}"
-
-        return [] if project is None else [project]
+        return self._get_current_tags("projects")
 
     @property
     def people(self) -> list[str]:
