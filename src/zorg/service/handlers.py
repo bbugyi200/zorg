@@ -36,10 +36,6 @@ def check_keep_alive_file(
     cmd: commands.CheckKeepAliveFileCommand, session: ZorgSQLSession
 ) -> None:
     """Command handler for the CheckKeepAliveFileCommand."""
-    logger.debug(
-        "Vim loop will run as long as the keep alive file exists.",
-        keep_alive_file=cmd.keep_alive_file,
-    )
     if not cmd.keep_alive_file.exists():
         logger.debug(
             "No keep alive file found.", keep_alive_file=cmd.keep_alive_file
@@ -47,6 +43,9 @@ def check_keep_alive_file(
         return
 
     if cmd.keep_alive_file.stat().st_size == 0:
+        logger.debug(
+            "Empty keep alive file found.", keep_alive_file=cmd.keep_alive_file
+        )
         paths = cmd.paths
     else:
         new_paths = prepend_zdir(
