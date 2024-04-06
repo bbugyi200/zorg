@@ -113,7 +113,7 @@ class ZorgNote(Base, table=True):
     """Model class for zorg notes."""
 
     # table columns
-    desc: str
+    body: str
     create_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
     todo_status: Optional[TodoStatus] = None
