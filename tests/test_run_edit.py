@@ -12,30 +12,16 @@ from . import common as c
 
 
 def test_edit_day_logs(
-    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path, snapshot: Snapshot
+    main: c.MainType, vim_proc_mock: Mock, zettel_dir: Path, snapshot: Snapshot
 ) -> None:
     """Test that we properly generate test day, habit, and done logs."""
-    zettel_dir = tmp_path / "org"
-    kwargs: dict[str, Any] = {
-        "vim_commands": ["echo hi", "source {zdir}/vimrc"]
-    }
-    for key, template_stem in [
-        ("day_log_template", "day_log"),
-        ("habit_log_template", "habit_log"),
-        ("done_log_template", "done_log"),
-    ]:
-        template_path: Path = zettel_dir / f"{template_stem}.zot"
-        template_path.parent.mkdir(parents=True, exist_ok=True)
-        test_data_template_path = Path(__file__).parent / Path(
-            f"data/{template_stem}.zot"
-        )
-        template_path.write_bytes(test_data_template_path.read_bytes())
-        kwargs[key] = template_path.name
-
     day_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.DD}.zo"
     habit_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.YEST_DD}_habit.zo"
     done_log = f"{c.YYYY}/{c.YYYY}{c.MM}{c.DD}_done.zo"
     re_date_group = "(?P<date>[0-9]{4}[01][0-9][0-3][0-9])"
+    kwargs: dict[str, Any] = {
+        "vim_commands": ["echo hi", "source {zdir}/vimrc"]
+    }
     exit_code = main(
         "--dir",
         str(zettel_dir),

@@ -6,6 +6,7 @@ https://docs.pytest.org/en/6.2.x/fixture.html#conftest-py-sharing-fixtures-acros
 
 from __future__ import annotations
 
+import itertools as it
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Iterator
 
@@ -31,7 +32,7 @@ def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     tmp_path = tmp_path_factory.getbasetemp()
     zettel_dir = tmp_path / "org"
     zettel_dir.mkdir()
-    for zo_path in _get_all_zo_paths():
+    for zo_path in _get_all_zo_and_zot_paths():
         zettel_zo_path = zettel_dir / zo_path.name
         zettel_zo_path.write_bytes(zo_path.read_bytes())
     return zettel_dir
@@ -61,10 +62,12 @@ def frozen_time() -> Iterator[None]:
         yield
 
 
-def _get_all_zo_paths() -> list[Path]:
+def _get_all_zo_and_zot_paths() -> list[Path]:
     """Returns a list of Paths for all the *.zo files.
 
     These names will be relative to the zorg root directory.
     """
     zorg_root_dir = Path(__file__).parent.parent
-    return list(zorg_root_dir.rglob("*.zo"))
+    return list(
+        it.chain(zorg_root_dir.rglob("*.zo"), zorg_root_dir.rglob("*.zot"))
+    )
