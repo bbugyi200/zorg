@@ -27,7 +27,9 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
 
         self.seen: list[ZorgFile] = []
 
-    def add(self, zorg_file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
+    def add(
+        self, zorg_file: ZorgFile, /, *, key: str = None
+    ) -> ErisResult[str]:
         """Adds a new file to the DB.
 
         Returns a unique identifier that has been associated with this file.

@@ -12,7 +12,7 @@ class Command:
 @dataclass(frozen=True)
 class EditCommand(Command):
     """Command to open one or more zorg files using an editor."""
-    
+
     zettel_dir: Path
     paths: list[Path]
     keep_alive_file: Path

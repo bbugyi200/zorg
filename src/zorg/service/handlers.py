@@ -16,6 +16,7 @@ logger = Logger(__name__)
 
 def start_vim_loop(cmd: commands.EditCommand, session: ZorgSQLSession) -> None:
     del session
+
     def run_vim(paths: Iterable[Path]) -> None:
         vimala.vim(
             *paths,
