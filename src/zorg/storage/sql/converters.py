@@ -16,14 +16,18 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
 
     def __init__(self, session: Session) -> None:
         self._note_converter = ZorgNoteConverter(session)
+        self._all_sql_notes: list[sql.ZorgNote] = []
 
     def from_entity(self, entity: ZorgFile) -> sql.ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
+        sql_notes = []
+        for note in entity.notes:
+            sql_note = self._note_converter.from_entity(note)
+            self._all_sql_notes.append(sql_note)
+            sql_notes.append(sql_note)
         return sql.ZorgFile(
             path=str(entity.path),
-            notes=[
-                self._note_converter.from_entity(note) for note in entity.notes
-            ],
+            notes=sql_notes,
         )
 
     def to_entity(self, sql_model: sql.ZorgFile) -> ZorgFile:
@@ -54,20 +58,21 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
             ("people", sql.Person),
             ("projects", sql.Project),
         ]:
-            self_tag_list = getattr(entity, attr)
-            model_tag_list = []
-            for tag_name in self_tag_list:
-                if tag_name not in self._tag_cache[tag_model]:
+            entity_tag_list = getattr(entity, attr)
+            sql_tag_list = []
+            tag_cache = self._tag_cache[tag_model]
+            for tag_name in entity_tag_list:
+                if tag_name not in tag_cache:
                     stmt = select(tag_model).where(tag_model.name == tag_name)
                     results = self._session.exec(stmt)
                     tag = results.first()
                     if tag is None:
                         tag = tag_model(name=tag_name)
-                    self._tag_cache[tag_model][tag_name] = tag
+                    tag_cache[tag_name] = tag
 
-                tag = self._tag_cache[tag_model][tag_name]
-                model_tag_list.append(tag)
-            setattr(sql_zorg_note, attr, model_tag_list)
+                tag = tag_cache[tag_name]
+                sql_tag_list.append(tag)
+            setattr(sql_zorg_note, attr, sql_tag_list)
         return sql_zorg_note
 
     def to_entity(self, sql_model: sql.ZorgNote) -> ZorgNote:
