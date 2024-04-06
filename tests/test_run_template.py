@@ -33,9 +33,7 @@ def test_template_render_day_log(
 
 
 def test_template_render_hello(
-    main: c.MainType,
-    capsys: CaptureFixture,
-    zettel_dir: Path
+    main: c.MainType, capsys: CaptureFixture, zettel_dir: Path
 ) -> None:
     """Test that the 'hello.zot' template renders as expected."""
     argv = [
