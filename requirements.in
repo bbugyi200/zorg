@@ -1,5 +1,5 @@
 antlr4-python3-runtime ~= 4.13
-bolton-clack ~= 0.3.11
+bolton-clack ~= 0.3.12
 bolton-eris ~= 0.2.3
 bolton-logrus ~= 0.1.1
 bolton-typist ~= 0.2.0
