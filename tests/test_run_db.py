@@ -12,8 +12,8 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 from . import common as c
 
 
-@fixture(scope="session")
-def sql_cursor(
+@fixture(name="sql_cursor", scope="session")
+def sql_cursor_fixture(
     main: c.MainType, tmp_path_factory: TempPathFactory, zettel_dir: Path
 ) -> sqlite3.Cursor:
     """Connects to the zorg DB created by 'zorg db create'."""

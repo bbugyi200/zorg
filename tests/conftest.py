@@ -30,12 +30,12 @@ if TYPE_CHECKING:  # fixes pytest warning
 def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
     tmp_path = tmp_path_factory.getbasetemp()
-    zettel_dir = tmp_path / "org"
-    zettel_dir.mkdir()
+    zdir = tmp_path / "org"
+    zdir.mkdir()
     for zo_path in _get_all_zo_and_zot_paths():
-        zettel_zo_path = zettel_dir / zo_path.name
+        zettel_zo_path = zdir / zo_path.name
         zettel_zo_path.write_bytes(zo_path.read_bytes())
-    return zettel_dir
+    return zdir
 
 
 @fixture(scope="session")
