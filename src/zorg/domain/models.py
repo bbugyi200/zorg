@@ -15,14 +15,6 @@ from .types import (
 
 
 @dataclass(frozen=True)
-class DateRange:
-    """Represents a range of dates."""
-
-    start: dt.date
-    end: Optional[dt.date] = None
-
-
-@dataclass(frozen=True)
 class TodoPayload:
     """Extra fields that are added to ZorgNotes that are todos."""
 
@@ -76,6 +68,14 @@ class PropertyFilter:
     value: str = ""
     op: PropertyOperator = PropertyOperator.EXISTS
     value_type: PropertyValueType = PropertyValueType.STRING
+
+
+@dataclass(frozen=True)
+class DateRange:
+    """Represents a range of dates."""
+
+    start: dt.date
+    end: Optional[dt.date] = None
 
 
 @dataclass
