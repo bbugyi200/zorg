@@ -1,10 +1,19 @@
 # serializer version: 1
 # name: test_run_db_create__areas[YAMLConfigFile]
   list([
+    'gtd',
+    'own',
+    'tags',
+    'thoughts',
   ])
 # ---
 # name: test_run_db_create__contexts[YAMLConfigFile]
   list([
+    'due',
+    'dzwk',
+    'fat_pig',
+    'pomodoro',
+    'puke',
   ])
 # ---
 # name: test_run_db_create__file_count[YAMLConfigFile]
@@ -15,10 +24,34 @@
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
+    'clyzajrm',
+    'pig',
   ])
 # ---
 # name: test_run_db_create__projects[YAMLConfigFile]
   list([
+    'arms',
+    'arms/bmlakcr',
+    'arms/bmlakcr/lozmhqjd',
+    'arms/bmlakcr/wjybwa',
+    'arms/cmeq',
+    'arms/fgifr',
+    'arms/ipyt/bqf/cpv_mociy',
+    'arms/ipyt/bqf/uahi',
+    'arms/judo/vennc',
+    'arms/judo/vfntwi',
+    'arms/jws_pkaft',
+    'arms/owwnfb/qbsum',
+    'arms/rgw_sxtvx',
+    'arms/rgw_sxtvx/zv_jzdd_djqa',
+    'arms/saxy',
+    'arms/vd_clxi/okwz',
+    'arms/vd_clxi/xoao',
+    'bad/to_the_bone',
+    'foobar',
+    'foobar/bazbuz',
+    'laundry',
+    'zorg',
   ])
 # ---
 # name: test_run_db_create__properties[YAMLConfigFile]
