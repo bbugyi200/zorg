@@ -23,7 +23,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         session: Session,
     ) -> None:
         self._session = session
-        self._converter = ZorgFileConverter()
+        self._converter = ZorgFileConverter(session)
 
     def add(self, file: ZorgFile, /, *, key: str = None) -> ErisResult[str]:
         """Adds a new file to the DB.
