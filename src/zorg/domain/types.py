@@ -52,6 +52,7 @@ TodoPriorityType = Literal[
 ]
 TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
+TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 
 
 class TodoStatus(enum.Enum):
@@ -60,6 +61,8 @@ class TodoStatus(enum.Enum):
     OPEN = enum.auto()
     CLOSED = enum.auto()
     CANCELED = enum.auto()
+    BLOCKED = enum.auto()
+    PARENT = enum.auto()
 
 
 class CreateEngineType(Protocol):

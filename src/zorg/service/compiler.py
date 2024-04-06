@@ -7,9 +7,10 @@ from typing import Any, Literal, Optional
 
 import antlr4
 from logrus import Logger
+from typist import assert_never
 
 from ..domain.models import TodoPayload, ZorgFile, ZorgNote
-from ..domain.types import TodoPriorityType, TodoStatus
+from ..domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
 from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
@@ -103,7 +104,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     def enterPriority(
         self, ctx: ZorgFileParser.PriorityContext
     ) -> None:  # noqa: D102
-        self._s.priority = ctx.ID().getText()[0].upper()
+        self._s.todo_priority = ctx.ID().getText()[0].upper()
 
     def enterProperty(
         self, ctx: ZorgFileParser.PropertyContext
@@ -143,13 +144,34 @@ class _ZorgFileCompiler(ZorgFileListener):
         self._s.parent_id = None
         del ctx
 
+    def enterTodo_prefix(
+        self, ctx: ZorgFileParser.Todo_prefixContext
+    ) -> None:  # noqa: D102
+        status = TodoStatus.OPEN
+        if self._s.in_note:
+            ch: TodoStatusPrefixChar = ctx.getText()[0]
+            if ch == "o":
+                status = TodoStatus.OPEN
+            elif ch == "x":
+                status = TodoStatus.CLOSED
+            elif ch == "~":
+                status = TodoStatus.CANCELED
+            elif ch == "<":
+                status = TodoStatus.BLOCKED
+            elif ch == ">":
+                status = TodoStatus.PARENT
+            else:
+                assert_never(ch)
+
+            self._s.todo_status = status
+
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
         kwargs = self._get_note_kwargs({
             "todo_payload": TodoPayload(
-                priority=self._s.priority, status=TodoStatus.OPEN
+                priority=self._s.todo_priority, status=self._s.todo_status
             )
         })
         note_body = ctx.note_body()
@@ -160,8 +182,10 @@ class _ZorgFileCompiler(ZorgFileListener):
         else:
             todo = ZorgNote(note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
-        # Reset priority back to default.
-        self._s.priority = "C"
+
+        # Reset todo priority and status back to defaults.
+        self._s.todo_priority = "C"
+        self._s.todo_status = TodoStatus.OPEN
 
     def exitH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -362,7 +386,8 @@ class _ZorgFileCompilerState:
     note_links: list[str] = field(default_factory=lambda: [])
     note_date: Optional[dt.date] = None
 
-    priority: TodoPriorityType = "C"
+    todo_priority: TodoPriorityType = "C"
+    todo_status: TodoStatus = TodoStatus.OPEN
 
     @property
     def areas(self) -> list[str]:
