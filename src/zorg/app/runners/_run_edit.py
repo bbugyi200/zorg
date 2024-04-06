@@ -25,7 +25,6 @@ def run_edit(cfg: EditConfig) -> int:
     for zo_path in zo_paths:
         init_from_template(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
 
-    session = ZorgSQLSession(cfg.database_url)
     messagebus.handle(
         [
             commands.EditCommand(
@@ -35,6 +34,6 @@ def run_edit(cfg: EditConfig) -> int:
                 vim_commands=cfg.vim_commands,
             ),
         ],
-        session,
+        ZorgSQLSession(cfg.database_url),
     )
     return 0
