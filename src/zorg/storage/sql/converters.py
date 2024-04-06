@@ -41,9 +41,12 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
 
     def from_entity(self, entity: ZorgNote) -> sql.ZorgNote:
         """Model-to-SQL-model converter for a ZorgNote."""
-        kwargs = {
+        kwargs: dict[str, Any] = {
             "body": entity.body,
         }
+        if entity.todo_payload:
+            kwargs["todo_status"] = entity.todo_payload.status
+            kwargs["todo_priority"] = entity.todo_payload.priority
         sql_zorg_note = sql.ZorgNote(**kwargs)
         for attr, tag_model in [
             ("areas", sql.Area),
