@@ -6,8 +6,10 @@ https://docs.pytest.org/en/6.2.x/fixture.html#conftest-py-sharing-fixtures-acros
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Iterator
 
+from _pytest.tmpdir import TempPathFactory
 from freezegun import freeze_time
 from pytest import fixture
 
@@ -23,7 +25,19 @@ if TYPE_CHECKING:  # fixes pytest warning
     from clack.pytest_plugin import MakeConfigFile
 
 
-@fixture
+@fixture(scope="session")
+def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
+    """Returns a zettel directory that contains copies of all *.zo files."""
+    tmp_path = tmp_path_factory.getbasetemp()
+    zettel_dir = tmp_path / "org"
+    zettel_dir.mkdir()
+    for zo_path in _get_all_zo_paths():
+        zettel_zo_path = zettel_dir / zo_path.name
+        zettel_zo_path.write_bytes(zo_path.read_bytes())
+    return zettel_dir
+
+
+@fixture(scope="session")
 def main(make_config_file: MakeConfigFile) -> c.MainType:
     """Returns a wrapper around zorg's main() function."""
 
@@ -45,3 +59,12 @@ def frozen_time() -> Iterator[None]:
     """Freeze time until our tests are done running."""
     with freeze_time(f"{c.TODAY}T{c.hh}:{c.mm}:00.123456Z"):
         yield
+
+
+def _get_all_zo_paths() -> list[Path]:
+    """Returns a list of Paths for all the *.zo files.
+
+    These names will be relative to the zorg root directory.
+    """
+    zorg_root_dir = Path(__file__).parent.parent
+    return list(zorg_root_dir.rglob("*.zo"))

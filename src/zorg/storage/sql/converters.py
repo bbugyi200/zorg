@@ -12,8 +12,7 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
 
     def from_entity(self, entity: ZorgFile) -> sql.ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
-        del entity
-        return sql.ZorgFile()
+        return sql.ZorgFile(path=str(entity.path))
 
     def to_entity(self, sql_model: sql.ZorgFile) -> ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""

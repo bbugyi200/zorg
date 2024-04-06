@@ -1,0 +1,47 @@
+# serializer version: 1
+# name: test_run_db_create__areas[YAMLConfigFile]
+  list([
+  ])
+# ---
+# name: test_run_db_create__contexts[YAMLConfigFile]
+  list([
+  ])
+# ---
+# name: test_run_db_create__file_count[YAMLConfigFile]
+  10
+# ---
+# name: test_run_db_create__note_count[YAMLConfigFile]
+  0
+# ---
+# name: test_run_db_create__people[YAMLConfigFile]
+  list([
+  ])
+# ---
+# name: test_run_db_create__projects[YAMLConfigFile]
+  list([
+  ])
+# ---
+# name: test_run_db_create__properties[YAMLConfigFile]
+  list([
+  ])
+# ---
+# name: test_run_db_create__table_names[YAMLConfigFile]
+  list([
+    'area',
+    'arealink',
+    'context',
+    'contextlink',
+    'person',
+    'personlink',
+    'project',
+    'projectlink',
+    'property',
+    'propertylink',
+    'zorgfile',
+    'zorgfilelink',
+    'zorgnote',
+  ])
+# ---
+# name: test_run_db_create__todo_count[YAMLConfigFile]
+  0
+# ---
