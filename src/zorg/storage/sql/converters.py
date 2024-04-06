@@ -53,6 +53,8 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
             kwargs["todo_status"] = entity.todo_payload.status
             kwargs["todo_priority"] = entity.todo_payload.priority
         sql_zorg_note = sql.ZorgNote(**kwargs)
+
+        stmt: Any
         for attr, tag_model in [
             ("areas", sql.Area),
             ("contexts", sql.Context),
