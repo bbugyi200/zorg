@@ -16,7 +16,10 @@ logger = Logger(__name__)
 
 COMMAND_HANDLERS: dict[
     type[commands.Command], Callable[[commands.Command, ZorgSQLSession], None]
-] = {commands.EditCommand: handlers.start_vim_loop}
+] = {
+    commands.EditCommand: handlers.edit_zorg_files,
+    commands.CheckKeepAliveFileCommand: handlers.check_keep_alive_file,
+}
 EVENT_HANDLERS: dict[
     type[events.Event], list[Callable[[events.Event, ZorgSQLSession], None]]
 ] = {}

@@ -76,7 +76,7 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         """Returns the GreatRepo object associated with this ZorgSQLSession."""
         return self._repo
 
-    def send_message(self, message: Message) -> None:
+    def add_message(self, message: Message) -> None:
         """Register a message to be handled by the message bus."""
         self._messages.append(message)
 

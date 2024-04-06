@@ -33,7 +33,7 @@ def run_edit(cfg: EditConfig) -> int:
                 paths=zo_paths,
                 keep_alive_file=cfg.keep_alive_file,
                 vim_commands=cfg.vim_commands,
-            )
+            ),
         ],
         session,
     )

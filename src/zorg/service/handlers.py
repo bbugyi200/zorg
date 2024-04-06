@@ -14,43 +14,62 @@ from .common import prepend_zdir
 logger = Logger(__name__)
 
 
-def start_vim_loop(cmd: commands.EditCommand, session: ZorgSQLSession) -> None:
-    del session
+def edit_zorg_files(
+    cmd: commands.EditCommand, session: ZorgSQLSession
+) -> None:
+    """Command handler for the EditCommand."""
+    session.add_message(
+        commands.CheckKeepAliveFileCommand(
+            zettel_dir=cmd.zettel_dir,
+            paths=cmd.paths,
+            keep_alive_file=cmd.keep_alive_file,
+            vim_commands=cmd.vim_commands,
+        )
+    )
+    vimala.vim(
+        *cmd.paths,
+        commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),
+    ).unwrap()
 
-    def run_vim(paths: Iterable[Path]) -> None:
-        vimala.vim(
-            *paths,
-            commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),
-        ).unwrap()
 
-    run_vim(cmd.paths)
-
+def check_keep_alive_file(
+    cmd: commands.CheckKeepAliveFileCommand, session: ZorgSQLSession
+) -> None:
+    """Command handler for the CheckKeepAliveFileCommand."""
     logger.debug(
         "Vim loop will run as long as the keep alive file exists.",
         keep_alive_file=cmd.keep_alive_file,
     )
-    last_paths = cmd.paths
-    while cmd.keep_alive_file.exists():
-        if cmd.keep_alive_file.stat().st_size == 0:
-            paths = last_paths
-        else:
-            new_paths = prepend_zdir(
-                cmd.zettel_dir,
-                [
-                    Path(p.strip())
-                    for p in cmd.keep_alive_file.read_text().split()
-                ],
-            )
-            logger.debug(
-                "Editing files specified in the keep alive file.",
-                keep_alive_file=cmd.keep_alive_file,
-                old_paths=last_paths,
-                new_paths=new_paths,
-            )
-            paths = last_paths = new_paths
+    if not cmd.keep_alive_file.exists():
+        logger.debug(
+            "No keep alive file found.", keep_alive_file=cmd.keep_alive_file
+        )
+        return
 
-        cmd.keep_alive_file.unlink()
-        run_vim(paths)
+    if cmd.keep_alive_file.stat().st_size == 0:
+        paths = cmd.paths
+    else:
+        new_paths = prepend_zdir(
+            cmd.zettel_dir,
+            [Path(p.strip()) for p in cmd.keep_alive_file.read_text().split()],
+        )
+        logger.debug(
+            "Editing files specified in the keep alive file.",
+            keep_alive_file=cmd.keep_alive_file,
+            old_paths=cmd.paths,
+            new_paths=new_paths,
+        )
+        paths = new_paths
+
+    cmd.keep_alive_file.unlink()
+    session.add_message(
+        commands.EditCommand(
+            zettel_dir=cmd.zettel_dir,
+            paths=paths,
+            keep_alive_file=cmd.keep_alive_file,
+            vim_commands=cmd.vim_commands,
+        )
+    )
 
 
 def _process_vim_commands(
