@@ -48,6 +48,7 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
         """Model-to-SQL-model converter for a ZorgNote."""
         kwargs: dict[str, Any] = {
             "body": entity.body,
+            "create_date": entity.create_date,
         }
         if entity.todo_payload:
             kwargs["todo_status"] = entity.todo_payload.status
