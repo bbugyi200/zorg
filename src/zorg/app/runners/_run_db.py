@@ -21,7 +21,7 @@ def run_db_create(cfg: DbCreateConfig) -> int:
     zorg_files = []
     total_num_notes = 0
     total_num_todos = 0
-    _recreate_sqlite_file(cfg.database_url)
+    _prep_sqlite_db_for_create(cfg.database_url)
     with ZorgSQLSession(cfg.database_url) as session:
         for zo_path in tqdm(
             sorted(cfg.zettel_dir.rglob("*.zo"), key=lambda p: p.name),
@@ -54,11 +54,11 @@ def run_db_create(cfg: DbCreateConfig) -> int:
     return 0
 
 
-def _recreate_sqlite_file(database_url: str) -> None:
+def _prep_sqlite_db_for_create(database_url: str) -> None:
     sqlite_prefix = "sqlite:///"
     if database_url.startswith(sqlite_prefix):
         db_path = Path(database_url[len(sqlite_prefix) :])
         db_path.parent.mkdir(exist_ok=True, parents=True)
         if db_path.exists():
             logger.info("Deleting existing zorg database.", db_path=db_path)
-        db_path.touch()
+            db_path.unlink()
