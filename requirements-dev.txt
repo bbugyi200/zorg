@@ -67,15 +67,22 @@ chardet==5.2.0
     # via binaryornot
 charset-normalizer==3.3.2
     # via requests
+cli-helpers[styles]==2.3.1
+    # via litecli
 click==8.1.7
     # via
     #   black
     #   cookiecutter
     #   cruft
+    #   litecli
     #   pip-tools
     #   typer
 cogapp==3.4.1
     # via -r requirements-dev.in
+configobj==5.0.8
+    # via
+    #   cli-helpers
+    #   litecli
 cookiecutter==2.6.0
     # via cruft
 coverage[toml]==7.4.4
@@ -125,6 +132,8 @@ jinja2==3.1.3
     #   cookiecutter
     #   sphinx
     #   zettel-org
+litecli==1.10.1
+    # via -r requirements-dev.in
 m2r2==0.3.3.post2
     # via -r requirements-dev.in
 markdown-it-py==3.0.0
@@ -170,6 +179,8 @@ potoroo==0.6.0
     # via
     #   -r requirements.in
     #   zettel-org
+prompt-toolkit==3.0.43
+    # via litecli
 py==1.11.0
     # via tox
 pycodestyle==2.11.1
@@ -189,6 +200,8 @@ pyflakes==3.2.0
     # via flake8
 pygments==2.17.2
     # via
+    #   cli-helpers
+    #   litecli
     #   rich
     #   sphinx
 pylint==3.1.0
@@ -233,6 +246,7 @@ shellingham==1.5.4
     # via typer
 six==1.16.0
     # via
+    #   configobj
     #   python-dateutil
     #   tox
 smmap==5.0.1
@@ -271,10 +285,14 @@ sqlmodel==0.0.16
     # via
     #   -r requirements.in
     #   zettel-org
+sqlparse==0.4.4
+    # via litecli
 structlog==24.1.0
     # via bolton-logrus
 syrupy==4.6.1
     # via -r requirements-dev.in
+tabulate[widechars]==0.9.0
+    # via cli-helpers
 text-unidecode==1.3
     # via python-slugify
 toml==0.10.2
@@ -328,6 +346,10 @@ vimala==0.2.0
     #   zettel-org
 virtualenv==20.25.1
     # via tox
+wcwidth==0.2.13
+    # via
+    #   prompt-toolkit
+    #   tabulate
 wheel==0.43.0
     # via pip-tools
 
