@@ -27,12 +27,14 @@ def run_edit(cfg: EditConfig) -> int:
 
     session = ZorgSQLSession(cfg.database_url)
     messagebus.handle(
-        commands.EditCommand(
-            zettel_dir=cfg.zettel_dir,
-            paths=zo_paths,
-            keep_alive_file=cfg.keep_alive_file,
-            vim_commands=cfg.vim_commands,
-        ),
-        session
+        [
+            commands.EditCommand(
+                zettel_dir=cfg.zettel_dir,
+                paths=zo_paths,
+                keep_alive_file=cfg.keep_alive_file,
+                vim_commands=cfg.vim_commands,
+            )
+        ],
+        session,
     )
     return 0

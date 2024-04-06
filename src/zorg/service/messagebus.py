@@ -22,9 +22,9 @@ EVENT_HANDLERS: dict[
 ] = {}
 
 
-def handle(message: Message, session: ZorgSQLSession) -> None:
+def handle(messages: list[Message], session: ZorgSQLSession) -> None:
     """Entry point into Zorg's event messagebus loop."""
-    queue = [message]
+    queue = messages.copy()
     while queue:
         message = queue.pop(0)
         if isinstance(message, events.Event):

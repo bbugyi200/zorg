@@ -33,7 +33,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         Returns a unique identifier that has been associated with this file.
         """
         del key
-        self._remember_zorg_file(zorg_file)
+        self._seen_zorg_file(zorg_file)
         self._session.add(self._converter.from_entity(zorg_file))
         # TODO(bugyi): Add ID generation logic here, which should add an event to the message bus.
         return Ok("")
@@ -52,7 +52,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         sql_zorg_file = results.first()
         if sql_zorg_file:
             zorg_file = self._converter.to_entity(sql_zorg_file)
-            self._remember_zorg_file(zorg_file)
+            self._seen_zorg_file(zorg_file)
             return Ok(zorg_file)
         else:
             return Ok(None)
@@ -62,7 +62,7 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         del query
         result = []
         for zorg_file in result:
-            self._remember_zorg_file(zorg_file)
+            self._seen_zorg_file(zorg_file)
         return Ok(result)
 
     def all(self) -> ErisResult[list[ZorgFile]]:
@@ -71,9 +71,9 @@ class ZorgSQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         result = []
         for sql_zorg_file in self._session.exec(stmt).all():
             zorg_file = self._converter.to_entity(sql_zorg_file)
-            self._remember_zorg_file(zorg_file)
+            self._seen_zorg_file(zorg_file)
         return Ok(result)
 
-    def _remember_zorg_file(self, zorg_file: ZorgFile) -> None:
+    def _seen_zorg_file(self, zorg_file: ZorgFile) -> None:
         if str(zorg_file.path) not in set(str(zf.path) for zf in self.seen):
             self.seen.append(zorg_file)

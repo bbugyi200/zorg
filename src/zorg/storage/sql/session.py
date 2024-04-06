@@ -35,6 +35,8 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
             engine_kwargs["echo"] = True
 
         self._engine_factory = partial(engine_factory, db_url, **engine_kwargs)
+        self._messages: list[Message] = []
+
         self._session: Session
         self._repo: ZorgSQLRepo
 
@@ -71,8 +73,15 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         """Returns the GreatRepo object associated with this ZorgSQLSession."""
         return self._repo
 
+    def send_message(self, message: Message) -> None:
+        """Register a message to be handled by the message bus."""
+        self._messages.append(message)
+
     def collect_new_messages(self) -> Iterator[Message]:
         """Collect new events/commands for our messagebus to process."""
+        while self._messages:
+            yield self._messages.pop(0)
+
         for zorg_file in self.repo.seen:
             while zorg_file.messages:
                 yield zorg_file.messages.pop(0)
