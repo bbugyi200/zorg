@@ -1,6 +1,5 @@
 """Contains runners for the 'zorg db' command."""
 
-from pathlib import Path
 import sys
 
 from logrus import Logger
@@ -21,8 +20,7 @@ def run_db_create(cfg: DbCreateConfig) -> int:
     zorg_files = []
     total_num_notes = 0
     total_num_todos = 0
-    _prep_sqlite_db_for_create(cfg.database_url)
-    with ZorgSQLSession(cfg.database_url) as session:
+    with ZorgSQLSession(cfg.database_url, create_new_database=True) as session:
         for zo_path in tqdm(
             sorted(cfg.zettel_dir.rglob("*.zo"), key=lambda p: p.name),
             desc="Reading notes from zorg files",
@@ -52,13 +50,3 @@ def run_db_create(cfg: DbCreateConfig) -> int:
         )
         session.commit()
     return 0
-
-
-def _prep_sqlite_db_for_create(database_url: str) -> None:
-    sqlite_prefix = "sqlite:///"
-    if database_url.startswith(sqlite_prefix):
-        db_path = Path(database_url[len(sqlite_prefix) :])
-        db_path.parent.mkdir(exist_ok=True, parents=True)
-        if db_path.exists():
-            logger.info("Deleting existing zorg database.", db_path=db_path)
-            db_path.unlink()

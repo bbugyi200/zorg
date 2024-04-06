@@ -5,9 +5,13 @@ from pathlib import Path
 import re
 from typing import Any, Iterable
 
+from logrus import Logger
 from typist import PathLike
 
 from ..domain.types import VarMapType
+
+
+logger = Logger(__name__)
 
 
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:
