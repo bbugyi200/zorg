@@ -71,6 +71,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#todo_prefix.
+    def enterTodo_prefix(self, ctx:ZorgFileParser.Todo_prefixContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#todo_prefix.
+    def exitTodo_prefix(self, ctx:ZorgFileParser.Todo_prefixContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#x_or_tilde.
     def enterX_or_tilde(self, ctx:ZorgFileParser.X_or_tildeContext):
         pass

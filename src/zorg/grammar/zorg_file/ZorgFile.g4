@@ -8,18 +8,19 @@ head       : comment+ ;
 comment    : HASH space_atoms? NL ;
 
 // block
-block      : item+ NL* ;
-item       : todo | note | footnote | comment ;
-todo       : base_todo subnote* ;
-base_todo  : (LOWER_O | x_or_tilde | LANGLE | RANGLE) (' ' priority)? note_body NL ;
-x_or_tilde : (LOWER_X | TILDE) (COLON time)? ;
-priority   : '[' HASH ID ']' ;
-note       : DASH base_note subnote* ;
-base_note  : note_body NL ;
-subnote    : TWO_SPACE_DASH base_note subsubnote*;
-subsubnote : FOUR_SPACE_DASH base_note ;
-note_body  : space_atoms (NL SPACE+ space_atoms)* ;
-footnote   : ref COLON space_atoms ;
+block       : item+ NL* ;
+item        : todo | note | footnote | comment ;
+todo        : base_todo subnote* ;
+base_todo   : todo_prefix (' ' priority)? note_body NL ;
+todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
+x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
+priority    : '[' HASH ID ']' ;
+note        : DASH base_note subnote* ;
+base_note   : note_body NL ;
+subnote     : TWO_SPACE_DASH base_note subsubnote*;
+subsubnote  : FOUR_SPACE_DASH base_note ;
+note_body   : space_atoms (NL SPACE+ space_atoms)* ;
+footnote    : ref COLON space_atoms ;
 
 // atoms
 space_atoms : space_atom+ ;
