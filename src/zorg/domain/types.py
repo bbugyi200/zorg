@@ -104,7 +104,7 @@ class EntityConverter(Generic[E, T], abc.ABC):
     """Abstract interface for domain entity converters."""
 
     @abc.abstractmethod
-    def to_entity(self, item: T) -> E:
+    def to_entity(self, _: T) -> E:
         """Converts some non-domain object into a domain entity."""
 
     @abc.abstractmethod
