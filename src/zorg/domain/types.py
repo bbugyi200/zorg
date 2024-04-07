@@ -61,9 +61,9 @@ class TodoStatus(enum.Enum):
 
     OPEN = enum.auto()  # o
     CLOSED = enum.auto()  # x
-    CANCELED = enum.auto() # ~
-    BLOCKED = enum.auto() # <
-    PARENT = enum.auto() # >
+    CANCELED = enum.auto()  # ~
+    BLOCKED = enum.auto()  # <
+    PARENT = enum.auto()  # >
 
 
 class CreateEngineType(Protocol):

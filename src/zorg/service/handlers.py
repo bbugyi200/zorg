@@ -6,7 +6,7 @@ from typing import Iterable, Iterator
 from logrus import Logger
 import vimala
 
-from ..domain import commands
+from ..domain import commands, events
 from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
 
@@ -16,55 +16,53 @@ logger = Logger(__name__)
 
 def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
     """Command handler for the EditCommand."""
-    session.add_message(
-        commands.CheckKeepAliveFileCommand(
-            zettel_dir=cmd.zettel_dir,
-            paths=cmd.paths,
-            keep_alive_file=cmd.keep_alive_file,
-            vim_commands=cmd.vim_commands,
-        )
-    )
     vimala.vim(
         *cmd.paths,
         commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),
     ).unwrap()
+    session.add_message(events.EditorClosedEvent(edit_cmd=cmd))
 
 
 def check_keep_alive_file(
-    cmd: commands.CheckKeepAliveFileCommand, session: SQLSession
+    event: events.EditorClosedEvent, session: SQLSession
 ) -> None:
-    """Command handler for the CheckKeepAliveFileCommand."""
-    if not cmd.keep_alive_file.exists():
+    """Check if the 'keep alive' file exists and, if so, reopens the editor."""
+    if not event.edit_cmd.keep_alive_file.exists():
         logger.debug(
-            "No keep alive file found.", keep_alive_file=cmd.keep_alive_file
+            "No keep alive file found.",
+            keep_alive_file=event.edit_cmd.keep_alive_file,
         )
         return
 
-    if cmd.keep_alive_file.stat().st_size == 0:
+    if event.edit_cmd.keep_alive_file.stat().st_size == 0:
         logger.debug(
-            "Empty keep alive file found.", keep_alive_file=cmd.keep_alive_file
+            "Empty keep alive file found.",
+            keep_alive_file=event.edit_cmd.keep_alive_file,
         )
-        paths = cmd.paths
+        paths = event.edit_cmd.paths
     else:
         new_paths = prepend_zdir(
-            cmd.zettel_dir,
-            [Path(p.strip()) for p in cmd.keep_alive_file.read_text().split()],
+            event.edit_cmd.zettel_dir,
+            [
+                Path(p.strip())
+                for p in event.edit_cmd.keep_alive_file.read_text().split()
+            ],
         )
         logger.debug(
             "Editing files specified in the keep alive file.",
-            keep_alive_file=cmd.keep_alive_file,
-            old_paths=cmd.paths,
+            keep_alive_file=event.edit_cmd.keep_alive_file,
+            old_paths=event.edit_cmd.paths,
             new_paths=new_paths,
         )
         paths = new_paths
 
-    cmd.keep_alive_file.unlink()
+    event.edit_cmd.keep_alive_file.unlink()
     session.add_message(
         commands.EditCommand(
-            zettel_dir=cmd.zettel_dir,
+            zettel_dir=event.edit_cmd.zettel_dir,
             paths=paths,
-            keep_alive_file=cmd.keep_alive_file,
-            vim_commands=cmd.vim_commands,
+            keep_alive_file=event.edit_cmd.keep_alive_file,
+            vim_commands=event.edit_cmd.vim_commands,
         )
     )
 
