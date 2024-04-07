@@ -17,7 +17,7 @@ logger = Logger(__name__)
 COMMAND_HANDLERS: dict[
     type[commands.Command], Callable[[Any, SQLSession], None]
 ] = {
-    commands.EditCommand: handlers.edit_zorg_files,
+    commands.EditCommand: handlers.edit_files,
     commands.CheckKeepAliveFileCommand: handlers.check_keep_alive_file,
 }
 EVENT_HANDLERS: dict[
