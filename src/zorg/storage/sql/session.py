@@ -20,14 +20,17 @@ logger = Logger(__name__)
 
 
 class SQLSession(UnitOfWork[SQLRepo]):
-    """Unit-of-work pattern used to manage transactions on zorg's SQL DB."""
+    """Unit-of-work pattern used to manage transactions on zorg's SQL DB.
+
+    TODO: Document __init__() params here.
+    """
 
     def __init__(
         self,
         db_url: str,
         *,
         engine_factory: CreateEngineType = create_cached_engine,
-        create_new_database: bool = False,
+        should_delete_existing_db: bool = False,
         verbose: int = 0,
     ) -> None:
         # echo SQL statements to console if -vvv or greater is specified on the
@@ -36,7 +39,7 @@ class SQLSession(UnitOfWork[SQLRepo]):
         if verbose > 2:
             engine_kwargs["echo"] = True
 
-        _prep_sqlite_db(db_url, should_delete=create_new_database)
+        _prep_sqlite_db(db_url, should_delete=should_delete_existing_db)
         self._engine_factory = partial(engine_factory, db_url, **engine_kwargs)
         self._messages: list[Message] = []
 
