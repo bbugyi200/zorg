@@ -15,7 +15,7 @@ from .converters import ZorgFileConverter
 logger = Logger(__name__)
 
 
-class ZorgSQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
+class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(

@@ -7,7 +7,7 @@ from logrus import Logger
 import vimala
 
 from ..domain import commands
-from ..storage.sql.session import ZorgSQLSession
+from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
 
 
@@ -15,7 +15,7 @@ logger = Logger(__name__)
 
 
 def edit_zorg_files(
-    cmd: commands.EditCommand, session: ZorgSQLSession
+    cmd: commands.EditCommand, session: SQLSession
 ) -> None:
     """Command handler for the EditCommand."""
     session.add_message(
@@ -33,7 +33,7 @@ def edit_zorg_files(
 
 
 def check_keep_alive_file(
-    cmd: commands.CheckKeepAliveFileCommand, session: ZorgSQLSession
+    cmd: commands.CheckKeepAliveFileCommand, session: SQLSession
 ) -> None:
     """Command handler for the CheckKeepAliveFileCommand."""
     if not cmd.keep_alive_file.exists():

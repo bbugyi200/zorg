@@ -1,4 +1,4 @@
-"""Contains the ZorgSQLSession class."""
+"""Contains the SQLSession class."""
 
 from __future__ import annotations
 
@@ -13,13 +13,13 @@ from sqlmodel import Session
 
 from ...domain.types import CreateEngineType, Message
 from .engine import create_cached_engine
-from .repo import ZorgSQLRepo
+from .repo import SQLRepo
 
 
 logger = Logger(__name__)
 
 
-class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
+class SQLSession(UnitOfWork[SQLRepo]):
     """Unit-of-work pattern used to manage transactions on zorg's SQL DB."""
 
     def __init__(
@@ -41,12 +41,12 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         self._messages: list[Message] = []
 
         self._session: Session
-        self._repo: ZorgSQLRepo
+        self._repo: SQLRepo
 
-    def __enter__(self) -> ZorgSQLSession:
-        """Called before entering a ZorgSQLSession with-block."""
+    def __enter__(self) -> SQLSession:
+        """Called before entering a SQLSession with-block."""
         self._session = Session(self._engine_factory())
-        self._repo = ZorgSQLRepo(self._session)
+        self._repo = SQLRepo(self._session)
         return self
 
     def __exit__(
@@ -55,7 +55,7 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        """Called before exiting a ZorgSQLSession with-block."""
+        """Called before exiting a SQLSession with-block."""
         del exc_type
         del exc_value
         del traceback
@@ -68,12 +68,12 @@ class ZorgSQLSession(UnitOfWork[ZorgSQLRepo]):
         self._session.commit()
 
     def rollback(self) -> None:
-        """Revert any changes made while in this ZorgSQLSession's with-block."""
+        """Revert any changes made while in this SQLSession's with-block."""
         self._session.rollback()
 
     @property
-    def repo(self) -> ZorgSQLRepo:
-        """Returns the GreatRepo object associated with this ZorgSQLSession."""
+    def repo(self) -> SQLRepo:
+        """Returns the GreatRepo object associated with this SQLSession."""
         return self._repo
 
     def add_message(self, message: Message) -> None:

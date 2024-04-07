@@ -6,7 +6,7 @@ from logrus import Logger
 from tqdm import tqdm
 
 from ...service.compiler import walk_zorg_file
-from ...storage.sql.session import ZorgSQLSession
+from ...storage.sql.session import SQLSession
 from ..config import DbCreateConfig
 from ._runners import runner
 
@@ -20,7 +20,7 @@ def run_db_create(cfg: DbCreateConfig) -> int:
     zorg_files = []
     total_num_notes = 0
     total_num_todos = 0
-    with ZorgSQLSession(cfg.database_url, create_new_database=True) as session:
+    with SQLSession(cfg.database_url, create_new_database=True) as session:
         for zo_path in tqdm(
             sorted(cfg.zettel_dir.rglob("*.zo"), key=lambda p: p.name),
             desc="Reading notes from zorg files",

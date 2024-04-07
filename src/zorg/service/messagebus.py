@@ -9,23 +9,23 @@ from logrus import Logger
 from . import handlers
 from ..domain import commands, events
 from ..domain.types import Message
-from ..storage.sql.session import ZorgSQLSession
+from ..storage.sql.session import SQLSession
 
 
 logger = Logger(__name__)
 
 COMMAND_HANDLERS: dict[
-    type[commands.Command], Callable[[Any, ZorgSQLSession], None]
+    type[commands.Command], Callable[[Any, SQLSession], None]
 ] = {
     commands.EditCommand: handlers.edit_zorg_files,
     commands.CheckKeepAliveFileCommand: handlers.check_keep_alive_file,
 }
 EVENT_HANDLERS: dict[
-    type[events.Event], list[Callable[[Any, ZorgSQLSession], None]]
+    type[events.Event], list[Callable[[Any, SQLSession], None]]
 ] = {}
 
 
-def handle(messages: list[Message], session: ZorgSQLSession) -> None:
+def handle(messages: list[Message], session: SQLSession) -> None:
     """Entry point into Zorg's event messagebus loop."""
     queue = messages.copy()
     while queue:
@@ -41,7 +41,7 @@ def handle(messages: list[Message], session: ZorgSQLSession) -> None:
 def handle_event(
     event: events.Event,
     queue: List[Message],
-    session: ZorgSQLSession,
+    session: SQLSession,
 ) -> None:
     """Handles a single Zorg event."""
     for handler in EVENT_HANDLERS[type(event)]:
@@ -62,7 +62,7 @@ def handle_event(
 def handle_command(
     command: commands.Command,
     queue: List[Message],
-    session: ZorgSQLSession,
+    session: SQLSession,
 ) -> None:
     """Handles a single Zorg command."""
     logger.debug("handling command", command=command)

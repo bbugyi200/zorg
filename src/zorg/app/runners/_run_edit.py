@@ -7,7 +7,7 @@ from ...service import messagebus
 from ...service.common import prepend_zdir
 from ...service.file_groups import expand_file_group_paths
 from ...service.templates import init_from_template
-from ...storage.sql.session import ZorgSQLSession
+from ...storage.sql.session import SQLSession
 from ..config import EditConfig
 from ._runners import runner
 
@@ -34,6 +34,6 @@ def run_edit(cfg: EditConfig) -> int:
                 vim_commands=cfg.vim_commands,
             ),
         ],
-        ZorgSQLSession(cfg.database_url),
+        SQLSession(cfg.database_url),
     )
     return 0
