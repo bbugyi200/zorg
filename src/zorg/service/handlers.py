@@ -14,9 +14,7 @@ from .common import prepend_zdir
 logger = Logger(__name__)
 
 
-def edit_zorg_files(
-    cmd: commands.EditCommand, session: SQLSession
-) -> None:
+def edit_zorg_files(cmd: commands.EditCommand, session: SQLSession) -> None:
     """Command handler for the EditCommand."""
     session.add_message(
         commands.CheckKeepAliveFileCommand(
