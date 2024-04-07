@@ -49,6 +49,7 @@ class ZorgFile:
     """A Zorg (i.e. *.zo) file."""
 
     path: Path
+    ident: Optional[int] = None
     notes: list[ZorgNote] = field(default_factory=lambda: [])
     messages: list[Message] = field(default_factory=lambda: [])
 
