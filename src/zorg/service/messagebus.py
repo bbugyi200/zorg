@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Callable, List
+from typing import Any, Callable, List
 
 from logrus import Logger
 
@@ -15,13 +15,13 @@ from ..storage.sql.session import ZorgSQLSession
 logger = Logger(__name__)
 
 COMMAND_HANDLERS: dict[
-    type[commands.Command], Callable[[commands.Command, ZorgSQLSession], None]
+    type[commands.Command], Callable[[Any, ZorgSQLSession], None]
 ] = {
     commands.EditCommand: handlers.edit_zorg_files,
     commands.CheckKeepAliveFileCommand: handlers.check_keep_alive_file,
 }
 EVENT_HANDLERS: dict[
-    type[events.Event], list[Callable[[events.Event, ZorgSQLSession], None]]
+    type[events.Event], list[Callable[[Any, ZorgSQLSession], None]]
 ] = {}
 
 
@@ -47,13 +47,15 @@ def handle_event(
     for handler in EVENT_HANDLERS[type(event)]:
         try:
             logger.debug(
-                "handling event with handler", event=event, handler=handler
+                "handling event with handler",
+                zorg_event=str(event),
+                handler=str(handler),
             )
             with session:
                 handler(event, session)
                 queue.extend(session.collect_new_messages())
         except Exception:
-            logger.exception("Exception handling event", event=event)
+            logger.exception("Exception handling event", zorg_event=event)
             continue
 
 

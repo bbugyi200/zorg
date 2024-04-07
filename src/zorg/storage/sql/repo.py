@@ -8,7 +8,6 @@ from potoroo import QueryRepo
 from sqlmodel import Session, select
 
 from . import models as sql
-from ...domain import events
 from ...domain.models import OrZorgQuery, ZorgFile
 from .converters import ZorgFileConverter
 
@@ -63,7 +62,7 @@ class ZorgSQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
     def get_by_query(self, query: OrZorgQuery) -> ErisResult[list[ZorgFile]]:
         """Get file(s) from DB by using a query."""
         del query
-        result = []
+        result: list[ZorgFile] = []
         for zorg_file in result:
             self._seen_zorg_file(zorg_file)
         return Ok(result)
@@ -71,7 +70,7 @@ class ZorgSQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
     def all(self) -> ErisResult[list[ZorgFile]]:
         """Returns all zorg notes contained in the underlying SQL database."""
         stmt = select(sql.ZorgFile)
-        result = []
+        result: list[ZorgFile] = []
         for sql_zorg_file in self._session.exec(stmt).all():
             zorg_file = self._converter.to_entity(sql_zorg_file)
             self._seen_zorg_file(zorg_file)
