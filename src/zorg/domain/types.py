@@ -59,11 +59,11 @@ TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 class TodoStatus(enum.Enum):
     """Zorg todo status."""
 
-    OPEN = enum.auto()
-    CLOSED = enum.auto()
-    CANCELED = enum.auto()
-    BLOCKED = enum.auto()
-    PARENT = enum.auto()
+    OPEN = enum.auto()  # o
+    CLOSED = enum.auto()  # x
+    CANCELED = enum.auto() # ~
+    BLOCKED = enum.auto() # <
+    PARENT = enum.auto() # >
 
 
 class CreateEngineType(Protocol):
