@@ -10,12 +10,13 @@ from .types import Message
 class Command(Message):
     """A zorg command."""
 
+    zettel_dir: Path
+
 
 @dataclass(frozen=True)
 class EditCommand(Command):
     """Command to open one or more zorg files using an editor."""
 
-    zettel_dir: Path
     paths: list[Path]
     keep_alive_file: Path
     vim_commands: list[str]
@@ -24,5 +25,3 @@ class EditCommand(Command):
 @dataclass(frozen=True)
 class CreateDBCommand(Command):
     """Command to (re)create zorg's database from scratch."""
-
-    zettel_dir: Path
