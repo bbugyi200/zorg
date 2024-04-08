@@ -68,9 +68,8 @@ def handle_command(
     logger.debug("handling command", command=command)
     try:
         handler = COMMAND_HANDLERS[type(command)]
-        with session:
-            handler(command, session)
-            queue.extend(session.collect_new_messages())
+        handler(command, session)
+        queue.extend(session.collect_new_messages())
     except Exception:
         logger.exception("Exception handling command", command=command)
         raise
