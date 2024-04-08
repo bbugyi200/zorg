@@ -11,8 +11,8 @@ from logrus import Logger
 from potoroo import UnitOfWork
 from sqlmodel import Session
 
-from ...domain.types import CreateEngineType
 from ...domain.messages import Message
+from ...domain.types import CreateEngineType
 from .engine import create_cached_engine
 from .repo import SQLRepo
 
