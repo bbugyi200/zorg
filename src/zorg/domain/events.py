@@ -3,11 +3,10 @@
 from dataclasses import dataclass
 
 from . import commands
-from .types import Message
 
 
 @dataclass(frozen=True)
-class Event(Message):
+class Event:
     """A zorg event."""
 
 

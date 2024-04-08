@@ -1,7 +1,6 @@
 """Custom types used by zorg."""
 
 import abc
-from dataclasses import dataclass
 import enum
 from pathlib import Path
 from typing import (
@@ -13,15 +12,20 @@ from typing import (
     Protocol,
     Sequence,
     TypeVar,
+    Union,
 )
 
 from sqlalchemy.future import Engine
+
+from .commands import Command
+from .events import Event
 
 
 E = TypeVar("E")
 T = TypeVar("T")
 
 
+Message = Union[Command, Event]
 FileGroupMapType = Mapping[str, Sequence[str]]
 TodoPriorityType = Literal[
     "A",
@@ -114,8 +118,3 @@ class EntityConverter(Generic[E, T], abc.ABC):
     @abc.abstractmethod
     def from_entity(self, entity: E) -> T:
         """Converts some domain entity into something else."""
-
-
-@dataclass(frozen=True)
-class Message:
-    """A message (e.g. event or command) to be handled by the message bus"""

@@ -3,11 +3,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from .types import Message
-
 
 @dataclass(frozen=True)
-class Command(Message):
+class Command:
     """A zorg command."""
 
     zettel_dir: Path
