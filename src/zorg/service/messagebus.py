@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any, Callable, List
 
 from logrus import Logger
+from typist import assert_never
 
 from . import handlers
 from ..domain.messages import Message, commands, events
@@ -29,21 +30,26 @@ def handle(messages: list[Message], session: SQLSession) -> None:
     queue = messages.copy()
     while queue:
         message = queue.pop(0)
-        with session:
-            if isinstance(message, events.Event):
-                handle_event(message, queue, session)
-            elif isinstance(message, commands.Command):
-                handle_command(message, queue, session)
-            else:
-                raise Exception(f"{message} was not an Event or Command")
+        _handle_message(message, queue, session)
 
 
-def handle_event(
+def _handle_message(
+    message: Message, queue: list[Message], session: SQLSession
+) -> None:
+    with session:
+        if isinstance(message, events.Event):
+            _handle_event(message, queue, session)
+        elif isinstance(message, commands.Command):
+            _handle_command(message, queue, session)
+        else:
+            assert_never(message)
+
+
+def _handle_event(
     event: events.Event,
     queue: List[Message],
     session: SQLSession,
 ) -> None:
-    """Handles a single Zorg event."""
     for handler in EVENT_HANDLERS[type(event)]:
         try:
             logger.debug(
@@ -58,12 +64,11 @@ def handle_event(
             continue
 
 
-def handle_command(
+def _handle_command(
     command: commands.Command,
     queue: List[Message],
     session: SQLSession,
 ) -> None:
-    """Handles a single Zorg command."""
     logger.debug("handling command", command=command)
     try:
         handler = COMMAND_HANDLERS[type(command)]
