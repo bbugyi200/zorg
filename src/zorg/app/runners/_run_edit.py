@@ -2,7 +2,7 @@
 
 from logrus import Logger
 
-from ...domain import commands
+from ...domain.messages import commands
 from ...service import messagebus
 from ...service.common import prepend_zdir
 from ...service.file_groups import expand_file_group_paths

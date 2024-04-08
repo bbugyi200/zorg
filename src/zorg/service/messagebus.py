@@ -7,8 +7,7 @@ from typing import Any, Callable, List
 from logrus import Logger
 
 from . import handlers
-from ..domain import commands, events
-from ..domain.types import Message
+from ..domain.messages import Message, commands, events
 from ..storage.sql.session import SQLSession
 
 

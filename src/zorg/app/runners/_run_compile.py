@@ -21,6 +21,6 @@ def run_compile(cfg: CompileConfig) -> int:
 
 def _convert_zorg_file_to_dict(zorg_file: ZorgFile) -> dict[str, Any]:
     zorg_file_dict = asdict(zorg_file)
-    for key in ["ident", "messages", "path"]:
+    for key in ["events", "ident", "path"]:
         del zorg_file_dict[key]
     return zorg_file_dict

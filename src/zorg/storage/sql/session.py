@@ -11,7 +11,8 @@ from logrus import Logger
 from potoroo import UnitOfWork
 from sqlmodel import Session
 
-from ...domain.types import CreateEngineType, Message
+from ...domain.types import CreateEngineType
+from ...domain.messages import Message
 from .engine import create_cached_engine
 from .repo import SQLRepo
 
@@ -89,8 +90,8 @@ class SQLSession(UnitOfWork[SQLRepo]):
             yield self._messages.pop(0)
 
         for zorg_file in self.repo.seen:
-            while zorg_file.messages:
-                yield zorg_file.messages.pop(0)
+            while zorg_file.events:
+                yield zorg_file.events.pop(0)
 
 
 def _prep_sqlite_db(database_url: str, should_delete: bool = False) -> None:

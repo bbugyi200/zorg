@@ -2,7 +2,7 @@
 
 from logrus import Logger
 
-from ...domain import commands
+from ...domain.messages import commands
 from ...service import messagebus
 from ...storage.sql.session import SQLSession
 from ..config import DbCreateConfig

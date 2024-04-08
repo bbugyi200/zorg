@@ -8,7 +8,7 @@ from logrus import Logger
 from tqdm import tqdm
 import vimala
 
-from ..domain import commands, events
+from ..domain.messages import commands, events
 from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
 from .compiler import walk_zorg_file

@@ -12,20 +12,15 @@ from typing import (
     Protocol,
     Sequence,
     TypeVar,
-    Union,
 )
 
 from sqlalchemy.future import Engine
-
-from .commands import Command
-from .events import Event
 
 
 E = TypeVar("E")
 T = TypeVar("T")
 
 
-Message = Union[Command, Event]
 FileGroupMapType = Mapping[str, Sequence[str]]
 TodoPriorityType = Literal[
     "A",
