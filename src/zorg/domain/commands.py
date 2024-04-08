@@ -19,3 +19,10 @@ class EditCommand(Command):
     paths: list[Path]
     keep_alive_file: Path
     vim_commands: list[str]
+
+
+@dataclass(frozen=True)
+class CreateDBCommand(Command):
+    """Command to (re)create zorg's database from scratch."""
+
+    zettel_dir: Path

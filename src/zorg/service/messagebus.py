@@ -18,6 +18,7 @@ COMMAND_HANDLERS: dict[
     type[commands.Command], Callable[[Any, SQLSession], None]
 ] = {
     commands.EditCommand: handlers.edit_files,
+    commands.CreateDBCommand: handlers.create_database,
 }
 EVENT_HANDLERS: dict[
     type[events.Event], list[Callable[[Any, SQLSession], None]]
@@ -29,12 +30,13 @@ def handle(messages: list[Message], session: SQLSession) -> None:
     queue = messages.copy()
     while queue:
         message = queue.pop(0)
-        if isinstance(message, events.Event):
-            handle_event(message, queue, session)
-        elif isinstance(message, commands.Command):
-            handle_command(message, queue, session)
-        else:
-            raise Exception(f"{message} was not an Event or Command")
+        with session:
+            if isinstance(message, events.Event):
+                handle_event(message, queue, session)
+            elif isinstance(message, commands.Command):
+                handle_command(message, queue, session)
+            else:
+                raise Exception(f"{message} was not an Event or Command")
 
 
 def handle_event(
@@ -50,9 +52,8 @@ def handle_event(
                 zorg_event=str(event),
                 handler=str(handler),
             )
-            with session:
-                handler(event, session)
-                queue.extend(session.collect_new_messages())
+            handler(event, session)
+            queue.extend(session.collect_new_messages())
         except Exception:
             logger.exception("Exception handling event", zorg_event=event)
             continue
