@@ -1,4 +1,4 @@
-"""zorg.sql
+"""zorg.storage.sql
 
-Code related to Zorg's SQL database (e.g. SQLAlchemy, SQLModel) lives here.
+Repository and unit-of-work implementation for Zorg's SQL database lives here.
 """
