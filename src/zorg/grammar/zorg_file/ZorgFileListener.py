@@ -134,6 +134,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#id_note_body.
+    def enterId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#id_note_body.
+    def exitId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#note_body.
     def enterNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
         pass
@@ -149,6 +158,15 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#footnote.
     def exitFootnote(self, ctx:ZorgFileParser.FootnoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#zorg_id.
+    def enterZorg_id(self, ctx:ZorgFileParser.Zorg_idContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#zorg_id.
+    def exitZorg_id(self, ctx:ZorgFileParser.Zorg_idContext):
         pass
 
 

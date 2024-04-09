@@ -10,7 +10,13 @@
 #
 # Usage
 # -----
-# build_zorg_grammars [-v]
+# build_zorg_grammars [-v] [ZO_NAME]
+#
+# Positional Arguments:
+# ---------------------
+# ZO_NAME
+#     The name of a *.zo file without the extension or parent dir. If provided,
+#     will only parse example files that match ZO_NAME.
 #
 # Optional Arguments
 # ------------------
@@ -39,6 +45,11 @@ function run() {
     log::debug "Verbose mode enabled!"
   fi
 
+  if [[ -n "${1}" ]]; then
+      ZO_NAME="$1"
+      shift
+  fi
+
   for dir in $(find src/zorg/grammar -maxdepth 1 -mindepth 1 -type d | xargs -I_ basename _); do
     if [[ "${dir}" == "_"* ]]; then
       log::debug "Skipping the %s directory." "${dir}"
@@ -48,6 +59,9 @@ function run() {
     log::info "Generating %s parser using antlr4." $dir
     antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
     for f in examples/$dir/*.zo; do
+      if [[ "${f}" != *"${ZO_NAME}"* ]]; then
+        continue
+      fi
       log::info "Contructing syntax tree from %s example file." $f
       echo "##### $f" >> $TMP_ERROR_FILE
       antlr4-parse src/zorg/grammar/$dir/*.g4 prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMP_ERROR_FILE

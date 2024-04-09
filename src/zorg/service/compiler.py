@@ -165,6 +165,11 @@ class _ZorgFileCompiler(ZorgFileListener):
 
             self._s.todo_status = status
 
+    def enterZorg_id(
+        self, ctx: ZorgFileParser.Zorg_idContext
+    ) -> None:  # noqa: D102
+        self._s.zorg_id = ctx.getText()
+
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
@@ -174,13 +179,13 @@ class _ZorgFileCompiler(ZorgFileListener):
                 priority=self._s.todo_priority, status=self._s.todo_status
             )
         })
-        note_body = ctx.note_body()
-        if note_body is None:
+        id_note_body = ctx.id_note_body()
+        if id_note_body is None:
             logger.warning(
                 "Skipping todo with no note body", todo=ctx.getText()
             )
         else:
-            todo = ZorgNote(note_body.getText(), **kwargs)
+            todo = ZorgNote(id_note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
 
         # Reset todo priority and status back to defaults.
@@ -253,7 +258,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        note = ZorgNote(ctx.note_body().getText(), **kwargs)
+        note = ZorgNote(ctx.id_note_body().getText(), **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
@@ -279,7 +284,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
             "contexts": self._s.contexts,
-            "ident": self._s.next_id,
+            "id_": self._s.zorg_id,
             "links": self._s.note_links,
             "people": self._s.people,
             "projects": self._s.projects,
@@ -291,6 +296,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         return kwargs | extra_kwargs
 
     def _reset_note_context(self) -> None:
+        self._s.zorg_id = None
         self._s.ids_in_note = 0
         self._s.note_tags = _get_default_tags_map()
         self._s.note_properties = {}
@@ -344,8 +350,11 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
 class _ZorgFileCompilerState:
     """Serves as a data store while parsing zorg files."""
 
+    zorg_id: Optional[str] = None
+
     ids_in_note: int = 0
 
+    # TODO(bugyi): Figure out a better way to track parent/child relationship
     next_id: int = 1
     parent_id: Optional[int] = None
 

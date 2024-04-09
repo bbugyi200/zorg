@@ -11,16 +11,20 @@ comment    : HASH space_atoms? NL ;
 block       : item+ NL* ;
 item        : todo | note | footnote | comment ;
 todo        : base_todo subnote* ;
-base_todo   : todo_prefix (' ' priority)? note_body NL ;
+base_todo   : todo_prefix (' ' priority)? id_note_body NL ;
 todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : '[' HASH ID ']' ;
 note        : DASH base_note subnote* ;
-base_note   : note_body NL ;
+base_note   : id_note_body NL ;
 subnote     : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote  : FOUR_SPACE_DASH base_note ;
+id_note_body : (SPACE zorg_id)? note_body ;
 note_body   : space_atoms (NL SPACE+ space_atoms)* ;
 footnote    : ref COLON space_atoms ;
+
+// Zorg YYMMDD#XX IDs
+zorg_id : ZORG_ID ;
 
 // atoms
 space_atoms : space_atom+ ;
@@ -69,6 +73,7 @@ LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : '2' NUM NUM NUM DASH ('0' | '1') NUM DASH ('0' | '1' | '2' | '3') NUM ;
 TIME         : ('0' | '1' | '2') NUM ('0' | '1' | '2' | '3' | '4' | '5') NUM ;
+ZORG_ID      : NUM NUM ('0' | '1') NUM ('0' | '1' | '2' | '3') NUM HASH (UPPER_LETTER | NUM) (UPPER_LETTER | NUM) ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 TWO_SPACE_DASH : '  -' ;
 FOUR_SPACE_DASH : '    -' ;

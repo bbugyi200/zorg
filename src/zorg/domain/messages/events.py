@@ -1,8 +1,10 @@
 """Zorg events."""
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from . import commands
+from ..models import ZorgNote
 
 
 @dataclass(frozen=True)
@@ -21,3 +23,6 @@ class EditorClosedEvent(Event):
 @dataclass(frozen=True)
 class NewZorgNotesEvent(Event):
     """This zorg event is broadcast when new zorg notes are indexed."""
+
+    zorg_file_path: Path
+    new_and_old_notes: list[tuple[ZorgNote, ZorgNote]]

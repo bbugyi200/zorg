@@ -3,9 +3,8 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from pathlib import Path
-from typing import Iterable, Optional
+from typing import TYPE_CHECKING, Iterable, Optional
 
-from .messages.events import Event
 from .types import (
     DescOperator,
     PropertyOperator,
@@ -13,6 +12,10 @@ from .types import (
     TodoPriorityType,
     TodoStatus,
 )
+
+
+if TYPE_CHECKING:
+    from .messages.events import Event
 
 
 @dataclass(frozen=True)
@@ -33,7 +36,7 @@ class ZorgNote:
     child_note_ids: list[int] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
-    ident: Optional[int] = None
+    id_: Optional[str] = None
     links: list[str] = field(default_factory=lambda: [])
     next_note_id: Optional[int] = None
     parent_note_id: Optional[int] = None
@@ -49,9 +52,8 @@ class ZorgFile:
     """A Zorg (i.e. *.zo) file."""
 
     path: Path
-    ident: Optional[int] = None
     notes: list[ZorgNote] = field(default_factory=lambda: [])
-    events: list[Event] = field(default_factory=lambda: [])
+    events: list["Event"] = field(default_factory=lambda: [])
 
 
 @dataclass(frozen=True)
