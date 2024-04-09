@@ -133,3 +133,11 @@ def test_run_db_create__todo_statuses(
         " NULL"
     )
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
+
+
+def test_run_db_create__zorg_ids(
+    sql_cursor: sqlite3.Cursor, snapshot: Snapshot
+) -> None:
+    """Check what create dates are indexed by running 'zorg db create'."""
+    sql_cursor.execute("SELECT DISTINCT zorg_id FROM zorgnote")
+    assert snapshot == sorted(row[0] for row in sql_cursor.fetchall() if row[0])

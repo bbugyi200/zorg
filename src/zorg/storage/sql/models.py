@@ -114,6 +114,8 @@ class ZorgNote(Base, table=True):
 
     # table columns
     body: str
+
+    zorg_id: Optional[str] = None
     create_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
     todo_status: Optional[TodoStatus] = None
