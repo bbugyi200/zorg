@@ -108,7 +108,6 @@
 # ---
 # name: test_run_db_create__zorg_ids[YAMLConfigFile]
   list([
-    '240408#0X',
-    '301231#X0',
+    '991231#XX',
   ])
 # ---

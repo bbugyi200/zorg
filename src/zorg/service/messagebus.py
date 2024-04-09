@@ -22,7 +22,13 @@ COMMAND_HANDLERS: dict[
 }
 EVENT_HANDLERS: dict[
     type[events.Event], list[Callable[[Any, SQLSession], None]]
-] = {events.EditorClosedEvent: [handlers.check_keep_alive_file]}
+] = {
+    events.EditorClosedEvent: [handlers.check_keep_alive_file],
+    events.NewZorgNotesEvent: [
+        handlers.add_zorg_ids_to_notes_in_file,
+        handlers.increment_zorg_id_counters,
+    ],
+}
 
 
 def handle(messages: list[Message], session: SQLSession) -> None:

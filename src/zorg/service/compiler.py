@@ -73,6 +73,10 @@ class _ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._s.in_h4_header = True
 
+    def enterHead(self, ctx: ZorgFileParser.HeadContext) -> None:  # noqa: D102
+        del ctx
+        self._s.in_head = True
+
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
         del ctx
         if self._s.in_note:
@@ -110,16 +114,18 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.PropertyContext
     ) -> None:  # noqa: D102
         key, value = ctx.ID().getText(), ctx.id_group().getText()
-        if self._s.in_h1_header:
-            self._s.h1_properties[key] = value
+        if self._s.in_head:
+            self._s.file_props[key] = value
+        elif self._s.in_h1_header:
+            self._s.h1_props[key] = value
         elif self._s.in_h2_header:
-            self._s.h2_properties[key] = value
+            self._s.h2_props[key] = value
         elif self._s.in_h3_header:
-            self._s.h3_properties[key] = value
+            self._s.h3_props[key] = value
         elif self._s.in_h4_header:
-            self._s.h4_properties[key] = value
+            self._s.h4_props[key] = value
         elif self._s.in_note:
-            self._s.note_properties[key] = value
+            self._s.note_props[key] = value
 
     def enterSubnote(
         self, ctx: ZorgFileParser.SubnoteContext
@@ -203,7 +209,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.h1_section_tags = _get_default_tags_map()
-        self._s.h1_properties = {}
+        self._s.h1_props = {}
 
     def exitH2_header(
         self, ctx: ZorgFileParser.H2_headerContext
@@ -216,7 +222,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.h2_section_tags = _get_default_tags_map()
-        self._s.h2_properties = {}
+        self._s.h2_props = {}
 
     def exitH3_header(
         self, ctx: ZorgFileParser.H3_headerContext
@@ -229,7 +235,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.h3_section_tags = _get_default_tags_map()
-        self._s.h3_properties = {}
+        self._s.h3_props = {}
 
     def exitH4_header(
         self, ctx: ZorgFileParser.H4_headerContext
@@ -242,7 +248,11 @@ class _ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.h4_section_tags = _get_default_tags_map()
-        self._s.h4_properties = {}
+        self._s.h4_props = {}
+
+    def exitHead(self, ctx: ZorgFileParser.HeadContext) -> None:  # noqa: D102
+        del ctx
+        self._s.in_head = False
 
     def exitComment(
         self, ctx: ZorgFileParser.CommentContext
@@ -284,11 +294,11 @@ class _ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
             "contexts": self._s.contexts,
-            "id_": self._s.zorg_id,
             "links": self._s.note_links,
             "people": self._s.people,
             "projects": self._s.projects,
             "properties": self._s.properties,
+            "zorg_id": self._s.zorg_id,
         }
         self._s.next_id += 1
         if self._s.note_date is not None:
@@ -299,7 +309,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         self._s.zorg_id = None
         self._s.ids_in_note = 0
         self._s.note_tags = _get_default_tags_map()
-        self._s.note_properties = {}
+        self._s.note_props = {}
         self._s.note_links = []
         self._s.note_date = None
 
@@ -359,6 +369,7 @@ class _ZorgFileCompilerState:
     parent_id: Optional[int] = None
 
     in_first_comment: bool = True
+    in_head: bool = False
     in_h1_header: bool = False
     in_h2_header: bool = False
     in_h3_header: bool = False
@@ -386,11 +397,12 @@ class _ZorgFileCompilerState:
         default_factory=_get_default_tags_map
     )
 
-    h1_properties: dict[str, Any] = field(default_factory=lambda: {})
-    h2_properties: dict[str, Any] = field(default_factory=lambda: {})
-    h3_properties: dict[str, Any] = field(default_factory=lambda: {})
-    h4_properties: dict[str, Any] = field(default_factory=lambda: {})
-    note_properties: dict[str, Any] = field(default_factory=lambda: {})
+    file_props: dict[str, Any] = field(default_factory=lambda: {})
+    h1_props: dict[str, Any] = field(default_factory=lambda: {})
+    h2_props: dict[str, Any] = field(default_factory=lambda: {})
+    h3_props: dict[str, Any] = field(default_factory=lambda: {})
+    h4_props: dict[str, Any] = field(default_factory=lambda: {})
+    note_props: dict[str, Any] = field(default_factory=lambda: {})
 
     note_links: list[str] = field(default_factory=lambda: [])
     note_date: Optional[dt.date] = None
@@ -422,11 +434,12 @@ class _ZorgFileCompilerState:
     def properties(self) -> dict[str, Any]:
         """Properties that are currently in-scope."""
         return (
-            self.h1_properties
-            | self.h2_properties
-            | self.h3_properties
-            | self.h4_properties
-            | self.note_properties
+            self.file_props
+            | self.h1_props
+            | self.h2_props
+            | self.h3_props
+            | self.h4_props
+            | self.note_props
         )
 
     def _get_current_tags(self, tag_name: TagName) -> list[str]:

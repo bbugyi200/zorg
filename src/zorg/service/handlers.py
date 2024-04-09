@@ -95,6 +95,8 @@ def create_database(
             zorg_file=zo_path.name,
             num_notes=num_notes,
             num_todos=num_todos,
+            total_num_notes=total_num_notes,
+            total_num_todos=total_num_todos,
         )
         session.repo.add(zorg_file)
         zorg_files.append(zorg_file)
@@ -105,6 +107,27 @@ def create_database(
         num_todos=total_num_todos,
     )
     session.commit()
+
+
+def add_zorg_ids_to_notes_in_file(
+    event: events.NewZorgNotesEvent, session: SQLSession
+) -> None:
+    """Adds IDs to new zorg notes."""
+    del session
+    logger.info("New notes have been added", zorg_event=event)
+
+
+# TODO(bugyi): This should actually listen for the DBCreatedEvent so we don't
+# increment the IDs once per zorg file.
+def increment_zorg_id_counters(
+    event: events.NewZorgNotesEvent, session: SQLSession
+) -> None:
+    """Increment the date-specific zorg ID counters.
+
+    These are stored in a directory in your zettel dir and are used when
+    generating new IDs (they are the XX in the YYMMDD#XX ID format).
+    """
+    del event, session
 
 
 def _process_vim_commands(

@@ -49,7 +49,7 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
         kwargs: dict[str, Any] = {
             "body": entity.body,
             "create_date": entity.create_date,
-            "zorg_id": entity.id_
+            "zorg_id": entity.zorg_id
         }
         if entity.todo_payload:
             kwargs["todo_status"] = entity.todo_payload.status

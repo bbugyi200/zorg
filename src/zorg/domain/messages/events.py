@@ -25,4 +25,4 @@ class NewZorgNotesEvent(Event):
     """This zorg event is broadcast when new zorg notes are indexed."""
 
     zorg_file_path: Path
-    new_and_old_notes: list[tuple[ZorgNote, ZorgNote]]
+    new_notes: list[ZorgNote]

@@ -36,7 +36,6 @@ class ZorgNote:
     child_note_ids: list[int] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
-    id_: Optional[str] = None
     links: list[str] = field(default_factory=lambda: [])
     next_note_id: Optional[int] = None
     parent_note_id: Optional[int] = None
@@ -45,6 +44,7 @@ class ZorgNote:
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
     todo_payload: Optional[TodoPayload] = None
+    zorg_id: Optional[str] = None
 
 
 @dataclass(frozen=True)

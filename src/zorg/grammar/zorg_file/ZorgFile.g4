@@ -73,7 +73,7 @@ LOWER_X      : 'x' ;
 ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
 DATE         : '2' NUM NUM NUM DASH ('0' | '1') NUM DASH ('0' | '1' | '2' | '3') NUM ;
 TIME         : ('0' | '1' | '2') NUM ('0' | '1' | '2' | '3' | '4' | '5') NUM ;
-ZORG_ID      : NUM NUM ('0' | '1') NUM ('0' | '1' | '2' | '3') NUM HASH (UPPER_LETTER | NUM) (UPPER_LETTER | NUM) ;
+ZORG_ID      : NUM NUM ('0' | '1') NUM ('0' | '1' | '2' | '3') NUM HASH (UPPER_LETTER | NUM) (UPPER_LETTER | NUM) (UPPER_LETTER | NUM)? ;
 NUM_ID       : NUM (ALPHANUM|UNDERSCORE)* ;
 TWO_SPACE_DASH : '  -' ;
 FOUR_SPACE_DASH : '    -' ;
