@@ -34,6 +34,6 @@ def run_edit(cfg: EditConfig) -> int:
                 vim_commands=cfg.vim_commands,
             ),
         ],
-        SQLSession(cfg.database_url),
+        SQLSession(cfg.zettel_dir, cfg.database_url),
     )
     return 0
