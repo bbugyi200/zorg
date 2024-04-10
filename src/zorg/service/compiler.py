@@ -278,7 +278,6 @@ class _ZorgFileCompiler(ZorgFileListener):
         kwargs = self._get_note_kwargs(extra_kwargs)
         body = ctx.id_note_body().getText()
         if body.strip() == "":
-            breakpoint()
             logger.warning(
                 "Skipping note with empty body",
                 note=ctx.getText(),
