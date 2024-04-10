@@ -15,6 +15,8 @@ logger = Logger(__name__)
 @runner
 def run_db_create(cfg: DbCreateConfig) -> int:
     """Runner for the 'db create' command."""
-    session = SQLSession(cfg.zettel_dir, cfg.database_url, should_delete_existing_db=True)
+    session = SQLSession(
+        cfg.zettel_dir, cfg.database_url, should_delete_existing_db=True
+    )
     messagebus.handle([commands.CreateDBCommand(cfg.zettel_dir)], session)
     return 0
