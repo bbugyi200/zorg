@@ -320,6 +320,9 @@ class _ZorgFileCompiler(ZorgFileListener):
             "zorg_id": self._s.zorg_id,
         }
         self._s.next_id += 1
+        # TODO(bugyi): Add h1_date, h2_date, h3_date, and h4_date
+        # TODO(bugyi): Add special syntax for [[status]] files that allows just
+        #              date to be used as header.
         if self._s.note_date is not None:
             kwargs["create_date"] = self._s.note_date
         elif self._s.file_date is not None:
