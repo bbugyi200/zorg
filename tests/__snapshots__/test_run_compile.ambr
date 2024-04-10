@@ -1924,7 +1924,7 @@
               'todo_payload': None,
               'zorg_id': '301231#X0'},
              {'areas': ['tags'],
-              'body': '240408#no Da nah nah nuh...',
+              'body': '240408#NO Da nah nah nuh...',
               'child_note_ids': [],
               'contexts': [],
               'create_date': FakeDate(2000, 1, 3),
