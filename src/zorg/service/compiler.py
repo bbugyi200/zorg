@@ -48,6 +48,10 @@ class _ZorgFileCompiler(ZorgFileListener):
             self._s.note_date = dt.datetime.strptime(
                 ctx.DATE().getText(), "%Y-%m-%d"
             )
+        elif self._s.in_first_comment:
+            self._s.file_date = dt.datetime.strptime(
+                ctx.DATE().getText(), "%Y-%m-%d"
+            )
 
     def enterH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -190,6 +194,10 @@ class _ZorgFileCompiler(ZorgFileListener):
             logger.warning(
                 "Skipping todo with no note body", todo=ctx.getText()
             )
+        elif id_note_body.getText().strip() == "":
+            logger.warning(
+                "Skipping todo with empty note body", todo=ctx.getText()
+            )
         else:
             todo = ZorgNote(id_note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
@@ -268,7 +276,17 @@ class _ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        note = ZorgNote(ctx.id_note_body().getText(), **kwargs)
+        body = ctx.id_note_body().getText()
+        if body.strip() == "":
+            breakpoint()
+            logger.warning(
+                "Skipping note with empty body",
+                note=ctx.getText(),
+                file_path=str(self.zorg_file.path),
+            )
+            return
+
+        note = ZorgNote(body, **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
@@ -303,6 +321,8 @@ class _ZorgFileCompiler(ZorgFileListener):
         self._s.next_id += 1
         if self._s.note_date is not None:
             kwargs["create_date"] = self._s.note_date
+        elif self._s.file_date is not None:
+            kwargs["create_date"] = self._s.file_date
         return kwargs | extra_kwargs
 
     def _reset_note_context(self) -> None:
@@ -405,6 +425,8 @@ class _ZorgFileCompilerState:
     note_props: dict[str, Any] = field(default_factory=lambda: {})
 
     note_links: list[str] = field(default_factory=lambda: [])
+
+    file_date: Optional[dt.date] = None
     note_date: Optional[dt.date] = None
 
     todo_priority: TodoPriorityType = "C"

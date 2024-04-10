@@ -113,8 +113,7 @@ def add_zorg_ids_to_notes_in_file(
     event: events.NewZorgNotesEvent, session: SQLSession
 ) -> None:
     """Adds IDs to new zorg notes."""
-    del session
-    logger.info("New notes have been added", zorg_event=event)
+    del event, session
 
 
 # TODO(bugyi): This should actually listen for the DBCreatedEvent so we don't
