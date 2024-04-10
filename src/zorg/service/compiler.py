@@ -44,7 +44,11 @@ class _ZorgFileCompiler(ZorgFileListener):
         self._add_tags(ctx, "contexts")
 
     def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
-        if self._s.in_note and self._s.ids_in_note == 1:
+        if (
+            self._s.in_note
+            and self._s.ids_in_note == 1
+            and self._s.note_date is None
+        ):
             self._s.note_date = dt.datetime.strptime(
                 ctx.DATE().getText(), "%Y-%m-%d"
             )
@@ -178,7 +182,10 @@ class _ZorgFileCompiler(ZorgFileListener):
     def enterZorg_id(
         self, ctx: ZorgFileParser.Zorg_idContext
     ) -> None:  # noqa: D102
-        self._s.zorg_id = ctx.getText()
+        zorg_id = ctx.getText()
+        self._s.zorg_id = zorg_id
+        zorg_id_date = f"20{zorg_id.split('#')[0]}"
+        self._s.note_date = dt.datetime.strptime(zorg_id_date, "%Y%m%d")
 
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
