@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 import datetime as dt
+from functools import partial
 from pathlib import Path
 from typing import Any, Literal, Optional
 
@@ -44,18 +45,25 @@ class _ZorgFileCompiler(ZorgFileListener):
         self._add_tags(ctx, "contexts")
 
     def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
+        get_date = partial(
+            dt.datetime.strptime, ctx.DATE().getText(), "%Y-%m-%d"
+        )
         if (
             self._s.in_note
             and self._s.ids_in_note == 1
             and self._s.note_date is None
         ):
-            self._s.note_date = dt.datetime.strptime(
-                ctx.DATE().getText(), "%Y-%m-%d"
-            )
+            self._s.note_date = get_date()
+        elif self._s.in_h4_header:
+            self._s.h4_date = get_date()
+        elif self._s.in_h3_header:
+            self._s.h3_date = get_date()
+        elif self._s.in_h2_header:
+            self._s.h2_date = get_date()
+        elif self._s.in_h1_header:
+            self._s.h1_date = get_date()
         elif self._s.in_first_comment:
-            self._s.file_date = dt.datetime.strptime(
-                ctx.DATE().getText(), "%Y-%m-%d"
-            )
+            self._s.file_date = get_date()
 
     def enterH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -313,6 +321,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
             "contexts": self._s.contexts,
+            "create_date": self._s.create_date,
             "links": self._s.note_links,
             "people": self._s.people,
             "projects": self._s.projects,
@@ -320,13 +329,6 @@ class _ZorgFileCompiler(ZorgFileListener):
             "zorg_id": self._s.zorg_id,
         }
         self._s.next_id += 1
-        # TODO(bugyi): Add h1_date, h2_date, h3_date, and h4_date
-        # TODO(bugyi): Add special syntax for [[status]] files that allows just
-        #              date to be used as header.
-        if self._s.note_date is not None:
-            kwargs["create_date"] = self._s.note_date
-        elif self._s.file_date is not None:
-            kwargs["create_date"] = self._s.file_date
         return kwargs | extra_kwargs
 
     def _reset_note_context(self) -> None:
@@ -431,6 +433,10 @@ class _ZorgFileCompilerState:
     note_links: list[str] = field(default_factory=lambda: [])
 
     file_date: Optional[dt.date] = None
+    h1_date: Optional[dt.date] = None
+    h2_date: Optional[dt.date] = None
+    h3_date: Optional[dt.date] = None
+    h4_date: Optional[dt.date] = None
     note_date: Optional[dt.date] = None
 
     todo_priority: TodoPriorityType = "C"
@@ -467,6 +473,24 @@ class _ZorgFileCompilerState:
             | self.h4_props
             | self.note_props
         )
+
+    @property
+    def create_date(self) -> dt.date:
+        """Create date based on file header, sections, zorg IDs, etc...."""
+        if self.note_date:
+            return self.note_date
+        elif self.h4_date:
+            return self.h4_date
+        elif self.h3_date:
+            return self.h3_date
+        elif self.h2_date:
+            return self.h2_date
+        elif self.h1_date:
+            return self.h1_date
+        elif self.file_date:
+            return self.file_date
+        else:
+            return dt.date.today()
 
     def _get_current_tags(self, tag_name: TagName) -> list[str]:
         tags = []
