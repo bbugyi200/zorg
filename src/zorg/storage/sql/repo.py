@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from eris import ErisResult, Ok
 from logrus import Logger
 from potoroo import QueryRepo
@@ -10,6 +12,7 @@ from sqlmodel import Session, select
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
 from ...domain.models import OrZorgQuery, ZorgFile
+from ...service.id_generator import IDGenerator
 from .converters import ZorgFileConverter
 
 
@@ -21,8 +24,10 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
 
     def __init__(
         self,
+        zettel_dir: Path,
         session: Session,
     ) -> None:
+        self._zettel_dir = zettel_dir
         self._session = session
         self._converter = ZorgFileConverter(session)
 
@@ -37,7 +42,7 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
         """
         del key
         self._seen_zorg_file(zorg_file)
-        _add_zorg_ids(zorg_file)
+        _add_zorg_ids(self._zettel_dir, zorg_file)
         sql_zorg_file = self._converter.from_entity(zorg_file)
         self._session.add(sql_zorg_file)
         return Ok(sql_zorg_file.id)
@@ -83,12 +88,13 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
             self.seen.append(zorg_file)
 
 
-def _add_zorg_ids(zorg_file: ZorgFile) -> None:
+def _add_zorg_ids(zdir: Path, zorg_file: ZorgFile) -> None:
     new_notes = []
+    id_gen = IDGenerator(zdir)
     for note in zorg_file.notes:
         if note.zorg_id is None:
             logger.debug("Found new zorg note", zorg_note=note)
-            zorg_id = "991231#XX"
+            zorg_id = id_gen.get_next(note.create_date)
             note.zorg_id = zorg_id
             new_notes.append(note)
     if new_notes:

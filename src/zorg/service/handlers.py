@@ -12,6 +12,7 @@ from ..domain.messages import commands, events
 from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
 from .compiler import walk_zorg_file
+from .id_generator import IDGenerator
 
 
 logger = Logger(__name__)
@@ -107,7 +108,7 @@ def create_database(
         num_todos=total_num_todos,
     )
     session.commit()
-    session.add_message(events.DBCreatedEvent())
+    session.add_message(events.DBCreatedEvent(cmd.zettel_dir))
 
 
 def add_zorg_ids_to_notes_in_file(
@@ -125,7 +126,9 @@ def increment_zorg_id_counters(
     These are stored in a directory in your zettel dir and are used when
     generating new IDs (they are the XX in the YYMMDD#XX ID format).
     """
-    del event, session
+    del session
+    id_gen = IDGenerator(event.zettel_dir)
+    id_gen.write_to_disk()
 
 
 def _process_vim_commands(
