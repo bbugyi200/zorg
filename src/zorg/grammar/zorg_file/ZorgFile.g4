@@ -7,21 +7,25 @@ prog       : head (NL+ block* h2_section* h1_section*)? EOF ;
 head       : comment+ ;
 comment    : HASH space_atoms? NL ;
 
-// block
+// blocks
 block       : item+ NL* ;
 item        : todo | note | footnote | comment ;
+footnote    : ref COLON space_atoms NL ;
+
+// notes
+note        : DASH base_note subnote* ;
+base_note   : id_note_body NL ;
+id_note_body : (SPACE zorg_id)? note_body ;
+note_body   : space_atoms (NL SPACE+ space_atoms)* ;
+subnote     : TWO_SPACE_DASH base_note subsubnote*;
+subsubnote  : FOUR_SPACE_DASH base_note ;
+
+// todos
 todo        : base_todo subnote* ;
 base_todo   : todo_prefix (SPACE priority)? id_note_body NL ;
 todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : '[' HASH ID ']' ;
-note        : DASH base_note subnote* ;
-base_note   : id_note_body NL ;
-subnote     : TWO_SPACE_DASH base_note subsubnote*;
-subsubnote  : FOUR_SPACE_DASH base_note ;
-id_note_body : (SPACE zorg_id)? note_body ;
-note_body   : space_atoms (NL SPACE+ space_atoms)* ;
-footnote    : ref COLON space_atoms NL ;
 
 // Zorg YYMMDD#XX IDs
 zorg_id : ZORG_ID ;

@@ -53,6 +53,69 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#footnote.
+    def enterFootnote(self, ctx:ZorgFileParser.FootnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#footnote.
+    def exitFootnote(self, ctx:ZorgFileParser.FootnoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#note.
+    def enterNote(self, ctx:ZorgFileParser.NoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#note.
+    def exitNote(self, ctx:ZorgFileParser.NoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#base_note.
+    def enterBase_note(self, ctx:ZorgFileParser.Base_noteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#base_note.
+    def exitBase_note(self, ctx:ZorgFileParser.Base_noteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#id_note_body.
+    def enterId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#id_note_body.
+    def exitId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#note_body.
+    def enterNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#note_body.
+    def exitNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#subnote.
+    def enterSubnote(self, ctx:ZorgFileParser.SubnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#subnote.
+    def exitSubnote(self, ctx:ZorgFileParser.SubnoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#subsubnote.
+    def enterSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#subsubnote.
+    def exitSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#todo.
     def enterTodo(self, ctx:ZorgFileParser.TodoContext):
         pass
@@ -95,69 +158,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#priority.
     def exitPriority(self, ctx:ZorgFileParser.PriorityContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#note.
-    def enterNote(self, ctx:ZorgFileParser.NoteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#note.
-    def exitNote(self, ctx:ZorgFileParser.NoteContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#base_note.
-    def enterBase_note(self, ctx:ZorgFileParser.Base_noteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#base_note.
-    def exitBase_note(self, ctx:ZorgFileParser.Base_noteContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#subnote.
-    def enterSubnote(self, ctx:ZorgFileParser.SubnoteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#subnote.
-    def exitSubnote(self, ctx:ZorgFileParser.SubnoteContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#subsubnote.
-    def enterSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#subsubnote.
-    def exitSubsubnote(self, ctx:ZorgFileParser.SubsubnoteContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#id_note_body.
-    def enterId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#id_note_body.
-    def exitId_note_body(self, ctx:ZorgFileParser.Id_note_bodyContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#note_body.
-    def enterNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#note_body.
-    def exitNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#footnote.
-    def enterFootnote(self, ctx:ZorgFileParser.FootnoteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#footnote.
-    def exitFootnote(self, ctx:ZorgFileParser.FootnoteContext):
         pass
 
 
