@@ -9,34 +9,39 @@ from typing import Optional
 class IDGenerator:
     """Responsible for knowing what the next zorg ID is based on the date."""
 
-    _next_id_map: Optional[dict[str, str]] = None
+    _class_next_id_map: Optional[dict[str, str]] = None
 
     def __init__(self, zettel_dir: Path) -> None:
         zorg_data_dir = zettel_dir / ".zorg_data"
         zorg_data_dir.mkdir(exist_ok=True)
         self._next_ids_path = zorg_data_dir / "next_ids.json"
-        if IDGenerator._next_id_map is None and self._next_ids_path.exists():
-            IDGenerator._next_id_map = json.loads(
+        if (
+            IDGenerator._class_next_id_map is None
+            and self._next_ids_path.exists()
+        ):
+            IDGenerator._class_next_id_map = json.loads(
                 self._next_ids_path.read_text()
             )
-        elif IDGenerator._next_id_map is None:
-            IDGenerator._next_id_map = {}
+        elif IDGenerator._class_next_id_map is None:
+            IDGenerator._class_next_id_map = {}
 
     def get_next(self, date: dt.date) -> str:
         """Returns the next zorg ID based on {date}."""
         date_part = date.strftime("%Y%m%d")[2:]
-        assert IDGenerator._next_id_map is not None
-        id_part = IDGenerator._next_id_map.get(date_part, "00")
-        IDGenerator._next_id_map[date_part] = _get_next_id(id_part)
+        id_part = self._next_id_map.get(date_part, "00")
+        # pylint: disable=unsupported-assignment-operation
+        self._next_id_map[date_part] = _get_next_id(id_part)
         return f"{date_part}#{id_part}"
 
     def write_to_disk(self) -> None:
         """Writes the next ID map back to disk."""
         with self._next_ids_path.open("w") as f:
-            assert IDGenerator._next_id_map is not None
-            json.dump(
-                dict(sorted(IDGenerator._next_id_map.items())), f, indent=4
-            )
+            json.dump(dict(sorted(self._next_id_map.items())), f, indent=4)
+
+    @property
+    def _next_id_map(self) -> dict[str, str]:
+        assert IDGenerator._class_next_id_map is not None
+        return IDGenerator._class_next_id_map
 
 
 def _get_next_id(last_id: str) -> str:
