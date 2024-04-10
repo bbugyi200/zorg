@@ -21,7 +21,7 @@ subnote     : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote  : FOUR_SPACE_DASH base_note ;
 id_note_body : (SPACE zorg_id)? note_body ;
 note_body   : space_atoms (NL SPACE+ space_atoms)* ;
-footnote    : ref COLON space_atoms ;
+footnote    : ref COLON space_atoms NL ;
 
 // Zorg YYMMDD#XX IDs
 zorg_id : ZORG_ID ;
