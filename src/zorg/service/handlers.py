@@ -107,6 +107,7 @@ def create_database(
         num_todos=total_num_todos,
     )
     session.commit()
+    session.add_message(events.DBCreatedEvent())
 
 
 def add_zorg_ids_to_notes_in_file(
@@ -116,10 +117,8 @@ def add_zorg_ids_to_notes_in_file(
     del event, session
 
 
-# TODO(bugyi): This should actually listen for the DBCreatedEvent so we don't
-# increment the IDs once per zorg file.
 def increment_zorg_id_counters(
-    event: events.NewZorgNotesEvent, session: SQLSession
+    event: events.DBCreatedEvent, session: SQLSession
 ) -> None:
     """Increment the date-specific zorg ID counters.
 

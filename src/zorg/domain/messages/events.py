@@ -22,7 +22,12 @@ class EditorClosedEvent(Event):
 
 @dataclass(frozen=True)
 class NewZorgNotesEvent(Event):
-    """This zorg event is broadcast when new zorg notes are indexed."""
+    """Broadcast when new zorg notes are indexed."""
 
     zorg_file_path: Path
     new_notes: list[ZorgNote]
+
+
+@dataclass(frozen=True)
+class DBCreatedEvent(Event):
+    """Broadcast when the zorg database is done being initialized."""
