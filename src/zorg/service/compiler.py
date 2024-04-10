@@ -227,7 +227,8 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.H1_headerContext
     ) -> None:  # noqa: D102
         del ctx
-        self._s.h1_section_tags = _get_default_tags_map()
+        self._s.h1_tags = _get_default_tags_map()
+        self._s.h1_date = None
         self._s.h1_props = {}
 
     def exitH2_header(
@@ -240,7 +241,8 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.H2_headerContext
     ) -> None:  # noqa: D102
         del ctx
-        self._s.h2_section_tags = _get_default_tags_map()
+        self._s.h2_tags = _get_default_tags_map()
+        self._s.h2_date = None
         self._s.h2_props = {}
 
     def exitH3_header(
@@ -253,7 +255,8 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.H3_headerContext
     ) -> None:  # noqa: D102
         del ctx
-        self._s.h3_section_tags = _get_default_tags_map()
+        self._s.h3_tags = _get_default_tags_map()
+        self._s.h3_date = None
         self._s.h3_props = {}
 
     def exitH4_header(
@@ -266,7 +269,8 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.H4_headerContext
     ) -> None:  # noqa: D102
         del ctx
-        self._s.h4_section_tags = _get_default_tags_map()
+        self._s.h4_tags = _get_default_tags_map()
+        self._s.h4_date = None
         self._s.h4_props = {}
 
     def exitHead(self, ctx: ZorgFileParser.HeadContext) -> None:  # noqa: D102
@@ -353,13 +357,13 @@ class _ZorgFileCompiler(ZorgFileListener):
         if self._s.in_first_comment:
             self._s.file_tags[tag_name].append(text)
         elif self._s.in_h1_header:
-            self._s.h1_section_tags[tag_name].append(text)
+            self._s.h1_tags[tag_name].append(text)
         elif self._s.in_h2_header:
-            self._s.h2_section_tags[tag_name].append(text)
+            self._s.h2_tags[tag_name].append(text)
         elif self._s.in_h3_header:
-            self._s.h3_section_tags[tag_name].append(text)
+            self._s.h3_tags[tag_name].append(text)
         elif self._s.in_h4_header:
-            self._s.h4_section_tags[tag_name].append(text)
+            self._s.h4_tags[tag_name].append(text)
         elif self._s.in_note:
             self._s.note_tags[tag_name].append(text)
 
@@ -407,16 +411,16 @@ class _ZorgFileCompilerState:
     file_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
-    h1_section_tags: dict[TagName, list[str]] = field(
+    h1_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
-    h2_section_tags: dict[TagName, list[str]] = field(
+    h2_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
-    h3_section_tags: dict[TagName, list[str]] = field(
+    h3_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
-    h4_section_tags: dict[TagName, list[str]] = field(
+    h4_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map
     )
     note_tags: dict[TagName, list[str]] = field(
@@ -495,9 +499,9 @@ class _ZorgFileCompilerState:
     def _get_current_tags(self, tag_name: TagName) -> list[str]:
         tags = []
         tags.extend(self.file_tags[tag_name])
-        tags.extend(self.h1_section_tags[tag_name])
-        tags.extend(self.h2_section_tags[tag_name])
-        tags.extend(self.h3_section_tags[tag_name])
-        tags.extend(self.h4_section_tags[tag_name])
+        tags.extend(self.h1_tags[tag_name])
+        tags.extend(self.h2_tags[tag_name])
+        tags.extend(self.h3_tags[tag_name])
+        tags.extend(self.h4_tags[tag_name])
         tags.extend(self.note_tags[tag_name])
         return sorted(set(tags))
