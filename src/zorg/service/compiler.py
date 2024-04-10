@@ -191,13 +191,9 @@ class _ZorgFileCompiler(ZorgFileListener):
         })
         id_note_body = ctx.id_note_body()
         if id_note_body is None:
-            logger.warning(
-                "Skipping todo with no note body", todo=ctx.getText()
-            )
+            logger.warning("Skipping todo with no note body")
         elif id_note_body.getText().strip() == "":
-            logger.warning(
-                "Skipping todo with empty note body", todo=ctx.getText()
-            )
+            logger.warning("Skipping todo with empty note body")
         else:
             todo = ZorgNote(id_note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
@@ -276,11 +272,10 @@ class _ZorgFileCompiler(ZorgFileListener):
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(extra_kwargs)
-        body = ctx.id_note_body().getText()
-        if body.strip() == "":
+        body: str = ctx.id_note_body().getText().strip()
+        if body == "":
             logger.warning(
                 "Skipping note with empty body",
-                note=ctx.getText(),
                 file_path=str(self.zorg_file.path),
             )
             return
