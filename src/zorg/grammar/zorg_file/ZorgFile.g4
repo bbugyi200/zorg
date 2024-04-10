@@ -100,7 +100,7 @@ RANGLE       : '>' ;
 //// fragments
 fragment UPPER_LETTER : 'A'..'Z' ;
 fragment LOWER_LETTER : 'a'..'z' ;
-fragment ZID_CHAR : NUM | 'A'..'H' | 'J'..'N' | 'P'..'Z' | 'a'..'k' | 'm'..'z' ;
+fragment ZID_CHAR : NUM | 'A'..'H' | 'J'..'N' | 'P'..'Z' | 'a'..'i' | 'k' | 'm'..'z' ;
 fragment NUM          : '0'..'9' ;
 fragment FIRST_D_NUM : '0' | '1' | '2' | '3' ;
 fragment FIRST_M_NUM : '0' | '1' ;
