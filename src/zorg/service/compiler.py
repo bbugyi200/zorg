@@ -190,9 +190,9 @@ class _ZorgFileCompiler(ZorgFileListener):
     def enterZorg_id(
         self, ctx: ZorgFileParser.Zorg_idContext
     ) -> None:  # noqa: D102
-        zorg_id = ctx.getText()
-        self._s.zorg_id = zorg_id
-        zorg_id_date = f"20{zorg_id.split('#')[0]}"
+        zid = ctx.getText()
+        self._s.zid = zid
+        zorg_id_date = f"20{zid.split('#')[0]}"
         self._s.note_date = dt.datetime.strptime(zorg_id_date, "%Y%m%d")
 
     def exitBase_todo(
@@ -330,13 +330,13 @@ class _ZorgFileCompiler(ZorgFileListener):
             "people": self._s.people,
             "projects": self._s.projects,
             "properties": self._s.properties,
-            "zorg_id": self._s.zorg_id,
+            "zid": self._s.zid,
         }
         self._s.next_id += 1
         return kwargs | extra_kwargs
 
     def _reset_note_context(self) -> None:
-        self._s.zorg_id = None
+        self._s.zid = None
         self._s.ids_in_note = 0
         self._s.note_tags = _get_default_tags_map()
         self._s.note_props = {}
@@ -390,7 +390,7 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
 class _ZorgFileCompilerState:
     """Serves as a data store while parsing zorg files."""
 
-    zorg_id: Optional[str] = None
+    zid: Optional[str] = None
 
     ids_in_note: int = 0
 

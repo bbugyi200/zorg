@@ -44,7 +44,7 @@ class ZorgNote:
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
     todo_payload: Optional[TodoPayload] = None
-    zorg_id: Optional[str] = None
+    zid: Optional[str] = None
 
 
 @dataclass(frozen=True)

@@ -42,7 +42,7 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
         """
         del key
         self._seen_zorg_file(zorg_file)
-        _add_zorg_ids(self._zettel_dir, zorg_file)
+        _add_zids(self._zettel_dir, zorg_file)
         sql_zorg_file = self._converter.from_entity(zorg_file)
         self._session.add(sql_zorg_file)
         return Ok(sql_zorg_file.id)
@@ -88,14 +88,14 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
             self.seen.append(zorg_file)
 
 
-def _add_zorg_ids(zdir: Path, zorg_file: ZorgFile) -> None:
+def _add_zids(zdir: Path, zorg_file: ZorgFile) -> None:
     new_notes = []
     id_gen = IDGenerator(zdir)
     for note in zorg_file.notes:
-        if note.zorg_id is None:
+        if note.zid is None:
             logger.debug("Found new zorg note", zorg_note=note)
-            zorg_id = id_gen.get_next(note.create_date)
-            note.zorg_id = zorg_id
+            zid = id_gen.get_next(note.create_date)
+            note.zid = zid
             new_notes.append(note)
     if new_notes:
         zorg_file.events.append(

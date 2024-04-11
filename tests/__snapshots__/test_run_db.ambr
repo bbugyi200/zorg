@@ -109,7 +109,7 @@
     'OPEN',
   ])
 # ---
-# name: test_run_db_create__zorg_ids[YAMLConfigFile]
+# name: test_run_db_create__zids[YAMLConfigFile]
   list([
     '000103#00',
     '000103#01',

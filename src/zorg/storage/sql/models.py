@@ -115,9 +115,9 @@ class ZorgNote(Base, table=True):
     # table columns
     body: str
 
-    # TODO(bugyi): Make zorg_id required to persist to DB.
-    # TODO(bugyi): Make zorg_id unique.
-    zorg_id: Optional[str] = Field(default=None)
+    # TODO(bugyi): Make zid required to persist to DB.
+    # TODO(bugyi): Make zid unique.
+    zid: Optional[str] = Field(default=None)
 
     create_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
