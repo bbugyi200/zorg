@@ -410,14 +410,15 @@ class _ZorgFileCompiler(ZorgFileListener):
             self._s.note_tags[tag_name].append(text)
 
 
-def walk_zorg_file(zo_path: Path) -> ZorgFile:
+def walk_zorg_file(zo_path: Path, verbose: bool = False) -> ZorgFile:
     """Create a new _ZorgFileCompiler and walk through notes in {zorg_file}."""
     zorg_file = ZorgFile(zo_path)
     stream = antlr4.FileStream(zorg_file.path, errors="ignore")
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgFileParser(tokens)
-    parser.removeErrorListeners()
+    if not verbose:
+        parser.removeErrorListeners()
     error_manager = ErrorManager()
     parser.addErrorListener(error_manager)
     tree = parser.prog()
