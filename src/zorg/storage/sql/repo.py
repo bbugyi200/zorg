@@ -12,7 +12,7 @@ from sqlmodel import Session, select
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
 from ...domain.models import OrZorgQuery, ZorgFile
-from ...service.id_generator import IDGenerator
+from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter
 
 
@@ -90,7 +90,7 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
 
 def _add_zids(zdir: Path, zorg_file: ZorgFile) -> None:
     new_notes = []
-    id_gen = IDGenerator(zdir)
+    id_gen = ZIDManager(zdir)
     for note in zorg_file.notes:
         if note.zid is None:
             logger.debug("Found new zorg note", zorg_note=note)

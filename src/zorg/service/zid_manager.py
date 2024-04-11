@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Optional
 
 
-class IDGenerator:
+class ZIDManager:
     """Responsible for knowing what the next zorg ID is based on the date."""
 
     _class_next_id_map: Optional[dict[str, str]] = None
@@ -16,14 +16,14 @@ class IDGenerator:
         zorg_data_dir.mkdir(exist_ok=True)
         self._next_ids_path = zorg_data_dir / "next_ids.json"
         if (
-            IDGenerator._class_next_id_map is None
+            ZIDManager._class_next_id_map is None
             and self._next_ids_path.exists()
         ):
-            IDGenerator._class_next_id_map = json.loads(
+            ZIDManager._class_next_id_map = json.loads(
                 self._next_ids_path.read_text()
             )
-        elif IDGenerator._class_next_id_map is None:
-            IDGenerator._class_next_id_map = {}
+        elif ZIDManager._class_next_id_map is None:
+            ZIDManager._class_next_id_map = {}
 
     def get_next(self, date: dt.date) -> str:
         """Returns the next zorg ID based on {date}."""
@@ -40,8 +40,8 @@ class IDGenerator:
 
     @property
     def _next_id_map(self) -> dict[str, str]:
-        assert IDGenerator._class_next_id_map is not None
-        return IDGenerator._class_next_id_map
+        assert ZIDManager._class_next_id_map is not None
+        return ZIDManager._class_next_id_map
 
 
 def _get_next_id(last_id: str) -> str:

@@ -12,7 +12,7 @@ from ..domain.messages import commands, events
 from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
 from .compiler import walk_zorg_file
-from .id_generator import IDGenerator
+from .zid_manager import ZIDManager
 
 
 logger = Logger(__name__)
@@ -127,7 +127,7 @@ def increment_zorg_id_counters(
     generating new IDs (they are the XX in the YYMMDD#XX ID format).
     """
     del session
-    id_gen = IDGenerator(event.zettel_dir)
+    id_gen = ZIDManager(event.zettel_dir)
     id_gen.write_to_disk()
 
 
