@@ -123,3 +123,6 @@ pyrightconfig.json
 
 # local sqlite databases
 *.db
+
+# zorg data files live here
+.zorg/
