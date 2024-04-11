@@ -15,6 +15,7 @@ from ..domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
 from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from antlr4.error.ErrorListener import ErrorListener
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
@@ -22,11 +23,24 @@ TagName = Literal["areas", "contexts", "people", "projects"]
 logger = Logger(__name__)
 
 
+class ErrorManager(ErrorListener):
+    def __init__(self):
+        super().__init__()
+        self.errors = []
+
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        del recognizer, offendingSymbol, e
+        self.errors.append(f"Line {line}:{column} {msg}")
+
+
 class _ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
-    def __init__(self, zorg_file: ZorgFile) -> None:
+    def __init__(
+        self, zorg_file: ZorgFile, error_manager: ErrorManager
+    ) -> None:
         self.zorg_file = zorg_file
+        self.error_manager = error_manager
 
         self._s = _ZorgFileCompilerState()
 
@@ -210,6 +224,12 @@ class _ZorgFileCompiler(ZorgFileListener):
             logger.warning("Skipping todo with no note body")
         elif id_note_body.getText().strip() == "":
             logger.warning("Skipping todo with empty note body")
+        elif self.error_manager.errors:
+            logger.warning(
+                "Skipping note since zorg file has errors.",
+                file_path=str(self.zorg_file.path),
+            )
+            self.zorg_file.has_errors = True
         else:
             todo = ZorgNote(id_note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
@@ -300,6 +320,14 @@ class _ZorgFileCompiler(ZorgFileListener):
             )
             return
 
+        if self.error_manager.errors:
+            logger.warning(
+                "Skipping note since zorg file has errors.",
+                file_path=str(self.zorg_file.path),
+            )
+            self.zorg_file.has_errors = True
+            return
+
         note = ZorgNote(body, **kwargs)
         self.zorg_file.notes.append(note)
 
@@ -379,8 +407,11 @@ def walk_zorg_file(zo_path: Path) -> ZorgFile:
     lexer = ZorgFileLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgFileParser(tokens)
+    parser.removeErrorListeners()
+    error_manager = ErrorManager()
+    parser.addErrorListener(error_manager)
     tree = parser.prog()
-    compiler = _ZorgFileCompiler(zorg_file)
+    compiler = _ZorgFileCompiler(zorg_file, error_manager)
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
     return zorg_file

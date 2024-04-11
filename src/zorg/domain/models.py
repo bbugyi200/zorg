@@ -48,11 +48,12 @@ class ZorgNote:
     zid: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass
 class ZorgFile:
     """A Zorg (i.e. *.zo) file."""
 
     path: Path
+    has_errors: bool = False
     notes: list[ZorgNote] = field(default_factory=lambda: [])
     events: list["Event"] = field(default_factory=lambda: [])
 

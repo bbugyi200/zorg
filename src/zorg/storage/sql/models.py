@@ -101,6 +101,7 @@ class ZorgFile(Base, table=True):
     """Model class for zorg (*.zo) files."""
 
     path: str
+    has_errors: bool = False
     notes: List["ZorgNote"] = Relationship(
         back_populates="zorg_file", link_model=ZorgFileLink
     )

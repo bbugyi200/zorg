@@ -139,14 +139,15 @@ def add_zorg_ids_to_notes_in_file(
 
 def _add_zid_to_line(zid: str, line: str) -> str:
     all_words = line.split(" ")
-    symbol = all_words[0]
-    words = all_words[1:]
 
     num_spaces = 0
-    while words[0] == "":
+    while all_words[0] == "":
         num_spaces += 1
-        words.pop(0)
+        all_words.pop(0)
     spaces = " " * num_spaces
+
+    symbol = all_words[0]
+    words = all_words[1:]
 
     priority = ""
     if words[0].startswith("[#"):

@@ -28,6 +28,7 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
         return sql.ZorgFile(
             path=str(entity.path),
             notes=sql_notes,
+            has_errors=entity.has_errors,
         )
 
     def to_entity(self, sql_model: sql.ZorgFile) -> ZorgFile:
