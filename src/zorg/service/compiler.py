@@ -26,9 +26,9 @@ logger = Logger(__name__)
 class ErrorManager(ErrorListener):
     """Keeps track of zorg file syntax errors."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.errors = []
+        self.errors: list[str] = []
 
     def syntaxError(
         self,
@@ -38,7 +38,7 @@ class ErrorManager(ErrorListener):
         column: int,
         msg: str,
         e: Any,
-    ):  # noqa: D102
+    ) -> None:  # noqa: D102
         del recognizer, offendingSymbol, e
         self.errors.append(f"Line {line}:{column} {msg}")
 
