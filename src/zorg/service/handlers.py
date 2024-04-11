@@ -128,6 +128,12 @@ def add_zorg_ids_to_notes_in_file(
         first_note_line = new_note_lines[0]
         new_note_lines[0] = _add_zid_to_line(note.zid, first_note_line)
         zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
+
+    logger.info(
+        "Adding ZIDs to zorg file",
+        zorg_file=event.zorg_file_path,
+        new_notes=len(event.new_notes),
+    )
     event.zorg_file_path.write_text("\n".join(zlines))
 
 
