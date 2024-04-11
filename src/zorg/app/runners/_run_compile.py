@@ -23,4 +23,7 @@ def _convert_zorg_file_to_dict(zorg_file: ZorgFile) -> dict[str, Any]:
     zorg_file_dict = asdict(zorg_file)
     for key in ["events", "path"]:
         del zorg_file_dict[key]
+
+    for note_dict in zorg_file_dict["notes"]:
+        del note_dict["line_no"]
     return zorg_file_dict
