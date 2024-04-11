@@ -197,11 +197,14 @@ class _ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
-        kwargs = self._get_note_kwargs({
-            "todo_payload": TodoPayload(
-                priority=self._s.todo_priority, status=self._s.todo_status
-            )
-        })
+        kwargs = self._get_note_kwargs(
+            ctx,
+            {
+                "todo_payload": TodoPayload(
+                    priority=self._s.todo_priority, status=self._s.todo_status
+                ),
+            },
+        )
         id_note_body = ctx.id_note_body()
         if id_note_body is None:
             logger.warning("Skipping todo with no note body")
@@ -288,7 +291,7 @@ class _ZorgFileCompiler(ZorgFileListener):
         extra_kwargs = {}
         if self._s.parent_id is not None:
             extra_kwargs["parent_note_id"] = self._s.parent_id
-        kwargs = self._get_note_kwargs(extra_kwargs)
+        kwargs = self._get_note_kwargs(ctx, extra_kwargs)
         body: str = ctx.id_note_body().getText().strip()
         if body == "":
             logger.warning(
@@ -316,7 +319,9 @@ class _ZorgFileCompiler(ZorgFileListener):
         del ctx
 
     def _get_note_kwargs(
-        self, extra_kwargs: dict[str, Any] = None
+        self,
+        ctx: antlr4.ParserRuleContext,
+        extra_kwargs: dict[str, Any] = None,
     ) -> dict[str, Any]:
         if extra_kwargs is None:
             extra_kwargs = {}
@@ -324,6 +329,7 @@ class _ZorgFileCompiler(ZorgFileListener):
             "areas": self._s.areas,
             "contexts": self._s.contexts,
             "create_date": self._s.create_date,
+            "line_no": ctx.start.line,
             "links": self._s.note_links,
             "people": self._s.people,
             "projects": self._s.projects,
