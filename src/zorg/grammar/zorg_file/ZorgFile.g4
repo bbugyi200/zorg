@@ -61,10 +61,10 @@ link       : '[[' id_group ']]' ;
 ref        : '[' id_group ']' ;
 
 // sections
-h1_section : h1_header block* (NL? h2_section)* ;
-h2_section : h2_header block* (NL? h3_section)* ;
-h3_section : h3_header block* (NL? h4_section)* ;
-h4_section : h4_header block* ;
+h1_section : h1_header NL* block* (NL? h2_section)* ;
+h2_section : h2_header NL* block* (NL? h3_section)* ;
+h3_section : h3_header NL* block* (NL? h4_section)* ;
+h4_section : h4_header NL* block* ;
 h1_header  : HASH HASH HASH HASH HASH HASH HASH HASH HASH space_atoms NL ;
 h2_header  : '=======' space_atoms NL ;
 h3_header  : '*****' space_atoms NL ;
