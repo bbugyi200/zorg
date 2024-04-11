@@ -9,9 +9,17 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.0...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.1...HEAD)
 
 No notable changes have been made.
+
+
+## [0.6.1](https://github.com/bbugyi200/zorg/compare/0.6.0...0.6.1) - 2024-04-10
+
+### Added
+
+* Add `zorg db create` command that creates a sqlite database and updates all
+  `*.zo` files by adding ZIDs to the notes they contain.
 
 
 ## [0.6.0](https://github.com/bbugyi200/zorg/compare/0.5.1...0.6.0) - 2024-03-31
