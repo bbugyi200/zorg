@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Literal, Optional
 
 import antlr4
+from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
@@ -15,7 +16,6 @@ from ..domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
 from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from antlr4.error.ErrorListener import ErrorListener
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
@@ -24,11 +24,21 @@ logger = Logger(__name__)
 
 
 class ErrorManager(ErrorListener):
+    """Keeps track of zorg file syntax errors."""
+
     def __init__(self):
         super().__init__()
         self.errors = []
 
-    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+    def syntaxError(
+        self,
+        recognizer: Any,
+        offendingSymbol: str,
+        line: int,
+        column: int,
+        msg: str,
+        e: Any,
+    ):  # noqa: D102
         del recognizer, offendingSymbol, e
         self.errors.append(f"Line {line}:{column} {msg}")
 
