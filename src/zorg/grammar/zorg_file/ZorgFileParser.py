@@ -190,7 +190,7 @@ class ZorgFileParser ( Parser ):
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "NL", "LOWER_O", 
-                      "LOWER_X", "ID", "DATE", "TIME", "ZORG_ID", "NUM_ID", 
+                      "LOWER_X", "ID", "DATE", "TIME", "ZID", "NUM_ID", 
                       "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DASH", 
                       "DOT", "FSLASH", "UNDERSCORE", "COLON", "SPACE", "LPAREN", 
                       "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", 
@@ -213,7 +213,7 @@ class ZorgFileParser ( Parser ):
     RULE_todo_prefix = 14
     RULE_x_or_tilde = 15
     RULE_priority = 16
-    RULE_zorg_id = 17
+    RULE_zid = 17
     RULE_space_atoms = 18
     RULE_space_atom = 19
     RULE_atom = 20
@@ -246,7 +246,7 @@ class ZorgFileParser ( Parser ):
     ruleNames =  [ "prog", "head", "comment", "block", "item", "footnote", 
                    "note", "base_note", "id_note_body", "note_body", "subnote", 
                    "subsubnote", "todo", "base_todo", "todo_prefix", "x_or_tilde", 
-                   "priority", "zorg_id", "space_atoms", "space_atom", "atom", 
+                   "priority", "zid", "space_atoms", "space_atom", "atom", 
                    "property", "id_group", "id", "date", "time", "any_symbol", 
                    "non_tag_symbol", "id_symbol", "tag_symbol", "tag", "area", 
                    "context", "person", "project", "quoted", "link", "ref", 
@@ -266,7 +266,7 @@ class ZorgFileParser ( Parser ):
     ID=10
     DATE=11
     TIME=12
-    ZORG_ID=13
+    ZID=13
     NUM_ID=14
     TWO_SPACE_DASH=15
     FOUR_SPACE_DASH=16
@@ -873,8 +873,8 @@ class ZorgFileParser ( Parser ):
         def SPACE(self):
             return self.getToken(ZorgFileParser.SPACE, 0)
 
-        def zorg_id(self):
-            return self.getTypedRuleContext(ZorgFileParser.Zorg_idContext,0)
+        def zid(self):
+            return self.getTypedRuleContext(ZorgFileParser.ZidContext,0)
 
 
         def getRuleIndex(self):
@@ -904,7 +904,7 @@ class ZorgFileParser ( Parser ):
                 self.state = 164
                 self.match(ZorgFileParser.SPACE)
                 self.state = 165
-                self.zorg_id()
+                self.zid()
 
 
             self.state = 168
@@ -1432,38 +1432,38 @@ class ZorgFileParser ( Parser ):
         return localctx
 
 
-    class Zorg_idContext(ParserRuleContext):
+    class ZidContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ZORG_ID(self):
-            return self.getToken(ZorgFileParser.ZORG_ID, 0)
+        def ZID(self):
+            return self.getToken(ZorgFileParser.ZID, 0)
 
         def getRuleIndex(self):
-            return ZorgFileParser.RULE_zorg_id
+            return ZorgFileParser.RULE_zid
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterZorg_id" ):
-                listener.enterZorg_id(self)
+            if hasattr( listener, "enterZid" ):
+                listener.enterZid(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitZorg_id" ):
-                listener.exitZorg_id(self)
+            if hasattr( listener, "exitZid" ):
+                listener.exitZid(self)
 
 
 
 
-    def zorg_id(self):
+    def zid(self):
 
-        localctx = ZorgFileParser.Zorg_idContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_zorg_id)
+        localctx = ZorgFileParser.ZidContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_zid)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 225
-            self.match(ZorgFileParser.ZORG_ID)
+            self.match(ZorgFileParser.ZID)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

@@ -187,8 +187,8 @@ class _ZorgFileCompiler(ZorgFileListener):
 
             self._s.todo_status = status
 
-    def enterZorg_id(
-        self, ctx: ZorgFileParser.Zorg_idContext
+    def enterZid(
+        self, ctx: ZorgFileParser.ZidContext
     ) -> None:  # noqa: D102
         zid = ctx.getText()
         self._s.zid = zid

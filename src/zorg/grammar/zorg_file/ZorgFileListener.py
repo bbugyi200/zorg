@@ -161,12 +161,12 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#zorg_id.
-    def enterZorg_id(self, ctx:ZorgFileParser.Zorg_idContext):
+    # Enter a parse tree produced by ZorgFileParser#zid.
+    def enterZid(self, ctx:ZorgFileParser.ZidContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#zorg_id.
-    def exitZorg_id(self, ctx:ZorgFileParser.Zorg_idContext):
+    # Exit a parse tree produced by ZorgFileParser#zid.
+    def exitZid(self, ctx:ZorgFileParser.ZidContext):
         pass
 
 

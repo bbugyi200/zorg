@@ -50,7 +50,7 @@ LOWER_X
 ID
 DATE
 TIME
-ZORG_ID
+ZID
 NUM_ID
 TWO_SPACE_DASH
 FOUR_SPACE_DASH
@@ -92,7 +92,7 @@ base_todo
 todo_prefix
 x_or_tilde
 priority
-zorg_id
+zid
 space_atoms
 space_atom
 atom

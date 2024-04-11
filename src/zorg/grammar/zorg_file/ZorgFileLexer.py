@@ -111,7 +111,7 @@ class ZorgFileLexer(Lexer):
     ID = 10
     DATE = 11
     TIME = 12
-    ZORG_ID = 13
+    ZID = 13
     NUM_ID = 14
     TWO_SPACE_DASH = 15
     FOUR_SPACE_DASH = 16
@@ -146,20 +146,20 @@ class ZorgFileLexer(Lexer):
             "'~'", "'*'", "'<'", "'>'" ]
 
     symbolicNames = [ "<INVALID>",
-            "NL", "LOWER_O", "LOWER_X", "ID", "DATE", "TIME", "ZORG_ID", 
-            "NUM_ID", "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DASH", 
-            "DOT", "FSLASH", "UNDERSCORE", "COLON", "SPACE", "LPAREN", "RPAREN", 
+            "NL", "LOWER_O", "LOWER_X", "ID", "DATE", "TIME", "ZID", "NUM_ID", 
+            "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DASH", "DOT", 
+            "FSLASH", "UNDERSCORE", "COLON", "SPACE", "LPAREN", "RPAREN", 
             "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", "DQUOTE", "TILDE", 
             "STAR", "LANGLE", "RANGLE" ]
 
     ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "NL", 
-                  "LOWER_O", "LOWER_X", "ID", "DATE", "TIME", "ZORG_ID", 
-                  "NUM_ID", "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", 
-                  "DASH", "DOT", "FSLASH", "UNDERSCORE", "COLON", "SPACE", 
-                  "LPAREN", "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", 
-                  "SQUOTE", "DQUOTE", "TILDE", "STAR", "LANGLE", "RANGLE", 
-                  "UPPER_LETTER", "LOWER_LETTER", "ZID_CHAR", "NUM", "FIRST_D_NUM", 
-                  "FIRST_M_NUM", "ALPHA", "ALPHANUM" ]
+                  "LOWER_O", "LOWER_X", "ID", "DATE", "TIME", "ZID", "NUM_ID", 
+                  "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DASH", 
+                  "DOT", "FSLASH", "UNDERSCORE", "COLON", "SPACE", "LPAREN", 
+                  "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", 
+                  "DQUOTE", "TILDE", "STAR", "LANGLE", "RANGLE", "UPPER_LETTER", 
+                  "LOWER_LETTER", "ZID_CHAR", "NUM", "FIRST_D_NUM", "FIRST_M_NUM", 
+                  "ALPHA", "ALPHANUM" ]
 
     grammarFileName = "ZorgFile.g4"
 
