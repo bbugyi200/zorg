@@ -152,6 +152,8 @@ def reindex_database(
     with file_hash_path.open("w") as f:
         json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
 
+    session.commit()
+
 
 def reindex_database_after_edit(
     event: events.EditorClosedEvent, session: SQLSession
