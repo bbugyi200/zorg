@@ -19,11 +19,15 @@ COMMAND_HANDLERS: dict[
 ] = {
     commands.EditCommand: handlers.edit_files,
     commands.CreateDBCommand: handlers.create_database,
+    commands.ReindexDBCommand: handlers.reindex_database,
 }
 EVENT_HANDLERS: dict[
     type[events.Event], list[Callable[[Any, SQLSession], None]]
 ] = {
-    events.EditorClosedEvent: [handlers.check_keep_alive_file],
+    events.EditorClosedEvent: [
+        handlers.check_keep_alive_file,
+        handlers.reindex_database_after_edit,
+    ],
     events.NewZorgNotesEvent: [handlers.add_zorg_ids_to_notes_in_file],
     events.DBCreatedEvent: [handlers.increment_zorg_id_counters],
 }

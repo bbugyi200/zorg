@@ -61,7 +61,7 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'action open', 'compile', 'db', 'db create', 'edit', 'template', 'template init', 'template render']:
+for cmd in ['action', 'action open', 'compile', 'db', 'db create', 'db reindex', 'edit', 'template', 'template init', 'template render']:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\n### `zorg {cmd} --help`\n")

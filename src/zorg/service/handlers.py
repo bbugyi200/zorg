@@ -1,13 +1,17 @@
 """Zorg's event and command handlers live here."""
 
+import hashlib
+import json
 from pathlib import Path
 import sys
 from typing import Iterable, Iterator
 
+from eris import Err
 from logrus import Logger
 from tqdm import tqdm
 import vimala
 
+from .. import APP_NAME
 from ..domain.messages import commands, events
 from ..storage.sql.session import SQLSession
 from .common import prepend_zdir
@@ -61,7 +65,7 @@ def check_keep_alive_file(
         paths = new_paths
 
     event.edit_cmd.keep_alive_file.unlink()
-    session.add_message(
+    session.add_last_message(
         commands.EditCommand(
             zettel_dir=event.edit_cmd.zettel_dir,
             paths=paths,
@@ -109,6 +113,53 @@ def create_database(
     )
     session.commit()
     session.add_message(events.DBCreatedEvent(cmd.zettel_dir))
+
+
+def reindex_database(
+    cmd: commands.ReindexDBCommand, session: SQLSession
+) -> None:
+    """Reindex an existing zorg database."""
+    paths = cmd.paths if cmd.paths else list(cmd.zettel_dir.rglob("*.zo"))
+    file_to_hash: dict[str, str] = {}
+    for path in paths:
+        file_to_hash[str(path)] = _hash_file(path)
+
+    zorg_data_dir = cmd.zettel_dir / f".{APP_NAME}"
+    zorg_data_dir.mkdir(exist_ok=True)
+    file_hash_path = zorg_data_dir / "file_hash.json"
+    old_file_to_hash: dict[str, str] = (
+        json.loads(file_hash_path.read_bytes())
+        if file_hash_path.exists()
+        else {}
+    )
+
+    for file, hash_ in file_to_hash.copy().items():
+        if (
+            file not in old_file_to_hash.keys()
+            or old_file_to_hash[file] != hash_
+        ):
+            logger.info("Changed file", file=file)
+            old_zorg_file = session.repo.get(file).unwrap()
+            if old_zorg_file is not None:
+                logger.info("Removing file from DB", file=file)
+                session.repo.remove(old_zorg_file)
+
+            zorg_file = walk_zorg_file(Path(file), verbose=cmd.verbose)
+            logger.info("Adding zorg file", file=file)
+            session.repo.add(zorg_file)
+
+    logger.info("Writing hash map to disk", file=str(file_hash_path))
+    with file_hash_path.open("w") as f:
+        json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
+
+
+def reindex_database_after_edit(
+    event: events.EditorClosedEvent, session: SQLSession
+) -> None:
+    """Reindex the zorg database after an edi."""
+    session.add_message(
+        commands.ReindexDBCommand(event.edit_cmd.zettel_dir, paths=[])
+    )
 
 
 def add_zorg_ids_to_notes_in_file(
@@ -162,6 +213,23 @@ def _add_zid_to_line(zid: str, line: str) -> str:
             words.pop(0)
 
     return f"{spaces}{symbol} {priority}{zid} {' '.join(words)}"
+
+
+def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
+    """
+    Hashes a file using SHA256 algorithm and returns the hash value.
+
+    :param filepath: Path to the file to be hashed.
+    :param chunk_size: Size of chunks to read the file. Default is 8192 bytes.
+    :return: A SHA256 hash of the file's contents.
+    """
+    hasher = hashlib.sha256()  # Initialize the hasher
+    with filepath.open("rb") as file:
+        chunk = file.read(chunk_size)
+        while chunk:
+            hasher.update(chunk)
+            chunk = file.read(chunk_size)
+    return hasher.hexdigest()
 
 
 def increment_zorg_id_counters(

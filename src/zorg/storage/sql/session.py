@@ -45,6 +45,7 @@ class SQLSession(UnitOfWork[SQLRepo]):
         self._engine_factory = partial(engine_factory, db_url, **engine_kwargs)
         self._zettel_dir = zettel_dir
         self._messages: list[Message] = []
+        self._last_messages: list[Message] = []
 
         self._session: Session
         self._repo: SQLRepo
@@ -86,6 +87,10 @@ class SQLSession(UnitOfWork[SQLRepo]):
         """Register a message to be handled by the message bus."""
         self._messages.append(message)
 
+    def add_last_message(self, message: Message) -> None:
+        """Register a message to be handled by the message bus last."""
+        self._last_messages.append(message)
+
     def collect_new_messages(self) -> Iterator[Message]:
         """Collect new events/commands for our messagebus to process."""
         while self._messages:
@@ -94,6 +99,9 @@ class SQLSession(UnitOfWork[SQLRepo]):
         for zorg_file in self.repo.seen:
             while zorg_file.events:
                 yield zorg_file.events.pop(0)
+
+        while self._last_messages:
+            yield self._last_messages.pop(0)
 
 
 def _prep_sqlite_db(database_url: str, should_delete: bool = False) -> None:

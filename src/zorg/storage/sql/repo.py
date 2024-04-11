@@ -19,7 +19,7 @@ from .converters import ZorgFileConverter
 logger = Logger(__name__)
 
 
-class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
+class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
@@ -34,8 +34,8 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
         self.seen: list[ZorgFile] = []
 
     def add(
-        self, zorg_file: ZorgFile, /, *, key: int = None
-    ) -> ErisResult[int]:
+        self, zorg_file: ZorgFile, /, *, key: str = None
+    ) -> ErisResult[str]:
         """Adds a new file to the DB.
 
         Returns a unique identifier that has been associated with this file.
@@ -54,9 +54,9 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
         self._session.delete(self._converter.from_entity(zorg_file))
         return Ok(zorg_file)
 
-    def get(self, key: int) -> ErisResult[ZorgFile | None]:
+    def get(self, key: str) -> ErisResult[ZorgFile | None]:
         """Retrieve a file from the DB."""
-        stmt = select(sql.ZorgFile).where(sql.ZorgFile.id == int(key))
+        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == key)
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
@@ -90,11 +90,11 @@ class SQLRepo(QueryRepo[int, ZorgFile, OrZorgQuery]):
 
 def _add_zids(zdir: Path, zorg_file: ZorgFile) -> None:
     new_notes = []
-    id_gen = ZIDManager(zdir)
+    zid_manager = ZIDManager(zdir)
     for note in zorg_file.notes:
         if note.zid is None:
             logger.debug("Found new zorg note", zorg_note=note)
-            zid = id_gen.get_next(note.create_date)
+            zid = zid_manager.get_next(note.create_date)
             note.zid = zid
             new_notes.append(note)
     if new_notes:

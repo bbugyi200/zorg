@@ -15,7 +15,9 @@ from ..domain.types import FileGroupMapType, TemplatePatternMapType, VarMapType
 from ..service import common
 
 
-Command = Literal["compile", "create", "edit", "init", "open", "render"]
+Command = Literal[
+    "compile", "create", "edit", "init", "open", "reindex", "render"
+]
 
 logger = Logger(__name__)
 
@@ -59,6 +61,15 @@ class DbCreateConfig(Config):
     """Clack config for the 'db create' command."""
 
     command: Literal["create"]
+
+
+class DbReindexConfig(Config):
+    """Clack config for the 'db reindex' command."""
+
+    command: Literal["reindex"]
+
+    # ----- Arguments
+    paths: list[Path] = []
 
 
 class EditConfig(Config):
@@ -169,6 +180,20 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     new_db_command(
         "create",
         help="Create zorg's backend database from scratch.",
+    )
+    # --- 'db reindex' command
+    db_reindex_parser = new_db_command(
+        "reindex",
+        help="Reindex any changed files by adding them to the database.",
+    )
+    db_reindex_parser.add_argument(
+        "paths",
+        type=Path,
+        nargs="*",
+        help=(
+            "Reindex these specific paths. If this argument is not provided,"
+            " we use a hashing approach to check which files have changed."
+        ),
     )
 
     # --- 'edit' command

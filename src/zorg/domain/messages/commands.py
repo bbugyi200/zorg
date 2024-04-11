@@ -23,3 +23,11 @@ class EditCommand(Command):
 @dataclass(frozen=True)
 class CreateDBCommand(Command):
     """Command to (re)create zorg's database from scratch."""
+
+
+@dataclass(frozen=True)
+class ReindexDBCommand(Command):
+    """Command to reindex an existing zorg database."""
+
+    paths: list[Path]
+    verbose: bool = False
