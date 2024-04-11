@@ -141,6 +141,13 @@ def _add_zid_to_line(zid: str, line: str) -> str:
     all_words = line.split(" ")
     symbol = all_words[0]
     words = all_words[1:]
+
+    num_spaces = 0
+    while words[0] == "":
+        num_spaces += 1
+        words.pop(0)
+    spaces = " " * num_spaces
+
     priority = ""
     if words[0].startswith("[#"):
         priority = f"{words.pop(0)} "
@@ -153,7 +160,7 @@ def _add_zid_to_line(zid: str, line: str) -> str:
         else:
             words.pop(0)
 
-    return f"{symbol} {priority}{zid} {' '.join(words)}"
+    return f"{spaces}{symbol} {priority}{zid} {' '.join(words)}"
 
 
 def increment_zorg_id_counters(
