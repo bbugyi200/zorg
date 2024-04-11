@@ -187,9 +187,7 @@ class _ZorgFileCompiler(ZorgFileListener):
 
             self._s.todo_status = status
 
-    def enterZid(
-        self, ctx: ZorgFileParser.ZidContext
-    ) -> None:  # noqa: D102
+    def enterZid(self, ctx: ZorgFileParser.ZidContext) -> None:  # noqa: D102
         zid = ctx.getText()
         self._s.zid = zid
         zorg_id_date = f"20{zid.split('#')[0]}"
