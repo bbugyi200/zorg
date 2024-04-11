@@ -119,14 +119,34 @@ def add_zorg_ids_to_notes_in_file(
 
     zlines = event.zorg_file_path.read_text().split("\n")
     for note in event.new_notes:
-        body_lines = note.body.split("\n")
-        line_no = note.line_no
-        assert line_no is not None
-        zlines = (
-            zlines[:line_no]
-            + body_lines
-            + zlines[line_no + len(body_lines) - 1 :]
-        )
+        assert note.zid is not None
+        assert note.line_no is not None
+
+        start_idx = note.line_no - 1
+        end_idx = note.line_no + len(note.body.split("\n")) - 1
+        new_note_lines = zlines[start_idx:end_idx]
+        first_note_line = new_note_lines[0]
+        new_note_lines[0] = _add_zid_to_line(note.zid, first_note_line)
+        zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
+
+
+def _add_zid_to_line(zid: str, line: str) -> str:
+    all_words = line.split(" ")
+    symbol = all_words[0]
+    words = all_words[1:]
+    priority = ""
+    if words[0].startswith("[#"):
+        priority = f"{words.pop(0)} "
+
+    if len(words[0]) == 10:
+        dash_idices = (4, 7)
+        for i, ch in enumerate(words[0][:10]):
+            if i not in dash_idices and not ch.isdigit():
+                break
+        else:
+            words.pop(0)
+
+    return f"{symbol} {priority}{zid} {' '.join(words)}"
 
 
 def increment_zorg_id_counters(
