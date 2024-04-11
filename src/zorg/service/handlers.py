@@ -117,9 +117,16 @@ def add_zorg_ids_to_notes_in_file(
     """Adds IDs to new zorg notes."""
     del session
 
-    zfile_lines = event.zorg_file_path.read_text().split("\n")
+    zlines = event.zorg_file_path.read_text().split("\n")
     for note in event.new_notes:
-        body_line_count = len(note.body.split("\n"))
+        body_lines = note.body.split("\n")
+        line_no = note.line_no
+        assert line_no is not None
+        zlines = (
+            zlines[:line_no]
+            + body_lines
+            + zlines[line_no + len(body_lines) - 1 :]
+        )
 
 
 def increment_zorg_id_counters(

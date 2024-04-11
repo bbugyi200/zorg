@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Optional
 
+from .. import APP_NAME
+
 
 class ZIDManager:
     """Responsible for knowing what the next zorg ID is based on the date."""
@@ -12,7 +14,7 @@ class ZIDManager:
     _class_next_id_map: Optional[dict[str, str]] = None
 
     def __init__(self, zettel_dir: Path) -> None:
-        zorg_data_dir = zettel_dir / ".zorg_data"
+        zorg_data_dir = zettel_dir / f".{APP_NAME}"
         zorg_data_dir.mkdir(exist_ok=True)
         self._next_ids_path = zorg_data_dir / "next_ids.json"
         if (
