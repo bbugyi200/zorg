@@ -29,7 +29,7 @@ class NewZorgNotesEvent(Event):
 
 
 @dataclass(frozen=True)
-class DBCreatedEvent(Event):
+class DBModifiedEvent(Event):
     """Broadcast when the zorg database is done being initialized."""
 
     zettel_dir: Path

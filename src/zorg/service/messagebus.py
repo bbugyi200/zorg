@@ -29,7 +29,7 @@ EVENT_HANDLERS: dict[
         handlers.reindex_database_after_edit,
     ],
     events.NewZorgNotesEvent: [handlers.add_zorg_ids_to_notes_in_file],
-    events.DBCreatedEvent: [handlers.increment_zorg_id_counters],
+    events.DBModifiedEvent: [handlers.increment_zorg_id_counters],
 }
 
 

@@ -119,8 +119,8 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
         """Model-to-SQL-model converter for a ZorgNote."""
         return ZorgNote(
             sql_model.body,
-            areas=list(sql_model.areas),
-            contexts=list(sql_model.contexts),
-            people=list(sql_model.people),
-            projects=list(sql_model.projects),
+            areas=list(area.name for area in sql_model.areas),
+            contexts=list(context.name for context in sql_model.contexts),
+            people=list(person.name for person in sql_model.people),
+            projects=list(project.name for project in sql_model.projects),
         )

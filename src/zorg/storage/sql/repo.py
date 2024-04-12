@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Optional
 
 from eris import ErisResult, Ok
 from logrus import Logger
@@ -51,12 +52,26 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self, zorg_file: ZorgFile, /  # noqa: W504
     ) -> ErisResult[ZorgFile | None]:
         """Remove a file from the DB."""
-        self._session.delete(self._converter.from_entity(zorg_file))
+        sql_zorg_file = self._converter.from_entity(zorg_file)
+        self._session.delete(sql_zorg_file)
         return Ok(zorg_file)
 
-    def get(self, key: str) -> ErisResult[ZorgFile | None]:
+    def remove_by_key(self, key: str) -> ErisResult[Optional[ZorgFile]]:
+        """Remove a zorg file from the repo by path."""
+        path = key
+        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == path)
+        results = self._session.exec(stmt)
+        sql_zorg_file = results.first()
+        if sql_zorg_file:
+            logger.info("Deleting Zorg File", sql_zorg_file=sql_zorg_file)
+            self._session.delete(sql_zorg_file)
+        else:
+            logger.warning("Failed to delete Zorg File", path=path)
+
+    def get(self, key: str) -> ErisResult[Optional[ZorgFile]]:
         """Retrieve a file from the DB."""
-        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == key)
+        path = key
+        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == path)
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
@@ -84,8 +99,8 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         return Ok(result)
 
     def _seen_zorg_file(self, zorg_file: ZorgFile) -> None:
-        if str(zorg_file.path) not in set(str(zf.path) for zf in self.seen):
-            self.seen.append(zorg_file)
+        # TODO(bugyi): Do I need to deduplicate self.seen?
+        self.seen.append(zorg_file)
 
 
 def _add_zids(zdir: Path, zorg_file: ZorgFile) -> None:

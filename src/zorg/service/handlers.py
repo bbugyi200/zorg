@@ -112,7 +112,7 @@ def create_database(
         num_todos=total_num_todos,
     )
     session.commit()
-    session.add_message(events.DBCreatedEvent(cmd.zettel_dir))
+    session.add_message(events.DBModifiedEvent(cmd.zettel_dir))
 
 
 def reindex_database(
@@ -142,17 +142,18 @@ def reindex_database(
             old_zorg_file = session.repo.get(file).unwrap()
             if old_zorg_file is not None:
                 logger.info("Removing file from DB", file=file)
-                session.repo.remove(old_zorg_file)
+                session.repo.remove_by_key(str(old_zorg_file.path))
 
             zorg_file = walk_zorg_file(Path(file), verbose=cmd.verbose)
             logger.info("Adding zorg file", file=file)
             session.repo.add(zorg_file)
 
-    logger.info("Writing hash map to disk", file=str(file_hash_path))
+    logger.debug("Writing hash map to disk", file=str(file_hash_path))
     with file_hash_path.open("w") as f:
         json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
 
     session.commit()
+    session.add_message(events.DBModifiedEvent(cmd.zettel_dir))
 
 
 def reindex_database_after_edit(
@@ -235,7 +236,7 @@ def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
 
 
 def increment_zorg_id_counters(
-    event: events.DBCreatedEvent, session: SQLSession
+    event: events.DBModifiedEvent, session: SQLSession
 ) -> None:
     """Increment the date-specific zorg ID counters.
 
@@ -243,8 +244,8 @@ def increment_zorg_id_counters(
     generating new IDs (they are the XX in the YYMMDD#XX ID format).
     """
     del session
-    id_gen = ZIDManager(event.zettel_dir)
-    id_gen.write_to_disk()
+    zid_manager = ZIDManager(event.zettel_dir)
+    zid_manager.write_to_disk()
 
 
 def _process_vim_commands(
