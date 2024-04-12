@@ -66,10 +66,10 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
             logger.info("Deleting Zorg File", sql_zorg_file=sql_zorg_file)
             for sql_note in sql_zorg_file.notes:
                 for prop_link in sql_note.property_links:
-                    delete_metatag = len(prop_link.prop.links) == 1
+                    delete_prop = len(prop_link.prop.links) == 1
                     self._session.delete(prop_link)
-                    if delete_metatag:
-                        self._session.delete(prop_link.metatag)
+                    if delete_prop:
+                        self._session.delete(prop_link.prop)
                     self._session.commit()
 
                 for note_tags in [
