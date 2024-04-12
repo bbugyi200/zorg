@@ -64,6 +64,8 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         sql_zorg_file = results.first()
         if sql_zorg_file:
             logger.info("Deleting Zorg File", sql_zorg_file=sql_zorg_file)
+            for sql_note in sql_zorg_file.notes:
+                self._session.delete(sql_note)
             self._session.delete(sql_zorg_file)
         else:
             logger.warning("Failed to delete Zorg File", path=path)
