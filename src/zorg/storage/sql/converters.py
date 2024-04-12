@@ -33,8 +33,14 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
 
     def to_entity(self, sql_model: sql.ZorgFile) -> ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
-        del sql_model
-        return ZorgFile(Path("."))
+        return ZorgFile(
+            Path(sql_model.path),
+            has_errors=sql_model.has_errors,
+            notes=[
+                self._note_converter.to_entity(sql_note)
+                for sql_note in sql_model.notes
+            ],
+        )
 
 
 class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
@@ -111,5 +117,10 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
 
     def to_entity(self, sql_model: sql.ZorgNote) -> ZorgNote:
         """Model-to-SQL-model converter for a ZorgNote."""
-        del sql_model
-        return ZorgNote("")
+        return ZorgNote(
+            sql_model.body,
+            areas=list(sql_model.areas),
+            contexts=list(sql_model.contexts),
+            people=list(sql_model.people),
+            projects=list(sql_model.projects),
+        )
