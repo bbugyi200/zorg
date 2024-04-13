@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, List
+from typing import Any, Callable, MutableSequence, Sequence
 
 from logrus import Logger
 from typist import assert_never
@@ -14,16 +14,13 @@ from ..storage.sql.session import SQLSession
 
 logger = Logger(__name__)
 
-COMMAND_HANDLERS: dict[
-    type[commands.Command], Callable[[Any, SQLSession], None]
-] = {
+MessageHandler = Callable[[Any, SQLSession], None]
+COMMAND_HANDLERS: dict[type[commands.Command], MessageHandler] = {
     commands.EditCommand: handlers.edit_files,
     commands.CreateDBCommand: handlers.create_database,
     commands.ReindexDBCommand: handlers.reindex_database,
 }
-EVENT_HANDLERS: dict[
-    type[events.Event], list[Callable[[Any, SQLSession], None]]
-] = {
+EVENT_HANDLERS: dict[type[events.Event], list[MessageHandler]] = {
     events.EditorClosedEvent: [
         handlers.check_keep_alive_file,
         handlers.reindex_database_after_edit,
@@ -33,16 +30,16 @@ EVENT_HANDLERS: dict[
 }
 
 
-def handle(messages: list[Message], session: SQLSession) -> None:
+def handle(messages: Sequence[Message], session: SQLSession) -> None:
     """Entry point into Zorg's event messagebus loop."""
-    queue = messages.copy()
+    queue = list(messages)
     while queue:
         message = queue.pop(0)
         _handle_message(message, queue, session)
 
 
 def _handle_message(
-    message: Message, queue: list[Message], session: SQLSession
+    message: Message, queue: MutableSequence[Message], session: SQLSession
 ) -> None:
     with session:
         if isinstance(message, events.Event):
@@ -55,7 +52,7 @@ def _handle_message(
 
 def _handle_event(
     event: events.Event,
-    queue: List[Message],
+    queue: MutableSequence[Message],
     session: SQLSession,
 ) -> None:
     for handler in EVENT_HANDLERS[type(event)]:
@@ -74,7 +71,7 @@ def _handle_event(
 
 def _handle_command(
     command: commands.Command,
-    queue: List[Message],
+    queue: MutableSequence[Message],
     session: SQLSession,
 ) -> None:
     logger.debug("handling command", command=command)
