@@ -6,7 +6,6 @@ from pathlib import Path
 import sys
 from typing import Iterable, Iterator
 
-from eris import Err
 from logrus import Logger
 from tqdm import tqdm
 import vimala
