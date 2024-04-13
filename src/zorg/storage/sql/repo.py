@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from eris import ErisResult, Ok
+from eris import ErisResult, Err, Ok
 from logrus import Logger
 from potoroo import QueryRepo
 from sqlmodel import Session, select
@@ -46,7 +46,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         _add_zids(self._zettel_dir, zorg_file)
         sql_zorg_file = self._converter.from_entity(zorg_file)
         self._session.add(sql_zorg_file)
-        return Ok(sql_zorg_file.id)
+        return Ok(sql_zorg_file.path)
 
     def remove(
         self, zorg_file: ZorgFile, /  # noqa: W504
@@ -86,8 +86,11 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
 
                 self._session.delete(sql_note)
             self._session.delete(sql_zorg_file)
+            return Ok(self._converter.to_entity(sql_model=sql_zorg_file))
         else:
-            logger.warning("Failed to delete Zorg File", path=path)
+            emsg = "Failed to delete Zorg File"
+            logger.warning(emsg, path=path)
+            return Err(emsg)
 
     def get(self, key: str) -> ErisResult[Optional[ZorgFile]]:
         """Retrieve a file from the DB."""

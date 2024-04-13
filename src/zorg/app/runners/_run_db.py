@@ -29,7 +29,9 @@ def run_db_reindex(cfg: DbReindexConfig) -> int:
     messagebus.handle(
         [
             commands.ReindexDBCommand(
-                zettel_dir=cfg.zettel_dir, paths=cfg.paths, verbose=cfg.verbose
+                zettel_dir=cfg.zettel_dir,
+                paths=cfg.paths,
+                verbose=bool(cfg.verbose),
             )
         ],
         session,
