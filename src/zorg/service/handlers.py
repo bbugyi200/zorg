@@ -125,7 +125,7 @@ def reindex_database(
         file_to_hash[str(path)] = _hash_file(path)
 
     zorg_data_dir = cmd.zettel_dir / f".{APP_NAME}"
-    zorg_data_dir.mkdir(exist_ok=True)
+    zorg_data_dir.mkdir(parents=True, exist_ok=True)
     file_hash_path = zorg_data_dir / "file_hash.json"
     old_file_to_hash: dict[str, str] = (
         json.loads(file_hash_path.read_bytes())
