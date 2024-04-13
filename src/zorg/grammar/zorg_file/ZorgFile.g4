@@ -65,10 +65,11 @@ h1_section : h1_header NL* block* (NL? h2_section)* ;
 h2_section : h2_header NL* block* (NL? h3_section)* ;
 h3_section : h3_header NL* block* (NL? h4_section)* ;
 h4_section : h4_header NL* block* ;
-h1_header  : HASH HASH HASH HASH HASH HASH HASH HASH HASH space_atoms NL ;
-h2_header  : '=======' space_atoms NL ;
-h3_header  : '*****' space_atoms NL ;
-h4_header  : DASH DASH DASH space_atoms NL ;
+h1_header  : HASH HASH HASH HASH HASH HASH HASH HASH HASH space_atoms eol ;
+h2_header  : '=======' space_atoms eol ;
+h3_header  : '*****' space_atoms eol ;
+h4_header  : DASH DASH DASH space_atoms eol ;
+eol        : NL | EOF ;
 
 //// lexer rules
 NL           : '\r'? '\n' ;

@@ -422,5 +422,14 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#eol.
+    def enterEol(self, ctx:ZorgFileParser.EolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#eol.
+    def exitEol(self, ctx:ZorgFileParser.EolContext):
+        pass
+
+
 
 del ZorgFileParser
