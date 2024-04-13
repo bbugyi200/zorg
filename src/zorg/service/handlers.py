@@ -165,7 +165,7 @@ def reindex_database_after_edit(
     )
 
 
-def add_zorg_ids_to_notes_in_file(
+def add_zids_to_notes_in_file(
     event: events.NewZorgNotesEvent, session: SQLSession
 ) -> None:
     """Adds IDs to new zorg notes."""
@@ -235,7 +235,7 @@ def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
     return hasher.hexdigest()
 
 
-def increment_zorg_id_counters(
+def increment_zid_counters(
     event: events.DBModifiedEvent, session: SQLSession
 ) -> None:
     """Increment the date-specific zorg ID counters.

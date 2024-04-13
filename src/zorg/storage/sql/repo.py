@@ -56,6 +56,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         self._session.delete(sql_zorg_file)
         return Ok(zorg_file)
 
+    # TODO(bugyi): Remove commits from this function!
     def remove_by_key(self, key: str) -> ErisResult[Optional[ZorgFile]]:
         """Remove a zorg file from the repo by path."""
         path = key
