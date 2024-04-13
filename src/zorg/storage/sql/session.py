@@ -84,11 +84,19 @@ class SQLSession(UnitOfWork[SQLRepo]):
         return self._repo
 
     def add_message(self, message: Message) -> None:
-        """Register a message to be handled by the message bus."""
+        """Register a message to be handled by the message bus first.
+
+        These messages will be processed BEFORE any messages attached to domain
+        entities (e.g. zorg files).
+        """
         self._messages.append(message)
 
     def add_last_message(self, message: Message) -> None:
-        """Register a message to be handled by the message bus last."""
+        """Register a message to be handled by the message bus last.
+
+        These messages will be processed AFTER any messages attached to domain
+        entities (e.g. zorg files).
+        """
         self._last_messages.append(message)
 
     def collect_new_messages(self) -> Iterator[Message]:
