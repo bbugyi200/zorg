@@ -158,16 +158,17 @@ options:
 ### `zorg db --help`
 
 ```
-usage: zorg db [-h] {create} ...
+usage: zorg db [-h] {create,reindex} ...
 
 Commands for managing Zorg's SQL database.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help        show this help message and exit
 
 subcommands:
-  {create}
-    create    Create zorg's backend database from scratch.
+  {create,reindex}
+    create          Create zorg's backend database from scratch.
+    reindex         Reindex any changed files by adding them to the database.
 ```
 
 ### `zorg db create --help`
@@ -176,6 +177,21 @@ subcommands:
 usage: zorg db create [-h]
 
 Create zorg's backend database from scratch.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `zorg db reindex --help`
+
+```
+usage: zorg db reindex [-h] [paths ...]
+
+Reindex any changed files by adding them to the database.
+
+positional arguments:
+  paths       Reindex these specific paths. If this argument is not provided,
+              we use a hashing approach to check which files have changed.
 
 options:
   -h, --help  show this help message and exit
