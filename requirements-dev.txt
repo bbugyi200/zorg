@@ -24,7 +24,7 @@ babel==2.14.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.3.0
+black==24.4.0
     # via -r requirements-dev.in
 bolton-clack==0.3.12
     # via
@@ -107,7 +107,7 @@ gitpython==3.1.43
     # via cruft
 greenlet==3.0.3
     # via sqlalchemy
-idna==3.6
+idna==3.7
     # via requests
 imagesize==1.4.1
     # via sphinx
@@ -174,12 +174,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.11.1
     # via flake8
-pydantic==2.6.4
+pydantic==2.7.0
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.16.3
+pydantic-core==2.18.1
     # via pydantic
 pydantic-settings==2.2.1
     # via bolton-clack
@@ -247,7 +247,7 @@ sphinx==7.2.6
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.0.0
+sphinx-autodoc-typehints==2.0.1
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
@@ -334,7 +334,7 @@ wheel==0.43.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.0
     # via pip-tools
-setuptools==69.2.0
+setuptools==69.5.0
     # via
     #   pip-tools
     #   setuptools-scm

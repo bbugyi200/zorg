@@ -42,12 +42,12 @@ markupsafe==2.1.5
     # via jinja2
 potoroo==0.6.0
     # via -r requirements.in
-pydantic==2.6.4
+pydantic==2.7.0
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.16.3
+pydantic-core==2.18.1
     # via pydantic
 pydantic-settings==2.2.1
     # via bolton-clack
