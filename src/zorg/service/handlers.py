@@ -119,7 +119,7 @@ def reindex_database(
     cmd: commands.ReindexDBCommand, session: SQLSession
 ) -> None:
     """Reindex an existing zorg database."""
-    paths = cmd.paths if cmd.paths else list(cmd.zettel_dir.rglob("*.zo"))
+    paths = cmd.paths if cmd.paths else sorted(cmd.zettel_dir.rglob("*.zo"))
     file_to_hash: dict[str, str] = {}
     for path in paths:
         file_to_hash[str(path)] = _hash_file(path)
