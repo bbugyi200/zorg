@@ -11,9 +11,6 @@ from typist import PathLike
 from ..domain.types import VarMapType
 
 
-logger = Logger(__name__)
-
-
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:
     """Processes and potentially adds to {var_map}."""
     new_var_map = {}
