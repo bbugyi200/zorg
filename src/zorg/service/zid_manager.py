@@ -72,7 +72,7 @@ def _get_next_id(last_id: str) -> str:
     if next_ch is None and len(last_id) == 2:
         # Special case that allows for 3-digit ID part if necessary. This
         # allows for enough available IDs if you run 'db create' on a large
-        # zettel org with a lot of notes that need zorg IDs.
+        # zettel org with a lot of notes that need ZIDs.
         return "000"
     elif next_ch is None:
         raise RuntimeError(
