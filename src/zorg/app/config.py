@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any, Final, Literal, Optional, Sequence
 
 import clack
-from clack import xdg
 from logrus import Logger
 
 from .. import APP_NAME
