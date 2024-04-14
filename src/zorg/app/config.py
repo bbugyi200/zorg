@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import itertools as it
 from pathlib import Path
-from typing import Any, Literal, Optional, Sequence
+from typing import Any, Final, Literal, Optional, Sequence
 
 import clack
 from clack import xdg
@@ -19,9 +19,9 @@ Command = Literal[
     "compile", "create", "edit", "init", "open", "reindex", "render"
 ]
 
-logger = Logger(__name__)
+_logger = Logger(__name__)
 
-DEFAULT_DATA_DIR = xdg.get_full_dir("data", APP_NAME)
+_DEFAULT_ZETTEL_DIR: Final[Path] = Path.home() / "org"
 
 
 class Config(clack.Config):
@@ -30,11 +30,12 @@ class Config(clack.Config):
     command: Command
 
     # ----- ARGUMENTS
-    zettel_dir: Path = Path.home() / "org"
+    zettel_dir: Path = _DEFAULT_ZETTEL_DIR
 
     # ----- CONFIG
-    data_dir: Path = DEFAULT_DATA_DIR
-    database_url: str = "sqlite:///" + str(DEFAULT_DATA_DIR / f"{APP_NAME}.db")
+    database_url: str = "sqlite:///" + str(
+        _DEFAULT_ZETTEL_DIR / f".zorg/{APP_NAME}.db"
+    )
     template_pattern_map: TemplatePatternMapType = {}
 
 
@@ -112,14 +113,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     # HACK: Make 'edit' the default sub-command.
     argv_after_opts = list(it.dropwhile(lambda x: x.startswith("-"), argv[1:]))
     if not argv_after_opts:
-        logger.debug(
+        _logger.debug(
             "Inferring 'edit' command since no subcommand was specified."
         )
         argv = list(argv) + ["edit"]
     elif argv_after_opts[0].startswith("@"):
         argv_opts = list(it.takewhile(lambda x: x.startswith("-"), argv[1:]))
         argv = [argv[0]] + argv_opts + ["edit"] + argv_after_opts
-        logger.debug(
+        _logger.debug(
             "Inferring 'edit' command since we found a file group name.",
             file_group_name=argv_after_opts[0],
             new_args=argv[1:],
@@ -265,7 +266,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
     if kwargs["command"] == "edit" and "zo_paths" not in kwargs:
-        logger.debug(
+        _logger.debug(
             "The 'edit' command was invoked, but no file paths were specified."
             " Auto-adding the @default file group paths.",
             kwargs=kwargs,
