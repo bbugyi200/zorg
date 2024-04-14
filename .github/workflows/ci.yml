@@ -4,7 +4,6 @@ on:  # yamllint disable-line rule:truthy
   pull_request:
 env:
   USE_DOCKER: true
-  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 jobs:
   test:
     runs-on: ["${{ matrix.os }}"]
@@ -31,7 +30,9 @@ jobs:
           make test
 
       - name: Publish coverage to codecov.io.
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         if: ${{ !env.ACT }}
         with:
           fail_ci_if_error: true
