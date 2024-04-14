@@ -23,7 +23,7 @@ TagName = Literal["areas", "contexts", "people", "projects"]
 logger = Logger(__name__)
 
 
-class ErrorManager(ErrorListener):
+class _ErrorManager(ErrorListener):
     """Keeps track of zorg file syntax errors."""
 
     def __init__(self) -> None:
@@ -47,7 +47,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
     def __init__(
-        self, zorg_file: ZorgFile, error_manager: ErrorManager
+        self, zorg_file: ZorgFile, error_manager: _ErrorManager
     ) -> None:
         self.zorg_file = zorg_file
         self.error_manager = error_manager
@@ -419,7 +419,7 @@ def walk_zorg_file(zo_path: Path, verbose: bool = False) -> ZorgFile:
     parser = ZorgFileParser(tokens)
     if not verbose:
         parser.removeErrorListeners()
-    error_manager = ErrorManager()
+    error_manager = _ErrorManager()
     parser.addErrorListener(error_manager)
     tree = parser.prog()
     compiler = _ZorgFileCompiler(zorg_file, error_manager)
