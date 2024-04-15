@@ -9,9 +9,16 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.1...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.2...HEAD)
 
 No notable changes have been made.
+
+
+## [0.6.1](https://github.com/bbugyi200/zorg/compare/0.6.1...0.6.2) - 2024-04-14
+
+### Fixed
+
+* Fix crash from trying to convert deleted entity.
 
 
 ## [0.6.1](https://github.com/bbugyi200/zorg/compare/0.6.0...0.6.1) - 2024-04-10
