@@ -190,6 +190,19 @@ def add_zids_to_notes_in_file(
     event.zorg_file_path.write_text("\n".join(zlines))
 
 
+def increment_zid_counters(
+    event: events.DBModifiedEvent, session: SQLSession
+) -> None:
+    """Increment the date-specific zorg ID counters.
+
+    These are stored in a directory in your zettel dir and are used when
+    generating new IDs (they are the XX in the YYMMDD#XX ID format).
+    """
+    del session
+    zid_manager = ZIDManager(event.zettel_dir)
+    zid_manager.write_to_disk()
+
+
 def _add_zid_to_line(zid: str, line: str) -> str:
     all_words = line.split(" ")
 
@@ -234,19 +247,6 @@ def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
             hasher.update(chunk)
             chunk = file.read(chunk_size)
     return hasher.hexdigest()
-
-
-def increment_zid_counters(
-    event: events.DBModifiedEvent, session: SQLSession
-) -> None:
-    """Increment the date-specific zorg ID counters.
-
-    These are stored in a directory in your zettel dir and are used when
-    generating new IDs (they are the XX in the YYMMDD#XX ID format).
-    """
-    del session
-    zid_manager = ZIDManager(event.zettel_dir)
-    zid_manager.write_to_disk()
 
 
 def _process_vim_commands(
