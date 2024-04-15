@@ -64,7 +64,12 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
-            logger.info("Deleting Zorg File", sql_zorg_file=sql_zorg_file)
+            zorg_file = self._converter.to_entity(sql_model=sql_zorg_file)
+            logger.info(
+                "Deleting Zorg File",
+                sql_zorg_file=sql_zorg_file,
+                zorg_file=zorg_file,
+            )
             for sql_note in sql_zorg_file.notes:
                 for prop_link in sql_note.property_links:
                     delete_prop = len(prop_link.prop.links) == 1
@@ -86,7 +91,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
 
                 self._session.delete(sql_note)
             self._session.delete(sql_zorg_file)
-            return Ok(self._converter.to_entity(sql_model=sql_zorg_file))
+            return Ok(zorg_file)
         else:
             emsg = "Failed to delete Zorg File"
             logger.warning(emsg, path=path)
