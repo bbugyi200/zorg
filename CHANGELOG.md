@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 No notable changes have been made.
 
 
-## [0.6.1](https://github.com/bbugyi200/zorg/compare/0.6.1...0.6.2) - 2024-04-14
+## [0.6.2](https://github.com/bbugyi200/zorg/compare/0.6.1...0.6.2) - 2024-04-14
 
 ### Fixed
 
