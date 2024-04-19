@@ -241,7 +241,7 @@ snowballstemmer==2.2.0
     # via
     #   pydocstyle
     #   sphinx
-sphinx==7.3.6
+sphinx==7.3.7
     # via
     #   -r requirements-dev.in
     #   sphinx-autodoc-typehints
