@@ -9,9 +9,17 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.2...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.3...HEAD)
 
 No notable changes have been made.
+
+
+## [0.6.3](https://github.com/bbugyi200/zorg/compare/0.6.2...0.6.3) - 2024-04-19
+
+### Fixed
+
+* Fix bug where absolute filename was used to key file hash. This was causing
+  the file hash map to not be portable across different machines.
 
 
 ## [0.6.2](https://github.com/bbugyi200/zorg/compare/0.6.1...0.6.2) - 2024-04-14
