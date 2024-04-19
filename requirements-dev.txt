@@ -91,7 +91,7 @@ docutils==0.20.1
     #   m2r2
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.2.0
+exceptiongroup==1.2.1
     # via pytest
 filelock==3.13.4
     # via
@@ -241,13 +241,13 @@ snowballstemmer==2.2.0
     # via
     #   pydocstyle
     #   sphinx
-sphinx==7.3.5
+sphinx==7.3.6
     # via
     #   -r requirements-dev.in
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.0.1
+sphinx-autodoc-typehints==2.1.0
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
