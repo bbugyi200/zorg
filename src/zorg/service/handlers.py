@@ -145,7 +145,9 @@ def reindex_database(
                 logger.info("Removing file from DB", file=file)
                 session.repo.remove_by_key(str(old_zorg_file.path))
 
-            zorg_file = walk_zorg_file(cmd.zettel_dir, Path(file), verbose=cmd.verbose)
+            zorg_file = walk_zorg_file(
+                cmd.zettel_dir, Path(file), verbose=cmd.verbose
+            )
             logger.info("Adding zorg file", file=file)
             session.repo.add(zorg_file)
 

@@ -106,27 +106,25 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
     )
 
     assert exit_code == 0
-    vim_proc_mock.assert_has_calls(
-        [
-            call(
-                ["vim", str(zettel_dir / "foobar.zo")],
-                stdout=None,
-                stderr=None,
-                timeout=None,
-            ),
-            call().unwrap(),
-            call(
-                [
-                    "vim",
-                    str(zettel_dir / "baz.zo"),
-                    str(zettel_dir / "buz.zo"),
-                ],
-                stdout=None,
-                stderr=None,
-                timeout=None,
-            ),
-            call().unwrap(),
-        ]
-    )
+    vim_proc_mock.assert_has_calls([
+        call(
+            ["vim", str(zettel_dir / "foobar.zo")],
+            stdout=None,
+            stderr=None,
+            timeout=None,
+        ),
+        call().unwrap(),
+        call(
+            [
+                "vim",
+                str(zettel_dir / "baz.zo"),
+                str(zettel_dir / "buz.zo"),
+            ],
+            stdout=None,
+            stderr=None,
+            timeout=None,
+        ),
+        call().unwrap(),
+    ])
     assert vim_proc_mock.call_count == 2
     assert not keep_alive_file.exists()
