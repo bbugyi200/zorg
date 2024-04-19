@@ -121,7 +121,9 @@ def reindex_database(
     paths = cmd.paths if cmd.paths else sorted(cmd.zettel_dir.rglob("*.zo"))
     file_to_hash: dict[str, str] = {}
     for path in paths:
-        file_to_hash[str(path)] = _hash_file(path)
+        file_to_hash[str(path).replace(f"{cmd.zettel_dir}/", "")] = _hash_file(
+            path
+        )
 
     zorg_data_dir = cmd.zettel_dir / f".{APP_NAME}"
     zorg_data_dir.mkdir(parents=True, exist_ok=True)
