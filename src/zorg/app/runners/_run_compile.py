@@ -13,7 +13,7 @@ from ._runners import runner
 @runner
 def run_compile(cfg: CompileConfig) -> int:
     """Runner for the 'compile' command."""
-    zorg_file = walk_zorg_file(cfg.zo_path, verbose=True)
+    zorg_file = walk_zorg_file(cfg.zettel_dir, cfg.zo_path, verbose=True)
     zorg_file_dict = _convert_zorg_file_to_dict(zorg_file)
     pprint(zorg_file_dict)
     return 0

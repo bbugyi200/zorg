@@ -410,8 +410,13 @@ class _ZorgFileCompiler(ZorgFileListener):
             self._s.note_tags[tag_name].append(text)
 
 
-def walk_zorg_file(zo_path: Path, verbose: bool = False) -> ZorgFile:
+def walk_zorg_file(
+    zdir: Path, zo_path_part: Path, verbose: bool = False
+) -> ZorgFile:
     """Create a new _ZorgFileCompiler and walk through notes in {zorg_file}."""
+    zo_path = (
+        zo_path_part if zo_path_part.is_absolute() else zdir / zo_path_part
+    )
     zorg_file = ZorgFile(zo_path)
     stream = antlr4.FileStream(zorg_file.path, errors="ignore")
     lexer = ZorgFileLexer(stream)

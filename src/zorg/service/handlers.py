@@ -87,7 +87,7 @@ def create_database(
         file=sys.stdout,
     ):
         logger.info("Starting to walk zorg file", zorg_file=zo_path.name)
-        zorg_file = walk_zorg_file(zo_path)
+        zorg_file = walk_zorg_file(cmd.zettel_dir, zo_path)
         num_notes = len(zorg_file.notes)
         num_todos = len(
             [note for note in zorg_file.notes if note.todo_payload]
@@ -145,7 +145,7 @@ def reindex_database(
                 logger.info("Removing file from DB", file=file)
                 session.repo.remove_by_key(str(old_zorg_file.path))
 
-            zorg_file = walk_zorg_file(Path(file), verbose=cmd.verbose)
+            zorg_file = walk_zorg_file(cmd.zettel_dir, Path(file), verbose=cmd.verbose)
             logger.info("Adding zorg file", file=file)
             session.repo.add(zorg_file)
 
