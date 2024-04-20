@@ -40,7 +40,6 @@ def strip_zdir(zdir: PathLike, path: PathLike) -> str:
     return str(path).replace(f"{zdir}/", "")
 
 
-
 def _var_map_value(value: str) -> Any:
     if re.match("^[0-9]{4}[01][0-9][0-3][0-9]$", value):
         return dt.datetime.strptime(value, "%Y%m%d")
