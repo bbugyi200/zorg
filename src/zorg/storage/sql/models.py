@@ -102,6 +102,7 @@ class ZorgFile(Base, table=True):
 
     path: str
     has_errors: bool = False
+    zlinks: list[str] = Field(default_factory=lambda: [])
     notes: List["ZorgNote"] = Relationship(
         back_populates="zorg_file", link_model=ZorgFileLink
     )
@@ -119,6 +120,7 @@ class ZorgNote(Base, table=True):
     # TODO(bugyi): Make zid required to persist to DB.
     # TODO(bugyi): Make zid unique.
     zid: Optional[str] = Field(default=None)
+    zlinks: list[str] = Field(default_factory=lambda: [])
 
     create_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
