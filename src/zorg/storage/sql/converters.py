@@ -9,12 +9,14 @@ from sqlmodel import Session, select
 from . import models as sql
 from ...domain.models import ZorgFile, ZorgNote
 from ...domain.types import EntityConverter
+from ...service import common
 
 
 class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
     """Converts ZorgFile domain entities to/from ZorgFile sqlmodels."""
 
-    def __init__(self, session: Session) -> None:
+    def __init__(self, zdir: Path, session: Session) -> None:
+        self._zdir = zdir
         self._note_converter = ZorgNoteConverter(session)
         self._all_sql_notes: list[sql.ZorgNote] = []
 
@@ -26,7 +28,7 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
             self._all_sql_notes.append(sql_note)
             sql_notes.append(sql_note)
         return sql.ZorgFile(
-            path=str(entity.path),
+            path=common.strip_zdir(self._zdir, entity.path),
             notes=sql_notes,
             has_errors=entity.has_errors,
         )
@@ -34,7 +36,7 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
     def to_entity(self, sql_model: sql.ZorgFile) -> ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
         return ZorgFile(
-            Path(sql_model.path),
+            Path(common.strip_zdir(self._zdir, sql_model.path)),
             has_errors=sql_model.has_errors,
             notes=[
                 self._note_converter.to_entity(sql_note)

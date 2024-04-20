@@ -35,6 +35,12 @@ def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
     return new_paths
 
 
+def strip_zdir(zdir: PathLike, path: PathLike) -> str:
+    """Strips {zdir} from {path}."""
+    return str(path).replace(f"{zdir}/", "")
+
+
+
 def _var_map_value(value: str) -> Any:
     if re.match("^[0-9]{4}[01][0-9][0-3][0-9]$", value):
         return dt.datetime.strptime(value, "%Y%m%d")

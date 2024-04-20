@@ -30,7 +30,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
     ) -> None:
         self._zettel_dir = zettel_dir
         self._session = session
-        self._converter = ZorgFileConverter(session)
+        self._converter = ZorgFileConverter(zettel_dir, session)
 
         self.seen: list[ZorgFile] = []
 

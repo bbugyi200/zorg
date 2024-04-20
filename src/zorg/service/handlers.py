@@ -10,10 +10,10 @@ from logrus import Logger
 from tqdm import tqdm
 import vimala
 
+from . import common
 from .. import APP_NAME
 from ..domain.messages import commands, events
 from ..storage.sql.session import SQLSession
-from .common import prepend_zdir
 from .compiler import walk_zorg_file
 from .zid_manager import ZIDManager
 
@@ -48,7 +48,7 @@ def check_keep_alive_file(
         )
         paths = event.edit_cmd.paths
     else:
-        new_paths = prepend_zdir(
+        new_paths = common.prepend_zdir(
             event.edit_cmd.zettel_dir,
             [
                 Path(p.strip())
@@ -121,9 +121,8 @@ def reindex_database(
     paths = cmd.paths if cmd.paths else sorted(cmd.zettel_dir.rglob("*.zo"))
     file_to_hash: dict[str, str] = {}
     for path in paths:
-        file_to_hash[str(path).replace(f"{cmd.zettel_dir}/", "")] = _hash_file(
-            path
-        )
+        key = common.strip_zdir(cmd.zettel_dir, path)
+        file_to_hash[key] = _hash_file(path)
 
     zorg_data_dir = cmd.zettel_dir / f".{APP_NAME}"
     zorg_data_dir.mkdir(parents=True, exist_ok=True)
