@@ -245,10 +245,8 @@ def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
     """
     hasher = hashlib.sha256()  # Initialize the hasher
     with filepath.open("rb") as file:
-        chunk = file.read(chunk_size)
-        while chunk:
+        while chunk := file.read(chunk_size):
             hasher.update(chunk)
-            chunk = file.read(chunk_size)
     return hasher.hexdigest()
 
 
