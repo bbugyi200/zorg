@@ -24,7 +24,7 @@ babel==2.14.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.4.0
+black==24.4.1
     # via -r requirements-dev.in
 bolton-clack==0.3.12
     # via
@@ -78,7 +78,7 @@ cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.4.4
+coverage[toml]==7.5.0
     # via pytest-cov
 cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
@@ -99,7 +99,7 @@ filelock==3.13.4
     #   virtualenv
 flake8==7.0.0
     # via -r requirements-dev.in
-freezegun==1.4.0
+freezegun==1.5.0
     # via -r requirements-dev.in
 gitdb==4.0.11
     # via gitpython
@@ -139,7 +139,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.9.0
+mypy==1.10.0
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
@@ -157,7 +157,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements-dev.in
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   black
     #   pylint
@@ -174,12 +174,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.11.1
     # via flake8
-pydantic==2.7.0
+pydantic==2.7.1
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.18.1
+pydantic-core==2.18.2
     # via pydantic
 pydantic-settings==2.2.1
     # via bolton-clack
@@ -327,7 +327,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.25.3
+virtualenv==20.26.0
     # via tox
 wheel==0.43.0
     # via pip-tools
