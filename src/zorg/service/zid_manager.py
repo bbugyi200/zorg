@@ -53,21 +53,15 @@ def _get_next_id(last_id: str) -> str:
         ch = last_id[idx]
         if ch == "9":
             next_ch = "A"
-        elif ch == "H":
-            next_ch = "J"
-        elif ch == "N":
-            next_ch = "P"
         elif ch == "Z":
             next_ch = "a"
-        elif ch == "i":
-            next_ch = "k"
-        elif ch == "k":
-            next_ch = "m"
         elif ch == "z":
             next_ch = None
             idx -= 1
         else:
             next_ch = chr(ord(ch) + 1)
+            while next_ch in ["I", "O", "Q", "i", "j", "l"]:
+                next_ch = chr(ord(next_ch) + 1)
 
     if next_ch is None and len(last_id) == 2:
         # Special case that allows for 3-digit ID part if necessary. This
