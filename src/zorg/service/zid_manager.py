@@ -3,9 +3,24 @@
 import datetime as dt
 import json
 from pathlib import Path
-from typing import Optional
+from typing import Final, Optional
 
 from .. import APP_NAME
+
+
+_UNSUPPORTED_ZID_CHARS: Final[list[str]] = [
+    "I",
+    "O",
+    "Q",
+    "S",
+    "g",
+    "i",
+    "j",
+    "l",
+    "p",
+    "q",
+    "y",
+]
 
 
 class ZIDManager:
@@ -60,7 +75,7 @@ def _get_next_id(last_id: str) -> str:
             idx -= 1
         else:
             next_ch = chr(ord(ch) + 1)
-            while next_ch in ["I", "O", "Q", "i", "j", "l"]:
+            while next_ch in _UNSUPPORTED_ZID_CHARS:
                 next_ch = chr(ord(next_ch) + 1)
 
     if next_ch is None and len(last_id) == 2:
