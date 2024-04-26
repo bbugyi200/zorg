@@ -33,7 +33,7 @@ zid : ZID ;
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
-atom        : tag_symbol | tag | link | property | id_group | ref ;
+atom        : tag_symbol | tag | link | property | id_group | ref | zid | priority ;
 
 // property
 property    : ID COLON COLON id_group ;
