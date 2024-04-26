@@ -8,7 +8,7 @@ from typing import Final, Optional
 from .. import APP_NAME
 
 
-_UNSUPPORTED_ZID_CHARS: Final[list[str]] = [
+_UNSUPPORTED_ZID_CHARS: Final[tuple[str, ...]] = (
     "I",
     "O",
     "Q",
@@ -20,7 +20,7 @@ _UNSUPPORTED_ZID_CHARS: Final[list[str]] = [
     "p",
     "q",
     "y",
-]
+)
 
 
 class ZIDManager:
