@@ -58,7 +58,7 @@ function run() {
 
     log::info "Generating %s parser using antlr4." $dir
     antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
-    for f in examples/$dir/*.zo; do
+    for f in examples/$dir/*.zo*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
         continue
       fi
