@@ -12,7 +12,7 @@ where : 'W' SPACE where_body ;
 order_by : 'O' ;
 group_by : 'G' ;
 
-select_body : 'file' | 'note' | '+' | '%' ;
+select_body : 'file' | 'note' | '@' | '#' | '+' | '%' ;
 where_body : 'o' ;
 
 //// lexer rules
