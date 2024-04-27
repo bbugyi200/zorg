@@ -69,7 +69,7 @@ class DescFilter:
 
 @dataclass(frozen=True)
 class PropertyFilter:
-    """Represents a single property filter (e.g. 'due<=0d' or '!recur')."""
+    """Represents a single property filter (e.g. 'due:<=0d' or '!recur:*')."""
 
     key: str
     value: str = ""
@@ -94,7 +94,8 @@ class AndZorgQuery:
     create_date_ranges: list[DateRange] = field(default_factory=list)
     desc_filters: list[DescFilter] = field(default_factory=list)
     done: Optional[bool] = None
-    done_date_ranges: list[DateRange] = field(default_factory=list)
+    modify_date_ranges: list[DateRange] = field(default_factory=list)
+    people: list[str] = field(default_factory=list)
     property_filters: list[PropertyFilter] = field(default_factory=list)
     priorities: list[TodoPriorityType] = field(default_factory=list)
     projects: list[str] = field(default_factory=list)

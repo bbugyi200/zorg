@@ -11,16 +11,16 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from ..domain.models import TodoPayload, ZorgFile, ZorgNote
-from ..domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
-from ..grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
-from ..grammar.zorg_file.ZorgFileListener import ZorgFileListener
-from ..grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from ...domain.models import TodoPayload, ZorgFile, ZorgNote
+from ...domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
+from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
+from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
+from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
 
 TagName = Literal["areas", "contexts", "people", "projects"]
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 
 class _ErrorManager(ErrorListener):
@@ -231,11 +231,11 @@ class _ZorgFileCompiler(ZorgFileListener):
         )
         id_note_body = ctx.id_note_body()
         if id_note_body is None:
-            logger.warning("Skipping todo with no note body")
+            _LOGGER.warning("Skipping todo with no note body")
         elif id_note_body.getText().strip() == "":
-            logger.warning("Skipping todo with empty note body")
+            _LOGGER.warning("Skipping todo with empty note body")
         elif self.error_manager.errors:
-            logger.warning(
+            _LOGGER.warning(
                 "Skipping note since zorg file has errors.",
                 file_path=str(self.zorg_file.path),
             )
@@ -324,14 +324,14 @@ class _ZorgFileCompiler(ZorgFileListener):
         kwargs = self._get_note_kwargs(ctx, extra_kwargs)
         body: str = ctx.id_note_body().getText().strip()
         if body == "":
-            logger.warning(
+            _LOGGER.warning(
                 "Skipping note with empty body",
                 file_path=str(self.zorg_file.path),
             )
             return
 
         if self.error_manager.errors:
-            logger.warning(
+            _LOGGER.warning(
                 "Skipping note since zorg file has errors.",
                 file_path=str(self.zorg_file.path),
             )
@@ -390,7 +390,7 @@ class _ZorgFileCompiler(ZorgFileListener):
     ) -> None:
         text = ctx.children[1].getText()
         if all(ch.isdigit() for ch in text):
-            logger.debug(
+            _LOGGER.debug(
                 "Tag identifiers cannot contain only digits.",
                 tag_name=tag_name,
                 ID=text,
@@ -408,29 +408,6 @@ class _ZorgFileCompiler(ZorgFileListener):
             self._s.h4_tags[tag_name].append(text)
         elif self._s.in_note:
             self._s.note_tags[tag_name].append(text)
-
-
-def walk_zorg_file(
-    zdir: Path, zo_path_part: Path, verbose: bool = False
-) -> ZorgFile:
-    """Create a new _ZorgFileCompiler and walk through notes in {zorg_file}."""
-    zo_path = (
-        zo_path_part if zo_path_part.is_absolute() else zdir / zo_path_part
-    )
-    zorg_file = ZorgFile(zo_path)
-    stream = antlr4.FileStream(zorg_file.path, errors="ignore")
-    lexer = ZorgFileLexer(stream)
-    tokens = antlr4.CommonTokenStream(lexer)
-    parser = ZorgFileParser(tokens)
-    if not verbose:
-        parser.removeErrorListeners()
-    error_manager = _ErrorManager()
-    parser.addErrorListener(error_manager)
-    tree = parser.prog()
-    compiler = _ZorgFileCompiler(zorg_file, error_manager)
-    walker = antlr4.ParseTreeWalker()
-    walker.walk(compiler, tree)
-    return zorg_file
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:
