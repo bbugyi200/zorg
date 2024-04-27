@@ -40,8 +40,7 @@ class ZorgQueryParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'S'", "'W'", "'O'", "'G'", "'file'", 
-                     "'note'", "'project'", "'people'", "'o'", "<INVALID>", 
-                     "' '" ]
+                     "'note'", "'+'", "'%'", "'o'", "<INVALID>", "' '" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
