@@ -4,7 +4,7 @@ from pathlib import Path
 
 import antlr4
 
-from ...domain.models import ZorgFile
+from ...domain.models import ZorgFile, ZorgQuery
 from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from ._file_compiler import ErrorManager, ZorgFileCompiler
@@ -31,3 +31,9 @@ def walk_zorg_file(
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
     return zorg_file
+
+
+def compile_zorg_query(query: str) -> ZorgQuery:
+    """Create a new ZorgQueryCompiler and use it to compile {query}."""
+    del query
+    return ZorgQuery()

@@ -12,7 +12,7 @@ from sqlmodel import Session, select
 
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import OrZorgQuery, ZorgFile
+from ...domain.models import ZorgQuery, ZorgFile
 from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter
 
@@ -20,7 +20,7 @@ from .converters import ZorgFileConverter
 logger = Logger(__name__)
 
 
-class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
+class SQLRepo(QueryRepo[str, ZorgFile, ZorgQuery]):
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
@@ -110,7 +110,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, OrZorgQuery]):
         else:
             return Ok(None)
 
-    def get_by_query(self, query: OrZorgQuery) -> ErisResult[list[ZorgFile]]:
+    def get_by_query(self, query: ZorgQuery) -> ErisResult[list[ZorgFile]]:
         """Get file(s) from DB by using a query."""
         del query
         result: list[ZorgFile] = []

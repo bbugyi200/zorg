@@ -42,7 +42,11 @@ class ErrorManager(ErrorListener):
 
 
 class ZorgFileCompiler(ZorgFileListener):
-    """Listener that compiles zorg files into zorc files."""
+    """Listener that compiles zorg files.
+
+    This compiler takes as input a single *.zo file. When walked, it produces
+    as output the {zorg_file} instance attribute.
+    """
 
     def __init__(
         self, zorg_file: ZorgFile, error_manager: ErrorManager

@@ -79,6 +79,13 @@ class DescOperator(enum.Enum):
     NOT_CONTAINS = enum.auto()
 
 
+class Select(enum.Enum):
+    """A zorg query (S)ELECT."""
+
+    NOTES = enum.auto()
+    PROJECTS = enum.auto()
+
+
 class PropertyOperator(enum.Enum):
     """Used to determine what kind of metatag constraint has been specified."""
 
