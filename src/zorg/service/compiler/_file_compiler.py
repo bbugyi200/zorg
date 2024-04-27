@@ -3,7 +3,6 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
-from pathlib import Path
 from typing import Any, Literal, Optional
 
 import antlr4
@@ -13,7 +12,6 @@ from typist import assert_never
 
 from ...domain.models import TodoPayload, ZorgFile, ZorgNote
 from ...domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
-from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
@@ -23,7 +21,7 @@ TagName = Literal["areas", "contexts", "people", "projects"]
 _LOGGER = Logger(__name__)
 
 
-class _ErrorManager(ErrorListener):
+class ErrorManager(ErrorListener):
     """Keeps track of zorg file syntax errors."""
 
     def __init__(self) -> None:
@@ -43,11 +41,11 @@ class _ErrorManager(ErrorListener):
         self.errors.append(f"Line {line}:{column} {msg}")
 
 
-class _ZorgFileCompiler(ZorgFileListener):
+class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files into zorc files."""
 
     def __init__(
-        self, zorg_file: ZorgFile, error_manager: _ErrorManager
+        self, zorg_file: ZorgFile, error_manager: ErrorManager
     ) -> None:
         self.zorg_file = zorg_file
         self.error_manager = error_manager
