@@ -12,7 +12,7 @@ from sqlmodel import Session, select
 
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import ZorgQuery, ZorgFile
+from ...domain.models import ZorgFile, ZorgQuery
 from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter
 
