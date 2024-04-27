@@ -9,9 +9,23 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.3...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.4...HEAD)
 
 No notable changes have been made.
+
+
+## [0.6.4](https://github.com/bbugyi200/zorg/compare/0.6.3...0.6.4) - 2024-04-27
+
+### Changed
+
+* Add `zorg query` command that does nothing ATM.
+* Stop generating ZIDs which use any of the following characters based on
+  similarity to digits OR because the lowercase letter hangs over an underline: `SQgipqy`
+
+### Fixed
+
+* Allow ZIDs and priorities in note body.
+* Strip zettel dir from sql.ZorgFile.path.
 
 
 ## [0.6.3](https://github.com/bbugyi200/zorg/compare/0.6.2...0.6.3) - 2024-04-19
