@@ -61,7 +61,19 @@ popen = subprocess.Popen(["zorg", "--help"], stdout=subprocess.PIPE)
 stdout, _ = popen.communicate()
 print("```", stdout.decode().strip(), "```", sep="\n")
 
-for cmd in ['action', 'action open', 'compile', 'db', 'db create', 'db reindex', 'edit', 'template', 'template init', 'template render']:
+for cmd in [
+    "action",
+    "action open",
+    "compile",
+    "db",
+    "db create",
+    "db reindex",
+    "edit",
+    "query",
+    "template",
+    "template init",
+    "template render",
+]:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
     print(f"\n### `zorg {cmd} --help`\n")
@@ -70,7 +82,7 @@ for cmd in ['action', 'action open', 'compile', 'db', 'db create', 'db reindex',
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,compile,db,edit,template} ...
+            {action,compile,db,edit,query,template} ...
 
 The zettel note manager of the future.
 
@@ -100,13 +112,14 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,compile,db,edit,template}
+  {action,compile,db,edit,query,template}
     action              Used to interface with vim via an action protocol.
     compile             Compiles zorg (*.zo) files into zorc (*.zoc) files.
     db                  Commands for managing Zorg's SQL database.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
+    query               Run a zorg query against your zettel directory.
     template            Commands for managing .zot templates.
 ```
 
@@ -206,6 +219,20 @@ Generate new day logs from templates and open the main day log in your system's 
 
 positional arguments:
   zo_paths    The .zo files we want to open in an editor.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `zorg query --help`
+
+```
+usage: zorg query [-h] query
+
+Run a zorg query against your zettel directory.
+
+positional arguments:
+  query       The zorg query we will run.
 
 options:
   -h, --help  show this help message and exit

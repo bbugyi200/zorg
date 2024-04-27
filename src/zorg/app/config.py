@@ -15,7 +15,7 @@ from ..service import common
 
 
 Command = Literal[
-    "compile", "create", "edit", "init", "open", "reindex", "render"
+    "compile", "create", "edit", "init", "open", "query", "reindex", "render"
 ]
 
 _logger = Logger(__name__)
@@ -68,7 +68,7 @@ class DbReindexConfig(Config):
 
     command: Literal["reindex"]
 
-    # ----- Arguments
+    # ----- ARGUMENTS
     paths: list[Path] = []
 
 
@@ -84,6 +84,15 @@ class EditConfig(Config):
     file_group_map: FileGroupMapType = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
+
+
+class QueryConfig(Config):
+    """Clack config for the 'query' command."""
+
+    command: Literal["query"]
+
+    # ----- ARGUMENTS
+    query: str
 
 
 class TemplateRenderConfig(Config):
@@ -210,6 +219,12 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         nargs="*",
         help="The .zo files we want to open in an editor.",
     )
+
+    # --- 'query' command
+    query_parser = new_command(
+        "query", help="Run a zorg query against your zettel directory."
+    )
+    query_parser.add_argument("query", help="The zorg query we will run.")
 
     # --- 'template' command
     template_parser = new_command(
