@@ -26,7 +26,7 @@ def walk_zorg_file(
         parser.removeErrorListeners()
     error_manager = ErrorManager()
     parser.addErrorListener(error_manager)
-    tree = parser.prog()
+    tree = parser.prog()  # type: ignore[no-untyped-call]
     compiler = ZorgFileCompiler(zorg_file, error_manager)
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
