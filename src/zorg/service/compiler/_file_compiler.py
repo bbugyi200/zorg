@@ -214,10 +214,11 @@ class ZorgFileCompiler(ZorgFileListener):
             self._s.todo_status = status
 
     def enterZid(self, ctx: ZorgFileParser.ZidContext) -> None:  # noqa: D102
-        zid = ctx.getText()
-        self._s.zid = zid
-        zorg_id_date = f"20{zid.split('#')[0]}"
-        self._s.note_date = dt.datetime.strptime(zorg_id_date, "%Y%m%d")
+        if self._s.in_note and self._s.ids_in_note == 0:
+            zid = ctx.getText()
+            self._s.zid = zid
+            zorg_id_date = f"20{zid.split('#')[0]}"
+            self._s.note_date = dt.datetime.strptime(zorg_id_date, "%Y%m%d")
 
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
