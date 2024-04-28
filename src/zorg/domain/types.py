@@ -82,7 +82,11 @@ class DescOperator(enum.Enum):
 class Select(enum.Enum):
     """A zorg query (S)ELECT."""
 
+    AREAS = enum.auto()
+    CONTEXTS = enum.auto()
+    FILES = enum.auto()
     NOTES = enum.auto()
+    PEOPLE = enum.auto()
     PROJECTS = enum.auto()
 
 
