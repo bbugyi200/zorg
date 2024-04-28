@@ -30,7 +30,7 @@
   10
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  134
+  135
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -220,6 +220,7 @@
     '000103#24',
     '000103#25',
     '000103#26',
+    '000103#27',
     '240313#00',
     '240313#01',
     '240313#02',

@@ -347,6 +347,20 @@
               'projects': [],
               'properties': {},
               'todo_payload': None,
+              'zid': None},
+             {'areas': [],
+              'body': 'Some note that references an old 200101#12 ZID.',
+              'child_note_ids': [],
+              'contexts': [],
+              'create_date': FakeDate(2000, 1, 3),
+              'links': [],
+              'next_note_id': None,
+              'parent_note_id': None,
+              'people': [],
+              'prev_note_id': None,
+              'projects': [],
+              'properties': {},
+              'todo_payload': None,
               'zid': None}]}
   
   '''
