@@ -7,7 +7,10 @@ import antlr4
 from ...domain.models import ZorgFile, ZorgQuery
 from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from ...grammar.zorg_query.ZorgQueryLexer import ZorgQueryLexer
+from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 from ._file_compiler import ErrorManager, ZorgFileCompiler
+from ._query_compiler import ZorgQueryCompiler
 
 
 def walk_zorg_file(
@@ -34,6 +37,14 @@ def walk_zorg_file(
 
 
 def compile_zorg_query(query: str) -> ZorgQuery:
-    """Create a new ZorgQueryCompiler and use it to compile {query}."""
-    del query
-    return ZorgQuery()
+    """Constructs a new ZorgQuery using {query}."""
+    stream = antlr4.InputStream(query)
+    lexer = ZorgQueryLexer(stream)
+    tokens = antlr4.CommonTokenStream(lexer)
+    parser = ZorgQueryParser(tokens)
+    tree = parser.prog()  # type: ignore[no-untyped-calls]
+    zorg_query = ZorgQuery()
+    compiler = ZorgQueryCompiler(zorg_query)
+    walker = antlr4.ParseTreeWalker()
+    walker.walk(compiler, tree)
+    return zorg_query

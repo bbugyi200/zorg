@@ -64,7 +64,7 @@ class WhereOrFilter:
     and_queries: Iterable[WhereAndFilter]
 
 
-@dataclass(frozen=True)
+@dataclass
 class ZorgQuery:
     """A zorg query that uses SWOG syntax.
 

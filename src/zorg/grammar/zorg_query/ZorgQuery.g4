@@ -1,7 +1,7 @@
 grammar ZorgQuery;
 
 //// parser rules
-prog : query NL ;
+prog : query NL? ;
 
 query : where_query | select_query ;
 where_query : (select SPACE)? where (SPACE order_by)? (SPACE group_by)? ;
