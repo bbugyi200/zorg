@@ -42,7 +42,7 @@ def compile_zorg_query(query: str) -> ZorgQuery:
     lexer = ZorgQueryLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgQueryParser(tokens)
-    tree = parser.prog()  # type: ignore[no-untyped-calls]
+    tree = parser.prog()  # type: ignore[no-untyped-call]
     zorg_query = ZorgQuery()
     compiler = ZorgQueryCompiler(zorg_query)
     walker = antlr4.ParseTreeWalker()
