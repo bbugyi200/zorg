@@ -12,11 +12,15 @@ where : 'W' SPACE where_body ;
 order_by : 'O' ;
 group_by : 'G' ;
 
-select_body : 'file' | 'note' | '@' | '#' | '+' | '%' ;
+select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
 where_body : 'o' ;
 
 //// lexer rules
 NL : '\r'? '\n' ;
 SPACE : ' ' ;
+PLUS : '+' ;
+AT_SIGN : '@' ;
+PERCENT : '%' ;
+HASH : '#' ;
 
 //// fragments
