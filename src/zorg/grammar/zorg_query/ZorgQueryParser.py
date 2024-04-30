@@ -10,13 +10,13 @@ else:
 
 def serializedATN():
     return [
-        4,1,17,72,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,18,72,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,1,0,1,0,3,0,27,8,0,
         1,1,1,1,3,1,31,8,1,1,2,1,2,1,2,3,2,36,8,2,1,2,1,2,1,2,3,2,41,8,2,
         1,2,1,2,3,2,45,8,2,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,6,1,
         6,1,7,1,7,1,8,1,8,1,9,1,9,1,10,4,10,66,8,10,11,10,12,10,67,1,11,
         1,11,1,11,0,0,12,0,2,4,6,8,10,12,14,16,18,20,22,0,2,2,0,5,6,9,12,
-        1,0,13,17,65,0,24,1,0,0,0,2,30,1,0,0,0,4,35,1,0,0,0,6,46,1,0,0,0,
+        1,0,13,18,65,0,24,1,0,0,0,2,30,1,0,0,0,4,35,1,0,0,0,6,46,1,0,0,0,
         8,48,1,0,0,0,10,52,1,0,0,0,12,56,1,0,0,0,14,58,1,0,0,0,16,60,1,0,
         0,0,18,62,1,0,0,0,20,65,1,0,0,0,22,69,1,0,0,0,24,26,3,2,1,0,25,27,
         5,7,0,0,26,25,1,0,0,0,26,27,1,0,0,0,27,1,1,0,0,0,28,31,3,4,2,0,29,
@@ -45,12 +45,12 @@ class ZorgQueryParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'S'", "'W'", "'O'", "'G'", "'file'", 
                      "'note'", "<INVALID>", "' '", "'+'", "'@'", "'%'", 
-                     "'#'", "'-'", "'o'", "'x'", "'<'", "'>'" ]
+                     "'#'", "'-'", "'o'", "'x'", "'<'", "'>'", "'~'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "NL", "SPACE", 
                       "PLUS", "AT_SIGN", "PERCENT", "HASH", "DASH", "LOWER_O", 
-                      "LOWER_X", "LANGLE", "RANGLE" ]
+                      "LOWER_X", "LANGLE", "RANGLE", "TILDE" ]
 
     RULE_prog = 0
     RULE_query = 1
@@ -87,6 +87,7 @@ class ZorgQueryParser ( Parser ):
     LOWER_X=15
     LANGLE=16
     RANGLE=17
+    TILDE=18
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -661,7 +662,7 @@ class ZorgQueryParser ( Parser ):
                 self.state = 67 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 253952) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 516096) != 0)):
                     break
 
         except RecognitionException as re:
@@ -688,6 +689,9 @@ class ZorgQueryParser ( Parser ):
 
         def LOWER_X(self):
             return self.getToken(ZorgQueryParser.LOWER_X, 0)
+
+        def TILDE(self):
+            return self.getToken(ZorgQueryParser.TILDE, 0)
 
         def LANGLE(self):
             return self.getToken(ZorgQueryParser.LANGLE, 0)
@@ -718,7 +722,7 @@ class ZorgQueryParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 69
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 253952) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 516096) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
