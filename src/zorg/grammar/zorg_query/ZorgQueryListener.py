@@ -98,5 +98,23 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#note_status.
+    def enterNote_status(self, ctx:ZorgQueryParser.Note_statusContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#note_status.
+    def exitNote_status(self, ctx:ZorgQueryParser.Note_statusContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#note_status_char.
+    def enterNote_status_char(self, ctx:ZorgQueryParser.Note_status_charContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#note_status_char.
+    def exitNote_status_char(self, ctx:ZorgQueryParser.Note_status_charContext):
+        pass
+
+
 
 del ZorgQueryParser

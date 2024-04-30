@@ -13,7 +13,10 @@ order_by : 'O' ;
 group_by : 'G' ;
 
 select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
-where_body : 'o' ;
+
+where_body : note_status ;
+note_status : note_status_char+ ;
+note_status_char : DASH | LOWER_O | LOWER_X | LANGLE | RANGLE ;
 
 //// lexer rules
 NL : '\r'? '\n' ;
@@ -22,5 +25,10 @@ PLUS : '+' ;
 AT_SIGN : '@' ;
 PERCENT : '%' ;
 HASH : '#' ;
+DASH : '-' ;
+LOWER_O : 'o' ;
+LOWER_X : 'x' ;
+LANGLE : '<' ;
+RANGLE : '>' ;
 
 //// fragments
