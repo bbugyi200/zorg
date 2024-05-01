@@ -62,5 +62,13 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 allowed_note_statuses.add(NoteStatus.BASIC)
             elif note_status_char.LOWER_O():
                 allowed_note_statuses.add(NoteStatus.OPEN_TODO)
-        where = WhereOrFilter([WhereAndFilter()])
+            elif note_status_char.LOWER_X():
+                allowed_note_statuses.add(NoteStatus.CLOSED_TODO)
+            elif note_status_char.TILDE():
+                allowed_note_statuses.add(NoteStatus.CANCELED_TODO)
+            elif note_status_char.LANGLE():
+                allowed_note_statuses.add(NoteStatus.BLOCKED_TODO)
+            elif note_status_char.RANGLE():
+                allowed_note_statuses.add(NoteStatus.PARENT_TODO)
+        where = WhereOrFilter([WhereAndFilter(allowed_note_statuses=allowed_note_statuses)])
         self.zorg_query.where = where
