@@ -57,6 +57,17 @@ class WhereAndFilter:
     priorities: list[TodoPriorityType] = field(default_factory=list)
     projects: list[str] = field(default_factory=list)
 
+    def __repr__(self) -> str:
+        """String representation that only shows fields if they are set."""
+        dict_repr = ", ".join(
+            f"{k}={v!r}"
+            for k, v in filter(
+                lambda item: bool(item[1]), self.__dict__.items()
+            )
+        )
+
+        return f"{self.__class__.__name__}({dict_repr})"
+
 
 @dataclass(frozen=True)
 class WhereOrFilter:
