@@ -70,5 +70,13 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 allowed_note_statuses.add(NoteStatus.BLOCKED_TODO)
             elif note_status_char.RANGLE():
                 allowed_note_statuses.add(NoteStatus.PARENT_TODO)
-        where = WhereOrFilter([WhereAndFilter(allowed_note_statuses=allowed_note_statuses)])
+            else:
+                emsg = "Unrecognized note status character"
+                _LOGGER.error(
+                    emsg, note_status_char=note_status_char.getText()
+                )
+                raise RuntimeError(emsg)
+        where = WhereOrFilter(
+            [WhereAndFilter(allowed_note_statuses=allowed_note_statuses)]
+        )
         self.zorg_query.where = where
