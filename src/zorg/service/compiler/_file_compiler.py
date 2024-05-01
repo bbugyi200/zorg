@@ -11,7 +11,7 @@ from logrus import Logger
 from typist import assert_never
 
 from ...domain.models import TodoPayload, ZorgFile, ZorgNote
-from ...domain.types import TodoPriorityType, NoteStatus, TodoStatusPrefixChar
+from ...domain.types import NoteStatus, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 

@@ -5,7 +5,7 @@ import datetime as dt
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
-from ..types import TodoPriorityType, NoteStatus
+from ..types import NoteStatus, TodoPriorityType
 
 
 if TYPE_CHECKING:
