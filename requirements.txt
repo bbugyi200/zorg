@@ -57,7 +57,7 @@ pyyaml==6.0.1
     # via bolton-clack
 sqlalchemy==2.0.29
     # via sqlmodel
-sqlmodel==0.0.16
+sqlmodel==0.0.18
     # via -r requirements.in
 structlog==24.1.0
     # via bolton-logrus

@@ -93,7 +93,7 @@ docutils==0.20.1
     #   sphinx-rtd-theme
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.13.4
+filelock==3.14.0
     # via
     #   tox
     #   virtualenv
@@ -193,7 +193,7 @@ pygments==2.17.2
     #   sphinx
 pylint==3.1.0
     # via -r requirements-dev.in
-pyproject-hooks==1.0.0
+pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
@@ -267,7 +267,7 @@ sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 sqlalchemy==2.0.29
     # via sqlmodel
-sqlmodel==0.0.16
+sqlmodel==0.0.18
     # via
     #   -r requirements.in
     #   zettel-org
@@ -288,7 +288,6 @@ tomli==2.0.1
     #   pip-tools
     #   pydocstyle
     #   pylint
-    #   pyproject-hooks
     #   pytest
     #   setuptools-scm
     #   sphinx
@@ -327,7 +326,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via tox
 wheel==0.43.0
     # via pip-tools
