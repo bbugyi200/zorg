@@ -106,7 +106,7 @@
 # ---
 # name: test_run_db_create__todo_statuses[YAMLConfigFile]
   list([
-    'OPEN',
+    'OPEN_TODO',
   ])
 # ---
 # name: test_run_db_create__zids[YAMLConfigFile]

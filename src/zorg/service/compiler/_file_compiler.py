@@ -11,7 +11,7 @@ from logrus import Logger
 from typist import assert_never
 
 from ...domain.models import TodoPayload, ZorgFile, ZorgNote
-from ...domain.types import TodoPriorityType, TodoStatus, TodoStatusPrefixChar
+from ...domain.types import TodoPriorityType, NoteStatus, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
@@ -195,19 +195,19 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterTodo_prefix(
         self, ctx: ZorgFileParser.Todo_prefixContext
     ) -> None:  # noqa: D102
-        status = TodoStatus.OPEN
+        status = NoteStatus.OPEN_TODO
         if self._s.in_note:
             ch: TodoStatusPrefixChar = ctx.getText()[0]
             if ch == "o":
-                status = TodoStatus.OPEN
+                status = NoteStatus.OPEN_TODO
             elif ch == "x":
-                status = TodoStatus.CLOSED
+                status = NoteStatus.CLOSED_TODO
             elif ch == "~":
-                status = TodoStatus.CANCELED
+                status = NoteStatus.CANCELED_TODO
             elif ch == "<":
-                status = TodoStatus.BLOCKED
+                status = NoteStatus.BLOCKED_TODO
             elif ch == ">":
-                status = TodoStatus.PARENT
+                status = NoteStatus.PARENT_TODO
             else:
                 assert_never(ch)
 
@@ -249,7 +249,7 @@ class ZorgFileCompiler(ZorgFileListener):
 
         # Reset todo priority and status back to defaults.
         self._s.todo_priority = "C"
-        self._s.todo_status = TodoStatus.OPEN
+        self._s.todo_status = NoteStatus.OPEN_TODO
 
     def exitH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -475,7 +475,7 @@ class _ZorgFileCompilerState:
     note_date: Optional[dt.date] = None
 
     todo_priority: TodoPriorityType = "C"
-    todo_status: TodoStatus = TodoStatus.OPEN
+    todo_status: NoteStatus = NoteStatus.OPEN_TODO
 
     @property
     def areas(self) -> list[str]:

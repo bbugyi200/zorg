@@ -55,14 +55,15 @@ VarMapType = Mapping[str, Any]
 TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 
 
-class TodoStatus(enum.Enum):
-    """Zorg todo status."""
+class NoteStatus(enum.Enum):
+    """Zorg note status."""
 
-    OPEN = enum.auto()  # o
-    CLOSED = enum.auto()  # x
-    CANCELED = enum.auto()  # ~
-    BLOCKED = enum.auto()  # <
-    PARENT = enum.auto()  # >
+    BASIC = enum.auto()  # -
+    OPEN_TODO = enum.auto()  # o
+    CLOSED_TODO = enum.auto()  # x
+    CANCELED_TODO = enum.auto()  # ~
+    BLOCKED_TODO = enum.auto()  # <
+    PARENT_TODO = enum.auto()  # >
 
 
 class CreateEngineType(Protocol):

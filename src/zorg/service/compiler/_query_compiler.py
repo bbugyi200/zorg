@@ -4,8 +4,8 @@ from typing import cast
 
 from logrus import Logger
 
-from ...domain.models import ZorgQuery
-from ...domain.types import Select
+from ...domain.models import WhereAndFilter, WhereOrFilter, ZorgQuery
+from ...domain.types import Select, NoteStatus
 from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 
@@ -48,4 +48,14 @@ class ZorgQueryCompiler(ZorgQueryListener):
     def enterWhere(
         self, ctx: ZorgQueryParser.WhereContext
     ) -> None:  # noqa: D102
-        del ctx
+        note_status = cast(ZorgQueryParser.Note_statusContext, ctx.where_body().note_status())
+        note_status_chars = cast(list[ZorgQueryParser.Note_status_charContext], note_status.note_status_char())
+        allowed_note_statuses: set[NoteStatus] = set()
+        where: WhereOrFilter
+        for note_status_char in note_status_chars:
+            if note_status_char.DASH():
+                allowed_note_statuses.add(NoteStatus.BASIC)
+            elif note_status_char.LOWER_O():
+                allowed_note_statuses.add(NoteStatus.OPEN_TODO)
+        where = WhereOrFilter([WhereAndFilter()])
+        self.zorg_query.where = where

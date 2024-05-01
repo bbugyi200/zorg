@@ -6,6 +6,7 @@ from typing import Iterable, Optional
 
 from ..types import (
     DescOperator,
+    NoteStatus,
     PropertyOperator,
     PropertyValueType,
     Select,
@@ -44,11 +45,11 @@ class DateRange:
 class WhereAndFilter:
     """Tag used to filter ZorgNotes."""
 
+    allowed_note_statuses: set[NoteStatus] = field(default_factory=set)
     areas: list[str] = field(default_factory=list)
     contexts: list[str] = field(default_factory=list)
     create_date_ranges: list[DateRange] = field(default_factory=list)
     desc_filters: list[DescFilter] = field(default_factory=list)
-    done: Optional[bool] = None
     modify_date_ranges: list[DateRange] = field(default_factory=list)
     or_filters: list["WhereOrFilter"] = field(default_factory=list)
     people: list[str] = field(default_factory=list)

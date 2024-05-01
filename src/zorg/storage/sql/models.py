@@ -7,7 +7,7 @@ from typing import List, Optional
 from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
-from ...domain.types import TodoStatus
+from ...domain.types import NoteStatus
 
 
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
@@ -122,7 +122,7 @@ class ZorgNote(Base, table=True):
 
     create_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
-    todo_status: Optional[TodoStatus] = None
+    todo_status: Optional[NoteStatus] = None
 
     # relationships
     zorg_file: ZorgFile = Relationship(
