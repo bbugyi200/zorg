@@ -10,11 +10,10 @@ from logrus import Logger
 from sqlmodel import Session, select
 
 from . import models as sql
-from .converters import to_select_of_note
 from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import ZorgFile, ZorgNote, WhereOrFilter
+from ...domain.models import WhereOrFilter, ZorgFile, ZorgNote
 from ...service.zid_manager import ZIDManager
-from .converters import ZorgFileConverter, ZorgNoteConverter
+from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
 
 
 logger = Logger(__name__)
