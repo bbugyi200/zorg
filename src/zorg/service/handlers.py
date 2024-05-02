@@ -1,5 +1,6 @@
 """Zorg's event and command handlers live here."""
 
+from functools import partial
 import hashlib
 import json
 from pathlib import Path
@@ -34,42 +35,57 @@ def check_keep_alive_file(
     event: events.EditorClosedEvent, session: SQLSession
 ) -> None:
     """Check if the 'keep alive' file exists and, if so, reopens the editor."""
-    if not event.edit_cmd.keep_alive_file.exists():
+    keep_alive_file = event.edit_cmd.keep_alive_file
+    if not keep_alive_file.exists():
         logger.debug(
             "No keep alive file found.",
-            keep_alive_file=event.edit_cmd.keep_alive_file,
+            keep_alive_file=keep_alive_file,
         )
         return
 
-    if event.edit_cmd.keep_alive_file.stat().st_size == 0:
+    zdir = event.edit_cmd.zettel_dir
+    prepend_zdir = partial(common.prepend_zdir, zdir)
+    vim_commands = list(event.edit_cmd.vim_commands)
+    if keep_alive_file.stat().st_size == 0:
         logger.debug(
             "Empty keep alive file found.",
-            keep_alive_file=event.edit_cmd.keep_alive_file,
+            keep_alive_file=keep_alive_file,
         )
         paths = event.edit_cmd.paths
     else:
-        new_paths = common.prepend_zdir(
-            event.edit_cmd.zettel_dir,
-            [
-                Path(p.strip())
-                for p in event.edit_cmd.keep_alive_file.read_text().split()
-            ],
-        )
+        keep_alive_lines = list(keep_alive_file.read_text().split())
+        focused_filename = keep_alive_lines.pop()
+        vim_commands = [
+            cmd for cmd in vim_commands if not cmd.startswith("edit")
+        ]
+        vim_commands.append(f"edit {focused_filename}")
+        new_paths = prepend_zdir([Path(p.strip()) for p in keep_alive_lines])
         logger.debug(
             "Editing files specified in the keep alive file.",
-            keep_alive_file=event.edit_cmd.keep_alive_file,
+            keep_alive_file=keep_alive_file,
             old_paths=event.edit_cmd.paths,
             new_paths=new_paths,
         )
         paths = new_paths
 
-    event.edit_cmd.keep_alive_file.unlink()
+    verbose = event.edit_cmd.verbose
+    if verbose <= 1:
+        logger.debug(
+            "Unlinking keep-alive file", keep_alive_file=keep_alive_file
+        )
+        keep_alive_file.unlink()
+    else:
+        logger.debug(
+            "We are NOT deleting the keep-alive file",
+            keep_alive_file=keep_alive_file,
+        )
     session.add_last_message(
         commands.EditCommand(
-            zettel_dir=event.edit_cmd.zettel_dir,
+            zettel_dir=zdir,
             paths=paths,
-            keep_alive_file=event.edit_cmd.keep_alive_file,
-            vim_commands=event.edit_cmd.vim_commands,
+            keep_alive_file=keep_alive_file,
+            verbose=verbose,
+            vim_commands=vim_commands,
         )
     )
 

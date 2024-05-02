@@ -9,9 +9,17 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.6.4...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.0...HEAD)
 
 No notable changes have been made.
+
+
+## [0.7.0](https://github.com/bbugyi200/zorg/compare/0.6.4...0.7.0) - 2024-05-02
+
+### Changed
+
+* *BREAKING CHANGE*: Expect final line of keep-alive file to be the full path
+  of the file in the currently focused buffer.
 
 
 ## [0.6.4](https://github.com/bbugyi200/zorg/compare/0.6.3...0.6.4) - 2024-04-27

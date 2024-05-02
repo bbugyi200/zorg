@@ -28,10 +28,11 @@ def run_edit(cfg: EditConfig) -> int:
     messagebus.handle(
         [
             commands.EditCommand(
-                zettel_dir=cfg.zettel_dir,
-                paths=zo_paths,
                 keep_alive_file=cfg.keep_alive_file,
+                paths=zo_paths,
+                verbose=cfg.verbose,
                 vim_commands=cfg.vim_commands,
+                zettel_dir=cfg.zettel_dir,
             ),
         ],
         SQLSession(cfg.zettel_dir, cfg.database_url),

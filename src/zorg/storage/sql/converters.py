@@ -34,6 +34,7 @@ def to_select_of_note(or_filter: Optional[WhereOrFilter]) -> SelectOfNote:
     and_filters = list(or_filter.and_filters)
     son = _SONConverter(and_filters.pop(0)).to_select_of_note()
     for and_filter in and_filters:
+        # TODO(bugyi): Fix this OR logic.
         son = or_(son, _SONConverter(and_filter).to_select_of_note())
     return son
 
