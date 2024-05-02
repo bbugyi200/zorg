@@ -8,7 +8,6 @@ from types import TracebackType
 from typing import Iterator, Type
 
 from logrus import Logger
-from potoroo import UnitOfWork
 from sqlmodel import Session
 
 from ...domain.messages import Message
@@ -20,7 +19,7 @@ from .repo import SQLRepo
 logger = Logger(__name__)
 
 
-class SQLSession(UnitOfWork[SQLRepo]):
+class SQLSession:
     """Unit-of-work pattern used to manage transactions on zorg's SQL DB.
 
     TODO: Document __init__() params here.

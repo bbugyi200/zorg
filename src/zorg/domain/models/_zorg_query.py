@@ -73,7 +73,7 @@ class WhereAndFilter:
 class WhereOrFilter:
     """A collection of `WhereAndFilter`s that have been ORed together."""
 
-    and_queries: Iterable[WhereAndFilter]
+    and_filters: Iterable[WhereAndFilter]
 
 
 @dataclass

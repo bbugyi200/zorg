@@ -7,20 +7,20 @@ from typing import Optional
 
 from eris import ErisResult, Err, Ok
 from logrus import Logger
-from potoroo import QueryRepo
 from sqlmodel import Session, select
 
 from . import models as sql
+from .converters import to_select_of_note
 from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import ZorgFile, ZorgQuery
+from ...domain.models import ZorgFile, ZorgNote, WhereOrFilter
 from ...service.zid_manager import ZIDManager
-from .converters import ZorgFileConverter
+from .converters import ZorgFileConverter, ZorgNoteConverter
 
 
 logger = Logger(__name__)
 
 
-class SQLRepo(QueryRepo[str, ZorgFile, ZorgQuery]):
+class SQLRepo:
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
@@ -31,6 +31,7 @@ class SQLRepo(QueryRepo[str, ZorgFile, ZorgQuery]):
         self._zettel_dir = zettel_dir
         self._session = session
         self._converter = ZorgFileConverter(zettel_dir, session)
+        self._note_converter = ZorgNoteConverter(session)
 
         self.seen: list[ZorgFile] = []
 
@@ -110,12 +111,14 @@ class SQLRepo(QueryRepo[str, ZorgFile, ZorgQuery]):
         else:
             return Ok(None)
 
-    def get_by_query(self, query: ZorgQuery) -> ErisResult[list[ZorgFile]]:
+    def get_by_query(
+        self, query: Optional[WhereOrFilter]
+    ) -> ErisResult[list[ZorgNote]]:
         """Get file(s) from DB by using a query."""
-        del query
-        result: list[ZorgFile] = []
-        for zorg_file in result:
-            self._seen_zorg_file(zorg_file)
+        select_of_note = to_select_of_note(query)
+        result: list[ZorgNote] = []
+        for sql_note in self._session.exec(select_of_note):
+            result.append(self._note_converter.to_entity(sql_note))
         return Ok(result)
 
     def all(self) -> ErisResult[list[ZorgFile]]:

@@ -1,15 +1,72 @@
 """Contains logic to convert domain models to/from SQL models."""
 
 from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Optional
 
-from sqlmodel import Session, select
+import metaman
+from sqlmodel import Session, or_, select
+from sqlmodel.sql.expression import SelectOfScalar
 
 from . import models as sql
-from ...domain.models import ZorgFile, ZorgNote
-from ...domain.types import EntityConverter
+from ...domain.models import WhereAndFilter, WhereOrFilter, ZorgFile, ZorgNote
+from ...domain.types import EntityConverter, NoteStatus
 from ...service import common
+
+
+SelectOfNote = SelectOfScalar[sql.ZorgNote]
+
+_SONConverterParser = Callable[["_SONConverter", SelectOfNote], SelectOfNote]
+# the @_son_converter_parser decorator should be used to mark a _SONConverter
+# parser method
+_SON_CONVERTER_PARSERS: list[_SONConverterParser] = []
+_son_converter_parser = metaman.register_function_factory(
+    _SON_CONVERTER_PARSERS
+)
+
+
+def to_select_of_note(or_filter: Optional[WhereOrFilter]) -> SelectOfNote:
+    """Converts a WhereOrFilter to a SQL SELECT that will fetch ZorgNotes."""
+    if or_filter is None or not or_filter.and_filters:
+        return select(sql.ZorgNote)
+
+    and_filters = list(or_filter.and_filters)
+    son = _SONConverter(and_filters.pop(0)).to_select_of_note()
+    for and_filter in and_filters:
+        son = or_(son, _SONConverter(and_filter).to_select_of_note())
+    return son
+
+
+@dataclass(frozen=True)
+class _SONConverter:
+    """Converts a WhereAndFilter to a SelectOfNote."""
+
+    and_filter: WhereAndFilter
+
+    def to_select_of_note(self) -> SelectOfNote:
+        """Constructs a SQL statement from the provided WhereAndFilter object."""
+        son = select(sql.ZorgNote)
+        for parse_son in _SON_CONVERTER_PARSERS:
+            son = parse_son(self, son)
+        return son
+
+    @_son_converter_parser
+    def note_status(self, son: SelectOfNote) -> SelectOfNote:
+        """Converter for done status (e.g. '-' or 'ox~<>')."""
+        return son.where(
+            or_(
+                sql.ZorgNote.todo_status == _to_todo_status(note_status)
+                for note_status in self.and_filter.allowed_note_statuses
+            )
+        )
+
+
+def _to_todo_status(note_status: NoteStatus) -> Optional[NoteStatus]:
+    if note_status is NoteStatus.BASIC:
+        return None
+    else:
+        return note_status
 
 
 class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
