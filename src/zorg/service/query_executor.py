@@ -23,5 +23,5 @@ def execute(session: SQLSession, query_string: str) -> str:
     """
     zorg_query = build_zorg_query(query_string)
     with session:
-        for zorg_note in session.repo.get_by_query(zorg_query.where).unwrap():
+        for zorg_note in session.repo.get_by_query(zorg_query.where):
             print(zorg_note)

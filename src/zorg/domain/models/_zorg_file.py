@@ -43,7 +43,7 @@ class Note:
 
 
 @dataclass
-class ZorgFile:
+class File:
     """A Zorg (i.e. *.zo) file."""
 
     path: Path

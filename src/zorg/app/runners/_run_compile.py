@@ -4,7 +4,7 @@ from dataclasses import asdict
 from pprint import pprint
 from typing import Any
 
-from ...domain.models import ZorgFile
+from ...domain.models import File
 from ...service.compiler import walk_zorg_file
 from ..config import CompileConfig
 from ._runners import runner
@@ -19,7 +19,7 @@ def run_compile(cfg: CompileConfig) -> int:
     return 0
 
 
-def _convert_zorg_file_to_dict(zorg_file: ZorgFile) -> dict[str, Any]:
+def _convert_zorg_file_to_dict(zorg_file: File) -> dict[str, Any]:
     zorg_file_dict = asdict(zorg_file)
     for key in ["events", "has_errors", "path"]:
         del zorg_file_dict[key]

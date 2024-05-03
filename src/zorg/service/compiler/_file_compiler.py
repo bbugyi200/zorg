@@ -10,7 +10,7 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from ...domain.models import Note, TodoPayload, ZorgFile
+from ...domain.models import File, Note, TodoPayload
 from ...domain.types import NoteStatus, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
@@ -48,9 +48,7 @@ class ZorgFileCompiler(ZorgFileListener):
     as output the {zorg_file} instance attribute.
     """
 
-    def __init__(
-        self, zorg_file: ZorgFile, error_manager: ErrorManager
-    ) -> None:
+    def __init__(self, zorg_file: File, error_manager: ErrorManager) -> None:
         self.zorg_file = zorg_file
         self.error_manager = error_manager
 
