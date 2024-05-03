@@ -2,7 +2,7 @@
 
 from typist import assert_never
 
-from ...domain.types import NoteType, Select
+from ...domain.types import NoteType, SelectType
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
 
@@ -48,7 +48,7 @@ def execute(session: SQLSession, query_string: str) -> str:
         filtered_notes = session.repo.get_by_query(query.where)
 
         # (S)ELECT
-        if query.select is Select.NOTES:
+        if query.select is SelectType.NOTES:
             for note in filtered_notes:
                 char = _to_prefix_char(
                     note.todo_payload.status

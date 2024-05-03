@@ -9,7 +9,7 @@ from ..types import (
     NoteType,
     PropertyOperator,
     PropertyValueType,
-    Select,
+    SelectType,
     TodoPriorityType,
 )
 
@@ -86,5 +86,5 @@ class Query:
     (G)ROUP BY
     """
 
-    select: Select = field(default=Select.NOTES)
+    select: SelectType = field(default=SelectType.NOTES)
     where: Optional[WhereOrFilter] = None

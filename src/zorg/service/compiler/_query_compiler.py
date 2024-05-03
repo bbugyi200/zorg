@@ -5,7 +5,7 @@ from typing import cast
 from logrus import Logger
 
 from ...domain.models import Query, WhereAndFilter, WhereOrFilter
-from ...domain.types import NoteType, Select
+from ...domain.types import NoteType, SelectType
 from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 
@@ -25,19 +25,19 @@ class ZorgQueryCompiler(ZorgQueryListener):
         select_body = cast(
             ZorgQueryParser.Select_bodyContext, ctx.select_body()
         )
-        select: Select
+        select: SelectType
         if select_body.AT_SIGN():
-            select = Select.CONTEXTS
+            select = SelectType.CONTEXTS
         elif select_body.HASH():
-            select = Select.AREAS
+            select = SelectType.AREAS
         elif select_body.PERCENT():
-            select = Select.PEOPLE
+            select = SelectType.PEOPLE
         elif select_body.PLUS():
-            select = Select.PROJECTS
+            select = SelectType.PROJECTS
         elif select_body.getText() == "file":
-            select = Select.FILES
+            select = SelectType.FILES
         elif select_body.getText() == "note":
-            select = Select.NOTES
+            select = SelectType.NOTES
         else:
             emsg = "Unrecognized select body"
             _LOGGER.error(emsg, select_body=select_body.getText())

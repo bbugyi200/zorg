@@ -80,7 +80,7 @@ class DescOperator(enum.Enum):
     NOT_CONTAINS = enum.auto()
 
 
-class Select(enum.Enum):
+class SelectType(enum.Enum):
     """A zorg query (S)ELECT."""
 
     AREAS = enum.auto()
