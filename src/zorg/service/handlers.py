@@ -220,10 +220,6 @@ def increment_zid_counters(
 
 
 def _get_file_hash_map(zdir: Path, paths: Iterable[Path]) -> dict[str, str]:
-    """Constructs a map of filenames to hashs.
-
-    Each hash is computed as a function of the corresponding file's contents.
-    """
     file_to_hash: dict[str, str] = {}
     for path in paths:
         key = common.strip_zdir(zdir, path)
@@ -232,7 +228,6 @@ def _get_file_hash_map(zdir: Path, paths: Iterable[Path]) -> dict[str, str]:
 
 
 def _get_file_hash_path(zdir: Path) -> Path:
-    """Returns a path to a JSON file where we will save file hash mapsDOCSTRING."""
     zorg_data_dir = zdir / f".{APP_NAME}"
     zorg_data_dir.mkdir(parents=True, exist_ok=True)
     return zorg_data_dir / "file_hash.json"
@@ -241,7 +236,6 @@ def _get_file_hash_path(zdir: Path) -> Path:
 def _write_file_hash_to_disk(
     file_hash_path: Path, file_to_hash: dict[str, str]
 ) -> None:
-    """Serializes {file_to_hash} to JSON and save it to {file_hash_path}."""
     logger.debug("Writing hash map to disk", file=str(file_hash_path))
     with file_hash_path.open("w") as f:
         json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
