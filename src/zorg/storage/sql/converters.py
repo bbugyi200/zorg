@@ -3,15 +3,21 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, cast
 
 import metaman
 from sqlmodel import Session, or_, select
 from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
-from ...domain.models import File, Note, WhereAndFilter, WhereOrFilter
-from ...domain.types import EntityConverter, NoteType
+from ...domain.models import (
+    File,
+    Note,
+    TodoPayload,
+    WhereAndFilter,
+    WhereOrFilter,
+)
+from ...domain.types import EntityConverter, NoteType, TodoPriorityType
 from ...service import common
 
 
@@ -174,10 +180,20 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
 
     def to_entity(self, sql_model: sql.ZorgNote) -> Note:
         """Model-to-SQL-model converter for a Note."""
+        todo_payload = (
+            TodoPayload(
+                status=sql_model.todo_status,
+                priority=cast(TodoPriorityType, sql_model.todo_priority),
+            )
+            if sql_model.todo_priority is not None
+            and sql_model.todo_status is not None
+            else None
+        )
         return Note(
             sql_model.body,
             areas=list(area.name for area in sql_model.areas),
             contexts=list(context.name for context in sql_model.contexts),
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),
+            todo_payload=todo_payload,
         )
