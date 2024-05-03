@@ -24,6 +24,7 @@ _son_converter_parser = metaman.register_function_factory(
 )
 
 
+# TODO(bugyi): Rename to_select_of_note() and other related identifiers.
 def to_select_of_note(
     or_filter: Optional[WhereOrFilter],
 ) -> SelectOfScalar[sql.ZorgNote]:
