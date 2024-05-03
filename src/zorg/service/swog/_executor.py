@@ -6,7 +6,7 @@ from ..compiler import build_zorg_query
 
 
 def execute(session: SQLSession, query_string: str) -> str:
-    """Execute a zorg query and then render it as the  .zo file.
+    """Execute a zorg query and then render it as a .zo file.
 
     In other words, a Zorg query comes in and a Zorg file comes out.
 
