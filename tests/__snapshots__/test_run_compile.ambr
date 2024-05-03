@@ -1964,7 +1964,8 @@
               'todo_payload': None,
               'zid': None},
              {'areas': ['tags'],
-              'body': 'Projects can start with a number',
+              'body': 'Projects can start with a number, but CANNOT be all '
+                      'numbers',
               'child_note_ids': [],
               'contexts': [],
               'create_date': FakeDate(2000, 1, 3),
