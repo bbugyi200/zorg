@@ -9,20 +9,19 @@ from ..compiler import build_zorg_query
 
 def _to_prefix_char(note_type: NoteType) -> str:
     if note_type is NoteType.BASIC:
-        return '-'
+        return "-"
     elif note_type is NoteType.OPEN_TODO:
-        return 'o'
+        return "o"
     elif note_type is NoteType.CLOSED_TODO:
-        return 'x'
+        return "x"
     elif note_type is NoteType.CANCELED_TODO:
-        return '~'
+        return "~"
     elif note_type is NoteType.BLOCKED_TODO:
-        return '<'
+        return "<"
     elif note_type is NoteType.PARENT_TODO:
-        return '>'
+        return ">"
     else:
         assert_never(note_type)
-        
 
 
 def execute(session: SQLSession, query_string: str) -> str:
@@ -56,7 +55,11 @@ def execute(session: SQLSession, query_string: str) -> str:
                     if note.todo_payload
                     else NoteType.BASIC
                 )
-                priority = f"{note.todo_payload.priority} " if note.todo_payload else ""
+                priority = (
+                    f"{note.todo_payload.priority} "
+                    if note.todo_payload
+                    else ""
+                )
                 result += f"{char}{priority}{note.body}\n"
 
     return result
