@@ -67,6 +67,7 @@ class NoteType(enum.Enum):
     PARENT_TODO = enum.auto()  # >
 
     def to_prefix_char(self) -> str:
+        """Converts a note's type to its corresponding prefix character."""
         if self is NoteType.BASIC:
             return "-"
         elif self is NoteType.OPEN_TODO:
