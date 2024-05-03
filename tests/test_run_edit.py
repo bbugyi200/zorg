@@ -90,13 +90,13 @@ def test_whenEmptyKeepAliveFileExists_shouldRestartVim(
 
 
 def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
-    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path
+    main: c.MainType, vim_proc_mock: Mock, tmp_path: Path, snapshot: Snapshot
 ) -> None:
     """Test that we can use the keep alive file to change our vim file args."""
     zettel_dir = tmp_path / "org"
 
     keep_alive_file = tmp_path / "zorg_keep_alive"
-    keep_alive_file.write_text("baz.zo buz.zo")
+    keep_alive_file.write_text("baz.zo buz.zo buz.zo")
     exit_code = main(
         "--dir",
         str(zettel_dir),
@@ -106,25 +106,10 @@ def test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart(
     )
 
     assert exit_code == 0
-    vim_proc_mock.assert_has_calls([
-        call(
-            ["vim", str(zettel_dir / "foobar.zo")],
-            stdout=None,
-            stderr=None,
-            timeout=None,
-        ),
-        call().unwrap(),
-        call(
-            [
-                "vim",
-                str(zettel_dir / "baz.zo"),
-                str(zettel_dir / "buz.zo"),
-            ],
-            stdout=None,
-            stderr=None,
-            timeout=None,
-        ),
-        call().unwrap(),
-    ])
+    assert [
+        [cmd_part.replace(str(tmp_path), "<TMP>") for cmd_part in call.args[0]]
+        for call in vim_proc_mock.mock_calls
+        if call.args
+    ] == snapshot
     assert vim_proc_mock.call_count == 2
     assert not keep_alive_file.exists()

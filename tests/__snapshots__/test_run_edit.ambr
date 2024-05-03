@@ -73,3 +73,18 @@
   
   '''
 # ---
+# name: test_whenKeepAliveFileContainsPaths_useThosePathsOnRestart[YAMLConfigFile]
+  list([
+    list([
+      'vim',
+      '<TMP>/org/foobar.zo',
+    ]),
+    list([
+      'vim',
+      '<TMP>/org/baz.zo',
+      '<TMP>/org/buz.zo',
+      '-c',
+      'edit buz.zo',
+    ]),
+  ])
+# ---
