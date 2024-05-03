@@ -24,6 +24,7 @@ class EditorClosedEvent(Event):
 class NewZorgNotesEvent(Event):
     """Broadcast when new zorg notes are indexed."""
 
+    zettel_dir: Path
     zorg_file_path: Path
     new_notes: list[Note]
 

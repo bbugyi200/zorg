@@ -144,6 +144,6 @@ def _add_zids(zdir: Path, zorg_file: File) -> None:
     if new_notes:
         zorg_file.events.append(
             NewZorgNotesEvent(
-                zorg_file_path=zorg_file.path, new_notes=new_notes
+                zdir, zorg_file_path=zorg_file.path, new_notes=new_notes
             )
         )

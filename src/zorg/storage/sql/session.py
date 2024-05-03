@@ -100,12 +100,13 @@ class SQLSession:
 
     def collect_new_messages(self) -> Iterator[Message]:
         """Collect new events/commands for our messagebus to process."""
-        while self._messages:
-            yield self._messages.pop(0)
+        while self._messages or any(file.events for file in self.repo.seen):
+            while self._messages:
+                yield self._messages.pop(0)
 
-        for zorg_file in self.repo.seen:
-            while zorg_file.events:
-                yield zorg_file.events.pop(0)
+            for zorg_file in self.repo.seen:
+                while zorg_file.events:
+                    yield zorg_file.events.pop(0)
 
         while self._last_messages:
             yield self._last_messages.pop(0)

@@ -33,9 +33,12 @@ EVENT_HANDLERS: dict[type[events.Event], list[MessageHandler]] = {
 def handle(messages: Sequence[Message], session: SQLSession) -> None:
     """Entry point into Zorg's event messagebus loop."""
     queue = list(messages)
-    while queue:
+    while queue := sorted(
+        queue, key=lambda x: isinstance(x, commands.Command)
+    ):
         message = queue.pop(0)
         _handle_message(message, queue, session)
+        queue.extend(session.collect_new_messages())
 
 
 def _handle_message(
@@ -63,7 +66,6 @@ def _handle_event(
                 handler=str(handler),
             )
             handler(event, session)
-            queue.extend(session.collect_new_messages())
         except Exception:
             logger.exception("Exception handling event", zorg_event=event)
             continue
@@ -78,7 +80,6 @@ def _handle_command(
     try:
         handler = COMMAND_HANDLERS[type(command)]
         handler(command, session)
-        queue.extend(session.collect_new_messages())
     except Exception:
         logger.exception("Exception handling command", command=command)
         raise

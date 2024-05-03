@@ -135,14 +135,8 @@ def reindex_database(
 ) -> None:
     """Reindex an existing zorg database."""
     paths = cmd.paths if cmd.paths else sorted(cmd.zettel_dir.rglob("*.zo"))
-    file_to_hash: dict[str, str] = {}
-    for path in paths:
-        key = common.strip_zdir(cmd.zettel_dir, path)
-        file_to_hash[key] = _hash_file(path)
-
-    zorg_data_dir = cmd.zettel_dir / f".{APP_NAME}"
-    zorg_data_dir.mkdir(parents=True, exist_ok=True)
-    file_hash_path = zorg_data_dir / "file_hash.json"
+    file_to_hash = _get_file_hash_map(cmd.zettel_dir, paths)
+    file_hash_path = _get_file_hash_path(cmd.zettel_dir)
     old_file_to_hash: dict[str, str] = (
         json.loads(file_hash_path.read_bytes())
         if file_hash_path.exists()
@@ -166,10 +160,7 @@ def reindex_database(
             logger.info("Adding zorg file", file=file)
             session.repo.add(zorg_file)
 
-    logger.debug("Writing hash map to disk", file=str(file_hash_path))
-    with file_hash_path.open("w") as f:
-        json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
-
+    _write_file_hash_to_disk(file_hash_path, file_to_hash)
     session.commit()
     session.add_message(events.DBModifiedEvent(cmd.zettel_dir))
 
@@ -208,6 +199,12 @@ def add_zids_to_notes_in_file(
     )
     event.zorg_file_path.write_text("\n".join(zlines))
 
+    zdir = event.zettel_dir
+    _write_file_hash_to_disk(
+        _get_file_hash_path(zdir),
+        _get_file_hash_map(zdir, Path(zdir).rglob("*.zo")),
+    )
+
 
 def increment_zid_counters(
     event: events.DBModifiedEvent, session: SQLSession
@@ -220,6 +217,34 @@ def increment_zid_counters(
     del session
     zid_manager = ZIDManager(event.zettel_dir)
     zid_manager.write_to_disk()
+
+
+def _get_file_hash_map(zdir: Path, paths: Iterable[Path]) -> dict[str, str]:
+    """Constructs a map of filenames to hashs.
+
+    Each hash is computed as a function of the corresponding file's contents.
+    """
+    file_to_hash: dict[str, str] = {}
+    for path in paths:
+        key = common.strip_zdir(zdir, path)
+        file_to_hash[key] = _hash_file(path)
+    return file_to_hash
+
+
+def _get_file_hash_path(zdir: Path) -> Path:
+    """Returns a path to a JSON file where we will save file hash mapsDOCSTRING."""
+    zorg_data_dir = zdir / f".{APP_NAME}"
+    zorg_data_dir.mkdir(parents=True, exist_ok=True)
+    return zorg_data_dir / "file_hash.json"
+
+
+def _write_file_hash_to_disk(
+    file_hash_path: Path, file_to_hash: dict[str, str]
+) -> None:
+    """Serializes {file_to_hash} to JSON and save it to {file_hash_path}."""
+    logger.debug("Writing hash map to disk", file=str(file_hash_path))
+    with file_hash_path.open("w") as f:
+        json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
 
 
 def _add_zid_to_line(zid: str, line: str) -> str:
