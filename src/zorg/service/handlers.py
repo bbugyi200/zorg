@@ -177,7 +177,7 @@ def reindex_database(
 def reindex_database_after_edit(
     event: events.EditorClosedEvent, session: SQLSession
 ) -> None:
-    """Reindex the zorg database after an edi."""
+    """Reindex the zorg database after an edit."""
     session.add_message(
         commands.ReindexDBCommand(event.edit_cmd.zettel_dir, paths=[])
     )
