@@ -1,27 +1,8 @@
 """Logic for executing zorg queries lives in this module."""
 
-from typist import assert_never
-
 from ...domain.types import NoteType, SelectType
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
-
-
-def _to_prefix_char(note_type: NoteType) -> str:
-    if note_type is NoteType.BASIC:
-        return "-"
-    elif note_type is NoteType.OPEN_TODO:
-        return "o"
-    elif note_type is NoteType.CLOSED_TODO:
-        return "x"
-    elif note_type is NoteType.CANCELED_TODO:
-        return "~"
-    elif note_type is NoteType.BLOCKED_TODO:
-        return "<"
-    elif note_type is NoteType.PARENT_TODO:
-        return ">"
-    else:
-        assert_never(note_type)
 
 
 def execute(session: SQLSession, query_string: str) -> str:
@@ -50,11 +31,12 @@ def execute(session: SQLSession, query_string: str) -> str:
         # (S)ELECT
         if query.select is SelectType.NOTES:
             for note in filtered_notes:
-                char = _to_prefix_char(
+                note_type = (
                     note.todo_payload.status
                     if note.todo_payload
                     else NoteType.BASIC
                 )
+                char = note_type.to_prefix_char()
                 priority = (
                     f"{note.todo_payload.priority} "
                     if note.todo_payload

@@ -15,6 +15,7 @@ from typing import (
 )
 
 from sqlalchemy.future import Engine
+from typist import assert_never
 
 
 E = TypeVar("E")
@@ -64,6 +65,22 @@ class NoteType(enum.Enum):
     CANCELED_TODO = enum.auto()  # ~
     BLOCKED_TODO = enum.auto()  # <
     PARENT_TODO = enum.auto()  # >
+
+    def to_prefix_char(self) -> str:
+        if self is NoteType.BASIC:
+            return "-"
+        elif self is NoteType.OPEN_TODO:
+            return "o"
+        elif self is NoteType.CLOSED_TODO:
+            return "x"
+        elif self is NoteType.CANCELED_TODO:
+            return "~"
+        elif self is NoteType.BLOCKED_TODO:
+            return "<"
+        elif self is NoteType.PARENT_TODO:
+            return ">"
+        else:
+            assert_never(self)
 
 
 class CreateEngineType(Protocol):
