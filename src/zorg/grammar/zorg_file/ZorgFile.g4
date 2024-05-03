@@ -76,7 +76,7 @@ eol        : NL | EOF ;
 NL           : '\r'? '\n' ;
 LOWER_O      : 'o' ;
 LOWER_X      : 'x' ;
-ID           : ALPHA (ALPHANUM|UNDERSCORE)* ;
+ID           : ALPHANUM (ALPHANUM|UNDERSCORE)* ;
 DATE         : '2' NUM NUM NUM DASH FIRST_M_NUM NUM DASH FIRST_D_NUM NUM ;
 TIME         : ('0' | '1' | '2') NUM ('0' | '1' | '2' | '3' | '4' | '5') NUM ;
 ZID      : NUM NUM FIRST_M_NUM NUM FIRST_D_NUM NUM HASH ZID_CHAR ZID_CHAR ZID_CHAR? ;

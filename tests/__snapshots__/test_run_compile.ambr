@@ -1962,6 +1962,20 @@
               'projects': ['bad', 'to_the_bone'],
               'properties': {},
               'todo_payload': None,
+              'zid': None},
+             {'areas': ['tags'],
+              'body': 'Projects can start with a number',
+              'child_note_ids': [],
+              'contexts': [],
+              'create_date': FakeDate(2000, 1, 3),
+              'links': [],
+              'next_note_id': None,
+              'parent_note_id': None,
+              'people': [],
+              'prev_note_id': None,
+              'projects': ['2_be_or_not_2_be', 'bad'],
+              'properties': {},
+              'todo_payload': None,
               'zid': None}]}
   
   '''
