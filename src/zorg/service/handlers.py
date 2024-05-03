@@ -56,7 +56,7 @@ def check_keep_alive_file(
         keep_alive_lines = list(keep_alive_file.read_text().split())
         focused_filename = keep_alive_lines.pop()
         vim_commands = [
-            cmd for cmd in vim_commands if not cmd.startswith("edit")
+            cmd for cmd in vim_commands if not cmd.startswith("edit ")
         ]
         vim_commands.append(f"edit {focused_filename}")
         new_paths = prepend_zdir([Path(p.strip()) for p in keep_alive_lines])
