@@ -66,7 +66,7 @@ class NoteType(enum.Enum):
     BLOCKED_TODO = enum.auto()  # <
     PARENT_TODO = enum.auto()  # >
 
-    def to_prefix_char(self) -> str:
+    def to_prefix_char(self) -> str:  # pyright: reportGeneralTypeIssues=false
         """Converts a note's type to its corresponding prefix character."""
         if self is NoteType.BASIC:
             return "-"
