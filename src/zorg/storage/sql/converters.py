@@ -11,7 +11,7 @@ from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
 from ...domain.models import File, Note, WhereAndFilter, WhereOrFilter
-from ...domain.types import EntityConverter, NoteStatus
+from ...domain.types import EntityConverter, NoteType
 from ...service import common
 
 
@@ -60,8 +60,8 @@ class _SONConverter:
         ])
 
 
-def _to_todo_status(note_status: NoteStatus) -> Optional[NoteStatus]:
-    if note_status is NoteStatus.BASIC:
+def _to_todo_status(note_status: NoteType) -> Optional[NoteType]:
+    if note_status is NoteType.BASIC:
         return None
     else:
         return note_status

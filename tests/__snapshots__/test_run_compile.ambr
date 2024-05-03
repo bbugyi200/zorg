@@ -299,7 +299,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None}]}
   
   '''
@@ -381,7 +381,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': ' Another related todo',
@@ -396,7 +396,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'A note about life...',
@@ -425,7 +425,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'With a note',
@@ -557,7 +557,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'A',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': ' 2024-03-13 Medium Priority TODO',
@@ -572,7 +572,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'B',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': ' 2024-03-13 Low Priority TODO',
@@ -587,7 +587,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None}]}
   
   '''
@@ -621,7 +621,7 @@
               'projects': [],
               'properties': {'due': '2024-03-13', 'p': '1'},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None}]}
   
   '''
@@ -1584,7 +1584,7 @@
               'projects': [],
               'properties': {'due': '2024-03-30', 'p': '1'},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'Todo subnote A',
@@ -1772,7 +1772,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'A note on the second section.',
@@ -1829,7 +1829,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'This is inside of h4_section!',
@@ -1900,7 +1900,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'C',
-                               'status': <NoteStatus.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 2>},
               'zid': None},
              {'areas': [],
               'body': 'This is the final section!',

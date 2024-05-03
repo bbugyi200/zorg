@@ -5,7 +5,7 @@ import datetime as dt
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
-from ..types import NoteStatus, TodoPriorityType
+from ..types import NoteType, TodoPriorityType
 
 
 if TYPE_CHECKING:
@@ -17,7 +17,7 @@ class TodoPayload:
     """Extra fields that are added to ZorgNotes that are todos."""
 
     priority: TodoPriorityType = "C"
-    status: NoteStatus = NoteStatus.OPEN_TODO
+    status: NoteType = NoteType.OPEN_TODO
 
 
 @dataclass

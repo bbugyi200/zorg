@@ -5,7 +5,7 @@ from typing import cast
 from logrus import Logger
 
 from ...domain.models import Query, WhereAndFilter, WhereOrFilter
-from ...domain.types import NoteStatus, Select
+from ...domain.types import NoteType, Select
 from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 
@@ -55,21 +55,21 @@ class ZorgQueryCompiler(ZorgQueryListener):
             list[ZorgQueryParser.Note_status_charContext],
             note_status.note_status_char(),
         )
-        allowed_note_statuses: set[NoteStatus] = set()
+        allowed_note_statuses: set[NoteType] = set()
         where: WhereOrFilter
         for note_status_char in note_status_chars:
             if note_status_char.DASH():
-                allowed_note_statuses.add(NoteStatus.BASIC)
+                allowed_note_statuses.add(NoteType.BASIC)
             elif note_status_char.LOWER_O():
-                allowed_note_statuses.add(NoteStatus.OPEN_TODO)
+                allowed_note_statuses.add(NoteType.OPEN_TODO)
             elif note_status_char.LOWER_X():
-                allowed_note_statuses.add(NoteStatus.CLOSED_TODO)
+                allowed_note_statuses.add(NoteType.CLOSED_TODO)
             elif note_status_char.TILDE():
-                allowed_note_statuses.add(NoteStatus.CANCELED_TODO)
+                allowed_note_statuses.add(NoteType.CANCELED_TODO)
             elif note_status_char.LANGLE():
-                allowed_note_statuses.add(NoteStatus.BLOCKED_TODO)
+                allowed_note_statuses.add(NoteType.BLOCKED_TODO)
             elif note_status_char.RANGLE():
-                allowed_note_statuses.add(NoteStatus.PARENT_TODO)
+                allowed_note_statuses.add(NoteType.PARENT_TODO)
             else:
                 emsg = "Unrecognized note status character"
                 _LOGGER.error(

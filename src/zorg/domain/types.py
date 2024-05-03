@@ -55,7 +55,7 @@ VarMapType = Mapping[str, Any]
 TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 
 
-class NoteStatus(enum.Enum):
+class NoteType(enum.Enum):
     """Zorg note status."""
 
     BASIC = enum.auto()  # -

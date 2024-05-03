@@ -11,7 +11,7 @@ from logrus import Logger
 from typist import assert_never
 
 from ...domain.models import File, Note, TodoPayload
-from ...domain.types import NoteStatus, TodoPriorityType, TodoStatusPrefixChar
+from ...domain.types import NoteType, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
@@ -193,19 +193,19 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterTodo_prefix(
         self, ctx: ZorgFileParser.Todo_prefixContext
     ) -> None:  # noqa: D102
-        status = NoteStatus.OPEN_TODO
+        status = NoteType.OPEN_TODO
         if self._s.in_note:
             ch: TodoStatusPrefixChar = ctx.getText()[0]
             if ch == "o":
-                status = NoteStatus.OPEN_TODO
+                status = NoteType.OPEN_TODO
             elif ch == "x":
-                status = NoteStatus.CLOSED_TODO
+                status = NoteType.CLOSED_TODO
             elif ch == "~":
-                status = NoteStatus.CANCELED_TODO
+                status = NoteType.CANCELED_TODO
             elif ch == "<":
-                status = NoteStatus.BLOCKED_TODO
+                status = NoteType.BLOCKED_TODO
             elif ch == ">":
-                status = NoteStatus.PARENT_TODO
+                status = NoteType.PARENT_TODO
             else:
                 assert_never(ch)
 
@@ -247,7 +247,7 @@ class ZorgFileCompiler(ZorgFileListener):
 
         # Reset todo priority and status back to defaults.
         self._s.todo_priority = "C"
-        self._s.todo_status = NoteStatus.OPEN_TODO
+        self._s.todo_status = NoteType.OPEN_TODO
 
     def exitH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -473,7 +473,7 @@ class _ZorgFileCompilerState:
     note_date: Optional[dt.date] = None
 
     todo_priority: TodoPriorityType = "C"
-    todo_status: NoteStatus = NoteStatus.OPEN_TODO
+    todo_status: NoteType = NoteType.OPEN_TODO
 
     @property
     def areas(self) -> list[str]:

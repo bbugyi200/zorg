@@ -6,7 +6,7 @@ from typing import Iterable, Optional
 
 from ..types import (
     DescOperator,
-    NoteStatus,
+    NoteType,
     PropertyOperator,
     PropertyValueType,
     Select,
@@ -45,7 +45,7 @@ class DateRange:
 class WhereAndFilter:
     """Tag used to filter ZorgNotes."""
 
-    allowed_note_statuses: set[NoteStatus] = field(default_factory=set)
+    allowed_note_statuses: set[NoteType] = field(default_factory=set)
     areas: list[str] = field(default_factory=list)
     contexts: list[str] = field(default_factory=list)
     create_date_ranges: list[DateRange] = field(default_factory=list)
