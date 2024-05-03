@@ -24,24 +24,21 @@ def execute(session: SQLSession, query_string: str) -> str:
     """
     query = build_zorg_query(query_string)
     result = ""
-    with session:
-        # (W)HERE
-        filtered_notes = session.repo.get_by_query(query.where)
+    # (W)HERE
+    filtered_notes = session.repo.get_by_query(query.where)
 
-        # (S)ELECT
-        if query.select is SelectType.NOTES:
-            for note in filtered_notes:
-                note_type = (
-                    note.todo_payload.status
-                    if note.todo_payload
-                    else NoteType.BASIC
-                )
-                char = note_type.to_prefix_char()
-                priority = (
-                    f"{note.todo_payload.priority} "
-                    if note.todo_payload
-                    else ""
-                )
-                result += f"{char}{priority}{note.body}\n"
+    # (S)ELECT
+    if query.select is SelectType.NOTES:
+        for note in filtered_notes:
+            note_type = (
+                note.todo_payload.status
+                if note.todo_payload
+                else NoteType.BASIC
+            )
+            char = note_type.to_prefix_char()
+            priority = (
+                f"{note.todo_payload.priority} " if note.todo_payload else ""
+            )
+            result += f"{char}{priority}{note.body}\n"
 
     return result
