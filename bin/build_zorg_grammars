@@ -59,15 +59,16 @@ function run() {
     log::info "Generating %s parser using antlr4." $dir
 
 		# Convert from snake_case to UpperCammelCase
-		local gfile=$(echo "$dir" | sed -r 's/(_[a-z])/\U\1/g ; s/^[a-z]/\U&/ ; s/_//')
-    antlr4 -Dlanguage=Python3 src/zorg/grammar/$gfile.g4 -o src/zorg/grammar/$dir/
+		local g4_stem=$(echo "$dir" | sed -r 's/(_[a-z])/\U\1/g ; s/^[a-z]/\U&/ ; s/_//')
+    local g4_path=src/zorg/grammar/$g4_stem.g4
+    antlr4 -Dlanguage=Python3 $g4_path -o src/zorg/grammar/$dir
     for f in examples/$dir/*.zo*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
         continue
       fi
       log::info "Contructing syntax tree from %s example file." $f
       echo "##### $f" >> $TMP_ERROR_FILE
-      antlr4-parse src/zorg/grammar/$dir/*.g4 prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMP_ERROR_FILE
+      antlr4-parse $g4_path prog "${parse_cmds[@]}" $f 3>&1 1>&2 2>&3 | tee /dev/stderr >> $TMP_ERROR_FILE
       echo >> $TMP_ERROR_FILE
     done
 
