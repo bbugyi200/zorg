@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, MutableSequence, Sequence
+from typing import Any, Callable, Sequence
 
 from logrus import Logger
 from typist import assert_never
@@ -37,25 +37,22 @@ def handle(messages: Sequence[Message], session: SQLSession) -> None:
         queue, key=lambda x: isinstance(x, commands.Command)
     ):
         message = queue.pop(0)
-        _handle_message(message, queue, session)
+        _handle_message(message, session)
         queue.extend(session.collect_new_messages())
 
 
-def _handle_message(
-    message: Message, queue: MutableSequence[Message], session: SQLSession
-) -> None:
+def _handle_message(message: Message, session: SQLSession) -> None:
     with session:
         if isinstance(message, events.Event):
-            _handle_event(message, queue, session)
+            _handle_event(message, session)
         elif isinstance(message, commands.Command):
-            _handle_command(message, queue, session)
+            _handle_command(message, session)
         else:
             assert_never(message)
 
 
 def _handle_event(
     event: events.Event,
-    queue: MutableSequence[Message],
     session: SQLSession,
 ) -> None:
     for handler in EVENT_HANDLERS[type(event)]:
@@ -73,7 +70,6 @@ def _handle_event(
 
 def _handle_command(
     command: commands.Command,
-    queue: MutableSequence[Message],
     session: SQLSession,
 ) -> None:
     logger.debug("handling command", command=command)
