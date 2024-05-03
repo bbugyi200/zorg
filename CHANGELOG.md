@@ -9,9 +9,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.0...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.1...HEAD)
 
-No notable changes have been made.
+
+## [0.7.1](https://github.com/bbugyi200/zorg/compare/0.7.0...0.7.1) - 2024-05-02
+
+### Fixed
+
+* Stop removing 'edit' vim commands with no args.
 
 
 ## [0.7.0](https://github.com/bbugyi200/zorg/compare/0.6.4...0.7.0) - 2024-05-02
