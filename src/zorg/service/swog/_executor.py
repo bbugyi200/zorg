@@ -1,8 +1,8 @@
 """Logic for executing zorg queries lives in this module."""
 
-from ..compiler import build_zorg_query
 from ...domain.types import NoteType
 from ...storage.sql.session import SQLSession
+from ..compiler import build_zorg_query
 
 
 # Mapping from a note to its corresponding prefix symbol
