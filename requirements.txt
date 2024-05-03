@@ -61,7 +61,7 @@ sqlmodel==0.0.18
     # via -r requirements.in
 structlog==24.1.0
     # via bolton-logrus
-tqdm==4.66.2
+tqdm==4.66.4
     # via -r requirements.in
 typing-extensions==4.11.0
     # via
