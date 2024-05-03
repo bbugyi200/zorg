@@ -1,11 +1,12 @@
 grammar ZorgFile;
 
 //// parser rules
-prog       : head (NL+ block* h2_section* h1_section*)? EOF ;
+prog : head body? EOF ;
 
-// header
+// header and body
 head       : comment+ ;
 comment    : HASH space_atoms? NL ;
+body : NL+ block* h2_section* h1_section* ;
 
 // blocks
 block       : item+ NL* ;

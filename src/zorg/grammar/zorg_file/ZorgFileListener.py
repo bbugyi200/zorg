@@ -35,6 +35,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#body.
+    def enterBody(self, ctx:ZorgFileParser.BodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#body.
+    def exitBody(self, ctx:ZorgFileParser.BodyContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#block.
     def enterBlock(self, ctx:ZorgFileParser.BlockContext):
         pass
