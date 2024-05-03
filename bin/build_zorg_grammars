@@ -57,7 +57,10 @@ function run() {
     fi
 
     log::info "Generating %s parser using antlr4." $dir
-    antlr4 -Dlanguage=Python3 src/zorg/grammar/$dir/*.g4
+
+		# Convert from snake_case to UpperCammelCase
+		local gfile=$(echo "$dir" | sed -r 's/(_[a-z])/\U\1/g ; s/^[a-z]/\U&/ ; s/_//')
+    antlr4 -Dlanguage=Python3 src/zorg/grammar/$gfile.g4 -o src/zorg/grammar/$dir/
     for f in examples/$dir/*.zo*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
         continue
