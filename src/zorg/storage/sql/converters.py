@@ -10,7 +10,7 @@ from sqlmodel import Session, or_, select
 from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
-from ...domain.models import WhereAndFilter, WhereOrFilter, ZorgFile, ZorgNote
+from ...domain.models import Note, WhereAndFilter, WhereOrFilter, ZorgFile
 from ...domain.types import EntityConverter, NoteStatus
 from ...service import common
 
@@ -100,15 +100,15 @@ class ZorgFileConverter(EntityConverter[ZorgFile, sql.ZorgFile]):
         )
 
 
-class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
-    """Converts ZorgNote domain entities to/from ZorgNote sqlmodels."""
+class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
+    """Converts Note domain entities to/from ZorgNote sqlmodels."""
 
     def __init__(self, session: Session) -> None:
         self._session = session
         self._tag_cache: dict[Any, dict[str, Any]] = defaultdict(lambda: {})
         self._property_cache: dict[str, sql.Property] = {}
 
-    def from_entity(self, entity: ZorgNote) -> sql.ZorgNote:
+    def from_entity(self, entity: Note) -> sql.ZorgNote:
         """Model-to-SQL-model converter for a ZorgNote."""
         kwargs: dict[str, Any] = {
             "body": entity.body,
@@ -172,9 +172,9 @@ class ZorgNoteConverter(EntityConverter[ZorgNote, sql.ZorgNote]):
         sql_zorg_note.property_links = property_links
         return sql_zorg_note
 
-    def to_entity(self, sql_model: sql.ZorgNote) -> ZorgNote:
-        """Model-to-SQL-model converter for a ZorgNote."""
-        return ZorgNote(
+    def to_entity(self, sql_model: sql.ZorgNote) -> Note:
+        """Model-to-SQL-model converter for a Note."""
+        return Note(
             sql_model.body,
             areas=list(area.name for area in sql_model.areas),
             contexts=list(context.name for context in sql_model.contexts),

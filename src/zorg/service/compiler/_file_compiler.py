@@ -10,7 +10,7 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from ...domain.models import TodoPayload, ZorgFile, ZorgNote
+from ...domain.models import Note, TodoPayload, ZorgFile
 from ...domain.types import NoteStatus, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
@@ -244,7 +244,7 @@ class ZorgFileCompiler(ZorgFileListener):
             )
             self.zorg_file.has_errors = True
         else:
-            todo = ZorgNote(id_note_body.getText(), **kwargs)
+            todo = Note(id_note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
 
         # Reset todo priority and status back to defaults.
@@ -341,7 +341,7 @@ class ZorgFileCompiler(ZorgFileListener):
             self.zorg_file.has_errors = True
             return
 
-        note = ZorgNote(body, **kwargs)
+        note = Note(body, **kwargs)
         self.zorg_file.notes.append(note)
 
     def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102

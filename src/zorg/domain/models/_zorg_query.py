@@ -1,4 +1,4 @@
-"""Contains the ZorgQuery Domain entity."""
+"""Contains the Query domain entity."""
 
 from dataclasses import dataclass, field
 import datetime as dt
@@ -77,7 +77,7 @@ class WhereOrFilter:
 
 
 @dataclass
-class ZorgQuery:
+class Query:
     """A zorg query that uses SWOG syntax.
 
     (S)ELECT

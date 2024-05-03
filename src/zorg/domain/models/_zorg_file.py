@@ -21,7 +21,7 @@ class TodoPayload:
 
 
 @dataclass
-class ZorgNote:
+class Note:
     """A Zorg note."""
 
     body: str
@@ -48,5 +48,5 @@ class ZorgFile:
 
     path: Path
     has_errors: bool = False
-    notes: list[ZorgNote] = field(default_factory=list)
+    notes: list[Note] = field(default_factory=list)
     events: list["Event"] = field(default_factory=list)

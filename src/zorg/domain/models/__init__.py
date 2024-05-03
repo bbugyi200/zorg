@@ -3,8 +3,8 @@
 Contains Domain-layer models.
 """
 
-from ._zorg_file import TodoPayload, ZorgFile, ZorgNote
-from ._zorg_query import WhereAndFilter, WhereOrFilter, ZorgQuery
+from ._zorg_file import Note, TodoPayload, ZorgFile
+from ._zorg_query import Query, WhereAndFilter, WhereOrFilter
 
 
 __all__ = [
@@ -12,6 +12,6 @@ __all__ = [
     "WhereAndFilter",
     "WhereOrFilter",
     "ZorgFile",
-    "ZorgNote",
-    "ZorgQuery",
+    "Note",
+    "Query",
 ]

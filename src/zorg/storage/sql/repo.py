@@ -13,7 +13,7 @@ from sqlmodel import Session, select
 
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import WhereOrFilter, ZorgFile, ZorgNote
+from ...domain.models import Note, WhereOrFilter, ZorgFile
 from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
 
@@ -114,10 +114,10 @@ class SQLRepo:
 
     def get_by_query(
         self, query: Optional[WhereOrFilter]
-    ) -> ErisResult[list[ZorgNote]]:
+    ) -> ErisResult[list[Note]]:
         """Get file(s) from DB by using a query."""
         select_of_note = to_select_of_note(query)
-        result: list[ZorgNote] = []
+        result: list[Note] = []
         for sql_note in self._session.exec(select_of_note):
             result.append(self._note_converter.to_entity(sql_note))
         return Ok(result)

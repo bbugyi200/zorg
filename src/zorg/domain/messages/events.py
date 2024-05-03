@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from . import commands
-from ..models import ZorgNote
+from ..models import Note
 
 
 @dataclass(frozen=True)
@@ -25,7 +25,7 @@ class NewZorgNotesEvent(Event):
     """Broadcast when new zorg notes are indexed."""
 
     zorg_file_path: Path
-    new_notes: list[ZorgNote]
+    new_notes: list[Note]
 
 
 @dataclass(frozen=True)

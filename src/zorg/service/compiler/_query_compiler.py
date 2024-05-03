@@ -4,7 +4,7 @@ from typing import cast
 
 from logrus import Logger
 
-from ...domain.models import WhereAndFilter, WhereOrFilter, ZorgQuery
+from ...domain.models import Query, WhereAndFilter, WhereOrFilter
 from ...domain.types import NoteStatus, Select
 from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
@@ -16,7 +16,7 @@ _LOGGER = Logger(__name__)
 class ZorgQueryCompiler(ZorgQueryListener):
     """Listener that compiles zorg queries."""
 
-    def __init__(self, zorg_query: ZorgQuery) -> None:
+    def __init__(self, zorg_query: Query) -> None:
         self.zorg_query = zorg_query
 
     def enterSelect(
