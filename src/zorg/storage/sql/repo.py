@@ -1,5 +1,7 @@
 """Contains the Repo class."""
 
+# pylint: disable=unsubscriptable-object
+
 from __future__ import annotations
 
 from pathlib import Path

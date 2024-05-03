@@ -7,7 +7,7 @@ from typing import Any, Callable, Optional
 
 import metaman
 from sqlmodel import Session, or_, select
-from sqlmodel.sql.expression import SelectOfScalar
+from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
 from ...domain.models import WhereAndFilter, WhereOrFilter, ZorgFile, ZorgNote
@@ -15,9 +15,7 @@ from ...domain.types import EntityConverter, NoteStatus
 from ...service import common
 
 
-SelectOfNote = SelectOfScalar[sql.ZorgNote]
-
-_SONConverterParser = Callable[["_SONConverter", SelectOfNote], SelectOfNote]
+_SONConverterParser = Callable[["_SONConverter"], ColumnElement]
 # the @_son_converter_parser decorator should be used to mark a _SONConverter
 # parser method
 _SON_CONVERTER_PARSERS: list[_SONConverterParser] = []
@@ -26,41 +24,39 @@ _son_converter_parser = metaman.register_function_factory(
 )
 
 
-def to_select_of_note(or_filter: Optional[WhereOrFilter]) -> SelectOfNote:
+def to_select_of_note(
+    or_filter: Optional[WhereOrFilter],
+) -> SelectOfScalar[sql.ZorgNote]:
     """Converts a WhereOrFilter to a SQL SELECT that will fetch ZorgNotes."""
     if or_filter is None or not or_filter.and_filters:
         return select(sql.ZorgNote)
 
-    and_filters = list(or_filter.and_filters)
-    son = _SONConverter(and_filters.pop(0)).to_select_of_note()
-    for and_filter in and_filters:
-        # TODO(bugyi): Fix this OR logic.
-        son = or_(son, _SONConverter(and_filter).to_select_of_note())
-    return son
+    return select(sql.ZorgNote).where(
+        or_(*[
+            _SONConverter(and_filter).to_note_clause()
+            for and_filter in or_filter.and_filters
+        ])
+    )
 
 
 @dataclass(frozen=True)
 class _SONConverter:
-    """Converts a WhereAndFilter to a SelectOfNote."""
+    """Converts a WhereAndFilter to a ColumnElement."""
 
     and_filter: WhereAndFilter
 
-    def to_select_of_note(self) -> SelectOfNote:
-        """Constructs a SQL statement from the provided WhereAndFilter object."""
-        son = select(sql.ZorgNote)
-        for parse_son in _SON_CONVERTER_PARSERS:
-            son = parse_son(self, son)
-        return son
+    def to_note_clause(self) -> ColumnElement:
+        """Constructs a SQL statement from the provided WhereAndFilter."""
+        where = or_(*[parse(self) for parse in _SON_CONVERTER_PARSERS])
+        return where
 
     @_son_converter_parser
-    def note_status(self, son: SelectOfNote) -> SelectOfNote:
+    def note_status(self) -> ColumnElement:
         """Converter for done status (e.g. '-' or 'ox~<>')."""
-        return son.where(
-            or_(
-                sql.ZorgNote.todo_status == _to_todo_status(note_status)
-                for note_status in self.and_filter.allowed_note_statuses
-            )
-        )
+        return or_(*[
+            sql.ZorgNote.todo_status == _to_todo_status(note_status)
+            for note_status in self.and_filter.allowed_note_statuses
+        ])
 
 
 def _to_todo_status(note_status: NoteStatus) -> Optional[NoteStatus]:
