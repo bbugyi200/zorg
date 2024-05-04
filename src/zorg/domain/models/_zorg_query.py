@@ -46,16 +46,16 @@ class WhereAndFilter:
     """Tag used to filter ZorgNotes."""
 
     allowed_note_statuses: set[NoteType] = field(default_factory=set)
-    areas: list[str] = field(default_factory=list)
-    contexts: list[str] = field(default_factory=list)
-    create_date_ranges: list[DateRange] = field(default_factory=list)
-    desc_filters: list[DescFilter] = field(default_factory=list)
-    modify_date_ranges: list[DateRange] = field(default_factory=list)
-    or_filters: list["WhereOrFilter"] = field(default_factory=list)
-    people: list[str] = field(default_factory=list)
-    property_filters: list[PropertyFilter] = field(default_factory=list)
+    areas: set[str] = field(default_factory=set)
+    contexts: set[str] = field(default_factory=set)
+    create_date_ranges: set[DateRange] = field(default_factory=set)
+    desc_filters: set[DescFilter] = field(default_factory=set)
+    modify_date_ranges: set[DateRange] = field(default_factory=set)
+    or_filters: set["WhereOrFilter"] = field(default_factory=set)
+    people: set[str] = field(default_factory=set)
+    property_filters: set[PropertyFilter] = field(default_factory=set)
     priorities: set[TodoPriorityType] = field(default_factory=set)
-    projects: list[str] = field(default_factory=list)
+    projects: set[str] = field(default_factory=set)
 
     def __repr__(self) -> str:
         """String representation that only shows fields if they are set."""
