@@ -27,8 +27,9 @@ note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : '[' HASH ID (',' ID)* ']' ;
 
 // GROUP BY
-group_by_body : 'file' ;
+group_by_body : group_by_atom (SPACE group_by_atom)? ;
+group_by_atom : 'file' | AT_SIGN | HASH | PLUS | PERCENT;
 
 // ORDER BY
-order_by_body : order_by_field (SPACE order_by_field)* ;
-order_by_field : 'priority' | 'zid' ;
+order_by_body : order_by_atom (SPACE order_by_atom)* ;
+order_by_atom : 'priority' | 'zid' ;

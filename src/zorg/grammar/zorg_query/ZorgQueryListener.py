@@ -143,6 +143,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#group_by_atom.
+    def enterGroup_by_atom(self, ctx:ZorgQueryParser.Group_by_atomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#group_by_atom.
+    def exitGroup_by_atom(self, ctx:ZorgQueryParser.Group_by_atomContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#order_by_body.
     def enterOrder_by_body(self, ctx:ZorgQueryParser.Order_by_bodyContext):
         pass
@@ -152,12 +161,12 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#order_by_field.
-    def enterOrder_by_field(self, ctx:ZorgQueryParser.Order_by_fieldContext):
+    # Enter a parse tree produced by ZorgQueryParser#order_by_atom.
+    def enterOrder_by_atom(self, ctx:ZorgQueryParser.Order_by_atomContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#order_by_field.
-    def exitOrder_by_field(self, ctx:ZorgQueryParser.Order_by_fieldContext):
+    # Exit a parse tree produced by ZorgQueryParser#order_by_atom.
+    def exitOrder_by_atom(self, ctx:ZorgQueryParser.Order_by_atomContext):
         pass
 
 
