@@ -119,7 +119,9 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
         # HACK: Needed to prevent errors of the form:
         #   SAWarning: Object of type <ZorgNote> not in session...
         with self._session.no_autoflush as session:
-            return self._from_entity_with_session(entity, session)
+            return self._from_entity_with_session(
+                entity, cast(Session, session)
+            )
 
     def _from_entity_with_session(
         self, entity: Note, session: Session
