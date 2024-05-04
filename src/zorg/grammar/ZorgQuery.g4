@@ -21,7 +21,7 @@ select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
 
 // WHERE
 where_body : or_filter ;
-or_filter : and_filter (SPACE 'or' SPACE and_filter)? ;
+or_filter : and_filter (SPACE 'or' SPACE and_filter)* ;
 and_filter : where_atom (SPACE where_atom)* ;
 where_atom : note_type | priority_range | tag | subfilter;
 note_type : note_type_char+ ;
