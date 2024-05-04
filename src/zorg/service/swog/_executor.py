@@ -23,11 +23,15 @@ def execute(session: SQLSession, query_string: str) -> str:
     [[src/zorg/grammar/zorg_file/ZorgFile.g4]] grammar's "body" parser rule.
     """
     query = build_zorg_query(query_string)
-    result = ""
     # (W)HERE
     filtered_notes = session.repo.get_by_query(query.where)
 
+    # (G)ROUP BY
+
+    # (O)RDER BY
+
     # (S)ELECT
+    result = ""
     if query.select is SelectType.NOTE:
         for note in filtered_notes:
             note_type = (

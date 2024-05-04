@@ -214,5 +214,5 @@ def _add_priorities(
     priority_range: ZorgQueryParser.Priority_rangeContext,
     priorities: set[TodoPriorityType],
 ) -> None:
-    for pletter in priority_range.priority_letter():
-        priorities.add(cast(TodoPriorityType, pletter.getText().upper()))
+    for pletter in priority_range.ID().getText().upper():
+        priorities.add(cast(TodoPriorityType, pletter))
