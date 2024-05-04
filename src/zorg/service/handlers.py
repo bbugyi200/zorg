@@ -8,7 +8,7 @@ import sys
 from typing import Iterable, Iterator
 
 from logrus import Logger
-from rich import print
+import rich
 from tqdm import tqdm
 import vimala
 
@@ -144,22 +144,37 @@ def reindex_database(
         else {}
     )
 
+    num_of_updates = 0
     for file, hash_ in file_to_hash.copy().items():
         if (
             file not in old_file_to_hash.keys()
             or old_file_to_hash[file] != hash_
         ):
+            num_of_updates += 1
             _LOGGER.info("Changed file", file=file)
             old_zorg_file = session.repo.get(file).unwrap()
             if old_zorg_file is not None:
                 _LOGGER.debug("Removing file from DB", file=file)
+                rich.print(
+                    "[bold black on #FFFEB8]UPDATING EXISTING FILE:"
+                    f"     {file}[/]"
+                )
                 session.repo.remove_by_key(str(old_zorg_file.path))
+            else:
+                rich.print(
+                    f"[bold white on #1A7E23]ADDING NEW FILE:     {file}[/]"
+                )
 
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(file), verbose=cmd.verbose
             )
             _LOGGER.debug("Adding zorg file", file=file)
             session.repo.add(zorg_file)
+
+    if num_of_updates == 0:
+        rich.print(
+            "[bold black on #FFFFFF]NO ZORG FILES HAVE BEEN MODIFIED[/]"
+        )
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
     session.commit()
