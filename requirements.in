@@ -4,6 +4,7 @@ bolton-eris ~= 0.2.3
 bolton-logrus ~= 0.1.1
 bolton-typist ~= 0.2.0
 jinja2
+rich ~= 13.7
 sqlmodel ~= 0.0.16
 tqdm ~= 4.66
 vimala ~= 0.2.0

@@ -220,8 +220,10 @@ requests==2.31.0
     #   sphinx
 rich==13.7.1
     # via
+    #   -r requirements.in
     #   cookiecutter
     #   typer
+    #   zettel-org
 setuptools-scm==8.0.4
     # via -r requirements-dev.in
 shellingham==1.5.4
