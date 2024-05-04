@@ -8,6 +8,7 @@ import sys
 from typing import Iterable, Iterator
 
 from logrus import Logger
+from rich import print
 from tqdm import tqdm
 import vimala
 
@@ -19,7 +20,7 @@ from .compiler import walk_zorg_file
 from .zid_manager import ZIDManager
 
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 
 def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
@@ -37,7 +38,7 @@ def check_keep_alive_file(
     """Check if the 'keep alive' file exists and, if so, reopens the editor."""
     keep_alive_file = event.edit_cmd.keep_alive_file
     if not keep_alive_file.exists():
-        logger.debug(
+        _LOGGER.debug(
             "No keep alive file found.",
             keep_alive_file=keep_alive_file,
         )
@@ -47,7 +48,7 @@ def check_keep_alive_file(
     prepend_zdir = partial(common.prepend_zdir, zdir)
     vim_commands = list(event.edit_cmd.vim_commands)
     if keep_alive_file.stat().st_size == 0:
-        logger.debug(
+        _LOGGER.debug(
             "Empty keep alive file found.",
             keep_alive_file=keep_alive_file,
         )
@@ -60,7 +61,7 @@ def check_keep_alive_file(
         ]
         vim_commands.append(f"edit {focused_filename}")
         new_paths = prepend_zdir([Path(p.strip()) for p in keep_alive_lines])
-        logger.debug(
+        _LOGGER.debug(
             "Editing files specified in the keep alive file.",
             keep_alive_file=keep_alive_file,
             old_paths=event.edit_cmd.paths,
@@ -70,12 +71,12 @@ def check_keep_alive_file(
 
     verbose = event.edit_cmd.verbose
     if verbose <= 1:
-        logger.debug(
+        _LOGGER.debug(
             "Unlinking keep-alive file", keep_alive_file=keep_alive_file
         )
         keep_alive_file.unlink()
     else:
-        logger.debug(
+        _LOGGER.debug(
             "We are NOT deleting the keep-alive file",
             keep_alive_file=keep_alive_file,
         )
@@ -102,7 +103,7 @@ def create_database(
         desc="Reading notes from zorg files",
         file=sys.stdout,
     ):
-        logger.info("Starting to walk zorg file", zorg_file=zo_path.name)
+        _LOGGER.info("Starting to walk zorg file", zorg_file=zo_path.name)
         zorg_file = walk_zorg_file(cmd.zettel_dir, zo_path)
         num_notes = len(zorg_file.notes)
         num_todos = len(
@@ -110,7 +111,7 @@ def create_database(
         )
         total_num_notes += num_notes
         total_num_todos += num_todos
-        logger.info(
+        _LOGGER.info(
             "Finished walking zorg file",
             zorg_file=zo_path.name,
             num_notes=num_notes,
@@ -120,7 +121,7 @@ def create_database(
         )
         session.repo.add(zorg_file)
         zorg_files.append(zorg_file)
-    logger.info(
+    _LOGGER.info(
         "Finished reading zettel org directory",
         num_files=len(zorg_files),
         num_notes=total_num_notes,
@@ -148,16 +149,16 @@ def reindex_database(
             file not in old_file_to_hash.keys()
             or old_file_to_hash[file] != hash_
         ):
-            logger.info("Changed file", file=file)
+            _LOGGER.info("Changed file", file=file)
             old_zorg_file = session.repo.get(file).unwrap()
             if old_zorg_file is not None:
-                logger.info("Removing file from DB", file=file)
+                _LOGGER.debug("Removing file from DB", file=file)
                 session.repo.remove_by_key(str(old_zorg_file.path))
 
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(file), verbose=cmd.verbose
             )
-            logger.info("Adding zorg file", file=file)
+            _LOGGER.debug("Adding zorg file", file=file)
             session.repo.add(zorg_file)
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
@@ -192,7 +193,7 @@ def add_zids_to_notes_in_file(
         new_note_lines[0] = _add_zid_to_line(note.zid, first_note_line)
         zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
 
-    logger.info(
+    _LOGGER.info(
         "Adding ZIDs to zorg file",
         zorg_file=event.zorg_file_path,
         new_notes=len(event.new_notes),
@@ -236,7 +237,7 @@ def _get_file_hash_path(zdir: Path) -> Path:
 def _write_file_hash_to_disk(
     file_hash_path: Path, file_to_hash: dict[str, str]
 ) -> None:
-    logger.debug("Writing hash map to disk", file=str(file_hash_path))
+    _LOGGER.debug("Writing hash map to disk", file=str(file_hash_path))
     with file_hash_path.open("w") as f:
         json.dump(dict(sorted(file_to_hash.items())), f, indent=4)
 

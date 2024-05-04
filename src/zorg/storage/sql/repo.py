@@ -18,7 +18,7 @@ from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
 
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 
 class SQLRepo:
@@ -64,11 +64,7 @@ class SQLRepo:
         sql_zorg_file = results.first()
         if sql_zorg_file:
             zorg_file = self._converter.to_entity(sql_model=sql_zorg_file)
-            logger.info(
-                "Deleting Zorg File",
-                sql_zorg_file=sql_zorg_file,
-                zorg_file=zorg_file,
-            )
+            _LOGGER.debug("Deleting Zorg File", zorg_file=zorg_file)
             for sql_note in sql_zorg_file.notes:
                 for prop_link in sql_note.property_links:
                     delete_prop = len(prop_link.prop.links) == 1
@@ -93,7 +89,7 @@ class SQLRepo:
             return Ok(zorg_file)
         else:
             emsg = "Failed to delete Zorg File"
-            logger.warning(emsg, path=path)
+            _LOGGER.warning(emsg, path=path)
             return Err(emsg)
 
     def get(self, key: str) -> ErisResult[Optional[File]]:
@@ -141,7 +137,7 @@ def _add_zids(zdir: Path, zorg_file: File) -> None:
     zid_manager = ZIDManager(zdir)
     for note in zorg_file.notes:
         if note.zid is None:
-            logger.debug("Found new zorg note", zorg_note=note)
+            _LOGGER.debug("Found new zorg note", zorg_note=note)
             zid = zid_manager.get_next(note.create_date)
             note.zid = zid
             new_notes.append(note)
