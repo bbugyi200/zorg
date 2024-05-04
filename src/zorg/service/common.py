@@ -49,7 +49,11 @@ def zprint(
     msg = " | ".join(msg_parts)
     bg = bg_color.to_rich_color()
     fg = fg_color.to_rich_color()
-    rich.print(f"[{style} {fg} on {bg}]#{i} | {msg}[/]")
+    hhmmss = dt.datetime.now().strftime("%H:%M:%S")
+    space_i = str(i)
+    while len(space_i) < 3:
+        space_i = f" {space_i}"
+    rich.print(f"[{style} {fg} on {bg}]{space_i} | {hhmmss} | {msg}[/]")
 
     setattr(zprint, call_count_attr, i + 1)
 
