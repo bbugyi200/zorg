@@ -214,9 +214,5 @@ def _add_priorities(
     priority_range: ZorgQueryParser.Priority_rangeContext,
     priorities: set[TodoPriorityType],
 ) -> None:
-    for ID in priority_range.ID():
-        pletter: str = ID.getText().upper()
-        assert (
-            len(pletter) == 1 and pletter.isalpha()
-        ), f"Invalid priority: {pletter}"
-        priorities.add(cast(TodoPriorityType, pletter))
+    for pletter in priority_range.priority_letter():
+        priorities.add(cast(TodoPriorityType, pletter.getText().upper()))

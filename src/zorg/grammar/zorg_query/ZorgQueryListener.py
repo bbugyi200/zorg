@@ -161,6 +161,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#priority_letter.
+    def enterPriority_letter(self, ctx:ZorgQueryParser.Priority_letterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#priority_letter.
+    def exitPriority_letter(self, ctx:ZorgQueryParser.Priority_letterContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#tag.
     def enterTag(self, ctx:ZorgQueryParser.TagContext):
         pass
