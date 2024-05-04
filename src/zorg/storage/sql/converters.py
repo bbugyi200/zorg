@@ -121,8 +121,9 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
         with self._session.no_autoflush as session:
             return self._from_entity_with_session(entity, session)
 
-
-    def _from_entity_with_session(self, entity: Note, session: Session) -> sql.ZorgNote:
+    def _from_entity_with_session(
+        self, entity: Note, session: Session
+    ) -> sql.ZorgNote:
         kwargs: dict[str, Any] = {
             "body": entity.body,
             "create_date": entity.create_date,
