@@ -54,7 +54,7 @@ class WhereAndFilter:
     or_filters: list["WhereOrFilter"] = field(default_factory=list)
     people: list[str] = field(default_factory=list)
     property_filters: list[PropertyFilter] = field(default_factory=list)
-    priorities: list[TodoPriorityType] = field(default_factory=list)
+    priorities: set[TodoPriorityType] = field(default_factory=set)
     projects: list[str] = field(default_factory=list)
 
     def __repr__(self) -> str:
