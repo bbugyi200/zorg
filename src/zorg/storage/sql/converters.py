@@ -60,7 +60,11 @@ class _SONConverter:
             if clause is not None:
                 and_clauses.append(clause)
 
-        where = and_(*and_clauses) if len(and_clauses) > 1 else and_clauses[0]
+        where = (
+            and_(and_clauses[0], *and_clauses[1:])
+            if len(and_clauses) > 1
+            else and_clauses[0]
+        )
         return where
 
     @_son_converter_parser
