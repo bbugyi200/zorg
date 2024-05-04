@@ -124,12 +124,33 @@ class _SONConverter:
         else:
             return None
 
+    @_son_converter_parser
+    def or_filters(self) -> Optional[ColumnElement]:
+        """Converter that handles nested OR filters."""
+        or_filters = self.and_filter.or_filters
+        if not or_filters:
+            return None
 
-def _to_todo_status(note_status: NoteType) -> Optional[NoteType]:
-    if note_status is NoteType.BASIC:
+        or_conds = []
+        for or_filter in or_filters:
+            or_conds.append(
+                or_(*[
+                    _SONConverter(and_filter).to_note_clause()
+                    for and_filter in or_filter.and_filters
+                ])
+            )
+        return (
+            and_(or_conds[0], *or_conds[1:])
+            if len(or_conds) > 1
+            else or_conds[0]
+        )
+
+
+def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
+    if note_type is NoteType.BASIC:
         return None
     else:
-        return note_status
+        return note_type
 
 
 class ZorgFileConverter(EntityConverter[File, sql.ZorgFile]):

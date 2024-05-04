@@ -19,7 +19,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
     def __init__(self, zorg_query: Query) -> None:
         self.zorg_query = zorg_query
 
-        self._and_filters: list[WhereAndFilter] = []
+        self._and_filter_groups: list[list[WhereAndFilter]] = []
 
     def enterSelect(
         self, ctx: ZorgQueryParser.SelectContext
@@ -97,9 +97,9 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
                 tag_set.add(f"{minus}{tag_id.getText()}")
 
-        self._and_filters.append(
+        self._and_filter_groups[-1].append(
             WhereAndFilter(
-                allowed_note_statuses=allowed_note_statuses,
+                allowed_note_types=allowed_note_types,
                 areas=areas,
                 contexts=contexts,
                 people=people,
@@ -108,34 +108,55 @@ class ZorgQueryCompiler(ZorgQueryListener):
             )
         )
 
+    def enterSubfilter(
+        self, ctx: ZorgQueryParser.SubfilterContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._and_filter_groups.append([])
+
+    def enterWhere(
+        self, ctx: ZorgQueryParser.WhereContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._and_filter_groups.append([])
+
+    def exitSubfilter(
+        self, ctx: ZorgQueryParser.SubfilterContext
+    ) -> None:  # noqa: D102
+        del ctx
+        and_filters = self._and_filter_groups.pop()
+        self._and_filter_groups[-1][-1].or_filters.append(
+            WhereOrFilter(and_filters)
+        )
+
     def exitWhere(
         self, ctx: ZorgQueryParser.WhereContext
     ) -> None:  # noqa: D102
         del ctx
-        where = WhereOrFilter(self._and_filters)
+        where = WhereOrFilter(self._and_filter_groups[-1])
         self.zorg_query.where = where
 
 
-def _add_note_statuses(
-    note_status_chars: list[ZorgQueryParser.Note_status_charContext],
-    allowed_note_statuses: set[NoteType],
+def _add_note_types(
+    note_type_chars: list[ZorgQueryParser.Note_type_charContext],
+    allowed_note_types: set[NoteType],
 ) -> None:
-    for note_status_char in note_status_chars:
-        if note_status_char.DASH():
-            allowed_note_statuses.add(NoteType.BASIC)
-        elif note_status_char.LOWER_O():
-            allowed_note_statuses.add(NoteType.OPEN_TODO)
-        elif note_status_char.LOWER_X():
-            allowed_note_statuses.add(NoteType.CLOSED_TODO)
-        elif note_status_char.TILDE():
-            allowed_note_statuses.add(NoteType.CANCELED_TODO)
-        elif note_status_char.LANGLE():
-            allowed_note_statuses.add(NoteType.BLOCKED_TODO)
-        elif note_status_char.RANGLE():
-            allowed_note_statuses.add(NoteType.PARENT_TODO)
+    for note_type_char in note_type_chars:
+        if note_type_char.DASH():
+            allowed_note_types.add(NoteType.BASIC)
+        elif note_type_char.LOWER_O():
+            allowed_note_types.add(NoteType.OPEN_TODO)
+        elif note_type_char.LOWER_X():
+            allowed_note_types.add(NoteType.CLOSED_TODO)
+        elif note_type_char.TILDE():
+            allowed_note_types.add(NoteType.CANCELED_TODO)
+        elif note_type_char.LANGLE():
+            allowed_note_types.add(NoteType.BLOCKED_TODO)
+        elif note_type_char.RANGLE():
+            allowed_note_types.add(NoteType.PARENT_TODO)
         else:
             emsg = "Unrecognized note status character"
-            _LOGGER.error(emsg, note_status_char=note_status_char.getText())
+            _LOGGER.error(emsg, note_type_char=note_type_char.getText())
             raise RuntimeError(emsg)
 
 
