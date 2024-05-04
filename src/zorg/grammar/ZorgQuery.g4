@@ -1,5 +1,7 @@
 grammar ZorgQuery;
 
+import CommonLexerRules;
+
 //// parser rules
 prog : query NL? ;
 
@@ -17,19 +19,3 @@ select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
 where_body : note_status ;
 note_status : note_status_char+ ;
 note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
-
-//// lexer rules
-NL : '\r'? '\n' ;
-SPACE : ' ' ;
-PLUS : '+' ;
-AT_SIGN : '@' ;
-PERCENT : '%' ;
-HASH : '#' ;
-DASH : '-' ;
-LOWER_O : 'o' ;
-LOWER_X : 'x' ;
-LANGLE : '<' ;
-RANGLE : '>' ;
-TILDE : '~' ;
-
-//// fragments
