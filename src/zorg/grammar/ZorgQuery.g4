@@ -24,7 +24,7 @@ where_body : where_atom (SPACE where_atom)* ;
 where_atom : note_status | priority_range ;
 note_status : note_status_char+ ;
 note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
-priority_range : '[' HASH ID ']' ;
+priority_range : '[' HASH ID (',' ID)* ']' ;
 
 // GROUP BY
 group_by_body : 'file' ;
