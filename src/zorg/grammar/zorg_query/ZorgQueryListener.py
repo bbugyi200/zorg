@@ -143,5 +143,23 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#order_by_body.
+    def enterOrder_by_body(self, ctx:ZorgQueryParser.Order_by_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#order_by_body.
+    def exitOrder_by_body(self, ctx:ZorgQueryParser.Order_by_bodyContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#order_by_field.
+    def enterOrder_by_field(self, ctx:ZorgQueryParser.Order_by_fieldContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#order_by_field.
+    def exitOrder_by_field(self, ctx:ZorgQueryParser.Order_by_fieldContext):
+        pass
+
+
 
 del ZorgQueryParser

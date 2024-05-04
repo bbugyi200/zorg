@@ -13,8 +13,8 @@ select_query : select ;
 // S W O G
 select : 'S' SPACE select_body ;
 where : 'W' SPACE where_body ;
-order_by : 'O' ;
-group_by : 'G' group_by_body ;
+order_by : 'O' SPACE order_by_body ;
+group_by : 'G' SPACE group_by_body ;
 
 // SELECT
 select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
@@ -28,3 +28,7 @@ priority_range : '[' HASH ID (',' ID)* ']' ;
 
 // GROUP BY
 group_by_body : 'file' ;
+
+// ORDER BY
+order_by_body : order_by_field (SPACE order_by_field)* ;
+order_by_field : 'priority' | 'zid' ;
