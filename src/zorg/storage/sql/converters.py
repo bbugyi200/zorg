@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Callable, Optional, cast
 
 import metaman
-from sqlmodel import Session, or_, select
+from sqlmodel import Session, and_, or_, select
 from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
@@ -21,7 +21,7 @@ from ...domain.types import EntityConverter, NoteType, TodoPriorityType
 from ...service import common
 
 
-_SONConverterParser = Callable[["_SONConverter"], ColumnElement]
+_SONConverterParser = Callable[["_SONConverter"], Optional[ColumnElement]]
 # the @_son_converter_parser decorator should be used to mark a _SONConverter
 # parser method
 _SON_CONVERTER_PARSERS: list[_SONConverterParser] = []
@@ -54,16 +54,37 @@ class _SONConverter:
 
     def to_note_clause(self) -> ColumnElement:
         """Constructs a SQL statement from the provided WhereAndFilter."""
-        where = or_(*[parse(self) for parse in _SON_CONVERTER_PARSERS])
+        and_clauses = []
+        for parse in _SON_CONVERTER_PARSERS:
+            clause = parse(self)
+            if clause is not None:
+                and_clauses.append(clause)
+
+        where = and_(*and_clauses) if len(and_clauses) > 1 else and_clauses[0]
         return where
 
     @_son_converter_parser
-    def note_status(self) -> ColumnElement:
+    def note_status(self) -> Optional[ColumnElement]:
         """Converter for done status (e.g. '-' or 'ox~<>')."""
+        if not self.and_filter.allowed_note_statuses:
+            return None
+
         return or_(*[
             sql.ZorgNote.todo_status == _to_todo_status(note_status)
             for note_status in self.and_filter.allowed_note_statuses
         ])
+
+    @_son_converter_parser
+    def priority_range(self) -> Optional[ColumnElement]:
+        """Converter for priority range filters."""
+        priorities = self.and_filter.priorities
+        if priorities:
+            return or_(*[
+                sql.ZorgNote.todo_priority == priority
+                for priority in priorities
+            ])
+        else:
+            return None
 
 
 def _to_todo_status(note_status: NoteType) -> Optional[NoteType]:
