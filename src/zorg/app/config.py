@@ -274,8 +274,17 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
     _convert_variables_to_var_map(kwargs)
     _process_zo_paths(kwargs)
+    _process_query(kwargs)
 
     return kwargs
+
+
+def _process_query(kwargs: dict[str, Any]) -> None:
+    if kwargs["command"] == "query" and not kwargs["query"].startswith(
+        ("S ", "W ")
+    ):
+        query = kwargs["query"]
+        kwargs["query"] = f"W {query}"
 
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
