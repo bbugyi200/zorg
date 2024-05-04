@@ -66,9 +66,9 @@ function run() {
     # HACK: This was the only way I could get antlr to stop putting the
     #   generated files in double-nested dirs like
     #   src/zorg/grammar/zorg_file/src/zorg/grammar/zorg_file
-		pushd $grammar_dir
+    pushd $grammar_dir >/dev/null
     antlr4 -Dlanguage=Python3 $g4_stem.g4 -o $dir
-    popd
+    popd >/dev/null
 
     for f in examples/$dir/*.zo*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
