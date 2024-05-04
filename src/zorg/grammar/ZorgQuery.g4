@@ -32,4 +32,4 @@ group_by_atom : 'file' | AT_SIGN | HASH | PLUS | PERCENT;
 
 // ORDER BY
 order_by_body : order_by_atom (SPACE order_by_atom)* ;
-order_by_atom : 'priority' | 'zid' ;
+order_by_atom : 'priority' | 'type' | 'zid' ;
