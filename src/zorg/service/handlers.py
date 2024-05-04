@@ -151,7 +151,6 @@ def reindex_database(
             or old_file_to_hash[file] != hash_
         ):
             num_of_updates += 1
-            _LOGGER.info("Changed file", file=file)
             old_zorg_file = session.repo.get(file).unwrap()
             if old_zorg_file is not None:
                 _LOGGER.debug("Removing file from DB", file=file)
@@ -162,7 +161,7 @@ def reindex_database(
                 session.repo.remove_by_key(str(old_zorg_file.path))
             else:
                 rich.print(
-                    f"[bold white on #1A7E23]ADDING NEW FILE:     {file}[/]"
+                    f"[bold #FFFFFF on #1A7E23]ADDING NEW FILE:     {file}[/]"
                 )
 
             zorg_file = walk_zorg_file(
@@ -170,6 +169,7 @@ def reindex_database(
             )
             _LOGGER.debug("Adding zorg file", file=file)
             session.repo.add(zorg_file)
+            session.commit()
 
     if num_of_updates == 0:
         rich.print(

@@ -116,6 +116,13 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
 
     def from_entity(self, entity: Note) -> sql.ZorgNote:
         """Model-to-SQL-model converter for a ZorgNote."""
+        # HACK: Needed to prevent errors of the form:
+        #   SAWarning: Object of type <ZorgNote> not in session...
+        with self._session.no_autoflush as session:
+            return self._from_entity_with_session(entity, session)
+
+
+    def _from_entity_with_session(self, entity: Note, session: Session) -> sql.ZorgNote:
         kwargs: dict[str, Any] = {
             "body": entity.body,
             "create_date": entity.create_date,
@@ -139,7 +146,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             for tag_name in entity_tag_list:
                 if tag_name not in tag_cache:
                     stmt = select(tag_model).where(tag_model.name == tag_name)
-                    results = self._session.exec(stmt)
+                    results = session.exec(stmt)
                     tag = results.first()
                     if tag is None:
                         tag = tag_model(name=tag_name)
@@ -153,7 +160,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
         for k, v in entity.properties.items():
             if k not in self._property_cache:
                 stmt = select(sql.Property).where(sql.Property.name == k)
-                results = self._session.exec(stmt)
+                results = session.exec(stmt)
                 prop = results.first()
                 if prop is None:
                     prop = sql.Property(name=k)
@@ -165,7 +172,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
                 .where(sql.PropertyLink.note_id == sql_zorg_note.id)
                 .where(sql.PropertyLink.prop_id == prop.id)
             )
-            results = self._session.exec(stmt)
+            results = session.exec(stmt)
             prop_link = results.first()
 
             if prop_link is None:
