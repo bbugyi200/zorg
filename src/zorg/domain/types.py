@@ -92,7 +92,7 @@ class Color(enum.Enum):
     WHITE = enum.auto()
     YELLOW = enum.auto()
 
-    def to_rich_color(self) -> str:
+    def to_rich_spec(self) -> str:
         """Converts a Color to a string spec that rich understands."""
         if self is Color.BLACK:
             return "black"

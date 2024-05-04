@@ -47,8 +47,8 @@ def zprint(
     i = getattr(zprint, call_count_attr, 1)
 
     msg = " | ".join(msg_parts)
-    bg = bg_color.to_rich_color()
-    fg = fg_color.to_rich_color()
+    bg = bg_color.to_rich_spec()
+    fg = fg_color.to_rich_spec()
     hhmmss = dt.datetime.now().strftime("%H:%M:%S")
     space_i = str(i)
     while len(space_i) < 3:
