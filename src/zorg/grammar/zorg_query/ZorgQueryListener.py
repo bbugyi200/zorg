@@ -98,6 +98,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#where_atom.
+    def enterWhere_atom(self, ctx:ZorgQueryParser.Where_atomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#where_atom.
+    def exitWhere_atom(self, ctx:ZorgQueryParser.Where_atomContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#note_status.
     def enterNote_status(self, ctx:ZorgQueryParser.Note_statusContext):
         pass
@@ -113,6 +122,15 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#note_status_char.
     def exitNote_status_char(self, ctx:ZorgQueryParser.Note_status_charContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#priority_range.
+    def enterPriority_range(self, ctx:ZorgQueryParser.Priority_rangeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#priority_range.
+    def exitPriority_range(self, ctx:ZorgQueryParser.Priority_rangeContext):
         pass
 
 
