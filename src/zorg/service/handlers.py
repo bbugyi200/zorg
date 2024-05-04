@@ -8,13 +8,13 @@ import sys
 from typing import Iterable, Iterator
 
 from logrus import Logger
-import rich
 from tqdm import tqdm
 import vimala
 
-from . import common
+from . import common as c
 from .. import APP_NAME
 from ..domain.messages import commands, events
+from ..domain.types import Color
 from ..storage.sql.session import SQLSession
 from .compiler import walk_zorg_file
 from .zid_manager import ZIDManager
@@ -45,7 +45,7 @@ def check_keep_alive_file(
         return
 
     zdir = event.edit_cmd.zettel_dir
-    prepend_zdir = partial(common.prepend_zdir, zdir)
+    prepend_zdir = partial(c.prepend_zdir, zdir)
     vim_commands = list(event.edit_cmd.vim_commands)
     if keep_alive_file.stat().st_size == 0:
         _LOGGER.debug(
@@ -154,14 +154,19 @@ def reindex_database(
             old_zorg_file = session.repo.get(file).unwrap()
             if old_zorg_file is not None:
                 _LOGGER.debug("Removing file from DB", file=file)
-                rich.print(
-                    "[bold black on #FFFEB8]UPDATING EXISTING FILE:"
-                    f"     {file}[/]"
+                c.zprint(
+                    "UPDATING EXISTING FILE",
+                    file,
+                    fg_color=Color.BLACK,
+                    bg_color=Color.YELLOW,
                 )
                 session.repo.remove_by_key(str(old_zorg_file.path))
             else:
-                rich.print(
-                    f"[bold #FFFFFF on #1A7E23]ADDING NEW FILE:     {file}[/]"
+                c.zprint(
+                    "ADDING NEW FILE",
+                    file,
+                    fg_color=Color.WHITE,
+                    bg_color=Color.GREEN,
                 )
 
             zorg_file = walk_zorg_file(
@@ -172,9 +177,7 @@ def reindex_database(
             session.commit()
 
     if num_of_updates == 0:
-        rich.print(
-            "[bold black on #FFFFFF]NO ZORG FILES HAVE BEEN MODIFIED[/]"
-        )
+        c.zprint("NO ZORG FILES HAVE BEEN MODIFIED")
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
     session.commit()
@@ -238,7 +241,7 @@ def increment_zid_counters(
 def _get_file_hash_map(zdir: Path, paths: Iterable[Path]) -> dict[str, str]:
     file_to_hash: dict[str, str] = {}
     for path in paths:
-        key = common.strip_zdir(zdir, path)
+        key = c.strip_zdir(zdir, path)
         file_to_hash[key] = _hash_file(path)
     return file_to_hash
 

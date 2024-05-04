@@ -84,6 +84,28 @@ class NoteType(enum.Enum):
             assert_never(self)
 
 
+class Color(enum.Enum):
+    """Represents colors that Zorg uses."""
+
+    BLACK = enum.auto()
+    GREEN = enum.auto()
+    WHITE = enum.auto()
+    YELLOW = enum.auto()
+
+    def to_rich_color(self) -> str:
+        """Converts a Color to a string spec that rich understands."""
+        if self is Color.BLACK:
+            return "black"
+        elif self is Color.GREEN:
+            return "#1A7E23"
+        elif self is Color.WHITE:
+            return "#FFFFFF"
+        elif self is Color.YELLOW:
+            return "#FFFEB8"
+        else:
+            assert_never(self)
+
+
 class CreateEngineType(Protocol):
     """The type of a `db.create_engine()` callable."""
 

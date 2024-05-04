@@ -5,9 +5,10 @@ from pathlib import Path
 import re
 from typing import Any, Iterable
 
+import rich
 from typist import PathLike
 
-from ..domain.types import VarMapType
+from ..domain.types import Color, VarMapType
 
 
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:
@@ -33,6 +34,24 @@ def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
             path if zdir_path in path.parents else zdir_path / path
         )
     return new_paths
+
+
+def zprint(
+    *msg_parts: str,
+    style: str = "bold",
+    bg_color: Color = Color.WHITE,
+    fg_color: Color = Color.BLACK,
+) -> None:
+    """Custom rich.print() wrapper used by Zorg."""
+    call_count_attr = "_call_count"
+    i = getattr(zprint, call_count_attr, 1)
+
+    msg = " | ".join(msg_parts)
+    bg = bg_color.to_rich_color()
+    fg = fg_color.to_rich_color()
+    rich.print(f"[{style} {fg} on {bg}]#{i} | {msg}[/]")
+
+    setattr(zprint, call_count_attr, i + 1)
 
 
 def strip_zdir(zdir: PathLike, path: PathLike) -> str:
