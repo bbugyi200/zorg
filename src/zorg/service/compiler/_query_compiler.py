@@ -50,11 +50,16 @@ class ZorgQueryCompiler(ZorgQueryListener):
     def enterAnd_filter(
         self, ctx: ZorgQueryParser.And_filterContext
     ) -> None:  # noqa: D102
+        allowed_note_statuses: set[NoteType] = set()
+        areas: set[str] = set()
+        contexts: set[str] = set()
+        people: set[str] = set()
+        priorities: set[TodoPriorityType] = set()
+        projects: set[str] = set()
+
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
         )
-        allowed_note_statuses: set[NoteType] = set()
-        priorities: set[TodoPriorityType] = set()
         for where_atom in where_atoms:
             if where_atom.note_status():
                 note_status = cast(
@@ -72,11 +77,34 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     where_atom.priority_range(),
                 )
                 _add_priorities(priority_range, priorities)
+            elif where_atom.tag():
+                tag = cast(ZorgQueryParser.TagContext, where_atom.tag())
+                minus = "-" if tag.not_op() else ""
+                if tag.area():
+                    tag_set = areas
+                    tag_id = tag.area().ID()
+                elif tag.context():
+                    tag_set = contexts
+                    tag_id = tag.context().ID()
+                elif tag.person():
+                    tag_set = people
+                    tag_id = tag.person().ID()
+                elif tag.project():
+                    tag_set = projects
+                    tag_id = tag.project().ID()
+                else:
+                    raise RuntimeError(f"Invalid Tag: {tag.getText()}")
+
+                tag_set.add(f"{minus}{tag_id.getText()}")
 
         self._and_filters.append(
             WhereAndFilter(
                 allowed_note_statuses=allowed_note_statuses,
+                areas=areas,
+                contexts=contexts,
+                people=people,
                 priorities=priorities,
+                projects=projects,
             )
         )
 

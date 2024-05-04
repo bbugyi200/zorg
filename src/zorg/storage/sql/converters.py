@@ -90,6 +90,40 @@ class _SONConverter:
         else:
             return None
 
+    @_son_converter_parser
+    def prefix_tag_parser(self) -> Optional[ColumnElement]:
+        """Parser for prefix tags (e.g. '@home' or '+greatday')."""
+        conditions = []
+        for prefix_tag_list, link_model, model in [
+            (self.and_filter.areas, sql.AreaLink, sql.Area),
+            (self.and_filter.contexts, sql.ContextLink, sql.Context),
+            (self.and_filter.people, sql.ProjectLink, sql.Project),
+            (self.and_filter.projects, sql.ProjectLink, sql.Project),
+        ]:
+            base_subquery = (
+                select(sql.ZorgNote.id).join(link_model).join(model)
+            )
+            for prefix_tag in prefix_tag_list:
+                name = prefix_tag
+
+                if name.startswith("-"):
+                    # remove '-' from name
+                    name = name[1:]
+                    in_op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+                else:
+                    in_op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+
+                subquery = base_subquery.where(model.name == name)
+                conditions.append(in_op(subquery))
+        if conditions:
+            return (
+                and_(conditions[0], *conditions[1:])
+                if len(conditions) > 1
+                else conditions[0]
+            )
+        else:
+            return None
+
 
 def _to_todo_status(note_status: NoteType) -> Optional[NoteType]:
     if note_status is NoteType.BASIC:

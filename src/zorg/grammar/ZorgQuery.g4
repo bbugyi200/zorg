@@ -27,11 +27,12 @@ where_atom : note_status | priority_range | tag | subfilter;
 note_status : note_status_char+ ;
 note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : '[' HASH ID (',' ID)* ']' ;
-tag        : area | context | person | project ;
-area       : HASH ID ;
-context    : AT_SIGN ID ;
-person     : PERCENT ID ;
-project    : PLUS ID ;
+tag : not_op? (area | context | person | project) ;
+not_op : '!' ;
+area : HASH ID ;
+context : AT_SIGN ID ;
+person : PERCENT ID ;
+project : PLUS ID ;
 subfilter : '(' or_filter ')' ;
 
 // GROUP BY

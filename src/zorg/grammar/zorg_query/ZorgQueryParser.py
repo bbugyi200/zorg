@@ -10,63 +10,65 @@ else:
 
 def serializedATN():
     return [
-        4,1,42,176,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,43,183,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
-        7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,1,0,1,0,3,
-        0,55,8,0,1,1,1,1,3,1,59,8,1,1,2,1,2,1,2,3,2,64,8,2,1,2,1,2,1,2,3,
-        2,69,8,2,1,2,1,2,3,2,73,8,2,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,
-        1,5,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,8,1,8,1,9,1,9,1,10,1,10,1,
-        10,1,10,1,10,3,10,102,8,10,1,11,1,11,1,11,5,11,107,8,11,10,11,12,
-        11,110,9,11,1,12,1,12,1,12,1,12,3,12,116,8,12,1,13,4,13,119,8,13,
-        11,13,12,13,120,1,14,1,14,1,15,1,15,1,15,1,15,1,15,5,15,130,8,15,
-        10,15,12,15,133,9,15,1,15,1,15,1,16,1,16,1,16,1,16,3,16,141,8,16,
-        1,17,1,17,1,17,1,18,1,18,1,18,1,19,1,19,1,19,1,20,1,20,1,20,1,21,
-        1,21,1,21,1,21,1,22,1,22,1,22,3,22,162,8,22,1,23,1,23,1,24,1,24,
-        1,24,5,24,169,8,24,10,24,12,24,172,9,24,1,25,1,25,1,25,0,0,26,0,
-        2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,
-        48,50,0,4,2,0,5,6,33,36,4,0,15,16,25,25,39,39,41,42,2,0,5,5,33,36,
-        1,0,11,13,166,0,52,1,0,0,0,2,58,1,0,0,0,4,63,1,0,0,0,6,74,1,0,0,
-        0,8,76,1,0,0,0,10,80,1,0,0,0,12,84,1,0,0,0,14,88,1,0,0,0,16,92,1,
-        0,0,0,18,94,1,0,0,0,20,96,1,0,0,0,22,103,1,0,0,0,24,115,1,0,0,0,
-        26,118,1,0,0,0,28,122,1,0,0,0,30,124,1,0,0,0,32,140,1,0,0,0,34,142,
-        1,0,0,0,36,145,1,0,0,0,38,148,1,0,0,0,40,151,1,0,0,0,42,154,1,0,
-        0,0,44,158,1,0,0,0,46,163,1,0,0,0,48,165,1,0,0,0,50,173,1,0,0,0,
-        52,54,3,2,1,0,53,55,5,14,0,0,54,53,1,0,0,0,54,55,1,0,0,0,55,1,1,
-        0,0,0,56,59,3,4,2,0,57,59,3,6,3,0,58,56,1,0,0,0,58,57,1,0,0,0,59,
-        3,1,0,0,0,60,61,3,8,4,0,61,62,5,30,0,0,62,64,1,0,0,0,63,60,1,0,0,
-        0,63,64,1,0,0,0,64,65,1,0,0,0,65,68,3,10,5,0,66,67,5,30,0,0,67,69,
-        3,12,6,0,68,66,1,0,0,0,68,69,1,0,0,0,69,72,1,0,0,0,70,71,5,30,0,
-        0,71,73,3,14,7,0,72,70,1,0,0,0,72,73,1,0,0,0,73,5,1,0,0,0,74,75,
-        3,8,4,0,75,7,1,0,0,0,76,77,5,1,0,0,77,78,5,30,0,0,78,79,3,16,8,0,
-        79,9,1,0,0,0,80,81,5,2,0,0,81,82,5,30,0,0,82,83,3,18,9,0,83,11,1,
-        0,0,0,84,85,5,3,0,0,85,86,5,30,0,0,86,87,3,48,24,0,87,13,1,0,0,0,
-        88,89,5,4,0,0,89,90,5,30,0,0,90,91,3,44,22,0,91,15,1,0,0,0,92,93,
-        7,0,0,0,93,17,1,0,0,0,94,95,3,20,10,0,95,19,1,0,0,0,96,101,3,22,
-        11,0,97,98,5,30,0,0,98,99,5,7,0,0,99,100,5,30,0,0,100,102,3,22,11,
-        0,101,97,1,0,0,0,101,102,1,0,0,0,102,21,1,0,0,0,103,108,3,24,12,
-        0,104,105,5,30,0,0,105,107,3,24,12,0,106,104,1,0,0,0,107,110,1,0,
-        0,0,108,106,1,0,0,0,108,109,1,0,0,0,109,23,1,0,0,0,110,108,1,0,0,
-        0,111,116,3,26,13,0,112,116,3,30,15,0,113,116,3,32,16,0,114,116,
-        3,42,21,0,115,111,1,0,0,0,115,112,1,0,0,0,115,113,1,0,0,0,115,114,
-        1,0,0,0,116,25,1,0,0,0,117,119,3,28,14,0,118,117,1,0,0,0,119,120,
-        1,0,0,0,120,118,1,0,0,0,120,121,1,0,0,0,121,27,1,0,0,0,122,123,7,
-        1,0,0,123,29,1,0,0,0,124,125,5,8,0,0,125,126,5,33,0,0,126,131,5,
-        19,0,0,127,128,5,9,0,0,128,130,5,19,0,0,129,127,1,0,0,0,130,133,
-        1,0,0,0,131,129,1,0,0,0,131,132,1,0,0,0,132,134,1,0,0,0,133,131,
-        1,0,0,0,134,135,5,10,0,0,135,31,1,0,0,0,136,141,3,34,17,0,137,141,
-        3,36,18,0,138,141,3,38,19,0,139,141,3,40,20,0,140,136,1,0,0,0,140,
-        137,1,0,0,0,140,138,1,0,0,0,140,139,1,0,0,0,141,33,1,0,0,0,142,143,
-        5,33,0,0,143,144,5,19,0,0,144,35,1,0,0,0,145,146,5,34,0,0,146,147,
-        5,19,0,0,147,37,1,0,0,0,148,149,5,36,0,0,149,150,5,19,0,0,150,39,
-        1,0,0,0,151,152,5,35,0,0,152,153,5,19,0,0,153,41,1,0,0,0,154,155,
-        5,31,0,0,155,156,3,20,10,0,156,157,5,32,0,0,157,43,1,0,0,0,158,161,
-        3,46,23,0,159,160,5,30,0,0,160,162,3,46,23,0,161,159,1,0,0,0,161,
-        162,1,0,0,0,162,45,1,0,0,0,163,164,7,2,0,0,164,47,1,0,0,0,165,170,
-        3,50,25,0,166,167,5,30,0,0,167,169,3,50,25,0,168,166,1,0,0,0,169,
-        172,1,0,0,0,170,168,1,0,0,0,170,171,1,0,0,0,171,49,1,0,0,0,172,170,
-        1,0,0,0,173,174,7,3,0,0,174,51,1,0,0,0,13,54,58,63,68,72,101,108,
-        115,120,131,140,161,170
+        7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
+        1,0,1,0,3,0,57,8,0,1,1,1,1,3,1,61,8,1,1,2,1,2,1,2,3,2,66,8,2,1,2,
+        1,2,1,2,3,2,71,8,2,1,2,1,2,3,2,75,8,2,1,3,1,3,1,4,1,4,1,4,1,4,1,
+        5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,8,1,8,1,9,1,9,1,
+        10,1,10,1,10,1,10,1,10,3,10,104,8,10,1,11,1,11,1,11,5,11,109,8,11,
+        10,11,12,11,112,9,11,1,12,1,12,1,12,1,12,3,12,118,8,12,1,13,4,13,
+        121,8,13,11,13,12,13,122,1,14,1,14,1,15,1,15,1,15,1,15,1,15,5,15,
+        132,8,15,10,15,12,15,135,9,15,1,15,1,15,1,16,3,16,140,8,16,1,16,
+        1,16,1,16,1,16,3,16,146,8,16,1,17,1,17,1,18,1,18,1,18,1,19,1,19,
+        1,19,1,20,1,20,1,20,1,21,1,21,1,21,1,22,1,22,1,22,1,22,1,23,1,23,
+        1,23,3,23,169,8,23,1,24,1,24,1,25,1,25,1,25,5,25,176,8,25,10,25,
+        12,25,179,9,25,1,26,1,26,1,26,0,0,27,0,2,4,6,8,10,12,14,16,18,20,
+        22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,0,4,2,0,5,6,34,37,
+        4,0,16,17,26,26,40,40,42,43,2,0,5,5,34,37,1,0,12,14,173,0,54,1,0,
+        0,0,2,60,1,0,0,0,4,65,1,0,0,0,6,76,1,0,0,0,8,78,1,0,0,0,10,82,1,
+        0,0,0,12,86,1,0,0,0,14,90,1,0,0,0,16,94,1,0,0,0,18,96,1,0,0,0,20,
+        98,1,0,0,0,22,105,1,0,0,0,24,117,1,0,0,0,26,120,1,0,0,0,28,124,1,
+        0,0,0,30,126,1,0,0,0,32,139,1,0,0,0,34,147,1,0,0,0,36,149,1,0,0,
+        0,38,152,1,0,0,0,40,155,1,0,0,0,42,158,1,0,0,0,44,161,1,0,0,0,46,
+        165,1,0,0,0,48,170,1,0,0,0,50,172,1,0,0,0,52,180,1,0,0,0,54,56,3,
+        2,1,0,55,57,5,15,0,0,56,55,1,0,0,0,56,57,1,0,0,0,57,1,1,0,0,0,58,
+        61,3,4,2,0,59,61,3,6,3,0,60,58,1,0,0,0,60,59,1,0,0,0,61,3,1,0,0,
+        0,62,63,3,8,4,0,63,64,5,31,0,0,64,66,1,0,0,0,65,62,1,0,0,0,65,66,
+        1,0,0,0,66,67,1,0,0,0,67,70,3,10,5,0,68,69,5,31,0,0,69,71,3,12,6,
+        0,70,68,1,0,0,0,70,71,1,0,0,0,71,74,1,0,0,0,72,73,5,31,0,0,73,75,
+        3,14,7,0,74,72,1,0,0,0,74,75,1,0,0,0,75,5,1,0,0,0,76,77,3,8,4,0,
+        77,7,1,0,0,0,78,79,5,1,0,0,79,80,5,31,0,0,80,81,3,16,8,0,81,9,1,
+        0,0,0,82,83,5,2,0,0,83,84,5,31,0,0,84,85,3,18,9,0,85,11,1,0,0,0,
+        86,87,5,3,0,0,87,88,5,31,0,0,88,89,3,50,25,0,89,13,1,0,0,0,90,91,
+        5,4,0,0,91,92,5,31,0,0,92,93,3,46,23,0,93,15,1,0,0,0,94,95,7,0,0,
+        0,95,17,1,0,0,0,96,97,3,20,10,0,97,19,1,0,0,0,98,103,3,22,11,0,99,
+        100,5,31,0,0,100,101,5,7,0,0,101,102,5,31,0,0,102,104,3,22,11,0,
+        103,99,1,0,0,0,103,104,1,0,0,0,104,21,1,0,0,0,105,110,3,24,12,0,
+        106,107,5,31,0,0,107,109,3,24,12,0,108,106,1,0,0,0,109,112,1,0,0,
+        0,110,108,1,0,0,0,110,111,1,0,0,0,111,23,1,0,0,0,112,110,1,0,0,0,
+        113,118,3,26,13,0,114,118,3,30,15,0,115,118,3,32,16,0,116,118,3,
+        44,22,0,117,113,1,0,0,0,117,114,1,0,0,0,117,115,1,0,0,0,117,116,
+        1,0,0,0,118,25,1,0,0,0,119,121,3,28,14,0,120,119,1,0,0,0,121,122,
+        1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,27,1,0,0,0,124,125,7,
+        1,0,0,125,29,1,0,0,0,126,127,5,8,0,0,127,128,5,34,0,0,128,133,5,
+        20,0,0,129,130,5,9,0,0,130,132,5,20,0,0,131,129,1,0,0,0,132,135,
+        1,0,0,0,133,131,1,0,0,0,133,134,1,0,0,0,134,136,1,0,0,0,135,133,
+        1,0,0,0,136,137,5,10,0,0,137,31,1,0,0,0,138,140,3,34,17,0,139,138,
+        1,0,0,0,139,140,1,0,0,0,140,145,1,0,0,0,141,146,3,36,18,0,142,146,
+        3,38,19,0,143,146,3,40,20,0,144,146,3,42,21,0,145,141,1,0,0,0,145,
+        142,1,0,0,0,145,143,1,0,0,0,145,144,1,0,0,0,146,33,1,0,0,0,147,148,
+        5,11,0,0,148,35,1,0,0,0,149,150,5,34,0,0,150,151,5,20,0,0,151,37,
+        1,0,0,0,152,153,5,35,0,0,153,154,5,20,0,0,154,39,1,0,0,0,155,156,
+        5,37,0,0,156,157,5,20,0,0,157,41,1,0,0,0,158,159,5,36,0,0,159,160,
+        5,20,0,0,160,43,1,0,0,0,161,162,5,32,0,0,162,163,3,20,10,0,163,164,
+        5,33,0,0,164,45,1,0,0,0,165,168,3,48,24,0,166,167,5,31,0,0,167,169,
+        3,48,24,0,168,166,1,0,0,0,168,169,1,0,0,0,169,47,1,0,0,0,170,171,
+        7,2,0,0,171,49,1,0,0,0,172,177,3,52,26,0,173,174,5,31,0,0,174,176,
+        3,52,26,0,175,173,1,0,0,0,176,179,1,0,0,0,177,175,1,0,0,0,177,178,
+        1,0,0,0,178,51,1,0,0,0,179,177,1,0,0,0,180,181,7,3,0,0,181,53,1,
+        0,0,0,14,56,60,65,70,74,103,110,117,122,133,139,145,168,177
     ]
 
 class ZorgQueryParser ( Parser ):
@@ -80,7 +82,7 @@ class ZorgQueryParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'S'", "'W'", "'O'", "'G'", "'file'", 
-                     "'note'", "'or'", "'['", "','", "']'", "'priority'", 
+                     "'note'", "'or'", "'['", "','", "']'", "'!'", "'priority'", 
                      "'type'", "'zid'", "<INVALID>", "'o'", "'x'", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "'  -'", "'    -'", "<INVALID>", "'-'", "'.'", "'/'", 
@@ -90,12 +92,12 @@ class ZorgQueryParser ( Parser ):
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "NL", "LOWER_O", "LOWER_X", 
-                      "DATE", "TIME", "ID", "ZID", "NUM_ID", "TWO_SPACE_DASH", 
-                      "FOUR_SPACE_DASH", "SYMBOL", "DASH", "DOT", "FSLASH", 
-                      "UNDERSCORE", "COLON", "SPACE", "LPAREN", "RPAREN", 
-                      "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", "DQUOTE", 
-                      "TILDE", "STAR", "LANGLE", "RANGLE" ]
+                      "<INVALID>", "<INVALID>", "<INVALID>", "NL", "LOWER_O", 
+                      "LOWER_X", "DATE", "TIME", "ID", "ZID", "NUM_ID", 
+                      "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DASH", 
+                      "DOT", "FSLASH", "UNDERSCORE", "COLON", "SPACE", "LPAREN", 
+                      "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", 
+                      "DQUOTE", "TILDE", "STAR", "LANGLE", "RANGLE" ]
 
     RULE_prog = 0
     RULE_query = 1
@@ -114,22 +116,23 @@ class ZorgQueryParser ( Parser ):
     RULE_note_status_char = 14
     RULE_priority_range = 15
     RULE_tag = 16
-    RULE_area = 17
-    RULE_context = 18
-    RULE_person = 19
-    RULE_project = 20
-    RULE_subfilter = 21
-    RULE_group_by_body = 22
-    RULE_group_by_atom = 23
-    RULE_order_by_body = 24
-    RULE_order_by_atom = 25
+    RULE_not_op = 17
+    RULE_area = 18
+    RULE_context = 19
+    RULE_person = 20
+    RULE_project = 21
+    RULE_subfilter = 22
+    RULE_group_by_body = 23
+    RULE_group_by_atom = 24
+    RULE_order_by_body = 25
+    RULE_order_by_atom = 26
 
     ruleNames =  [ "prog", "query", "where_query", "select_query", "select", 
                    "where", "order_by", "group_by", "select_body", "where_body", 
                    "or_filter", "and_filter", "where_atom", "note_status", 
-                   "note_status_char", "priority_range", "tag", "area", 
-                   "context", "person", "project", "subfilter", "group_by_body", 
-                   "group_by_atom", "order_by_body", "order_by_atom" ]
+                   "note_status_char", "priority_range", "tag", "not_op", 
+                   "area", "context", "person", "project", "subfilter", 
+                   "group_by_body", "group_by_atom", "order_by_body", "order_by_atom" ]
 
     EOF = Token.EOF
     T__0=1
@@ -145,35 +148,36 @@ class ZorgQueryParser ( Parser ):
     T__10=11
     T__11=12
     T__12=13
-    NL=14
-    LOWER_O=15
-    LOWER_X=16
-    DATE=17
-    TIME=18
-    ID=19
-    ZID=20
-    NUM_ID=21
-    TWO_SPACE_DASH=22
-    FOUR_SPACE_DASH=23
-    SYMBOL=24
-    DASH=25
-    DOT=26
-    FSLASH=27
-    UNDERSCORE=28
-    COLON=29
-    SPACE=30
-    LPAREN=31
-    RPAREN=32
-    HASH=33
-    AT_SIGN=34
-    PLUS=35
-    PERCENT=36
-    SQUOTE=37
-    DQUOTE=38
-    TILDE=39
-    STAR=40
-    LANGLE=41
-    RANGLE=42
+    T__13=14
+    NL=15
+    LOWER_O=16
+    LOWER_X=17
+    DATE=18
+    TIME=19
+    ID=20
+    ZID=21
+    NUM_ID=22
+    TWO_SPACE_DASH=23
+    FOUR_SPACE_DASH=24
+    SYMBOL=25
+    DASH=26
+    DOT=27
+    FSLASH=28
+    UNDERSCORE=29
+    COLON=30
+    SPACE=31
+    LPAREN=32
+    RPAREN=33
+    HASH=34
+    AT_SIGN=35
+    PLUS=36
+    PERCENT=37
+    SQUOTE=38
+    DQUOTE=39
+    TILDE=40
+    STAR=41
+    LANGLE=42
+    RANGLE=43
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -219,13 +223,13 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 52
-            self.query()
             self.state = 54
+            self.query()
+            self.state = 56
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==14:
-                self.state = 53
+            if _la==15:
+                self.state = 55
                 self.match(ZorgQueryParser.NL)
 
 
@@ -272,18 +276,18 @@ class ZorgQueryParser ( Parser ):
         localctx = ZorgQueryParser.QueryContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_query)
         try:
-            self.state = 58
+            self.state = 60
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 56
+                self.state = 58
                 self.where_query()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 57
+                self.state = 59
                 self.select_query()
                 pass
 
@@ -347,35 +351,35 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 63
+            self.state = 65
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==1:
-                self.state = 60
+                self.state = 62
                 self.select()
-                self.state = 61
+                self.state = 63
                 self.match(ZorgQueryParser.SPACE)
 
 
-            self.state = 65
+            self.state = 67
             self.where()
-            self.state = 68
+            self.state = 70
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
             if la_ == 1:
-                self.state = 66
+                self.state = 68
                 self.match(ZorgQueryParser.SPACE)
-                self.state = 67
+                self.state = 69
                 self.order_by()
 
 
-            self.state = 72
+            self.state = 74
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==30:
-                self.state = 70
+            if _la==31:
+                self.state = 72
                 self.match(ZorgQueryParser.SPACE)
-                self.state = 71
+                self.state = 73
                 self.group_by()
 
 
@@ -419,7 +423,7 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_select_query)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 74
+            self.state = 76
             self.select()
         except RecognitionException as re:
             localctx.exception = re
@@ -464,11 +468,11 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_select)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 76
-            self.match(ZorgQueryParser.T__0)
-            self.state = 77
-            self.match(ZorgQueryParser.SPACE)
             self.state = 78
+            self.match(ZorgQueryParser.T__0)
+            self.state = 79
+            self.match(ZorgQueryParser.SPACE)
+            self.state = 80
             self.select_body()
         except RecognitionException as re:
             localctx.exception = re
@@ -513,11 +517,11 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 10, self.RULE_where)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 80
-            self.match(ZorgQueryParser.T__1)
-            self.state = 81
-            self.match(ZorgQueryParser.SPACE)
             self.state = 82
+            self.match(ZorgQueryParser.T__1)
+            self.state = 83
+            self.match(ZorgQueryParser.SPACE)
+            self.state = 84
             self.where_body()
         except RecognitionException as re:
             localctx.exception = re
@@ -562,11 +566,11 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_order_by)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 84
-            self.match(ZorgQueryParser.T__2)
-            self.state = 85
-            self.match(ZorgQueryParser.SPACE)
             self.state = 86
+            self.match(ZorgQueryParser.T__2)
+            self.state = 87
+            self.match(ZorgQueryParser.SPACE)
+            self.state = 88
             self.order_by_body()
         except RecognitionException as re:
             localctx.exception = re
@@ -611,11 +615,11 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_group_by)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 88
-            self.match(ZorgQueryParser.T__3)
-            self.state = 89
-            self.match(ZorgQueryParser.SPACE)
             self.state = 90
+            self.match(ZorgQueryParser.T__3)
+            self.state = 91
+            self.match(ZorgQueryParser.SPACE)
+            self.state = 92
             self.group_by_body()
         except RecognitionException as re:
             localctx.exception = re
@@ -666,9 +670,9 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 92
+            self.state = 94
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 128849018976) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 257698037856) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -713,7 +717,7 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_where_body)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 94
+            self.state = 96
             self.or_filter()
         except RecognitionException as re:
             localctx.exception = re
@@ -764,19 +768,19 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 20, self.RULE_or_filter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 96
+            self.state = 98
             self.and_filter()
-            self.state = 101
+            self.state = 103
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
-                self.state = 97
-                self.match(ZorgQueryParser.SPACE)
-                self.state = 98
-                self.match(ZorgQueryParser.T__6)
                 self.state = 99
                 self.match(ZorgQueryParser.SPACE)
                 self.state = 100
+                self.match(ZorgQueryParser.T__6)
+                self.state = 101
+                self.match(ZorgQueryParser.SPACE)
+                self.state = 102
                 self.and_filter()
 
 
@@ -829,18 +833,18 @@ class ZorgQueryParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_and_filter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 103
+            self.state = 105
             self.where_atom()
-            self.state = 108
+            self.state = 110
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 104
+                    self.state = 106
                     self.match(ZorgQueryParser.SPACE)
-                    self.state = 105
+                    self.state = 107
                     self.where_atom() 
-                self.state = 110
+                self.state = 112
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
 
@@ -895,27 +899,27 @@ class ZorgQueryParser ( Parser ):
         localctx = ZorgQueryParser.Where_atomContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_where_atom)
         try:
-            self.state = 115
+            self.state = 117
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [15, 16, 25, 39, 41, 42]:
+            if token in [16, 17, 26, 40, 42, 43]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 111
+                self.state = 113
                 self.note_status()
                 pass
             elif token in [8]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 112
+                self.state = 114
                 self.priority_range()
                 pass
-            elif token in [33, 34, 35, 36]:
+            elif token in [11, 34, 35, 36, 37]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 113
+                self.state = 115
                 self.tag()
                 pass
-            elif token in [31]:
+            elif token in [32]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 114
+                self.state = 116
                 self.subfilter()
                 pass
             else:
@@ -965,16 +969,16 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 118 
+            self.state = 120 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 117
+                self.state = 119
                 self.note_status_char()
-                self.state = 120 
+                self.state = 122 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 7146859233280) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 14293718466560) != 0)):
                     break
 
         except RecognitionException as re:
@@ -1032,9 +1036,9 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 122
+            self.state = 124
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 7146859233280) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 14293718466560) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1085,25 +1089,25 @@ class ZorgQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 124
-            self.match(ZorgQueryParser.T__7)
-            self.state = 125
-            self.match(ZorgQueryParser.HASH)
             self.state = 126
+            self.match(ZorgQueryParser.T__7)
+            self.state = 127
+            self.match(ZorgQueryParser.HASH)
+            self.state = 128
             self.match(ZorgQueryParser.ID)
-            self.state = 131
+            self.state = 133
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==9:
-                self.state = 127
+                self.state = 129
                 self.match(ZorgQueryParser.T__8)
-                self.state = 128
+                self.state = 130
                 self.match(ZorgQueryParser.ID)
-                self.state = 133
+                self.state = 135
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 134
+            self.state = 136
             self.match(ZorgQueryParser.T__9)
         except RecognitionException as re:
             localctx.exception = re
@@ -1137,6 +1141,10 @@ class ZorgQueryParser ( Parser ):
             return self.getTypedRuleContext(ZorgQueryParser.ProjectContext,0)
 
 
+        def not_op(self):
+            return self.getTypedRuleContext(ZorgQueryParser.Not_opContext,0)
+
+
         def getRuleIndex(self):
             return ZorgQueryParser.RULE_tag
 
@@ -1155,33 +1163,78 @@ class ZorgQueryParser ( Parser ):
 
         localctx = ZorgQueryParser.TagContext(self, self._ctx, self.state)
         self.enterRule(localctx, 32, self.RULE_tag)
+        self._la = 0 # Token type
         try:
-            self.state = 140
+            self.enterOuterAlt(localctx, 1)
+            self.state = 139
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==11:
+                self.state = 138
+                self.not_op()
+
+
+            self.state = 145
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [33]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 136
+            if token in [34]:
+                self.state = 141
                 self.area()
                 pass
-            elif token in [34]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 137
+            elif token in [35]:
+                self.state = 142
                 self.context()
                 pass
-            elif token in [36]:
-                self.enterOuterAlt(localctx, 3)
-                self.state = 138
+            elif token in [37]:
+                self.state = 143
                 self.person()
                 pass
-            elif token in [35]:
-                self.enterOuterAlt(localctx, 4)
-                self.state = 139
+            elif token in [36]:
+                self.state = 144
                 self.project()
                 pass
             else:
                 raise NoViableAltException(self)
 
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Not_opContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+
+        def getRuleIndex(self):
+            return ZorgQueryParser.RULE_not_op
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNot_op" ):
+                listener.enterNot_op(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNot_op" ):
+                listener.exitNot_op(self)
+
+
+
+
+    def not_op(self):
+
+        localctx = ZorgQueryParser.Not_opContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_not_op)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 147
+            self.match(ZorgQueryParser.T__10)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1221,12 +1274,12 @@ class ZorgQueryParser ( Parser ):
     def area(self):
 
         localctx = ZorgQueryParser.AreaContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_area)
+        self.enterRule(localctx, 36, self.RULE_area)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 142
+            self.state = 149
             self.match(ZorgQueryParser.HASH)
-            self.state = 143
+            self.state = 150
             self.match(ZorgQueryParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1267,12 +1320,12 @@ class ZorgQueryParser ( Parser ):
     def context(self):
 
         localctx = ZorgQueryParser.ContextContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_context)
+        self.enterRule(localctx, 38, self.RULE_context)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 145
+            self.state = 152
             self.match(ZorgQueryParser.AT_SIGN)
-            self.state = 146
+            self.state = 153
             self.match(ZorgQueryParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1313,12 +1366,12 @@ class ZorgQueryParser ( Parser ):
     def person(self):
 
         localctx = ZorgQueryParser.PersonContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_person)
+        self.enterRule(localctx, 40, self.RULE_person)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 148
+            self.state = 155
             self.match(ZorgQueryParser.PERCENT)
-            self.state = 149
+            self.state = 156
             self.match(ZorgQueryParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1359,12 +1412,12 @@ class ZorgQueryParser ( Parser ):
     def project(self):
 
         localctx = ZorgQueryParser.ProjectContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_project)
+        self.enterRule(localctx, 42, self.RULE_project)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 151
+            self.state = 158
             self.match(ZorgQueryParser.PLUS)
-            self.state = 152
+            self.state = 159
             self.match(ZorgQueryParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1409,14 +1462,14 @@ class ZorgQueryParser ( Parser ):
     def subfilter(self):
 
         localctx = ZorgQueryParser.SubfilterContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_subfilter)
+        self.enterRule(localctx, 44, self.RULE_subfilter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 154
+            self.state = 161
             self.match(ZorgQueryParser.LPAREN)
-            self.state = 155
+            self.state = 162
             self.or_filter()
-            self.state = 156
+            self.state = 163
             self.match(ZorgQueryParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1461,19 +1514,19 @@ class ZorgQueryParser ( Parser ):
     def group_by_body(self):
 
         localctx = ZorgQueryParser.Group_by_bodyContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 44, self.RULE_group_by_body)
+        self.enterRule(localctx, 46, self.RULE_group_by_body)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 158
+            self.state = 165
             self.group_by_atom()
-            self.state = 161
+            self.state = 168
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==30:
-                self.state = 159
+            if _la==31:
+                self.state = 166
                 self.match(ZorgQueryParser.SPACE)
-                self.state = 160
+                self.state = 167
                 self.group_by_atom()
 
 
@@ -1522,13 +1575,13 @@ class ZorgQueryParser ( Parser ):
     def group_by_atom(self):
 
         localctx = ZorgQueryParser.Group_by_atomContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 46, self.RULE_group_by_atom)
+        self.enterRule(localctx, 48, self.RULE_group_by_atom)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 163
+            self.state = 170
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 128849018912) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 257698037792) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1579,23 +1632,23 @@ class ZorgQueryParser ( Parser ):
     def order_by_body(self):
 
         localctx = ZorgQueryParser.Order_by_bodyContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 48, self.RULE_order_by_body)
+        self.enterRule(localctx, 50, self.RULE_order_by_body)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 165
+            self.state = 172
             self.order_by_atom()
-            self.state = 170
+            self.state = 177
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 166
+                    self.state = 173
                     self.match(ZorgQueryParser.SPACE)
-                    self.state = 167
+                    self.state = 174
                     self.order_by_atom() 
-                self.state = 172
+                self.state = 179
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1631,13 +1684,13 @@ class ZorgQueryParser ( Parser ):
     def order_by_atom(self):
 
         localctx = ZorgQueryParser.Order_by_atomContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 50, self.RULE_order_by_atom)
+        self.enterRule(localctx, 52, self.RULE_order_by_atom)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 173
+            self.state = 180
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 14336) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 28672) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

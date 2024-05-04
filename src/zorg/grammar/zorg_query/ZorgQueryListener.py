@@ -161,6 +161,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#not_op.
+    def enterNot_op(self, ctx:ZorgQueryParser.Not_opContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#not_op.
+    def exitNot_op(self, ctx:ZorgQueryParser.Not_opContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#area.
     def enterArea(self, ctx:ZorgQueryParser.AreaContext):
         pass
