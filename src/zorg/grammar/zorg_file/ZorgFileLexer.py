@@ -1,4 +1,4 @@
-# Generated from src/zorg/grammar/zorg_file/ZorgFile.g4 by ANTLR 4.13.1
+# Generated from ZorgFile.g4 by ANTLR 4.13.1
 from antlr4 import *
 from io import StringIO
 import sys

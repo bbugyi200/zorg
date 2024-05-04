@@ -1,4 +1,4 @@
-# Generated from src/zorg/grammar/zorg_query/ZorgQuery.g4 by ANTLR 4.13.1
+# Generated from ZorgQuery.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .ZorgQueryParser import ZorgQueryParser
