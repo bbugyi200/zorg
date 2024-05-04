@@ -12,7 +12,7 @@ from ..domain.messages import Message, commands, events
 from ..storage.sql.session import SQLSession
 
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 MessageHandler = Callable[[Any, SQLSession], None]
 COMMAND_HANDLERS: dict[type[commands.Command], MessageHandler] = {
@@ -57,14 +57,14 @@ def _handle_event(
 ) -> None:
     for handler in EVENT_HANDLERS[type(event)]:
         try:
-            logger.debug(
+            _LOGGER.debug(
                 "handling event with handler",
                 zorg_event=str(event),
                 handler=str(handler),
             )
             handler(event, session)
         except Exception:
-            logger.exception("Exception handling event", zorg_event=event)
+            _LOGGER.exception("Exception handling event", zorg_event=event)
             continue
 
 
@@ -72,10 +72,10 @@ def _handle_command(
     command: commands.Command,
     session: SQLSession,
 ) -> None:
-    logger.debug("handling command", command=command)
+    _LOGGER.debug("handling command", command=command)
     try:
         handler = COMMAND_HANDLERS[type(command)]
         handler(command, session)
     except Exception:
-        logger.exception("Exception handling command", command=command)
+        _LOGGER.exception("Exception handling command", command=command)
         raise

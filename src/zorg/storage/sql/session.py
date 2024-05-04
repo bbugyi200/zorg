@@ -16,7 +16,7 @@ from .engine import create_cached_engine
 from .repo import SQLRepo
 
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 
 class SQLSession:
@@ -122,5 +122,5 @@ def _prep_sqlite_db(database_url: str, should_delete: bool = False) -> None:
         db_path = Path(database_url[len(sqlite_prefix) :])
         db_path.parent.mkdir(exist_ok=True, parents=True)
         if db_path.exists() and should_delete:
-            logger.info("Deleting existing zorg database.", db_path=db_path)
+            _LOGGER.info("Deleting existing zorg database.", db_path=db_path)
             db_path.unlink()

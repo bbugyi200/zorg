@@ -1,7 +1,5 @@
 """Contains runners for the 'zorg edit' command."""
 
-from logrus import Logger
-
 from ...domain.messages import commands
 from ...service import messagebus
 from ...service.common import prepend_zdir
@@ -10,9 +8,6 @@ from ...service.templates import init_from_template
 from ...storage.sql.session import SQLSession
 from ..config import EditConfig
 from ._runners import runner
-
-
-logger = Logger(__name__)
 
 
 @runner

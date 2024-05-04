@@ -18,7 +18,7 @@ Command = Literal[
     "compile", "create", "edit", "init", "open", "query", "reindex", "render"
 ]
 
-_logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 _DEFAULT_ZETTEL_DIR: Final[Path] = Path.home() / "org"
 
@@ -121,14 +121,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     # HACK: Make 'edit' the default sub-command.
     argv_after_opts = list(it.dropwhile(lambda x: x.startswith("-"), argv[1:]))
     if not argv_after_opts:
-        _logger.debug(
+        _LOGGER.debug(
             "Inferring 'edit' command since no subcommand was specified."
         )
         argv = list(argv) + ["edit"]
     elif argv_after_opts[0].startswith("@"):
         argv_opts = list(it.takewhile(lambda x: x.startswith("-"), argv[1:]))
         argv = [argv[0]] + argv_opts + ["edit"] + argv_after_opts
-        _logger.debug(
+        _LOGGER.debug(
             "Inferring 'edit' command since we found a file group name.",
             file_group_name=argv_after_opts[0],
             new_args=argv[1:],
@@ -280,7 +280,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
     if kwargs["command"] == "edit" and "zo_paths" not in kwargs:
-        _logger.debug(
+        _LOGGER.debug(
             "The 'edit' command was invoked, but no file paths were specified."
             " Auto-adding the @default file group paths.",
             kwargs=kwargs,

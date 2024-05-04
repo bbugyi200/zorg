@@ -13,7 +13,7 @@ from . import common
 from ..domain.types import TemplatePatternMapType, VarMapType
 
 
-logger = Logger(__name__)
+_LOGGER = Logger(__name__)
 
 
 def init_from_template(
@@ -51,14 +51,14 @@ def init_from_template(
             break
 
     if matched_template is None:
-        logger.warn(
+        _LOGGER.warn(
             "Unable to match new filename with any registered templates.",
             template_pattern_map=template_pattern_map,
             new_path=new_path,
         )
         return
 
-    logger.info(
+    _LOGGER.info(
         "Creating new file using zorg template.",
         new_file=new_path,
         template=matched_template,
