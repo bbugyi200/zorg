@@ -91,8 +91,8 @@ class _SONConverter:
             return None
 
     @_son_converter_parser
-    def prefix_tag_parser(self) -> Optional[ColumnElement]:
-        """Parser for prefix tags (e.g. '@home' or '+greatday')."""
+    def tags(self) -> Optional[ColumnElement]:
+        """Parser for prefix tags (e.g. '@home' or '+zorg')."""
         conditions = []
         for prefix_tag_list, link_model, model in [
             (self.and_filter.areas, sql.AreaLink, sql.Area),
