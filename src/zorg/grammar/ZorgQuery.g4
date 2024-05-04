@@ -21,10 +21,15 @@ select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
 
 // WHERE
 where_body : where_atom (SPACE where_atom)* ;
-where_atom : note_status | priority_range ;
+where_atom : note_status | priority_range | tag ;
 note_status : note_status_char+ ;
 note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : '[' HASH ID (',' ID)* ']' ;
+tag        : area | context | person | project ;
+area       : HASH ID ;
+context    : AT_SIGN ID ;
+person     : PERCENT ID ;
+project    : PLUS ID ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? ;

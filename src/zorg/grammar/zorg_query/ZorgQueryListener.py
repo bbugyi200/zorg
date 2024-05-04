@@ -134,6 +134,51 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#tag.
+    def enterTag(self, ctx:ZorgQueryParser.TagContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#tag.
+    def exitTag(self, ctx:ZorgQueryParser.TagContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#area.
+    def enterArea(self, ctx:ZorgQueryParser.AreaContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#area.
+    def exitArea(self, ctx:ZorgQueryParser.AreaContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#context.
+    def enterContext(self, ctx:ZorgQueryParser.ContextContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#context.
+    def exitContext(self, ctx:ZorgQueryParser.ContextContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#person.
+    def enterPerson(self, ctx:ZorgQueryParser.PersonContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#person.
+    def exitPerson(self, ctx:ZorgQueryParser.PersonContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#project.
+    def enterProject(self, ctx:ZorgQueryParser.ProjectContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#project.
+    def exitProject(self, ctx:ZorgQueryParser.ProjectContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#group_by_body.
     def enterGroup_by_body(self, ctx:ZorgQueryParser.Group_by_bodyContext):
         pass
