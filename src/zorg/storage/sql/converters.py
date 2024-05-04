@@ -97,7 +97,7 @@ class _SONConverter:
         for prefix_tag_list, link_model, model in [
             (self.and_filter.areas, sql.AreaLink, sql.Area),
             (self.and_filter.contexts, sql.ContextLink, sql.Context),
-            (self.and_filter.people, sql.ProjectLink, sql.Project),
+            (self.and_filter.people, sql.PersonLink, sql.Person),
             (self.and_filter.projects, sql.ProjectLink, sql.Project),
         ]:
             base_subquery = (
