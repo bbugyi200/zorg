@@ -20,8 +20,10 @@ group_by : 'G' SPACE group_by_body ;
 select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
 
 // WHERE
-where_body : where_atom (SPACE where_atom)* ;
-where_atom : note_status | priority_range | tag ;
+where_body : or_filter ;
+or_filter : and_filter (SPACE 'or' SPACE and_filter)? ;
+and_filter : where_atom (SPACE where_atom)* ;
+where_atom : note_status | priority_range | tag | subfilter;
 note_status : note_status_char+ ;
 note_status_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : '[' HASH ID (',' ID)* ']' ;
@@ -30,6 +32,7 @@ area       : HASH ID ;
 context    : AT_SIGN ID ;
 person     : PERCENT ID ;
 project    : PLUS ID ;
+subfilter : '(' or_filter ')' ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? ;

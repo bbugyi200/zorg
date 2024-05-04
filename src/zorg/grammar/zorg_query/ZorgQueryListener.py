@@ -98,6 +98,24 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#or_filter.
+    def enterOr_filter(self, ctx:ZorgQueryParser.Or_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#or_filter.
+    def exitOr_filter(self, ctx:ZorgQueryParser.Or_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#and_filter.
+    def enterAnd_filter(self, ctx:ZorgQueryParser.And_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#and_filter.
+    def exitAnd_filter(self, ctx:ZorgQueryParser.And_filterContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#where_atom.
     def enterWhere_atom(self, ctx:ZorgQueryParser.Where_atomContext):
         pass
@@ -176,6 +194,15 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#project.
     def exitProject(self, ctx:ZorgQueryParser.ProjectContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#subfilter.
+    def enterSubfilter(self, ctx:ZorgQueryParser.SubfilterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#subfilter.
+    def exitSubfilter(self, ctx:ZorgQueryParser.SubfilterContext):
         pass
 
 

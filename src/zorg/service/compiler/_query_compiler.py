@@ -19,6 +19,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
     def __init__(self, zorg_query: Query) -> None:
         self.zorg_query = zorg_query
 
+        self._and_filters: list[WhereAndFilter] = []
+
     def enterSelect(
         self, ctx: ZorgQueryParser.SelectContext
     ) -> None:  # noqa: D102
@@ -45,12 +47,11 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
         self.zorg_query.select = select
 
-    def enterWhere(
-        self, ctx: ZorgQueryParser.WhereContext
+    def enterAnd_filter(
+        self, ctx: ZorgQueryParser.And_filterContext
     ) -> None:  # noqa: D102
-        where_body = cast(ZorgQueryParser.Where_bodyContext, ctx.where_body())
         where_atoms = cast(
-            list[ZorgQueryParser.Where_atomContext], where_body.where_atom()
+            list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
         )
         allowed_note_statuses: set[NoteType] = set()
         priorities: set[TodoPriorityType] = set()
@@ -71,12 +72,19 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     where_atom.priority_range(),
                 )
                 _add_priorities(priority_range, priorities)
-        where = WhereOrFilter([
+
+        self._and_filters.append(
             WhereAndFilter(
                 allowed_note_statuses=allowed_note_statuses,
                 priorities=priorities,
             )
-        ])
+        )
+
+    def exitWhere(
+        self, ctx: ZorgQueryParser.WhereContext
+    ) -> None:  # noqa: D102
+        del ctx
+        where = WhereOrFilter(self._and_filters)
         self.zorg_query.where = where
 
 
