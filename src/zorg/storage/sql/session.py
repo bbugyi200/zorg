@@ -45,6 +45,7 @@ class SQLSession:
         self._zettel_dir = zettel_dir
         self._messages: list[Message] = []
         self._last_messages: list[Message] = []
+        self._verbose = verbose
 
         self._session: Session
         self._repo: SQLRepo
@@ -52,7 +53,9 @@ class SQLSession:
     def __enter__(self) -> SQLSession:
         """Called before entering a SQLSession with-block."""
         self._session = Session(self._engine_factory())
-        self._repo = SQLRepo(self._zettel_dir, self._session)
+        self._repo = SQLRepo(
+            self._zettel_dir, self._session, verbose=self._verbose
+        )
         return self
 
     def __exit__(

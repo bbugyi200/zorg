@@ -25,14 +25,13 @@ class SQLRepo:
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
-        self,
-        zettel_dir: Path,
-        session: Session,
+        self, zettel_dir: Path, session: Session, *, verbose: int = 0
     ) -> None:
         self._zettel_dir = zettel_dir
         self._session = session
         self._converter = ZorgFileConverter(zettel_dir, session)
         self._note_converter = ZorgNoteConverter(session)
+        self._verbose = verbose
 
         self.seen: list[File] = []
 
@@ -113,6 +112,11 @@ class SQLRepo:
     def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get file(s) from DB by using a query."""
         select_of_note = to_select_of_note(query)
+        # If the user asked for really verbose output...
+        if self._verbose > 1:
+            # ... then we print the SELECT statement.
+            print(select_of_note)
+
         result: list[Note] = []
         for sql_note in self._session.exec(select_of_note):
             result.append(self._note_converter.to_entity(sql_note))
