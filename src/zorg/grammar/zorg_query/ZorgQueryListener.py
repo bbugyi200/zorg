@@ -89,6 +89,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#note.
+    def enterNote(self, ctx:ZorgQueryParser.NoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#note.
+    def exitNote(self, ctx:ZorgQueryParser.NoteContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#where_body.
     def enterWhere_body(self, ctx:ZorgQueryParser.Where_bodyContext):
         pass
@@ -248,6 +257,42 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#order_by_atom.
     def exitOrder_by_atom(self, ctx:ZorgQueryParser.Order_by_atomContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#date.
+    def enterDate(self, ctx:ZorgQueryParser.DateContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#date.
+    def exitDate(self, ctx:ZorgQueryParser.DateContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#priority.
+    def enterPriority(self, ctx:ZorgQueryParser.PriorityContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#priority.
+    def exitPriority(self, ctx:ZorgQueryParser.PriorityContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#file.
+    def enterFile(self, ctx:ZorgQueryParser.FileContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#file.
+    def exitFile(self, ctx:ZorgQueryParser.FileContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#type.
+    def enterType(self, ctx:ZorgQueryParser.TypeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#type.
+    def exitType(self, ctx:ZorgQueryParser.TypeContext):
         pass
 
 

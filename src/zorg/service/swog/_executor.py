@@ -28,7 +28,7 @@ def execute(session: SQLSession, query_string: str) -> str:
     filtered_notes = session.repo.get_by_query(query.where)
 
     # (S)ELECT
-    if query.select is SelectType.NOTES:
+    if query.select is SelectType.NOTE:
         for note in filtered_notes:
             note_type = (
                 note.todo_payload.status

@@ -6,7 +6,9 @@ from typing import Iterable, Optional
 
 from ..types import (
     DescOperator,
+    GroupByType,
     NoteType,
+    OrderByType,
     PropertyOperator,
     PropertyValueType,
     SelectType,
@@ -86,5 +88,11 @@ class Query:
     (G)ROUP BY
     """
 
-    select: SelectType = field(default=SelectType.NOTES)
+    select: SelectType = field(default=SelectType.NOTE)
     where: Optional[WhereOrFilter] = None
+    order_by: tuple[OrderByType, ...] = (
+        OrderByType.NOTE_TYPE,
+        OrderByType.PRIORITY,
+        OrderByType.DATE,
+    )
+    group_by: Optional[tuple[GroupByType, ...]] = None

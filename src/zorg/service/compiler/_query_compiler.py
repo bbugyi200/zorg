@@ -5,7 +5,13 @@ from typing import cast
 from logrus import Logger
 
 from ...domain.models import Query, WhereAndFilter, WhereOrFilter
-from ...domain.types import NoteType, SelectType, TodoPriorityType
+from ...domain.types import (
+    GroupByType,
+    NoteType,
+    OrderByType,
+    SelectType,
+    TodoPriorityType,
+)
 from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 
@@ -28,18 +34,18 @@ class ZorgQueryCompiler(ZorgQueryListener):
             ZorgQueryParser.Select_bodyContext, ctx.select_body()
         )
         select: SelectType
-        if select_body.AT_SIGN():
-            select = SelectType.CONTEXTS
-        elif select_body.HASH():
-            select = SelectType.AREAS
+        if select_body.HASH():
+            select = SelectType.AREA
+        elif select_body.AT_SIGN():
+            select = SelectType.CONTEXT
         elif select_body.PERCENT():
-            select = SelectType.PEOPLE
+            select = SelectType.PERSON
         elif select_body.PLUS():
-            select = SelectType.PROJECTS
-        elif select_body.getText() == "file":
-            select = SelectType.FILES
-        elif select_body.getText() == "note":
-            select = SelectType.NOTES
+            select = SelectType.PROJECT
+        elif select_body.file_():
+            select = SelectType.FILE
+        elif select_body.note():
+            select = SelectType.NOTE
         else:
             emsg = "Unrecognized select body"
             _LOGGER.error(emsg, select_body=select_body.getText())
@@ -107,6 +113,50 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 projects=projects,
             )
         )
+
+    def enterGroup_by_body(
+        self, ctx: ZorgQueryParser.Group_by_bodyContext
+    ) -> None:  # noqa: D102
+        group_by_types = []
+        for group_by_atom in cast(
+            list[ZorgQueryParser.Group_by_atomContext], ctx.group_by_atom()
+        ):
+            if group_by_atom.HASH():
+                group_by_type = GroupByType.AREA
+            elif group_by_atom.PLUS():
+                group_by_type = GroupByType.PROJECT
+            elif group_by_atom.file_():
+                group_by_type = GroupByType.FILE
+            elif group_by_atom.type_():
+                group_by_type = GroupByType.NOTE_TYPE
+            else:
+                raise RuntimeError(
+                    f"Invalid GROUP BY atom: {group_by_atom.getText()}"
+                )
+
+            group_by_types.append(group_by_type)
+        self.zorg_query.group_by = tuple(group_by_types)
+
+    def enterOrder_by_body(
+        self, ctx: ZorgQueryParser.Order_by_bodyContext
+    ) -> None:  # noqa: D102
+        order_by_types = []
+        for order_by_atom in cast(
+            list[ZorgQueryParser.Order_by_atomContext], ctx.order_by_atom()
+        ):
+            if order_by_atom.date():
+                group_by_type = OrderByType.DATE
+            elif order_by_atom.priority():
+                group_by_type = OrderByType.PRIORITY
+            elif order_by_atom.type_():
+                group_by_type = OrderByType.NOTE_TYPE
+            else:
+                raise RuntimeError(
+                    f"Invalid GROUP BY atom: {order_by_atom.getText()}"
+                )
+
+            order_by_types.append(group_by_type)
+        self.zorg_query.order_by = tuple(order_by_types)
 
     def enterSubfilter(
         self, ctx: ZorgQueryParser.SubfilterContext

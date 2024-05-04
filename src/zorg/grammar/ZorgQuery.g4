@@ -17,7 +17,8 @@ order_by : 'O' SPACE order_by_body ;
 group_by : 'G' SPACE group_by_body ;
 
 // SELECT
-select_body : 'file' | 'note' | AT_SIGN | HASH | PLUS | PERCENT ;
+select_body : file | note | AT_SIGN | HASH | PLUS | PERCENT ;
+note : 'note' ;
 
 // WHERE
 where_body : or_filter ;
@@ -37,8 +38,14 @@ subfilter : '(' or_filter ')' ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? ;
-group_by_atom : 'file' | AT_SIGN | HASH | PLUS | PERCENT;
+group_by_atom : file | type | HASH | PLUS ;
 
 // ORDER BY
 order_by_body : order_by_atom (SPACE order_by_atom)* ;
-order_by_atom : 'priority' | 'type' | 'zid' ;
+order_by_atom : date | priority | type ;
+date : 'date' ;
+priority : 'priority' ;
+
+// shared subrules
+file : 'file' ;
+type : 'type' ;

@@ -120,15 +120,32 @@ class DescOperator(enum.Enum):
     NOT_CONTAINS = enum.auto()
 
 
+class GroupByType(enum.Enum):
+    """Represents a single GROUP BY field for zorg queries."""
+
+    AREA = enum.auto()
+    FILE = enum.auto()
+    NOTE_TYPE = enum.auto()
+    PROJECT = enum.auto()
+
+
+class OrderByType(enum.Enum):
+    """Represents a single ORDER BY field for zorg queries."""
+
+    DATE = enum.auto()
+    NOTE_TYPE = enum.auto()
+    PRIORITY = enum.auto()
+
+
 class SelectType(enum.Enum):
     """A zorg query (S)ELECT."""
 
-    AREAS = enum.auto()
-    CONTEXTS = enum.auto()
-    FILES = enum.auto()
-    NOTES = enum.auto()
-    PEOPLE = enum.auto()
-    PROJECTS = enum.auto()
+    AREA = enum.auto()
+    CONTEXT = enum.auto()
+    FILE = enum.auto()
+    NOTE = enum.auto()
+    PERSON = enum.auto()
+    PROJECT = enum.auto()
 
 
 class PropertyOperator(enum.Enum):
