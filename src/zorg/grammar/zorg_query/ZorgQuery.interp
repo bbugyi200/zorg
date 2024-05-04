@@ -104,8 +104,8 @@ where_body
 or_filter
 and_filter
 where_atom
-note_status
-note_status_char
+note_type
+note_type_char
 priority_range
 tag
 not_op

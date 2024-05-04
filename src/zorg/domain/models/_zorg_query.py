@@ -45,13 +45,13 @@ class DateRange:
 class WhereAndFilter:
     """Tag used to filter ZorgNotes."""
 
-    allowed_note_statuses: set[NoteType] = field(default_factory=set)
+    allowed_note_types: set[NoteType] = field(default_factory=set)
     areas: set[str] = field(default_factory=set)
     contexts: set[str] = field(default_factory=set)
     create_date_ranges: set[DateRange] = field(default_factory=set)
     desc_filters: set[DescFilter] = field(default_factory=set)
     modify_date_ranges: set[DateRange] = field(default_factory=set)
-    or_filters: set["WhereOrFilter"] = field(default_factory=set)
+    or_filters: list["WhereOrFilter"] = field(default_factory=list)
     people: set[str] = field(default_factory=set)
     property_filters: set[PropertyFilter] = field(default_factory=set)
     priorities: set[TodoPriorityType] = field(default_factory=set)

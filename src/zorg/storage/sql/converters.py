@@ -68,14 +68,14 @@ class _SONConverter:
         return where
 
     @_son_converter_parser
-    def note_status(self) -> Optional[ColumnElement]:
+    def note_type(self) -> Optional[ColumnElement]:
         """Converter for done status (e.g. '-' or 'ox~<>')."""
-        if not self.and_filter.allowed_note_statuses:
+        if not self.and_filter.allowed_note_types:
             return None
 
         return or_(*[
-            sql.ZorgNote.todo_status == _to_todo_status(note_status)
-            for note_status in self.and_filter.allowed_note_statuses
+            sql.ZorgNote.todo_status == _to_todo_status(note_type)
+            for note_type in self.and_filter.allowed_note_types
         ])
 
     @_son_converter_parser

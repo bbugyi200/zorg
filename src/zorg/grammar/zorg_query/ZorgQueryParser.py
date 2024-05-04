@@ -112,8 +112,8 @@ class ZorgQueryParser ( Parser ):
     RULE_or_filter = 10
     RULE_and_filter = 11
     RULE_where_atom = 12
-    RULE_note_status = 13
-    RULE_note_status_char = 14
+    RULE_note_type = 13
+    RULE_note_type_char = 14
     RULE_priority_range = 15
     RULE_tag = 16
     RULE_not_op = 17
@@ -129,8 +129,8 @@ class ZorgQueryParser ( Parser ):
 
     ruleNames =  [ "prog", "query", "where_query", "select_query", "select", 
                    "where", "order_by", "group_by", "select_body", "where_body", 
-                   "or_filter", "and_filter", "where_atom", "note_status", 
-                   "note_status_char", "priority_range", "tag", "not_op", 
+                   "or_filter", "and_filter", "where_atom", "note_type", 
+                   "note_type_char", "priority_range", "tag", "not_op", 
                    "area", "context", "person", "project", "subfilter", 
                    "group_by_body", "group_by_atom", "order_by_body", "order_by_atom" ]
 
@@ -864,8 +864,8 @@ class ZorgQueryParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def note_status(self):
-            return self.getTypedRuleContext(ZorgQueryParser.Note_statusContext,0)
+        def note_type(self):
+            return self.getTypedRuleContext(ZorgQueryParser.Note_typeContext,0)
 
 
         def priority_range(self):
@@ -905,7 +905,7 @@ class ZorgQueryParser ( Parser ):
             if token in [16, 17, 26, 40, 42, 43]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 113
-                self.note_status()
+                self.note_type()
                 pass
             elif token in [8]:
                 self.enterOuterAlt(localctx, 2)
@@ -934,38 +934,38 @@ class ZorgQueryParser ( Parser ):
         return localctx
 
 
-    class Note_statusContext(ParserRuleContext):
+    class Note_typeContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def note_status_char(self, i:int=None):
+        def note_type_char(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ZorgQueryParser.Note_status_charContext)
+                return self.getTypedRuleContexts(ZorgQueryParser.Note_type_charContext)
             else:
-                return self.getTypedRuleContext(ZorgQueryParser.Note_status_charContext,i)
+                return self.getTypedRuleContext(ZorgQueryParser.Note_type_charContext,i)
 
 
         def getRuleIndex(self):
-            return ZorgQueryParser.RULE_note_status
+            return ZorgQueryParser.RULE_note_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterNote_status" ):
-                listener.enterNote_status(self)
+            if hasattr( listener, "enterNote_type" ):
+                listener.enterNote_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitNote_status" ):
-                listener.exitNote_status(self)
+            if hasattr( listener, "exitNote_type" ):
+                listener.exitNote_type(self)
 
 
 
 
-    def note_status(self):
+    def note_type(self):
 
-        localctx = ZorgQueryParser.Note_statusContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_note_status)
+        localctx = ZorgQueryParser.Note_typeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 26, self.RULE_note_type)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
@@ -974,7 +974,7 @@ class ZorgQueryParser ( Parser ):
             _la = self._input.LA(1)
             while True:
                 self.state = 119
-                self.note_status_char()
+                self.note_type_char()
                 self.state = 122 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -990,7 +990,7 @@ class ZorgQueryParser ( Parser ):
         return localctx
 
 
-    class Note_status_charContext(ParserRuleContext):
+    class Note_type_charContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1016,23 +1016,23 @@ class ZorgQueryParser ( Parser ):
             return self.getToken(ZorgQueryParser.RANGLE, 0)
 
         def getRuleIndex(self):
-            return ZorgQueryParser.RULE_note_status_char
+            return ZorgQueryParser.RULE_note_type_char
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterNote_status_char" ):
-                listener.enterNote_status_char(self)
+            if hasattr( listener, "enterNote_type_char" ):
+                listener.enterNote_type_char(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitNote_status_char" ):
-                listener.exitNote_status_char(self)
+            if hasattr( listener, "exitNote_type_char" ):
+                listener.exitNote_type_char(self)
 
 
 
 
-    def note_status_char(self):
+    def note_type_char(self):
 
-        localctx = ZorgQueryParser.Note_status_charContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_note_status_char)
+        localctx = ZorgQueryParser.Note_type_charContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 28, self.RULE_note_type_char)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)

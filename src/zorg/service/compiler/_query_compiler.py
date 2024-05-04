@@ -50,7 +50,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
     def enterAnd_filter(
         self, ctx: ZorgQueryParser.And_filterContext
     ) -> None:  # noqa: D102
-        allowed_note_statuses: set[NoteType] = set()
+        allowed_note_types: set[NoteType] = set()
         areas: set[str] = set()
         contexts: set[str] = set()
         people: set[str] = set()
@@ -61,16 +61,16 @@ class ZorgQueryCompiler(ZorgQueryListener):
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
         )
         for where_atom in where_atoms:
-            if where_atom.note_status():
-                note_status = cast(
-                    ZorgQueryParser.Note_statusContext,
-                    where_atom.note_status(),
+            if where_atom.note_type():
+                note_type = cast(
+                    ZorgQueryParser.Note_typeContext,
+                    where_atom.note_type(),
                 )
-                note_status_chars = cast(
-                    list[ZorgQueryParser.Note_status_charContext],
-                    note_status.note_status_char(),
+                note_type_chars = cast(
+                    list[ZorgQueryParser.Note_type_charContext],
+                    note_type.note_type_char(),
                 )
-                _add_note_statuses(note_status_chars, allowed_note_statuses)
+                _add_note_types(note_type_chars, allowed_note_types)
             elif where_atom.priority_range():
                 priority_range = cast(
                     ZorgQueryParser.Priority_rangeContext,
