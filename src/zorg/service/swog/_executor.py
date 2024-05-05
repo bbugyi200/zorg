@@ -54,7 +54,7 @@ def execute(session: SQLSession, query_string: str) -> str:
     if query.group_by is None:
         grouped_notes = filtered_notes
     else:
-        grouped_notes = _nested_note_group(filtered_notes, query.group_by)
+        grouped_notes = _group_notes_by(filtered_notes, query.group_by)
 
     ### (O)RDER BY
 
@@ -114,7 +114,7 @@ def _get_header(level: int) -> str:
         )
 
 
-def _nested_note_group(
+def _group_notes_by(
     notes: Iterable[Note], group_by_types: Sequence[GroupByType]
 ) -> GroupedNotes:
     if not group_by_types:
@@ -127,5 +127,5 @@ def _nested_note_group(
     for k, group in it.groupby(sorted_notes, key=key):
         if isinstance(k, list):
             k = " ".join(k)
-        grouped_notes[k] = _nested_note_group(group, rest_group_by_types)
+        grouped_notes[k] = _group_notes_by(group, rest_group_by_types)
     return grouped_notes
