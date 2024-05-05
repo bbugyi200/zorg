@@ -16,8 +16,8 @@ from ..compiler import build_zorg_query
 _LOGGER = Logger(__name__)
 
 
-GroupNoteMap = dict[str, "GroupedNotes"]
-GroupedNotes = Union[list[Note], GroupNoteMap]
+GroupNoteMap = dict[str, "NoteGroup"]
+NoteGroup = Union[list[Note], GroupNoteMap]
 
 
 def execute(session: SQLSession, query_string: str) -> str:
@@ -38,43 +38,45 @@ def execute(session: SQLSession, query_string: str) -> str:
     [[src/zorg/grammar/ZorgFile.g4]] grammar's "body" parser rule.
     """
     query = build_zorg_query(query_string)
+    _LOGGER.debug(
+        "Built query from string", query=query, query_string=query_string
+    )
 
     ### (W)HERE
     start_time = time.time()
     filtered_notes = session.repo.get_by_query(query.where)
     query_runtime = time.time() - start_time
-    _LOGGER.debug(
+    _LOGGER.info(
         "Query complete",
         num_of_notes=len(filtered_notes),
         seconds=f"{query_runtime:.3f}",
-        query=query,
     )
 
     ### (G)ROUP BY
-    grouped_notes = _group_notes_by(filtered_notes, query.group_by)
+    note_group = _group_notes_by(filtered_notes, query.group_by)
 
     ### (O)RDER BY
 
     ### (S)ELECT
-    result = _select(query.select, grouped_notes)
+    result = _select(query.select, note_group)
 
     return result
 
 
 def _select(
-    select_type: SelectType, grouped_notes: GroupedNotes, *, level: int = 1
+    select_type: SelectType, note_group: NoteGroup, *, level: int = 1
 ) -> str:
     result = ""
     if select_type is SelectType.NOTE:
-        if isinstance(grouped_notes, list):
-            result += _select_note(grouped_notes)
+        if isinstance(note_group, list):
+            result += _select_note(note_group)
         else:
-            assert isinstance(grouped_notes, dict)
-            for group_name, next_grouped_notes in grouped_notes.items():
+            assert isinstance(note_group, dict)
+            for group_name, note_subgroup in note_group.items():
                 if group_name:
                     result += f"\n{_get_header(level)} {group_name}\n"
                 result += _select(
-                    select_type, next_grouped_notes, level=level + 1
+                    select_type, note_subgroup, level=level + 1
                 )
     else:
         raise NotImplementedError(
@@ -115,14 +117,14 @@ def _get_header(level: int) -> str:
 
 def _group_notes_by(
     notes: Iterable[Note], group_by_types: Sequence[GroupByType]
-) -> GroupedNotes:
+) -> NoteGroup:
     if not group_by_types:
         return list(notes)
 
     key = group_by_types[0].keyfunc
     rest_group_by_types = group_by_types[1:]
     sorted_notes = sorted(notes, key=key)
-    grouped_notes: GroupNoteMap = defaultdict(list)
+    note_group: GroupNoteMap = defaultdict(list)
     for k, group in it.groupby(sorted_notes, key=key):
-        grouped_notes[str(k)] = _group_notes_by(group, rest_group_by_types)
-    return grouped_notes
+        note_group[str(k)] = _group_notes_by(group, rest_group_by_types)
+    return note_group
