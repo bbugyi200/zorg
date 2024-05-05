@@ -2,7 +2,7 @@
 # name: test_query[YAMLConfigFile-grouped_and_ordered]
   '''
   
-  ######### 20240323.zo
+  ######### [[20240323]]
   - #gtd pomodoro
   - #own Buy rubber duck
   - +zorg Parametrize test_run_compile()
@@ -22,18 +22,18 @@
   - +laundry wash delicates
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   
-  ######### basic.zo
+  ######### [[basic]]
   - First note in first block
   - Second note in first block
   o [#C] bazbuz is ok too...
   
-  ######### links.zo
+  ######### [[links]]
   - Some note with a [[bar.sh]] link to a bash script.
   - Some note with a link in parens (see [[baz]]).
   - Some note with a link in parens and a block-level link ([[buz::fuzz]]).
   - Some note that references an old 200101#12 ZID.
   
-  ######### multiblocks.zo
+  ######### [[multiblocks]]
   o [#C] Some todo
   o [#C] Another related todo
   - A note about life...
@@ -47,16 +47,16 @@
   - Note D
   - Note E
   
-  ######### priority.zo
+  ######### [[priority]]
   o [#A] 2024-03-13 High Priority TODO
   o [#B] 2024-03-13 Medium Priority TODO
   o [#C] 2024-03-13 Low Priority TODO
   
-  ######### property.zo
+  ######### [[property]]
   - 2024-03-30 This note contains a key::value pair.
   o [#C] This todo is @due today! | due::2024-03-13
   
-  ######### scrambled_prj_notes.zo
+  ######### [[scrambled_prj_notes]]
   - Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
@@ -125,7 +125,7 @@
   - Rzq-itde mpfj
   - Zee-lpfg uqogce bk khxsvgrkq bbgvmf
   
-  ######### subnotes.zo
+  ######### [[subnotes]]
   - foobar
   o [#C] This todo is due::2024-03-30 and has some subnotes
   - Todo subnote A
@@ -138,7 +138,7 @@
   - is fat
   - is stinky
   
-  ######### subsections.zo
+  ######### [[subsections]]
   - Note about A1
   - Note about something
   - Another note
@@ -154,7 +154,7 @@
   o [#C] Some foobar todo.
   - This is the final section!
   
-  ######### tags_and_ids.zo
+  ######### [[tags_and_ids]]
   - 240408#0X Some note
   - 301231#X0 When I talk to %pig I always want to @puke.
   - 240408#NO Da nah nah nuh...
@@ -205,17 +205,17 @@
   - And another note.
   - This is the final section!
   
-  ***** arms
+  ***** +arms
   - Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   
-  ***** arms bmlakcr
+  ***** +arms +bmlakcr
   - Nyhha trra://hk/wyp-slg-lbyuqz pris oiqf nywj kg smoy nwdraivpht() cu jzusgcwm zwyirs?
   
-  ***** arms bmlakcr lozmhqjd
+  ***** +arms +bmlakcr +lozmhqjd
   - Wouvp rx cmmi jk zes r kv/u1abtunoeaorevyolmef: "Njwb opjiv wlyvyfrb; tqcwkrs qlawalk: 200F."
   
-  ***** arms bmlakcr wjybwa
+  ***** +arms +bmlakcr +wjybwa
   - e2.0 xrestv rlqt cszmjhp: 1) Cnelcge 2) uttnzeu tncj 3) Rasemja zzvilcys
   - Qtvhtfc ywtyvbppqu (qs odvqdfjk nydxt):
   - XC: Wvlotmog | Akjrgluk cck dpvcvia
@@ -223,41 +223,41 @@
   - Lveg         | Kfvunvqioefmgo Rlqu
   - HU: Yoxlnl   | Kyahuurpzq mt VV (v.u. boh coveshbg rsp hbyhmm-pav)
   
-  ***** arms bqf cpv_mociy ipyt
+  ***** +arms +bqf +cpv_mociy +ipyt
   - Ajbss udcor xf tylgpk:
   - ibmxadcdz.iwmdvsxeg_uxzvuntgl
   - oiuglzpuv.xwhjvfwrs_imjxfgwoo.fvyclrkt_vqycmgeuj_ihblc
   - ycdcddvhw.shmlpcnju_chsokpadf.bcpgad_hoargfl_fhzshiqoe_qrsrxtdsq
   - bpeijqkwt.ysazfxpem_tnpnkohdy.nppowgku_kqhexqeih_njhno
   
-  ***** arms bqf ipyt uahi
+  ***** +arms +bqf +ipyt +uahi
   - uceq://ap/591285707
   
-  ***** arms cmeq
+  ***** +arms +cmeq
   - Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
   
-  ***** arms fgifr
+  ***** +arms +fgifr
   - Ikr lr 20 pggmb
   - Ttx-yecb mxovcuwbc
   - Rzq-itde mpfj
   - Zee-lpfg uqogce bk khxsvgrkq bbgvmf
   
-  ***** arms judo vennc
+  ***** +arms +judo +vennc
   - ykseciqhy IG: bp/531522711
   
-  ***** arms judo vfntwi
+  ***** +arms +judo +vfntwi
   - setw://fq/zfv-haow-micxv
   - sorj
   - bhkh://xzywfi3/relyocplej/dpw/qk/otehzx/qpsiyunh/rgthilw_sldeu/fonvlqflxv/rjluzb/tbf/hrtkdrq_mnurg_eltj_szkb.raja
   - knlo://evfkaz3/kmxgifnodz/wav/nz/idlwsr/oslzcscp/raarqgi_bjfdp/xftsdpbcka/itulza/prk/pkgxzoc_zgntm_txeg_npbvju.jldf
   
-  ***** arms jws_pkaft
+  ***** +arms +jws_pkaft
   - TbuburbQuf zilo hpfu://wz/ytg:hep_epzc_ek_jehnmz?h=omm:cpdu :
       (2576796, 2584174, 2585902, 2611556, 2612222)
   - Kmue izlgeghae jivs kkhoh:
       (23068288959, 23070555923, 23071198233, 23081557400, 23082128453)
   
-  ***** arms owwnfb qbsum
+  ***** +arms +owwnfb +qbsum
   - KU onbf
   - Adah wv wsr: Pwyv qrykrmat
   - Fjdu lk aozqwmt rdtv (ingu yhlzh kha zro zstolomj?): Vujflym
@@ -277,14 +277,14 @@
   - An fsqw hdegvhwy?
   - Tyrgbh iwj fcq jjuea qpltzla rkyq br at DS tfvwjwf?
   
-  ***** arms rgw_sxtvx
+  ***** +arms +rgw_sxtvx
   - Rmy [[eswz_xqow::empiz_ljyiwjbmi_szstj]]
   
-  ***** arms rgw_sxtvx zv_jzdd_djqa
+  ***** +arms +rgw_sxtvx +zv_jzdd_djqa
   - nejo/vpe/gjggaa/fwi/kgrtqhtdy/ynbwnm/qekadk/cvhc/MqgomkswAgbkGhthPoqfvqt.ednt
   - qiuz/adb/lhwggp/kqt/ldmqosmbs/qtjvrxutayfiyh/oocyfjbnuih/jmov/faaat/XibsjbhuFsbuRrawDgfksjcXwjudTvvzbxa.vvep
   
-  ***** arms saxy
+  ***** +arms +saxy
   - Eongcgfy tho pscz giwq arjebc@?
   - Crxekimyx kq fjboaq:
   - Lcnoajccb Injdqwlf
@@ -296,23 +296,23 @@
   - Gziien fxfmhul
   - Ajfn dz Rhyt (ty 6499 cw 6075)
   
-  ***** arms vd_clxi okwz
+  ***** +arms +vd_clxi +okwz
   - Mcjr bdukfjxm 14521206
   - Spuekgphn 14521428
   - Necywz met td fuvbdooge 14524967
   - Fbtqtkb, fywupn qr mzrgsvqve 14521641
   - Uc lsmpfxhtkyh 14522952
   
-  ***** arms vd_clxi xoao
+  ***** +arms +vd_clxi +xoao
   - Git [[desd_cd_kdzb.yhdxx]] hgq lkl[1] @dzwk
   
-  ***** laundry
+  ***** +laundry
   - +laundry dry whites
   - +laundry wip: fold darks
   - +laundry fold darks
   - +laundry wash delicates
   
-  ***** zorg
+  ***** +zorg
   - +zorg Parametrize test_run_compile()
   - +zorg Move models.py and file_groups.py
   - +zorg Add links to grammar
@@ -326,26 +326,26 @@
   - +zorg Updated grammar to handle quotes
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   
-  ======= gtd
+  ======= #gtd
   - #gtd pomodoro
   
-  ======= own
+  ======= #own
   - #own Buy rubber duck
   
-  ======= tags
+  ======= #tags
   
-  ***** bad 2_be_or_not_2_be
+  ***** +bad +2_be_or_not_2_be
   - Projects can start with a number, but CANNOT be all numbers
   
-  ***** bad to_the_bone
+  ***** +bad +to_the_bone
   - 240408#NO Da nah nah nuh...
   
-  ***** foobar
+  ***** +foobar
   - 240408#0X Some note
   
-  ======= tags thoughts
+  ======= #tags #thoughts
   
-  ***** foobar bazbuz
+  ***** +foobar +bazbuz
   - 301231#X0 When I talk to %pig I always want to @puke.
   
   ######### Open Todos
@@ -410,7 +410,7 @@
 # name: test_query[YAMLConfigFile-zorg_notes]
   '''
   
-  ######### 20240323.zo
+  ######### [[20240323]]
   - +zorg Parametrize test_run_compile()
   - +zorg Move models.py and file_groups.py
   - +zorg Add links to grammar

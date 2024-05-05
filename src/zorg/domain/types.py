@@ -157,13 +157,13 @@ class GroupByType(enum.Enum):
     def keyfunc(self) -> KeyFunc:
         """Returns a callable that can be used to group/sort notes."""
         if self is GroupByType.AREA:
-            return lambda note: note.areas
+            return lambda note: [f"#{area}" for area in note.areas]
         elif self is GroupByType.FILE:
             return lambda note: _to_comparable_file(note.file_path)
         elif self is GroupByType.NOTE_TYPE:
             return lambda note: _to_comparable_note_type(note.todo_payload)
         elif self is GroupByType.PROJECT:
-            return lambda note: note.projects
+            return lambda note: [f"+{project}" for project in note.projects]
         else:
             assert_never(self)
 
@@ -232,4 +232,5 @@ def _to_comparable_note_type(todo_payload: Optional["TodoPayload"]) -> str:
 
 def _to_comparable_file(file_path: Optional[Path]) -> str:
     assert file_path is not None
-    return str(file_path)
+    link_name = str(file_path).replace(".zo", "")
+    return f"[[{link_name}]]"
