@@ -368,6 +368,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "areas": self._s.areas,
             "contexts": self._s.contexts,
             "create_date": self._s.create_date,
+            "file_path": self.zorg_file.path,
             "line_no": ctx.start.line,
             "links": self._s.note_links,
             "people": self._s.people,

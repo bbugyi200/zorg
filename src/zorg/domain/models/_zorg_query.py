@@ -95,4 +95,4 @@ class Query:
         OrderByType.PRIORITY,
         OrderByType.DATE,
     )
-    group_by: Optional[tuple[GroupByType, ...]] = None
+    group_by: tuple[GroupByType, ...] = tuple()

@@ -4,10 +4,13 @@ import abc
 import enum
 from pathlib import Path
 from typing import (
+    TYPE_CHECKING,
     Any,
+    Callable,
     Generic,
     Literal,
     Mapping,
+    Optional,
     Pattern,
     Protocol,
     Sequence,
@@ -15,13 +18,18 @@ from typing import (
 )
 
 from sqlalchemy.future import Engine
-from typist import assert_never
+from typist import Comparable, assert_never
+
+
+if TYPE_CHECKING:
+    from .models import Note, TodoPayload
 
 
 E = TypeVar("E")
 T = TypeVar("T")
 
 
+KeyFunc = Callable[["Note"], Comparable]
 FileGroupMapType = Mapping[str, Sequence[str]]
 TodoPriorityType = Literal[
     "A",
@@ -65,6 +73,23 @@ class NoteType(enum.Enum):
     CANCELED_TODO = enum.auto()  # ~
     BLOCKED_TODO = enum.auto()  # <
     PARENT_TODO = enum.auto()  # >
+
+    def to_header_label(self) -> str:
+        """Converts to a header label that can be used by GROUP BY."""
+        if self is NoteType.BASIC:
+            return "Notes"
+        elif self is NoteType.OPEN_TODO:
+            return "Open Todos"
+        elif self is NoteType.CLOSED_TODO:
+            return "Done Todos"
+        elif self is NoteType.CANCELED_TODO:
+            return "Canceled Todos"
+        elif self is NoteType.BLOCKED_TODO:
+            return "Blocked Todos"
+        elif self is NoteType.PARENT_TODO:
+            return "Parent Todos"
+        else:
+            assert_never(self)
 
     def to_prefix_char(self) -> str:  # pyright: reportGeneralTypeIssues=false
         """Converts a note's type to its corresponding prefix character."""
@@ -128,6 +153,20 @@ class GroupByType(enum.Enum):
     NOTE_TYPE = enum.auto()
     PROJECT = enum.auto()
 
+    @property
+    def keyfunc(self) -> KeyFunc:
+        """Returns a callable that can be used to group/sort notes."""
+        if self is GroupByType.AREA:
+            return lambda note: note.areas
+        elif self is GroupByType.FILE:
+            return lambda note: _to_comparable_file(note.file_path)
+        elif self is GroupByType.NOTE_TYPE:
+            return lambda note: _to_comparable_note_type(note.todo_payload)
+        elif self is GroupByType.PROJECT:
+            return lambda note: note.projects
+        else:
+            assert_never(self)
+
 
 class OrderByType(enum.Enum):
     """Represents a single ORDER BY field for zorg queries."""
@@ -182,3 +221,15 @@ class EntityConverter(Generic[E, T], abc.ABC):
     @abc.abstractmethod
     def from_entity(self, entity: E) -> T:
         """Converts some domain entity into something else."""
+
+
+def _to_comparable_note_type(todo_payload: Optional["TodoPayload"]) -> str:
+    if todo_payload is None:
+        return NoteType.BASIC.to_header_label()
+    else:
+        return todo_payload.status.to_header_label()
+
+
+def _to_comparable_file(file_path: Optional[Path]) -> str:
+    assert file_path is not None
+    return str(file_path)

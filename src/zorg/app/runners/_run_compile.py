@@ -25,5 +25,6 @@ def _convert_zorg_file_to_dict(zorg_file: File) -> dict[str, Any]:
         del zorg_file_dict[key]
 
     for note_dict in zorg_file_dict["notes"]:
-        del note_dict["line_no"]
+        for key in ["file_path", "line_no"]:
+            del note_dict[key]
     return zorg_file_dict
