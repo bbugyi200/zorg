@@ -1,8 +1,15 @@
 """Logic for executing zorg queries lives in this module."""
 
+import time
+
+from logrus import Logger
+
 from ...domain.types import NoteType, SelectType
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
+
+
+_LOGGER = Logger(__name__)
 
 
 def execute(session: SQLSession, query_string: str) -> str:
@@ -24,7 +31,14 @@ def execute(session: SQLSession, query_string: str) -> str:
     """
     query = build_zorg_query(query_string)
     # (W)HERE
+    start_time = time.time()
     filtered_notes = session.repo.get_by_query(query.where)
+    query_runtime = time.time() - start_time
+    _LOGGER.info(
+        "Query complete",
+        num_of_notes=len(filtered_notes),
+        seconds=f"{query_runtime:.3f}",
+    )
 
     # (G)ROUP BY
 
