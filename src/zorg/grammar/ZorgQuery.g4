@@ -37,7 +37,7 @@ project : PLUS ID ;
 subfilter : '(' or_filter ')' ;
 
 // GROUP BY
-group_by_body : group_by_atom (SPACE group_by_atom)? ;
+group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
 group_by_atom : file | type | HASH | PLUS ;
 
 // ORDER BY
