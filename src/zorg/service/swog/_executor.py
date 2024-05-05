@@ -57,10 +57,12 @@ def execute(session: SQLSession, query_string: str) -> str:
 
     ### (O)RDER BY
 
+    # TODO(bugyi): Implement ORDER BY query functionality.
+
     ### (S)ELECT
     result = _select(query.select, note_group)
 
-    return result
+    return result.strip()
 
 
 def _select(

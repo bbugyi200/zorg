@@ -159,8 +159,6 @@
   - 240408#NO Da nah nah nuh...
   - Projects can start with a number, but CANNOT be all numbers
   
-  
-  
   '''
 # ---
 # name: test_query[YAMLConfigFile-grouped_by_type_area_project]
@@ -359,15 +357,11 @@
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
   
-  
-  
   '''
 # ---
 # name: test_query[YAMLConfigFile-high_priority]
   '''
   o [#A] 2024-03-13 High Priority TODO
-  
-  
   
   '''
 # ---
@@ -384,8 +378,6 @@
   o [#C] A todo for something
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
-  
-  
   
   '''
 # ---
@@ -404,8 +396,6 @@
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
   
-  
-  
   '''
 # ---
 # name: test_query[YAMLConfigFile-zorg_notes]
@@ -423,8 +413,6 @@
   - +zorg Finished 'john@' to '%john' migration
   - +zorg Updated grammar to handle quotes
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
-  
-  
   
   '''
 # ---
