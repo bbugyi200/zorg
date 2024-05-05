@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Optional
 from ..types import NoteType, TodoPriorityType
 
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from ..messages.events import Event
 
 

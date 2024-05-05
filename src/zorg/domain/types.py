@@ -21,7 +21,7 @@ from sqlalchemy.future import Engine
 from typist import Comparable, assert_never
 
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from .models import Note, TodoPayload
 
 
