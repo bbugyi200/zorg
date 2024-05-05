@@ -33,6 +33,10 @@ def db_zettel_dir_fixture(main: c.MainType, module_zettel_dir: Path) -> Path:
             "S note W (o or x or ~ or < or > or -) O priority date G file",
             id="grouped_and_ordered",
         ),
+        param(
+            "S note W (o or x or ~ or < or > or -) G type # +",
+            id="grouped_by_type_area_project",
+        ),
     ],
 )
 def test_query(
