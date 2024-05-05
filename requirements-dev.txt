@@ -20,7 +20,7 @@ arrow==1.3.0
     # via cookiecutter
 astroid==3.1.0
     # via pylint
-babel==2.14.0
+babel==2.15.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
