@@ -51,10 +51,7 @@ def execute(session: SQLSession, query_string: str) -> str:
     )
 
     ### (G)ROUP BY
-    if query.group_by is None:
-        grouped_notes = filtered_notes
-    else:
-        grouped_notes = _group_notes_by(filtered_notes, query.group_by)
+    grouped_notes = _group_notes_by(filtered_notes, query.group_by)
 
     ### (O)RDER BY
 
@@ -73,10 +70,12 @@ def _select(
             result += _select_note(grouped_notes)
         else:
             assert isinstance(grouped_notes, dict)
-            for group_name, grouped_notes in grouped_notes.items():
+            for group_name, next_grouped_notes in grouped_notes.items():
                 if group_name:
                     result += f"\n{_get_header(level)} {group_name}\n"
-                result += _select(select_type, grouped_notes, level=level + 1)
+                result += _select(
+                    select_type, next_grouped_notes, level=level + 1
+                )
     else:
         raise NotImplementedError(
             f"SELECT type is not implemented yet: {select_type}"
@@ -125,7 +124,5 @@ def _group_notes_by(
     sorted_notes = sorted(notes, key=key)
     grouped_notes: GroupNoteMap = defaultdict(list)
     for k, group in it.groupby(sorted_notes, key=key):
-        if isinstance(k, list):
-            k = " ".join(k)
-        grouped_notes[k] = _group_notes_by(group, rest_group_by_types)
+        grouped_notes[str(k)] = _group_notes_by(group, rest_group_by_types)
     return grouped_notes
