@@ -1,5 +1,191 @@
 # serializer version: 1
-# name: test_query[YAMLConfigFile-W - +zorg G file]
+# name: test_query[YAMLConfigFile-grouped_and_ordered]
+  '''
+  - #gtd pomodoro
+  - #own Buy rubber duck
+  - +zorg Parametrize test_run_compile()
+  - +zorg Move models.py and file_groups.py
+  - +zorg Add links to grammar
+  - +zorg Fix grammar so it works with this file
+  - +zorg Add this file to test data
+  - +zorg Filter out all numeric tag names
+  - +zorg Test against all examples/ files
+  - +zorg wip: Replace 'john@' with '%john'
+  - +laundry dry whites
+  - +zorg wip: migrate people
+  - +zorg Finished 'john@' to '%john' migration
+  - +zorg Updated grammar to handle quotes
+  - +laundry wip: fold darks
+  - +laundry fold darks
+  - +laundry wash delicates
+  - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+  - First note in first block
+  - Second note in first block
+  o [#C] bazbuz is ok too...
+  - Some note with a [[bar.sh]] link to a bash script.
+  - Some note with a link in parens (see [[baz]]).
+  - Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - Some note that references an old 200101#12 ZID.
+  o [#C] Some todo
+  o [#C] Another related todo
+  - A note about life...
+  o [#C] Some other todo
+  - With a note
+  - Some note in section 0
+  - Note A1
+  - Note A2
+  - Note B
+  - Note C
+  - Note D
+  - Note E
+  o [#A] 2024-03-13 High Priority TODO
+  o [#B] 2024-03-13 Medium Priority TODO
+  o [#C] 2024-03-13 Low Priority TODO
+  - 2024-03-30 This note contains a key::value pair.
+  o [#C] This todo is @due today! | due::2024-03-13
+  - Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
+  - Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
+  - Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
+  - Eongcgfy tho pscz giwq arjebc@?
+  - Crxekimyx kq fjboaq:
+  - Lcnoajccb Injdqwlf
+  - Lrry-Jhfv Nfsw
+  - Ga Ewwnanwqgoq
+  - Gaonrjmk: Cbnuev, Xvdgisy, Aeyfbb?
+  - Vont ywgotqe vndsv (lfqbnlfar, kwmnafb, Yneicgqi/Mxvvkclvzk)
+  - Eyfptapyh ijmfacppn (lqrui ?jr=HF)
+  - Gziien fxfmhul
+  - Ajfn dz Rhyt (ty 6499 cw 6075)
+  - setw://fq/zfv-haow-micxv
+  - sorj
+  - bhkh://xzywfi3/relyocplej/dpw/qk/otehzx/qpsiyunh/rgthilw_sldeu/fonvlqflxv/rjluzb/tbf/hrtkdrq_mnurg_eltj_szkb.raja
+  - knlo://evfkaz3/kmxgifnodz/wav/nz/idlwsr/oslzcscp/raarqgi_bjfdp/xftsdpbcka/itulza/prk/pkgxzoc_zgntm_txeg_npbvju.jldf
+  - ykseciqhy IG: bp/531522711
+  - Nyhha trra://hk/wyp-slg-lbyuqz pris oiqf nywj kg smoy nwdraivpht() cu jzusgcwm zwyirs?
+  - Wouvp rx cmmi jk zes r kv/u1abtunoeaorevyolmef: "Njwb opjiv wlyvyfrb; tqcwkrs qlawalk: 200F."
+  - e2.0 xrestv rlqt cszmjhp: 1) Cnelcge 2) uttnzeu tncj 3) Rasemja zzvilcys
+  - Qtvhtfc ywtyvbppqu (qs odvqdfjk nydxt):
+  - XC: Wvlotmog | Akjrgluk cck dpvcvia
+  - Oers Higwy   | NYS / Cyuxu fyod mrfwalatc
+  - Lveg         | Kfvunvqioefmgo Rlqu
+  - HU: Yoxlnl   | Kyahuurpzq mt VV (v.u. boh coveshbg rsp hbyhmm-pav)
+  - TbuburbQuf zilo hpfu://wz/ytg:hep_epzc_ek_jehnmz?h=omm:cpdu :
+      (2576796, 2584174, 2585902, 2611556, 2612222)
+  - Kmue izlgeghae jivs kkhoh:
+      (23068288959, 23070555923, 23071198233, 23081557400, 23082128453)
+  - KU onbf
+  - Adah wv wsr: Pwyv qrykrmat
+  - Fjdu lk aozqwmt rdtv (ingu yhlzh kha zro zstolomj?): Vujflym
+  - Cyuyngz rpzj (<tzcx_zm> nat <iqge_xqu>): Opalekb / Ubq hefcgpa
+  - Snke udr djwhji ku iysauiroj (<wtflgi_jw_aykjvl>):
+  - Puny mng lomkrpd
+  - Eipahnv
+  - <olxh_cqe>
+  - Fe dxiovcyxz kuirhi: Kjwjjl hxd: <lllwcz_bp_mjklvt>\wZkzuguo/yckqyt: <awqxbdj>
+  - Nid bzvqqd gktb uhwgmwk jfiwf atukar oq znzg-htqz bpba?: (<izljyv_dk_ebsiqu>)
+  - Poxi hdtlblgq:
+  - Uripbc uui qr njuytfkxf
+  - Dvfbqlk/ignpsr lb imwgiazpd
+  - Rb rnfqqbizlps
+  - Wuxpotyb:
+  - Me fkf zddkb?
+  - An fsqw hdegvhwy?
+  - Tyrgbh iwj fcq jjuea qpltzla rkyq br at DS tfvwjwf?
+  - Rmy [[eswz_xqow::empiz_ljyiwjbmi_szstj]]
+  - nejo/vpe/gjggaa/fwi/kgrtqhtdy/ynbwnm/qekadk/cvhc/MqgomkswAgbkGhthPoqfvqt.ednt
+  - qiuz/adb/lhwggp/kqt/ldmqosmbs/qtjvrxutayfiyh/oocyfjbnuih/jmov/faaat/XibsjbhuFsbuRrawDgfksjcXwjudTvvzbxa.vvep
+  - Ajbss udcor xf tylgpk:
+  - ibmxadcdz.iwmdvsxeg_uxzvuntgl
+  - oiuglzpuv.xwhjvfwrs_imjxfgwoo.fvyclrkt_vqycmgeuj_ihblc
+  - ycdcddvhw.shmlpcnju_chsokpadf.bcpgad_hoargfl_fhzshiqoe_qrsrxtdsq
+  - bpeijqkwt.ysazfxpem_tnpnkohdy.nppowgku_kqhexqeih_njhno
+  - uceq://ap/591285707
+  - Git [[desd_cd_kdzb.yhdxx]] hgq lkl[1] @dzwk
+  - Mcjr bdukfjxm 14521206
+  - Spuekgphn 14521428
+  - Necywz met td fuvbdooge 14524967
+  - Fbtqtkb, fywupn qr mzrgsvqve 14521641
+  - Uc lsmpfxhtkyh 14522952
+  - Ikr lr 20 pggmb
+  - Ttx-yecb mxovcuwbc
+  - Rzq-itde mpfj
+  - Zee-lpfg uqogce bk khxsvgrkq bbgvmf
+  - foobar
+  o [#C] This todo is due::2024-03-30 and has some subnotes
+  - Todo subnote A
+  - Todo subnote B
+  - Todo subsubnote C
+  - This note has many subnotes.
+  - 2024-03-30 This note contains a key::value pair.
+  - bazbuz
+  - pig
+  - is fat
+  - is stinky
+  - Note about A1
+  - Note about something
+  - Another note
+  o [#C] A todo for something
+  - A note on the second section.
+  - A sub-note.
+  - And another note.
+  o [#C] Some foobar todo.
+  - This is inside of h4_section!
+  - A note on the third section.
+  - A sub-note.
+  - And another note.
+  o [#C] Some foobar todo.
+  - This is the final section!
+  - 240408#0X Some note
+  - 301231#X0 When I talk to %pig I always want to @puke.
+  - 240408#NO Da nah nah nuh...
+  - Projects can start with a number, but CANNOT be all numbers
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-high_priority]
+  '''
+  o [#A] 2024-03-13 High Priority TODO
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-mid_and_low_priority]
+  '''
+  o [#C] bazbuz is ok too...
+  o [#C] Some todo
+  o [#C] Another related todo
+  o [#C] Some other todo
+  o [#B] 2024-03-13 Medium Priority TODO
+  o [#C] 2024-03-13 Low Priority TODO
+  o [#C] This todo is @due today! | due::2024-03-13
+  o [#C] This todo is due::2024-03-30 and has some subnotes
+  o [#C] A todo for something
+  o [#C] Some foobar todo.
+  o [#C] Some foobar todo.
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-open_todos]
+  '''
+  o [#C] bazbuz is ok too...
+  o [#C] Some todo
+  o [#C] Another related todo
+  o [#C] Some other todo
+  o [#A] 2024-03-13 High Priority TODO
+  o [#B] 2024-03-13 Medium Priority TODO
+  o [#C] 2024-03-13 Low Priority TODO
+  o [#C] This todo is @due today! | due::2024-03-13
+  o [#C] This todo is due::2024-03-30 and has some subnotes
+  o [#C] A todo for something
+  o [#C] Some foobar todo.
+  o [#C] Some foobar todo.
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-zorg_notes]
   '''
   - +zorg Parametrize test_run_compile()
   - +zorg Move models.py and file_groups.py
@@ -13,48 +199,6 @@
   - +zorg Finished 'john@' to '%john' migration
   - +zorg Updated grammar to handle quotes
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
-  
-  
-  '''
-# ---
-# name: test_query[YAMLConfigFile-o [#a]]
-  '''
-  o [#A] 2024-03-13 High Priority TODO
-  
-  
-  '''
-# ---
-# name: test_query[YAMLConfigFile-o [#bc]]
-  '''
-  o [#C] bazbuz is ok too...
-  o [#C] Some todo
-  o [#C] Another related todo
-  o [#C] Some other todo
-  o [#B] 2024-03-13 Medium Priority TODO
-  o [#C] 2024-03-13 Low Priority TODO
-  o [#C] This todo is @due today! | due::2024-03-13
-  o [#C] This todo is due::2024-03-30 and has some subnotes
-  o [#C] A todo for something
-  o [#C] Some foobar todo.
-  o [#C] Some foobar todo.
-  
-  
-  '''
-# ---
-# name: test_query[YAMLConfigFile-o]
-  '''
-  o [#C] bazbuz is ok too...
-  o [#C] Some todo
-  o [#C] Another related todo
-  o [#C] Some other todo
-  o [#A] 2024-03-13 High Priority TODO
-  o [#B] 2024-03-13 Medium Priority TODO
-  o [#C] 2024-03-13 Low Priority TODO
-  o [#C] This todo is @due today! | due::2024-03-13
-  o [#C] This todo is due::2024-03-30 and has some subnotes
-  o [#C] A todo for something
-  o [#C] Some foobar todo.
-  o [#C] Some foobar todo.
   
   
   '''
