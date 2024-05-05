@@ -283,9 +283,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
 
 
 def _fix_database_url(kwargs: dict[str, Any]) -> None:
-    if "database_url" not in kwargs and (
-        zdir := kwargs.get("zettel_dir")
-    ):
+    if "database_url" not in kwargs and (zdir := kwargs.get("zettel_dir")):
         kwargs["database_url"] = _get_default_database_url(zdir)
 
 
