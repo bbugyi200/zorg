@@ -9,7 +9,16 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.1...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.2...HEAD)
+
+
+## [0.7.2](https://github.com/bbugyi200/zorg/compare/0.7.1...0.7.2) - 2024-05-05
+
+### Added
+
+* Implement basic functionality for `zorg query`. We can now SELECT notes with
+  a (very limited ATM) WHERE filter and GROUP BY various dimensions (e.g. file,
+  note type, projects).
 
 
 ## [0.7.1](https://github.com/bbugyi200/zorg/compare/0.7.0...0.7.1) - 2024-05-02
