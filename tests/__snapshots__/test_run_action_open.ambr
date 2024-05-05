@@ -1,0 +1,7 @@
+# serializer version: 1
+# name: test_action_open__bad[YAMLConfigFile-8]
+  '''
+  ECHO We did not find anything zorg knows how to open on line #8
+  
+  '''
+# ---

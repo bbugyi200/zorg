@@ -1,11 +1,17 @@
 """Contains runners for the 'zorg action' command."""
 
 from pathlib import Path
+from typing import Final
 
 from ...service.common import prepend_zdir
 from ...service.templates import init_from_template
 from ..config import OpenActionConfig
 from ._runners import runner
+
+
+_MSG_NOTHING_TO_OPEN: Final = (
+    "We did not find anything zorg knows how to open on line"
+)
 
 
 @runner
@@ -36,10 +42,6 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             print(f"EDIT {link_path}")
             break
     else:
-        print(
-            "ECHO We did not find anything zorg knows how to open on line"
-            f" #{cfg.line_number}"
-        )
-        return 1
+        print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
