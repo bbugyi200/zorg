@@ -77,9 +77,7 @@ def _select(
             for group_name, note_subgroup in note_group.items():
                 if group_name:
                     result += f"{_get_header(level)} {group_name}\n"
-                result += _select(
-                    select_type, note_subgroup, level=level + 1
-                )
+                result += _select(select_type, note_subgroup, level=level + 1)
     else:
         raise NotImplementedError(
             f"SELECT type is not implemented yet: {select_type}"

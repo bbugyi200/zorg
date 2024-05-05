@@ -121,8 +121,12 @@ class ZorgQueryCompiler(ZorgQueryListener):
         for group_by_atom in cast(
             list[ZorgQueryParser.Group_by_atomContext], ctx.group_by_atom()
         ):
-            if group_by_atom.HASH():
+            if group_by_atom.AT_SIGN():
+                group_by_type = GroupByType.CONTEXT
+            elif group_by_atom.HASH():
                 group_by_type = GroupByType.AREA
+            elif group_by_atom.PERCENT():
+                group_by_type = GroupByType.PERSON
             elif group_by_atom.PLUS():
                 group_by_type = GroupByType.PROJECT
             elif group_by_atom.file_():

@@ -35,8 +35,10 @@ def db_zettel_dir_fixture(main: c.MainType, module_zettel_dir: Path) -> Path:
         ),
         param(
             "S note W (o or x or ~ or < or > or -) G type # +",
-            id="grouped_by_type_area_project",
+            id="group_by_type_area_project",
         ),
+        param("(o or x or ~ or < or > or -) G @", id="group_by_context"),
+        param("(o or x or ~ or < or > or -) G %", id="group_by_people"),
     ],
 )
 def test_query(
