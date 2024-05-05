@@ -20,6 +20,7 @@ GroupNoteMap = dict[str, "NoteGroup"]
 NoteGroup = Union[list[Note], GroupNoteMap]
 
 
+# TODO(bugyi): Reduce package to single swog.py file
 def execute(session: SQLSession, query_string: str) -> str:
     """Execute a zorg query and then render it as a .zo file.
 

@@ -12,7 +12,8 @@ from ._runners import runner
 def run_action_open(cfg: OpenActionConfig) -> int:
     """Runner for the 'action open' command."""
     zo_path = prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
-    zo_line = zo_path.read_text().split("\n")[cfg.line_number - 1]
+    zo_lines = zo_path.read_text().split("\n")
+    zo_line = zo_lines[cfg.line_number - 1]
     for word in zo_line.split(" "):
         left_find = word.find("[[")
         right_find = word.find("]")
@@ -34,4 +35,11 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             )
             print(f"EDIT {link_path}")
             break
+    else:
+        print(
+            "ECHO We did not find anything zorg knows how to open on line"
+            f" #{cfg.line_number}"
+        )
+        return 1
+
     return 0
