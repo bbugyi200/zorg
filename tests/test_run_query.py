@@ -30,7 +30,7 @@ def db_zettel_dir_fixture(main: c.MainType, module_zettel_dir: Path) -> Path:
         param("o [#bc]", id="mid_and_low_priority"),
         param("W - +zorg G file", id="zorg_notes"),
         param(
-            "W (o or x or ~ or < or > or -) O priority date G file",
+            "S note W (o or x or ~ or < or > or -) O priority date G file",
             id="grouped_and_ordered",
         ),
     ],
