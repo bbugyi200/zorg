@@ -43,20 +43,24 @@ def zprint(
     fg_color: Color = Color.BLACK,
 ) -> None:
     """Custom rich.print() wrapper used by Zorg."""
+    # get call count
     call_count_attr = "_call_count"
     call_count = getattr(zprint, call_count_attr, 1)
 
-    msg = " | ".join(msg_parts)
-    bg = bg_color.to_rich_spec()
-    fg = fg_color.to_rich_spec()
-    hhmmss = dt.datetime.now().strftime("%H:%M:%S")
+    # prep variables used by final message
     space_call_count = str(call_count)
     while len(space_call_count) < 3:
         space_call_count = f" {space_call_count}"
+    hhmmss = dt.datetime.now().strftime("%H:%M:%S")
+    msg = " | ".join(msg_parts)
+    bg = bg_color.to_rich_spec()
+    fg = fg_color.to_rich_spec()
 
+    # print final message
     contents = f"{space_call_count} | {hhmmss} | {msg}"
     rich.print(f"[{style} {fg} on {bg}]{contents}[/]")
 
+    # set call count
     setattr(zprint, call_count_attr, call_count + 1)
 
 
