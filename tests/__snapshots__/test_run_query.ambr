@@ -1,7 +1,6 @@
 # serializer version: 1
 # name: test_query[YAMLConfigFile-grouped_and_ordered]
   '''
-  
   ######### [[20240323]]
   - #gtd pomodoro
   - #own Buy rubber duck
@@ -161,11 +160,11 @@
   - Projects can start with a number, but CANNOT be all numbers
   
   
+  
   '''
 # ---
 # name: test_query[YAMLConfigFile-grouped_by_type_area_project]
   '''
-  
   ######### Notes
   - First note in first block
   - Second note in first block
@@ -333,7 +332,6 @@
   - #own Buy rubber duck
   
   ======= #tags
-  
   ***** +2_be_or_not_2_be +bad
   - Projects can start with a number, but CANNOT be all numbers
   
@@ -344,7 +342,6 @@
   - 240408#0X Some note
   
   ======= #tags #thoughts
-  
   ***** +bazbuz +foobar
   - 301231#X0 When I talk to %pig I always want to @puke.
   
@@ -363,11 +360,13 @@
   o [#C] Some foobar todo.
   
   
+  
   '''
 # ---
 # name: test_query[YAMLConfigFile-high_priority]
   '''
   o [#A] 2024-03-13 High Priority TODO
+  
   
   
   '''
@@ -385,6 +384,7 @@
   o [#C] A todo for something
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
+  
   
   
   '''
@@ -405,11 +405,11 @@
   o [#C] Some foobar todo.
   
   
+  
   '''
 # ---
 # name: test_query[YAMLConfigFile-zorg_notes]
   '''
-  
   ######### [[20240323]]
   - +zorg Parametrize test_run_compile()
   - +zorg Move models.py and file_groups.py
@@ -423,6 +423,7 @@
   - +zorg Finished 'john@' to '%john' migration
   - +zorg Updated grammar to handle quotes
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+  
   
   
   '''

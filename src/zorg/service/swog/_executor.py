@@ -69,12 +69,12 @@ def _select(
     result = ""
     if select_type is SelectType.NOTE:
         if isinstance(note_group, list):
-            result += _select_note(note_group)
+            result += _select_note(note_group) + "\n"
         else:
             assert isinstance(note_group, dict)
             for group_name, note_subgroup in note_group.items():
                 if group_name:
-                    result += f"\n{_get_header(level)} {group_name}\n"
+                    result += f"{_get_header(level)} {group_name}\n"
                 result += _select(
                     select_type, note_subgroup, level=level + 1
                 )
