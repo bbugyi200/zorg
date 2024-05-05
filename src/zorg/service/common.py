@@ -44,18 +44,20 @@ def zprint(
 ) -> None:
     """Custom rich.print() wrapper used by Zorg."""
     call_count_attr = "_call_count"
-    i = getattr(zprint, call_count_attr, 1)
+    call_count = getattr(zprint, call_count_attr, 1)
 
     msg = " | ".join(msg_parts)
     bg = bg_color.to_rich_spec()
     fg = fg_color.to_rich_spec()
     hhmmss = dt.datetime.now().strftime("%H:%M:%S")
-    space_i = str(i)
-    while len(space_i) < 3:
-        space_i = f" {space_i}"
-    rich.print(f"[{style} {fg} on {bg}]{space_i} | {hhmmss} | {msg}[/]")
+    space_call_count = str(call_count)
+    while len(space_call_count) < 3:
+        space_call_count = f" {space_call_count}"
 
-    setattr(zprint, call_count_attr, i + 1)
+    contents = f"{space_call_count} | {hhmmss} | {msg}"
+    rich.print(f"[{style} {fg} on {bg}]{contents}[/]")
+
+    setattr(zprint, call_count_attr, call_count + 1)
 
 
 def strip_zdir(zdir: PathLike, path: PathLike) -> str:
