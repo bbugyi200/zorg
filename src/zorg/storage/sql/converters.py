@@ -283,6 +283,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             sql_model.body,
             areas=list(area.name for area in sql_model.areas),
             contexts=list(context.name for context in sql_model.contexts),
+            file_path=Path(sql_model.zorg_file.path),
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),
             todo_payload=todo_payload,
