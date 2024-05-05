@@ -1,0 +1,61 @@
+# serializer version: 1
+# name: test_query[YAMLConfigFile-W - +zorg G file]
+  '''
+  - +zorg Parametrize test_run_compile()
+  - +zorg Move models.py and file_groups.py
+  - +zorg Add links to grammar
+  - +zorg Fix grammar so it works with this file
+  - +zorg Add this file to test data
+  - +zorg Filter out all numeric tag names
+  - +zorg Test against all examples/ files
+  - +zorg wip: Replace 'john@' with '%john'
+  - +zorg wip: migrate people
+  - +zorg Finished 'john@' to '%john' migration
+  - +zorg Updated grammar to handle quotes
+  - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-o [#a]]
+  '''
+  o [#A] 2024-03-13 High Priority TODO
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-o [#bc]]
+  '''
+  o [#C] bazbuz is ok too...
+  o [#C] Some todo
+  o [#C] Another related todo
+  o [#C] Some other todo
+  o [#B] 2024-03-13 Medium Priority TODO
+  o [#C] 2024-03-13 Low Priority TODO
+  o [#C] This todo is @due today! | due::2024-03-13
+  o [#C] This todo is due::2024-03-30 and has some subnotes
+  o [#C] A todo for something
+  o [#C] Some foobar todo.
+  o [#C] Some foobar todo.
+  
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-o]
+  '''
+  o [#C] bazbuz is ok too...
+  o [#C] Some todo
+  o [#C] Another related todo
+  o [#C] Some other todo
+  o [#A] 2024-03-13 High Priority TODO
+  o [#B] 2024-03-13 Medium Priority TODO
+  o [#C] 2024-03-13 Low Priority TODO
+  o [#C] This todo is @due today! | due::2024-03-13
+  o [#C] This todo is due::2024-03-30 and has some subnotes
+  o [#C] A todo for something
+  o [#C] Some foobar todo.
+  o [#C] Some foobar todo.
+  
+  
+  '''
+# ---

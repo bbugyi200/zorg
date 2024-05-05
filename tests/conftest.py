@@ -29,7 +29,18 @@ if TYPE_CHECKING:  # fixes pytest warning
 @fixture(scope="session")
 def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
-    tmp_path = tmp_path_factory.getbasetemp()
+    return _get_zettel_dir(tmp_path_factory.getbasetemp())
+
+
+@fixture(scope="module")
+def module_zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
+    """Returns a zettel directory that contains copies of all *.zo files."""
+    tmp_path = tmp_path_factory.getbasetemp() / "module_scope"
+    tmp_path.mkdir()
+    return _get_zettel_dir(tmp_path)
+
+
+def _get_zettel_dir(tmp_path: Path) -> Path:
     zdir = tmp_path / "org"
     zdir.mkdir()
     for zo_path in _get_all_zo_and_zot_paths():

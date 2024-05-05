@@ -13,19 +13,10 @@ from . import common as c
 
 
 @fixture(name="sql_cursor", scope="session")
-def sql_cursor_fixture(
-    main: c.MainType, tmp_path_factory: TempPathFactory, zettel_dir: Path
-) -> sqlite3.Cursor:
+def sql_cursor_fixture(main: c.MainType, zettel_dir: Path) -> sqlite3.Cursor:
     """Connects to the zorg DB created by 'zorg db create'."""
-    tmp_path = tmp_path_factory.getbasetemp()
-    db_path_str = f"{tmp_path}/zorg.db"
-    exit_code = main(
-        "--dir",
-        str(zettel_dir),
-        "db",
-        "create",
-        database_url=f"sqlite:///{db_path_str}",
-    )
+    db_path_str = f"{zettel_dir}/.zorg/zorg.db"
+    exit_code = main("--dir", str(zettel_dir), "db", "create")
     assert exit_code == 0
     conn = sqlite3.connect(db_path_str)
     return conn.cursor()
