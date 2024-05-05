@@ -23,6 +23,10 @@ _LOGGER = Logger(__name__)
 _DEFAULT_ZETTEL_DIR: Final[Path] = Path.home() / "org"
 
 
+def _get_default_database_url(zdir: Path) -> str:
+    return f"sqlite:///{zdir}/.{APP_NAME}/{APP_NAME}.db"
+
+
 class Config(clack.Config):
     """Shared clack configuration class."""
 
@@ -32,9 +36,7 @@ class Config(clack.Config):
     zettel_dir: Path = _DEFAULT_ZETTEL_DIR
 
     # ----- CONFIG
-    database_url: str = "sqlite:///" + str(
-        _DEFAULT_ZETTEL_DIR / f".zorg/{APP_NAME}.db"
-    )
+    database_url: str = _get_default_database_url(_DEFAULT_ZETTEL_DIR)
     template_pattern_map: TemplatePatternMapType = {}
 
 
@@ -275,8 +277,16 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     _convert_variables_to_var_map(kwargs)
     _process_zo_paths(kwargs)
     _process_query(kwargs)
+    _fix_database_url(kwargs)
 
     return kwargs
+
+
+def _fix_database_url(kwargs: dict[str, Any]) -> None:
+    if "database_url" not in kwargs and (
+        zdir := kwargs.get("zettel_dir")
+    ):
+        kwargs["database_url"] = _get_default_database_url(zdir)
 
 
 def _process_query(kwargs: dict[str, Any]) -> None:
