@@ -16,6 +16,7 @@ params = mark.parametrize
 
 @fixture(scope="module")
 def db_zettel_dir(main: c.MainType, module_zettel_dir: Path) -> Path:
+    """Returns zettel dir containing pre-initialized database.."""
     assert main("--dir", str(module_zettel_dir), "db", "create") == 0
     return module_zettel_dir
 
