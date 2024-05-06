@@ -15,6 +15,7 @@ from freezegun import freeze_time
 from pytest import fixture
 
 from zorg.app.__main__ import main as zorg_main
+from zorg.service.zid_manager import ZIDManager
 
 from . import common as c
 
@@ -26,18 +27,32 @@ if TYPE_CHECKING:  # fixes pytest warning
     from clack.pytest_plugin import MakeConfigFile
 
 
+@fixture(autouse=True)
+def clear_zid_cache():
+    """Clears the in-memory ZID mapping."""
+    ZIDManager._class_next_id_map = None
+
+
 @fixture(scope="session")
 def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
     return _get_zettel_dir(tmp_path_factory.getbasetemp())
 
 
-@fixture(scope="module")
-def module_zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
+@fixture(scope="session")
+def query_zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
-    tmp_path = tmp_path_factory.getbasetemp() / "module_scope"
+    tmp_path = tmp_path_factory.getbasetemp() / "query_tests"
     tmp_path.mkdir()
     return _get_zettel_dir(tmp_path)
+
+
+@fixture(scope="session")
+def db_zettel_dir(main: c.MainType, query_zettel_dir: Path) -> Path:
+    """Returns zettel dir containing pre-initialized database.."""
+    ec = main("--log=null", "--dir", str(query_zettel_dir), "db", "create")
+    assert ec == 0
+    return query_zettel_dir
 
 
 def _get_zettel_dir(tmp_path: Path) -> Path:

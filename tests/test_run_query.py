@@ -47,11 +47,3 @@ def test_query(
     assert exit_code == 0
     assert capture.err == ""
     assert capture.out == snapshot
-
-
-@fixture(scope="module", name="db_zettel_dir")
-def db_zettel_dir_fixture(main: c.MainType, module_zettel_dir: Path) -> Path:
-    """Returns zettel dir containing pre-initialized database.."""
-    ec = main("--log=null", "--dir", str(module_zettel_dir), "db", "create")
-    assert ec == 0
-    return module_zettel_dir
