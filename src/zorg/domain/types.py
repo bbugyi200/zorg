@@ -162,17 +162,17 @@ class GroupByType(enum.Enum):
     def keyfunc(self) -> KeyFunc:
         """Returns a callable that can be used to group/sort notes."""
         if self is GroupByType.AREA:
-            return _tag_keyfunc_factory("areas", "#")
+            return _to_comparable_tag_factory("areas", "#")
         elif self is GroupByType.CONTEXT:
-            return _tag_keyfunc_factory("contexts", "@")
+            return _to_comparable_tag_factory("contexts", "@")
         elif self is GroupByType.FILE:
             return lambda note: _to_comparable_file(note.file_path)
         elif self is GroupByType.NOTE_TYPE:
             return lambda note: _to_comparable_note_type(note.todo_payload)
         elif self is GroupByType.PERSON:
-            return _tag_keyfunc_factory("people", "%")
+            return _to_comparable_tag_factory("people", "%")
         elif self is GroupByType.PROJECT:
-            return _tag_keyfunc_factory("projects", "+")
+            return _to_comparable_tag_factory("projects", "+")
         else:
             assert_never(self)
 
@@ -245,7 +245,7 @@ def _to_comparable_file(file_path: Optional[Path]) -> str:
     return f"[[{link_name}]]"
 
 
-def _tag_keyfunc_factory(attr: str, tag_symbol: str) -> KeyFunc:
+def _to_comparable_tag_factory(attr: str, tag_symbol: str) -> KeyFunc:
     def _keyfunc(note: "Note") -> str:
         return " | ".join(
             f"{tag_symbol}{tag}" for tag in sorted(getattr(note, attr))
