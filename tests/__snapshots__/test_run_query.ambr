@@ -301,7 +301,7 @@
 # ---
 # name: test_query[YAMLConfigFile-group_by_type_area_project]
   '''
-  ######### 1 | Open Todos
+  ######### 1 | OPEN TODOS
   o [#C] bazbuz is ok too...
   o [#C] Some todo
   o [#C] Another related todo
@@ -315,7 +315,7 @@
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
   
-  ######### 3 | Notes
+  ######### 3 | NOTES
   - First note in first block
   - Second note in first block
   - Some note with a [[bar.sh]] link to a bash script.
