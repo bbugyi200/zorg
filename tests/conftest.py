@@ -28,7 +28,7 @@ if TYPE_CHECKING:  # fixes pytest warning
 
 
 @fixture(autouse=True)
-def clear_zid_cache():
+def clear_zid_cache() -> None:
     """Clears the in-memory ZID mapping."""
     ZIDManager._class_next_id_map = None
 
