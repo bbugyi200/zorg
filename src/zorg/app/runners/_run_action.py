@@ -4,8 +4,7 @@ import datetime as dt
 from pathlib import Path
 from typing import Final
 
-from ...service import common as c
-from ...service import swog
+from ...service import common as c, swog
 from ...service.templates import init_from_template
 from ...storage.sql.session import SQLSession
 from ..config import OpenActionConfig
