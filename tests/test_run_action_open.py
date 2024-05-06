@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from _pytest.capture import CaptureFixture
 from pytest import fixture, mark
@@ -53,7 +54,7 @@ def open_action_main_fixture(main: c.MainType, zettel_dir: Path) -> c.MainType:
     """Wrapper for main() fixture that is tailered to 'action open' tests."""
     zpath_to_links = zettel_dir / "links.zo"
 
-    def open_action_main(*args, **kwargs) -> int:
+    def open_action_main(*args: str, **kwargs: Any) -> int:
         exit_code = main(
             "--log=null",
             "--dir",
