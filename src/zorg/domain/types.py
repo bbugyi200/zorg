@@ -7,6 +7,7 @@ from typing import (
     TYPE_CHECKING,
     Any,
     Callable,
+    Final,
     Generic,
     Literal,
     Mapping,
@@ -76,18 +77,20 @@ class NoteType(enum.Enum):
 
     def to_header_label(self) -> str:
         """Converts to a header label that can be used by GROUP BY."""
+        open_todos_label: Final = "Open Todos"
+        done_todos_label: Final = "Done Todos"
         if self is NoteType.BASIC:
             return "Notes"
         elif self is NoteType.OPEN_TODO:
-            return "Open Todos"
+            return open_todos_label
         elif self is NoteType.CLOSED_TODO:
-            return "Done Todos"
+            return done_todos_label
         elif self is NoteType.CANCELED_TODO:
-            return "Canceled Todos"
+            return done_todos_label
         elif self is NoteType.BLOCKED_TODO:
-            return "Blocked Todos"
+            return open_todos_label
         elif self is NoteType.PARENT_TODO:
-            return "Parent Todos"
+            return open_todos_label
         else:
             assert_never(self)
 
