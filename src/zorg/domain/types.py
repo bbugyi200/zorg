@@ -247,7 +247,7 @@ def _to_comparable_file(file_path: Optional[Path]) -> str:
 
 def _tag_keyfunc_factory(attr: str, tag_symbol: str) -> KeyFunc:
     def _keyfunc(note: "Note") -> str:
-        return " ".join(
+        return " | ".join(
             f"{tag_symbol}{tag}" for tag in sorted(getattr(note, attr))
         )
 
