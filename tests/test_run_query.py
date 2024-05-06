@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from _pytest.capture import CaptureFixture
-from pytest import fixture, mark, param
+from pytest import mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
 from . import common as c
