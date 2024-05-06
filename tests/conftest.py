@@ -39,8 +39,8 @@ def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     return _get_zettel_dir(tmp_path_factory.getbasetemp())
 
 
-@fixture(scope="session")
-def query_zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
+@fixture(scope="session", name="query_zettel_dir")
+def query_zettel_dir_fixture(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
     tmp_path = tmp_path_factory.getbasetemp() / "query_tests"
     tmp_path.mkdir()
@@ -64,8 +64,8 @@ def _get_zettel_dir(tmp_path: Path) -> Path:
     return zdir
 
 
-@fixture(scope="session")
-def main(make_config_file: MakeConfigFile) -> c.MainType:
+@fixture(scope="session", name="main")
+def main_fixture(make_config_file: MakeConfigFile) -> c.MainType:
     """Returns a wrapper around zorg's main() function."""
 
     def inner_main(*args: str, **kwargs: Any) -> int:
