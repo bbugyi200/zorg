@@ -135,8 +135,9 @@ def reindex_database(
     cmd: commands.ReindexDBCommand, session: SQLSession
 ) -> None:
     """Reindex an existing zorg database."""
-    paths = cmd.paths if cmd.paths else sorted(cmd.zettel_dir.rglob("*.zo"))
-    file_to_hash = _get_file_hash_map(cmd.zettel_dir, paths)
+    file_to_hash = _get_file_hash_map(
+        cmd.zettel_dir, paths=cmd.paths if cmd.paths else None
+    )
     file_hash_path = _get_file_hash_path(cmd.zettel_dir)
     old_file_to_hash: dict[str, str] = (
         json.loads(file_hash_path.read_bytes())
@@ -220,8 +221,7 @@ def add_zids_to_notes_in_file(
 
     zdir = event.zettel_dir
     _write_file_hash_to_disk(
-        _get_file_hash_path(zdir),
-        _get_file_hash_map(zdir, Path(zdir).rglob("*.zo")),
+        _get_file_hash_path(zdir), _get_file_hash_map(zdir)
     )
 
 
@@ -238,7 +238,14 @@ def increment_zid_counters(
     zid_manager.write_to_disk()
 
 
-def _get_file_hash_map(zdir: Path, paths: Iterable[Path]) -> dict[str, str]:
+def _get_file_hash_map(
+    zdir: Path, *, paths: Iterable[Path] = None
+) -> dict[str, str]:
+    if paths is None:
+        query_dir = zdir / "query"
+        paths = sorted(
+            p for p in Path(zdir).rglob("*.zo") if str(query_dir) not in str(p)
+        )
     file_to_hash: dict[str, str] = {}
     for path in paths:
         key = c.strip_zdir(zdir, path)
