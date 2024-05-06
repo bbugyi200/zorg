@@ -74,16 +74,15 @@ def test_action_open__query(
 @fixture(name="open_action_main")
 def open_action_main_fixture(main: c.MainType, zettel_dir: Path) -> c.MainType:
     """Wrapper for main() fixture that is tailered to 'action open' tests."""
-    zpath_to_links = zettel_dir / "links.zo"
-
     def open_action_main(*args: str, zdir: Path = None, **kwargs: Any) -> int:
+        zdir = zdir or zettel_dir
         exit_code = main(
             "--log=null",
             "--dir",
-            str(zdir or zettel_dir),
+            str(zdir),
             "action",
             "open",
-            str(zpath_to_links),
+            str(zdir / "links.zo"),
             *args,
             **kwargs,
         )

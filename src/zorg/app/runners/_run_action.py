@@ -2,12 +2,10 @@
 
 import datetime as dt
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 from typing import Final
 
-from ...service.common import prepend_zdir
-from ...service.compiler import build_zorg_query
-from ...service.swog import execute
+from ...service import common as c
+from ...service import swog
 from ...service.templates import init_from_template
 from ...storage.sql.session import SQLSession
 from ..config import OpenActionConfig
@@ -22,7 +20,7 @@ _MSG_NOTHING_TO_OPEN: Final = (
 @runner
 def run_action_open(cfg: OpenActionConfig) -> int:
     """Runner for the 'action open' command."""
-    zo_path = prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
+    zo_path = c.prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
     zo_lines = zo_path.read_text().split("\n")
     zo_line = zo_lines[cfg.line_number - 1]
     for word in zo_line.split(" "):
@@ -31,7 +29,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         if left_find >= 0 and right_find >= 0:
             link_base = word[left_find + 2 : right_find].split("::")[0]
             link_base = link_base if "." in link_base else f"{link_base}.zo"
-            link_path = prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
+            link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
             init_from_template(
                 cfg.zettel_dir,
                 cfg.template_pattern_map,
@@ -53,7 +51,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             with SQLSession(
                 cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
             ) as session:
-                query_results = execute(session, query_string)
+                query_results = swog.execute(session, query_string)
 
             query_dir = cfg.zettel_dir / "query"
             query_dir.mkdir(exist_ok=True)
@@ -63,7 +61,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             if cfg.zo_path == query_path:
                 parent_link = ""
             else:
-                parent_link = f"from [[{cfg.zo_path}]] ".replace(".zo", "")
+                zo_spec = c.strip_zdir(cfg.zettel_dir, cfg.zo_path)
+                parent_link = f"from [[{zo_spec}]] ".replace(".zo", "")
             with query_path.open("w") as f:
                 f.write(
                     f"# {query_string} | {query_name}\n#\n# Saved query"

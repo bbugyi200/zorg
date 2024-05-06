@@ -36,6 +36,11 @@ def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
     return new_paths
 
 
+def strip_zdir(zdir: PathLike, path: PathLike) -> str:
+    """Strips {zdir} from {path}."""
+    return str(path).replace(f"{zdir}/", "")
+
+
 def zprint(
     *msg_parts: str,
     style: str = "bold",
@@ -62,11 +67,6 @@ def zprint(
 
     # set call count
     setattr(zprint, call_count_attr, call_count + 1)
-
-
-def strip_zdir(zdir: PathLike, path: PathLike) -> str:
-    """Strips {zdir} from {path}."""
-    return str(path).replace(f"{zdir}/", "")
 
 
 def _var_map_value(value: str) -> Any:
