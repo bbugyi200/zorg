@@ -8,6 +8,7 @@ from typing import Any, Final, Literal, Optional, Sequence
 
 import clack
 from logrus import Logger
+from typist import literal_to_list
 
 from .. import APP_NAME
 from ..domain.types import FileGroupMapType, TemplatePatternMapType, VarMapType
@@ -15,7 +16,15 @@ from ..service import common
 
 
 Command = Literal[
-    "compile", "create", "edit", "init", "open", "query", "reindex", "render"
+    "compile",
+    "create",
+    "edit",
+    "init",
+    "list",
+    "open",
+    "query",
+    "reindex",
+    "render",
 ]
 
 _LOGGER = Logger(__name__)
@@ -97,6 +106,12 @@ class QueryConfig(Config):
     query: str
 
 
+class TemplateListConfig(Config):
+    """Clack config for the 'template' command."""
+
+    command: Literal["list"]
+
+
 class TemplateRenderConfig(Config):
     """Clack config for the 'template' command."""
 
@@ -120,7 +135,14 @@ class TemplateInitConfig(Config):
 
 def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     """Parser we pass to the `main_factory()` `parser` kwarg."""
-    # HACK: Make 'edit' the default sub-command.
+    # HACK: These make the command-line arguments more conveniant:
+    #
+    # * Make 'edit' the default sub-command.
+    # * Make 'render' the default sub-sub-command for the 'template'
+    #   sub-command.
+    argv_before_opts = [argv[0]] + list(
+        it.takewhile(lambda x: x.startswith("-"), argv[1:])
+    )
     argv_after_opts = list(it.dropwhile(lambda x: x.startswith("-"), argv[1:]))
     if not argv_after_opts:
         _LOGGER.debug(
@@ -128,12 +150,27 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         )
         argv = list(argv) + ["edit"]
     elif argv_after_opts[0].startswith("@"):
-        argv_opts = list(it.takewhile(lambda x: x.startswith("-"), argv[1:]))
-        argv = [argv[0]] + argv_opts + ["edit"] + argv_after_opts
+        argv = argv_before_opts + ["edit"] + argv_after_opts
         _LOGGER.debug(
             "Inferring 'edit' command since we found a file group name.",
             file_group_name=argv_after_opts[0],
             new_args=argv[1:],
+        )
+    elif (
+        argv_after_opts[0] == "template"
+        and len(argv_after_opts) > 1
+        and argv_after_opts[1] not in literal_to_list(Command)
+    ):
+        argv = (
+            argv_before_opts
+            + [argv_after_opts[0], "render"]
+            + argv_after_opts[1:]
+        )
+    elif argv_after_opts[0] == "template" and len(argv_after_opts) == 1:
+        argv = (
+            argv_before_opts
+            + [argv_after_opts[0], "list"]
+            + argv_after_opts[1:]
         )
 
     parser = clack.Parser(description="The zettel note manager of the future.")
@@ -233,18 +270,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "template", help="Commands for managing .zot templates."
     )
     new_template_command = clack.new_command_factory(template_parser)
-    # --- 'template render' command
-    template_render_parser = new_template_command(
-        "render", help="Render a new .zo file using a .zot template."
-    )
-    template_render_parser.add_argument(
-        "template", type=Path, help="Path to the .zot template."
-    )
-    template_render_parser.add_argument(
-        "variables",
-        nargs="*",
-        help="A list of variable specs of the form of key=value.",
-    )
     # --- 'template init' command
     template_init_parser = new_template_command(
         "init", help="Initialize a new file using a zorg template."
@@ -266,6 +291,20 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         ),
     )
     template_init_parser.add_argument(
+        "variables",
+        nargs="*",
+        help="A list of variable specs of the form of key=value.",
+    )
+    # --- 'template list' command
+    new_template_command("list", help="List all zorg template files.")
+    # --- 'template render' command
+    template_render_parser = new_template_command(
+        "render", help="Render a new .zo file using a .zot template."
+    )
+    template_render_parser.add_argument(
+        "template", type=Path, help="Path to the .zot template."
+    )
+    template_render_parser.add_argument(
         "variables",
         nargs="*",
         help="A list of variable specs of the form of key=value.",
@@ -314,3 +353,5 @@ def _convert_variables_to_var_map(kwargs: dict[str, Any]) -> None:
         var_map = common.process_var_map(var_map)
         kwargs["var_map"] = var_map
         del kwargs["variables"]
+    elif kwargs["command"] == "render":
+        kwargs["var_map"] = {}

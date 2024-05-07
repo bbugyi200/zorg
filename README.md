@@ -72,6 +72,7 @@ for cmd in [
     "query",
     "template",
     "template init",
+    "template list",
     "template render",
 ]:
     popen = subprocess.Popen(["zorg"] + cmd.split() + ["--help"], stdout=subprocess.PIPE)
