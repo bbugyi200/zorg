@@ -1,6 +1,7 @@
 """Contains runners for the 'zorg template' command."""
 
 from pathlib import Path
+import sys
 from typing import Any, Iterable
 
 from ...domain.types import VarMapType
@@ -53,13 +54,25 @@ def run_template_list(cfg: TemplateListConfig) -> int:
 
 
 def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
-    maybe_zot_file = str(template)
-    zot_file = (
-        maybe_zot_file
-        if maybe_zot_file.endswith(".zot")
-        else f"{maybe_zot_file}.zot"
-    )
-    zot_path = c.prepend_zdir(zettel_dir, [zot_file])[0]
+    zot_path = c.prepend_zdir(zettel_dir, [template])[0]
+    if not zot_path.exists():
+        matched_zot_paths: list[Path] = []
+        for some_zot_path in sorted(zettel_dir.rglob("*.zot")):
+            if str(zot_path) in str(some_zot_path):
+                matched_zot_paths.append(some_zot_path)
+        if not matched_zot_paths:
+            raise RuntimeError(f"Unknown template path: {template}")
+
+        if len(matched_zot_paths) == 1:
+            zot_path = matched_zot_paths[0]
+        else:
+            prompt = ""
+            for i, candidate_zot_path in enumerate(matched_zot_paths):
+                candidate_zot_name = c.strip_zdir(zettel_dir, candidate_zot_path)
+                prompt += f"[{i + 1}] {candidate_zot_name}\n"
+            prompt += "\nSelect a zot template: "
+            idx = int(_zinput(prompt)) - 1
+            zot_path = matched_zot_paths[idx]
     return zot_path
 
 
@@ -69,9 +82,14 @@ def _prompt_for_missing_vars(
     new_var_map = dict(var_map)
     for var in required_vars:
         if var not in new_var_map:
-            v = input(f"{var}: ")
+            v = _zinput(f"{var}: ")
             new_var_map[var] = v
     return new_var_map
+
+
+def _zinput(prompt: str) -> str:
+    print(prompt, file=sys.stderr, end="")
+    return input()
 
 
 def _get_zot_vars(zot_path: Path) -> set[str]:
