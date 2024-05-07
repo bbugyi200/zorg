@@ -26,7 +26,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         left_find = word.find("[[")
         right_find = word.find("]")
         if left_find >= 0 and right_find >= 0:
-            link_base = word[left_find + 2 : right_find].split("::")[0]
+            link_parts = word[left_find + 2 : right_find].split("::")
+            link_base = link_parts[0]
             link_base = link_base if "." in link_base else f"{link_base}.zo"
             link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
             init_from_template(
@@ -42,6 +43,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 },
             )
             print(f"EDIT {link_path}")
+            if len(link_parts) > 1:
+                print(f"SEARCH {link_parts[1]}")
             break
     else:
         name_sep = " | "
