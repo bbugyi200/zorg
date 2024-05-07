@@ -68,7 +68,9 @@ def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
         else:
             prompt = ""
             for i, candidate_zot_path in enumerate(matched_zot_paths):
-                candidate_zot_name = c.strip_zdir(zettel_dir, candidate_zot_path)
+                candidate_zot_name = c.strip_zdir(
+                    zettel_dir, candidate_zot_path
+                )
                 prompt += f"[{i + 1}] {candidate_zot_name}\n"
             prompt += "\nSelect a zot template: "
             idx = int(_zinput(prompt)) - 1
