@@ -242,17 +242,16 @@ options:
 ### `zorg template --help`
 
 ```
-usage: zorg template [-h] {render,init} ...
+usage: zorg template render [-h] template [variables ...]
 
-Commands for managing .zot templates.
+Render a new .zo file using a .zot template.
+
+positional arguments:
+  template    Path to the .zot template.
+  variables   A list of variable specs of the form of key=value.
 
 options:
-  -h, --help     show this help message and exit
-
-subcommands:
-  {render,init}
-    render       Render a new .zo file using a .zot template.
-    init         Initialize a new file using a zorg template.
+  -h, --help  show this help message and exit
 ```
 
 ### `zorg template init --help`
@@ -272,6 +271,17 @@ options:
                         Optional path to the .zot template. If a template is
                         not provided, we will infer what template to use based
                         off of the new file's name.
+```
+
+### `zorg template list --help`
+
+```
+usage: zorg template list [-h]
+
+List all zorg template files.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
 ### `zorg template render --help`
