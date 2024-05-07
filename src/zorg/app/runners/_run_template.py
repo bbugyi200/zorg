@@ -88,10 +88,13 @@ def _get_zot_vars(zot_path: Path) -> set[str]:
                 var = token.split(".")[0]
                 if var not in banned_vars:
                     variables.add(var)
-            elif token.startswith("{{") and token.endswith("}}"):
-                var = token.split(".")[0][2:-2]
-                if var not in banned_vars:
-                    variables.add(var)
+            elif "{{" in token and "}}" in token:
+                left_idx = token.find("{{") + 2
+                right_idx = token.find("}}")
+                if left_idx < right_idx:
+                    var = token.split(".")[0][left_idx:right_idx]
+                    if var not in banned_vars:
+                        variables.add(var)
             elif token.endswith("{{"):
                 found_var = True
     return variables
