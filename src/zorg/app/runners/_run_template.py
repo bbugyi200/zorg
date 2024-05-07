@@ -55,7 +55,7 @@ def run_template_list(cfg: TemplateListConfig) -> int:
 
 def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
     zot_path = c.prepend_zdir(zettel_dir, [template])[0]
-    if not zot_path.exists():
+    if not zot_path.exists() or not zot_path.is_file():
         matched_zot_paths: list[Path] = []
         for some_zot_path in sorted(zettel_dir.rglob("*.zot")):
             if str(zot_path) in str(some_zot_path):
@@ -74,6 +74,7 @@ def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
                 prompt += f"[{i + 1}] {candidate_zot_name}\n"
             prompt += "\nSelect a zot template: "
             idx = int(_zinput(prompt)) - 1
+            print(file=sys.stderr)
             zot_path = matched_zot_paths[idx]
     return zot_path
 
@@ -82,10 +83,14 @@ def _prompt_for_missing_vars(
     var_map: VarMapType, required_vars: Iterable[str]
 ) -> dict[str, Any]:
     new_var_map = dict(var_map)
+    found_missing_vars = False
     for var in required_vars:
         if var not in new_var_map:
+            found_missing_vars = True
             v = _zinput(f"{var}: ")
             new_var_map[var] = v
+    if found_missing_vars:
+        print(file=sys.stderr)
     return new_var_map
 
 

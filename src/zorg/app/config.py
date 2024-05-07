@@ -167,11 +167,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
             + argv_after_opts[1:]
         )
     elif argv_after_opts[0] == "template" and len(argv_after_opts) == 1:
-        argv = (
-            argv_before_opts
-            + [argv_after_opts[0], "list"]
-            + argv_after_opts[1:]
-        )
+        argv = argv_before_opts + [argv_after_opts[0], "render", ""]
 
     parser = clack.Parser(description="The zettel note manager of the future.")
     # --- Global Options
