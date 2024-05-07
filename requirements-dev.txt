@@ -224,7 +224,7 @@ rich==13.7.1
     #   cookiecutter
     #   typer
     #   zettel-org
-setuptools-scm==8.0.4
+setuptools-scm==8.1.0
     # via -r requirements-dev.in
 shellingham==1.5.4
     # via typer
@@ -314,7 +314,6 @@ typing-extensions==4.11.0
     #   mypy
     #   pydantic
     #   pydantic-core
-    #   setuptools-scm
     #   sqlalchemy
     #   typer
 urllib3==2.2.1
