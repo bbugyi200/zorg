@@ -99,7 +99,7 @@ def create_database(
     total_num_notes = 0
     total_num_todos = 0
     for zo_path in tqdm(
-        sorted(cmd.zettel_dir.rglob("*.zo"), key=lambda p: p.name),
+        _get_zo_paths_to_index(cmd.zettel_dir),
         desc="Reading notes from zorg files",
         file=sys.stdout,
     ):
@@ -238,14 +238,19 @@ def increment_zid_counters(
     zid_manager.write_to_disk()
 
 
+def _get_zo_paths_to_index(zdir: Path) -> list[Path]:
+    query_dir = zdir / "query"
+    return sorted(
+        [p for p in zdir.rglob("*.zo") if str(query_dir) not in str(p)],
+        key=lambda p: p.name,
+    )
+
+
 def _get_file_hash_map(
     zdir: Path, *, paths: Iterable[Path] = None
 ) -> dict[str, str]:
     if paths is None:
-        query_dir = zdir / "query"
-        paths = sorted(
-            p for p in Path(zdir).rglob("*.zo") if str(query_dir) not in str(p)
-        )
+        paths = _get_zo_paths_to_index(zdir)
     file_to_hash: dict[str, str] = {}
     for path in paths:
         key = c.strip_zdir(zdir, path)
