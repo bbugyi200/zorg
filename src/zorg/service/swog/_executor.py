@@ -102,7 +102,7 @@ def _select_note(filtered_notes: list[Note]) -> str:
 
 def _get_header(level: int) -> str:
     if level == 1:
-        return "#########"
+        return "\n#########"
     elif level == 2:
         return "======="
     elif level == 3:

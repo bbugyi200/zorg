@@ -118,17 +118,22 @@
   - 240408#NO Da nah nah nuh...
   - Projects can start with a number, but CANNOT be all numbers
   
+  
   ######### @due
   o [#C] This todo is @due today! | due::2024-03-13
+  
   
   ######### @dzwk
   - Git [[desd_cd_kdzb.yhdxx]] hgq lkl[1] @dzwk
   
+  
   ######### @fat_pig
   - 240408#0X Some note
   
+  
   ######### @fat_pig | @puke
   - 301231#X0 When I talk to %pig I always want to @puke.
+  
   
   ######### @pomodoro
   - #gtd pomodoro
@@ -291,8 +296,10 @@
   - 240408#NO Da nah nah nuh...
   - Projects can start with a number, but CANNOT be all numbers
   
+  
   ######### %clyzajrm
   - Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
+  
   
   ######### %pig
   - 301231#X0 When I talk to %pig I always want to @puke.
@@ -314,6 +321,7 @@
   o [#C] A todo for something
   o [#C] Some foobar todo.
   o [#C] Some foobar todo.
+  
   
   ######### 3 | NOTES
   - First note in first block
@@ -519,16 +527,19 @@
   - +laundry wash delicates
   - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   
+  
   ######### [[basic]]
   - First note in first block
   - Second note in first block
   o [#C] bazbuz is ok too...
+  
   
   ######### [[links]]
   - Some note with a [[bar.sh]] link to a bash script.
   - Some note with a link in parens (see [[baz]]).
   - Some note with a link in parens and a block-level link ([[buz::fuzz]]).
   - Some note that references an old 200101#12 ZID.
+  
   
   ######### [[multiblocks]]
   o [#C] Some todo
@@ -544,14 +555,17 @@
   - Note D
   - Note E
   
+  
   ######### [[priority]]
   o [#A] 2024-03-13 High Priority TODO
   o [#B] 2024-03-13 Medium Priority TODO
   o [#C] 2024-03-13 Low Priority TODO
   
+  
   ######### [[property]]
   - 2024-03-30 This note contains a key::value pair.
   o [#C] This todo is @due today! | due::2024-03-13
+  
   
   ######### [[scrambled_prj_notes]]
   - Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -622,6 +636,7 @@
   - Rzq-itde mpfj
   - Zee-lpfg uqogce bk khxsvgrkq bbgvmf
   
+  
   ######### [[subnotes]]
   - foobar
   o [#C] This todo is due::2024-03-30 and has some subnotes
@@ -634,6 +649,7 @@
   - pig
   - is fat
   - is stinky
+  
   
   ######### [[subsections]]
   - Note about A1
@@ -650,6 +666,7 @@
   - And another note.
   o [#C] Some foobar todo.
   - This is the final section!
+  
   
   ######### [[tags_and_ids]]
   - 240408#0X Some note
