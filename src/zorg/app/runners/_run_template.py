@@ -32,6 +32,16 @@ def run_template_init(cfg: TemplateInitConfig) -> int:
 
 
 @runner
+def run_template_list(cfg: TemplateListConfig) -> int:
+    """Runner for the 'template list' command."""
+    for zot_path in sorted(Path(cfg.zettel_dir).rglob("*.zot")):
+        print(zot_path.name.replace(".zot", ""))
+        for var in sorted(_get_zot_vars(zot_path)):
+            print(f"  - {var}")
+    return 0
+
+
+@runner
 def run_template_render(cfg: TemplateRenderConfig) -> int:
     """Runner for the 'template render' command."""
     template = _get_zot_path(cfg.zettel_dir, cfg.template)
@@ -40,16 +50,6 @@ def run_template_render(cfg: TemplateRenderConfig) -> int:
         cfg.var_map, sorted(_get_zot_vars(template))
     )
     print(tmpl_manager.render(template, var_map))
-    return 0
-
-
-@runner
-def run_template_list(cfg: TemplateListConfig) -> int:
-    """Runner for the 'template list' command."""
-    for zot_path in sorted(Path(cfg.zettel_dir).rglob("*.zot")):
-        print(zot_path.name.replace(".zot", ""))
-        for var in sorted(_get_zot_vars(zot_path)):
-            print(f"  - {var}")
     return 0
 
 
