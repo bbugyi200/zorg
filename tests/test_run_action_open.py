@@ -93,7 +93,7 @@ def testActionOpen_withProperty_sendsSearchMsg(
     assert capture.err == ""
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        f"SEARCH {link_prop}",
+        f"SEARCH id::{link_prop}",
     ]
 
 

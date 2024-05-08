@@ -74,7 +74,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             )
             print(f"EDIT {link_path}")
             if len(link_parts) > 1:
-                print(f"SEARCH {link_parts[1]}")
+                print(f"SEARCH id::{link_parts[1]}")
 
     else:
         name_sep = " | "
