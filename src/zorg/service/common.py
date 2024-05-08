@@ -3,6 +3,7 @@
 import datetime as dt
 from pathlib import Path
 import re
+import sys
 from typing import Any, Iterable
 
 import rich
@@ -67,6 +68,12 @@ def zprint(
 
     # set call count
     setattr(zprint, call_count_attr, call_count + 1)
+
+
+def zinput(prompt: str) -> str:
+    """Custom input() wrapper used by Zorg."""
+    print(prompt, file=sys.stderr, end="")
+    return input()
 
 
 def _var_map_value(value: str) -> Any:

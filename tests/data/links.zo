@@ -10,3 +10,4 @@
 - Some note with a link in parens (see [[baz]]).
 - Some note with a link in parens and a block-level link ([[buz::fuzz]]).
 - Some note that references an old 200101#12 ZID.
+- Some note with a [[foo]] linke and a [[bar]] link.

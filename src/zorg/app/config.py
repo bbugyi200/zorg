@@ -49,16 +49,6 @@ class Config(clack.Config):
     template_pattern_map: TemplatePatternMapType = {}
 
 
-class OpenActionConfig(Config):
-    """Clack config for the 'action' command."""
-
-    command: Literal["open"]
-
-    # ----- ARGUMENTS
-    zo_path: Path
-    line_number: int
-
-
 class CompileConfig(Config):
     """Clack config for the 'compile' command."""
 
@@ -95,6 +85,17 @@ class EditConfig(Config):
     file_group_map: FileGroupMapType = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
+
+
+class OpenActionConfig(Config):
+    """Clack config for the 'action open' command."""
+
+    command: Literal["open"]
+
+    # ----- ARGUMENTS
+    zo_path: Path
+    line_number: int
+    option_idx: Optional[int] = None
 
 
 class QueryConfig(Config):
@@ -204,6 +205,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         type=int,
         help=(
             "The line number that your editor cursor is currently located on."
+        ),
+    )
+    action_open_parser.add_argument(
+        "option_idx",
+        nargs="?",
+        help=(
+            "Used on a second 'action open' run to indicate which option was"
+            " selected."
         ),
     )
 

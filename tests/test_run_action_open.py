@@ -17,7 +17,7 @@ params = mark.parametrize
 
 @params(
     "lineno,zo_name",
-    [(7, "foo.zo"), (9, "bar.sh"), (10, "baz.zo"), (11, "buz.zo")],
+    [(7, "foo.zo"), (9, "bar.sh"), (10, "baz.zo")],
 )
 def test_action_open__good(
     open_action_main: c.MainType,
@@ -26,7 +26,7 @@ def test_action_open__good(
     lineno: int,
     zo_name: str,
 ) -> None:
-    """Test that the OPEN_LINK action is WAI."""
+    """Test the 'action open' command's simple happy path."""
     open_action_main(str(lineno))
 
     capture = capsys.readouterr()
@@ -41,7 +41,7 @@ def test_action_open__bad(
     snapshot: Snapshot,
     lineno: int,
 ) -> None:
-    """Test that the OPEN_LINK action is WAI."""
+    """Test the 'action open' command's sad path."""
     open_action_main(str(lineno))
 
     capture = capsys.readouterr()
@@ -61,7 +61,7 @@ def test_action_open__query(
     lineno: int,
     zo_name: str,
 ) -> None:
-    """Test that the OPEN_LINK action is WAI."""
+    """Test the 'action open' command with a SWOG query."""
     open_action_main(str(lineno), zdir=db_zettel_dir)
 
     capture = capsys.readouterr()
@@ -69,6 +69,32 @@ def test_action_open__query(
     assert capture.err == ""
     assert capture.out == f"EDIT {query_zo_path}\n"
     assert query_zo_path.read_text() == snapshot
+
+
+@params("lineno,zo_name,link_prop", [param(11, "buz.zo", "fuzz")])
+def testActionOpen_withProperty_sendsSearchMsg(
+    open_action_main: c.MainType,
+    capsys: CaptureFixture,
+    db_zettel_dir: Path,
+    lineno: int,
+    zo_name: str,
+    link_prop: str,
+) -> None:
+    """Test the 'action open' command's SEARCH message.
+
+    This message should be sent back to vim when zorg is asked to open a link
+    with a '::' separator. For example, a link of the form [[foo::bar]] should
+    trigger the 'SEARCH bar' message.
+    """
+    open_action_main(str(lineno), zdir=db_zettel_dir)
+
+    capture = capsys.readouterr()
+    zo_path = db_zettel_dir / zo_name
+    assert capture.err == ""
+    assert capture.out.strip().split("\n") == [
+        f"EDIT {zo_path}",
+        f"SEARCH {link_prop}",
+    ]
 
 
 @fixture(name="open_action_main")

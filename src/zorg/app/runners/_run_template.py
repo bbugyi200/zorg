@@ -77,7 +77,7 @@ def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
                 )
                 prompt += f"{i + 1}){spaces} {candidate_zot_name}\n"
             prompt += "\nSelect a zot template: "
-            idx = int(_zinput(prompt)) - 1
+            idx = int(c.zinput(prompt)) - 1
             print(file=sys.stderr)
             zot_path = matched_zot_paths[idx]
     return zot_path
@@ -91,16 +91,11 @@ def _prompt_for_missing_vars(
     for var in required_vars:
         if var not in new_var_map:
             found_missing_vars = True
-            v = _zinput(f"{var}: ")
+            v = c.zinput(f"{var}: ")
             new_var_map[var] = v
     if found_missing_vars:
         print(file=sys.stderr)
     return new_var_map
-
-
-def _zinput(prompt: str) -> str:
-    print(prompt, file=sys.stderr, end="")
-    return input()
 
 
 def _get_zot_vars(zot_path: Path) -> set[str]:
