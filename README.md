@@ -142,13 +142,15 @@ subcommands:
 ### `zorg action open --help`
 
 ```
-usage: zorg action open [-h] zo_path line_number
+usage: zorg action open [-h] zo_path line_number [option_idx]
 
 Open a zettel link if one exists on the provided zorg file line.
 
 positional arguments:
   line_number  The line number that your editor cursor is currently located
                on.
+  option_idx   Used on a second 'action open' run to indicate which option was
+               selected.
   zo_path      The file that your editor currently has open.
 
 options:
