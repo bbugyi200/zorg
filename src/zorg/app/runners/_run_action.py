@@ -88,11 +88,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             query_path = cfg.zettel_dir / f"{query_name}.zoq"
 
             date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-            if cfg.zo_path == query_path:
-                parent_link = ""
-            else:
-                zo_spec = c.strip_zdir(cfg.zettel_dir, cfg.zo_path)
-                parent_link = f"from [[{zo_spec}]] ".replace(".zo", "")
+            zo_spec = c.strip_zdir(cfg.zettel_dir, cfg.zo_path)
+            parent_link = f"from [[{zo_spec}]] ".replace(".zo]", "]")
             with query_path.open("w") as f:
                 f.write(
                     f"# {query_string} | {query_name}\n#\n# Saved query"
