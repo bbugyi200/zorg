@@ -161,7 +161,7 @@ class _SONConverter:
             and_conds.append(and_(*date_filters))
 
         if and_conds:
-            return and_(*and_conds)
+            return and_(and_conds[0], *and_conds[1:])
         else:
             return None
 
