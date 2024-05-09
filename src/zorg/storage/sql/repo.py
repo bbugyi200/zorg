@@ -7,7 +7,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from eris import ErisResult, Err, Ok
+from eris import ErisResult, Ok
 from logrus import Logger
 from sqlmodel import Session, select
 
