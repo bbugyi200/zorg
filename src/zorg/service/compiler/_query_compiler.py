@@ -1,10 +1,12 @@
 """Contains service logic used to compile zorg queries."""
 
-from typing import cast
+import datetime as dt
+from typing import Optional, cast
 
 from logrus import Logger
 
-from ...domain.models import Query, WhereAndFilter, WhereOrFilter
+from .. import dates as zdt
+from ...domain.models import DateRange, Query, WhereAndFilter, WhereOrFilter
 from ...domain.types import (
     GroupByType,
     NoteType,
@@ -59,6 +61,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         allowed_note_types: set[NoteType] = set()
         areas: set[str] = set()
         contexts: set[str] = set()
+        create_date_ranges: set[DateRange] = set()
         people: set[str] = set()
         priorities: set[TodoPriorityType] = set()
         projects: set[str] = set()
@@ -83,6 +86,21 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     where_atom.priority_range(),
                 )
                 _add_priorities(priority_range, priorities)
+            elif x := where_atom.create_range():
+                create_range = cast(ZorgQueryParser.Create_rangeContext, x)
+                short_start_date = create_range.CREATE_RANGE_HEAD().getText()[
+                    1:
+                ]
+                start_date = zdt.from_short_date(short_start_date)
+
+                end_date: Optional[dt.date] = None
+                if date_range_tail := create_range.DATE_RANGE_TAIL():
+                    short_end_date = date_range_tail.getText()[1:]
+                    end_date = zdt.from_short_date(short_end_date)
+
+                date_range = DateRange(start_date, end_date)
+                create_date_ranges.add(date_range)
+
             elif where_atom.tag():
                 tag = cast(ZorgQueryParser.TagContext, where_atom.tag())
                 minus = "-" if tag.not_op() else ""
@@ -108,6 +126,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 allowed_note_types=allowed_note_types,
                 areas=areas,
                 contexts=contexts,
+                create_date_ranges=create_date_ranges,
                 people=people,
                 priorities=priorities,
                 projects=projects,

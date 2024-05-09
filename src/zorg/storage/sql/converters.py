@@ -31,6 +31,7 @@ _son_converter_parser = metaman.register_function_factory(
 
 
 # TODO(bugyi): Rename to_select_of_note() and other related identifiers.
+# TODO(bugyi): Move to_select_of_note() out of of this file!
 def to_select_of_note(
     or_filter: Optional[WhereOrFilter],
 ) -> SelectOfScalar[sql.ZorgNote]:
@@ -144,6 +145,21 @@ class _SONConverter:
             if len(or_conds) > 1
             else or_conds[0]
         )
+
+    @_son_converter_parser
+    def create_date_ranges(self) -> Optional[ColumnElement]:
+        """Converter that handles create date ranges."""
+        and_conds = []
+        for create_date_range in self.and_filter.create_date_ranges:
+            date_filters = [
+                sql.ZorgNote.create_date >= create_date_range.start
+            ]
+            if create_date_range.end is not None:
+                date_filters.append(
+                    sql.ZorgNote.create_date <= create_date_range.end
+                )
+            and_conds.append(and_(*date_filters))
+        return and_(*and_conds)
 
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:

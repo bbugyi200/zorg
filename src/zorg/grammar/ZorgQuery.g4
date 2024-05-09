@@ -35,7 +35,7 @@ context : AT_SIGN ID ;
 person : PERCENT ID ;
 project : PLUS ID ;
 subfilter : '(' or_filter ')' ;
-create_range : HAT SHORT_DATE (COLON SHORT_DATE)? ;
+create_range : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
