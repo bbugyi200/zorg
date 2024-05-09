@@ -246,6 +246,7 @@ def update_note_modify_dates(
     event: events.ModifiedZorgNotesEvent, session: SQLSession
 ) -> None:
     """Creates or updates note modify dates."""
+    del event, session
 
 
 def _get_zo_paths_to_index(zdir: Path) -> list[Path]:
