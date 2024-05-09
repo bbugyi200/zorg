@@ -159,7 +159,11 @@ class _SONConverter:
                     sql.ZorgNote.create_date <= create_date_range.end
                 )
             and_conds.append(and_(*date_filters))
-        return and_(*and_conds)
+
+        if and_conds:
+            return and_(*and_conds)
+        else:
+            return None
 
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
