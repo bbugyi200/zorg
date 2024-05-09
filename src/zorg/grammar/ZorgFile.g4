@@ -46,7 +46,7 @@ date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_symbol     : SQUOTE | DQUOTE | non_tag_symbol | tag_symbol | id_symbol ;
+any_symbol     : SQUOTE | DQUOTE | HAT | non_tag_symbol | tag_symbol | id_symbol ;
 non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;

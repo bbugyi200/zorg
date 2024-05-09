@@ -24,7 +24,7 @@ note : 'note' ;
 where_body : or_filter ;
 or_filter : and_filter (SPACE 'or' SPACE and_filter)* ;
 and_filter : where_atom (SPACE where_atom)* ;
-where_atom : note_type | priority_range | tag | subfilter;
+where_atom : note_type | priority_range | tag | subfilter | create_range ;
 note_type : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : '[' HASH ID ']' ;
@@ -35,6 +35,7 @@ context : AT_SIGN ID ;
 person : PERCENT ID ;
 project : PLUS ID ;
 subfilter : '(' or_filter ')' ;
+create_range : HAT SHORT_DATE (COLON SHORT_DATE)? ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
