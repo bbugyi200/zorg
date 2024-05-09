@@ -165,6 +165,11 @@ class _SONConverter:
         else:
             return None
 
+    @_son_converter_parser
+    def modify_date_range(self) -> Optional[ColumnElement]:
+        """Converter that handles modify date ranges."""
+        return None
+
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
     if note_type is NoteType.BASIC:
@@ -229,6 +234,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
         kwargs: dict[str, Any] = {
             "body": entity.body,
             "create_date": entity.create_date,
+            "modify_date": entity.modify_date,
             "zid": entity.zid,
         }
         if entity.todo_payload:
@@ -303,7 +309,9 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             sql_model.body,
             areas=list(area.name for area in sql_model.areas),
             contexts=list(context.name for context in sql_model.contexts),
+            create_date=sql_model.create_date,
             file_path=Path(sql_model.zorg_file.path),
+            modify_date=sql_model.modify_date,
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),
             todo_payload=todo_payload,

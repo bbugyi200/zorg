@@ -88,9 +88,9 @@ class SQLRepo:
             self._session.delete(sql_zorg_file)
             return Ok(zorg_file)
         else:
-            emsg = "Failed to delete Zorg File"
-            _LOGGER.warning(emsg, path=path)
-            return Err(emsg)
+            emsg = "Cannot delete zorg file since it does not exist."
+            _LOGGER.debug(emsg, path=path)
+            return Ok(None)
 
     def get(self, key: str) -> ErisResult[Optional[File]]:
         """Retrieve a file from the DB."""

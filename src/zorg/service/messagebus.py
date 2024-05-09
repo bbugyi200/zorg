@@ -25,6 +25,7 @@ EVENT_HANDLERS: dict[type[events.Event], list[MessageHandler]] = {
         handlers.check_keep_alive_file,
         handlers.reindex_database_after_edit,
     ],
+    events.ModifiedZorgNotesEvent: [handlers.update_note_modify_dates],
     events.NewZorgNotesEvent: [handlers.add_zids_to_notes_in_file],
     events.DBModifiedEvent: [handlers.increment_zid_counters],
 }

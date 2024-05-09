@@ -33,6 +33,7 @@ class Note:
     file_path: Optional[Path] = None
     line_no: Optional[int] = None
     links: list[str] = field(default_factory=lambda: [])
+    modify_date: dt.date = field(default_factory=dt.date.today)
     next_note_id: Optional[int] = None
     parent_note_id: Optional[int] = None
     people: list[str] = field(default_factory=lambda: [])

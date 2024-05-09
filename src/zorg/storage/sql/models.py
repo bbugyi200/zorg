@@ -121,6 +121,7 @@ class ZorgNote(Base, table=True):
     zid: Optional[str] = Field(default=None)
 
     create_date: dt.date = Field(default_factory=dt.date.today)
+    modify_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
     todo_status: Optional[NoteType] = None
 

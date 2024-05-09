@@ -1,5 +1,6 @@
 """Zorg's event and command handlers live here."""
 
+import datetime as dt
 from functools import partial
 import hashlib
 import json
@@ -14,6 +15,7 @@ import vimala
 from . import common as c
 from .. import APP_NAME
 from ..domain.messages import commands, events
+from ..domain.models import File, Note
 from ..domain.types import Color
 from ..storage.sql.session import SQLSession
 from .compiler import walk_zorg_file
@@ -146,34 +148,36 @@ def reindex_database(
     )
 
     num_of_updates = 0
-    for file, hash_ in file_to_hash.copy().items():
+    for zorg_file_name, hash_ in file_to_hash.copy().items():
+        # If this file has never been indexed OR the file contents have changed
+        # since the last time it was indexed.
         if (
-            file not in old_file_to_hash.keys()
-            or old_file_to_hash[file] != hash_
+            zorg_file_name not in old_file_to_hash.keys()
+            or old_file_to_hash[zorg_file_name] != hash_
         ):
             num_of_updates += 1
-            old_zorg_file = session.repo.get(file).unwrap()
+            old_zorg_file = session.repo.remove_by_key(zorg_file_name).unwrap()
             if old_zorg_file is not None:
-                _LOGGER.debug("Removing file from DB", file=file)
+                _LOGGER.debug("Removing file from DB", file=zorg_file_name)
                 c.zprint(
                     "UPDATING EXISTING FILE",
-                    file,
+                    zorg_file_name,
                     fg_color=Color.BLACK,
                     bg_color=Color.YELLOW,
                 )
-                session.repo.remove_by_key(str(old_zorg_file.path))
             else:
                 c.zprint(
                     "ADDING NEW FILE",
-                    file,
+                    zorg_file_name,
                     fg_color=Color.WHITE,
                     bg_color=Color.GREEN,
                 )
 
             zorg_file = walk_zorg_file(
-                cmd.zettel_dir, Path(file), verbose=cmd.verbose
+                cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
-            _LOGGER.debug("Adding zorg file", file=file)
+            _add_modify_dates(cmd.zettel_dir, zorg_file)
+            _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add(zorg_file)
             session.commit()
 
@@ -238,6 +242,12 @@ def increment_zid_counters(
     zid_manager.write_to_disk()
 
 
+def update_note_modify_dates(
+    event: events.ModifiedZorgNotesEvent, session: SQLSession
+) -> None:
+    """Creates or updates note modify dates."""
+
+
 def _get_zo_paths_to_index(zdir: Path) -> list[Path]:
     query_dir = zdir / "query"
     return sorted(
@@ -288,6 +298,8 @@ def _add_zid_to_line(zid: str, line: str) -> str:
     if words[0].startswith("[#"):
         priority = f"{words.pop(0)} "
 
+    # Remove a YYYY-MM-DD create date if one existed prior to adding a ZID to
+    # the note.
     if len(words[0]) == 10:
         dash_idices = (4, 7)
         for i, ch in enumerate(words[0][:10]):
@@ -324,3 +336,15 @@ def _process_vim_commands(
             yield vim_cmd.format(zdir=zettel_dir)
         else:
             yield vim_cmd
+
+
+def _add_modify_dates(zdir: Path, zorg_file: File) -> None:
+    today = dt.date.today()
+    modified_notes: list[Note] = []
+    for note in zorg_file.notes:
+        if note.modify_date != today:
+            modified_notes.append(note)
+    if modified_notes:
+        zorg_file.events.append(
+            events.ModifiedZorgNotesEvent(zdir, zorg_file.path, modified_notes)
+        )
