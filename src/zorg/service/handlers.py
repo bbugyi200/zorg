@@ -250,11 +250,7 @@ def update_note_modify_dates(
 
 
 def _get_zo_paths_to_index(zdir: Path) -> list[Path]:
-    query_dir = zdir / "query"
-    return sorted(
-        [p for p in zdir.rglob("*.zo") if str(query_dir) not in str(p)],
-        key=lambda p: p.name,
-    )
+    return sorted(zdir.rglob("*.zo"), key=lambda p: p.name)
 
 
 def _get_file_hash_map(

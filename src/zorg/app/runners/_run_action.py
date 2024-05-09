@@ -85,9 +85,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             ) as session:
                 query_results = swog.execute(session, query_string)
 
-            query_dir = cfg.zettel_dir / "query"
-            query_dir.mkdir(exist_ok=True)
-            query_path = query_dir / f"{query_name}.zo"
+            query_path = cfg.zettel_dir / f"{query_name}.zoq"
 
             date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
             if cfg.zo_path == query_path:

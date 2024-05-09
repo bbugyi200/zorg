@@ -51,7 +51,7 @@ def test_action_open__bad(
 
 @params(
     "lineno,zo_name",
-    [param(5, "query/order_by_file.zo", id="order_by_file_query")],
+    [param(5, "order_by_file.zoq", id="order_by_file_query")],
 )
 def test_action_open__query(
     open_action_main: c.MainType,
