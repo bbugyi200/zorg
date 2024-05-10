@@ -180,7 +180,7 @@ def reindex_database(
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
-            _add_modify_dates(cmd.zettel_dir, zorg_file, old_zorg_file)
+            _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add(zorg_file)
             session.commit()
@@ -294,19 +294,6 @@ def _add_zid_to_line(zid: str, line: str) -> str:
     return f"{line_before_zid}{zid} {' '.join(words)}"
 
 
-def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
-    words = line.split(" ")
-    line_before_zid = _pop_line_before_zid(words)
-    zid = words.pop(0)
-    if words and len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
-        old_modify_date = words.pop(0)
-        _LOGGER.debug(
-            "Removing old modify date", old_modify_date=old_modify_date
-        )
-    line_prefix = f"{line_before_zid}{zid} "
-    return f"{line_prefix}{short_modify_date} {' '.join(words)}"
-
-
 def _pop_line_before_zid(words: list[str]) -> str:
     num_spaces = 0
     while words[0] == "":
@@ -349,7 +336,7 @@ def _process_vim_commands(
             yield vim_cmd
 
 
-def _add_modify_dates(
+def _check_for_modified_notes(
     zdir: Path, zorg_file: File, old_zorg_file: Optional[File]
 ) -> None:
     today = dt.date.today()
@@ -358,12 +345,27 @@ def _add_modify_dates(
     old_zid_map = {note.zid: note for note in notes if note.zid is not None}
     for note in zorg_file.notes:
         old_note = old_zid_map.get(note.zid, None) if note.zid else None
-        if note.modify_date != today and old_note and note != old_note:
+        note_has_changed = old_note and note != old_note
+        note_is_new = old_note is None and note.zid is not None
+        if note.modify_date != today and (note_has_changed or note_is_new):
             modified_notes.append(note)
     if modified_notes:
         zorg_file.events.append(
             events.ModifiedZorgNotesEvent(zdir, zorg_file.path, modified_notes)
         )
+
+
+def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
+    words = line.split(" ")
+    line_before_zid = _pop_line_before_zid(words)
+    zid = words.pop(0)
+    if words and len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
+        old_modify_date = words.pop(0)
+        _LOGGER.debug(
+            "Removing old modify date", old_modify_date=old_modify_date
+        )
+    line_prefix = f"{line_before_zid}{zid} "
+    return f"{line_prefix}{short_modify_date} {' '.join(words)}"
 
 
 def _update_zo_file(
