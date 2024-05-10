@@ -156,7 +156,9 @@ class _SONConverter:
         ]:
             for date_range in date_range_list:
                 date_filters = [sql_date >= date_range.start]
-                end_date = date_range.end if date_range.end else date_range.start
+                end_date = (
+                    date_range.end if date_range.end else date_range.start
+                )
                 date_filters.append(sql_date <= end_date)
                 and_conds.append(and_(*date_filters))
 
