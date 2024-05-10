@@ -121,6 +121,9 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
         if self._s.in_note:
             self._s.ids_in_note += 1
+            # TODO(bugyi): Figure out how to include 'short_date' or
+            # 'modify_date' in ZorgFile grammar as parser rules instead of
+            # using the following hack.
             if self._s.ids_in_note == 1 and zdt.is_short_date(
                 short_date := ctx.getText()
             ):
