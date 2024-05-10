@@ -305,7 +305,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_noteContext
     ) -> None:  # noqa: D102
         self._s.in_note = False
-        extra_kwargs = {}
+        extra_kwargs: dict[str, Any] = {}
         kwargs = self._get_note_kwargs(ctx, extra_kwargs)
         body: str = ctx.id_note_body().getText().strip()
         if body == "":

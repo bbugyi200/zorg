@@ -109,7 +109,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 ]
                 start_date = zdt.from_short_date(short_start_date)
 
-                end_date: Optional[dt.date] = None
+                end_date = None
                 if date_range_tail := modify_range.DATE_RANGE_TAIL():
                     short_end_date = date_range_tail.getText()[1:]
                     end_date = zdt.from_short_date(short_end_date)

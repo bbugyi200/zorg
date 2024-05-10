@@ -39,9 +39,11 @@ class Note:
     todo_payload: Optional[TodoPayload] = None
     zid: Optional[str] = None
 
-    def __eq__(self, other: "Note") -> bool:  # noqa: D105
+    def __eq__(self, other: object) -> bool:  # noqa: D105
         return (
-            self.body == other.body and self.todo_payload == other.todo_payload
+            isinstance(other, Note)
+            and self.body == other.body
+            and self.todo_payload == other.todo_payload
         )
 
 
