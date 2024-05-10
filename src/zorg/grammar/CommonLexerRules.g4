@@ -35,11 +35,9 @@ RANGLE            : '>' ;
 COLON             : ':' ;
 
 //// fragments
-//
-// ZID_CHAR is any digit OR any letter NOT in ('I', 'O', 'j', 'l')
 fragment UPPER_LETTER : 'A'..'Z' ;
 fragment LOWER_LETTER : 'a'..'z' ;
-fragment ZID_CHAR     : NUM | 'A'..'H' | 'J'..'N' | 'P'..'Z' | 'a'..'i' | 'k' | 'm'..'z' ;
+fragment ZID_CHAR     : NUM | 'A'..'Z' | 'a'..'z' ;
 fragment NUM          : '0'..'9' ;
 fragment FIRST_D_NUM  : '0' | '1' | '2' | '3' ;
 fragment FIRST_M_NUM  : '0' | '1' ;
