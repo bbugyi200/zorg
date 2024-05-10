@@ -18,7 +18,8 @@ footnote    : ref COLON space_atoms NL ;
 // notes
 note        : DASH base_note subnote* ;
 base_note   : id_note_body NL ;
-id_note_body : (SPACE zid)? note_body ;
+id_note_body : (SPACE zid (SPACE modify_date)?)? note_body ;
+modify_date : SHORT_DATE ;
 note_body   : space_atoms (NL SPACE+ space_atoms)* ;
 subnote     : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote  : FOUR_SPACE_DASH base_note ;
@@ -31,7 +32,7 @@ x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : '[' HASH ID ']' ;
 
 // Zorg YYMMDD#XX IDs
-zid : ZID ;
+zid : ZID  ;
 
 // atoms
 space_atoms : space_atom+ ;
