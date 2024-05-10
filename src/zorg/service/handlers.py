@@ -180,7 +180,7 @@ def reindex_database(
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
-            # _add_modify_dates(cmd.zettel_dir, zorg_file, old_zorg_file)
+            _add_modify_dates(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add(zorg_file)
             session.commit()
@@ -355,11 +355,13 @@ def _add_modify_dates(
     today = dt.date.today()
     modified_notes: list[Note] = []
     notes = old_zorg_file.notes if old_zorg_file else []
-    old_zid_map = {note.zid: note for note in notes}
+    old_zid_map = {note.zid: note for note in notes if note.zid is not None}
     for note in zorg_file.notes:
-        if note.modify_date != today and (
-            note.zid not in old_zid_map
-            or note.body != old_zid_map[note.zid].body
+        old_note = old_zid_map.get(note.zid, None) if note.zid else None
+        if (
+            note.modify_date != today
+            and old_note
+            and note.body != old_note.body
         ):
             modified_notes.append(note)
     if modified_notes:

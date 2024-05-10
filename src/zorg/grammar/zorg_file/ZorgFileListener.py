@@ -98,15 +98,6 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#modify_date.
-    def enterModify_date(self, ctx:ZorgFileParser.Modify_dateContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#modify_date.
-    def exitModify_date(self, ctx:ZorgFileParser.Modify_dateContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#note_body.
     def enterNote_body(self, ctx:ZorgFileParser.Note_bodyContext):
         pass

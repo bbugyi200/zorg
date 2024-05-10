@@ -70,7 +70,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._add_tags(ctx, "contexts")
 
     def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
-        get_date = partial(
+        get_datetime = partial(
             dt.datetime.strptime, ctx.DATE().getText(), "%Y-%m-%d"
         )
         if (
@@ -78,17 +78,17 @@ class ZorgFileCompiler(ZorgFileListener):
             and self._s.ids_in_note == 1
             and self._s.note_date is None
         ):
-            self._s.note_date = get_date()
+            self._s.note_date = get_datetime().date()
         elif self._s.in_h4_header:
-            self._s.h4_date = get_date()
+            self._s.h4_date = get_datetime().date()
         elif self._s.in_h3_header:
-            self._s.h3_date = get_date()
+            self._s.h3_date = get_datetime().date()
         elif self._s.in_h2_header:
-            self._s.h2_date = get_date()
+            self._s.h2_date = get_datetime().date()
         elif self._s.in_h1_header:
-            self._s.h1_date = get_date()
+            self._s.h1_date = get_datetime().date()
         elif self._s.in_first_comment:
-            self._s.file_date = get_date()
+            self._s.file_date = get_datetime().date()
 
     def enterH1_header(
         self, ctx: ZorgFileParser.H1_headerContext
@@ -119,9 +119,13 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_head = True
 
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
-        del ctx
         if self._s.in_note:
             self._s.ids_in_note += 1
+            if (
+                self._s.ids_in_note == 1
+                and zdt.is_short_date(short_date := ctx.getText())
+            ):
+                self._s.modify_date = zdt.from_short_date(short_date)
 
     def enterItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
         del ctx
@@ -131,11 +135,6 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.in_note:
             link_text = ctx.children[1].getText()
             self._s.note_links.append(link_text)
-
-    def enterModify_date(
-        self, ctx: ZorgFileParser.Modify_dateContext
-    ) -> None:  # noqa: D102
-        self._s.modify_date = zdt.from_short_date(ctx.getText())
 
     def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         del ctx
@@ -222,7 +221,9 @@ class ZorgFileCompiler(ZorgFileListener):
             zid = ctx.getText()
             self._s.zid = zid
             zorg_id_date = f"20{zid.split('#')[0]}"
-            self._s.note_date = dt.datetime.strptime(zorg_id_date, "%Y%m%d")
+            self._s.note_date = dt.datetime.strptime(
+                zorg_id_date, "%Y%m%d"
+            ).date()
 
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
