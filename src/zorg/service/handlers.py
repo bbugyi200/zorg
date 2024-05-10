@@ -7,7 +7,7 @@ import json
 from operator import attrgetter
 from pathlib import Path
 import sys
-from typing import Callable, Iterable, Iterator, Sequence
+from typing import Callable, Iterable, Iterator, Optional, Sequence
 
 from logrus import Logger
 from tqdm import tqdm
@@ -350,7 +350,7 @@ def _process_vim_commands(
 
 
 def _add_modify_dates(
-    zdir: Path, zorg_file: File, old_zorg_file: File
+    zdir: Path, zorg_file: File, old_zorg_file: Optional[File]
 ) -> None:
     today = dt.date.today()
     modified_notes: list[Note] = []
