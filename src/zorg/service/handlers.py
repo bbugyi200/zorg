@@ -4,15 +4,16 @@ import datetime as dt
 from functools import partial
 import hashlib
 import json
+from operator import attrgetter
 from pathlib import Path
 import sys
-from typing import Iterable, Iterator
+from typing import Callable, Iterable, Iterator, Sequence
 
 from logrus import Logger
 from tqdm import tqdm
 import vimala
 
-from . import common as c
+from . import common as c, dates as zdt
 from .. import APP_NAME
 from ..domain.messages import commands, events
 from ..domain.models import File, Note
@@ -23,6 +24,9 @@ from .zid_manager import ZIDManager
 
 
 _LOGGER = Logger(__name__)
+
+_ThingFirstLineAdder = Callable[[str, str], str]
+_ThingGetter = Callable[[Note], str]
 
 
 def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
@@ -201,31 +205,16 @@ def reindex_database_after_edit(
 def add_zids_to_notes_in_file(
     event: events.NewZorgNotesEvent, session: SQLSession
 ) -> None:
-    """Adds IDs to new zorg notes."""
+    """Adds ZIDs to new zorg notes."""
     del session
 
-    zlines = event.zorg_file_path.read_text().split("\n")
-    for note in event.new_notes:
-        assert note.zid is not None
-        assert note.line_no is not None
-
-        start_idx = note.line_no - 1
-        end_idx = note.line_no + len(note.body.split("\n")) - 1
-        new_note_lines = zlines[start_idx:end_idx]
-        first_note_line = new_note_lines[0]
-        new_note_lines[0] = _add_zid_to_line(note.zid, first_note_line)
-        zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
-
-    _LOGGER.info(
-        "Adding ZIDs to zorg file",
-        zorg_file=event.zorg_file_path,
-        new_notes=len(event.new_notes),
-    )
-    event.zorg_file_path.write_text("\n".join(zlines))
-
-    zdir = event.zettel_dir
-    _write_file_hash_to_disk(
-        _get_file_hash_path(zdir), _get_file_hash_map(zdir)
+    _update_zo_file(
+        zdir=event.zettel_dir,
+        zo_path=event.zorg_file_path,
+        notes_to_update=event.new_notes,
+        add_thing_to_first_line=_add_zid_to_line,
+        thing_getter=attrgetter("zid"),
+        log_message="Adding ZIDs to zorg file",
     )
 
 
@@ -246,7 +235,16 @@ def update_note_modify_dates(
     event: events.ModifiedZorgNotesEvent, session: SQLSession
 ) -> None:
     """Creates or updates note modify dates."""
-    del event, session
+    del session
+    today_short_date = zdt.to_short_date(dt.date.today())
+    _update_zo_file(
+        zdir=event.zettel_dir,
+        zo_path=event.zorg_file_path,
+        notes_to_update=event.modified_notes,
+        add_thing_to_first_line=_add_or_update_modify_date,
+        thing_getter=lambda _: today_short_date,
+        log_message="Updating modify dates",
+    )
 
 
 def _get_zo_paths_to_index(zdir: Path) -> list[Path]:
@@ -280,20 +278,8 @@ def _write_file_hash_to_disk(
 
 
 def _add_zid_to_line(zid: str, line: str) -> str:
-    all_words = line.split(" ")
-
-    num_spaces = 0
-    while all_words[0] == "":
-        num_spaces += 1
-        all_words.pop(0)
-    spaces = " " * num_spaces
-
-    symbol = all_words[0]
-    words = all_words[1:]
-
-    priority = ""
-    if words[0].startswith("[#"):
-        priority = f"{words.pop(0)} "
+    words = line.split(" ")
+    line_before_zid = _pop_line_before_zid(words)
 
     # Remove a YYYY-MM-DD create date if one existed prior to adding a ZID to
     # the note.
@@ -305,7 +291,32 @@ def _add_zid_to_line(zid: str, line: str) -> str:
         else:
             words.pop(0)
 
-    return f"{spaces}{symbol} {priority}{zid} {' '.join(words)}"
+    return f"{line_before_zid}{zid} {' '.join(words)}"
+
+
+def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
+    words = line.split(" ")
+    line_before_zid = _pop_line_before_zid(words)
+    zid = words.pop(0)
+    if len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
+        _LOGGER.debug("Removing old modify date", old_modify_date=words.pop(0))
+    line_prefix = f"{line_before_zid}{zid} "
+    return f"{line_prefix}{short_modify_date} {' '.join(words)}"
+
+
+def _pop_line_before_zid(words: list[str]) -> str:
+    num_spaces = 0
+    while words[0] == "":
+        num_spaces += 1
+        words.pop(0)
+    spaces = " " * num_spaces
+
+    symbol = words.pop(0)
+
+    priority = ""
+    if words[0].startswith("[#"):
+        priority = f"{words.pop(0)} "
+    return f"{spaces}{symbol} {priority}"
 
 
 def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
@@ -345,3 +356,36 @@ def _add_modify_dates(zdir: Path, zorg_file: File) -> None:
         zorg_file.events.append(
             events.ModifiedZorgNotesEvent(zdir, zorg_file.path, modified_notes)
         )
+
+
+def _update_zo_file(
+    *,
+    zdir: Path,
+    zo_path: Path,
+    notes_to_update: Sequence[Note],
+    add_thing_to_first_line: _ThingFirstLineAdder,
+    thing_getter: _ThingGetter,
+    log_message: str,
+) -> None:
+    zlines = zo_path.read_text().split("\n")
+    for note in notes_to_update:
+        assert note.zid is not None
+        assert note.line_no is not None
+
+        start_idx = note.line_no - 1
+        end_idx = note.line_no + len(note.body.split("\n")) - 1
+        new_note_lines = zlines[start_idx:end_idx]
+        first_note_line = new_note_lines[0]
+        new_note_lines[0] = add_thing_to_first_line(
+            thing_getter(note), first_note_line
+        )
+        zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
+
+    _LOGGER.info(
+        log_message, zorg_file=zo_path, notes_to_update=len(notes_to_update)
+    )
+    zo_path.write_text("\n".join(zlines))
+
+    _write_file_hash_to_disk(
+        _get_file_hash_path(zdir), _get_file_hash_map(zdir)
+    )
