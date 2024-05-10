@@ -46,7 +46,7 @@ def check_keep_alive_file(
     if not keep_alive_file.exists():
         _LOGGER.debug(
             "No keep alive file found.",
-            keep_alive_file=keep_alive_file,
+            keep_alive_file=str(keep_alive_file),
         )
         return
 
@@ -56,7 +56,7 @@ def check_keep_alive_file(
     if keep_alive_file.stat().st_size == 0:
         _LOGGER.debug(
             "Empty keep alive file found.",
-            keep_alive_file=keep_alive_file,
+            keep_alive_file=str(keep_alive_file),
         )
         paths = event.edit_cmd.paths
     else:
@@ -69,22 +69,22 @@ def check_keep_alive_file(
         new_paths = prepend_zdir([Path(p.strip()) for p in keep_alive_lines])
         _LOGGER.debug(
             "Editing files specified in the keep alive file.",
-            keep_alive_file=keep_alive_file,
-            old_paths=event.edit_cmd.paths,
-            new_paths=new_paths,
+            keep_alive_file=str(keep_alive_file),
+            old_paths=[str(p) for p in event.edit_cmd.paths],
+            new_paths=[str(p) for p in new_paths],
         )
         paths = new_paths
 
     verbose = event.edit_cmd.verbose
     if verbose <= 1:
         _LOGGER.debug(
-            "Unlinking keep-alive file", keep_alive_file=keep_alive_file
+            "Unlinking keep-alive file", keep_alive_file=str(keep_alive_file)
         )
         keep_alive_file.unlink()
     else:
         _LOGGER.debug(
             "We are NOT deleting the keep-alive file",
-            keep_alive_file=keep_alive_file,
+            keep_alive_file=str(keep_alive_file),
         )
     session.add_last_message(
         commands.EditCommand(
@@ -109,7 +109,7 @@ def create_database(
         desc="Reading notes from zorg files",
         file=sys.stdout,
     ):
-        _LOGGER.info("Starting to walk zorg file", zorg_file=zo_path.name)
+        _LOGGER.info("Starting to walk zorg file", zorg_file=str(zo_path))
         zorg_file = walk_zorg_file(cmd.zettel_dir, zo_path)
         num_notes = len(zorg_file.notes)
         num_todos = len(
@@ -382,7 +382,9 @@ def _update_zo_file(
         zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
 
     _LOGGER.info(
-        log_message, zorg_file=zo_path, notes_to_update=len(notes_to_update)
+        log_message,
+        zorg_file=str(zo_path),
+        notes_to_update=len(notes_to_update),
     )
     zo_path.write_text("\n".join(zlines))
 
