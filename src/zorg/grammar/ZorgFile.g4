@@ -6,9 +6,9 @@ import CommonLexerRules;
 prog : head body? EOF ;
 
 // header and body
-head       : comment+ ;
-comment    : HASH space_atoms? NL ;
-body : NL+ block* h2_section* h1_section* ;
+head    : comment+ ;
+comment : HASH space_atoms? NL ;
+body    : NL+ block* h2_section* h1_section* ;
 
 // blocks
 block       : item+ NL* ;
@@ -16,12 +16,12 @@ item        : todo | note | footnote | comment ;
 footnote    : ref COLON space_atoms NL ;
 
 // notes
-note        : DASH base_note subnote* ;
-base_note   : id_note_body NL ;
+note         : DASH base_note subnote* ;
+base_note    : id_note_body NL ;
 id_note_body : (SPACE zid)? note_body ;
-note_body   : space_atoms (NL SPACE+ space_atoms)* ;
-subnote     : TWO_SPACE_DASH base_note subsubnote*;
-subsubnote  : FOUR_SPACE_DASH base_note ;
+note_body    : space_atoms (NL SPACE+ space_atoms)* ;
+subnote      : TWO_SPACE_DASH base_note subsubnote*;
+subsubnote   : FOUR_SPACE_DASH base_note ;
 
 // todos
 todo        : base_todo subnote* ;
@@ -52,11 +52,11 @@ id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // tag
-tag        : area | context | person | project ;
-area       : HASH ID ;
-context    : AT_SIGN ID ;
-person     : PERCENT ID ;
-project    : PLUS ID ;
+tag     : area | context | person | project ;
+area    : HASH ID ;
+context : AT_SIGN ID ;
+person  : PERCENT ID ;
+project : PLUS ID ;
 
 // quotes and links
 quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
