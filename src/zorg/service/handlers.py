@@ -358,11 +358,7 @@ def _add_modify_dates(
     old_zid_map = {note.zid: note for note in notes if note.zid is not None}
     for note in zorg_file.notes:
         old_note = old_zid_map.get(note.zid, None) if note.zid else None
-        if (
-            note.modify_date != today
-            and old_note
-            and note.body != old_note.body
-        ):
+        if note.modify_date != today and old_note and note != old_note:
             modified_notes.append(note)
     if modified_notes:
         zorg_file.events.append(
