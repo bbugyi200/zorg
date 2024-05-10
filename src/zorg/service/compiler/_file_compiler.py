@@ -138,10 +138,6 @@ class ZorgFileCompiler(ZorgFileListener):
             link_text = ctx.children[1].getText()
             self._s.note_links.append(link_text)
 
-    def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
-        del ctx
-        self._s.parent_id = None
-
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
     ) -> None:  # noqa: D102
@@ -174,27 +170,8 @@ class ZorgFileCompiler(ZorgFileListener):
         elif self._s.in_note:
             self._s.note_props[key] = value
 
-    def enterSubnote(
-        self, ctx: ZorgFileParser.SubnoteContext
-    ) -> None:  # noqa: D102
-        del ctx
-        if not self._s.in_subnote:
-            self._s.parent_id = self._s.next_id - 1
-        self._s.in_subnote = True
-        self._reset_note_context()
-
-    def enterSubsubnote(
-        self, ctx: ZorgFileParser.SubsubnoteContext
-    ) -> None:  # noqa: D102
-        del ctx
-        if not self._s.in_subsubnote:
-            self._s.parent_id = self._s.next_id - 1
-        self._s.in_subsubnote = True
-        self._reset_note_context()
-
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = True
-        self._s.parent_id = None
         del ctx
 
     def enterTodo_prefix(
@@ -329,8 +306,6 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.in_note = False
         extra_kwargs = {}
-        if self._s.parent_id is not None:
-            extra_kwargs["parent_note_id"] = self._s.parent_id
         kwargs = self._get_note_kwargs(ctx, extra_kwargs)
         body: str = ctx.id_note_body().getText().strip()
         if body == "":
@@ -350,21 +325,6 @@ class ZorgFileCompiler(ZorgFileListener):
 
         note = Note(body, **kwargs)
         self.zorg_file.notes.append(note)
-
-    def exitItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
-        del ctx
-        self._s.in_subnote = False
-
-    def exitSubnote(
-        self, ctx: ZorgFileParser.SubnoteContext
-    ) -> None:  # noqa: D102
-        self._s.in_subsubnote = False
-        del ctx
-
-    def exitSubsubnote(
-        self, ctx: ZorgFileParser.SubsubnoteContext
-    ) -> None:  # noqa: D102
-        del ctx
 
     def _get_note_kwargs(
         self,
@@ -441,7 +401,6 @@ class _ZorgFileCompilerState:
 
     # TODO(bugyi): Figure out a better way to track parent/child relationship
     next_id: int = 1
-    parent_id: Optional[int] = None
 
     in_first_comment: bool = True
     in_head: bool = False
@@ -450,8 +409,6 @@ class _ZorgFileCompilerState:
     in_h3_header: bool = False
     in_h4_header: bool = False
     in_note: bool = False
-    in_subnote: bool = False
-    in_subsubnote: bool = False
 
     file_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map

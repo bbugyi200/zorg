@@ -233,6 +233,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#modify_range.
+    def enterModify_range(self, ctx:ZorgQueryParser.Modify_rangeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#modify_range.
+    def exitModify_range(self, ctx:ZorgQueryParser.Modify_rangeContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#group_by_body.
     def enterGroup_by_body(self, ctx:ZorgQueryParser.Group_by_bodyContext):
         pass

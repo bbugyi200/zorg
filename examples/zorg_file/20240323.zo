@@ -13,45 +13,45 @@
 
 ######### @pomodoro
 ======= p::1   1015 +00
-- #gtd pomodoro
+- 240323#0J #gtd pomodoro
 
 ======= p::2   1055 +00
-- #own Buy rubber duck
-- +zorg Parametrize test_run_compile()
+- 240323#0K #own Buy rubber duck
+- 240323#0L +zorg Parametrize test_run_compile()
 
 ======= p::3   1120 +00
-- +zorg Move models.py and file_groups.py
-- +zorg Add links to grammar
+- 240323#0M +zorg Move models.py and file_groups.py
+- 240323#0N +zorg Add links to grammar
 
 ======= p::4   1145 +00
-- +zorg Fix grammar so it works with this file
+- 240323#0P +zorg Fix grammar so it works with this file
 
 ======= p::5   1210 +00
-- +zorg Add this file to test data
-- +zorg Filter out all numeric tag names
+- 240323#0R +zorg Add this file to test data
+- 240323#0T +zorg Filter out all numeric tag names
 
 ======= p::6   1300 +00
-- +zorg Test against all examples/ files
-- +zorg wip: Replace 'john@' with '%john'
+- 240323#0U +zorg Test against all examples/ files
+- 240323#0V +zorg wip: Replace 'john@' with '%john'
 
 ======= p::7   1330 +00
-- +laundry dry whites
-- +zorg wip: migrate people
+- 240323#0W +laundry dry whites
+- 240323#0X +zorg wip: migrate people
 
 ======= p::8   1355 +00
-- +zorg Finished 'john@' to '%john' migration
+- 240323#0Y +zorg Finished 'john@' to '%john' migration
 
 ======= p::9   1425 +00
-- +zorg Updated grammar to handle quotes
+- 240323#0Z +zorg Updated grammar to handle quotes
 
 ======= p::10  1520 +05
-- +laundry wip: fold darks
+- 240323#0a +laundry wip: fold darks
 
 ======= p::11  1550 +04
-- +laundry fold darks
+- 240323#0b +laundry fold darks
 
 ======= p::12  1620 +00
-- +laundry wash delicates
+- 240323#0c +laundry wash delicates
 
 ======= p::14  1750 +00
-- +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+- 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]

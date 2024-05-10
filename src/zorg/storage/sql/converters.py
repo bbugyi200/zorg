@@ -147,18 +147,18 @@ class _SONConverter:
         )
 
     @_son_converter_parser
-    def create_date_ranges(self) -> Optional[ColumnElement]:
-        """Converter that handles create date ranges."""
+    def date_ranges(self) -> Optional[ColumnElement]:
+        """Converter that handles create/modify date ranges."""
         and_conds = []
-        for create_date_range in self.and_filter.create_date_ranges:
-            date_filters = [
-                sql.ZorgNote.create_date >= create_date_range.start
-            ]
-            if create_date_range.end is not None:
-                date_filters.append(
-                    sql.ZorgNote.create_date <= create_date_range.end
-                )
-            and_conds.append(and_(*date_filters))
+        for date_range_list, sql_date in [
+            (self.and_filter.create_date_ranges, sql.ZorgNote.create_date),
+            (self.and_filter.modify_date_ranges, sql.ZorgNote.modify_date),
+        ]:
+            for date_range in date_range_list:
+                date_filters = [sql_date >= date_range.start]
+                end_date = date_range.end if date_range.end else date_range.start
+                date_filters.append(sql_date <= end_date)
+                and_conds.append(and_(*date_filters))
 
         if and_conds:
             return and_(and_conds[0], *and_conds[1:])

@@ -31,6 +31,7 @@ params = mark.parametrize
         ),
         param("(o or x or ~ or < or > or -) G @", id="group_by_context"),
         param("(o or x or ~ or < or > or -) G %", id="group_by_people"),
+        param("^240408 $240509", id="filter_by_create_and_modify"),
     ],
 )
 def test_query(

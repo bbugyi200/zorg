@@ -62,6 +62,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         areas: set[str] = set()
         contexts: set[str] = set()
         create_date_ranges: set[DateRange] = set()
+        modify_date_ranges: set[DateRange] = set()
         people: set[str] = set()
         priorities: set[TodoPriorityType] = set()
         projects: set[str] = set()
@@ -86,6 +87,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     where_atom.priority_range(),
                 )
                 _add_priorities(priority_range, priorities)
+            # TODO(bugyi): De-duplicate create range and modify range parsing.
             elif x := where_atom.create_range():
                 create_range = cast(ZorgQueryParser.Create_rangeContext, x)
                 short_start_date = create_range.CREATE_RANGE_HEAD().getText()[
@@ -100,7 +102,20 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
                 date_range = DateRange(start_date, end_date)
                 create_date_ranges.add(date_range)
+            elif x := where_atom.modify_range():
+                modify_range = cast(ZorgQueryParser.Modify_rangeContext, x)
+                short_start_date = modify_range.MODIFY_RANGE_HEAD().getText()[
+                    1:
+                ]
+                start_date = zdt.from_short_date(short_start_date)
 
+                end_date: Optional[dt.date] = None
+                if date_range_tail := modify_range.DATE_RANGE_TAIL():
+                    short_end_date = date_range_tail.getText()[1:]
+                    end_date = zdt.from_short_date(short_end_date)
+
+                date_range = DateRange(start_date, end_date)
+                modify_date_ranges.add(date_range)
             elif where_atom.tag():
                 tag = cast(ZorgQueryParser.TagContext, where_atom.tag())
                 minus = "-" if tag.not_op() else ""
@@ -127,6 +142,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 areas=areas,
                 contexts=contexts,
                 create_date_ranges=create_date_ranges,
+                modify_date_ranges=modify_date_ranges,
                 people=people,
                 priorities=priorities,
                 projects=projects,

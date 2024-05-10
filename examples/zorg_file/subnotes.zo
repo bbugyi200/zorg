@@ -1,14 +1,14 @@
 # A zorg file containing subnotes.
 
 ######### p::1
-- foobar
-o This todo is due::2024-03-30 and has some subnotes
-  - Todo subnote A
-  - Todo subnote B
-    - Todo subsubnote C
-- This note has many subnotes.
-  - 2024-03-30 This note contains a key::value pair.
-  - bazbuz
-  - pig
-    - is fat
-    - is stinky
+- 240510#1c foobar
+o 240510#1d This todo is due::2024-03-30 and has some subnotes
+  - 240510#1e Todo subnote A
+  - 240510#1f Todo subnote B
+    - 240510#1h Todo subsubnote C
+- 240510#1k This note has many subnotes.
+  - 240510#1m This note contains a key::value pair.
+  - 240510#1n bazbuz
+  - 240510#1o pig
+    - 240510#1r is fat
+    - 240510#1s is stinky

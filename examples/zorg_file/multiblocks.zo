@@ -3,26 +3,26 @@
 # A block is one or more consecutive todos/notes with no blank lines
 # in-between.
 
-o Some todo
-o Another related todo
+o 240510#07 Some todo
+o 240510#08 Another related todo
 
-- A note about life...
+- 240510#09 A note about life...
 
-o Some other todo
-- With a note
+o 240510#0A Some other todo
+- 240510#0B With a note
 
 ======= Boom Bam
-- Some note in section 0
+- 240510#0C Some note in section 0
 
 ######### Foobar
-- Note A1
-- Note A2
+- 240510#0D Note A1
+- 240510#0E Note A2
 
-- Note B
+- 240510#0F Note B
 
 ######### Bazbuz
-- Note C
+- 240510#0G Note C
 
-- Note D
+- 240510#0H Note D
 
-- Note E
+- 240510#0J Note E
