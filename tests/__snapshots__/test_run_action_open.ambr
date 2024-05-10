@@ -12,171 +12,171 @@
   # Saved query generated on 2000-01-03 at 12:00:00.
   
   ######### [[20240323]]
-  - #gtd pomodoro
-  - #own Buy rubber duck
-  - +zorg Parametrize test_run_compile()
-  - +zorg Move models.py and file_groups.py
-  - +zorg Add links to grammar
-  - +zorg Fix grammar so it works with this file
-  - +zorg Add this file to test data
-  - +zorg Filter out all numeric tag names
-  - +zorg Test against all examples/ files
-  - +zorg wip: Replace 'john@' with '%john'
-  - +laundry dry whites
-  - +zorg wip: migrate people
-  - +zorg Finished 'john@' to '%john' migration
-  - +zorg Updated grammar to handle quotes
-  - +laundry wip: fold darks
-  - +laundry fold darks
-  - +laundry wash delicates
-  - +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+  - 240323#0J #gtd pomodoro
+  - 240323#0K #own Buy rubber duck
+  - 240323#0L +zorg Parametrize test_run_compile()
+  - 240323#0M +zorg Move models.py and file_groups.py
+  - 240323#0N +zorg Add links to grammar
+  - 240323#0P +zorg Fix grammar so it works with this file
+  - 240323#0R +zorg Add this file to test data
+  - 240323#0T +zorg Filter out all numeric tag names
+  - 240323#0U +zorg Test against all examples/ files
+  - 240323#0V +zorg wip: Replace 'john@' with '%john'
+  - 240323#0W +laundry dry whites
+  - 240323#0X +zorg wip: migrate people
+  - 240323#0Y +zorg Finished 'john@' to '%john' migration
+  - 240323#0Z +zorg Updated grammar to handle quotes
+  - 240323#0a +laundry wip: fold darks
+  - 240323#0b +laundry fold darks
+  - 240323#0c +laundry wash delicates
+  - 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   
   
   ######### [[basic]]
-  - First note in first block
-  - Second note in first block
-  o [#C] bazbuz is ok too...
+  - 240510#00 First note in first block
+  - 240510#01 Second note in first block
+  o [#C] 240510#02 bazbuz is ok too...
   
   
   ######### [[links]]
-  - Some note with a [[bar.sh]] link to a bash script.
-  - Some note with a link in parens (see [[baz]]).
-  - Some note with a link in parens and a block-level link ([[buz::fuzz]]).
-  - Some note that references an old 200101#12 ZID.
+  - 240510#03 Some note with a [[bar.sh]] link to a bash script.
+  - 240510#04 Some note with a link in parens (see [[baz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#06 Some note that references an old 200101#12 ZID.
   
   
   ######### [[multiblocks]]
-  o [#C] Some todo
-  o [#C] Another related todo
-  - A note about life...
-  o [#C] Some other todo
-  - With a note
-  - Some note in section 0
-  - Note A1
-  - Note A2
-  - Note B
-  - Note C
-  - Note D
-  - Note E
+  o [#C] 240510#07 Some todo
+  o [#C] 240510#08 Another related todo
+  - 240510#09 A note about life...
+  o [#C] 240510#0A Some other todo
+  - 240510#0B With a note
+  - 240510#0C Some note in section 0
+  - 240510#0D Note A1
+  - 240510#0E Note A2
+  - 240510#0F Note B
+  - 240510#0G Note C
+  - 240510#0H Note D
+  - 240510#0J Note E
   
   
   ######### [[priority]]
-  o [#A] 2024-03-13 High Priority TODO
-  o [#B] 2024-03-13 Medium Priority TODO
-  o [#C] 2024-03-13 Low Priority TODO
+  o [#A] 240313#03 High Priority TODO
+  o [#B] 240313#04 Medium Priority TODO
+  o [#C] 240313#05 Low Priority TODO
   
   
   ######### [[property]]
-  - 2024-03-30 This note contains a key::value pair.
-  o [#C] This todo is @due today! | due::2024-03-13
+  - 240330#02 This note contains a key::value pair.
+  o [#C] 240510#0K This todo is @due today! | due::2024-03-13
   
   
   ######### [[scrambled_prj_notes]]
-  - Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
-  - Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
-  - Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
-  - Eongcgfy tho pscz giwq arjebc@?
-  - Crxekimyx kq fjboaq:
-  - Lcnoajccb Injdqwlf
-  - Lrry-Jhfv Nfsw
-  - Ga Ewwnanwqgoq
-  - Gaonrjmk: Cbnuev, Xvdgisy, Aeyfbb?
-  - Vont ywgotqe vndsv (lfqbnlfar, kwmnafb, Yneicgqi/Mxvvkclvzk)
-  - Eyfptapyh ijmfacppn (lqrui ?jr=HF)
-  - Gziien fxfmhul
-  - Ajfn dz Rhyt (ty 6499 cw 6075)
-  - setw://fq/zfv-haow-micxv
-  - sorj
-  - bhkh://xzywfi3/relyocplej/dpw/qk/otehzx/qpsiyunh/rgthilw_sldeu/fonvlqflxv/rjluzb/tbf/hrtkdrq_mnurg_eltj_szkb.raja
-  - knlo://evfkaz3/kmxgifnodz/wav/nz/idlwsr/oslzcscp/raarqgi_bjfdp/xftsdpbcka/itulza/prk/pkgxzoc_zgntm_txeg_npbvju.jldf
-  - ykseciqhy IG: bp/531522711
-  - Nyhha trra://hk/wyp-slg-lbyuqz pris oiqf nywj kg smoy nwdraivpht() cu jzusgcwm zwyirs?
-  - Wouvp rx cmmi jk zes r kv/u1abtunoeaorevyolmef: "Njwb opjiv wlyvyfrb; tqcwkrs qlawalk: 200F."
-  - e2.0 xrestv rlqt cszmjhp: 1) Cnelcge 2) uttnzeu tncj 3) Rasemja zzvilcys
-  - Qtvhtfc ywtyvbppqu (qs odvqdfjk nydxt):
-  - XC: Wvlotmog | Akjrgluk cck dpvcvia
-  - Oers Higwy   | NYS / Cyuxu fyod mrfwalatc
-  - Lveg         | Kfvunvqioefmgo Rlqu
-  - HU: Yoxlnl   | Kyahuurpzq mt VV (v.u. boh coveshbg rsp hbyhmm-pav)
-  - TbuburbQuf zilo hpfu://wz/ytg:hep_epzc_ek_jehnmz?h=omm:cpdu :
+  - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
+  - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
+  - 240510#0N Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
+  - 240510#0P Eongcgfy tho pscz giwq arjebc@?
+  - 240510#0R Crxekimyx kq fjboaq:
+  - 240510#0T Lcnoajccb Injdqwlf
+  - 240510#0U Lrry-Jhfv Nfsw
+  - 240510#0V Ga Ewwnanwqgoq
+  - 240510#0W Gaonrjmk: Cbnuev, Xvdgisy, Aeyfbb?
+  - 240510#0X Vont ywgotqe vndsv (lfqbnlfar, kwmnafb, Yneicgqi/Mxvvkclvzk)
+  - 240510#0Y Eyfptapyh ijmfacppn (lqrui ?jr=HF)
+  - 240510#0Z Gziien fxfmhul
+  - 240510#0a Ajfn dz Rhyt (ty 6499 cw 6075)
+  - 240510#0b setw://fq/zfv-haow-micxv
+  - 240510#0c sorj
+  - 240510#0d bhkh://xzywfi3/relyocplej/dpw/qk/otehzx/qpsiyunh/rgthilw_sldeu/fonvlqflxv/rjluzb/tbf/hrtkdrq_mnurg_eltj_szkb.raja
+  - 240510#0e knlo://evfkaz3/kmxgifnodz/wav/nz/idlwsr/oslzcscp/raarqgi_bjfdp/xftsdpbcka/itulza/prk/pkgxzoc_zgntm_txeg_npbvju.jldf
+  - 240510#0f ykseciqhy IG: bp/531522711
+  - 240510#0h Nyhha trra://hk/wyp-slg-lbyuqz pris oiqf nywj kg smoy nwdraivpht() cu jzusgcwm zwyirs?
+  - 240510#0k Wouvp rx cmmi jk zes r kv/u1abtunoeaorevyolmef: "Njwb opjiv wlyvyfrb; tqcwkrs qlawalk: 200F."
+  - 240510#0m e2.0 xrestv rlqt cszmjhp: 1) Cnelcge 2) uttnzeu tncj 3) Rasemja zzvilcys
+  - 240510#0n Qtvhtfc ywtyvbppqu (qs odvqdfjk nydxt):
+  - 240510#0o XC: Wvlotmog | Akjrgluk cck dpvcvia
+  - 240510#0r Oers Higwy   | NYS / Cyuxu fyod mrfwalatc
+  - 240510#0s Lveg         | Kfvunvqioefmgo Rlqu
+  - 240510#0t HU: Yoxlnl   | Kyahuurpzq mt VV (v.u. boh coveshbg rsp hbyhmm-pav)
+  - 240510#0u TbuburbQuf zilo hpfu://wz/ytg:hep_epzc_ek_jehnmz?h=omm:cpdu :
       (2576796, 2584174, 2585902, 2611556, 2612222)
-  - Kmue izlgeghae jivs kkhoh:
+  - 240510#0v Kmue izlgeghae jivs kkhoh:
       (23068288959, 23070555923, 23071198233, 23081557400, 23082128453)
-  - KU onbf
-  - Adah wv wsr: Pwyv qrykrmat
-  - Fjdu lk aozqwmt rdtv (ingu yhlzh kha zro zstolomj?): Vujflym
-  - Cyuyngz rpzj (<tzcx_zm> nat <iqge_xqu>): Opalekb / Ubq hefcgpa
-  - Snke udr djwhji ku iysauiroj (<wtflgi_jw_aykjvl>):
-  - Puny mng lomkrpd
-  - Eipahnv
-  - <olxh_cqe>
-  - Fe dxiovcyxz kuirhi: Kjwjjl hxd: <lllwcz_bp_mjklvt>\wZkzuguo/yckqyt: <awqxbdj>
-  - Nid bzvqqd gktb uhwgmwk jfiwf atukar oq znzg-htqz bpba?: (<izljyv_dk_ebsiqu>)
-  - Poxi hdtlblgq:
-  - Uripbc uui qr njuytfkxf
-  - Dvfbqlk/ignpsr lb imwgiazpd
-  - Rb rnfqqbizlps
-  - Wuxpotyb:
-  - Me fkf zddkb?
-  - An fsqw hdegvhwy?
-  - Tyrgbh iwj fcq jjuea qpltzla rkyq br at DS tfvwjwf?
-  - Rmy [[eswz_xqow::empiz_ljyiwjbmi_szstj]]
-  - nejo/vpe/gjggaa/fwi/kgrtqhtdy/ynbwnm/qekadk/cvhc/MqgomkswAgbkGhthPoqfvqt.ednt
-  - qiuz/adb/lhwggp/kqt/ldmqosmbs/qtjvrxutayfiyh/oocyfjbnuih/jmov/faaat/XibsjbhuFsbuRrawDgfksjcXwjudTvvzbxa.vvep
-  - Ajbss udcor xf tylgpk:
-  - ibmxadcdz.iwmdvsxeg_uxzvuntgl
-  - oiuglzpuv.xwhjvfwrs_imjxfgwoo.fvyclrkt_vqycmgeuj_ihblc
-  - ycdcddvhw.shmlpcnju_chsokpadf.bcpgad_hoargfl_fhzshiqoe_qrsrxtdsq
-  - bpeijqkwt.ysazfxpem_tnpnkohdy.nppowgku_kqhexqeih_njhno
-  - uceq://ap/591285707
-  - Git [[desd_cd_kdzb.yhdxx]] hgq lkl[1] @dzwk
-  - Mcjr bdukfjxm 14521206
-  - Spuekgphn 14521428
-  - Necywz met td fuvbdooge 14524967
-  - Fbtqtkb, fywupn qr mzrgsvqve 14521641
-  - Uc lsmpfxhtkyh 14522952
-  - Ikr lr 20 pggmb
-  - Ttx-yecb mxovcuwbc
-  - Rzq-itde mpfj
-  - Zee-lpfg uqogce bk khxsvgrkq bbgvmf
+  - 240510#0w KU onbf
+  - 240510#0x Adah wv wsr: Pwyv qrykrmat
+  - 240510#0z Fjdu lk aozqwmt rdtv (ingu yhlzh kha zro zstolomj?): Vujflym
+  - 240510#10 Cyuyngz rpzj (<tzcx_zm> nat <iqge_xqu>): Opalekb / Ubq hefcgpa
+  - 240510#11 Snke udr djwhji ku iysauiroj (<wtflgi_jw_aykjvl>):
+  - 240510#12 Puny mng lomkrpd
+  - 240510#13 Eipahnv
+  - 240510#14 <olxh_cqe>
+  - 240510#15 Fe dxiovcyxz kuirhi: Kjwjjl hxd: <lllwcz_bp_mjklvt>\wZkzuguo/yckqyt: <awqxbdj>
+  - 240510#16 Nid bzvqqd gktb uhwgmwk jfiwf atukar oq znzg-htqz bpba?: (<izljyv_dk_ebsiqu>)
+  - 240510#17 Poxi hdtlblgq:
+  - 240510#18 Uripbc uui qr njuytfkxf
+  - 240510#19 Dvfbqlk/ignpsr lb imwgiazpd
+  - 240510#1A Rb rnfqqbizlps
+  - 240510#1B Wuxpotyb:
+  - 240510#1C Me fkf zddkb?
+  - 240510#1D An fsqw hdegvhwy?
+  - 240510#1E Tyrgbh iwj fcq jjuea qpltzla rkyq br at DS tfvwjwf?
+  - 240510#1F Rmy [[eswz_xqow::empiz_ljyiwjbmi_szstj]]
+  - 240510#1G nejo/vpe/gjggaa/fwi/kgrtqhtdy/ynbwnm/qekadk/cvhc/MqgomkswAgbkGhthPoqfvqt.ednt
+  - 240510#1H qiuz/adb/lhwggp/kqt/ldmqosmbs/qtjvrxutayfiyh/oocyfjbnuih/jmov/faaat/XibsjbhuFsbuRrawDgfksjcXwjudTvvzbxa.vvep
+  - 240510#1J Ajbss udcor xf tylgpk:
+  - 240510#1K ibmxadcdz.iwmdvsxeg_uxzvuntgl
+  - 240510#1L oiuglzpuv.xwhjvfwrs_imjxfgwoo.fvyclrkt_vqycmgeuj_ihblc
+  - 240510#1M ycdcddvhw.shmlpcnju_chsokpadf.bcpgad_hoargfl_fhzshiqoe_qrsrxtdsq
+  - 240510#1N bpeijqkwt.ysazfxpem_tnpnkohdy.nppowgku_kqhexqeih_njhno
+  - 240510#1P uceq://ap/591285707
+  - 240510#1R Git [[desd_cd_kdzb.yhdxx]] hgq lkl[1] @dzwk
+  - 240510#1T Mcjr bdukfjxm 14521206
+  - 240510#1U Spuekgphn 14521428
+  - 240510#1V Necywz met td fuvbdooge 14524967
+  - 240510#1W Fbtqtkb, fywupn qr mzrgsvqve 14521641
+  - 240510#1X Uc lsmpfxhtkyh 14522952
+  - 240510#1Y Ikr lr 20 pggmb
+  - 240510#1Z Ttx-yecb mxovcuwbc
+  - 240510#1a Rzq-itde mpfj
+  - 240510#1b Zee-lpfg uqogce bk khxsvgrkq bbgvmf
   
   
   ######### [[subnotes]]
-  - foobar
-  o [#C] This todo is due::2024-03-30 and has some subnotes
-  - Todo subnote A
-  - Todo subnote B
-  - Todo subsubnote C
-  - This note has many subnotes.
-  - 2024-03-30 This note contains a key::value pair.
-  - bazbuz
-  - pig
-  - is fat
-  - is stinky
+  - 240510#1c foobar
+  o [#C] 240510#1d This todo is due::2024-03-30 and has some subnotes
+  - 240510#1e Todo subnote A
+  - 240510#1f Todo subnote B
+  - 240510#1h Todo subsubnote C
+  - 240510#1k This note has many subnotes.
+  - 240510#1m This note contains a key::value pair.
+  - 240510#1n bazbuz
+  - 240510#1o pig
+  - 240510#1r is fat
+  - 240510#1s is stinky
   
   
   ######### [[subsections]]
-  - Note about A1
-  - Note about something
-  - Another note
-  o [#C] A todo for something
-  - A note on the second section.
-  - A sub-note.
-  - And another note.
-  o [#C] Some foobar todo.
-  - This is inside of h4_section!
-  - A note on the third section.
-  - A sub-note.
-  - And another note.
-  o [#C] Some foobar todo.
-  - This is the final section!
+  - 240510#1t Note about A1
+  - 240510#1u Note about something
+  - 240510#1v Another note
+  o [#C] 240510#1w A todo for something
+  - 240510#1x A note on the second section.
+  - 240510#1z A sub-note.
+  - 240510#20 And another note.
+  o [#C] 240510#21 Some foobar todo.
+  - 240510#22 This is inside of h4_section!
+  - 240510#23 A note on the third section.
+  - 240510#24 A sub-note.
+  - 240510#25 And another note.
+  o [#C] 240510#26 Some foobar todo.
+  - 240510#27 This is the final section!
   
   
   ######### [[tags_and_ids]]
   - 240408#0X Some note
   - 240408#0X 240509 Some note with a modify date
   - 301231#X0 When I talk to %pig I always want to @puke.
-  - 240408#NO Da nah nah nuh...
-  - Projects can start with a number, but CANNOT be all numbers
+  - 240510#28 240408#NO Da nah nah nuh...
+  - 240510#29 Projects can start with a number, but CANNOT be all numbers
   '''
 # ---
