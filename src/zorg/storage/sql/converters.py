@@ -307,6 +307,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
         )
         return Note(
             sql_model.body,
+            zid=sql_model.zid,
             areas=list(area.name for area in sql_model.areas),
             contexts=list(context.name for context in sql_model.contexts),
             create_date=sql_model.create_date,

@@ -10,6 +10,7 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
+from .. import dates as zdt
 from ...domain.models import File, Note, TodoPayload
 from ...domain.types import NoteType, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
@@ -130,6 +131,11 @@ class ZorgFileCompiler(ZorgFileListener):
         if self._s.in_note:
             link_text = ctx.children[1].getText()
             self._s.note_links.append(link_text)
+
+    def enterModify_date(
+        self, ctx: ZorgFileParser.Modify_dateContext
+    ) -> None:  # noqa: D102
+        self._s.modify_date = zdt.from_short_date(ctx.getText())
 
     def enterNote(self, ctx: ZorgFileParser.NoteContext) -> None:  # noqa: D102
         del ctx
@@ -371,6 +377,11 @@ class ZorgFileCompiler(ZorgFileListener):
             "file_path": self.zorg_file.path,
             "line_no": ctx.start.line,
             "links": self._s.note_links,
+            "modify_date": (
+                self._s.modify_date
+                if self._s.modify_date
+                else self._s.create_date
+            ),
             "people": self._s.people,
             "projects": self._s.projects,
             "properties": self._s.properties,
@@ -386,6 +397,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.note_props = {}
         self._s.note_links = []
         self._s.note_date = None
+        self._s.modify_date = None
 
     def _add_tags(
         self, ctx: antlr4.ParserRuleContext, tag_name: TagName
@@ -472,6 +484,7 @@ class _ZorgFileCompilerState:
     h3_date: Optional[dt.date] = None
     h4_date: Optional[dt.date] = None
     note_date: Optional[dt.date] = None
+    modify_date: Optional[dt.date] = None
 
     todo_priority: TodoPriorityType = "C"
     todo_status: NoteType = NoteType.OPEN_TODO

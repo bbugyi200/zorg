@@ -180,7 +180,7 @@ def reindex_database(
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
-            _add_modify_dates(cmd.zettel_dir, zorg_file)
+            # _add_modify_dates(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add(zorg_file)
             session.commit()
@@ -298,8 +298,11 @@ def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
     words = line.split(" ")
     line_before_zid = _pop_line_before_zid(words)
     zid = words.pop(0)
-    if len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
-        _LOGGER.debug("Removing old modify date", old_modify_date=words.pop(0))
+    if words and len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
+        old_modify_date = words.pop(0)
+        _LOGGER.debug(
+            "Removing old modify date", old_modify_date=old_modify_date
+        )
     line_prefix = f"{line_before_zid}{zid} "
     return f"{line_prefix}{short_modify_date} {' '.join(words)}"
 
@@ -346,11 +349,18 @@ def _process_vim_commands(
             yield vim_cmd
 
 
-def _add_modify_dates(zdir: Path, zorg_file: File) -> None:
+def _add_modify_dates(
+    zdir: Path, zorg_file: File, old_zorg_file: File
+) -> None:
     today = dt.date.today()
     modified_notes: list[Note] = []
+    notes = old_zorg_file.notes if old_zorg_file else []
+    old_zid_map = {note.zid: note for note in notes}
     for note in zorg_file.notes:
-        if note.modify_date != today:
+        if note.modify_date != today and (
+            note.zid not in old_zid_map
+            or note.body != old_zid_map[note.zid].body
+        ):
             modified_notes.append(note)
     if modified_notes:
         zorg_file.events.append(

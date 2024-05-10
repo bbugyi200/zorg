@@ -14,4 +14,4 @@ def from_short_date(short_date: str) -> dt.date:
 
 def to_short_date(date: dt.date) -> str:
     """Creates a short zorg date of the form YYMMDD from a date."""
-    return date.strftime(_DATE_FMT)
+    return date.strftime(_DATE_FMT)[2:]
