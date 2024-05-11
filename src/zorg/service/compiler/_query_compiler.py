@@ -253,10 +253,10 @@ def _add_priorities(
     priority_range: ZorgQueryParser.Priority_rangeContext,
     priorities: set[TodoPriorityType],
 ) -> None:
-    p_start_and_end = list(priority_range.getText().split(":"))
+    p_start_and_end = list(priority_range.getText().split("-"))
     p_start_idx = int(p_start_and_end.pop(0)[-1])
     p_end_idx = p_start_idx + 1
     if p_start_and_end:
-        p_end_idx = int(p_start_and_end.pop(0)[-1])
+        p_end_idx = int(p_start_and_end.pop(0))
     for priority in [f"P{n}" for n in range(p_start_idx, p_end_idx)]:
         priorities.add(cast(TodoPriorityType, priority))

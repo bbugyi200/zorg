@@ -6,7 +6,7 @@ to interpret Zorg queries. For example, to show all A-priority open todos:
 Examples
 --------
 // Show all open 'P0', 'P1', or 'P2' priority todos, grouped by file.
-W P0:P2 G file
+W P0-2 G file
 
 // Show all people involved with the +foobar project.
 S people W +foobar

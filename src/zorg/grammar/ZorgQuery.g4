@@ -27,7 +27,7 @@ and_filter     : where_atom (SPACE where_atom)* ;
 where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range ;
 note_type      : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
-priority_range : PRIORITY (COLON PRIORITY)? ;
+priority_range : PRIORITY (DASH ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'))? ;
 tag            : not_op? (area | context | person | project) ;
 not_op         : '!' ;
 area           : HASH ID ;
