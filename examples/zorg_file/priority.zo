@@ -1,5 +1,5 @@
 # A zorg file with todos that have priorities and dates.
 
-o [#A] 240313#03 High Priority TODO
-o [#B] 240313#04 Medium Priority TODO
-o [#C] 240313#05 Low Priority TODO
+o P0 240313#03 High Priority TODO
+o P1 240313#04 Medium Priority TODO
+o P2 240313#05 Low Priority TODO

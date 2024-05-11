@@ -33,32 +33,7 @@ T = TypeVar("T")
 KeyFunc = Callable[["Note"], Comparable]
 FileGroupMapType = Mapping[str, Sequence[str]]
 TodoPriorityType = Literal[
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
+    "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
 ]
 TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]

@@ -94,7 +94,7 @@ def _select_note(filtered_notes: list[Note]) -> str:
         )
         char = note_type.to_prefix_char()
         priority = (
-            f" [#{note.todo_payload.priority}]" if note.todo_payload else ""
+            f" {note.todo_payload.priority}" if note.todo_payload else ""
         )
         result += f"{char}{priority} {note.body.strip()}\n"
     return result

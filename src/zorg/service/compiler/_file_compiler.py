@@ -151,7 +151,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterPriority(
         self, ctx: ZorgFileParser.PriorityContext
     ) -> None:  # noqa: D102
-        self._s.todo_priority = ctx.ID().getText()[0].upper()
+        self._s.todo_priority = ctx.getText().upper()
 
     def enterProperty(
         self, ctx: ZorgFileParser.PropertyContext
@@ -232,7 +232,7 @@ class ZorgFileCompiler(ZorgFileListener):
             self.zorg_file.notes.append(todo)
 
         # Reset todo priority and status back to defaults.
-        self._s.todo_priority = "C"
+        self._s.todo_priority = "P2"
         self._s.todo_status = NoteType.OPEN_TODO
 
     def exitH1_header(
@@ -446,7 +446,7 @@ class _ZorgFileCompilerState:
     note_date: Optional[dt.date] = None
     modify_date: Optional[dt.date] = None
 
-    todo_priority: TodoPriorityType = "C"
+    todo_priority: TodoPriorityType = "P2"
     todo_status: NoteType = NoteType.OPEN_TODO
 
     @property

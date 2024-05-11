@@ -304,7 +304,7 @@ def _pop_line_before_zid(words: list[str]) -> str:
     symbol = words.pop(0)
 
     priority = ""
-    if words[0].startswith("[#"):
+    if len(words[0]) == 2 and words[0][0] == "P" and words[0][1].isdigit():
         priority = f"{words.pop(0)} "
     return f"{spaces}{symbol} {priority}"
 
