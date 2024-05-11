@@ -18,8 +18,8 @@ params = mark.parametrize
     "query",
     [
         param("o", id="open_todos"),
-        param("o [#a]", id="high_priority"),
-        param("o [#bc]", id="mid_and_low_priority"),
+        param("o P0", id="high_priority"),
+        param("o P1:P2", id="mid_and_low_priority"),
         param("W - +zorg G file", id="zorg_notes"),
         param(
             "S note W (o or x or ~ or < or > or -) O priority date G file",
