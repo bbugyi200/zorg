@@ -41,7 +41,7 @@ atom        : tag_symbol | tag | link | property | id_group | ref | zid | priori
 // property
 property    : ID COLON COLON id_group ;
 id_group    : id (id_symbol+ id)* ;
-id          : ID | NUM_ID | DATE_RANGE_TAIL | date | time | LOWER_O | LOWER_X ;
+id          : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
 

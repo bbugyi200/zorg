@@ -294,21 +294,6 @@ def _add_zid_to_line(zid: str, line: str) -> str:
     return f"{line_before_zid}{zid} {' '.join(words)}"
 
 
-def _pop_line_before_zid(words: list[str]) -> str:
-    num_spaces = 0
-    while words[0] == "":
-        num_spaces += 1
-        words.pop(0)
-    spaces = " " * num_spaces
-
-    symbol = words.pop(0)
-
-    priority = ""
-    if len(words[0]) == 2 and words[0][0] == "P" and words[0][1].isdigit():
-        priority = f"{words.pop(0)} "
-    return f"{spaces}{symbol} {priority}"
-
-
 def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
     """Hashes a file using SHA256 algorithm and returns the hash value.
 
@@ -366,6 +351,21 @@ def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
         )
     line_prefix = f"{line_before_zid}{zid} "
     return f"{line_prefix}{short_modify_date} {' '.join(words)}"
+
+
+def _pop_line_before_zid(words: list[str]) -> str:
+    num_spaces = 0
+    while words[0] == "":
+        num_spaces += 1
+        words.pop(0)
+    spaces = " " * num_spaces
+
+    symbol = words.pop(0)
+
+    priority = ""
+    if len(words[0]) == 2 and words[0][0] == "P" and words[0][1].isdigit():
+        priority = f"{words.pop(0)} "
+    return f"{spaces}{symbol} {priority}"
 
 
 def _update_zo_file(
