@@ -100,9 +100,9 @@
 # ---
 # name: test_run_db_create__todo_priorities[YAMLConfigFile]
   list([
-    'A',
-    'B',
-    'C',
+    'P0',
+    'P1',
+    'P2',
   ])
 # ---
 # name: test_run_db_create__todo_statuses[YAMLConfigFile]
