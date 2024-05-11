@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 class TodoPayload:
     """Extra fields that are added to ZorgNotes that are todos."""
 
-    priority: TodoPriorityType = "C"
+    priority: TodoPriorityType = "P2"
     status: NoteType = NoteType.OPEN_TODO
 
 
