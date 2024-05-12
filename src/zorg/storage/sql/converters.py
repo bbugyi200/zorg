@@ -167,11 +167,6 @@ class _SONConverter:
         else:
             return None
 
-    @_son_converter_parser
-    def modify_date_range(self) -> Optional[ColumnElement]:
-        """Converter that handles modify date ranges."""
-        return None
-
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
     if note_type is NoteType.BASIC:
