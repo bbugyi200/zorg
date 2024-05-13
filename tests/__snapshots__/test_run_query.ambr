@@ -121,7 +121,7 @@
   - 240510#25 And another note.
   o P2 240510#26 Some foobar todo.
   - 240510#27 This is the final section!
-  - 240510#28 240408#NO Da nah nah nuh...
+  - 240408#NO Da nah nah nuh...
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   
@@ -301,7 +301,7 @@
   - 240510#27 This is the final section!
   - 240408#0X Some note
   - 240509 240408#0X Some note with a modify date
-  - 240510#28 240408#NO Da nah nah nuh...
+  - 240408#NO Da nah nah nuh...
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   
@@ -502,7 +502,7 @@
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   ***** +bad | +to_the_bone
-  - 240510#28 240408#NO Da nah nah nuh...
+  - 240408#NO Da nah nah nuh...
   
   ***** +foobar
   - 240408#0X Some note
@@ -681,7 +681,7 @@
   - 240408#0X Some note
   - 240509 240408#0X Some note with a modify date
   - 301231#X0 When I talk to %pig I always want to @puke.
-  - 240510#28 240408#NO Da nah nah nuh...
+  - 240408#NO Da nah nah nuh...
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   '''
