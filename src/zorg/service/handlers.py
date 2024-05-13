@@ -343,13 +343,12 @@ def _check_for_modified_notes(
 def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
     words = line.split(" ")
     line_before_zid = _pop_line_before_zid(words)
-    zid = words.pop(0)
     if words and len(words[0]) == 6 and all(ch.isdigit() for ch in words[0]):
         old_modify_date = words.pop(0)
         _LOGGER.debug(
             "Removing old modify date", old_modify_date=old_modify_date
         )
-    line_prefix = f"{line_before_zid}{zid} "
+    line_prefix = f"{line_before_zid} "
     return f"{line_prefix}{short_modify_date} {' '.join(words)}"
 
 

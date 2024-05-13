@@ -33,7 +33,7 @@ priority    : PRIORITY ;
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
-atom        : tag_symbol | tag | link | property | id_group | ref | zid | priority ;
+atom        : tag_symbol | tag | link | property | id_group | ref | priority ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -41,7 +41,7 @@ zid : ZID  ;
 // property
 property    : ID COLON COLON id_group ;
 id_group    : id (id_symbol+ id)* ;
-id          : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | LOWER_O | LOWER_X ;
+id          : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
 

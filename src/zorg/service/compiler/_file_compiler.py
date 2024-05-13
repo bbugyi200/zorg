@@ -121,13 +121,19 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
         if self._s.in_note:
             self._s.ids_in_note += 1
-            # TODO(bugyi): Figure out how to include 'short_date' or
-            # 'modify_date' in ZorgFile grammar as parser rules instead of
-            # using the following hack.
             if self._s.ids_in_note == 1 and zdt.is_short_date(
                 short_date := ctx.getText()
             ):
                 self._s.modify_date = zdt.from_short_date(short_date)
+            elif (
+                self._s.ids_in_note == 1
+                or (self._s.ids_in_note == 2 and self._s.modify_date)
+            ) and zdt.is_zid(zid := ctx.getText()):
+                self._s.zid = zid
+                zorg_id_date = f"20{zid.split('#')[0]}"
+                self._s.note_date = dt.datetime.strptime(
+                    zorg_id_date, "%Y%m%d"
+                ).date()
 
     def enterItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
         del ctx
@@ -194,15 +200,6 @@ class ZorgFileCompiler(ZorgFileListener):
                 assert_never(ch)
 
             self._s.todo_status = status
-
-    def enterZid(self, ctx: ZorgFileParser.ZidContext) -> None:  # noqa: D102
-        if self._s.in_note and self._s.ids_in_note == 0:
-            zid = ctx.getText()
-            self._s.zid = zid
-            zorg_id_date = f"20{zid.split('#')[0]}"
-            self._s.note_date = dt.datetime.strptime(
-                zorg_id_date, "%Y%m%d"
-            ).date()
 
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext

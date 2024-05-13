@@ -20,3 +20,8 @@ def to_short_date(date: dt.date) -> str:
 def is_short_date(short_date: str) -> bool:
     """Returns True iff {short_date} is a valid short date."""
     return len(short_date) == 6 and all(ch.isdigit() for ch in short_date)
+
+
+def is_zid(zid: str) -> bool:
+    """Returns True iff {zid} is a valid ZID."""
+    return len(zid) == 9 and is_short_date(zid[:6]) and zid[6] == "#"
