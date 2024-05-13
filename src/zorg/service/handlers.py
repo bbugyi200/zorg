@@ -348,8 +348,7 @@ def _add_or_update_modify_date(short_modify_date: str, line: str) -> str:
         _LOGGER.debug(
             "Removing old modify date", old_modify_date=old_modify_date
         )
-    line_prefix = f"{line_before_zid} "
-    return f"{line_prefix}{short_modify_date} {' '.join(words)}"
+    return f"{line_before_zid}{short_modify_date} {' '.join(words)}"
 
 
 def _pop_line_before_zid(words: list[str]) -> str:
