@@ -18,7 +18,7 @@ footnote    : ref COLON space_atoms NL ;
 // notes
 note         : DASH base_note subnote* ;
 base_note    : id_note_body NL ;
-id_note_body : (SPACE zid)? note_body ;
+id_note_body : note_body ;
 note_body    : space_atoms (NL SPACE+ space_atoms)* ;
 subnote      : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote   : FOUR_SPACE_DASH base_note ;
@@ -30,13 +30,13 @@ todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : PRIORITY ;
 
-// Zorg YYMMDD#XX IDs
-zid : ZID  ;
-
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
 atom        : tag_symbol | tag | link | property | id_group | ref | zid | priority ;
+
+// Zorg YYMMDD#XX IDs
+zid : ZID  ;
 
 // property
 property    : ID COLON COLON id_group ;

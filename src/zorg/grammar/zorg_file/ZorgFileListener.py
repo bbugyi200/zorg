@@ -170,15 +170,6 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#zid.
-    def enterZid(self, ctx:ZorgFileParser.ZidContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#zid.
-    def exitZid(self, ctx:ZorgFileParser.ZidContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#space_atoms.
     def enterSpace_atoms(self, ctx:ZorgFileParser.Space_atomsContext):
         pass
@@ -203,6 +194,15 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#atom.
     def exitAtom(self, ctx:ZorgFileParser.AtomContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#zid.
+    def enterZid(self, ctx:ZorgFileParser.ZidContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#zid.
+    def exitZid(self, ctx:ZorgFileParser.ZidContext):
         pass
 
 
