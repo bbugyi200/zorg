@@ -65,8 +65,6 @@ def execute(session: SQLSession, query_string: str) -> str:
     ### (O)RDER BY
     ordered_note_group = _order_notes_by(note_group, query.order_by)
 
-    # TODO(bugyi): Implement ORDER BY query functionality.
-
     ### (S)ELECT
     result = _select(query.select, ordered_note_group)
 
