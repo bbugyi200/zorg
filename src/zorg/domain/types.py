@@ -20,7 +20,7 @@ from typing import (
 )
 
 from sqlalchemy.future import Engine
-from typist import Comparable, assert_never
+from typist import assert_never
 
 
 if TYPE_CHECKING:
@@ -31,7 +31,7 @@ E = TypeVar("E")
 T = TypeVar("T")
 
 
-KeyFunc = Callable[["Note"], Comparable]
+KeyFunc = Callable[["Note"], str]
 FileGroupMapType = Mapping[str, Sequence[str]]
 TodoPriorityType = Literal[
     "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"

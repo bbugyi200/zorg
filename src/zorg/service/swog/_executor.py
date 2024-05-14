@@ -6,7 +6,6 @@ import time
 from typing import Iterable, Sequence, Union
 
 from logrus import Logger
-from typist import Comparable
 
 from ...domain.models import Note
 from ...domain.types import (
@@ -89,8 +88,8 @@ def _order_notes_by(
 
 
 def _order_by_keyfunc(order_bys: Iterable[OrderByType]) -> KeyFunc:
-    def keyfunc(note: Note) -> Comparable:
-        return tuple(oby.keyfunc(note) for oby in order_bys)
+    def keyfunc(note: Note) -> str:
+        return " ".join(oby.keyfunc(note) for oby in order_bys)
 
     return keyfunc
 
