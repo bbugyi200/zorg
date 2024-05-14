@@ -10,8 +10,6 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  - 240330#02 This note contains a key::value pair.
-  - 240408#NO Da nah nah nuh...
   o P2 240510#02 bazbuz is ok too...
   o P2 240510#07 Some todo
   o P2 240510#08 Another related todo
@@ -20,6 +18,8 @@
   o P2 240510#1w A todo for something
   o P2 240510#21 Some foobar todo.
   o P2 240510#26 Some foobar todo.
+  - 240330#02 This note contains a key::value pair.
+  - 240408#NO Da nah nah nuh...
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
@@ -169,6 +169,15 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
+  o P2 240510#02 bazbuz is ok too...
+  o P2 240510#07 Some todo
+  o P2 240510#08 Another related todo
+  o P2 240510#0A Some other todo
+  o P2 240510#0K This todo is @due today! | due::2024-03-13
+  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P2 240510#1w A todo for something
+  o P2 240510#21 Some foobar todo.
+  o P2 240510#26 Some foobar todo.
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
   - 240323#0L +zorg Parametrize test_run_compile()
@@ -191,15 +200,6 @@
   - 240408#0X Some note
   - 240408#NO Da nah nah nuh...
   - 240509 240408#0X Some note with a modify date
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
@@ -331,7 +331,7 @@
   o P2 240510#26 Some foobar todo.
   
   
-  ######### 3 | NOTES
+  ######### 4 | NOTES
   - 240330#02 This note contains a key::value pair.
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
