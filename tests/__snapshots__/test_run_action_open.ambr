@@ -46,10 +46,7 @@
   
   
   ######### [[multiblocks]]
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
   - 240510#09 A note about life...
-  o P2 240510#0A Some other todo
   - 240510#0B With a note
   - 240510#0C Some note in section 0
   - 240510#0D Note A1
@@ -58,6 +55,9 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
+  o P2 240510#07 Some todo
+  o P2 240510#08 Another related todo
+  o P2 240510#0A Some other todo
   
   
   ######### [[priority]]
@@ -143,7 +143,6 @@
   
   ######### [[subnotes]]
   - 240510#1c foobar
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
   - 240510#1e Todo subnote A
   - 240510#1f Todo subnote B
   - 240510#1h Todo subsubnote C
@@ -153,30 +152,31 @@
   - 240510#1o pig
   - 240510#1r is fat
   - 240510#1s is stinky
+  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
   
   
   ######### [[subsections]]
   - 240510#1t Note about A1
   - 240510#1u Note about something
   - 240510#1v Another note
-  o P2 240510#1w A todo for something
   - 240510#1x A note on the second section.
   - 240510#1z A sub-note.
   - 240510#20 And another note.
-  o P2 240510#21 Some foobar todo.
   - 240510#22 This is inside of h4_section!
   - 240510#23 A note on the third section.
   - 240510#24 A sub-note.
   - 240510#25 And another note.
-  o P2 240510#26 Some foobar todo.
   - 240510#27 This is the final section!
+  o P2 240510#1w A todo for something
+  o P2 240510#21 Some foobar todo.
+  o P2 240510#26 Some foobar todo.
   
   
   ######### [[tags_and_ids]]
   - 240408#0X Some note
-  - 240509 240408#0X Some note with a modify date
-  - 301231#X0 When I talk to %pig I always want to @puke.
   - 240408#NO Da nah nah nuh...
+  - 240509 240408#0X Some note with a modify date
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
+  - 301231#X0 When I talk to %pig I always want to @puke.
   '''
 # ---
