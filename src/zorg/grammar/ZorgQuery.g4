@@ -24,7 +24,7 @@ note        : 'note' ;
 where_body     : or_filter ;
 or_filter      : and_filter (SPACE 'or' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
-where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range ;
+where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter ;
 note_type      : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : PRIORITY (DASH ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'))? ;
@@ -37,6 +37,8 @@ project        : PLUS ID ;
 subfilter      : '(' or_filter ')' ;
 create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
+prop_filter    : ID COLON prop_op? ID STAR? ;
+prop_op        : '<' | '<=' | '>=' | '>' ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;

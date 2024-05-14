@@ -242,6 +242,24 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#prop_filter.
+    def enterProp_filter(self, ctx:ZorgQueryParser.Prop_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#prop_filter.
+    def exitProp_filter(self, ctx:ZorgQueryParser.Prop_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#prop_op.
+    def enterProp_op(self, ctx:ZorgQueryParser.Prop_opContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#prop_op.
+    def exitProp_op(self, ctx:ZorgQueryParser.Prop_opContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#group_by_body.
     def enterGroup_by_body(self, ctx:ZorgQueryParser.Group_by_bodyContext):
         pass
