@@ -296,12 +296,21 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#date.
-    def enterDate(self, ctx:ZorgQueryParser.DateContext):
+    # Enter a parse tree produced by ZorgQueryParser#create.
+    def enterCreate(self, ctx:ZorgQueryParser.CreateContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#date.
-    def exitDate(self, ctx:ZorgQueryParser.DateContext):
+    # Exit a parse tree produced by ZorgQueryParser#create.
+    def exitCreate(self, ctx:ZorgQueryParser.CreateContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#modify.
+    def enterModify(self, ctx:ZorgQueryParser.ModifyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#modify.
+    def exitModify(self, ctx:ZorgQueryParser.ModifyContext):
         pass
 
 

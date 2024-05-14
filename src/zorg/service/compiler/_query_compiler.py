@@ -183,7 +183,9 @@ class ZorgQueryCompiler(ZorgQueryListener):
         for order_by_atom in cast(
             list[ZorgQueryParser.Order_by_atomContext], ctx.order_by_atom()
         ):
-            if order_by_atom.date():
+            if order_by_atom.create():
+                group_by_type = OrderByType.CREATE_DATE
+            elif order_by_atom.modify():
                 group_by_type = OrderByType.MODIFY_DATE
             elif order_by_atom.priority():
                 group_by_type = OrderByType.PRIORITY

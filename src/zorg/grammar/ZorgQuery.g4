@@ -45,10 +45,11 @@ group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPA
 group_by_atom : file | type | AT_SIGN | HASH | PERCENT | PLUS ;
 
 // ORDER BY
-order_by_body : order_by_atom (SPACE order_by_atom)* ;
-order_by_atom : date | priority | type ;
-date          : 'date' ;
-priority      : 'priority' ;
+order_by_body :  order_by_atom (SPACE order_by_atom)* ;
+order_by_atom :  create | modify | priority | type ;
+create        :  'create' ;
+modify        :  'modify' ;
+priority      :  'priority' ;
 
 // shared subrules
 file : 'file' ;
