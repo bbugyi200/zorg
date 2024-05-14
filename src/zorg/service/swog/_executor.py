@@ -6,9 +6,16 @@ import time
 from typing import Iterable, Sequence, Union
 
 from logrus import Logger
+from typist import Comparable
 
 from ...domain.models import Note
-from ...domain.types import GroupByType, NoteType, OrderByType, SelectType
+from ...domain.types import (
+    GroupByType,
+    KeyFunc,
+    NoteType,
+    OrderByType,
+    SelectType,
+)
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
 
@@ -70,7 +77,7 @@ def execute(session: SQLSession, query_string: str) -> str:
 def _order_notes_by(
     note_group: NoteGroup, order_bys: Iterable[OrderByType]
 ) -> NoteGroup:
-    keyfunc = lambda note: tuple(oby.keyfunc(note) for oby in order_bys)
+    keyfunc = _order_by_keyfunc(order_bys)
     if isinstance(note_group, list):
         return sorted(note_group, key=keyfunc)
 
@@ -79,6 +86,13 @@ def _order_notes_by(
     for k, v in note_group.items():
         new_note_group[k] = _order_notes_by(v, order_bys)
     return new_note_group
+
+
+def _order_by_keyfunc(order_bys: Iterable[OrderByType]) -> KeyFunc:
+    def keyfunc(note: Note) -> Comparable:
+        return tuple(oby.keyfunc(note) for oby in order_bys)
+
+    return keyfunc
 
 
 def _select(

@@ -91,8 +91,8 @@ class Query:
     select: SelectType = field(default=SelectType.NOTE)
     where: Optional[WhereOrFilter] = None
     order_by: tuple[OrderByType, ...] = (
-        OrderByType.MODIFY_DATE,
         OrderByType.NOTE_TYPE,
         OrderByType.PRIORITY,
+        OrderByType.MODIFY_DATE,
     )
     group_by: tuple[GroupByType, ...] = tuple()
