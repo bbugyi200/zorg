@@ -1,6 +1,7 @@
 """Custom types used by zorg."""
 
 import abc
+import datetime as dt
 import enum
 from pathlib import Path
 from typing import (
@@ -135,7 +136,7 @@ class GroupByType(enum.Enum):
 
     @property
     def keyfunc(self) -> KeyFunc:
-        """Returns a callable that can be used to group/sort notes."""
+        """Returns a callable that can be used to group notes."""
         if self is GroupByType.AREA:
             return _to_comparable_tag_factory("areas", "#")
         elif self is GroupByType.CONTEXT:
@@ -155,9 +156,21 @@ class GroupByType(enum.Enum):
 class OrderByType(enum.Enum):
     """Represents a single ORDER BY field for zorg queries."""
 
-    DATE = enum.auto()
+    MODIFY_DATE = enum.auto()
     NOTE_TYPE = enum.auto()
     PRIORITY = enum.auto()
+
+    @property
+    def keyfunc(self) -> KeyFunc:
+        """Returns a callable that can be used sort notes."""
+        if self is OrderByType.MODIFY_DATE:
+            return lambda note: _to_comparable_date(note.modify_date)
+        elif self is OrderByType.NOTE_TYPE:
+            return lambda note: _to_comparable_note_type(note.todo_payload)
+        elif self is OrderByType.PRIORITY:
+            return lambda note: _to_comparable_priority(note.todo_payload)
+        else:
+            assert_never(self)
 
 
 class SelectType(enum.Enum):
@@ -214,10 +227,23 @@ def _to_comparable_note_type(todo_payload: Optional["TodoPayload"]) -> str:
         return todo_payload.status.to_header_label()
 
 
+def _to_comparable_priority(
+    todo_payload: Optional["TodoPayload"],
+) -> TodoPriorityType:
+    if todo_payload is None:
+        return "P0"
+    else:
+        return todo_payload.priority
+
+
 def _to_comparable_file(file_path: Optional[Path]) -> str:
     assert file_path is not None
     link_name = str(file_path).replace(".zo", "")
     return f"[[{link_name}]]"
+
+
+def _to_comparable_date(date: dt.date) -> str:
+    return date.strftime("%Y%m%d")
 
 
 def _to_comparable_tag_factory(attr: str, tag_symbol: str) -> KeyFunc:

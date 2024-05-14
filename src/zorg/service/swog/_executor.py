@@ -8,7 +8,7 @@ from typing import Iterable, Sequence, Union
 from logrus import Logger
 
 from ...domain.models import Note
-from ...domain.types import GroupByType, NoteType, SelectType
+from ...domain.types import GroupByType, NoteType, OrderByType, SelectType
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
 
@@ -57,13 +57,28 @@ def execute(session: SQLSession, query_string: str) -> str:
     note_group = _group_notes_by(filtered_notes, query.group_by)
 
     ### (O)RDER BY
+    ordered_note_group = _order_notes_by(note_group, query.order_by)
 
     # TODO(bugyi): Implement ORDER BY query functionality.
 
     ### (S)ELECT
-    result = _select(query.select, note_group)
+    result = _select(query.select, ordered_note_group)
 
     return result.strip()
+
+
+def _order_notes_by(
+    note_group: NoteGroup, order_bys: Iterable[OrderByType]
+) -> NoteGroup:
+    keyfunc = lambda note: tuple(oby.keyfunc(note) for oby in order_bys)
+    if isinstance(note_group, list):
+        return sorted(note_group, key=keyfunc)
+
+    assert isinstance(note_group, dict)
+    new_note_group = {}
+    for k, v in note_group.items():
+        new_note_group[k] = _order_notes_by(v, order_bys)
+    return new_note_group
 
 
 def _select(
