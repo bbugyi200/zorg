@@ -54,15 +54,14 @@ class NoteType(enum.Enum):
     def to_header_label(self) -> str:
         """Converts to a header label that can be used by GROUP BY."""
         open_todos_label: Final = "1 | OPEN TODOS"
-        done_todos_label: Final = "2 | DONE TODOS"
         if self is NoteType.BASIC:
-            return "3 | NOTES"
+            return "4 | NOTES"
         elif self is NoteType.OPEN_TODO:
             return open_todos_label
         elif self is NoteType.CLOSED_TODO:
-            return done_todos_label
+            return "2 | DONE TODOS"
         elif self is NoteType.CANCELED_TODO:
-            return done_todos_label
+            return "3 | CANCELED TODOS"
         elif self is NoteType.BLOCKED_TODO:
             return open_todos_label
         elif self is NoteType.PARENT_TODO:
