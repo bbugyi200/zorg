@@ -184,13 +184,13 @@ class _SONConverter:
             return None
         and_conds = []
         for property_filter in self.and_filter.property_filters:
-            neg = property_filter.negated
+            negated = property_filter.negated
             comp_op_map = {
-                PropertyOperator.EQ: operator.ne if neg else operator.eq,
-                PropertyOperator.LT: operator.ge if neg else operator.lt,
-                PropertyOperator.GT: operator.le if neg else operator.gt,
-                PropertyOperator.LE: operator.gt if neg else operator.le,
-                PropertyOperator.GE: operator.lt if neg else operator.ge,
+                PropertyOperator.EQ: operator.ne if negated else operator.eq,
+                PropertyOperator.LT: operator.ge if negated else operator.lt,
+                PropertyOperator.GT: operator.le if negated else operator.gt,
+                PropertyOperator.LE: operator.gt if negated else operator.le,
+                PropertyOperator.GE: operator.lt if negated else operator.ge,
             }
             subquery = (
                 select(sql.ZorgNote.id)
@@ -200,10 +200,7 @@ class _SONConverter:
             )
 
             op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
-            if (
-                property_filter.op == PropertyOperator.EXISTS
-                and property_filter.negated
-            ):
+            if property_filter.op == PropertyOperator.EXISTS and negated:
                 op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
             elif property_filter.op != PropertyOperator.EXISTS:
                 comp_op = comp_op_map[property_filter.op]
