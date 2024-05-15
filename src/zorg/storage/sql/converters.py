@@ -2,11 +2,13 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
+import operator
 from pathlib import Path
-from typing import Any, Callable, Optional, cast
+from typing import Any, Callable, Optional, TypeVar, cast
 
 import metaman
-from sqlmodel import Session, and_, or_, select
+from sqlalchemy import func
+from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
 
 from . import models as sql
@@ -17,8 +19,14 @@ from ...domain.models import (
     WhereAndFilter,
     WhereOrFilter,
 )
-from ...domain.types import EntityConverter, NoteType, TodoPriorityType
-from ...service import common
+from ...domain.types import (
+    EntityConverter,
+    NoteType,
+    PropertyOperator,
+    PropertyValueType,
+    TodoPriorityType,
+)
+from ...service import common, dates as zdt
 
 
 _SONConverterParser = Callable[["_SONConverter"], Optional[ColumnElement]]
@@ -28,6 +36,8 @@ _SON_CONVERTER_PARSERS: list[_SONConverterParser] = []
 _son_converter_parser = metaman.register_function_factory(
     _SON_CONVERTER_PARSERS
 )
+
+_T = TypeVar("_T")
 
 
 # TODO(bugyi): Rename to_select_of_note() and other related identifiers.
@@ -166,6 +176,69 @@ class _SONConverter:
             return and_(and_conds[0], *and_conds[1:])
         else:
             return None
+
+    @_son_converter_parser
+    def property_filters(self) -> Optional[ColumnElement]:
+        """Converter tht handles property filters."""
+        if not self.and_filter.property_filters:
+            return None
+        and_conds = []
+        for property_filter in self.and_filter.property_filters:
+            neg = property_filter.negated
+            comp_op_map = {
+                PropertyOperator.EQ: operator.ne if neg else operator.eq,
+                PropertyOperator.LT: operator.ge if neg else operator.lt,
+                PropertyOperator.GT: operator.le if neg else operator.gt,
+                PropertyOperator.LE: operator.gt if neg else operator.le,
+                PropertyOperator.GE: operator.lt if neg else operator.ge,
+            }
+            subquery = (
+                select(sql.ZorgNote.id)
+                .join(sql.PropertyLink)
+                .join(sql.Property)
+                .where(sql.Property.name == property_filter.key)
+            )
+
+            op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+            if (
+                property_filter.op == PropertyOperator.EXISTS
+                and property_filter.negated
+            ):
+                op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+            elif property_filter.op != PropertyOperator.EXISTS:
+                comp_op = comp_op_map[property_filter.op]
+
+                value_type_map: dict[
+                    PropertyValueType,
+                    tuple[Callable[[Any], Any], Callable[[Any], Any]],
+                ] = {
+                    PropertyValueType.DATE: (func.date, zdt.to_date),
+                    PropertyValueType.INTEGER: (_col_to_int, int),
+                    PropertyValueType.STRING: (_noop, _noop),
+                }
+                cast_model, cast_value = value_type_map[
+                    property_filter.value_type
+                ]
+                subquery = subquery.where(
+                    comp_op(
+                        cast_model(sql.PropertyLink.value),
+                        cast_value(property_filter.value),
+                    )
+                )
+
+            and_conds.append(op(subquery))
+
+        return and_(and_conds[0], *and_conds[1:])
+
+
+def _noop(value: _T) -> _T:
+    """A function that does nothing."""
+    return value
+
+
+def _col_to_int(value: Any) -> Any:
+    """Casts SQL table's column to integer."""
+    return func.cast(value, Integer)
 
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:

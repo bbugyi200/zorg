@@ -268,7 +268,7 @@ def _split_op_value(op_value: str) -> tuple[PropertyOperator, str]:
 
 
 def _get_value_type(value: str) -> PropertyValueType:
-    if zdt.is_short_date(value):
+    if zdt.is_date(value):
         return PropertyValueType.DATE
     elif all(ch.isdigit() for ch in value):
         return PropertyValueType.INTEGER
