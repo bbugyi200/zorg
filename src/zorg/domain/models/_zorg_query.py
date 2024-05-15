@@ -33,6 +33,7 @@ class PropertyFilter:
     value: str = ""
     op: PropertyOperator = PropertyOperator.EXISTS
     value_type: PropertyValueType = PropertyValueType.STRING
+    negated: bool = False
 
 
 @dataclass(frozen=True)

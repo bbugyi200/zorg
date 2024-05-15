@@ -37,7 +37,7 @@ project        : PLUS ID ;
 subfilter      : '(' or_filter ')' ;
 create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
-prop_filter    : ID COLON prop_op? ID STAR? ;
+prop_filter    : not_op? ID COLON prop_op? ID STAR? ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
 
 // GROUP BY

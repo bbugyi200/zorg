@@ -6,11 +6,19 @@ from typing import Optional, cast
 from logrus import Logger
 
 from .. import dates as zdt
-from ...domain.models import DateRange, Query, WhereAndFilter, WhereOrFilter
+from ...domain.models import (
+    DateRange,
+    Query,
+    PropertyFilter,
+    WhereAndFilter,
+    WhereOrFilter,
+)
 from ...domain.types import (
     GroupByType,
     NoteType,
     OrderByType,
+    PropertyOperator,
+    PropertyValueType,
     SelectType,
     TodoPriorityType,
 )
@@ -66,6 +74,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         people: set[str] = set()
         priorities: set[TodoPriorityType] = set()
         projects: set[str] = set()
+        property_filters: set[PropertyFilter] = set()
 
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
@@ -135,6 +144,18 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     raise RuntimeError(f"Invalid Tag: {tag.getText()}")
 
                 tag_set.add(f"{minus}{tag_id.getText()}")
+            elif where_atom.prop_filter():
+                key, op_value = where_atom.prop_filter().getText().split(":")
+                negated = False
+                if key[0] == "!":
+                    negated = True
+                    key = key[1:]
+                op, value = _split_op_value(op_value)
+                value_type = _get_value_type(value)
+                property_filter = PropertyFilter(
+                    key, value, op=op, value_type=value_type, negated=negated
+                )
+                property_filters.add(property_filter)
 
         self._and_filter_groups[-1].append(
             WhereAndFilter(
@@ -146,6 +167,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 people=people,
                 priorities=priorities,
                 projects=projects,
+                property_filters=property_filters,
             )
         )
 
@@ -226,6 +248,32 @@ class ZorgQueryCompiler(ZorgQueryListener):
         del ctx
         where = WhereOrFilter(self._and_filter_groups[-1])
         self.zorg_query.where = where
+
+
+def _split_op_value(op_value: str) -> tuple[PropertyOperator, str]:
+    if op_value[0] == "<":
+        op_value = op_value[1:]
+        if op_value[0] == "=":
+            return (PropertyOperator.LE, op_value[1:])
+        return (PropertyOperator.LT, op_value)
+    elif op_value[0] == ">":
+        op_value = op_value[1:]
+        if op_value[0] == "=":
+            return (PropertyOperator.GE, op_value[1:])
+        return (PropertyOperator.GT, op_value)
+    elif op_value[0] == "*" and len(op_value) == 1:
+        return (PropertyOperator.EXISTS, "")
+    else:
+        return (PropertyOperator.EQ, op_value)
+
+
+def _get_value_type(value: str) -> PropertyValueType:
+    if zdt.is_short_date(value):
+        return PropertyValueType.DATE
+    elif all(ch.isdigit() for ch in value):
+        return PropertyValueType.INTEGER
+
+    return PropertyValueType.STRING
 
 
 def _add_note_types(

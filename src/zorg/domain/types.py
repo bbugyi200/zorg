@@ -187,15 +187,10 @@ class SelectType(enum.Enum):
 
 
 class PropertyOperator(enum.Enum):
-    """Used to determine what kind of metatag constraint has been specified."""
+    """Used to determine what kind of property constraint has been specified."""
 
-    # exists / not exists
     EXISTS = enum.auto()
-    NOT_EXISTS = enum.auto()
-
-    # comparison operators
     EQ = enum.auto()
-    NE = enum.auto()
     LT = enum.auto()
     LE = enum.auto()
     GT = enum.auto()
