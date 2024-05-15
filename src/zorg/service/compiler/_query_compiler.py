@@ -8,8 +8,8 @@ from logrus import Logger
 from .. import dates as zdt
 from ...domain.models import (
     DateRange,
-    Query,
     PropertyFilter,
+    Query,
     WhereAndFilter,
     WhereOrFilter,
 )
