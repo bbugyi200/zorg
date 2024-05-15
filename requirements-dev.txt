@@ -18,7 +18,7 @@ antlr4-tools==0.2.1
     # via -r requirements-dev.in
 arrow==1.3.0
     # via cookiecutter
-astroid==3.1.0
+astroid==3.2.0
     # via pylint
 babel==2.15.0
     # via sphinx
@@ -156,7 +156,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements-dev.in
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   black
     #   pylint
@@ -186,7 +186,7 @@ pygments==2.18.0
     # via
     #   rich
     #   sphinx
-pylint==3.1.0
+pylint==3.2.0
     # via -r requirements-dev.in
 pyproject-hooks==1.1.0
     # via
@@ -322,7 +322,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via tox
 wheel==0.43.0
     # via pip-tools
