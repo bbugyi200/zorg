@@ -238,7 +238,7 @@ def _noop(value: _T) -> _T:
 
 def _col_to_int(value: Any) -> Any:
     """Casts SQL table's column to integer."""
-    return func.cast(value, Integer)
+    return func.cast(value, Integer)  # pylint: disable=not-callable
 
 
 def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
