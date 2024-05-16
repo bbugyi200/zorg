@@ -243,7 +243,7 @@ class _SONConverter:
             op_arg: Any
             if case_sensitive:
                 cond = sql.ZorgNote.desc.like(like_arg)  # type: ignore[attr-defined]
-                subquery = select(sql.ZorgNote.id, sql.ZorgNote.desc).where(
+                subquery = select(sql.ZorgNote.id, sql.ZorgNote.body).where(
                     cond
                 )
                 op_map: dict[DescOperator, Any] = {
