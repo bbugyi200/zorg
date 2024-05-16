@@ -8,6 +8,7 @@ from logrus import Logger
 from .. import dates as zdt
 from ...domain.models import (
     DateRange,
+    DescFilter,
     PropertyFilter,
     Query,
     WhereAndFilter,
@@ -75,6 +76,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         priorities: set[TodoPriorityType] = set()
         projects: set[str] = set()
         property_filters: set[PropertyFilter] = set()
+        desc_filters: set[DescFilter] = set()
 
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
@@ -156,6 +158,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     key, value, op=op, value_type=value_type, negated=negated
                 )
                 property_filters.add(property_filter)
+            elif where_atom.desc_filter():
+                pass
 
         self._and_filter_groups[-1].append(
             WhereAndFilter(
@@ -163,6 +167,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 areas=areas,
                 contexts=contexts,
                 create_date_ranges=create_date_ranges,
+                desc_filters=desc_filters,
                 modify_date_ranges=modify_date_ranges,
                 people=people,
                 priorities=priorities,

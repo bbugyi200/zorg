@@ -260,6 +260,51 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#desc_filter.
+    def enterDesc_filter(self, ctx:ZorgQueryParser.Desc_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#desc_filter.
+    def exitDesc_filter(self, ctx:ZorgQueryParser.Desc_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#zid.
+    def enterZid(self, ctx:ZorgQueryParser.ZidContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#zid.
+    def exitZid(self, ctx:ZorgQueryParser.ZidContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#id.
+    def enterId(self, ctx:ZorgQueryParser.IdContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#id.
+    def exitId(self, ctx:ZorgQueryParser.IdContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#date.
+    def enterDate(self, ctx:ZorgQueryParser.DateContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#date.
+    def exitDate(self, ctx:ZorgQueryParser.DateContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#time.
+    def enterTime(self, ctx:ZorgQueryParser.TimeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#time.
+    def exitTime(self, ctx:ZorgQueryParser.TimeContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#group_by_body.
     def enterGroup_by_body(self, ctx:ZorgQueryParser.Group_by_bodyContext):
         pass

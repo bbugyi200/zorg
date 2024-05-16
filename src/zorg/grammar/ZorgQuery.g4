@@ -24,7 +24,7 @@ note        : 'note' ;
 where_body     : or_filter ;
 or_filter      : and_filter (SPACE 'or' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
-where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter ;
+where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter | desc_filter ;
 note_type      : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : PRIORITY (DASH ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'))? ;
@@ -39,6 +39,12 @@ create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
 prop_filter    : not_op? ID COLON prop_op? ((ID | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+) STAR? | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
+desc_filter    : SQUOTE id (SPACE id)* SQUOTE ;
+
+zid  : ZID  ;
+id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
+date : DATE ;
+time : TIME ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;

@@ -20,6 +20,7 @@ from ...domain.models import (
     WhereOrFilter,
 )
 from ...domain.types import (
+    DescOperator,
     EntityConverter,
     NoteType,
     PropertyOperator,
@@ -225,6 +226,41 @@ class _SONConverter:
 
             and_conds.append(op(subquery))
 
+        return and_(and_conds[0], *and_conds[1:])
+
+    @_son_converter_parser
+    def desc_filters(self) -> Optional[ColumnElement]:
+        and_conds = []
+        if not self.and_filter.desc_filters:
+            return None
+
+        for desc_filter in self.and_filter.desc_filters:
+            case_sensitive = desc_filter.case_sensitive
+            if case_sensitive is None:
+                case_sensitive = not bool(desc_filter.value.islower())
+
+            like_arg = f"%{desc_filter.value}%"
+            op_arg: Any
+            if case_sensitive:
+                cond = sql.ZorgNote.desc.like(like_arg)  # type: ignore[attr-defined]
+                subquery = select(sql.ZorgNote.id, sql.ZorgNote.desc).where(
+                    cond
+                )
+                op_map: dict[DescOperator, Any] = {
+                    DescOperator.CONTAINS: sql.ZorgNote.id.in_,  # type: ignore[union-attr]
+                    DescOperator.NOT_CONTAINS: sql.ZorgNote.id.not_in,  # type: ignore[union-attr]
+                }
+                op = op_map[desc_filter.op]
+                op_arg = subquery
+            else:
+                op_map = {
+                    DescOperator.CONTAINS: sql.ZorgNote.desc.ilike,  # type: ignore[attr-defined]
+                    DescOperator.NOT_CONTAINS: sql.ZorgNote.desc.not_ilike,  # type: ignore[attr-defined]
+                }
+                op = op_map[desc_filter.op]
+                op_arg = like_arg
+
+            and_conds.append(op(op_arg))
         return and_(and_conds[0], *and_conds[1:])
 
 
