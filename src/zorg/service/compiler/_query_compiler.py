@@ -15,6 +15,7 @@ from ...domain.models import (
     WhereOrFilter,
 )
 from ...domain.types import (
+    DescOperator,
     GroupByType,
     NoteType,
     OrderByType,
@@ -159,7 +160,21 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 )
                 property_filters.add(property_filter)
             elif where_atom.desc_filter():
-                pass
+                desc_filter = where_atom.desc_filter().getText()
+                op = DescOperator.CONTAINS
+                case_sensitive: Optional[bool] = None
+                if desc_filter[0] == "!":
+                    op = DescOperator.NOT_CONTAINS
+                    desc_filter = desc_filter[1:]
+                if desc_filter[0] == "c":
+                    desc_filter = desc_filter[1:]
+                    case_sensitive = True
+                value = desc_filter[1:-1]
+                desc_filters.add(
+                    DescFilter(
+                        value=value, op=op, case_sensitive=case_sensitive
+                    )
+                )
 
         self._and_filter_groups[-1].append(
             WhereAndFilter(

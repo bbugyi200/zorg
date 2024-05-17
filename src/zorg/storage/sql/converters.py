@@ -242,7 +242,7 @@ class _SONConverter:
             like_arg = f"%{desc_filter.value}%"
             op_arg: Any
             if case_sensitive:
-                cond = sql.ZorgNote.desc.like(like_arg)  # type: ignore[attr-defined]
+                cond = sql.ZorgNote.body.like(like_arg)  # type: ignore[attr-defined]
                 subquery = select(sql.ZorgNote.id, sql.ZorgNote.body).where(
                     cond
                 )
@@ -254,8 +254,8 @@ class _SONConverter:
                 op_arg = subquery
             else:
                 op_map = {
-                    DescOperator.CONTAINS: sql.ZorgNote.desc.ilike,  # type: ignore[attr-defined]
-                    DescOperator.NOT_CONTAINS: sql.ZorgNote.desc.not_ilike,  # type: ignore[attr-defined]
+                    DescOperator.CONTAINS: sql.ZorgNote.body.ilike,  # type: ignore[attr-defined]
+                    DescOperator.NOT_CONTAINS: sql.ZorgNote.body.not_ilike,  # type: ignore[attr-defined]
                 }
                 op = op_map[desc_filter.op]
                 op_arg = like_arg

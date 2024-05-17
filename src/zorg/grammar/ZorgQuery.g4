@@ -39,7 +39,7 @@ create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
 prop_filter    : not_op? ID COLON prop_op? ((ID | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+) STAR? | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
-desc_filter    : SQUOTE id (SPACE id)* SQUOTE ;
+desc_filter    : not_op? 'c'? SQUOTE id (SPACE id)* SQUOTE ;
 
 zid  : ZID  ;
 id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
