@@ -249,6 +249,9 @@ class _SONConverter:
                 )
                 id_list: list[int] = []
                 for ID, body in self.session.exec(subquery).all():
+                    assert (
+                        ID is not None
+                    ), "The DB shouldn't contain notes without an ID, right?"
                     if desc_filter.value in body:
                         id_list.append(ID)
 
