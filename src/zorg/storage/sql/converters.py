@@ -44,7 +44,7 @@ _T = TypeVar("_T")
 # TODO(bugyi): Rename to_select_of_note() and other related identifiers.
 # TODO(bugyi): Move to_select_of_note() out of of this file!
 def to_select_of_note(
-    or_filter: Optional[WhereOrFilter],
+    or_filter: Optional[WhereOrFilter], session: Session
 ) -> SelectOfScalar[sql.ZorgNote]:
     """Converts a WhereOrFilter to a SQL SELECT that will fetch ZorgNotes."""
     if or_filter is None or not or_filter.and_filters:
@@ -52,7 +52,7 @@ def to_select_of_note(
 
     return select(sql.ZorgNote).where(
         or_(*[
-            _SONConverter(and_filter).to_note_clause()
+            _SONConverter(and_filter, session).to_note_clause()
             for and_filter in or_filter.and_filters
         ])
     )
@@ -63,6 +63,7 @@ class _SONConverter:
     """Converts a WhereAndFilter to a ColumnElement."""
 
     and_filter: WhereAndFilter
+    session: Session
 
     def to_note_clause(self) -> ColumnElement:
         """Constructs a SQL statement from the provided WhereAndFilter."""
@@ -147,7 +148,7 @@ class _SONConverter:
         for or_filter in or_filters:
             or_conds.append(
                 or_(*[
-                    _SONConverter(and_filter).to_note_clause()
+                    _SONConverter(and_filter, self.session).to_note_clause()
                     for and_filter in or_filter.and_filters
                 ])
             )
@@ -246,12 +247,17 @@ class _SONConverter:
                 subquery = select(sql.ZorgNote.id, sql.ZorgNote.body).where(
                     cond
                 )
+                id_list: list[int] = []
+                for ID, body in self.session.exec(subquery).all():
+                    if desc_filter.value in body:
+                        id_list.append(ID)
+
                 op_map: dict[DescOperator, Any] = {
                     DescOperator.CONTAINS: sql.ZorgNote.id.in_,  # type: ignore[union-attr]
                     DescOperator.NOT_CONTAINS: sql.ZorgNote.id.not_in,  # type: ignore[union-attr]
                 }
                 op = op_map[desc_filter.op]
-                op_arg = subquery
+                op_arg = id_list
             else:
                 op_map = {
                     DescOperator.CONTAINS: sql.ZorgNote.body.ilike,  # type: ignore[attr-defined]

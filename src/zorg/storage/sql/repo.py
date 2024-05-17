@@ -107,7 +107,7 @@ class SQLRepo:
 
     def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get file(s) from DB by using a query."""
-        select_of_note = to_select_of_note(query)
+        select_of_note = to_select_of_note(query, self._session)
         # If the user asked for really verbose output...
         if self._verbose > 1:
             # ... then we print the SELECT statement.
