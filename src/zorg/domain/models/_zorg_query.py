@@ -95,5 +95,6 @@ class Query:
         OrderByType.NOTE_TYPE,
         OrderByType.PRIORITY,
         OrderByType.MODIFY_DATE,
+        OrderByType.CREATE_DATE,
     )
     group_by: tuple[GroupByType, ...] = tuple()
