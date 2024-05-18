@@ -235,11 +235,9 @@ def _to_comparable_note_type(todo_payload: Optional["TodoPayload"]) -> str:
         return todo_payload.status.to_header_label()
 
 
-def _to_comparable_priority(
-    todo_payload: Optional["TodoPayload"],
-) -> TodoPriorityType:
+def _to_comparable_priority(todo_payload: Optional["TodoPayload"]) -> str:
     if todo_payload is None:
-        return "P9"
+        return ""
     else:
         return todo_payload.priority
 
