@@ -2,8 +2,6 @@
 #
 # The following line is a named saved zorg query:
 #
-# W (o or x or ~ or < or > or -) O priority modify G file | order_by_file
-#
 # ^ = [[foo]]
 
 - 240510#03 Some note with a [[bar.sh]] link to a bash script.

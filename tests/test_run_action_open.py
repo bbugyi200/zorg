@@ -17,7 +17,7 @@ params = mark.parametrize
 
 @params(
     "lineno,zo_name",
-    [(7, "foo.zo"), (9, "bar.sh"), (10, "baz.zo")],
+    [(5, "foo.zo"), (7, "bar.sh"), (8, "baz.zo")],
 )
 def test_action_open__good(
     open_action_main: c.MainType,
@@ -33,7 +33,7 @@ def test_action_open__good(
     assert capture.out == f"EDIT {zettel_dir}/{zo_name}\n"
 
 
-@params("lineno", [param(12, id="line_with_no_links")])
+@params("lineno", [param(10, id="line_with_no_links")])
 def test_action_open__bad(
     open_action_main: c.MainType,
     capsys: CaptureFixture,
