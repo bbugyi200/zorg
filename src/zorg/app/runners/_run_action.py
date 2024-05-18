@@ -77,24 +77,21 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 print(f"SEARCH id::{link_parts[1]}")
 
     else:
-        name_sep = " | "
-        if zo_line.startswith(("# S ", "# W ")) and name_sep in zo_line:
-            query_string, query_name = zo_line.strip()[2:].split(name_sep)
+        if zo_line.startswith(("# S ", "# W ")):
+            query_string = zo_line.strip()[2:]
             with SQLSession(
                 cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
             ) as session:
                 query_results = swog.execute(session, query_string)
 
-            query_path = cfg.zettel_dir / f"{query_name}.zoq"
-
             date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-            with query_path.open("w") as f:
+            with zo_path.open("w") as f:
                 f.write(
-                    f"# {query_string} | {query_name}\n#\n# Saved query"
+                    f"# {query_string}\n#\n# Saved query"
                     f" generated on {date_spec}.\n\n{query_results}"
                 )
 
-            print(f"EDIT {query_path}")
+            print(f"EDIT {zo_path}")
         else:
             print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
