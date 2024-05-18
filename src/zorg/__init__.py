@@ -7,4 +7,4 @@ APP_NAME: Final = "zorg"
 
 __author__ = "Bryan M Bugyi"
 __email__ = "bryanbugyi34@gmail.com"
-__version__ = "0.7.2"
+__version__ = "0.7.3"
