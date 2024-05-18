@@ -9,7 +9,15 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.2...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.3...HEAD)
+
+
+## [0.7.3](https://github.com/bbugyi200/zorg/compare/0.7.2...0.7.3) - 2024-05-17
+
+### Added
+
+* Add support for the various new WHERE filters and new GROUP BY dimensions.
+* Add ORDER BY support to zorg queries.
 
 
 ## [0.7.2](https://github.com/bbugyi200/zorg/compare/0.7.1...0.7.2) - 2024-05-05
