@@ -76,7 +76,7 @@ def test_action_open__query(
     assert query_zo_path.read_text() == snapshot
 
 
-@params("lineno,zo_name,link_prop", [param(11, "buz.zo", "fuzz")])
+@params("lineno,zo_name,link_prop", [param(9, "buz.zo", "fuzz")])
 def testActionOpen_withProperty_sendsSearchMsg(
     open_action_main: c.MainType,
     capsys: CaptureFixture,
