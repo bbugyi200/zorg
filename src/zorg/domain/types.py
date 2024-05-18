@@ -131,6 +131,7 @@ class GroupByType(enum.Enum):
     FILE = enum.auto()
     NOTE_TYPE = enum.auto()
     PERSON = enum.auto()
+    PRIORITY = enum.auto()
     PROJECT = enum.auto()
 
     @property
@@ -148,6 +149,8 @@ class GroupByType(enum.Enum):
             return _to_comparable_tag_factory("people", "%")
         elif self is GroupByType.PROJECT:
             return _to_comparable_tag_factory("projects", "+")
+        elif self is GroupByType.PRIORITY:
+            return lambda note: _to_comparable_priority(note.todo_payload)
         else:
             assert_never(self)
 
@@ -236,7 +239,7 @@ def _to_comparable_priority(
     todo_payload: Optional["TodoPayload"],
 ) -> TodoPriorityType:
     if todo_payload is None:
-        return "P0"
+        return "P9"
     else:
         return todo_payload.priority
 

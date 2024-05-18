@@ -48,7 +48,7 @@ time : TIME ;
 
 // GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
-group_by_atom : file | type | AT_SIGN | HASH | PERCENT | PLUS ;
+group_by_atom : file | type | priority | AT_SIGN | HASH | PERCENT | PLUS ;
 
 // ORDER BY
 order_by_body :  order_by_atom (SPACE order_by_atom)* ;

@@ -210,6 +210,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 group_by_type = GroupByType.FILE
             elif group_by_atom.type_():
                 group_by_type = GroupByType.NOTE_TYPE
+            elif group_by_atom.priority():
+                group_by_type = GroupByType.PRIORITY
             else:
                 raise RuntimeError(
                     f"Invalid GROUP BY atom: {group_by_atom.getText()}"
