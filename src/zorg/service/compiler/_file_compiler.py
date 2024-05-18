@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
-from typing import Any, Literal, Optional
+from typing import Any, Final, Literal, Optional
 
 import antlr4
 from antlr4.error.ErrorListener import ErrorListener
@@ -19,6 +19,7 @@ from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
 TagName = Literal["areas", "contexts", "people", "projects"]
 
+_DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"
 _LOGGER = Logger(__name__)
 
 
@@ -229,7 +230,7 @@ class ZorgFileCompiler(ZorgFileListener):
             self.zorg_file.notes.append(todo)
 
         # Reset todo priority and status back to defaults.
-        self._s.todo_priority = "P2"
+        self._s.todo_priority = _DEFAULT_PRIORITY
         self._s.todo_status = NoteType.OPEN_TODO
 
     def exitH1_header(
@@ -443,7 +444,7 @@ class _ZorgFileCompilerState:
     note_date: Optional[dt.date] = None
     modify_date: Optional[dt.date] = None
 
-    todo_priority: TodoPriorityType = "P2"
+    todo_priority: TodoPriorityType = _DEFAULT_PRIORITY
     todo_status: NoteType = NoteType.OPEN_TODO
 
     @property
