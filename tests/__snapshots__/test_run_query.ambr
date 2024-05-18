@@ -10,14 +10,14 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
+  o P3 240510#02 bazbuz is ok too...
+  o P3 240510#07 Some todo
+  o P3 240510#08 Another related todo
+  o P3 240510#0A Some other todo
+  o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   - 240330#02 This note contains a key::value pair.
   - 240408#NO Da nah nah nuh...
   - 240510#00 First note in first block
@@ -126,7 +126,7 @@
   
   
   ######### @due
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
   
   
   ######### @dzwk
@@ -169,15 +169,15 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
+  o P3 240510#02 bazbuz is ok too...
+  o P3 240510#07 Some todo
+  o P3 240510#08 Another related todo
+  o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
   - 240323#0L +zorg Parametrize test_run_compile()
@@ -320,15 +320,15 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
+  o P3 240510#02 bazbuz is ok too...
+  o P3 240510#07 Some todo
+  o P3 240510#08 Another related todo
+  o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   
   
   ######### 4 | NOTES
@@ -540,7 +540,7 @@
   ######### [[basic]]
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
-  o P2 240510#02 bazbuz is ok too...
+  o P3 240510#02 bazbuz is ok too...
   
   
   ######### [[links]]
@@ -560,9 +560,9 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
+  o P3 240510#07 Some todo
+  o P3 240510#08 Another related todo
+  o P3 240510#0A Some other todo
   
   
   ######### [[priority]]
@@ -573,7 +573,7 @@
   
   ######### [[property]]
   - 240330#02 This note contains a key::value pair.
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
   
   
   ######### [[scrambled_prj_notes]]
@@ -657,7 +657,7 @@
   - 240510#1o pig
   - 240510#1r is fat
   - 240510#1s is stinky
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   
   
   ######### [[subsections]]
@@ -672,9 +672,9 @@
   - 240510#24 A sub-note.
   - 240510#25 And another note.
   - 240510#27 This is the final section!
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   
   
   ######### [[tags_and_ids]]
@@ -696,15 +696,6 @@
   '''
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
   
   '''
 # ---
@@ -713,15 +704,15 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P2 240510#02 bazbuz is ok too...
-  o P2 240510#07 Some todo
-  o P2 240510#08 Another related todo
-  o P2 240510#0A Some other todo
-  o P2 240510#0K This todo is @due today! | due::2024-03-13
-  o P2 240510#1d This todo is due::2024-03-30 and has some subnotes
-  o P2 240510#1w A todo for something
-  o P2 240510#21 Some foobar todo.
-  o P2 240510#26 Some foobar todo.
+  o P3 240510#02 bazbuz is ok too...
+  o P3 240510#07 Some todo
+  o P3 240510#08 Another related todo
+  o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   
   '''
 # ---
