@@ -178,10 +178,18 @@ class OrderByType(enum.Enum):
 class SelectType(enum.Enum):
     """A zorg query (S)ELECT."""
 
+    # Select all notes in block.
+    BLOCK = enum.auto()
+
+    # Select file paths.
+    FILE = enum.auto()
+
+    # Select a note.
+    NOTE = enum.auto()
+
+    # Select tags.
     AREA = enum.auto()
     CONTEXT = enum.auto()
-    FILE = enum.auto()
-    NOTE = enum.auto()
     PERSON = enum.auto()
     PROJECT = enum.auto()
 
