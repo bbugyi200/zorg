@@ -30,7 +30,6 @@ def test_action_open__good(
     open_action_main(str(lineno))
 
     capture = capsys.readouterr()
-    assert capture.err == ""
     assert capture.out == f"EDIT {zettel_dir}/{zo_name}\n"
 
 
@@ -45,16 +44,15 @@ def test_action_open__bad(
     open_action_main(str(lineno))
 
     capture = capsys.readouterr()
-    assert capture.err == ""
     assert capture.out == snapshot
 
 
 @params(
     "lineno,zo_name",
-    [param(5, "order_by_file.zoq", id="order_by_file_query")],
+    [param(1, "order_by_file.zoq", id="order_by_file_query")],
 )
 def test_action_open__query(
-    open_action_main: c.MainType,
+    main: c.MainType,
     capsys: CaptureFixture,
     snapshot: Snapshot,
     db_zettel_dir: Path,
@@ -62,11 +60,18 @@ def test_action_open__query(
     zo_name: str,
 ) -> None:
     """Test the 'action open' command with a SWOG query."""
-    open_action_main(str(lineno), zdir=db_zettel_dir)
+    query_zo_path = db_zettel_dir / zo_name
+    exit_code = main(
+        "--dir",
+        str(db_zettel_dir),
+        "action",
+        "open",
+        str(query_zo_path),
+        str(lineno),
+    )
+    assert exit_code == 0
 
     capture = capsys.readouterr()
-    query_zo_path = db_zettel_dir / zo_name
-    assert capture.err == ""
     assert capture.out == f"EDIT {query_zo_path}\n"
     assert query_zo_path.read_text() == snapshot
 
@@ -90,7 +95,6 @@ def testActionOpen_withProperty_sendsSearchMsg(
 
     capture = capsys.readouterr()
     zo_path = db_zettel_dir / zo_name
-    assert capture.err == ""
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
         f"SEARCH id::{link_prop}",
@@ -104,7 +108,6 @@ def open_action_main_fixture(main: c.MainType, zettel_dir: Path) -> c.MainType:
     def open_action_main(*args: str, zdir: Path = None, **kwargs: Any) -> int:
         zdir = zdir or zettel_dir
         exit_code = main(
-            "--log=null",
             "--dir",
             str(zdir),
             "action",

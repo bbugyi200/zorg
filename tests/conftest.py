@@ -58,7 +58,7 @@ def db_zettel_dir(main: c.MainType, query_zettel_dir: Path) -> Path:
 def _get_zettel_dir(tmp_path: Path) -> Path:
     zdir = tmp_path / "org"
     zdir.mkdir()
-    for zo_path in _get_all_zo_and_zot_paths():
+    for zo_path in _get_all_zo_paths():
         zettel_zo_path = zdir / zo_path.name
         zettel_zo_path.write_bytes(zo_path.read_bytes())
     return zdir
@@ -88,12 +88,16 @@ def frozen_time() -> Iterator[None]:
         yield
 
 
-def _get_all_zo_and_zot_paths() -> list[Path]:
-    """Returns a list of Paths for all the *.zo files.
+def _get_all_zo_paths() -> list[Path]:
+    """Returns a list of Paths for all the *.zo[tq] files.
 
     These names will be relative to the zorg root directory.
     """
     zorg_root_dir = Path(__file__).parent.parent
     return list(
-        it.chain(zorg_root_dir.rglob("*.zo"), zorg_root_dir.rglob("*.zot"))
+        it.chain(
+            zorg_root_dir.rglob("*.zo"),
+            zorg_root_dir.rglob("*.zot"),
+            zorg_root_dir.rglob("*.zoq"),
+        )
     )
