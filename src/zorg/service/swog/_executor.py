@@ -7,7 +7,7 @@ from typing import Iterable, Sequence, Union
 
 from logrus import Logger
 
-from ...domain.models import Note
+from ...domain.models import Note, Query
 from ...domain.types import (
     GroupByType,
     KeyFunc,
@@ -50,17 +50,10 @@ def execute(session: SQLSession, query_string: str) -> str:
     )
 
     ### (W)HERE
-    start_time = time.time()
-    filtered_notes = session.repo.get_by_query(query.where)
-    query_runtime = time.time() - start_time
-    _LOGGER.info(
-        "Query complete",
-        num_of_notes=len(filtered_notes),
-        seconds=f"{query_runtime:.3f}",
-    )
+    notes = _get_notes_by_query(session, query)
 
     ### (G)ROUP BY
-    note_group = _group_notes_by(filtered_notes, query.group_by)
+    note_group = _group_notes_by(notes, query.group_by)
 
     ### (O)RDER BY
     ordered_note_group = _order_notes_by(note_group, query.order_by)
@@ -69,6 +62,18 @@ def execute(session: SQLSession, query_string: str) -> str:
     result = _select(query.select, ordered_note_group)
 
     return result.strip()
+
+
+def _get_notes_by_query(session: SQLSession, query: Query) -> list[Note]:
+    start_time = time.time()
+    filtered_notes = session.repo.get_by_query(query.where)
+    query_runtime = time.time() - start_time
+    _LOGGER.info(
+        "Query complete",
+        num_of_notes=len(filtered_notes),
+        seconds=f"{query_runtime:.3f}",
+    )
+    return filtered_notes
 
 
 def _order_notes_by(
@@ -90,6 +95,21 @@ def _order_by_keyfunc(order_bys: Iterable[OrderByType]) -> KeyFunc:
         return " ".join(oby.keyfunc(note) for oby in order_bys)
 
     return keyfunc
+
+
+def _group_notes_by(
+    notes: Iterable[Note], group_by_types: Sequence[GroupByType]
+) -> NoteGroup:
+    if not group_by_types:
+        return list(notes)
+
+    key = group_by_types[0].keyfunc
+    rest_group_by_types = group_by_types[1:]
+    sorted_notes = sorted(notes, key=key)
+    note_group: GroupNoteMap = defaultdict(list)
+    for k, group in it.groupby(sorted_notes, key=key):
+        note_group[str(k)] = _group_notes_by(group, rest_group_by_types)
+    return note_group
 
 
 def _select(
@@ -140,18 +160,3 @@ def _get_header(level: int) -> str:
             "Zorg supports grouping notes by a MAXIMUM of 4 dimensions at"
             f" once | level={level}"
         )
-
-
-def _group_notes_by(
-    notes: Iterable[Note], group_by_types: Sequence[GroupByType]
-) -> NoteGroup:
-    if not group_by_types:
-        return list(notes)
-
-    key = group_by_types[0].keyfunc
-    rest_group_by_types = group_by_types[1:]
-    sorted_notes = sorted(notes, key=key)
-    note_group: GroupNoteMap = defaultdict(list)
-    for k, group in it.groupby(sorted_notes, key=key):
-        note_group[str(k)] = _group_notes_by(group, rest_group_by_types)
-    return note_group
