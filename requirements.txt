@@ -4,7 +4,7 @@
 #
 #    "make update-requirements"
 #
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via pydantic
 antlr4-python3-runtime==4.13.1
     # via -r requirements.in

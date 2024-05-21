@@ -8,7 +8,7 @@
     # via -r requirements-dev.in
 alabaster==0.7.16
     # via sphinx
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via pydantic
 antlr4-python3-runtime==4.13.1
     # via
@@ -18,7 +18,7 @@ antlr4-tools==0.2.1
     # via -r requirements-dev.in
 arrow==1.3.0
     # via cookiecutter
-astroid==3.2.1
+astroid==3.2.2
     # via pylint
 babel==2.15.0
     # via sphinx
@@ -186,7 +186,7 @@ pygments==2.18.0
     # via
     #   rich
     #   sphinx
-pylint==3.2.0
+pylint==3.2.2
     # via -r requirements-dev.in
 pyproject-hooks==1.1.0
     # via
@@ -214,7 +214,7 @@ pyyaml==6.0.1
     # via
     #   bolton-clack
     #   cookiecutter
-requests==2.31.0
+requests==2.32.1
     # via
     #   cookiecutter
     #   sphinx
@@ -330,7 +330,7 @@ wheel==0.43.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.0
     # via pip-tools
-setuptools==69.5.1
+setuptools==70.0.0
     # via
     #   pip-tools
     #   setuptools-scm
