@@ -66,14 +66,14 @@ def execute(session: SQLSession, query_string: str) -> str:
 
 def _get_notes_by_query(session: SQLSession, query: Query) -> list[Note]:
     start_time = time.time()
-    filtered_notes = session.repo.get_by_query(query.where)
+    notes = session.repo.get_by_query(query.where)
     query_runtime = time.time() - start_time
     _LOGGER.info(
         "Query complete",
-        num_of_notes=len(filtered_notes),
+        num_of_notes=len(notes),
         seconds=f"{query_runtime:.3f}",
     )
-    return filtered_notes
+    return notes
 
 
 def _order_notes_by(
