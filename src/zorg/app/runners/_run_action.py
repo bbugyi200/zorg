@@ -1,6 +1,8 @@
 """Contains runners for the 'zorg action' command."""
 
 import datetime as dt
+from functools import partial
+import itertools as it
 from pathlib import Path
 from typing import Final, Optional
 
@@ -85,14 +87,24 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 query_results = swog.execute(session, query_string)
 
             date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
+            stats_line_start = "# Saved query generated on"
+            old_header_lines = it.takewhile(
+                partial(_is_zoq_header_line, stats_line_start),
+                zo_lines,
+            )
+            old_header = "\n".join(old_header_lines)
+            stats_line = f"{stats_line_start} {date_spec}."
+            maybe_hash_line = "" if old_header.endswith("#") else "#\n"
+            zoq_contents = f"{old_header}\n{maybe_hash_line}{stats_line}\n\n{query_results}"
             with zo_path.open("w") as f:
-                f.write(
-                    f"# {query_string}\n#\n# Saved query"
-                    f" generated on {date_spec}.\n\n{query_results}"
-                )
+                f.write(zoq_contents)
 
             print(f"EDIT {zo_path}")
         else:
             print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
+
+
+def _is_zoq_header_line(end_marker: str, line: str) -> bool:
+    return line.startswith("#") and not line.startswith(end_marker)
