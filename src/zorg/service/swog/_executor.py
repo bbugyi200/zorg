@@ -1,11 +1,13 @@
 """Logic for executing zorg queries lives in this module."""
 
 from collections import defaultdict
+from functools import partial
 import itertools as it
 import time
 from typing import Iterable, Sequence, Union
 
 from logrus import Logger
+from typist import assert_never
 
 from ...domain.models import Note, Query
 from ...domain.types import (
@@ -116,25 +118,38 @@ def _select(
     select_type: SelectType, note_group: NoteGroup, *, level: int = 1
 ) -> str:
     result = ""
-    if select_type is SelectType.NOTE:
-        if isinstance(note_group, list):
-            result += _select_note(note_group) + "\n"
+    if isinstance(note_group, list):
+        selector = _select_note
+        if select_type is SelectType.AREA:
+            selector = partial(_select_tags, "areas")
+        elif select_type is SelectType.BLOCK:
+            raise NotImplementedError("Selecting blocks is not yet supported.")
+        elif select_type is SelectType.CONTEXT:
+            selector = partial(_select_tags, "contexts")
+        elif select_type is SelectType.FILE:
+            selector = _select_file
+        elif select_type is SelectType.NOTE:
+            selector = _select_note
+        elif select_type is SelectType.PERSON:
+            selector = partial(_select_tags, "people")
+        elif select_type is SelectType.PROJECT:
+            selector = partial(_select_tags, "projects")
         else:
-            assert isinstance(note_group, dict)
-            for group_name, note_subgroup in note_group.items():
-                if group_name:
-                    result += f"{_get_header(level)} {group_name}\n"
-                result += _select(select_type, note_subgroup, level=level + 1)
+            assert_never(select_type)
+
+        result += selector(note_group) + "\n"
     else:
-        raise NotImplementedError(
-            f"SELECT type is not implemented yet: {select_type}"
-        )
+        assert isinstance(note_group, dict)
+        for group_name, note_subgroup in note_group.items():
+            if group_name:
+                result += f"{_get_header(level)} {group_name}\n"
+            result += _select(select_type, note_subgroup, level=level + 1)
     return result
 
 
-def _select_note(filtered_notes: list[Note]) -> str:
+def _select_note(notes: list[Note]) -> str:
     result = ""
-    for note in filtered_notes:
+    for note in notes:
         note_type = (
             note.todo_payload.status if note.todo_payload else NoteType.BASIC
         )
@@ -144,6 +159,22 @@ def _select_note(filtered_notes: list[Note]) -> str:
         )
         result += f"{char}{priority} {note.body.strip()}\n"
     return result
+
+
+def _select_tags(attr: str, notes: list[Note]) -> str:
+    tags: set[str] = set()
+    for note in notes:
+        for tag in getattr(note, attr):
+            tags.add(tag)
+    return "\n".join(sorted(tags))
+
+
+def _select_file(notes: list[Note]) -> str:
+    file_paths: set[str] = set()
+    for note in notes:
+        assert note.file_path is not None
+        file_paths.add(str(note.file_path))
+    return "\n".join(sorted(file_paths))
 
 
 def _get_header(level: int) -> str:
