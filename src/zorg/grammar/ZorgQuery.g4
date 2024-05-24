@@ -16,11 +16,11 @@ where    : 'W' SPACE where_body ;
 order_by : 'O' SPACE order_by_body ;
 group_by : 'G' SPACE group_by_body ;
 
-// SELECT
+// --- SELECT
 select_body : file | note | AT_SIGN | HASH | PLUS | PERCENT ;
 note        : 'note' ;
 
-// WHERE
+// --- WHERE
 where_body     : or_filter ;
 or_filter      : and_filter (SPACE 'or' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
@@ -39,18 +39,24 @@ create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
 prop_filter    : not_op? ID COLON prop_op? ((ID | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+) STAR? | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
-desc_filter    : not_op? 'c'? SQUOTE id (SPACE id)* SQUOTE ;
+desc_filter    : not_op? 'c'? SQUOTE any_non_squote* id (SPACE id)* SQUOTE ;
 
 zid  : ZID  ;
 id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
 date : DATE ;
 time : TIME ;
 
-// GROUP BY
+// symbols
+any_non_squote : DQUOTE | HAT | DOLLAR | non_tag_symbol | tag_symbol | id_symbol ;
+non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
+id_symbol      : DASH | DOT | FSLASH | COLON ;
+tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
+
+// --- GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
 group_by_atom : file | type | priority | AT_SIGN | HASH | PERCENT | PLUS ;
 
-// ORDER BY
+// --- ORDER BY
 order_by_body :  order_by_atom (SPACE order_by_atom)* ;
 order_by_atom :  create | modify | priority | type ;
 create        :  'create' ;

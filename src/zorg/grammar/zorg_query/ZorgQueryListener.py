@@ -305,6 +305,42 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#any_non_squote.
+    def enterAny_non_squote(self, ctx:ZorgQueryParser.Any_non_squoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#any_non_squote.
+    def exitAny_non_squote(self, ctx:ZorgQueryParser.Any_non_squoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#non_tag_symbol.
+    def enterNon_tag_symbol(self, ctx:ZorgQueryParser.Non_tag_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#non_tag_symbol.
+    def exitNon_tag_symbol(self, ctx:ZorgQueryParser.Non_tag_symbolContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#id_symbol.
+    def enterId_symbol(self, ctx:ZorgQueryParser.Id_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#id_symbol.
+    def exitId_symbol(self, ctx:ZorgQueryParser.Id_symbolContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#tag_symbol.
+    def enterTag_symbol(self, ctx:ZorgQueryParser.Tag_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#tag_symbol.
+    def exitTag_symbol(self, ctx:ZorgQueryParser.Tag_symbolContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#group_by_body.
     def enterGroup_by_body(self, ctx:ZorgQueryParser.Group_by_bodyContext):
         pass
