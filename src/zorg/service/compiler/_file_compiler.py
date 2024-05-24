@@ -122,10 +122,10 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterId(self, ctx: ZorgFileParser.IdContext) -> None:  # noqa: D102
         if self._s.in_note:
             self._s.ids_in_note += 1
-            if self._s.ids_in_note == 1 and zdt.is_short_date(
+            if self._s.ids_in_note == 1 and zdt.is_short_date_spec(
                 short_date := ctx.getText()
             ):
-                self._s.modify_date = zdt.from_short_date(short_date)
+                self._s.modify_date = zdt.from_short_date_spec(short_date)
             elif (
                 self._s.ids_in_note == 1
                 or (self._s.ids_in_note == 2 and self._s.modify_date)

@@ -236,7 +236,7 @@ def update_note_modify_dates(
 ) -> None:
     """Creates or updates note modify dates."""
     del session
-    today_short_date = zdt.to_short_date(dt.date.today())
+    today_short_date = zdt.to_short_date_spec(dt.date.today())
     _update_zo_file(
         zdir=event.zettel_dir,
         zo_path=event.zorg_file_path,

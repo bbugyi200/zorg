@@ -211,7 +211,7 @@ class _SONConverter:
                     PropertyValueType,
                     tuple[Callable[[Any], Any], Callable[[Any], Any]],
                 ] = {
-                    PropertyValueType.DATE: (func.date, zdt.to_date),
+                    PropertyValueType.DATE: (func.date, zdt.from_date_spec),
                     PropertyValueType.INTEGER: (_col_to_int, int),
                     PropertyValueType.STRING: (_noop, _noop),
                 }

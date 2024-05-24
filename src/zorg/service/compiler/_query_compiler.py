@@ -99,12 +99,12 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 short_start_date = create_range.CREATE_RANGE_HEAD().getText()[
                     1:
                 ]
-                start_date = zdt.from_short_date(short_start_date)
+                start_date = zdt.from_short_date_spec(short_start_date)
 
                 end_date: Optional[dt.date] = None
                 if date_range_tail := create_range.DATE_RANGE_TAIL():
                     short_end_date = date_range_tail.getText()[1:]
-                    end_date = zdt.from_short_date(short_end_date)
+                    end_date = zdt.from_short_date_spec(short_end_date)
 
                 date_range = DateRange(start_date, end_date)
                 create_date_ranges.add(date_range)
@@ -113,12 +113,12 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 short_start_date = modify_range.MODIFY_RANGE_HEAD().getText()[
                     1:
                 ]
-                start_date = zdt.from_short_date(short_start_date)
+                start_date = zdt.from_short_date_spec(short_start_date)
 
                 end_date = None
                 if date_range_tail := modify_range.DATE_RANGE_TAIL():
                     short_end_date = date_range_tail.getText()[1:]
-                    end_date = zdt.from_short_date(short_end_date)
+                    end_date = zdt.from_short_date_spec(short_end_date)
 
                 date_range = DateRange(start_date, end_date)
                 modify_date_ranges.add(date_range)
@@ -288,7 +288,7 @@ def _split_op_value(op_value: str) -> tuple[PropertyOperator, str]:
 
 
 def _get_value_type(value: str) -> PropertyValueType:
-    if zdt.is_date(value):
+    if zdt.is_date_spec(value):
         return PropertyValueType.DATE
     elif all(ch.isdigit() for ch in value):
         return PropertyValueType.INTEGER
