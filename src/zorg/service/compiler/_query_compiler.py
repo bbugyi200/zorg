@@ -83,25 +83,19 @@ class ZorgQueryCompiler(ZorgQueryListener):
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
         )
         for where_atom in where_atoms:
-            if where_atom.note_type():
-                note_type = cast(
-                    ZorgQueryParser.Note_typeContext,
-                    where_atom.note_type(),
-                )
+            if w := where_atom.note_type():
+                note_type = cast(ZorgQueryParser.Note_typeContext, w)
                 note_type_chars = cast(
                     list[ZorgQueryParser.Note_type_charContext],
                     note_type.note_type_char(),
                 )
                 _add_note_types(note_type_chars, allowed_note_types)
-            elif where_atom.priority_range():
-                priority_range = cast(
-                    ZorgQueryParser.Priority_rangeContext,
-                    where_atom.priority_range(),
-                )
+            elif w := where_atom.priority_range():
+                priority_range = cast(ZorgQueryParser.Priority_rangeContext, w)
                 _add_priorities(priority_range, priorities)
             # TODO(bugyi): De-duplicate create range and modify range parsing.
-            elif x := where_atom.create_range():
-                create_range = cast(ZorgQueryParser.Create_rangeContext, x)
+            elif w := where_atom.create_range():
+                create_range = cast(ZorgQueryParser.Create_rangeContext, w)
                 short_start_date = create_range.CREATE_RANGE_HEAD().getText()[
                     1:
                 ]
@@ -114,8 +108,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
                 date_range = DateRange(start_date, end_date)
                 create_date_ranges.add(date_range)
-            elif x := where_atom.modify_range():
-                modify_range = cast(ZorgQueryParser.Modify_rangeContext, x)
+            elif w := where_atom.modify_range():
+                modify_range = cast(ZorgQueryParser.Modify_rangeContext, w)
                 short_start_date = modify_range.MODIFY_RANGE_HEAD().getText()[
                     1:
                 ]
@@ -128,8 +122,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
                 date_range = DateRange(start_date, end_date)
                 modify_date_ranges.add(date_range)
-            elif where_atom.tag():
-                tag = cast(ZorgQueryParser.TagContext, where_atom.tag())
+            elif w := where_atom.tag():
+                tag = cast(ZorgQueryParser.TagContext, w)
                 minus = "-" if tag.not_op() else ""
                 if tag.area():
                     tag_set = areas
@@ -147,8 +141,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     raise RuntimeError(f"Invalid Tag: {tag.getText()}")
 
                 tag_set.add(f"{minus}{tag_id.getText()}")
-            elif where_atom.prop_filter():
-                key, op_value = where_atom.prop_filter().getText().split(":")
+            elif w := where_atom.prop_filter():
+                key, op_value = w.getText().split(":")
                 negated = False
                 if key[0] == "!":
                     negated = True
@@ -159,8 +153,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     key, value, op=op, value_type=value_type, negated=negated
                 )
                 property_filters.add(property_filter)
-            elif where_atom.desc_filter():
-                desc_filter = where_atom.desc_filter().getText()
+            elif w := where_atom.desc_filter():
+                desc_filter = w.getText()
                 desc_op = DescOperator.CONTAINS
                 case_sensitive: Optional[bool] = None
                 if desc_filter[0] == "!":
@@ -174,6 +168,10 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     DescFilter(
                         value=value, op=desc_op, case_sensitive=case_sensitive
                     )
+                )
+            else:
+                _LOGGER.warning(
+                    f"Unrecognized where atom: {where_atom.getText()}"
                 )
 
         self._and_filter_groups[-1].append(
