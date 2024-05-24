@@ -95,7 +95,12 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             old_header = "\n".join(old_header_lines)
             stats_line = f"{stats_line_start} {date_spec}."
             maybe_hash_line = "" if old_header.endswith("#") else "#\n"
-            zoq_contents = f"{old_header}\n{maybe_hash_line}{stats_line}\n\n{query_results}"
+            zoq_contents = (
+                f"{old_header}\n"
+                f"{maybe_hash_line}"
+                f"{stats_line}\n\n"
+                f"{query_results}"
+            )
             with zo_path.open("w") as f:
                 f.write(zoq_contents)
 
