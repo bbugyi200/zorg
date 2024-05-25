@@ -140,6 +140,7 @@ def _add_zids(zdir: Path, zorg_file: File) -> None:
             _LOGGER.debug("Found new zorg note", zorg_note=note)
             zid = zid_manager.get_next(note.create_date)
             note.zid = zid
+            note.body = f"{zid} {note.body.lstrip()}"
             new_notes.append(note)
     if new_notes:
         zorg_file.events.append(
