@@ -172,7 +172,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
             # Subfilters are handled in a different method. See the
             # enterSubfilter() and exitSubfilter() methods for more
             # information.
-            elif not (w := where_atom.subfilter()):
+            elif not where_atom.subfilter():
                 _LOGGER.warning(
                     f"Unrecognized where atom: {where_atom.getText()}"
                 )
