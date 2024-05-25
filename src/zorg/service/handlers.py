@@ -13,7 +13,7 @@ from logrus import Logger
 from tqdm import tqdm
 import vimala
 
-from . import common as c, dates as zdt
+from . import common as c, dates as zdt, swog
 from .. import APP_NAME
 from ..domain.messages import commands, events
 from ..domain.models import File, Note
@@ -31,6 +31,9 @@ _ThingGetter = Callable[[Note], str]
 
 def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
     """Command handler for the EditCommand."""
+    for path in cmd.paths:
+        if path.suffix == ".zoq":
+            swog.refresh_zoq_file(session, path)
     vimala.vim(
         *cmd.paths,
         commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),

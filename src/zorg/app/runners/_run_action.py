@@ -1,7 +1,7 @@
 """Contains runners for the 'zorg action' command."""
 
 from pathlib import Path
-from typing import Final, Optional
+from typing import Callable, Final, Optional
 
 from logrus import Logger
 
@@ -31,6 +31,9 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         if left_idx >= 0 and right_idx >= 0:
             link_word_idx_map[word] = (left_idx, right_idx)
 
+    refresh_zoq_file = _refresh_zoq_file_factory(
+        cfg.zettel_dir, cfg.database_url, cfg.verbose
+    )
     if link_word_idx_map:
         word_left_right: Optional[tuple[str, int, int]] = None
         if len(link_word_idx_map) == 1:
@@ -59,29 +62,40 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             link_base = link_base if "." in link_base else f"{link_base}.zo"
             link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
 
-            init_from_template(
-                cfg.zettel_dir,
-                cfg.template_pattern_map,
-                link_path,
-                var_map={
-                    "parent": (
-                        str(zo_path)
-                        .replace(".zo", "")
-                        .replace(str(cfg.zettel_dir) + "/", "")
-                    )
-                },
-            )
+            if not link_path.exists():
+                init_from_template(
+                    cfg.zettel_dir,
+                    cfg.template_pattern_map,
+                    link_path,
+                    var_map={
+                        "parent": (
+                            str(zo_path)
+                            .replace(".zo", "")
+                            .replace(str(cfg.zettel_dir) + "/", "")
+                        )
+                    },
+                )
+            elif link_path.suffix == ".zoq":
+                refresh_zoq_file(link_path)
+
             print(f"EDIT {link_path}")
             if len(link_parts) > 1:
                 print(f"SEARCH id::{link_parts[1]}")
     else:
         if zo_line.startswith(("# S ", "# W ")):
-            with SQLSession(
-                cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-            ) as session:
-                swog.refresh_zoq_file(session, zo_path)
+            refresh_zoq_file(zo_path)
             print(f"EDIT {zo_path}")
         else:
             print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
+
+
+def _refresh_zoq_file_factory(
+    zdir: Path, db_url: str, verbose: int
+) -> Callable[[Path], None]:
+    def refresh_zoq_file(zoq_path: Path) -> None:
+        with SQLSession(zdir, db_url, verbose=verbose) as session:
+            swog.refresh_zoq_file(session, zoq_path)
+
+    return refresh_zoq_file
