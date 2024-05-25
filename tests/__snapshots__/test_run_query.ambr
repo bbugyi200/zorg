@@ -19,7 +19,7 @@
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
   - 240330#02 This note contains a key::value pair.
-  - 240408#NO Da nah nah nuh...
+  - 000103#00 240408#NO Da nah nah nuh...
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
@@ -197,7 +197,7 @@
   - 240323#0c +laundry wash delicates
   - 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   - 240330#02 This note contains a key::value pair.
-  - 240408#NO Da nah nah nuh...
+  - 000103#00 240408#NO Da nah nah nuh...
   - 240408#0X Some note
   - 240509 240408#0X Some note with a modify date
   - 240510#00 First note in first block
@@ -502,7 +502,7 @@
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   ***** +bad | +to_the_bone
-  - 240408#NO Da nah nah nuh...
+  - 000103#00 240408#NO Da nah nah nuh...
   
   ***** +foobar
   - 240408#0X Some note
@@ -678,7 +678,7 @@
   
   
   ######### [[tags_and_ids]]
-  - 240408#NO Da nah nah nuh...
+  - 000103#00 240408#NO Da nah nah nuh...
   - 240408#0X Some note
   - 240509 240408#0X Some note with a modify date
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
