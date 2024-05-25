@@ -300,12 +300,14 @@ def _add_zid_to_line(zid: str, line: str) -> str:
 def _hash_file(filepath: Path, chunk_size: int = 8192) -> str:
     """Hashes a file using SHA256 algorithm and returns the hash value.
 
-    Args:
-        filepath: Path to the file to be hashed.
-        chunk_size: Size of chunks to read the file. Default is 8192 bytes.
+    Arguments:
+    ----------
+    filepath: Path to the file to be hashed.
+    chunk_size: Size of chunks to read the file. Default is 8192 bytes.
 
-    Returns:
-        A SHA256 hash of the file's contents.
+    Return:
+    -------
+    A SHA256 hash of the file's contents.
     """
     hasher = hashlib.sha256()  # Initialize the hasher
     with filepath.open("rb") as file:
