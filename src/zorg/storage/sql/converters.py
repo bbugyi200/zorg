@@ -60,6 +60,7 @@ def to_select_of_note(
                 for and_filter in or_filter.and_filters
             ])
         )
+        .order_by(sql.ZorgNote.id)
     )
 
 
