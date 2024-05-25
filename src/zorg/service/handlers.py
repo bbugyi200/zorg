@@ -338,6 +338,9 @@ def _check_for_modified_notes(
         note_has_changed = old_note and note != old_note
         note_is_new = old_note is None and note.zid is not None
         if note.modify_date != today and (note_has_changed or note_is_new):
+            note.modify_date = today
+            modify_short_date = zdt.to_short_date_spec(dt.date.today())
+            note.body = f"{modify_short_date} {note.body.lstrip()}"
             modified_notes.append(note)
     if modified_notes:
         zorg_file.events.append(
