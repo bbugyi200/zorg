@@ -269,6 +269,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#file_filter.
+    def enterFile_filter(self, ctx:ZorgQueryParser.File_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#file_filter.
+    def exitFile_filter(self, ctx:ZorgQueryParser.File_filterContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#zid.
     def enterZid(self, ctx:ZorgQueryParser.ZidContext):
         pass
