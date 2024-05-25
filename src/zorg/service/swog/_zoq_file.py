@@ -1,4 +1,4 @@
-"""Contains the init_zoq_file() function."""
+"""Contains utilities for working with *.zoq files."""
 
 import datetime as dt
 from functools import partial
@@ -9,23 +9,23 @@ from ...storage.sql.session import SQLSession
 from ._executor import execute
 
 
-def init_zoq_file(
-    session: SQLSession, query_string: str, zoq_path: Path
-) -> None:
-    """Initialize the provided *.zoq file.
+def refresh_zoq_file(session: SQLSession, zoq_path: Path) -> None:
+    """Refresh the query execution results contained in a provided *.zoq file.
 
     Arguments:
     ----------
     session: A zorg SQL session that MUST be instantiated (e.g. using `with
         session`) by the caller.
-    query_string: A SWOG query string. We will execute this query and use the
-        results to populate the provided *.zoq file.
-    zoq_path: The path of the *.zoq file we are going to initialize.
+    zoq_path: The path of an existing *.zoq file we are going to refresh.
     """
+    assert (
+        zoq_path.exists()
+    ), "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST exist."
+    zoq_lines = zoq_path.read_text().split("\n")
+    query_string = zoq_lines[0].strip()[2:]
     query_results = execute(session, query_string)
     date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
     stats_line_start = "# Saved query generated on"
-    zoq_lines = zoq_path.read_text().split("\n")
     old_header_lines = it.takewhile(
         partial(_is_zoq_header_line, stats_line_start), zoq_lines
     )

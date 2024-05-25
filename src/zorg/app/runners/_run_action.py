@@ -76,11 +76,10 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 print(f"SEARCH id::{link_parts[1]}")
     else:
         if zo_line.startswith(("# S ", "# W ")):
-            query_string = zo_line.strip()[2:]
             with SQLSession(
                 cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
             ) as session:
-                swog.init_zoq_file(session, query_string, zo_path)
+                swog.refresh_zoq_file(session, zo_path)
             print(f"EDIT {zo_path}")
         else:
             print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
