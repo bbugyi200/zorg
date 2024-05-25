@@ -25,8 +25,8 @@ from .zid_manager import ZIDManager
 
 _LOGGER = Logger(__name__)
 
-_ThingFirstLineAdder = Callable[[str, str], str]
-_ThingGetter = Callable[[Note], str]
+_AddThingToFirstLine = Callable[[str, str], str]
+_GetThing = Callable[[Note], str]
 
 
 def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
@@ -216,7 +216,7 @@ def add_zids_to_notes_in_file(
         zo_path=event.zorg_file_path,
         notes_to_update=event.new_notes,
         add_thing_to_first_line=_add_zid_to_line,
-        thing_getter=attrgetter("zid"),
+        get_thing=attrgetter("zid"),
         log_message="Adding ZIDs to zorg file",
     )
 
@@ -245,7 +245,7 @@ def update_note_modify_dates(
         zo_path=event.zorg_file_path,
         notes_to_update=event.modified_notes,
         add_thing_to_first_line=_add_or_update_modify_date,
-        thing_getter=lambda _: today_short_date,
+        get_thing=lambda _: today_short_date,
         log_message="Updating modify dates",
     )
 
@@ -374,8 +374,8 @@ def _update_zo_file(
     zdir: Path,
     zo_path: Path,
     notes_to_update: Sequence[Note],
-    add_thing_to_first_line: _ThingFirstLineAdder,
-    thing_getter: _ThingGetter,
+    add_thing_to_first_line: _AddThingToFirstLine,
+    get_thing: _GetThing,
     log_message: str,
 ) -> None:
     zlines = zo_path.read_text().split("\n")
@@ -388,7 +388,7 @@ def _update_zo_file(
         new_note_lines = zlines[start_idx:end_idx]
         first_note_line = new_note_lines[0]
         new_note_lines[0] = add_thing_to_first_line(
-            thing_getter(note), first_note_line
+            get_thing(note), first_note_line
         )
         zlines = zlines[:start_idx] + new_note_lines + zlines[end_idx:]
 
