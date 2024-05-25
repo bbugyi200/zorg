@@ -286,8 +286,12 @@ class _SONConverter:
         if not self.and_filter.file_filters:
             return None
         for file_filter in self.and_filter.file_filters:
-            file_like = sql.ZorgFile.path.like  # type: ignore[attr-defined]
-            and_conds.append(file_like(file_filter.replace("*", "%")))
+            like_op = (
+                sql.ZorgFile.path.not_like  # type: ignore[attr-defined]
+                if file_filter.negated
+                else sql.ZorgFile.path.like  # type: ignore[attr-defined]
+            )
+            and_conds.append(like_op(file_filter.path_glob.replace("*", "%")))
         return and_(and_conds[0], *and_conds[1:])
 
 

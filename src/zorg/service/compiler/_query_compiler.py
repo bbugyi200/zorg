@@ -9,6 +9,7 @@ from .. import dates as zdt
 from ...domain.models import (
     DateRange,
     DescFilter,
+    FileFilter,
     PropertyFilter,
     Query,
     WhereAndFilter,
@@ -78,7 +79,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         projects: set[str] = set()
         property_filters: set[PropertyFilter] = set()
         desc_filters: set[DescFilter] = set()
-        file_filters: set[str] = set()
+        file_filters: set[FileFilter] = set()
 
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
@@ -171,7 +172,16 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     )
                 )
             elif w := where_atom.file_filter():
-                file_filters.add(w.getText()[2:])
+                if w.getText().startswith("!"):
+                    negated = True
+                    path_glob = w.getText()[3:]
+                else:
+                    negated = False
+                    path_glob = w.getText()[2:]
+                path_glob = (
+                    path_glob if path_glob.endswith("*") else f"{path_glob}.zo"
+                )
+                file_filters.add(FileFilter(path_glob, negated=negated))
             # Subfilters are handled in a different method. See the
             # enterSubfilter() and exitSubfilter() methods for more
             # information.

@@ -26,6 +26,14 @@ class DescFilter:
 
 
 @dataclass(frozen=True)
+class FileFilter:
+    """Represents a single file filter (e.g. 'f=foobar' or 'f=*baz*')."""
+
+    path_glob: str
+    negated: bool = False
+
+
+@dataclass(frozen=True)
 class PropertyFilter:
     """Represents a single property filter (e.g. 'due:<=0d' or '!recur:*')."""
 
@@ -53,7 +61,7 @@ class WhereAndFilter:
     contexts: set[str] = field(default_factory=set)
     create_date_ranges: set[DateRange] = field(default_factory=set)
     desc_filters: set[DescFilter] = field(default_factory=set)
-    file_filters: set[str] = field(default_factory=set)
+    file_filters: set[FileFilter] = field(default_factory=set)
     modify_date_ranges: set[DateRange] = field(default_factory=set)
     or_filters: list["WhereOrFilter"] = field(default_factory=list)
     people: set[str] = field(default_factory=set)
