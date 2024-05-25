@@ -77,7 +77,6 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             print(f"EDIT {link_path}")
             if len(link_parts) > 1:
                 print(f"SEARCH id::{link_parts[1]}")
-
     else:
         if zo_line.startswith(("# S ", "# W ")):
             query_string = zo_line.strip()[2:]
@@ -89,8 +88,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
             stats_line_start = "# Saved query generated on"
             old_header_lines = it.takewhile(
-                partial(_is_zoq_header_line, stats_line_start),
-                zo_lines,
+                partial(_is_zoq_header_line, stats_line_start), zo_lines
             )
             old_header = "\n".join(old_header_lines)
             stats_line = f"{stats_line_start} {date_spec}."

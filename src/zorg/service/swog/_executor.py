@@ -23,7 +23,6 @@ from ..compiler import build_zorg_query
 
 _LOGGER = Logger(__name__)
 
-
 GroupNoteMap = dict[str, "NoteGroup"]
 NoteGroup = Union[list[Note], GroupNoteMap]
 
@@ -78,6 +77,21 @@ def _get_notes_by_query(session: SQLSession, query: Query) -> list[Note]:
     return notes
 
 
+def _group_notes_by(
+    notes: Iterable[Note], group_by_types: Sequence[GroupByType]
+) -> NoteGroup:
+    if not group_by_types:
+        return list(notes)
+
+    key = group_by_types[0].keyfunc
+    rest_group_by_types = group_by_types[1:]
+    sorted_notes = sorted(notes, key=key)
+    note_group: GroupNoteMap = defaultdict(list)
+    for k, group in it.groupby(sorted_notes, key=key):
+        note_group[str(k)] = _group_notes_by(group, rest_group_by_types)
+    return note_group
+
+
 def _order_notes_by(
     note_group: NoteGroup, order_bys: Iterable[OrderByType]
 ) -> NoteGroup:
@@ -97,21 +111,6 @@ def _order_by_keyfunc(order_bys: Iterable[OrderByType]) -> KeyFunc:
         return " ".join(oby.keyfunc(note) for oby in order_bys)
 
     return keyfunc
-
-
-def _group_notes_by(
-    notes: Iterable[Note], group_by_types: Sequence[GroupByType]
-) -> NoteGroup:
-    if not group_by_types:
-        return list(notes)
-
-    key = group_by_types[0].keyfunc
-    rest_group_by_types = group_by_types[1:]
-    sorted_notes = sorted(notes, key=key)
-    note_group: GroupNoteMap = defaultdict(list)
-    for k, group in it.groupby(sorted_notes, key=key):
-        note_group[str(k)] = _group_notes_by(group, rest_group_by_types)
-    return note_group
 
 
 def _select(
