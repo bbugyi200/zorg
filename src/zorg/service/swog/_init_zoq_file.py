@@ -5,16 +5,24 @@ from functools import partial
 import itertools as it
 from pathlib import Path
 
+from ...storage.sql.session import SQLSession
+from ._executor import execute
 
-def init_zoq_file(zoq_path: Path, query_results: str) -> None:
+
+def init_zoq_file(
+    session: SQLSession, query_string: str, zoq_path: Path
+) -> None:
     """Initialize the provided *.zoq file.
 
     Arguments:
     ----------
+    session: A zorg SQL session that MUST be instantiated (e.g. using `with
+        session`) by the caller.
+    query_string: A SWOG query string. We will execute this query and use the
+        results to populate the provided *.zoq file.
     zoq_path: The path of the *.zoq file we are going to initialize.
-    query_string: The execution results of this SWOG query will be used to
-      populate the provided *.zoq file.
     """
+    query_results = execute(session, query_string)
     date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
     stats_line_start = "# Saved query generated on"
     zoq_lines = zoq_path.read_text().split("\n")

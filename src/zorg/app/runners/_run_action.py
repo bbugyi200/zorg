@@ -80,8 +80,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             with SQLSession(
                 cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
             ) as session:
-                query_results = swog.execute(session, query_string)
-            swog.init_zoq_file(zo_path, query_results)
+                swog.init_zoq_file(session, query_string, zo_path)
             print(f"EDIT {zo_path}")
         else:
             print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
