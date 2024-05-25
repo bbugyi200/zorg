@@ -11,33 +11,21 @@
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
   o P3 240510#02 bazbuz is ok too...
-  o P3 240510#1w A todo for something
-  o P3 240510#21 Some foobar todo.
-  o P3 240510#26 Some foobar todo.
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   - 240330#02 This note contains a key::value pair.
   - 000103#00 240408#NO Da nah nah nuh...
-  - 240510#29 Projects can start with a number, but CANNOT be all numbers
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
   - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
   - 240510#06 Some note that references an old 200101#12 ZID.
-  - 240510#1t Note about A1
-  - 240510#1u Note about something
-  - 240510#1v Another note
-  - 240510#1x A note on the second section.
-  - 240510#1z A sub-note.
-  - 240510#20 And another note.
-  - 240510#22 This is inside of h4_section!
-  - 240510#23 A note on the third section.
-  - 240510#24 A sub-note.
-  - 240510#25 And another note.
-  - 240510#27 This is the final section!
   - 240510#09 A note about life...
   - 240510#0B With a note
   - 240510#0C Some note in section 0
@@ -47,16 +35,6 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  - 240510#1c foobar
-  - 240510#1e Todo subnote A
-  - 240510#1f Todo subnote B
-  - 240510#1h Todo subsubnote C
-  - 240510#1k This note has many subnotes.
-  - 240510#1m This note contains a key::value pair.
-  - 240510#1n bazbuz
-  - 240510#1o pig
-  - 240510#1r is fat
-  - 240510#1s is stinky
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0N Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
@@ -123,6 +101,28 @@
   - 240510#1Z Ttx-yecb mxovcuwbc
   - 240510#1a Rzq-itde mpfj
   - 240510#1b Zee-lpfg uqogce bk khxsvgrkq bbgvmf
+  - 240510#1c foobar
+  - 240510#1e Todo subnote A
+  - 240510#1f Todo subnote B
+  - 240510#1h Todo subsubnote C
+  - 240510#1k This note has many subnotes.
+  - 240510#1m This note contains a key::value pair.
+  - 240510#1n bazbuz
+  - 240510#1o pig
+  - 240510#1r is fat
+  - 240510#1s is stinky
+  - 240510#1t Note about A1
+  - 240510#1u Note about something
+  - 240510#1v Another note
+  - 240510#1x A note on the second section.
+  - 240510#1z A sub-note.
+  - 240510#20 And another note.
+  - 240510#22 This is inside of h4_section!
+  - 240510#23 A note on the third section.
+  - 240510#24 A sub-note.
+  - 240510#25 And another note.
+  - 240510#27 This is the final section!
+  - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   
   ######### @due
@@ -170,14 +170,14 @@
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
   o P3 240510#02 bazbuz is ok too...
-  o P3 240510#0K This todo is @due today! | due::2024-03-13
-  o P3 240510#1w A todo for something
-  o P3 240510#21 Some foobar todo.
-  o P3 240510#26 Some foobar todo.
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
   - 240323#0L +zorg Parametrize test_run_compile()
@@ -200,24 +200,12 @@
   - 000103#00 240408#NO Da nah nah nuh...
   - 240408#0X Some note
   - 240509 240408#0X Some note with a modify date
-  - 240510#29 Projects can start with a number, but CANNOT be all numbers
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
   - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
   - 240510#06 Some note that references an old 200101#12 ZID.
-  - 240510#1t Note about A1
-  - 240510#1u Note about something
-  - 240510#1v Another note
-  - 240510#1x A note on the second section.
-  - 240510#1z A sub-note.
-  - 240510#20 And another note.
-  - 240510#22 This is inside of h4_section!
-  - 240510#23 A note on the third section.
-  - 240510#24 A sub-note.
-  - 240510#25 And another note.
-  - 240510#27 This is the final section!
   - 240510#09 A note about life...
   - 240510#0B With a note
   - 240510#0C Some note in section 0
@@ -227,16 +215,6 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  - 240510#1c foobar
-  - 240510#1e Todo subnote A
-  - 240510#1f Todo subnote B
-  - 240510#1h Todo subsubnote C
-  - 240510#1k This note has many subnotes.
-  - 240510#1m This note contains a key::value pair.
-  - 240510#1n bazbuz
-  - 240510#1o pig
-  - 240510#1r is fat
-  - 240510#1s is stinky
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0P Eongcgfy tho pscz giwq arjebc@?
@@ -303,6 +281,28 @@
   - 240510#1Z Ttx-yecb mxovcuwbc
   - 240510#1a Rzq-itde mpfj
   - 240510#1b Zee-lpfg uqogce bk khxsvgrkq bbgvmf
+  - 240510#1c foobar
+  - 240510#1e Todo subnote A
+  - 240510#1f Todo subnote B
+  - 240510#1h Todo subsubnote C
+  - 240510#1k This note has many subnotes.
+  - 240510#1m This note contains a key::value pair.
+  - 240510#1n bazbuz
+  - 240510#1o pig
+  - 240510#1r is fat
+  - 240510#1s is stinky
+  - 240510#1t Note about A1
+  - 240510#1u Note about something
+  - 240510#1v Another note
+  - 240510#1x A note on the second section.
+  - 240510#1z A sub-note.
+  - 240510#20 And another note.
+  - 240510#22 This is inside of h4_section!
+  - 240510#23 A note on the third section.
+  - 240510#24 A sub-note.
+  - 240510#25 And another note.
+  - 240510#27 This is the final section!
+  - 240510#29 Projects can start with a number, but CANNOT be all numbers
   
   
   ######### %clyzajrm
@@ -321,14 +321,14 @@
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
   o P3 240510#02 bazbuz is ok too...
-  o P3 240510#0K This todo is @due today! | due::2024-03-13
-  o P3 240510#1w A todo for something
-  o P3 240510#21 Some foobar todo.
-  o P3 240510#26 Some foobar todo.
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   
   
   ######### 4 | NOTES
@@ -339,17 +339,6 @@
   - 240510#04 Some note with a link in parens (see [[baz]]).
   - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
   - 240510#06 Some note that references an old 200101#12 ZID.
-  - 240510#1t Note about A1
-  - 240510#1u Note about something
-  - 240510#1v Another note
-  - 240510#1x A note on the second section.
-  - 240510#1z A sub-note.
-  - 240510#20 And another note.
-  - 240510#22 This is inside of h4_section!
-  - 240510#23 A note on the third section.
-  - 240510#24 A sub-note.
-  - 240510#25 And another note.
-  - 240510#27 This is the final section!
   - 240510#09 A note about life...
   - 240510#0B With a note
   - 240510#0C Some note in section 0
@@ -369,6 +358,17 @@
   - 240510#1o pig
   - 240510#1r is fat
   - 240510#1s is stinky
+  - 240510#1t Note about A1
+  - 240510#1u Note about something
+  - 240510#1v Another note
+  - 240510#1x A note on the second section.
+  - 240510#1z A sub-note.
+  - 240510#20 And another note.
+  - 240510#22 This is inside of h4_section!
+  - 240510#23 A note on the third section.
+  - 240510#24 A sub-note.
+  - 240510#25 And another note.
+  - 240510#27 This is the final section!
   
   ***** +arms
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -705,14 +705,14 @@
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
   o P3 240510#02 bazbuz is ok too...
-  o P3 240510#0K This todo is @due today! | due::2024-03-13
-  o P3 240510#1w A todo for something
-  o P3 240510#21 Some foobar todo.
-  o P3 240510#26 Some foobar todo.
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
+  o P3 240510#1w A todo for something
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
   
   '''
 # ---
