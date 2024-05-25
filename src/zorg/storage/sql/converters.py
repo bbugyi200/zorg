@@ -50,11 +50,16 @@ def to_select_of_note(
     if or_filter is None or not or_filter.and_filters:
         return select(sql.ZorgNote)
 
-    return select(sql.ZorgNote).where(
-        or_(*[
-            _SONConverter(and_filter, session).to_note_clause()
-            for and_filter in or_filter.and_filters
-        ])
+    return (
+        select(sql.ZorgNote)
+        .join(sql.ZorgFileLink, sql.ZorgNote.id == sql.ZorgFileLink.note_id)
+        .join(sql.ZorgFile, sql.ZorgFileLink.zorg_file_id == sql.ZorgFile.id)
+        .where(
+            or_(*[
+                _SONConverter(and_filter, session).to_note_clause()
+                for and_filter in or_filter.and_filters
+            ])
+        )
     )
 
 
@@ -231,6 +236,7 @@ class _SONConverter:
 
     @_son_converter_parser
     def desc_filters(self) -> Optional[ColumnElement]:
+        """Converter tht handles desc filters."""
         and_conds = []
         if not self.and_filter.desc_filters:
             return None
@@ -272,6 +278,17 @@ class _SONConverter:
             and_conds.append(op(op_arg))
         return and_(and_conds[0], *and_conds[1:])
 
+    @_son_converter_parser
+    def file_filters(self) -> Optional[ColumnElement]:
+        """Converter tht handles file filters."""
+        and_conds = []
+        if not self.and_filter.file_filters:
+            return None
+        for file_filter in self.and_filter.file_filters:
+            file_like = sql.ZorgFile.path.like  # type: ignore[attr-defined]
+            and_conds.append(file_like(file_filter.replace("*", "%")))
+        return and_(and_conds[0], *and_conds[1:])
+
 
 def _noop(value: _T) -> _T:
     """A function that does nothing."""
@@ -295,7 +312,7 @@ class ZorgFileConverter(EntityConverter[File, sql.ZorgFile]):
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._zdir = zdir
-        self._note_converter = ZorgNoteConverter(session)
+        self._note_converter = ZorgNoteConverter(zdir, session)
         self._all_sql_notes: list[sql.ZorgNote] = []
 
     def from_entity(self, entity: File) -> sql.ZorgFile:
@@ -326,8 +343,10 @@ class ZorgFileConverter(EntityConverter[File, sql.ZorgFile]):
 class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
     """Converts Note domain entities to/from ZorgNote sqlmodels."""
 
-    def __init__(self, session: Session) -> None:
+    def __init__(self, zdir: Path, session: Session) -> None:
+        self._zdir = zdir
         self._session = session
+
         self._tag_cache: dict[Any, dict[str, Any]] = defaultdict(lambda: {})
         self._property_cache: dict[str, sql.Property] = {}
 
@@ -404,6 +423,18 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             property_links.append(prop_link)
 
         sql_zorg_note.property_links = property_links
+
+        # Convert 'zorg_file' field.
+        if entity.file_path is not None:
+            stripped_file_path = common.strip_zdir(
+                self._zdir, entity.file_path
+            )
+            stmt = select(sql.ZorgFile).where(
+                sql.ZorgFile.path == stripped_file_path
+            )
+            results = session.exec(stmt)
+            sql_zorg_note.zorg_file = results.first()
+
         return sql_zorg_note
 
     def to_entity(self, sql_model: sql.ZorgNote) -> Note:

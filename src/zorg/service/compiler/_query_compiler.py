@@ -78,6 +78,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         projects: set[str] = set()
         property_filters: set[PropertyFilter] = set()
         desc_filters: set[DescFilter] = set()
+        file_filters: set[str] = set()
 
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
@@ -169,6 +170,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                         value=value, op=desc_op, case_sensitive=case_sensitive
                     )
                 )
+            elif w := where_atom.file_filter():
+                file_filters.add(w.getText()[2:])
             # Subfilters are handled in a different method. See the
             # enterSubfilter() and exitSubfilter() methods for more
             # information.
@@ -184,6 +187,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 contexts=contexts,
                 create_date_ranges=create_date_ranges,
                 desc_filters=desc_filters,
+                file_filters=file_filters,
                 modify_date_ranges=modify_date_ranges,
                 people=people,
                 priorities=priorities,
