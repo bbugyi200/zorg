@@ -38,6 +38,8 @@ params = mark.parametrize
         param("due:2024-03-13", id="filter_by_property_eq"),
         param("p:>5", id="filter_by_property_gt"),
         param("'foo'", id="desc_filter"),
+        param("S +", id="select_projects"),
+        param("S file W o", id="select_files_with_todos"),
     ],
 )
 def test_query(

@@ -745,6 +745,51 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-select_files_with_todos]
+  '''
+  basic.zo
+  multiblocks.zo
+  priority.zo
+  property.zo
+  subnotes.zo
+  subsections.zo
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-select_projects]
+  '''
+  2_be_or_not_2_be
+  arms
+  bad
+  bazbuz
+  bmlakcr
+  bqf
+  cmeq
+  cpv_mociy
+  fgifr
+  foobar
+  ipyt
+  judo
+  jws_pkaft
+  laundry
+  lozmhqjd
+  okwz
+  owwnfb
+  qbsum
+  rgw_sxtvx
+  saxy
+  to_the_bone
+  uahi
+  vd_clxi
+  vennc
+  vfntwi
+  wjybwa
+  xoao
+  zorg
+  zv_jzdd_djqa
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-zorg_notes]
   '''
   ######### [[20240323]]
