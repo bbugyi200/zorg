@@ -61,7 +61,7 @@ project : PLUS ID ;
 // quotes and links
 quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
 link       : '[[' id_group ']]' ;
-ref        : '[' id_group ']' ;
+ref        : '[' id_group (SPACE id_group)* ']' ;
 
 // sections
 h1_section : h1_header NL* block* (NL? h2_section)* ;
