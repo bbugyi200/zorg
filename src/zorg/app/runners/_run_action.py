@@ -34,7 +34,12 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     refresh_zoq_file = _refresh_zoq_file_factory(
         cfg.zettel_dir, cfg.database_url, cfg.verbose
     )
-    if link_word_idx_map:
+    # If the target line is a zorg query...
+    if zo_line.startswith(("# S ", "# W ")):
+        refresh_zoq_file(zo_path)
+        print(f"EDIT {zo_path}")
+    # Else if the target line contains [[links]]...
+    elif link_word_idx_map:
         word_left_right: Optional[tuple[str, int, int]] = None
         if len(link_word_idx_map) == 1:
             word = list(link_word_idx_map.keys())[0]
@@ -81,12 +86,9 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             print(f"EDIT {link_path}")
             if len(link_parts) > 1:
                 print(f"SEARCH id::{link_parts[1]}")
+    # Else we tell vim to echo an error message.
     else:
-        if zo_line.startswith(("# S ", "# W ")):
-            refresh_zoq_file(zo_path)
-            print(f"EDIT {zo_path}")
-        else:
-            print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
+        print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
 
