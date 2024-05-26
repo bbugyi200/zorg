@@ -40,6 +40,10 @@ params = mark.parametrize
         param("'foo'", id="desc_filter"),
         param("S +", id="select_projects"),
         param("S file W o", id="select_files_with_todos"),
+        param("f=basic G file", id="file_filter_basic"),
+        param("f=*s G file", id="file_filter__ends_with_s"),
+        param("f=p* G file", id="file_filter__starts_with_p"),
+        param("f=*p* G file", id="file_filter__has_a_p"),
     ],
 )
 def test_query(
