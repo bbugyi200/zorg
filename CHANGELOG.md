@@ -9,7 +9,21 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.3...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.4...HEAD)
+
+
+## [0.7.4](https://github.com/bbugyi200/zorg/compare/0.7.3...0.7.4) - 2024-05-26
+
+### Added
+
+* Support for related file section to query pages.
+* Support for `f=GLOB` style file-filters in zorg queries.
+* Support for selecting files and tags using zorg queries.
+* Auto-refresh query pages when they are open (e.g. via `action open`).
+
+### Fixed
+
+* Bug which caused modify date or ZID to not show in query pages.
 
 
 ## [0.7.3](https://github.com/bbugyi200/zorg/compare/0.7.2...0.7.3) - 2024-05-17
