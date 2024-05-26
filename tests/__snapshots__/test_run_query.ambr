@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_query[YAMLConfigFile-desc_filter]
+# name: test_query[YAMLConfigFile-desc_filter__foo]
   '''
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.

@@ -37,7 +37,7 @@ params = mark.parametrize
         param("^240408 $240509", id="filter_by_create_and_modify"),
         param("due:2024-03-13", id="filter_by_property_eq"),
         param("p:>5", id="filter_by_property_gt"),
-        param("'foo'", id="desc_filter"),
+        param("'foo'", id="desc_filter__foo"),
         param("S +", id="select_projects"),
         param("S file W o", id="select_files_with_todos"),
         param("f=basic G file", id="file_filter_basic"),
