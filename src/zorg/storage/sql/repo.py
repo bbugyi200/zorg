@@ -30,7 +30,7 @@ class SQLRepo:
         self._zettel_dir = zettel_dir
         self._session = session
         self._converter = ZorgFileConverter(zettel_dir, session)
-        self._note_converter = ZorgNoteConverter(session, zettel_dir)
+        self._note_converter = ZorgNoteConverter(zettel_dir, session)
         self._verbose = verbose
 
         self.seen: list[File] = []

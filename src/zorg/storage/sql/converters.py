@@ -9,7 +9,7 @@ from typing import Any, Callable, Optional, TypeVar, cast
 import metaman
 from sqlalchemy import func
 from sqlmodel import Integer, Session, and_, or_, select
-from sqlmodel.sql.expression import ColumnElement, SelectOfScalar
+from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
 from . import models as sql
 from ...domain.models import (
@@ -52,15 +52,23 @@ def to_select_of_note(
 
     return (
         select(sql.ZorgNote)
-        .join(sql.ZorgFileLink, sql.ZorgNote.id == sql.ZorgFileLink.note_id)
-        .join(sql.ZorgFile, sql.ZorgFileLink.zorg_file_id == sql.ZorgFile.id)
+        .join(
+            sql.ZorgFileLink,
+            cast(ColumnElement, sql.ZorgNote.id == sql.ZorgFileLink.note_id),
+        )
+        .join(
+            sql.ZorgFile,
+            cast(
+                ColumnElement, sql.ZorgFileLink.zorg_file_id == sql.ZorgFile.id
+            ),
+        )
         .where(
             or_(*[
                 _SONConverter(and_filter, session).to_note_clause()
                 for and_filter in or_filter.and_filters
             ])
         )
-        .order_by(sql.ZorgNote.id)
+        .order_by(cast(Column, sql.ZorgNote.id))
     )
 
 
