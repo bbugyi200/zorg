@@ -1,7 +1,7 @@
 """Contains service logic used to compile zorg queries."""
 
 import datetime as dt
-from typing import Optional, cast
+from typing import Optional, Union, cast
 
 from logrus import Logger
 
@@ -95,35 +95,22 @@ class ZorgQueryCompiler(ZorgQueryListener):
             elif w := where_atom.priority_range():
                 priority_range = cast(ZorgQueryParser.Priority_rangeContext, w)
                 _add_priorities(priority_range, priorities)
-            # TODO(bugyi): De-duplicate create range and modify range parsing.
             elif w := where_atom.create_range():
                 create_range = cast(ZorgQueryParser.Create_rangeContext, w)
                 short_start_date = create_range.CREATE_RANGE_HEAD().getText()[
                     1:
                 ]
-                start_date = zdt.from_short_date_spec(short_start_date)
-
-                end_date: Optional[dt.date] = None
-                if date_range_tail := create_range.DATE_RANGE_TAIL():
-                    short_end_date = date_range_tail.getText()[1:]
-                    end_date = zdt.from_short_date_spec(short_end_date)
-
-                date_range = DateRange(start_date, end_date)
-                create_date_ranges.add(date_range)
+                create_date_ranges.add(
+                    _get_date_range(create_range, short_start_date)
+                )
             elif w := where_atom.modify_range():
                 modify_range = cast(ZorgQueryParser.Modify_rangeContext, w)
                 short_start_date = modify_range.MODIFY_RANGE_HEAD().getText()[
                     1:
                 ]
-                start_date = zdt.from_short_date_spec(short_start_date)
-
-                end_date = None
-                if date_range_tail := modify_range.DATE_RANGE_TAIL():
-                    short_end_date = date_range_tail.getText()[1:]
-                    end_date = zdt.from_short_date_spec(short_end_date)
-
-                date_range = DateRange(start_date, end_date)
-                modify_date_ranges.add(date_range)
+                modify_date_ranges.add(
+                    _get_date_range(modify_range, short_start_date)
+                )
             elif w := where_atom.tag():
                 tag = cast(ZorgQueryParser.TagContext, w)
                 minus = "-" if tag.not_op() else ""
@@ -144,17 +131,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
 
                 tag_set.add(f"{minus}{tag_id.getText()}")
             elif w := where_atom.prop_filter():
-                key, op_value = w.getText().split(":")
-                negated = False
-                if key[0] == "!":
-                    negated = True
-                    key = key[1:]
-                op, value = _split_op_value(op_value)
-                value_type = _get_value_type(value)
-                property_filter = PropertyFilter(
-                    key, value, op=op, value_type=value_type, negated=negated
-                )
-                property_filters.add(property_filter)
+                property_filters.add(_get_property_filter(w))
             elif w := where_atom.desc_filter():
                 desc_filter = w.getText()
                 desc_op = DescOperator.CONTAINS
@@ -285,6 +262,38 @@ class ZorgQueryCompiler(ZorgQueryListener):
         del ctx
         where = WhereOrFilter(self._and_filter_groups[-1])
         self.zorg_query.where = where
+
+
+def _get_date_range(
+    range_ctx: Union[
+        ZorgQueryParser.Create_rangeContext,
+        ZorgQueryParser.Modify_rangeContext,
+    ],
+    short_start_date: str,
+) -> DateRange:
+    start_date = zdt.from_short_date_spec(short_start_date)
+
+    end_date: Optional[dt.date] = None
+    if date_range_tail := range_ctx.DATE_RANGE_TAIL():
+        short_end_date = date_range_tail.getText()[1:]
+        end_date = zdt.from_short_date_spec(short_end_date)
+
+    return DateRange(start_date, end_date)
+
+
+def _get_property_filter(
+    w: ZorgQueryParser.Prop_filterContext,
+) -> PropertyFilter:
+    key, op_value = w.getText().split(":")
+    negated = False
+    if key[0] == "!":
+        negated = True
+        key = key[1:]
+    op, value = _split_op_value(op_value)
+    value_type = _get_value_type(value)
+    return PropertyFilter(
+        key, value, op=op, value_type=value_type, negated=negated
+    )
 
 
 def _split_op_value(op_value: str) -> tuple[PropertyOperator, str]:
