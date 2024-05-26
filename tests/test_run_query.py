@@ -37,6 +37,7 @@ params = mark.parametrize
         param("^240408 $240509", id="filter_by_create_and_modify"),
         param("due:2024-03-13", id="filter_by_property_eq"),
         param("p:>5", id="filter_by_property_gt"),
+        param("'foo'", id="desc_filter"),
     ],
 )
 def test_query(

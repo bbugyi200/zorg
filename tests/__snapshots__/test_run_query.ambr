@@ -1,4 +1,12 @@
 # serializer version: 1
+# name: test_query[YAMLConfigFile-desc_filter]
+  '''
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
+  - 240510#1c foobar
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-filter_by_create_and_modify]
   '''
   - 240509 240408#0X Some note with a modify date
