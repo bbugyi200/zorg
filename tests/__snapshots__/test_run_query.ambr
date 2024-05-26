@@ -5,6 +5,27 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-filter_by_property_eq]
+  '''
+  o P3 240510#0K This todo is @due today! | due::2024-03-13
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-filter_by_property_gt]
+  '''
+  - 240323#0U +zorg Test against all examples/ files
+  - 240323#0V +zorg wip: Replace 'john@' with '%john'
+  - 240323#0W +laundry dry whites
+  - 240323#0X +zorg wip: migrate people
+  - 240323#0Y +zorg Finished 'john@' to '%john' migration
+  - 240323#0Z +zorg Updated grammar to handle quotes
+  - 240323#0a +laundry wip: fold darks
+  - 240323#0b +laundry fold darks
+  - 240323#0c +laundry wash delicates
+  - 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-group_by_context]
   '''
   o P0 240313#03 High Priority TODO
