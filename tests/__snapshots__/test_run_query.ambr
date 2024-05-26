@@ -969,6 +969,37 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-not_scrambled_file_AND_no_e_in_desc]
+  '''
+  ######### [[20240323]]
+  - 240323#0J #gtd pomodoro
+  - 240323#0N +zorg Add links to grammar
+  - 240323#0a +laundry wip: fold darks
+  - 240323#0b +laundry fold darks
+  
+  
+  ######### [[basic]]
+  o P3 240510#02 bazbuz is ok too...
+  
+  
+  ######### [[priority]]
+  o P0 240313#03 High Priority TODO
+  o P2 240313#05 Low Priority TODO
+  
+  
+  ######### [[subnotes]]
+  - 240510#1c foobar
+  - 240510#1n bazbuz
+  - 240510#1o pig
+  - 240510#1r is fat
+  - 240510#1s is stinky
+  
+  
+  ######### [[tags_and_ids]]
+  - 000103#00 240408#NO Da nah nah nuh...
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-open_todos]
   '''
   o P0 240313#03 High Priority TODO
