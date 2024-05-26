@@ -44,6 +44,10 @@ params = mark.parametrize
         param("f=*s G file", id="file_filter__ends_with_s"),
         param("f=p* G file", id="file_filter__starts_with_p"),
         param("f=*p* G file", id="file_filter__has_a_p"),
+        param(
+            "!f=*scrambled* !'e' G file",
+            id="not_scrambled_file_AND_no_e_in_desc",
+        ),
     ],
 )
 def test_query(
