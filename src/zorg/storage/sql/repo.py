@@ -83,7 +83,7 @@ class SQLRepo:
             return None
 
     def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
-        """Get file(s) from DB by using a query."""
+        """Get note(s) from DB by using a query."""
         select_of_note = to_select_of_note(query, self._session)
         # If the user asked for really verbose output...
         if self._verbose > 1:
@@ -94,6 +94,19 @@ class SQLRepo:
         for sql_note in self._session.exec(select_of_note):
             result.append(self._note_converter.to_entity(sql_note))
         return result
+
+    def get_by_zid(self, zid: str) -> Optional[Note]:
+        """Fetch a single note using its unique ZID."""
+        stmt = select(sql.ZorgNote).where(sql.ZorgNote.zid == zid)
+        results = self._session.exec(stmt)
+        sql_zorg_note = results.first()
+        if sql_zorg_note:
+            return self._note_converter.to_entity(sql_zorg_note)
+        else:
+            _LOGGER.warning(
+                "Unable to find a note with the given ZID", zid=zid
+            )
+            return None
 
     def _seen_zorg_file(self, zorg_file: File) -> None:
         # TODO(bugyi): Do I need to deduplicate self.seen?

@@ -27,15 +27,25 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     zo_line = zo_lines[cfg.line_number - 1]
 
     all_targets_in_line: set[str] = set()
+    found_primary_zid = False
     for i, word in enumerate(
         [w.strip("(),.?!;:") for w in zo_line.split(" ")]
     ):
         left_idx = word.find("[[")
         right_idx = word.find("]]")
         is_link = left_idx >= 0 and right_idx >= 0
-        is_targetable_zid = zdt.is_zid(word) and (i >= 2 or is_zoq_file)
+        is_targetable_zid = zdt.is_zid(word) and (
+            found_primary_zid or is_zoq_file
+        )
         if is_link or is_targetable_zid:
             all_targets_in_line.add(word)
+        elif (
+            not found_primary_zid
+            and i >= 2
+            and not zdt.is_short_date_spec(word)
+            and not zdt.is_zid(word)
+        ):
+            found_primary_zid = True
 
     # If the target line is a zorg query...
     if zo_line.startswith(("# S ", "# W ")) and is_zoq_file:
@@ -61,9 +71,11 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 )
                 return 1
 
-        assert target is not None
-        if target.startswith("[[") and target.endswith("]]"):
-            _open_link(cfg, zo_path, target)
+        if target is not None:
+            if target.startswith("[[") and target.endswith("]]"):
+                return _open_link(cfg, zo_path, target)
+            else:
+                return _open_zid(cfg, target)
     # Else we tell vim to echo an error message.
     else:
         print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
@@ -71,8 +83,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     return 0
 
 
-def _open_link(cfg: OpenActionConfig, zo_path: Path, target: str) -> None:
-    link_parts = target.split("::")
+def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
+    link_parts = link.split("::")
     link_base = (
         link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
     )
@@ -98,6 +110,23 @@ def _open_link(cfg: OpenActionConfig, zo_path: Path, target: str) -> None:
     print(f"EDIT {link_path}")
     if len(link_parts) > 1:
         print(f"SEARCH id::{link_parts[1][:-2]}")
+
+    return 0
+
+
+def _open_zid(cfg: OpenActionConfig, zid: str) -> int:
+    with SQLSession(
+        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
+    ) as session:
+        note = session.repo.get_by_zid(zid)
+        if note is None:
+            return 1
+
+        note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
+        print(f"EDIT {note_file_path}")
+        print(f"SEARCH {zid}")
+
+        return 0
 
 
 def _refresh_zoq_file(cfg: OpenActionConfig, zoq_path: Path) -> None:
