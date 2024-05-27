@@ -5,7 +5,7 @@ from typing import Callable, Final, Optional
 
 from logrus import Logger
 
-from ...service import common as c, swog
+from ...service import common as c, dates as zdt, swog
 from ...service.templates import init_from_template
 from ...storage.sql.session import SQLSession
 from ..config import OpenActionConfig
@@ -22,70 +22,48 @@ _MSG_NOTHING_TO_OPEN: Final = (
 def run_action_open(cfg: OpenActionConfig) -> int:
     """Runner for the 'action open' command."""
     zo_path = c.prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
+    is_zoq_file = zo_path.suffix == ".zoq"
     zo_lines = zo_path.read_text().split("\n")
     zo_line = zo_lines[cfg.line_number - 1]
-    link_word_idx_map: dict[str, tuple[int, int]] = {}
-    for word in zo_line.split(" "):
+
+    all_targets_in_line: set[str] = set()
+    for i, word in enumerate(
+        [w.strip("(),.?!;:") for w in zo_line.split(" ")]
+    ):
         left_idx = word.find("[[")
         right_idx = word.find("]]")
-        if left_idx >= 0 and right_idx >= 0:
-            link_word_idx_map[word] = (left_idx, right_idx)
+        is_link = left_idx >= 0 and right_idx >= 0
+        is_targetable_zid = zdt.is_zid(word) and (i >= 2 or is_zoq_file)
+        if is_link or is_targetable_zid:
+            all_targets_in_line.add(word)
 
-    refresh_zoq_file = _refresh_zoq_file_factory(
-        cfg.zettel_dir, cfg.database_url, cfg.verbose
-    )
     # If the target line is a zorg query...
-    if zo_line.startswith(("# S ", "# W ")):
-        refresh_zoq_file(zo_path)
+    if zo_line.startswith(("# S ", "# W ")) and is_zoq_file:
+        _refresh_zoq_file(cfg, zo_path)
         print(f"EDIT {zo_path}")
     # Else if the target line contains [[links]]...
-    elif link_word_idx_map:
-        word_left_right: Optional[tuple[str, int, int]] = None
-        if len(link_word_idx_map) == 1:
-            word = list(link_word_idx_map.keys())[0]
-            left_idx, right_idx = link_word_idx_map[word]
-            word_left_right = word, left_idx, right_idx
+    elif all_targets_in_line:
+        target: Optional[str] = None
+        if len(all_targets_in_line) == 1:
+            word = list(all_targets_in_line)[0]
+            target = word
         elif cfg.option_idx is None:
-            link_choice_msg_part = " ".join(link_word_idx_map.keys())
+            link_choice_msg_part = " ".join(all_targets_in_line)
             print(f"PROMPT {link_choice_msg_part}")
         else:
-            for i, (word, (left_idx, right_idx)) in enumerate(
-                link_word_idx_map.items()
-            ):
+            for i, (word) in enumerate(all_targets_in_line):
                 if i + 1 == cfg.option_idx:
-                    word_left_right = word, left_idx, right_idx
+                    target = word
                     break
             else:
                 _LOGGER.warning(
                     "Unknown option selected", option=cfg.option_idx
                 )
+                return 1
 
-        if word_left_right is not None:
-            word, left_idx, right_idx = word_left_right
-            link_parts = word[left_idx + 2 : right_idx].split("::")
-            link_base = link_parts[0]
-            link_base = link_base if "." in link_base else f"{link_base}.zo"
-            link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
-
-            if not link_path.exists():
-                init_from_template(
-                    cfg.zettel_dir,
-                    cfg.template_pattern_map,
-                    link_path,
-                    var_map={
-                        "parent": (
-                            str(zo_path)
-                            .replace(".zo", "")
-                            .replace(str(cfg.zettel_dir) + "/", "")
-                        )
-                    },
-                )
-            elif link_path.suffix == ".zoq":
-                refresh_zoq_file(link_path)
-
-            print(f"EDIT {link_path}")
-            if len(link_parts) > 1:
-                print(f"SEARCH id::{link_parts[1]}")
+        assert target is not None
+        if target.startswith("[[") and target.endswith("]]"):
+            _open_link(cfg, zo_path, target)
     # Else we tell vim to echo an error message.
     else:
         print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
@@ -93,11 +71,37 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     return 0
 
 
-def _refresh_zoq_file_factory(
-    zdir: Path, db_url: str, verbose: int
-) -> Callable[[Path], None]:
-    def refresh_zoq_file(zoq_path: Path) -> None:
-        with SQLSession(zdir, db_url, verbose=verbose) as session:
-            swog.refresh_zoq_file(session, zoq_path)
+def _open_link(cfg: OpenActionConfig, zo_path: Path, target: str) -> None:
+    link_parts = target.split("::")
+    link_base = (
+        link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
+    )
+    link_base = link_base if "." in link_base else f"{link_base}.zo"
+    link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
 
-    return refresh_zoq_file
+    if not link_path.exists():
+        init_from_template(
+            cfg.zettel_dir,
+            cfg.template_pattern_map,
+            link_path,
+            var_map={
+                "parent": (
+                    str(zo_path)
+                    .replace(".zo", "")
+                    .replace(str(cfg.zettel_dir) + "/", "")
+                )
+            },
+        )
+    elif link_path.suffix == ".zoq":
+        _refresh_zoq_file(cfg, link_path)
+
+    print(f"EDIT {link_path}")
+    if len(link_parts) > 1:
+        print(f"SEARCH id::{link_parts[1][:-2]}")
+
+
+def _refresh_zoq_file(cfg: OpenActionConfig, zoq_path: Path) -> None:
+    with SQLSession(
+        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
+    ) as session:
+        swog.refresh_zoq_file(session, zoq_path)
