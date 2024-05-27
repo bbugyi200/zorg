@@ -47,14 +47,6 @@ class SQLRepo:
         self._session.add(sql_zorg_file)
         return Ok(sql_zorg_file.path)
 
-    def remove(
-        self, zorg_file: File, /  # noqa: W504
-    ) -> ErisResult[File | None]:
-        """Remove a file from the DB."""
-        sql_zorg_file = self._converter.from_entity(zorg_file)
-        self._session.delete(sql_zorg_file)
-        return Ok(zorg_file)
-
     # TODO(bugyi): Remove commits from this function!
     def remove_by_key(self, key: str) -> ErisResult[Optional[File]]:
         """Remove a zorg file from the repo by path."""
@@ -92,19 +84,6 @@ class SQLRepo:
             _LOGGER.debug(emsg, path=path)
             return Ok(None)
 
-    def get(self, key: str) -> ErisResult[Optional[File]]:
-        """Retrieve a file from the DB."""
-        path = key
-        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == path)
-        results = self._session.exec(stmt)
-        sql_zorg_file = results.first()
-        if sql_zorg_file:
-            zorg_file = self._converter.to_entity(sql_zorg_file)
-            self._seen_zorg_file(zorg_file)
-            return Ok(zorg_file)
-        else:
-            return Ok(None)
-
     def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get file(s) from DB by using a query."""
         select_of_note = to_select_of_note(query, self._session)
@@ -117,15 +96,6 @@ class SQLRepo:
         for sql_note in self._session.exec(select_of_note):
             result.append(self._note_converter.to_entity(sql_note))
         return result
-
-    def all(self) -> ErisResult[list[File]]:
-        """Returns all zorg notes contained in the underlying SQL database."""
-        stmt = select(sql.ZorgFile)
-        result: list[File] = []
-        for sql_zorg_file in self._session.exec(stmt).all():
-            zorg_file = self._converter.to_entity(sql_zorg_file)
-            self._seen_zorg_file(zorg_file)
-        return Ok(result)
 
     def _seen_zorg_file(self, zorg_file: File) -> None:
         # TODO(bugyi): Do I need to deduplicate self.seen?
