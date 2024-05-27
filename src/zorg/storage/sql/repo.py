@@ -34,11 +34,8 @@ class SQLRepo:
 
         self.seen: list[File] = []
 
-    def add(self, zorg_file: File, /, *, key: str = None) -> None:
-        """Adds a new file to the DB.
-
-        Returns a unique identifier that has been associated with this file.
-        """
+    def add_file(self, zorg_file: File, /, *, key: str = None) -> None:
+        """Adds a new file to the DB."""
         del key
         self._seen_zorg_file(zorg_file)
         _add_zids(self._zettel_dir, zorg_file)
@@ -46,10 +43,9 @@ class SQLRepo:
         self._session.add(sql_zorg_file)
 
     # TODO(bugyi): Remove commits from this function!
-    def remove_by_key(self, key: str) -> Optional[File]:
+    def remove_file_by_name(self, filename: str) -> Optional[File]:
         """Remove a zorg file from the repo by path."""
-        path = key
-        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == path)
+        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == filename)
         results = self._session.exec(stmt)
         sql_zorg_file = results.first()
         if sql_zorg_file:
@@ -79,10 +75,10 @@ class SQLRepo:
             return zorg_file
         else:
             emsg = "Cannot delete zorg file since it does not exist."
-            _LOGGER.debug(emsg, path=path)
+            _LOGGER.debug(emsg, path=filename)
             return None
 
-    def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
+    def get_notes_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get note(s) from DB by using a query."""
         select_of_note = to_select_of_note(query, self._session)
         # If the user asked for really verbose output...
@@ -95,7 +91,7 @@ class SQLRepo:
             result.append(self._note_converter.to_entity(sql_note))
         return result
 
-    def get_by_zid(self, zid: str) -> Optional[Note]:
+    def get_note_by_zid(self, zid: str) -> Optional[Note]:
         """Fetch a single note using its unique ZID."""
         stmt = select(sql.ZorgNote).where(sql.ZorgNote.zid == zid)
         results = self._session.exec(stmt)

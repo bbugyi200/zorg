@@ -128,7 +128,7 @@ def create_database(
             total_num_notes=total_num_notes,
             total_num_todos=total_num_todos,
         )
-        session.repo.add(zorg_file)
+        session.repo.add_file(zorg_file)
         zorg_files.append(zorg_file)
     _LOGGER.info(
         "Finished reading zettel org directory",
@@ -163,7 +163,7 @@ def reindex_database(
             or old_file_to_hash[zorg_file_name] != hash_
         ):
             num_of_updates += 1
-            old_zorg_file = session.repo.remove_by_key(zorg_file_name)
+            old_zorg_file = session.repo.remove_file_by_name(zorg_file_name)
             if old_zorg_file is not None:
                 _LOGGER.debug("Removing file from DB", file=zorg_file_name)
                 c.zprint(
@@ -185,7 +185,7 @@ def reindex_database(
             )
             _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
-            session.repo.add(zorg_file)
+            session.repo.add_file(zorg_file)
             session.commit()
 
     if num_of_updates == 0:

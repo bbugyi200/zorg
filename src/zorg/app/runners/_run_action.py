@@ -119,7 +119,7 @@ def _open_zid(cfg: OpenActionConfig, zid: str) -> int:
     with SQLSession(
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
-        note = session.repo.get_by_zid(zid)
+        note = session.repo.get_note_by_zid(zid)
 
     if note is None:
         return 1
