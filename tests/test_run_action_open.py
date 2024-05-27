@@ -17,38 +17,6 @@ params = mark.parametrize
 
 @params(
     "lineno,zo_name",
-    [(5, "foo.zo"), (7, "bar.sh"), (8, "baz.zo")],
-)
-def test_action_open__good(
-    open_action_main: c.MainType,
-    capsys: CaptureFixture,
-    zettel_dir: Path,
-    lineno: int,
-    zo_name: str,
-) -> None:
-    """Test the 'action open' command's simple happy path."""
-    open_action_main(str(lineno))
-
-    capture = capsys.readouterr()
-    assert capture.out == f"EDIT {zettel_dir}/{zo_name}\n"
-
-
-@params("lineno", [param(10, id="line_with_no_links")])
-def test_action_open__bad(
-    open_action_main: c.MainType,
-    capsys: CaptureFixture,
-    snapshot: Snapshot,
-    lineno: int,
-) -> None:
-    """Test the 'action open' command's sad path."""
-    open_action_main(str(lineno))
-
-    capture = capsys.readouterr()
-    assert capture.out == snapshot
-
-
-@params(
-    "lineno,zo_name",
     [param(1, "order_by_file.zoq", id="order_by_file_query")],
 )
 def test_action_open__query(
@@ -76,6 +44,24 @@ def test_action_open__query(
     assert query_zo_path.read_text() == snapshot
 
 
+@params(
+    "lineno,zo_name",
+    [(5, "foo.zo"), (7, "bar.sh"), (8, "baz.zo")],
+)
+def test_action_open__good(
+    open_action_main: c.MainType,
+    capsys: CaptureFixture,
+    zettel_dir: Path,
+    lineno: int,
+    zo_name: str,
+) -> None:
+    """Test the 'action open' command's simple happy path."""
+    open_action_main(str(lineno))
+
+    capture = capsys.readouterr()
+    assert capture.out == f"EDIT {zettel_dir}/{zo_name}\n"
+
+
 @params("lineno,zo_name,link_prop", [param(9, "buz.zo", "fuzz")])
 def testActionOpen_withProperty_sendsSearchMsg(
     open_action_main: c.MainType,
@@ -98,6 +84,46 @@ def testActionOpen_withProperty_sendsSearchMsg(
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
         f"SEARCH id::{link_prop}",
+    ]
+
+
+@params("lineno", [param(10, id="line_with_no_links")])
+def test_action_open__bad(
+    open_action_main: c.MainType,
+    capsys: CaptureFixture,
+    snapshot: Snapshot,
+    lineno: int,
+) -> None:
+    """Test the 'action open' command's sad path."""
+    open_action_main(str(lineno))
+
+    capture = capsys.readouterr()
+    assert capture.out == snapshot
+
+
+@params("lineno", [param(11, id="line_with_zid_ref")])
+def test_action_open__zid(
+    main: c.MainType,
+    capsys: CaptureFixture,
+    db_zettel_dir: Path,
+    lineno: int,
+) -> None:
+    """Test the 'action open' command can target ZIDs."""
+    exit_code = main(
+        "--dir",
+        str(db_zettel_dir),
+        "action",
+        "open",
+        str(db_zettel_dir / "links.zo"),
+        str(lineno),
+    )
+    assert exit_code == 0
+
+    capture = capsys.readouterr()
+    zo_path = db_zettel_dir / "links.zo"
+    assert capture.out.strip().split("\n") == [
+        f"EDIT {zo_path}",
+        "SEARCH 240510#03",
     ]
 
 
