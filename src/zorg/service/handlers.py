@@ -340,7 +340,15 @@ def _check_for_modified_notes(
         if note.modify_date != today and (note_has_changed or note_is_new):
             note.modify_date = today
             modify_short_date = zdt.to_short_date_spec(dt.date.today())
-            note.body = f"{modify_short_date} {note.body.lstrip()}"
+            # If the modify date is the same as the create date, then no modify
+            # date spec should exist yet...
+            if note.modify_date == note.create_date:
+                old_body = f"{note.body.lstrip()}"
+            # Otherwise, we need to remove the old modify date spec before
+            # adding the new one.
+            else:
+                old_body = " ".join(note.body.split(" ")[1:]).lstrip()
+            note.body = f"{modify_short_date} {old_body}"
             modified_notes.append(note)
     if modified_notes:
         zorg_file.events.append(
