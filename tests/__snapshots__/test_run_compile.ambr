@@ -290,7 +290,7 @@
               'todo_payload': None,
               'zid': '240510#06'},
              {'areas': [],
-              'body': '240510#06 Some note that references a local 240510#03 '
+              'body': '240510#07 Some note that references a local 240510#03 '
                       'ZID.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
@@ -300,7 +300,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': None,
-              'zid': '240510#06'}]}
+              'zid': '240510#07'}]}
   
   '''
 # ---
