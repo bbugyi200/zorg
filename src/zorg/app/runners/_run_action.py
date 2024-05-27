@@ -1,7 +1,7 @@
 """Contains runners for the 'zorg action' command."""
 
 from pathlib import Path
-from typing import Callable, Final, Optional
+from typing import Final, Optional
 
 from logrus import Logger
 
