@@ -347,7 +347,7 @@ def _check_for_modified_notes(
             # Otherwise, we need to remove the old modify date spec before
             # adding the new one.
             else:
-                old_body = " ".join(note.body.split(" ")[1:]).lstrip()
+                old_body = " ".join(note.body.lstrip().split(" ")[1:])
             note.body = f"{modify_short_date} {old_body}"
             modified_notes.append(note)
     if modified_notes:
