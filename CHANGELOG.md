@@ -11,14 +11,18 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.4...HEAD)
 
+### Added
+
+* Add support to `action open` command for targeting ZIDs.
+
 
 ## [0.7.4](https://github.com/bbugyi200/zorg/compare/0.7.3...0.7.4) - 2024-05-26
 
 ### Added
 
-* Support for related file section to query pages.
-* Support for `f=GLOB` style file-filters in zorg queries.
-* Support for selecting files and tags using zorg queries.
+* Add support for related file section to query pages.
+* Add support for `f=GLOB` style file-filters in zorg queries.
+* Add support for selecting files and tags using zorg queries.
 * Auto-refresh query pages when they are open (e.g. via `action open`).
 
 ### Fixed
