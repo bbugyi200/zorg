@@ -122,6 +122,7 @@ def _open_zid(cfg: OpenActionConfig, zid: str) -> int:
         if note is None:
             return 1
 
+        assert note.file_path is not None
         note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
         print(f"EDIT {note_file_path}")
         print(f"SEARCH {zid}")
