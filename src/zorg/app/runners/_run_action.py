@@ -26,7 +26,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     zo_lines = zo_path.read_text().split("\n")
     zo_line = zo_lines[cfg.line_number - 1]
 
-    all_targets_in_line: set[str] = set()
+    all_targets_in_line: list[str] = []
     found_primary_zid = False
     for i, word in enumerate(
         [w.strip("(),.?!;:") for w in zo_line.split(" ")]
@@ -38,7 +38,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             found_primary_zid or is_zoq_file
         )
         if is_link or is_targetable_zid:
-            all_targets_in_line.add(word)
+            all_targets_in_line.append(word)
         elif (
             not found_primary_zid
             and i >= 2
