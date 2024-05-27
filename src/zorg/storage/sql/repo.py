@@ -7,7 +7,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from eris import ErisResult, Ok
 from logrus import Logger
 from sqlmodel import Session, select
 
@@ -35,7 +34,7 @@ class SQLRepo:
 
         self.seen: list[File] = []
 
-    def add(self, zorg_file: File, /, *, key: str = None) -> ErisResult[str]:
+    def add(self, zorg_file: File, /, *, key: str = None) -> None:
         """Adds a new file to the DB.
 
         Returns a unique identifier that has been associated with this file.
@@ -45,10 +44,9 @@ class SQLRepo:
         _add_zids(self._zettel_dir, zorg_file)
         sql_zorg_file = self._converter.from_entity(zorg_file)
         self._session.add(sql_zorg_file)
-        return Ok(sql_zorg_file.path)
 
     # TODO(bugyi): Remove commits from this function!
-    def remove_by_key(self, key: str) -> ErisResult[Optional[File]]:
+    def remove_by_key(self, key: str) -> Optional[File]:
         """Remove a zorg file from the repo by path."""
         path = key
         stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == path)
@@ -78,11 +76,11 @@ class SQLRepo:
 
                 self._session.delete(sql_note)
             self._session.delete(sql_zorg_file)
-            return Ok(zorg_file)
+            return zorg_file
         else:
             emsg = "Cannot delete zorg file since it does not exist."
             _LOGGER.debug(emsg, path=path)
-            return Ok(None)
+            return None
 
     def get_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get file(s) from DB by using a query."""

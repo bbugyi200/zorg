@@ -163,7 +163,7 @@ def reindex_database(
             or old_file_to_hash[zorg_file_name] != hash_
         ):
             num_of_updates += 1
-            old_zorg_file = session.repo.remove_by_key(zorg_file_name).unwrap()
+            old_zorg_file = session.repo.remove_by_key(zorg_file_name)
             if old_zorg_file is not None:
                 _LOGGER.debug("Removing file from DB", file=zorg_file_name)
                 c.zprint(
