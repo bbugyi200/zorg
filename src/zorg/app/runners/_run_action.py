@@ -35,13 +35,14 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         right_idx = word.find("]]")
         is_link = left_idx >= 0 and right_idx >= 0
         is_targetable_zid = zdt.is_zid(word) and (
-            found_primary_zid or is_zoq_file
+            found_primary_zid or is_zoq_file or i == 0
         )
         if is_link or is_targetable_zid:
             all_targets_in_line.append(word)
         elif (
             not found_primary_zid
-            and i >= 2
+            and not _is_prefix_symbol(word)
+            and not _is_priority(word)
             and not zdt.is_short_date_spec(word)
             and not zdt.is_zid(word)
         ):
@@ -136,3 +137,11 @@ def _refresh_zoq_file(cfg: OpenActionConfig, zoq_path: Path) -> None:
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
         swog.refresh_zoq_file(session, zoq_path)
+
+
+def _is_priority(word: str) -> bool:
+    return len(word) == 2 and word[0] == "P" and word[1].isdigit()
+
+
+def _is_prefix_symbol(word: str) -> bool:
+    return word in ["-", "<", ">", "o", "x"]
