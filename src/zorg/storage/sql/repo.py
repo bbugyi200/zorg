@@ -13,8 +13,8 @@ from sqlmodel import Session, select
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
 from ...domain.models import File, Note, WhereOrFilter
-from ...service.zid_manager import ZIDManager
 from ...service import dates as zdt
+from ...service.zid_manager import ZIDManager
 from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
 
 
