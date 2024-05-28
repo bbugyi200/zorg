@@ -31,9 +31,10 @@ def run_action_open(cfg: OpenActionConfig) -> int:
     for i, word in enumerate(
         [w.strip("(),.?!;:") for w in zo_line.split(" ")]
     ):
-        left_idx = word.find("[[")
-        right_idx = word.find("]]")
-        is_link = left_idx >= 0 and right_idx >= 0
+        is_link = word.find("[[") >= 0 and word.find("]]") >= 0
+        # Is this word a ZID that should be considered as a target? We consider
+        # any ZID that is NOT the primary ZID to be targetable. In *.zoq files,
+        # every ZID is targetable.
         is_targetable_zid = zdt.is_zid(word) and (
             found_primary_zid or is_zoq_file or i == 0
         )
