@@ -43,7 +43,6 @@ class SQLRepo:
         sql_zorg_file = self._converter.from_entity(zorg_file)
         self._session.add(sql_zorg_file)
 
-    # TODO(bugyi): Remove commits from this function!
     def remove_file_by_name(self, filename: str) -> Optional[File]:
         """Remove a zorg file from the repo by path."""
         stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == filename)
@@ -106,7 +105,6 @@ class SQLRepo:
             return None
 
     def _seen_zorg_file(self, zorg_file: File) -> None:
-        # TODO(bugyi): Do I need to deduplicate self.seen?
         self.seen.append(zorg_file)
 
 
