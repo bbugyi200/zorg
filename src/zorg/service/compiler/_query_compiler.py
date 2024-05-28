@@ -116,20 +116,20 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 minus = "-" if tag.not_op() else ""
                 if tag.area():
                     tag_set = areas
-                    tag_id = tag.area().ID()
+                    tag_id = tag.area()
                 elif tag.context():
                     tag_set = contexts
-                    tag_id = tag.context().ID()
+                    tag_id = tag.context()
                 elif tag.person():
                     tag_set = people
-                    tag_id = tag.person().ID()
+                    tag_id = tag.person()
                 elif tag.project():
                     tag_set = projects
-                    tag_id = tag.project().ID()
+                    tag_id = tag.project()
                 else:
                     raise RuntimeError(f"Invalid Tag: {tag.getText()}")
 
-                tag_set.add(f"{minus}{tag_id.getText()}")
+                tag_set.add(f"{minus}{tag_id.getText()[1:]}")
             elif w := where_atom.prop_filter():
                 property_filters.add(_get_property_filter(w))
             elif w := where_atom.desc_filter():

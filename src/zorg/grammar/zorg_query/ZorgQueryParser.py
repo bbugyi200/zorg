@@ -87,21 +87,21 @@ def serializedATN():
         1,0,0,0,190,195,3,38,19,0,191,195,3,40,20,0,192,195,3,42,21,0,193,
         195,3,44,22,0,194,190,1,0,0,0,194,191,1,0,0,0,194,192,1,0,0,0,194,
         193,1,0,0,0,195,35,1,0,0,0,196,197,5,16,0,0,197,37,1,0,0,0,198,199,
-        5,52,0,0,199,200,5,36,0,0,200,39,1,0,0,0,201,202,5,53,0,0,202,203,
-        5,36,0,0,203,41,1,0,0,0,204,205,5,55,0,0,205,206,5,36,0,0,206,43,
-        1,0,0,0,207,208,5,54,0,0,208,209,5,36,0,0,209,45,1,0,0,0,210,211,
-        5,50,0,0,211,212,3,22,11,0,212,213,5,51,0,0,213,47,1,0,0,0,214,216,
-        5,32,0,0,215,217,5,34,0,0,216,215,1,0,0,0,216,217,1,0,0,0,217,49,
-        1,0,0,0,218,220,5,33,0,0,219,221,5,34,0,0,220,219,1,0,0,0,220,221,
-        1,0,0,0,221,51,1,0,0,0,222,224,3,36,18,0,223,222,1,0,0,0,223,224,
-        1,0,0,0,224,225,1,0,0,0,225,226,5,36,0,0,226,228,5,62,0,0,227,229,
-        3,54,27,0,228,227,1,0,0,0,228,229,1,0,0,0,229,237,1,0,0,0,230,238,
-        3,62,31,0,231,233,7,2,0,0,232,231,1,0,0,0,233,234,1,0,0,0,234,232,
-        1,0,0,0,234,235,1,0,0,0,235,238,1,0,0,0,236,238,5,59,0,0,237,230,
-        1,0,0,0,237,232,1,0,0,0,237,236,1,0,0,0,238,53,1,0,0,0,239,240,7,
-        3,0,0,240,55,1,0,0,0,241,243,3,36,18,0,242,241,1,0,0,0,242,243,1,
-        0,0,0,243,245,1,0,0,0,244,246,5,20,0,0,245,244,1,0,0,0,245,246,1,
-        0,0,0,246,247,1,0,0,0,247,251,5,56,0,0,248,250,3,68,34,0,249,248,
+        5,52,0,0,199,200,3,62,31,0,200,39,1,0,0,0,201,202,5,53,0,0,202,203,
+        3,62,31,0,203,41,1,0,0,0,204,205,5,55,0,0,205,206,3,62,31,0,206,
+        43,1,0,0,0,207,208,5,54,0,0,208,209,3,62,31,0,209,45,1,0,0,0,210,
+        211,5,50,0,0,211,212,3,22,11,0,212,213,5,51,0,0,213,47,1,0,0,0,214,
+        216,5,32,0,0,215,217,5,34,0,0,216,215,1,0,0,0,216,217,1,0,0,0,217,
+        49,1,0,0,0,218,220,5,33,0,0,219,221,5,34,0,0,220,219,1,0,0,0,220,
+        221,1,0,0,0,221,51,1,0,0,0,222,224,3,36,18,0,223,222,1,0,0,0,223,
+        224,1,0,0,0,224,225,1,0,0,0,225,226,5,36,0,0,226,228,5,62,0,0,227,
+        229,3,54,27,0,228,227,1,0,0,0,228,229,1,0,0,0,229,237,1,0,0,0,230,
+        238,3,62,31,0,231,233,7,2,0,0,232,231,1,0,0,0,233,234,1,0,0,0,234,
+        232,1,0,0,0,234,235,1,0,0,0,235,238,1,0,0,0,236,238,5,59,0,0,237,
+        230,1,0,0,0,237,232,1,0,0,0,237,236,1,0,0,0,238,53,1,0,0,0,239,240,
+        7,3,0,0,240,55,1,0,0,0,241,243,3,36,18,0,242,241,1,0,0,0,242,243,
+        1,0,0,0,243,245,1,0,0,0,244,246,5,20,0,0,245,244,1,0,0,0,245,246,
+        1,0,0,0,246,247,1,0,0,0,247,251,5,56,0,0,248,250,3,68,34,0,249,248,
         1,0,0,0,250,253,1,0,0,0,251,249,1,0,0,0,251,252,1,0,0,0,252,254,
         1,0,0,0,253,251,1,0,0,0,254,259,3,62,31,0,255,256,5,49,0,0,256,258,
         3,62,31,0,257,255,1,0,0,0,258,261,1,0,0,0,259,257,1,0,0,0,259,260,
@@ -1499,8 +1499,9 @@ class ZorgQueryParser ( Parser ):
         def HASH(self):
             return self.getToken(ZorgQueryParser.HASH, 0)
 
-        def ID(self):
-            return self.getToken(ZorgQueryParser.ID, 0)
+        def id_(self):
+            return self.getTypedRuleContext(ZorgQueryParser.IdContext,0)
+
 
         def getRuleIndex(self):
             return ZorgQueryParser.RULE_area
@@ -1525,7 +1526,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 198
             self.match(ZorgQueryParser.HASH)
             self.state = 199
-            self.match(ZorgQueryParser.ID)
+            self.id_()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1545,8 +1546,9 @@ class ZorgQueryParser ( Parser ):
         def AT_SIGN(self):
             return self.getToken(ZorgQueryParser.AT_SIGN, 0)
 
-        def ID(self):
-            return self.getToken(ZorgQueryParser.ID, 0)
+        def id_(self):
+            return self.getTypedRuleContext(ZorgQueryParser.IdContext,0)
+
 
         def getRuleIndex(self):
             return ZorgQueryParser.RULE_context
@@ -1571,7 +1573,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 201
             self.match(ZorgQueryParser.AT_SIGN)
             self.state = 202
-            self.match(ZorgQueryParser.ID)
+            self.id_()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1591,8 +1593,9 @@ class ZorgQueryParser ( Parser ):
         def PERCENT(self):
             return self.getToken(ZorgQueryParser.PERCENT, 0)
 
-        def ID(self):
-            return self.getToken(ZorgQueryParser.ID, 0)
+        def id_(self):
+            return self.getTypedRuleContext(ZorgQueryParser.IdContext,0)
+
 
         def getRuleIndex(self):
             return ZorgQueryParser.RULE_person
@@ -1617,7 +1620,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 204
             self.match(ZorgQueryParser.PERCENT)
             self.state = 205
-            self.match(ZorgQueryParser.ID)
+            self.id_()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1637,8 +1640,9 @@ class ZorgQueryParser ( Parser ):
         def PLUS(self):
             return self.getToken(ZorgQueryParser.PLUS, 0)
 
-        def ID(self):
-            return self.getToken(ZorgQueryParser.ID, 0)
+        def id_(self):
+            return self.getTypedRuleContext(ZorgQueryParser.IdContext,0)
+
 
         def getRuleIndex(self):
             return ZorgQueryParser.RULE_project
@@ -1663,7 +1667,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 207
             self.match(ZorgQueryParser.PLUS)
             self.state = 208
-            self.match(ZorgQueryParser.ID)
+            self.id_()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
