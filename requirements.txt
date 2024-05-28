@@ -63,7 +63,7 @@ sqlalchemy==2.0.30
     # via sqlmodel
 sqlmodel==0.0.18
     # via -r requirements.in
-structlog==24.1.0
+structlog==24.2.0
     # via bolton-logrus
 tqdm==4.66.4
     # via -r requirements.in

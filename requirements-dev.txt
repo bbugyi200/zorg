@@ -266,7 +266,7 @@ sqlmodel==0.0.18
     # via
     #   -r requirements.in
     #   zettel-org
-structlog==24.1.0
+structlog==24.2.0
     # via bolton-logrus
 syrupy==4.6.1
     # via -r requirements-dev.in
