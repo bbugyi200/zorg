@@ -53,10 +53,10 @@ tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // tag
 tag     : area | context | person | project ;
-area    : HASH ID ;
-context : AT_SIGN ID ;
-person  : PERCENT ID ;
-project : PLUS ID ;
+area    : HASH id ;
+context : AT_SIGN id ;
+person  : PERCENT id ;
+project : PLUS id ;
 
 // quotes and links
 quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
