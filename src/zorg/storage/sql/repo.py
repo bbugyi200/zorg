@@ -14,6 +14,7 @@ from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
 from ...domain.models import File, Note, WhereOrFilter
 from ...service.zid_manager import ZIDManager
+from ...service import dates as zdt
 from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
 
 
@@ -117,7 +118,10 @@ def _add_zids(zdir: Path, zorg_file: File) -> None:
             _LOGGER.debug("Found new zorg note", zorg_note=note)
             zid = zid_manager.get_next(note.create_date)
             note.zid = zid
-            note.body = f"{zid} {note.body.lstrip()}"
+            old_body = note.body.lstrip()
+            if zdt.is_long_date_spec(old_body.split(" ")[0]):
+                old_body = " ".join(old_body.split(" ")[1:])
+            note.body = f"{zid} {old_body}"
             new_notes.append(note)
     if new_notes:
         zorg_file.events.append(
