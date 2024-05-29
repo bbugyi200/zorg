@@ -123,7 +123,7 @@ def test_action_open__zid(
     zo_path = db_zettel_dir / "links.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH 240510#03",
+        "SEARCH \\s\\zs240510#03",
     ]
 
 
