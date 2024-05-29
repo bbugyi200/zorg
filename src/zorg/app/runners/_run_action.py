@@ -35,11 +35,14 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         # Is this word a ZID that should be considered as a target? We consider
         # any ZID that is NOT the primary ZID to be targetable. In *.zoq files,
         # every ZID is targetable.
-        is_targetable_zid = zdt.is_zid(word) and (
+        zid_word = word.strip("[]")
+        is_targetable_zid = zdt.is_zid(zid_word) and (
             found_primary_zid or is_zoq_file or i == 0
         )
-        if is_link or is_targetable_zid:
+        if is_link:
             all_targets_in_line.append(word)
+        elif is_targetable_zid:
+            all_targets_in_line.append(zid_word)
         elif (
             not found_primary_zid
             and not _is_prefix_symbol(word)

@@ -359,6 +359,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#zid_ref.
+    def enterZid_ref(self, ctx:ZorgFileParser.Zid_refContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#zid_ref.
+    def exitZid_ref(self, ctx:ZorgFileParser.Zid_refContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#ref.
     def enterRef(self, ctx:ZorgFileParser.RefContext):
         pass
