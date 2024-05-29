@@ -75,7 +75,7 @@ cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.5.2
+coverage[toml]==7.5.3
     # via pytest-cov
 cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
@@ -167,12 +167,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.11.1
     # via flake8
-pydantic==2.7.1
+pydantic==2.7.2
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.18.2
+pydantic-core==2.18.3
     # via pydantic
 pydantic-settings==2.2.1
     # via bolton-clack
