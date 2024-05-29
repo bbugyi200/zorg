@@ -24,8 +24,8 @@ def refresh_zoq_file(session: SQLSession, zoq_path: Path) -> None:
     zoq_lines = zoq_path.read_text().split("\n")
     query_string = zoq_lines[0].strip()[2:]
     query_results = execute(session, query_string)
-    date_spec = dt.datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-    stats_line_start = "# Saved query generated on"
+    date_spec = dt.datetime.now().strftime("%Y-%m-%d AT %H:%M:%S")
+    stats_line_start = "# SAVED QUERY GENERATED ON"
     old_header_lines = it.takewhile(
         partial(_is_zoq_header_line, stats_line_start), zoq_lines
     )
