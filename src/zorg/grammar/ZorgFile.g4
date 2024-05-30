@@ -63,7 +63,7 @@ quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUO
 link       : '[[' id_group ']]' ;
 id_ref     : '[#' ID ']' ;
 zid_ref    : '[' zid ']' ;
-ref        : '[' id_group (SPACE id_group)* ']' ;
+ref        : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
 
 // sections
 h1_section : h1_header NL* block* (NL? h2_section)* ;
