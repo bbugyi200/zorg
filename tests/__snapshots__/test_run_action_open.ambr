@@ -7,7 +7,7 @@
 # ---
 # name: test_action_open__query[YAMLConfigFile-order_by_file_query]
   '''
-  # W (o or x or ~ or < or > or -) O priority modify G file
+  # W (o | x | ~ | < | > | -) O priority modify G file
   #
   # SAVED QUERY GENERATED ON 2000-01-03 AT 12:00:00.
   
