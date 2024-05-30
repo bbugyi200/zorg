@@ -22,10 +22,7 @@ params = mark.parametrize
         param("o P1-2", id="mid_and_low_priority"),
         param("W - +zorg G file", id="zorg_notes"),
         param(
-            "S note"
-            " W (o | x | ~ | < | > | -)"
-            " O priority create modify"
-            " G file",
+            "S note W (o | x | ~ | < | > | -) O priority create modify G file",
             id="grouped_and_ordered",
         ),
         param(
