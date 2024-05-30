@@ -212,7 +212,7 @@ pyyaml==6.0.1
     # via
     #   bolton-clack
     #   cookiecutter
-requests==2.32.2
+requests==2.32.3
     # via
     #   cookiecutter
     #   sphinx
