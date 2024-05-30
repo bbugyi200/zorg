@@ -31,7 +31,7 @@
   10
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  138
+  139
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -97,7 +97,7 @@
   ])
 # ---
 # name: test_run_db_create__todo_count[YAMLConfigFile]
-  12
+  13
 # ---
 # name: test_run_db_create__todo_priorities[YAMLConfigFile]
   list([

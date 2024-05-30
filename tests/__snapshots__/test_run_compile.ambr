@@ -1271,6 +1271,20 @@
               'todo_payload': None,
               'zid': '240510#1c'},
              {'areas': [],
+              'body': ' 240510#1t This todo has checkboxes\n'
+                      '  * [X] Done subtask\n'
+                      '  * [ ] Open subtask',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {'p': '1'},
+              'todo_payload': {'priority': 'P3',
+                               'status': <NoteType.OPEN_TODO: 2>},
+              'zid': '240510#1t'},
+             {'areas': [],
               'body': ' 240510#1d This todo is due::2024-03-30 and has some '
                       'subnotes',
               'contexts': [],

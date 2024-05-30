@@ -45,6 +45,9 @@
   
   
   ######### [[subnotes]]
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   - 240510#1m This note contains a key::value pair.
   
   
@@ -149,6 +152,9 @@
   
   
   ######### [[subnotes]]
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   - 240510#1c foobar
   - 240510#1e Todo subnote A
@@ -331,6 +337,9 @@
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
@@ -492,6 +501,9 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
@@ -644,6 +656,9 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
@@ -978,6 +993,9 @@
   - 240510#1o pig
   - 240510#1r is fat
   - 240510#1s is stinky
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   
   
@@ -1061,6 +1079,9 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#1t This todo has checkboxes
+    * [X] Done subtask
+    * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
