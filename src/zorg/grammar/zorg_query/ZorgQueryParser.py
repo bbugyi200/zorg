@@ -152,7 +152,7 @@ class ZorgQueryParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'S'", "'W'", "'O'", "'G'", "'note'", 
-                     "'or'", "'1'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", 
+                     "'|'", "'1'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", 
                      "'8'", "'9'", "'!'", "'0'", "'<='", "'>='", "'c'", 
                      "'f='", "'create'", "'modify'", "'priority'", "'file'", 
                      "'type'", "<INVALID>", "'o'", "'x'", "<INVALID>", "<INVALID>", 

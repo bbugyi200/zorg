@@ -23,17 +23,17 @@ params = mark.parametrize
         param("W - +zorg G file", id="zorg_notes"),
         param(
             "S note"
-            " W (o or x or ~ or < or > or -)"
+            " W (o | x | ~ | < | > | -)"
             " O priority create modify"
             " G file",
             id="grouped_and_ordered",
         ),
         param(
-            "S note W (o or x or ~ or < or > or -) G type # +",
+            "S note W (o | x | ~ | < | > | -) G type # +",
             id="group_by_type_area_project",
         ),
-        param("(o or x or ~ or < or > or -) G @", id="group_by_context"),
-        param("(o or x or ~ or < or > or -) G %", id="group_by_people"),
+        param("(o | x | ~ | < | > | -) G @", id="group_by_context"),
+        param("(o | x | ~ | < | > | -) G %", id="group_by_people"),
         param("^240408 $240509", id="filter_by_create_and_modify"),
         param("due:2024-03-13", id="filter_by_property_eq"),
         param("p:>5", id="filter_by_property_gt"),

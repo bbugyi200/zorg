@@ -22,7 +22,7 @@ note        : 'note' ;
 
 // --- WHERE
 where_body     : or_filter ;
-or_filter      : and_filter (SPACE 'or' SPACE and_filter)* ;
+or_filter      : and_filter (SPACE '|' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
 where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter | desc_filter | file_filter ;
 note_type      : note_type_char+ ;
