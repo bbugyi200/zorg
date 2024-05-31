@@ -143,9 +143,7 @@ def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
         return 1
 
     if len(notes) > 1:
-        matched_files = " ".join(
-            sorted(set([str(n.file_path) for n in notes]))
-        )
+        matched_files = " ".join(sorted({str(n.file_path) for n in notes}))
         print(
             f"ECHO Multiple notes found the with the id::{id_key} property:"
             f" {matched_files}"
