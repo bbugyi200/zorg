@@ -336,8 +336,7 @@ def _check_for_modified_notes(
     for note in zorg_file.notes:
         old_note = old_zid_map.get(note.zid, None) if note.zid else None
         note_has_changed = old_note and note != old_note
-        note_is_new = old_note is None and note.zid is not None
-        if note.modify_date != today and (note_has_changed or note_is_new):
+        if note.modify_date != today and note_has_changed:
             note.modify_date = today
             modify_short_date = zdt.to_short_date_spec(dt.date.today())
             # If the modify date is the same as the create date, then no modify
