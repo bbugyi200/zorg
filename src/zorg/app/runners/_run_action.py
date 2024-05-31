@@ -153,6 +153,7 @@ def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
         return 1
 
     note = notes[0]
+    assert note.file_path is not None
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
     print(f"SEARCH id::{id_key}")
