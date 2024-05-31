@@ -149,6 +149,32 @@ def test_action_open__local_link(
     assert capture.out.strip() == "SEARCH id::1"
 
 
+@params("lineno", [param(13, id="line_with_id_link")])
+def test_action_open__id_link(
+    main: c.MainType,
+    capsys: CaptureFixture,
+    db_zettel_dir: Path,
+    lineno: int,
+) -> None:
+    """Test the 'action open' command can target ZIDs."""
+    exit_code = main(
+        "--dir",
+        str(db_zettel_dir),
+        "action",
+        "open",
+        str(db_zettel_dir / "links.zo"),
+        str(lineno),
+    )
+    assert exit_code == 0
+
+    capture = capsys.readouterr()
+    zo_path = db_zettel_dir / "tags_and_ids.zo"
+    assert capture.out.strip().split("\n") == [
+        f"EDIT {zo_path}",
+        "SEARCH id::pig_is_gross",
+    ]
+
+
 @fixture(name="open_action_main")
 def open_action_main_fixture(main: c.MainType, zettel_dir: Path) -> c.MainType:
     """Wrapper for main() fixture that is tailered to 'action open' tests."""
