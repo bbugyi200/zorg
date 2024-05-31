@@ -39,7 +39,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         is_targetable_zid = zdt.is_zid(zid_word) and (
             found_primary_zid or is_zoq_file or i == 0
         )
-        if is_link:
+        is_local_link = word.find("[@") >= 0 and word.find("]") >= 0
+        if is_link or is_local_link:
             all_targets_in_line.append(word)
         elif is_targetable_zid:
             all_targets_in_line.append(zid_word)
@@ -79,6 +80,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         if target is not None:
             if target.startswith("[[") and target.endswith("]]"):
                 return _open_link(cfg, zo_path, target)
+            elif target.startswith("[@") and target.endswith("]"):
+                return _open_local_link(target)
             else:
                 return _open_zid(cfg, target)
     # Else we tell vim to echo an error message.
@@ -116,6 +119,12 @@ def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     if len(link_parts) > 1:
         print(f"SEARCH id::{link_parts[1][:-2]}")
 
+    return 0
+
+
+def _open_local_link(local_link: str) -> int:
+    id_key = local_link[2:-1]
+    print(f"SEARCH id::{id_key}")
     return 0
 
 

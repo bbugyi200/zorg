@@ -127,6 +127,28 @@ def test_action_open__zid(
     ]
 
 
+@params("lineno", [param(12, id="line_with_local_link")])
+def test_action_open__local_link(
+    main: c.MainType,
+    capsys: CaptureFixture,
+    db_zettel_dir: Path,
+    lineno: int,
+) -> None:
+    """Test the 'action open' command can target ZIDs."""
+    exit_code = main(
+        "--dir",
+        str(db_zettel_dir),
+        "action",
+        "open",
+        str(db_zettel_dir / "links.zo"),
+        str(lineno),
+    )
+    assert exit_code == 0
+
+    capture = capsys.readouterr()
+    assert capture.out.strip() == "SEARCH id::1"
+
+
 @fixture(name="open_action_main")
 def open_action_main_fixture(main: c.MainType, zettel_dir: Path) -> c.MainType:
     """Wrapper for main() fixture that is tailered to 'action open' tests."""
