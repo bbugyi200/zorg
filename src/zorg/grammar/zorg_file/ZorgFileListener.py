@@ -350,21 +350,30 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#id_ref.
-    def enterId_ref(self, ctx:ZorgFileParser.Id_refContext):
+    # Enter a parse tree produced by ZorgFileParser#id_link.
+    def enterId_link(self, ctx:ZorgFileParser.Id_linkContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#id_ref.
-    def exitId_ref(self, ctx:ZorgFileParser.Id_refContext):
+    # Exit a parse tree produced by ZorgFileParser#id_link.
+    def exitId_link(self, ctx:ZorgFileParser.Id_linkContext):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#zid_ref.
-    def enterZid_ref(self, ctx:ZorgFileParser.Zid_refContext):
+    # Enter a parse tree produced by ZorgFileParser#local_link.
+    def enterLocal_link(self, ctx:ZorgFileParser.Local_linkContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#zid_ref.
-    def exitZid_ref(self, ctx:ZorgFileParser.Zid_refContext):
+    # Exit a parse tree produced by ZorgFileParser#local_link.
+    def exitLocal_link(self, ctx:ZorgFileParser.Local_linkContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#zid_link.
+    def enterZid_link(self, ctx:ZorgFileParser.Zid_linkContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#zid_link.
+    def exitZid_link(self, ctx:ZorgFileParser.Zid_linkContext):
         pass
 
 
