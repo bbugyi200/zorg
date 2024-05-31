@@ -290,7 +290,7 @@
               'todo_payload': None,
               'zid': '240510#06'},
              {'areas': [],
-              'body': '240510#07 Some note that references a local 240510#03 '
+              'body': '240510#07 Some note that references a local [240510#03] '
                       'ZID.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
@@ -300,7 +300,29 @@
               'projects': [],
               'properties': {},
               'todo_payload': None,
-              'zid': '240510#07'}]}
+              'zid': '240510#07'},
+             {'areas': [],
+              'body': '240510#08 Some note that references a local [@1] link.',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {},
+              'todo_payload': None,
+              'zid': '240510#08'},
+             {'areas': [],
+              'body': '240510#09 id::1 http://www.example.com',
+              'contexts': ['footnote'],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {'id': '1'},
+              'todo_payload': None,
+              'zid': '240510#09'}]}
   
   '''
 # ---

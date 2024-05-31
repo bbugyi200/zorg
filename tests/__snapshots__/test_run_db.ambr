@@ -12,6 +12,7 @@
     'due',
     'dzwk',
     'fat_pig',
+    'footnote',
     'pomodoro',
     'puke',
   ])
@@ -31,7 +32,7 @@
   10
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  139
+  141
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -75,6 +76,7 @@
 # name: test_run_db_create__properties[YAMLConfigFile]
   list([
     'due',
+    'id',
     'key',
     'p',
   ])
