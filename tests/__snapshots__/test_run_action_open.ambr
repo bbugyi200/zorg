@@ -45,6 +45,7 @@
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [@1] link.
+  - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#09 id::1 http://www.example.com
   
   
@@ -183,6 +184,6 @@
   - 000103#00 240408#NO Da nah nah nuh...
   - 240509 240408#0X Some note with a modify date
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
-  - 301231#X0 When I talk to %pig I always want to @puke.
+  - 301231#X0 When I talk to %pig I always want to @puke. | id::pig_is_gross
   '''
 # ---

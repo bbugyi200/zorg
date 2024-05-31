@@ -5,10 +5,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import Optional, cast
 
 from logrus import Logger
-from sqlmodel import Session, select
+from sqlmodel import Session, and_, select
+from sqlmodel.sql.expression import ColumnElement
 
 from . import models as sql
 from ...domain.messages.events import NewZorgNotesEvent
@@ -95,14 +96,41 @@ class SQLRepo:
         """Fetch a single note using its unique ZID."""
         stmt = select(sql.ZorgNote).where(sql.ZorgNote.zid == zid)
         results = self._session.exec(stmt)
-        sql_zorg_note = results.first()
-        if sql_zorg_note:
-            return self._note_converter.to_entity(sql_zorg_note)
+        sql_note = results.first()
+        if sql_note:
+            return self._note_converter.to_entity(sql_note)
         else:
             _LOGGER.warning(
                 "Unable to find a note with the given ZID", zid=zid
             )
             return None
+
+    def get_notes_by_id(self, id_: str) -> list[Note]:
+        """Fetch a list of notes using an id:: property."""
+        stmt = (
+            select(sql.ZorgNote)
+            .join(
+                sql.PropertyLink,
+                cast(
+                    ColumnElement, sql.ZorgNote.id == sql.PropertyLink.note_id
+                ),
+            )
+            .join(
+                sql.Property,
+                cast(
+                    ColumnElement,
+                    sql.PropertyLink.prop_id == sql.Property.id,
+                ),
+            )
+            .where(
+                and_(sql.Property.name == "id", sql.PropertyLink.value == id_)
+            )
+        )
+        results = self._session.exec(stmt)
+        return [
+            self._note_converter.to_entity(sql_note)
+            for sql_note in results.all()
+        ]
 
     def _seen_zorg_file(self, zorg_file: File) -> None:
         self.seen.append(zorg_file)

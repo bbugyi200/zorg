@@ -40,7 +40,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             found_primary_zid or is_zoq_file or i == 0
         )
         is_local_link = word.find("[@") >= 0 and word.find("]") >= 0
-        if is_link or is_local_link:
+        is_id_link = word.find("[#") >= 0 and word.find("]") >= 0
+        if is_link or is_local_link or is_id_link:
             all_targets_in_line.append(word)
         elif is_targetable_zid:
             all_targets_in_line.append(zid_word)
@@ -82,6 +83,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 return _open_link(cfg, zo_path, target)
             elif target.startswith("[@") and target.endswith("]"):
                 return _open_local_link(target)
+            elif target.startswith("[#") and target.endswith("]"):
+                return _open_id_link(cfg, target)
             else:
                 return _open_zid(cfg, target)
     # Else we tell vim to echo an error message.
@@ -125,6 +128,35 @@ def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 def _open_local_link(local_link: str) -> int:
     id_key = local_link[2:-1]
     print(f"SEARCH id::{id_key}")
+    return 0
+
+
+def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
+    id_key = id_link[2:-1]
+    with SQLSession(
+        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
+    ) as session:
+        notes = session.repo.get_notes_by_id(id_key)
+
+    if not notes:
+        print(f"ECHO No notes with found with the id::{id_key} property")
+        return 1
+
+    if len(notes) > 1:
+        matched_files = " ".join(
+            sorted(set([str(n.file_path) for n in notes]))
+        )
+        print(
+            f"ECHO Multiple notes found the with the id::{id_key} property:"
+            f" {matched_files}"
+        )
+        return 1
+
+    note = notes[0]
+    note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
+    print(f"EDIT {note_file_path}")
+    print(f"SEARCH id::{id_key}")
+
     return 0
 
 
