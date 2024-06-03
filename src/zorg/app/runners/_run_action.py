@@ -104,7 +104,7 @@ def _is_local_link(word: str) -> bool:
 
 
 def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
-    link_parts = link.split("::")
+    link_parts = link.split("#")
     link_base = (
         link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
     )
