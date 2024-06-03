@@ -268,10 +268,10 @@
               'zid': '240510#04'},
              {'areas': [],
               'body': '240510#05 Some note with a link in parens and a '
-                      'block-level link ([[buz::fuzz]]).',
+                      'block-level link ([[buz#fuzz]]).',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
-              'links': ['buz::fuzz'],
+              'links': ['buz#fuzz'],
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],

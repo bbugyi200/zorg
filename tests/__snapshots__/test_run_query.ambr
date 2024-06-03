@@ -17,7 +17,7 @@
   
   
   ################################ [[links]]
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   
   
   ################################ [[property]]
@@ -61,7 +61,7 @@
   ################################ [[links]]
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [1] link.
@@ -353,7 +353,7 @@
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [1] link.
@@ -543,7 +543,7 @@
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [1] link.
@@ -683,7 +683,7 @@
   - 240510#01 Second note in first block
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [1] link.
@@ -896,7 +896,7 @@
   ################################ [[links]]
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
   - 240510#04 Some note with a link in parens (see [[baz]]).
-  - 240510#05 Some note with a link in parens and a block-level link ([[buz::fuzz]]).
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
   - 240510#08 Some note that references a local [1] link.
