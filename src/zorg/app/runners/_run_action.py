@@ -39,9 +39,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         is_targetable_zid = zdt.is_zid(zid_word) and (
             found_primary_zid or is_zoq_file or i == 0
         )
-        is_local_link = word.find("[@") >= 0 and word.find("]") >= 0
         is_id_link = word.find("[#") >= 0 and word.find("]") >= 0
-        if is_link or is_local_link or is_id_link:
+        if is_link or _is_local_link(word) or is_id_link:
             all_targets_in_line.append(word)
         elif is_targetable_zid:
             all_targets_in_line.append(zid_word)
@@ -81,7 +80,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         if target is not None:
             if target.startswith("[[") and target.endswith("]]"):
                 return _open_link(cfg, zo_path, target)
-            elif target.startswith("[@") and target.endswith("]"):
+            elif _is_local_link(target):
                 return _open_local_link(target)
             elif target.startswith("[#") and target.endswith("]"):
                 return _open_id_link(cfg, target)
@@ -92,6 +91,16 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
+
+
+def _is_local_link(word: str) -> bool:
+    left_idx = word.find("[")
+    right_idx = word.find("]")
+    return (
+        left_idx >= 0
+        and right_idx >= 0
+        and word[left_idx + 1 : right_idx].isdigit()
+    )
 
 
 def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
@@ -126,7 +135,7 @@ def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 
 
 def _open_local_link(local_link: str) -> int:
-    id_key = local_link[2:-1]
+    id_key = local_link[1:-1]
     print(f"SEARCH id::{id_key}")
     return 0
 
