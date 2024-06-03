@@ -11,47 +11,47 @@
 # Z = [[act_zorg]]
 
 
-######### @pomodoro
-======= p::1   1015 +00
+-------------------------------- @pomodoro
+------------------------ p::1   1015 +00
 - 240323#0J #gtd pomodoro
 
-======= p::2   1055 +00
+------------------------ p::2   1055 +00
 - 240323#0K #own Buy rubber duck
 - 240323#0L +zorg Parametrize test_run_compile()
 
-======= p::3   1120 +00
+------------------------ p::3   1120 +00
 - 240323#0M +zorg Move models.py and file_groups.py
 - 240323#0N +zorg Add links to grammar
 
-======= p::4   1145 +00
+------------------------ p::4   1145 +00
 - 240323#0P +zorg Fix grammar so it works with this file
 
-======= p::5   1210 +00
+------------------------ p::5   1210 +00
 - 240323#0R +zorg Add this file to test data
 - 240323#0T +zorg Filter out all numeric tag names
 
-======= p::6   1300 +00
+------------------------ p::6   1300 +00
 - 240323#0U +zorg Test against all examples/ files
 - 240323#0V +zorg wip: Replace 'john@' with '%john'
 
-======= p::7   1330 +00
+------------------------ p::7   1330 +00
 - 240323#0W +laundry dry whites
 - 240323#0X +zorg wip: migrate people
 
-======= p::8   1355 +00
+------------------------ p::8   1355 +00
 - 240323#0Y +zorg Finished 'john@' to '%john' migration
 
-======= p::9   1425 +00
+------------------------ p::9   1425 +00
 - 240323#0Z +zorg Updated grammar to handle quotes
 
-======= p::10  1520 +05
+------------------------ p::10  1520 +05
 - 240323#0a +laundry wip: fold darks
 
-======= p::11  1550 +04
+------------------------ p::11  1550 +04
 - 240323#0b +laundry fold darks
 
-======= p::12  1620 +00
+------------------------ p::12  1620 +00
 - 240323#0c +laundry wash delicates
 
-======= p::14  1750 +00
+------------------------ p::14  1750 +00
 - 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]

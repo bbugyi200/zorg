@@ -177,13 +177,13 @@ def _select_file(notes: list[Note]) -> str:
 
 def _get_header(level: int) -> str:
     if level == 1:
-        return "\n#########"
+        return f"\n{'-' * 32}"
     elif level == 2:
-        return "======="
+        return f"{'-' * 24}"
     elif level == 3:
-        return "*****"
+        return f"{'-' * 16}"
     elif level == 4:
-        return "---"
+        return f"{'-' * 8}"
     else:
         raise RuntimeError(
             "Zorg supports grouping notes by a MAXIMUM of 4 dimensions at"
