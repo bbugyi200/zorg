@@ -1,6 +1,6 @@
 # A zorg file containing subnotes.
 
--------------------------------- p::1
+################################ p::1
 - 240510#1c foobar
 o 240510#1t This todo has checkboxes
   * [X] Done subtask

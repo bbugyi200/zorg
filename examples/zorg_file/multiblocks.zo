@@ -11,16 +11,16 @@ o 240510#08 Another related todo
 o 240510#0A Some other todo
 - 240510#0B With a note
 
------------------------- Boom Bam
+======================== Boom Bam
 - 240510#0C Some note in section 0
 
--------------------------------- Foobar
+################################ Foobar
 - 240510#0D Note A1
 - 240510#0E Note A2
 
 - 240510#0F Note B
 
--------------------------------- Bazbuz
+################################ Bazbuz
 - 240510#0G Note C
 
 - 240510#0H Note D

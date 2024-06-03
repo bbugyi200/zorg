@@ -12,5 +12,5 @@
 - 240510#08 Some note that references a local [1] link.
 - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
 
--------------------------------- @footnote
+################################ @footnote
 - 240510#09 id::1 http://www.example.com

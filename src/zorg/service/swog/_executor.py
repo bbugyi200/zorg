@@ -177,11 +177,11 @@ def _select_file(notes: list[Note]) -> str:
 
 def _get_header(level: int) -> str:
     if level == 1:
-        return f"\n{'-' * 32}"
+        return f"\n{'#' * 32}"
     elif level == 2:
-        return f"{'-' * 24}"
+        return f"{'=' * 24}"
     elif level == 3:
-        return f"{'-' * 16}"
+        return f"{'+' * 16}"
     elif level == 4:
         return f"{'-' * 8}"
     else:
