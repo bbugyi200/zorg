@@ -36,10 +36,3 @@ class ModifiedZorgNotesEvent(Event):
     zettel_dir: Path
     zorg_file_path: Path
     modified_notes: list[Note]
-
-
-@dataclass(frozen=True)
-class DBModifiedEvent(Event):
-    """Broadcast when the zorg database is done being initialized."""
-
-    zettel_dir: Path

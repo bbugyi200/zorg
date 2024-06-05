@@ -26,39 +26,33 @@ _UNSUPPORTED_ZID_CHARS: Final[tuple[str, ...]] = (
 class ZIDManager:
     """Responsible for knowing what the next zorg ID is based on the date."""
 
-    _class_next_id_map: Optional[dict[str, str]] = None
-
     def __init__(self, zettel_dir: Path) -> None:
         zorg_data_dir = zettel_dir / f".{APP_NAME}"
         zorg_data_dir.mkdir(exist_ok=True)
         self._next_ids_path = zorg_data_dir / "next_ids.json"
-        if (
-            ZIDManager._class_next_id_map is None
-            and self._next_ids_path.exists()
-        ):
-            ZIDManager._class_next_id_map = json.loads(
-                self._next_ids_path.read_text()
-            )
-        elif ZIDManager._class_next_id_map is None:
-            ZIDManager._class_next_id_map = {}
+        self._mutable_next_id_map: Optional[dict[str, str]] = None
 
     def get_next(self, date: dt.date) -> str:
         """Returns the next zorg ID based on {date}."""
         date_part = date.strftime("%Y%m%d")[2:]
-        id_part = self._next_id_map.get(date_part, "00")
+        next_id_map = self._next_id_map
+        id_part = next_id_map.get(date_part, "00")
         # pylint: disable=unsupported-assignment-operation
-        self._next_id_map[date_part] = _get_next_id(id_part)
+        next_id_map[date_part] = _get_next_id(id_part)
+        self.write_to_disk(next_id_map)
         return f"{date_part}#{id_part}"
 
-    def write_to_disk(self) -> None:
+    def write_to_disk(self, next_id_map: dict[str, str]) -> None:
         """Writes the next ID map back to disk."""
         with self._next_ids_path.open("w") as f:
-            json.dump(dict(sorted(self._next_id_map.items())), f, indent=4)
+            json.dump(dict(next_id_map), f, indent=4)
 
     @property
     def _next_id_map(self) -> dict[str, str]:
-        assert ZIDManager._class_next_id_map is not None
-        return ZIDManager._class_next_id_map
+        if self._next_ids_path.exists() and self._mutable_next_id_map is None:
+            return json.loads(self._next_ids_path.read_text())
+        else:
+            return {}
 
 
 def _get_next_id(last_id: str) -> str:

@@ -137,7 +137,6 @@ def create_database(
         num_todos=total_num_todos,
     )
     session.commit()
-    session.add_message(events.DBModifiedEvent(cmd.zettel_dir))
 
 
 def reindex_database(
@@ -193,7 +192,6 @@ def reindex_database(
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
     session.commit()
-    session.add_message(events.DBModifiedEvent(cmd.zettel_dir))
 
 
 def reindex_database_after_edit(
@@ -219,19 +217,6 @@ def add_zids_to_notes_in_file(
         get_thing=attrgetter("zid"),
         log_message="Adding ZIDs to zorg file",
     )
-
-
-def increment_zid_counters(
-    event: events.DBModifiedEvent, session: SQLSession
-) -> None:
-    """Increment the date-specific zorg ID counters.
-
-    These are stored in a directory in your zettel dir and are used when
-    generating new IDs (they are the XX in the YYMMDD#XX ID format).
-    """
-    del session
-    zid_manager = ZIDManager(event.zettel_dir)
-    zid_manager.write_to_disk()
 
 
 def update_note_modify_dates(
