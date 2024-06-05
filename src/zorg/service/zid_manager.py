@@ -3,7 +3,7 @@
 import datetime as dt
 import json
 from pathlib import Path
-from typing import Final, Optional
+from typing import Final, Optional, cast
 
 from .. import APP_NAME
 
@@ -50,7 +50,9 @@ class ZIDManager:
     @property
     def _next_id_map(self) -> dict[str, str]:
         if self._next_ids_path.exists() and self._mutable_next_id_map is None:
-            return json.loads(self._next_ids_path.read_text())
+            return cast(
+                dict[str, str], json.loads(self._next_ids_path.read_text())
+            )
         else:
             return {}
 
