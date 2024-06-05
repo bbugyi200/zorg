@@ -20,7 +20,6 @@ from ..domain.models import File, Note
 from ..domain.types import Color
 from ..storage.sql.session import SQLSession
 from .compiler import walk_zorg_file
-from .zid_manager import ZIDManager
 
 
 _LOGGER = Logger(__name__)
