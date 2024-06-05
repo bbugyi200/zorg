@@ -15,7 +15,6 @@ from freezegun import freeze_time
 from pytest import fixture
 
 from zorg.app.__main__ import main as zorg_main
-from zorg.service.zid_manager import ZIDManager
 
 from . import common as c
 
@@ -25,12 +24,6 @@ pytest_plugins = ["clack.pytest_plugin", "vimala.pytest_plugin"]
 
 if TYPE_CHECKING:  # fixes pytest warning
     from clack.pytest_plugin import MakeConfigFile
-
-
-@fixture(autouse=True)
-def clear_zid_cache() -> None:
-    """Clears the in-memory ZID mapping."""
-    ZIDManager._class_next_id_map = None
 
 
 @fixture(scope="session")
