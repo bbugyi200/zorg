@@ -39,10 +39,10 @@ class ZIDManager:
         id_part = next_id_map.get(date_part, "00")
         # pylint: disable=unsupported-assignment-operation
         next_id_map[date_part] = _get_next_id(id_part)
-        self.write_to_disk(next_id_map)
+        self._write_to_disk(next_id_map)
         return f"{date_part}#{id_part}"
 
-    def write_to_disk(self, next_id_map: dict[str, str]) -> None:
+    def _write_to_disk(self, next_id_map: dict[str, str]) -> None:
         """Writes the next ID map back to disk."""
         with self._next_ids_path.open("w") as f:
             json.dump(dict(next_id_map), f, indent=4)
