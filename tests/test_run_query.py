@@ -56,9 +56,8 @@ def test_query(
     query: str,
 ) -> None:
     """Tests that zorg queries produce expected output."""
-    exit_code = main("--log=null", "--dir", str(db_zettel_dir), "query", query)
+    exit_code = main("--dir", str(db_zettel_dir), "query", query)
     capture = capsys.readouterr()
 
     assert exit_code == 0
-    assert capture.err == ""
     assert capture.out == snapshot

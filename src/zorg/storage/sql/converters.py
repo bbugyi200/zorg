@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
+from functools import partial
 import operator
 from pathlib import Path
 from typing import Any, Callable, Optional, TypeVar, cast
@@ -255,7 +256,7 @@ class _SONConverter:
             if case_sensitive is None:
                 case_sensitive = not bool(desc_filter.value.islower())
 
-            like_arg = f"%{desc_filter.value}%"
+            like_arg = f"%{desc_filter.value}%".replace("_", "\\_")
             op_arg: Any
             if case_sensitive:
                 cond = sql.ZorgNote.body.like(like_arg)  # type: ignore[attr-defined]
@@ -281,7 +282,7 @@ class _SONConverter:
                     DescOperator.CONTAINS: sql.ZorgNote.body.ilike,  # type: ignore[attr-defined]
                     DescOperator.NOT_CONTAINS: sql.ZorgNote.body.not_ilike,  # type: ignore[attr-defined]
                 }
-                op = op_map[desc_filter.op]
+                op = partial(op_map[desc_filter.op], escape="\\")
                 op_arg = like_arg
 
             and_conds.append(op(op_arg))
