@@ -146,7 +146,7 @@ def test_action_open__local_link(
     assert exit_code == 0
 
     capture = capsys.readouterr()
-    assert capture.out.strip() == "SEARCH id::1"
+    assert capture.out.strip() == "SEARCH id::1\\(\\s\\|$\\)"
 
 
 @params("lineno", [param(13, id="line_with_id_link")])
@@ -171,7 +171,7 @@ def test_action_open__id_link(
     zo_path = db_zettel_dir / "tags_and_ids.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH id::pig_is_gross",
+        "SEARCH id::pig_is_gross\\(\\s\\|$\\)",
     ]
 
 

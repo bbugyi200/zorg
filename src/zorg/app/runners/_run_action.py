@@ -136,7 +136,7 @@ def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 
 def _open_local_link(local_link: str) -> int:
     id_key = local_link[1:-1]
-    print(f"SEARCH id::{id_key}")
+    print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
     return 0
 
 
@@ -163,7 +163,7 @@ def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
     assert note.file_path is not None
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
-    print(f"SEARCH id::{id_key}")
+    print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
 
     return 0
 
