@@ -325,7 +325,8 @@ def _check_for_modified_notes(
             modify_short_date = zdt.to_short_date_spec(dt.date.today())
             # If the modify date is the same as the create date, then no modify
             # date spec should exist yet...
-            if note.modify_date == note.create_date:
+            assert old_note is not None
+            if old_note.modify_date == note.create_date:
                 old_body = f"{note.body.lstrip()}"
             # Otherwise, we need to remove the old modify date spec before
             # adding the new one.
