@@ -12,5 +12,7 @@ def run_query(cfg: QueryConfig) -> int:
     with SQLSession(
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
-        print(swog.execute(session, cfg.query))
+        query_results = swog.execute(session, cfg.query)
+        if query_results:
+            print(query_results)
     return 0
