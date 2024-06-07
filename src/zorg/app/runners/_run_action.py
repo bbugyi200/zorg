@@ -79,7 +79,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
 
         if target is not None:
             if target.startswith("[[") and target.endswith("]]"):
-                return _open_link(cfg, zo_path, target)
+                return _open_file_link(cfg, zo_path, target)
             elif _is_local_link(target):
                 return _open_local_link(target)
             elif target.startswith("[#") and target.endswith("]"):
@@ -103,7 +103,7 @@ def _is_local_link(word: str) -> bool:
     )
 
 
-def _open_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
+def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     link_parts = link.split("#")
     link_base = (
         link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
