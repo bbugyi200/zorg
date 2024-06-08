@@ -3,6 +3,7 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
+from pathlib import Path
 from typing import Any, Final, Literal, Optional
 
 import antlr4
@@ -143,7 +144,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
             link_text = ctx.children[1].getText()
-            self._s.note_links.append(link_text)
+            self._s.note_links.append(Path(link_text.split("#")[0]))
 
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
@@ -337,7 +338,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "create_date": self._s.create_date,
             "file_path": self.zorg_file.path,
             "line_no": ctx.start.line,
-            "links": self._s.note_links,
+            "linked_file_paths": self._s.note_links,
             "modify_date": (
                 self._s.modify_date
                 if self._s.modify_date
@@ -434,7 +435,7 @@ class _ZorgFileCompilerState:
     h4_props: dict[str, Any] = field(default_factory=lambda: {})
     note_props: dict[str, Any] = field(default_factory=lambda: {})
 
-    note_links: list[str] = field(default_factory=lambda: [])
+    note_links: list[Path] = field(default_factory=lambda: [])
 
     file_date: Optional[dt.date] = None
     h1_date: Optional[dt.date] = None
