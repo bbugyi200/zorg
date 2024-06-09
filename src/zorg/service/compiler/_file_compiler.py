@@ -57,7 +57,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s = _ZorgFileCompilerState()
 
     def enterArea(self, ctx: ZorgFileParser.AreaContext) -> None:  # noqa: D102
-        self._add_tags(ctx, "areas")
+        self._add_tag("areas", ctx.children[1].getText())
 
     def enterBase_note(
         self, ctx: ZorgFileParser.Base_noteContext
@@ -68,7 +68,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterContext(
         self, ctx: ZorgFileParser.ContextContext
     ) -> None:  # noqa: D102
-        self._add_tags(ctx, "contexts")
+        self._add_tag("contexts", ctx.children[1].getText())
 
     def enterDate(self, ctx: ZorgFileParser.DateContext) -> None:  # noqa: D102
         get_datetime = partial(
@@ -115,6 +115,11 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._s.in_h4_header = True
 
+    def enterGlobal_link(
+        self, ctx: ZorgFileParser.Global_linkContext
+    ) -> None:  # noqa: D102
+        self._add_tag("links", f"global:{ctx.children[1].getText()}")
+
     def enterHead(self, ctx: ZorgFileParser.HeadContext) -> None:  # noqa: D102
         del ctx
         self._s.in_head = True
@@ -140,18 +145,27 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._reset_note_context()
 
+    def enterLocal_link(
+        self, ctx: ZorgFileParser.Local_linkContext
+    ) -> None:  # noqa: D102
+        local_id = ctx.children[1].getText()
+        # HACK: Ignore completed checklists items.
+        if local_id == "X":
+            return
+        self._add_tag("links", f"local:{local_id}")
+
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
-        self._add_tags(ctx, "links")
+        self._add_tag("links", ctx.children[1].getText())
 
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
     ) -> None:  # noqa: D102
-        self._add_tags(ctx, "people")
+        self._add_tag("people", ctx.children[1].getText())
 
     def enterProject(
         self, ctx: ZorgFileParser.ProjectContext
     ) -> None:  # noqa: D102
-        self._add_tags(ctx, "projects")
+        self._add_tag("projects", ctx.children[1].getText())
 
     def enterPriority(
         self, ctx: ZorgFileParser.PriorityContext
@@ -199,6 +213,11 @@ class ZorgFileCompiler(ZorgFileListener):
                 assert_never(ch)
 
             self._s.todo_status = status
+
+    def enterZid_link(
+        self, ctx: ZorgFileParser.Zid_linkContext
+    ) -> None:  # noqa: D102
+        self._add_tag("links", f"zid:{ctx.children[1].getText()}")
 
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
@@ -357,29 +376,26 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.note_date = None
         self._s.modify_date = None
 
-    def _add_tags(
-        self, ctx: antlr4.ParserRuleContext, tag_name: TagName
-    ) -> None:
-        text = ctx.children[1].getText()
-        if all(ch.isdigit() for ch in text):
+    def _add_tag(self, tag_name: TagName, tag_value: str) -> None:
+        if all(ch.isdigit() for ch in tag_value):
             _LOGGER.debug(
                 "Tag identifiers cannot contain only digits.",
                 tag_name=tag_name,
-                ID=text,
+                ID=tag_value,
             )
             return
         if self._s.in_first_comment:
-            self._s.file_tags[tag_name].append(text)
+            self._s.file_tags[tag_name].append(tag_value)
         elif self._s.in_h1_header:
-            self._s.h1_tags[tag_name].append(text)
+            self._s.h1_tags[tag_name].append(tag_value)
         elif self._s.in_h2_header:
-            self._s.h2_tags[tag_name].append(text)
+            self._s.h2_tags[tag_name].append(tag_value)
         elif self._s.in_h3_header:
-            self._s.h3_tags[tag_name].append(text)
+            self._s.h3_tags[tag_name].append(tag_value)
         elif self._s.in_h4_header:
-            self._s.h4_tags[tag_name].append(text)
+            self._s.h4_tags[tag_name].append(tag_value)
         elif self._s.in_note:
-            self._s.note_tags[tag_name].append(text)
+            self._s.note_tags[tag_name].append(tag_value)
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:

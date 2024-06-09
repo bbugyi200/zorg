@@ -33,7 +33,7 @@ priority    : PRIORITY ;
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
-atom        : tag_symbol | tag | link | property | id_group | ref | global_link | local_link | zid_link | priority ;
+atom        : tag_symbol | tag | link | property | id_group | global_link | local_link | zid_link | ref | priority ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;

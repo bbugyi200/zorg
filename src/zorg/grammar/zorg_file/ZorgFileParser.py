@@ -118,8 +118,8 @@ def serializedATN():
         0,258,250,1,0,0,0,258,259,1,0,0,0,259,261,1,0,0,0,260,262,3,82,41,
         0,261,260,1,0,0,0,261,262,1,0,0,0,262,39,1,0,0,0,263,274,3,60,30,
         0,264,274,3,62,31,0,265,274,3,74,37,0,266,274,3,44,22,0,267,274,
-        3,46,23,0,268,274,3,82,41,0,269,274,3,76,38,0,270,274,3,78,39,0,
-        271,274,3,80,40,0,272,274,3,34,17,0,273,263,1,0,0,0,273,264,1,0,
+        3,46,23,0,268,274,3,76,38,0,269,274,3,78,39,0,270,274,3,80,40,0,
+        271,274,3,82,41,0,272,274,3,34,17,0,273,263,1,0,0,0,273,264,1,0,
         0,0,273,265,1,0,0,0,273,266,1,0,0,0,273,267,1,0,0,0,273,268,1,0,
         0,0,273,269,1,0,0,0,273,270,1,0,0,0,273,271,1,0,0,0,273,272,1,0,
         0,0,274,41,1,0,0,0,275,276,5,16,0,0,276,43,1,0,0,0,277,278,5,15,
@@ -1742,10 +1742,6 @@ class ZorgFileParser ( Parser ):
             return self.getTypedRuleContext(ZorgFileParser.Id_groupContext,0)
 
 
-        def ref(self):
-            return self.getTypedRuleContext(ZorgFileParser.RefContext,0)
-
-
         def global_link(self):
             return self.getTypedRuleContext(ZorgFileParser.Global_linkContext,0)
 
@@ -1756,6 +1752,10 @@ class ZorgFileParser ( Parser ):
 
         def zid_link(self):
             return self.getTypedRuleContext(ZorgFileParser.Zid_linkContext,0)
+
+
+        def ref(self):
+            return self.getTypedRuleContext(ZorgFileParser.RefContext,0)
 
 
         def priority(self):
@@ -1817,25 +1817,25 @@ class ZorgFileParser ( Parser ):
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 268
-                self.ref()
+                self.global_link()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 269
-                self.global_link()
+                self.local_link()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 270
-                self.local_link()
+                self.zid_link()
                 pass
 
             elif la_ == 9:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 271
-                self.zid_link()
+                self.ref()
                 pass
 
             elif la_ == 10:
