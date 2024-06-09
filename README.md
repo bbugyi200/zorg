@@ -259,7 +259,7 @@ options:
 ### `zorg template init --help`
 
 ```
-usage: zorg template init [-h] [-t TEMPLATE] new_path [variables ...]
+usage: zorg template init [-h] [-f] [-t TEMPLATE] new_path [variables ...]
 
 Initialize a new file using a zorg template.
 
@@ -268,6 +268,7 @@ positional arguments:
   variables             A list of variable specs of the form of key=value.
 
 options:
+  -f, --force           Overwrite target file if the file already exists.
   -h, --help            show this help message and exit
   -t TEMPLATE, --template TEMPLATE
                         Optional path to the .zot template. If a template is
