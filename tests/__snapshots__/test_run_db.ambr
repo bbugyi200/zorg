@@ -87,6 +87,8 @@
     'arealink',
     'context',
     'contextlink',
+    'link',
+    'linklink',
     'person',
     'personlink',
     'project',

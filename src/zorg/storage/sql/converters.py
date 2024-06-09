@@ -393,6 +393,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             ("contexts", sql.Context),
             ("people", sql.Person),
             ("projects", sql.Project),
+            ("links", sql.Link),
         ]:
             entity_tag_list = getattr(entity, attr)
             sql_tag_list = []
@@ -468,6 +469,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             contexts=list(context.name for context in sql_model.contexts),
             create_date=sql_model.create_date,
             file_path=Path(sql_model.zorg_file.path),
+            links=[link.name for link in sql_model.links],
             modify_date=sql_model.modify_date,
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),

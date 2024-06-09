@@ -94,6 +94,14 @@ class PropertyLink(NoteLink, table=True):
     value: str
 
 
+class LinkLink(NoteLink, table=True):
+    """Association model for note-to-link relationships."""
+
+    link_id: Optional[int] = Field(
+        default=None, foreign_key="link.id", primary_key=True
+    )
+
+
 ###############################################################################
 # model used to track zorg (*.zo) files
 ###############################################################################
@@ -128,6 +136,9 @@ class ZorgNote(Base, table=True):
     # relationships
     zorg_file: ZorgFile = Relationship(
         back_populates="notes", link_model=ZorgFileLink
+    )
+    links: List["Link"] = Relationship(
+        back_populates="notes", link_model=LinkLink
     )
     contexts: List["Context"] = Relationship(
         back_populates="notes", link_model=ContextLink
@@ -180,6 +191,14 @@ class Person(Tag, table=True):
 
 
 class Property(Tag, table=True):
-    """Model class for metadata tags (e.g. due:2022-06-01)."""
+    """Model class for properties (e.g. due::2022-06-01)."""
 
     links: List[PropertyLink] = Relationship(back_populates="prop")
+
+
+class Link(Tag, table=True):
+    """Model class for links (e.g. [[foobar]])."""
+
+    notes: List[ZorgNote] = Relationship(
+        back_populates="links", link_model=LinkLink
+    )
