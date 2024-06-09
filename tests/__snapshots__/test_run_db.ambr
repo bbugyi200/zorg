@@ -37,11 +37,12 @@
     'buz#fuzz',
     'desd_cd_kdzb.yhdxx',
     'eswz_xqow::empiz_ljyiwjbmi_szstj',
+    'poop',
     'xmind/zorg_e2e_query_arch.xmind',
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  142
+  143
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([

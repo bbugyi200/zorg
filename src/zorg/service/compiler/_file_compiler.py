@@ -17,7 +17,7 @@ from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
 
-TagName = Literal["areas", "contexts", "people", "projects"]
+TagName = Literal["areas", "contexts", "links", "people", "projects"]
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"
 _LOGGER = Logger(__name__)
@@ -141,9 +141,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._reset_note_context()
 
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
-        if self._s.in_note:
-            link_text = ctx.children[1].getText()
-            self._s.note_links.append(link_text)
+        self._add_tags(ctx, "links")
 
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
@@ -337,7 +335,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "create_date": self._s.create_date,
             "file_path": self.zorg_file.path,
             "line_no": ctx.start.line,
-            "links": self._s.note_links,
+            "links": self._s.links,
             "modify_date": (
                 self._s.modify_date
                 if self._s.modify_date
@@ -356,7 +354,6 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.ids_in_note = 0
         self._s.note_tags = _get_default_tags_map()
         self._s.note_props = {}
-        self._s.note_links = []
         self._s.note_date = None
         self._s.modify_date = None
 
@@ -386,7 +383,13 @@ class ZorgFileCompiler(ZorgFileListener):
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:
-    return {"areas": [], "projects": [], "contexts": [], "people": []}
+    return {
+        "areas": [],
+        "contexts": [],
+        "links": [],
+        "people": [],
+        "projects": [],
+    }
 
 
 @dataclass
@@ -434,8 +437,6 @@ class _ZorgFileCompilerState:
     h4_props: dict[str, Any] = field(default_factory=lambda: {})
     note_props: dict[str, Any] = field(default_factory=lambda: {})
 
-    note_links: list[str] = field(default_factory=lambda: [])
-
     file_date: Optional[dt.date] = None
     h1_date: Optional[dt.date] = None
     h2_date: Optional[dt.date] = None
@@ -456,6 +457,11 @@ class _ZorgFileCompilerState:
     def contexts(self) -> list[str]:
         """Context tags that are currently in-scope."""
         return self._get_current_tags("contexts")
+
+    @property
+    def links(self) -> list[str]:
+        """Links that are currently in-scope."""
+        return self._get_current_tags("links")
 
     @property
     def projects(self) -> list[str]:
