@@ -30,9 +30,9 @@ def test_edit_day_logs(
         habit_log,
         done_log,
         template_pattern_map={
-            f"^{re_date_group}_habit.zo$": "habit_log.zot",
-            f"^{re_date_group}_done.zo$": "done_log.zot",
-            f"^{re_date_group}.zo$": "day_log.zot",
+            f"^{c.YYYY}/{re_date_group}_habit.zo$": "habit_log.zot",
+            f"^{c.YYYY}/{re_date_group}_done.zo$": "done_log.zot",
+            f"^{c.YYYY}/{re_date_group}.zo$": "day_log.zot",
         },
         **kwargs,
     )
