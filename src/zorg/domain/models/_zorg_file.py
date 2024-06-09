@@ -31,7 +31,7 @@ class Note:
     create_date: dt.date = field(default_factory=dt.date.today)
     file_path: Optional[Path] = None
     line_no: Optional[int] = None
-    linked_file_paths: list[Path] = field(default_factory=lambda: [])
+    links: list[str] = field(default_factory=lambda: [])
     modify_date: dt.date = field(default_factory=dt.date.today)
     people: list[str] = field(default_factory=lambda: [])
     projects: list[str] = field(default_factory=lambda: [])

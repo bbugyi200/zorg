@@ -449,20 +449,6 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             results = session.exec(stmt)
             sql_zorg_note.zorg_file = results.first()
 
-        # Convert 'linked_zorg_files' field.
-        linked_zorg_files: list[sql.ZorgFile] = []
-        for linked_file_path in entity.linked_file_paths:
-            stripped_file_path = common.strip_zdir(
-                self._zdir, linked_file_path
-            )
-            stmt = select(sql.ZorgFile).where(
-                sql.ZorgFile.path == stripped_file_path
-            )
-            results = session.exec(stmt)
-            if linked_zorg_file := results.first():
-                linked_zorg_files.append(linked_zorg_file)
-        sql_zorg_note.linked_zorg_files = linked_zorg_files
-
         return sql_zorg_note
 
     def to_entity(self, sql_model: sql.ZorgNote) -> Note:
@@ -482,10 +468,6 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             contexts=list(context.name for context in sql_model.contexts),
             create_date=sql_model.create_date,
             file_path=Path(sql_model.zorg_file.path),
-            linked_file_paths=[
-                Path(linked_file)
-                for linked_file in sql_model.linked_zorg_files
-            ],
             modify_date=sql_model.modify_date,
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),
