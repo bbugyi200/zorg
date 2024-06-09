@@ -1060,6 +1060,15 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-link_filter__buz]
+  '''
+  - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-link_filter__tags_and_ids]
+  ''
+# ---
 # name: test_query[YAMLConfigFile-mid_and_low_priority]
   '''
   o P1 240313#04 Medium Priority TODO

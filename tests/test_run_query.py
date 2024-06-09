@@ -46,6 +46,8 @@ params = mark.parametrize
             "!f=*scrambled* !'e' G file",
             id="not_scrambled_file_AND_no_e_in_desc",
         ),
+        param("[[buz]]", id="link_filter__buz"),
+        param("[[tags_and_ids]]", id="link_filter__tags_and_ids"),
     ],
 )
 def test_query(
