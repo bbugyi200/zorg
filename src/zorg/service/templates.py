@@ -23,6 +23,7 @@ def init_from_template(
     *,
     template: Path = None,
     var_map: VarMapType = None,
+    should_overwrite_existing: bool = False,
 ) -> None:
     """Initialize a new file by rendering a template if necessary.
 
@@ -40,7 +41,7 @@ def init_from_template(
     new_path = common.prepend_zdir(zdir, [Path(new_path)])[0]
     var_map = {} if var_map is None else dict(var_map)
 
-    if new_path.exists():
+    if new_path.exists() and not should_overwrite_existing:
         return
 
     matched_template = template

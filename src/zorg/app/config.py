@@ -130,6 +130,7 @@ class TemplateInitConfig(Config):
 
     # ----- ARGUMENTS
     new_path: Path
+    should_overwrite_existing: bool = False
     template: Optional[Path] = None
     var_map: Optional[VarMapType] = None
 
@@ -283,6 +284,13 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "new_path",
         type=Path,
         help="Path to the new file you would like to create.",
+    )
+    template_init_parser.add_argument(
+        "-f",
+        "--force",
+        dest="should_overwrite_existing",
+        action="store_true",
+        help="Overwrite target file if the file already exists.",
     )
     template_init_parser.add_argument(
         "-t",

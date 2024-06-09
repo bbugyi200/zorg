@@ -25,6 +25,7 @@ def run_template_init(cfg: TemplateInitConfig) -> int:
         cfg.zettel_dir,
         cfg.template_pattern_map,
         cfg.new_path,
+        should_overwrite_existing=cfg.should_overwrite_existing,
         template=template,
         var_map=cfg.var_map,
     )
