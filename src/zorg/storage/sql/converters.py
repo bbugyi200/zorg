@@ -315,10 +315,10 @@ class _SONConverter:
         for link_filter in self.and_filter.link_filters:
             if link_filter.negated:
                 in_op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
-                like_op = sql.Link.name.not_like  # type: ignore[union-attr]
+                like_op = sql.Link.name.not_like  # type: ignore[attr-defined]
             else:
                 in_op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
-                like_op = sql.Link.name.like  # type: ignore[union-attr]
+                like_op = sql.Link.name.like  # type: ignore[attr-defined]
 
             link_name = link_filter.link
             subquery = base_subquery.where(
