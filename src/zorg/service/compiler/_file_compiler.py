@@ -143,7 +143,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterLink(self, ctx: ZorgFileParser.LinkContext) -> None:  # noqa: D102
         if self._s.in_note:
             link_text = ctx.children[1].getText()
-            self._s.note_file_links.append(link_text)
+            self._s.note_links.append(link_text)
 
     def enterPerson(
         self, ctx: ZorgFileParser.PersonContext
@@ -337,7 +337,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "create_date": self._s.create_date,
             "file_path": self.zorg_file.path,
             "line_no": ctx.start.line,
-            "file_links": self._s.note_file_links,
+            "links": self._s.note_links,
             "modify_date": (
                 self._s.modify_date
                 if self._s.modify_date
@@ -356,7 +356,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.ids_in_note = 0
         self._s.note_tags = _get_default_tags_map()
         self._s.note_props = {}
-        self._s.note_file_links = []
+        self._s.note_links = []
         self._s.note_date = None
         self._s.modify_date = None
 
@@ -434,7 +434,7 @@ class _ZorgFileCompilerState:
     h4_props: dict[str, Any] = field(default_factory=lambda: {})
     note_props: dict[str, Any] = field(default_factory=lambda: {})
 
-    note_file_links: list[str] = field(default_factory=lambda: [])
+    note_links: list[str] = field(default_factory=lambda: [])
 
     file_date: Optional[dt.date] = None
     h1_date: Optional[dt.date] = None

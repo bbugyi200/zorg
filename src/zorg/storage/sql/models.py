@@ -66,7 +66,7 @@ class AreaLink(NoteLink, table=True):
 
 
 class PersonLink(NoteLink, table=True):
-    """Association model for notes-to-people relationships."""
+    """Association model for notes-to-areas relationships."""
 
     person_id: Optional[int] = Field(
         default=None, foreign_key="person.id", primary_key=True
@@ -94,14 +94,6 @@ class PropertyLink(NoteLink, table=True):
     value: str
 
 
-class Link(NoteLink, table=True):
-    """Association model for notes to linked zorg files."""
-
-    zorg_file_id: Optional[int] = Field(
-        default=None, foreign_key="zorgfile.id", primary_key=True
-    )
-
-
 ###############################################################################
 # model used to track zorg (*.zo) files
 ###############################################################################
@@ -112,9 +104,6 @@ class ZorgFile(Base, table=True):
     has_errors: bool = False
     notes: List["ZorgNote"] = Relationship(
         back_populates="zorg_file", link_model=ZorgFileLink
-    )
-    linked_notes: List["ZorgNote"] = Relationship(
-        back_populates="linked_zorg_files", link_model=Link
     )
 
 
@@ -139,9 +128,6 @@ class ZorgNote(Base, table=True):
     # relationships
     zorg_file: ZorgFile = Relationship(
         back_populates="notes", link_model=ZorgFileLink
-    )
-    linked_zorg_files: List[ZorgFile] = Relationship(
-        back_populates="linked_notes", link_model=Link
     )
     contexts: List["Context"] = Relationship(
         back_populates="notes", link_model=ContextLink
