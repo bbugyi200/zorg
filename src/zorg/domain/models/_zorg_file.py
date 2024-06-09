@@ -30,14 +30,16 @@ class Note:
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
     file_path: Optional[Path] = None
+    file_links: list[Path] = field(default_factory=lambda: [])
+    id_links: list[str] = field(default_factory=lambda: [])
     line_no: Optional[int] = None
-    links: list[str] = field(default_factory=lambda: [])
     modify_date: dt.date = field(default_factory=dt.date.today)
     people: list[str] = field(default_factory=lambda: [])
     projects: list[str] = field(default_factory=lambda: [])
     properties: dict[str, str] = field(default_factory=lambda: {})
     todo_payload: Optional[TodoPayload] = None
     zid: Optional[str] = None
+    zid_links: list[str] = field(default_factory=lambda: [])
 
     def __eq__(self, other: object) -> bool:  # noqa: D105
         return (
