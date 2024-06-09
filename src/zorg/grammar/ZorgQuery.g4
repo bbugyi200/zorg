@@ -24,7 +24,7 @@ note        : 'note' ;
 where_body     : or_filter ;
 or_filter      : and_filter (SPACE '|' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
-where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter | desc_filter | file_filter ;
+where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter | desc_filter | file_filter | link_filter ;
 note_type      : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : PRIORITY (DASH ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'))? ;
@@ -41,6 +41,7 @@ prop_filter    : not_op? ID COLON prop_op? (id | ('0' | '1' | '2' | '3' | '4' | 
 prop_op        : '<' | '<=' | '>=' | '>' ;
 desc_filter    : not_op? 'c'? SQUOTE any_non_squote* id (SPACE id)* SQUOTE ;
 file_filter    : not_op? 'f=' (STAR UNDERSCORE?)? id STAR? ;
+link_filter    : not_op? '[[' id ']]' ;
 
 zid  : ZID  ;
 id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;

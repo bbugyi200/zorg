@@ -278,6 +278,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#link_filter.
+    def enterLink_filter(self, ctx:ZorgQueryParser.Link_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#link_filter.
+    def exitLink_filter(self, ctx:ZorgQueryParser.Link_filterContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#zid.
     def enterZid(self, ctx:ZorgQueryParser.ZidContext):
         pass
