@@ -135,21 +135,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
             elif w := where_atom.prop_filter():
                 property_filters.add(_get_property_filter(w))
             elif w := where_atom.desc_filter():
-                desc_filter = w.getText()
-                desc_op = DescOperator.CONTAINS
-                case_sensitive: Optional[bool] = None
-                if desc_filter[0] == "!":
-                    desc_op = DescOperator.NOT_CONTAINS
-                    desc_filter = desc_filter[1:]
-                if desc_filter[0] == "c":
-                    desc_filter = desc_filter[1:]
-                    case_sensitive = True
-                value = desc_filter[1:-1]
-                desc_filters.add(
-                    DescFilter(
-                        value=value, op=desc_op, case_sensitive=case_sensitive
-                    )
-                )
+                desc_filters.add(_get_desc_filter(w))
             elif w := where_atom.file_filter():
                 if w.getText().startswith("!"):
                     negated = True
@@ -290,6 +276,20 @@ def _get_date_range(
         end_date = zdt.from_short_date_spec(short_end_date)
 
     return DateRange(start_date, end_date)
+
+
+def _get_desc_filter(w: ZorgQueryParser.Desc_filterContext) -> DescFilter:
+    desc_filter = w.getText()
+    desc_op = DescOperator.CONTAINS
+    case_sensitive: Optional[bool] = None
+    if desc_filter[0] == "!":
+        desc_op = DescOperator.NOT_CONTAINS
+        desc_filter = desc_filter[1:]
+    if desc_filter[0] == "c":
+        desc_filter = desc_filter[1:]
+        case_sensitive = True
+    value = desc_filter[1:-1]
+    return DescFilter(value=value, op=desc_op, case_sensitive=case_sensitive)
 
 
 def _get_property_filter(
