@@ -10,6 +10,7 @@ from ...domain.models import (
     DateRange,
     DescFilter,
     FileFilter,
+    LinkFilter,
     PropertyFilter,
     Query,
     WhereAndFilter,
@@ -80,6 +81,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         property_filters: set[PropertyFilter] = set()
         desc_filters: set[DescFilter] = set()
         file_filters: set[FileFilter] = set()
+        link_filters: set[LinkFilter] = set()
 
         where_atoms = cast(
             list[ZorgQueryParser.Where_atomContext], ctx.where_atom()
@@ -159,6 +161,14 @@ class ZorgQueryCompiler(ZorgQueryListener):
                     path_glob if path_glob.endswith("*") else f"{path_glob}.zo"
                 )
                 file_filters.add(FileFilter(path_glob, negated=negated))
+            elif w := where_atom.link_filter():
+                if w.getText().startswith("!"):
+                    negated = True
+                    link = w.getText()[3:-2]
+                else:
+                    negated = False
+                    link = w.getText()[2:-2]
+                link_filters.add(LinkFilter(link, negated=negated))
             # Subfilters are handled in a different method. See the
             # enterSubfilter() and exitSubfilter() methods for more
             # information.
@@ -175,6 +185,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 create_date_ranges=create_date_ranges,
                 desc_filters=desc_filters,
                 file_filters=file_filters,
+                link_filters=link_filters,
                 modify_date_ranges=modify_date_ranges,
                 people=people,
                 priorities=priorities,

@@ -303,6 +303,30 @@ class _SONConverter:
             and_conds.append(like_op(file_filter.path_glob.replace("*", "%")))
         return and_(and_conds[0], *and_conds[1:])
 
+    @_son_converter_parser
+    def link_filters(self) -> Optional[ColumnElement]:
+        """Converter tht handles link filters."""
+        and_conds = []
+        if not self.and_filter.link_filters:
+            return None
+        base_subquery = (
+            select(sql.ZorgNote.id).join(sql.LinkLink).join(sql.Link)
+        )
+        for link_filter in self.and_filter.link_filters:
+            if link_filter.negated:
+                in_op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+                like_op = sql.Link.name.not_like  # type: ignore[union-attr]
+            else:
+                in_op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+                like_op = sql.Link.name.like  # type: ignore[union-attr]
+
+            link_name = link_filter.link
+            subquery = base_subquery.where(
+                or_(sql.Link.name == link_name, like_op(f"{link_name}#%"))
+            )
+            and_conds.append(in_op(subquery))
+        return and_(and_conds[0], *and_conds[1:])
+
 
 def _noop(value: _T) -> _T:
     """A function that does nothing."""
