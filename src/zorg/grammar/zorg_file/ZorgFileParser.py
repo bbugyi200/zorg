@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,46,493,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,45,493,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
@@ -55,8 +55,8 @@ def serializedATN():
         1,48,1,48,1,48,1,49,1,49,1,49,1,49,1,50,1,50,1,50,0,0,51,0,2,4,6,
         8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,
         52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,
-        96,98,100,0,5,2,0,9,9,42,42,4,0,26,26,32,32,34,35,42,45,3,0,29,31,
-        36,36,46,46,1,0,36,39,1,1,7,7,523,0,102,1,0,0,0,2,109,1,0,0,0,4,
+        96,98,100,0,5,2,0,8,8,41,41,4,0,25,25,31,31,33,34,41,44,3,0,28,30,
+        35,35,45,45,1,0,35,38,1,1,6,6,523,0,102,1,0,0,0,2,109,1,0,0,0,4,
         113,1,0,0,0,6,120,1,0,0,0,8,143,1,0,0,0,10,157,1,0,0,0,12,159,1,
         0,0,0,14,164,1,0,0,0,16,172,1,0,0,0,18,175,1,0,0,0,20,177,1,0,0,
         0,22,190,1,0,0,0,24,198,1,0,0,0,26,201,1,0,0,0,28,208,1,0,0,0,30,
@@ -71,9 +71,9 @@ def serializedATN():
         0,0,100,490,1,0,0,0,102,104,3,2,1,0,103,105,3,6,3,0,104,103,1,0,
         0,0,104,105,1,0,0,0,105,106,1,0,0,0,106,107,5,0,0,1,107,1,1,0,0,
         0,108,110,3,4,2,0,109,108,1,0,0,0,110,111,1,0,0,0,111,109,1,0,0,
-        0,111,112,1,0,0,0,112,3,1,0,0,0,113,115,5,36,0,0,114,116,3,36,18,
-        0,115,114,1,0,0,0,115,116,1,0,0,0,116,117,1,0,0,0,117,118,5,7,0,
-        0,118,5,1,0,0,0,119,121,5,7,0,0,120,119,1,0,0,0,121,122,1,0,0,0,
+        0,111,112,1,0,0,0,112,3,1,0,0,0,113,115,5,35,0,0,114,116,3,36,18,
+        0,115,114,1,0,0,0,115,116,1,0,0,0,116,117,1,0,0,0,117,118,5,6,0,
+        0,118,5,1,0,0,0,119,121,5,6,0,0,120,119,1,0,0,0,121,122,1,0,0,0,
         122,120,1,0,0,0,122,123,1,0,0,0,123,127,1,0,0,0,124,126,3,8,4,0,
         125,124,1,0,0,0,126,129,1,0,0,0,127,125,1,0,0,0,127,128,1,0,0,0,
         128,133,1,0,0,0,129,127,1,0,0,0,130,132,3,86,43,0,131,130,1,0,0,
@@ -81,35 +81,35 @@ def serializedATN():
         0,135,133,1,0,0,0,136,138,3,84,42,0,137,136,1,0,0,0,138,141,1,0,
         0,0,139,137,1,0,0,0,139,140,1,0,0,0,140,7,1,0,0,0,141,139,1,0,0,
         0,142,144,3,10,5,0,143,142,1,0,0,0,144,145,1,0,0,0,145,143,1,0,0,
-        0,145,146,1,0,0,0,146,150,1,0,0,0,147,149,5,7,0,0,148,147,1,0,0,
+        0,145,146,1,0,0,0,146,150,1,0,0,0,147,149,5,6,0,0,148,147,1,0,0,
         0,149,152,1,0,0,0,150,148,1,0,0,0,150,151,1,0,0,0,151,9,1,0,0,0,
         152,150,1,0,0,0,153,158,3,26,13,0,154,158,3,14,7,0,155,158,3,12,
         6,0,156,158,3,4,2,0,157,153,1,0,0,0,157,154,1,0,0,0,157,155,1,0,
-        0,0,157,156,1,0,0,0,158,11,1,0,0,0,159,160,3,82,41,0,160,161,5,46,
-        0,0,161,162,3,36,18,0,162,163,5,7,0,0,163,13,1,0,0,0,164,165,5,29,
+        0,0,157,156,1,0,0,0,158,11,1,0,0,0,159,160,3,82,41,0,160,161,5,45,
+        0,0,161,162,3,36,18,0,162,163,5,6,0,0,163,13,1,0,0,0,164,165,5,28,
         0,0,165,169,3,16,8,0,166,168,3,22,11,0,167,166,1,0,0,0,168,171,1,
         0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,15,1,0,0,0,171,169,1,0,
-        0,0,172,173,3,18,9,0,173,174,5,7,0,0,174,17,1,0,0,0,175,176,3,20,
-        10,0,176,19,1,0,0,0,177,187,3,36,18,0,178,180,5,7,0,0,179,181,5,
-        33,0,0,180,179,1,0,0,0,181,182,1,0,0,0,182,180,1,0,0,0,182,183,1,
+        0,0,172,173,3,18,9,0,173,174,5,6,0,0,174,17,1,0,0,0,175,176,3,20,
+        10,0,176,19,1,0,0,0,177,187,3,36,18,0,178,180,5,6,0,0,179,181,5,
+        32,0,0,180,179,1,0,0,0,181,182,1,0,0,0,182,180,1,0,0,0,182,183,1,
         0,0,0,183,184,1,0,0,0,184,186,3,36,18,0,185,178,1,0,0,0,186,189,
         1,0,0,0,187,185,1,0,0,0,187,188,1,0,0,0,188,21,1,0,0,0,189,187,1,
-        0,0,0,190,191,5,24,0,0,191,195,3,16,8,0,192,194,3,24,12,0,193,192,
+        0,0,0,190,191,5,23,0,0,191,195,3,16,8,0,192,194,3,24,12,0,193,192,
         1,0,0,0,194,197,1,0,0,0,195,193,1,0,0,0,195,196,1,0,0,0,196,23,1,
-        0,0,0,197,195,1,0,0,0,198,199,5,25,0,0,199,200,3,16,8,0,200,25,1,
+        0,0,0,197,195,1,0,0,0,198,199,5,24,0,0,199,200,3,16,8,0,200,25,1,
         0,0,0,201,205,3,28,14,0,202,204,3,22,11,0,203,202,1,0,0,0,204,207,
         1,0,0,0,205,203,1,0,0,0,205,206,1,0,0,0,206,27,1,0,0,0,207,205,1,
-        0,0,0,208,211,3,30,15,0,209,210,5,33,0,0,210,212,3,34,17,0,211,209,
+        0,0,0,208,211,3,30,15,0,209,210,5,32,0,0,210,212,3,34,17,0,211,209,
         1,0,0,0,211,212,1,0,0,0,212,213,1,0,0,0,213,214,3,18,9,0,214,215,
-        5,7,0,0,215,29,1,0,0,0,216,221,5,8,0,0,217,221,3,32,16,0,218,221,
-        5,44,0,0,219,221,5,45,0,0,220,216,1,0,0,0,220,217,1,0,0,0,220,218,
+        5,6,0,0,215,29,1,0,0,0,216,221,5,7,0,0,217,221,3,32,16,0,218,221,
+        5,43,0,0,219,221,5,44,0,0,220,216,1,0,0,0,220,217,1,0,0,0,220,218,
         1,0,0,0,220,219,1,0,0,0,221,31,1,0,0,0,222,225,7,0,0,0,223,224,5,
-        46,0,0,224,226,3,52,26,0,225,223,1,0,0,0,225,226,1,0,0,0,226,33,
-        1,0,0,0,227,228,5,15,0,0,228,35,1,0,0,0,229,231,3,38,19,0,230,229,
+        45,0,0,224,226,3,52,26,0,225,223,1,0,0,0,225,226,1,0,0,0,226,33,
+        1,0,0,0,227,228,5,14,0,0,228,35,1,0,0,0,229,231,3,38,19,0,230,229,
         1,0,0,0,231,232,1,0,0,0,232,230,1,0,0,0,232,233,1,0,0,0,233,37,1,
-        0,0,0,234,237,5,33,0,0,235,236,5,40,0,0,236,238,3,56,28,0,237,235,
+        0,0,0,234,237,5,32,0,0,235,236,5,39,0,0,236,238,3,56,28,0,237,235,
         1,0,0,0,237,238,1,0,0,0,238,243,1,0,0,0,239,242,3,56,28,0,240,242,
-        5,41,0,0,241,239,1,0,0,0,241,240,1,0,0,0,242,245,1,0,0,0,243,241,
+        5,40,0,0,241,239,1,0,0,0,241,240,1,0,0,0,242,245,1,0,0,0,243,241,
         1,0,0,0,243,244,1,0,0,0,244,248,1,0,0,0,245,243,1,0,0,0,246,249,
         3,40,20,0,247,249,3,72,36,0,248,246,1,0,0,0,248,247,1,0,0,0,248,
         249,1,0,0,0,249,258,1,0,0,0,250,255,3,54,27,0,251,254,3,54,27,0,
@@ -122,70 +122,70 @@ def serializedATN():
         271,274,3,80,40,0,272,274,3,34,17,0,273,263,1,0,0,0,273,264,1,0,
         0,0,273,265,1,0,0,0,273,266,1,0,0,0,273,267,1,0,0,0,273,268,1,0,
         0,0,273,269,1,0,0,0,273,270,1,0,0,0,273,271,1,0,0,0,273,272,1,0,
-        0,0,274,41,1,0,0,0,275,276,5,17,0,0,276,43,1,0,0,0,277,278,5,16,
-        0,0,278,279,5,46,0,0,279,280,5,46,0,0,280,281,3,46,23,0,281,45,1,
+        0,0,274,41,1,0,0,0,275,276,5,16,0,0,276,43,1,0,0,0,277,278,5,15,
+        0,0,278,279,5,45,0,0,279,280,5,45,0,0,280,281,3,46,23,0,281,45,1,
         0,0,0,282,292,3,48,24,0,283,285,3,58,29,0,284,283,1,0,0,0,285,286,
         1,0,0,0,286,284,1,0,0,0,286,287,1,0,0,0,287,288,1,0,0,0,288,289,
         3,48,24,0,289,291,1,0,0,0,290,284,1,0,0,0,291,294,1,0,0,0,292,290,
         1,0,0,0,292,293,1,0,0,0,293,47,1,0,0,0,294,292,1,0,0,0,295,305,5,
-        16,0,0,296,305,5,19,0,0,297,305,5,14,0,0,298,305,5,15,0,0,299,305,
-        3,50,25,0,300,305,3,52,26,0,301,305,3,42,21,0,302,305,5,8,0,0,303,
-        305,5,9,0,0,304,295,1,0,0,0,304,296,1,0,0,0,304,297,1,0,0,0,304,
+        15,0,0,296,305,5,18,0,0,297,305,5,13,0,0,298,305,5,14,0,0,299,305,
+        3,50,25,0,300,305,3,52,26,0,301,305,3,42,21,0,302,305,5,7,0,0,303,
+        305,5,8,0,0,304,295,1,0,0,0,304,296,1,0,0,0,304,297,1,0,0,0,304,
         298,1,0,0,0,304,299,1,0,0,0,304,300,1,0,0,0,304,301,1,0,0,0,304,
-        302,1,0,0,0,304,303,1,0,0,0,305,49,1,0,0,0,306,307,5,10,0,0,307,
-        51,1,0,0,0,308,309,5,11,0,0,309,53,1,0,0,0,310,318,5,40,0,0,311,
-        318,5,41,0,0,312,318,5,28,0,0,313,318,5,27,0,0,314,318,3,56,28,0,
-        315,318,3,60,30,0,316,318,3,58,29,0,317,310,1,0,0,0,317,311,1,0,
-        0,0,317,312,1,0,0,0,317,313,1,0,0,0,317,314,1,0,0,0,317,315,1,0,
-        0,0,317,316,1,0,0,0,318,55,1,0,0,0,319,320,7,1,0,0,320,57,1,0,0,
-        0,321,322,7,2,0,0,322,59,1,0,0,0,323,324,7,3,0,0,324,61,1,0,0,0,
-        325,330,3,64,32,0,326,330,3,66,33,0,327,330,3,68,34,0,328,330,3,
-        70,35,0,329,325,1,0,0,0,329,326,1,0,0,0,329,327,1,0,0,0,329,328,
-        1,0,0,0,330,63,1,0,0,0,331,332,5,36,0,0,332,333,3,48,24,0,333,65,
-        1,0,0,0,334,335,5,37,0,0,335,336,3,48,24,0,336,67,1,0,0,0,337,338,
-        5,39,0,0,338,339,3,48,24,0,339,69,1,0,0,0,340,341,5,38,0,0,341,342,
-        3,48,24,0,342,71,1,0,0,0,343,348,5,40,0,0,344,349,3,40,20,0,345,
-        349,3,34,17,0,346,349,5,1,0,0,347,349,5,2,0,0,348,344,1,0,0,0,348,
-        345,1,0,0,0,348,346,1,0,0,0,348,347,1,0,0,0,349,350,1,0,0,0,350,
-        348,1,0,0,0,350,351,1,0,0,0,351,352,1,0,0,0,352,362,5,40,0,0,353,
-        355,5,41,0,0,354,356,3,40,20,0,355,354,1,0,0,0,356,357,1,0,0,0,357,
-        355,1,0,0,0,357,358,1,0,0,0,358,359,1,0,0,0,359,360,5,41,0,0,360,
-        362,1,0,0,0,361,343,1,0,0,0,361,353,1,0,0,0,362,73,1,0,0,0,363,364,
-        5,1,0,0,364,365,3,46,23,0,365,366,5,2,0,0,366,75,1,0,0,0,367,368,
-        5,3,0,0,368,369,5,16,0,0,369,370,5,4,0,0,370,77,1,0,0,0,371,372,
-        5,5,0,0,372,373,5,16,0,0,373,374,5,4,0,0,374,79,1,0,0,0,375,376,
-        5,6,0,0,376,377,3,42,21,0,377,378,5,4,0,0,378,81,1,0,0,0,379,380,
-        5,6,0,0,380,385,3,46,23,0,381,382,5,33,0,0,382,384,3,46,23,0,383,
-        381,1,0,0,0,384,387,1,0,0,0,385,383,1,0,0,0,385,386,1,0,0,0,386,
-        388,1,0,0,0,387,385,1,0,0,0,388,389,5,4,0,0,389,394,1,0,0,0,390,
-        391,5,6,0,0,391,392,5,33,0,0,392,394,5,4,0,0,393,379,1,0,0,0,393,
-        390,1,0,0,0,394,83,1,0,0,0,395,399,3,92,46,0,396,398,5,7,0,0,397,
-        396,1,0,0,0,398,401,1,0,0,0,399,397,1,0,0,0,399,400,1,0,0,0,400,
-        405,1,0,0,0,401,399,1,0,0,0,402,404,3,8,4,0,403,402,1,0,0,0,404,
-        407,1,0,0,0,405,403,1,0,0,0,405,406,1,0,0,0,406,414,1,0,0,0,407,
-        405,1,0,0,0,408,410,5,7,0,0,409,408,1,0,0,0,409,410,1,0,0,0,410,
-        411,1,0,0,0,411,413,3,86,43,0,412,409,1,0,0,0,413,416,1,0,0,0,414,
-        412,1,0,0,0,414,415,1,0,0,0,415,85,1,0,0,0,416,414,1,0,0,0,417,421,
-        3,94,47,0,418,420,5,7,0,0,419,418,1,0,0,0,420,423,1,0,0,0,421,419,
+        302,1,0,0,0,304,303,1,0,0,0,305,49,1,0,0,0,306,307,5,9,0,0,307,51,
+        1,0,0,0,308,309,5,10,0,0,309,53,1,0,0,0,310,318,5,39,0,0,311,318,
+        5,40,0,0,312,318,5,27,0,0,313,318,5,26,0,0,314,318,3,56,28,0,315,
+        318,3,60,30,0,316,318,3,58,29,0,317,310,1,0,0,0,317,311,1,0,0,0,
+        317,312,1,0,0,0,317,313,1,0,0,0,317,314,1,0,0,0,317,315,1,0,0,0,
+        317,316,1,0,0,0,318,55,1,0,0,0,319,320,7,1,0,0,320,57,1,0,0,0,321,
+        322,7,2,0,0,322,59,1,0,0,0,323,324,7,3,0,0,324,61,1,0,0,0,325,330,
+        3,64,32,0,326,330,3,66,33,0,327,330,3,68,34,0,328,330,3,70,35,0,
+        329,325,1,0,0,0,329,326,1,0,0,0,329,327,1,0,0,0,329,328,1,0,0,0,
+        330,63,1,0,0,0,331,332,5,35,0,0,332,333,3,48,24,0,333,65,1,0,0,0,
+        334,335,5,36,0,0,335,336,3,48,24,0,336,67,1,0,0,0,337,338,5,38,0,
+        0,338,339,3,48,24,0,339,69,1,0,0,0,340,341,5,37,0,0,341,342,3,48,
+        24,0,342,71,1,0,0,0,343,348,5,39,0,0,344,349,3,40,20,0,345,349,3,
+        34,17,0,346,349,5,1,0,0,347,349,5,2,0,0,348,344,1,0,0,0,348,345,
+        1,0,0,0,348,346,1,0,0,0,348,347,1,0,0,0,349,350,1,0,0,0,350,348,
+        1,0,0,0,350,351,1,0,0,0,351,352,1,0,0,0,352,362,5,39,0,0,353,355,
+        5,40,0,0,354,356,3,40,20,0,355,354,1,0,0,0,356,357,1,0,0,0,357,355,
+        1,0,0,0,357,358,1,0,0,0,358,359,1,0,0,0,359,360,5,40,0,0,360,362,
+        1,0,0,0,361,343,1,0,0,0,361,353,1,0,0,0,362,73,1,0,0,0,363,364,5,
+        1,0,0,364,365,3,46,23,0,365,366,5,2,0,0,366,75,1,0,0,0,367,368,5,
+        3,0,0,368,369,5,15,0,0,369,370,5,4,0,0,370,77,1,0,0,0,371,372,5,
+        5,0,0,372,373,5,15,0,0,373,374,5,4,0,0,374,79,1,0,0,0,375,376,5,
+        5,0,0,376,377,3,42,21,0,377,378,5,4,0,0,378,81,1,0,0,0,379,380,5,
+        5,0,0,380,385,3,46,23,0,381,382,5,32,0,0,382,384,3,46,23,0,383,381,
+        1,0,0,0,384,387,1,0,0,0,385,383,1,0,0,0,385,386,1,0,0,0,386,388,
+        1,0,0,0,387,385,1,0,0,0,388,389,5,4,0,0,389,394,1,0,0,0,390,391,
+        5,5,0,0,391,392,5,32,0,0,392,394,5,4,0,0,393,379,1,0,0,0,393,390,
+        1,0,0,0,394,83,1,0,0,0,395,399,3,92,46,0,396,398,5,6,0,0,397,396,
+        1,0,0,0,398,401,1,0,0,0,399,397,1,0,0,0,399,400,1,0,0,0,400,405,
+        1,0,0,0,401,399,1,0,0,0,402,404,3,8,4,0,403,402,1,0,0,0,404,407,
+        1,0,0,0,405,403,1,0,0,0,405,406,1,0,0,0,406,414,1,0,0,0,407,405,
+        1,0,0,0,408,410,5,6,0,0,409,408,1,0,0,0,409,410,1,0,0,0,410,411,
+        1,0,0,0,411,413,3,86,43,0,412,409,1,0,0,0,413,416,1,0,0,0,414,412,
+        1,0,0,0,414,415,1,0,0,0,415,85,1,0,0,0,416,414,1,0,0,0,417,421,3,
+        94,47,0,418,420,5,6,0,0,419,418,1,0,0,0,420,423,1,0,0,0,421,419,
         1,0,0,0,421,422,1,0,0,0,422,427,1,0,0,0,423,421,1,0,0,0,424,426,
         3,8,4,0,425,424,1,0,0,0,426,429,1,0,0,0,427,425,1,0,0,0,427,428,
-        1,0,0,0,428,436,1,0,0,0,429,427,1,0,0,0,430,432,5,7,0,0,431,430,
+        1,0,0,0,428,436,1,0,0,0,429,427,1,0,0,0,430,432,5,6,0,0,431,430,
         1,0,0,0,431,432,1,0,0,0,432,433,1,0,0,0,433,435,3,88,44,0,434,431,
         1,0,0,0,435,438,1,0,0,0,436,434,1,0,0,0,436,437,1,0,0,0,437,87,1,
-        0,0,0,438,436,1,0,0,0,439,443,3,96,48,0,440,442,5,7,0,0,441,440,
+        0,0,0,438,436,1,0,0,0,439,443,3,96,48,0,440,442,5,6,0,0,441,440,
         1,0,0,0,442,445,1,0,0,0,443,441,1,0,0,0,443,444,1,0,0,0,444,449,
         1,0,0,0,445,443,1,0,0,0,446,448,3,8,4,0,447,446,1,0,0,0,448,451,
         1,0,0,0,449,447,1,0,0,0,449,450,1,0,0,0,450,458,1,0,0,0,451,449,
-        1,0,0,0,452,454,5,7,0,0,453,452,1,0,0,0,453,454,1,0,0,0,454,455,
+        1,0,0,0,452,454,5,6,0,0,453,452,1,0,0,0,453,454,1,0,0,0,454,455,
         1,0,0,0,455,457,3,90,45,0,456,453,1,0,0,0,457,460,1,0,0,0,458,456,
         1,0,0,0,458,459,1,0,0,0,459,89,1,0,0,0,460,458,1,0,0,0,461,465,3,
-        98,49,0,462,464,5,7,0,0,463,462,1,0,0,0,464,467,1,0,0,0,465,463,
+        98,49,0,462,464,5,6,0,0,463,462,1,0,0,0,464,467,1,0,0,0,465,463,
         1,0,0,0,465,466,1,0,0,0,466,471,1,0,0,0,467,465,1,0,0,0,468,470,
         3,8,4,0,469,468,1,0,0,0,470,473,1,0,0,0,471,469,1,0,0,0,471,472,
-        1,0,0,0,472,91,1,0,0,0,473,471,1,0,0,0,474,475,5,20,0,0,475,476,
-        3,36,18,0,476,477,3,100,50,0,477,93,1,0,0,0,478,479,5,21,0,0,479,
-        480,3,36,18,0,480,481,3,100,50,0,481,95,1,0,0,0,482,483,5,22,0,0,
-        483,484,3,36,18,0,484,485,3,100,50,0,485,97,1,0,0,0,486,487,5,23,
+        1,0,0,0,472,91,1,0,0,0,473,471,1,0,0,0,474,475,5,19,0,0,475,476,
+        3,36,18,0,476,477,3,100,50,0,477,93,1,0,0,0,478,479,5,20,0,0,479,
+        480,3,36,18,0,480,481,3,100,50,0,481,95,1,0,0,0,482,483,5,21,0,0,
+        483,484,3,36,18,0,484,485,3,100,50,0,485,97,1,0,0,0,486,487,5,22,
         0,0,487,488,3,36,18,0,488,489,3,100,50,0,489,99,1,0,0,0,490,491,
         7,4,0,0,491,101,1,0,0,0,53,104,111,115,122,127,133,139,145,150,157,
         169,182,187,195,205,211,220,225,232,237,241,243,248,253,255,258,
@@ -203,8 +203,8 @@ class ZorgFileParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'[['", "']]'", "'[#'", "']'", "'[@'", 
-                     "'['", "<INVALID>", "'o'", "'x'", "<INVALID>", "<INVALID>", 
+    literalNames = [ "<INVALID>", "'[['", "']]'", "'[#'", "']'", "'['", 
+                     "<INVALID>", "'o'", "'x'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "'################################'", "'========================'", 
@@ -214,8 +214,8 @@ class ZorgFileParser ( Parser ):
                      "'\"'", "'~'", "'*'", "'<'", "'>'", "':'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "NL", "LOWER_O", 
-                      "LOWER_X", "DATE", "TIME", "CREATE_RANGE_HEAD", "MODIFY_RANGE_HEAD", 
+                      "<INVALID>", "<INVALID>", "NL", "LOWER_O", "LOWER_X", 
+                      "DATE", "TIME", "CREATE_RANGE_HEAD", "MODIFY_RANGE_HEAD", 
                       "DATE_RANGE_TAIL", "PRIORITY", "ID", "ZID", "SHORT_DATE", 
                       "NUM_ID", "H1_HEADER", "H2_HEADER", "H3_HEADER", "H4_HEADER", 
                       "TWO_SPACE_DASH", "FOUR_SPACE_DASH", "SYMBOL", "DOLLAR", 
@@ -262,7 +262,7 @@ class ZorgFileParser ( Parser ):
     RULE_project = 35
     RULE_quoted = 36
     RULE_link = 37
-    RULE_id_link = 38
+    RULE_global_link = 38
     RULE_local_link = 39
     RULE_zid_link = 40
     RULE_ref = 41
@@ -282,7 +282,7 @@ class ZorgFileParser ( Parser ):
                    "priority", "space_atoms", "space_atom", "atom", "zid", 
                    "property", "id_group", "id", "date", "time", "any_symbol", 
                    "non_tag_symbol", "id_symbol", "tag_symbol", "tag", "area", 
-                   "context", "person", "project", "quoted", "link", "id_link", 
+                   "context", "person", "project", "quoted", "link", "global_link", 
                    "local_link", "zid_link", "ref", "h1_section", "h2_section", 
                    "h3_section", "h4_section", "h1_header", "h2_header", 
                    "h3_header", "h4_header", "eol" ]
@@ -293,47 +293,46 @@ class ZorgFileParser ( Parser ):
     T__2=3
     T__3=4
     T__4=5
-    T__5=6
-    NL=7
-    LOWER_O=8
-    LOWER_X=9
-    DATE=10
-    TIME=11
-    CREATE_RANGE_HEAD=12
-    MODIFY_RANGE_HEAD=13
-    DATE_RANGE_TAIL=14
-    PRIORITY=15
-    ID=16
-    ZID=17
-    SHORT_DATE=18
-    NUM_ID=19
-    H1_HEADER=20
-    H2_HEADER=21
-    H3_HEADER=22
-    H4_HEADER=23
-    TWO_SPACE_DASH=24
-    FOUR_SPACE_DASH=25
-    SYMBOL=26
-    DOLLAR=27
-    HAT=28
-    DASH=29
-    DOT=30
-    FSLASH=31
-    UNDERSCORE=32
-    SPACE=33
-    LPAREN=34
-    RPAREN=35
-    HASH=36
-    AT_SIGN=37
-    PLUS=38
-    PERCENT=39
-    SQUOTE=40
-    DQUOTE=41
-    TILDE=42
-    STAR=43
-    LANGLE=44
-    RANGLE=45
-    COLON=46
+    NL=6
+    LOWER_O=7
+    LOWER_X=8
+    DATE=9
+    TIME=10
+    CREATE_RANGE_HEAD=11
+    MODIFY_RANGE_HEAD=12
+    DATE_RANGE_TAIL=13
+    PRIORITY=14
+    ID=15
+    ZID=16
+    SHORT_DATE=17
+    NUM_ID=18
+    H1_HEADER=19
+    H2_HEADER=20
+    H3_HEADER=21
+    H4_HEADER=22
+    TWO_SPACE_DASH=23
+    FOUR_SPACE_DASH=24
+    SYMBOL=25
+    DOLLAR=26
+    HAT=27
+    DASH=28
+    DOT=29
+    FSLASH=30
+    UNDERSCORE=31
+    SPACE=32
+    LPAREN=33
+    RPAREN=34
+    HASH=35
+    AT_SIGN=36
+    PLUS=37
+    PERCENT=38
+    SQUOTE=39
+    DQUOTE=40
+    TILDE=41
+    STAR=42
+    LANGLE=43
+    RANGLE=44
+    COLON=45
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -388,7 +387,7 @@ class ZorgFileParser ( Parser ):
             self.state = 104
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==7:
+            if _la==6:
                 self.state = 103
                 self.body()
 
@@ -448,7 +447,7 @@ class ZorgFileParser ( Parser ):
                 self.state = 111 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==36):
+                if not (_la==35):
                     break
 
         except RecognitionException as re:
@@ -503,7 +502,7 @@ class ZorgFileParser ( Parser ):
             self.state = 115
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==33:
+            if _la==32:
                 self.state = 114
                 self.space_atoms()
 
@@ -583,13 +582,13 @@ class ZorgFileParser ( Parser ):
                 self.state = 122 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==7):
+                if not (_la==6):
                     break
 
             self.state = 127
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 57243860992832) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 28621930496416) != 0):
                 self.state = 124
                 self.block()
                 self.state = 129
@@ -599,7 +598,7 @@ class ZorgFileParser ( Parser ):
             self.state = 133
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==21:
+            while _la==20:
                 self.state = 130
                 self.h2_section()
                 self.state = 135
@@ -609,7 +608,7 @@ class ZorgFileParser ( Parser ):
             self.state = 139
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==20:
+            while _la==19:
                 self.state = 136
                 self.h1_section()
                 self.state = 141
@@ -744,22 +743,22 @@ class ZorgFileParser ( Parser ):
             self.state = 157
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [8, 9, 42, 44, 45]:
+            if token in [7, 8, 41, 43, 44]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 153
                 self.todo()
                 pass
-            elif token in [29]:
+            elif token in [28]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 154
                 self.note()
                 pass
-            elif token in [6]:
+            elif token in [5]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 155
                 self.footnote()
                 pass
-            elif token in [36]:
+            elif token in [35]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 156
                 self.comment()
@@ -883,7 +882,7 @@ class ZorgFileParser ( Parser ):
             self.state = 169
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==24:
+            while _la==23:
                 self.state = 166
                 self.subnote()
                 self.state = 171
@@ -1121,7 +1120,7 @@ class ZorgFileParser ( Parser ):
             self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==25:
+            while _la==24:
                 self.state = 192
                 self.subsubnote()
                 self.state = 197
@@ -1228,7 +1227,7 @@ class ZorgFileParser ( Parser ):
             self.state = 205
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==24:
+            while _la==23:
                 self.state = 202
                 self.subnote()
                 self.state = 207
@@ -1357,19 +1356,19 @@ class ZorgFileParser ( Parser ):
             self.state = 220
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [8]:
+            if token in [7]:
                 self.state = 216
                 self.match(ZorgFileParser.LOWER_O)
                 pass
-            elif token in [9, 42]:
+            elif token in [8, 41]:
                 self.state = 217
                 self.x_or_tilde()
                 pass
-            elif token in [44]:
+            elif token in [43]:
                 self.state = 218
                 self.match(ZorgFileParser.LANGLE)
                 pass
-            elif token in [45]:
+            elif token in [44]:
                 self.state = 219
                 self.match(ZorgFileParser.RANGLE)
                 pass
@@ -1428,7 +1427,7 @@ class ZorgFileParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 222
             _la = self._input.LA(1)
-            if not(_la==9 or _la==42):
+            if not(_la==8 or _la==41):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1436,7 +1435,7 @@ class ZorgFileParser ( Parser ):
             self.state = 225
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==46:
+            if _la==45:
                 self.state = 223
                 self.match(ZorgFileParser.COLON)
                 self.state = 224
@@ -1537,7 +1536,7 @@ class ZorgFileParser ( Parser ):
                 self.state = 232 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==33):
+                if not (_la==32):
                     break
 
         except RecognitionException as re:
@@ -1642,11 +1641,11 @@ class ZorgFileParser ( Parser ):
                     self.state = 241
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [26, 32, 34, 35, 42, 43, 44, 45]:
+                    if token in [25, 31, 33, 34, 41, 42, 43, 44]:
                         self.state = 239
                         self.non_tag_symbol()
                         pass
-                    elif token in [41]:
+                    elif token in [40]:
                         self.state = 240
                         self.match(ZorgFileParser.DQUOTE)
                         pass
@@ -1672,21 +1671,21 @@ class ZorgFileParser ( Parser ):
             self.state = 258
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 140728831311872) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 70364415655936) != 0):
                 self.state = 250
                 self.any_symbol()
                 self.state = 255
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while (((_la) & ~0x3f) == 0 and ((1 << _la) & 140728832085760) != 0):
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & 70364416042880) != 0):
                     self.state = 253
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]:
+                    if token in [25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]:
                         self.state = 251
                         self.any_symbol()
                         pass
-                    elif token in [8, 9, 10, 11, 14, 15, 16, 17, 19]:
+                    elif token in [7, 8, 9, 10, 13, 14, 15, 16, 18]:
                         self.state = 252
                         self.id_()
                         pass
@@ -1702,7 +1701,7 @@ class ZorgFileParser ( Parser ):
             self.state = 261
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==6:
+            if _la==5:
                 self.state = 260
                 self.ref()
 
@@ -1747,8 +1746,8 @@ class ZorgFileParser ( Parser ):
             return self.getTypedRuleContext(ZorgFileParser.RefContext,0)
 
 
-        def id_link(self):
-            return self.getTypedRuleContext(ZorgFileParser.Id_linkContext,0)
+        def global_link(self):
+            return self.getTypedRuleContext(ZorgFileParser.Global_linkContext,0)
 
 
         def local_link(self):
@@ -1824,7 +1823,7 @@ class ZorgFileParser ( Parser ):
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 269
-                self.id_link()
+                self.global_link()
                 pass
 
             elif la_ == 8:
@@ -2011,7 +2010,7 @@ class ZorgFileParser ( Parser ):
                         self.state = 286 
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 70441221750784) != 0)):
+                        if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 35220610875392) != 0)):
                             break
 
                     self.state = 288
@@ -2088,47 +2087,47 @@ class ZorgFileParser ( Parser ):
             self.state = 304
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [16]:
+            if token in [15]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 295
                 self.match(ZorgFileParser.ID)
                 pass
-            elif token in [19]:
+            elif token in [18]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 296
                 self.match(ZorgFileParser.NUM_ID)
                 pass
-            elif token in [14]:
+            elif token in [13]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 297
                 self.match(ZorgFileParser.DATE_RANGE_TAIL)
                 pass
-            elif token in [15]:
+            elif token in [14]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 298
                 self.match(ZorgFileParser.PRIORITY)
                 pass
-            elif token in [10]:
+            elif token in [9]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 299
                 self.date()
                 pass
-            elif token in [11]:
+            elif token in [10]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 300
                 self.time()
                 pass
-            elif token in [17]:
+            elif token in [16]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 301
                 self.zid()
                 pass
-            elif token in [8]:
+            elif token in [7]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 302
                 self.match(ZorgFileParser.LOWER_O)
                 pass
-            elif token in [9]:
+            elif token in [8]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 303
                 self.match(ZorgFileParser.LOWER_X)
@@ -2386,7 +2385,7 @@ class ZorgFileParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 319
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 66026599350272) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 33013299675136) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2445,7 +2444,7 @@ class ZorgFileParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 321
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 70441221750784) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 35220610875392) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2501,7 +2500,7 @@ class ZorgFileParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 323
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792151040) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 515396075520) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2560,22 +2559,22 @@ class ZorgFileParser ( Parser ):
             self.state = 329
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [36]:
+            if token in [35]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 325
                 self.area()
                 pass
-            elif token in [37]:
+            elif token in [36]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 326
                 self.context()
                 pass
-            elif token in [39]:
+            elif token in [38]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 327
                 self.person()
                 pass
-            elif token in [38]:
+            elif token in [37]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 328
                 self.project()
@@ -2837,7 +2836,7 @@ class ZorgFileParser ( Parser ):
             self.state = 361
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [40]:
+            if token in [39]:
                 self.state = 343
                 self.match(ZorgFileParser.SQUOTE)
                 self.state = 348 
@@ -2871,13 +2870,13 @@ class ZorgFileParser ( Parser ):
                     self.state = 350 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792925038) != 0)):
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 515396462510) != 0)):
                         break
 
                 self.state = 352
                 self.match(ZorgFileParser.SQUOTE)
                 pass
-            elif token in [41]:
+            elif token in [40]:
                 self.state = 353
                 self.match(ZorgFileParser.DQUOTE)
                 self.state = 355 
@@ -2889,7 +2888,7 @@ class ZorgFileParser ( Parser ):
                     self.state = 357 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792925034) != 0)):
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 515396462506) != 0)):
                         break
 
                 self.state = 359
@@ -2953,7 +2952,7 @@ class ZorgFileParser ( Parser ):
         return localctx
 
 
-    class Id_linkContext(ParserRuleContext):
+    class Global_linkContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2964,23 +2963,23 @@ class ZorgFileParser ( Parser ):
             return self.getToken(ZorgFileParser.ID, 0)
 
         def getRuleIndex(self):
-            return ZorgFileParser.RULE_id_link
+            return ZorgFileParser.RULE_global_link
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterId_link" ):
-                listener.enterId_link(self)
+            if hasattr( listener, "enterGlobal_link" ):
+                listener.enterGlobal_link(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitId_link" ):
-                listener.exitId_link(self)
+            if hasattr( listener, "exitGlobal_link" ):
+                listener.exitGlobal_link(self)
 
 
 
 
-    def id_link(self):
+    def global_link(self):
 
-        localctx = ZorgFileParser.Id_linkContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 76, self.RULE_id_link)
+        localctx = ZorgFileParser.Global_linkContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 76, self.RULE_global_link)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 367
@@ -3075,7 +3074,7 @@ class ZorgFileParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 375
-            self.match(ZorgFileParser.T__5)
+            self.match(ZorgFileParser.T__4)
             self.state = 376
             self.zid()
             self.state = 377
@@ -3135,13 +3134,13 @@ class ZorgFileParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 379
-                self.match(ZorgFileParser.T__5)
+                self.match(ZorgFileParser.T__4)
                 self.state = 380
                 self.id_group()
                 self.state = 385
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==33:
+                while _la==32:
                     self.state = 381
                     self.match(ZorgFileParser.SPACE)
                     self.state = 382
@@ -3157,7 +3156,7 @@ class ZorgFileParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 390
-                self.match(ZorgFileParser.T__5)
+                self.match(ZorgFileParser.T__4)
                 self.state = 391
                 self.match(ZorgFileParser.SPACE)
                 self.state = 392
@@ -3242,7 +3241,7 @@ class ZorgFileParser ( Parser ):
             self.state = 405
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 57243860992832) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 28621930496416) != 0):
                 self.state = 402
                 self.block()
                 self.state = 407
@@ -3252,11 +3251,11 @@ class ZorgFileParser ( Parser ):
             self.state = 414
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==7 or _la==21:
+            while _la==6 or _la==20:
                 self.state = 409
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==7:
+                if _la==6:
                     self.state = 408
                     self.match(ZorgFileParser.NL)
 
@@ -3344,7 +3343,7 @@ class ZorgFileParser ( Parser ):
             self.state = 427
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 57243860992832) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 28621930496416) != 0):
                 self.state = 424
                 self.block()
                 self.state = 429
@@ -3359,7 +3358,7 @@ class ZorgFileParser ( Parser ):
                     self.state = 431
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if _la==7:
+                    if _la==6:
                         self.state = 430
                         self.match(ZorgFileParser.NL)
 
@@ -3447,7 +3446,7 @@ class ZorgFileParser ( Parser ):
             self.state = 449
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 57243860992832) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 28621930496416) != 0):
                 self.state = 446
                 self.block()
                 self.state = 451
@@ -3462,7 +3461,7 @@ class ZorgFileParser ( Parser ):
                     self.state = 453
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if _la==7:
+                    if _la==6:
                         self.state = 452
                         self.match(ZorgFileParser.NL)
 
@@ -3543,7 +3542,7 @@ class ZorgFileParser ( Parser ):
             self.state = 471
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 57243860992832) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 28621930496416) != 0):
                 self.state = 468
                 self.block()
                 self.state = 473
@@ -3807,7 +3806,7 @@ class ZorgFileParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 490
             _la = self._input.LA(1)
-            if not(_la==-1 or _la==7):
+            if not(_la==-1 or _la==6):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

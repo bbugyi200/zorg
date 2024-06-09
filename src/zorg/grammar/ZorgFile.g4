@@ -33,7 +33,7 @@ priority    : PRIORITY ;
 // atoms
 space_atoms : space_atom+ ;
 space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
-atom        : tag_symbol | tag | link | property | id_group | ref | id_link | local_link | zid_link | priority ;
+atom        : tag_symbol | tag | link | property | id_group | ref | global_link | local_link | zid_link | priority ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -59,12 +59,12 @@ person  : PERCENT id ;
 project : PLUS id ;
 
 // quotes and links
-quoted     : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
-link       : '[[' id_group ']]' ;
-id_link    : '[#' ID ']' ;
-local_link : '[@' ID ']' ;
-zid_link   : '[' zid ']' ;
-ref        : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
+quoted      : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
+link        : '[[' id_group ']]' ;
+global_link : '[#' ID ']' ;
+local_link  : '[' ID ']' ;
+zid_link    : '[' zid ']' ;
+ref         : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
 
 // sections
 h1_section : h1_header NL* block* (NL? h2_section)* ;

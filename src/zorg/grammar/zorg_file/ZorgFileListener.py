@@ -350,12 +350,12 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#id_link.
-    def enterId_link(self, ctx:ZorgFileParser.Id_linkContext):
+    # Enter a parse tree produced by ZorgFileParser#global_link.
+    def enterGlobal_link(self, ctx:ZorgFileParser.Global_linkContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#id_link.
-    def exitId_link(self, ctx:ZorgFileParser.Id_linkContext):
+    # Exit a parse tree produced by ZorgFileParser#global_link.
+    def exitGlobal_link(self, ctx:ZorgFileParser.Global_linkContext):
         pass
 
 
