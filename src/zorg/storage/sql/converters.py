@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from functools import partial
 import operator
 from pathlib import Path
-from typing import Any, Callable, Optional, TypeVar, cast
+from typing import Any, Callable, Iterable, Optional, TypeVar, cast
 
 import metaman
 from sqlalchemy import func
@@ -321,11 +321,43 @@ class _SONConverter:
                 like_op = sql.Link.name.like  # type: ignore[attr-defined]
 
             link_name = link_filter.link
+            notes_in_file = _get_notes_in_file(self.session, link_name)
             subquery = base_subquery.where(
-                or_(sql.Link.name == link_name, like_op(f"{link_name}#%"))
+                or_(
+                    sql.Link.name == link_name,
+                    like_op(f"{link_name}#%"),
+                    *_global_link_conds(notes_in_file),
+                    *_zid_link_conds(notes_in_file),
+                )
             )
             and_conds.append(in_op(subquery))
         return and_(and_conds[0], *and_conds[1:])
+
+
+def _get_notes_in_file(session: Session, file_name: str) -> list[sql.ZorgNote]:
+    stmt = (
+        select(sql.ZorgNote)
+        .join(sql.ZorgFileLink)
+        .join(sql.ZorgFile)
+        .where(sql.ZorgFile.path == f"{file_name}.zo")
+    )
+    return list(session.exec(stmt).all())
+
+
+def _global_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
+    conds = []
+    for note in notes:
+        for prop_link in note.property_links:
+            if prop_link.prop.name == "id":
+                conds.append(sql.Link.name == f"global:{prop_link.value}")
+    return conds
+
+
+def _zid_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
+    conds = []
+    for note in notes:
+        conds.append(sql.Link.name == f"zid:{note.zid}")
+    return conds
 
 
 def _noop(value: _T) -> _T:

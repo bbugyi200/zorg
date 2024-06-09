@@ -1067,7 +1067,11 @@
   '''
 # ---
 # name: test_query[YAMLConfigFile-link_filter__tags_and_ids]
-  ''
+  '''
+  - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
+  
+  '''
 # ---
 # name: test_query[YAMLConfigFile-mid_and_low_priority]
   '''
