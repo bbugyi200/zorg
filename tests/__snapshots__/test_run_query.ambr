@@ -68,6 +68,7 @@
   - 240510#08 Some note that references a local [1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 id::1 http://www.example.com
   
   
@@ -361,6 +362,7 @@
   - 240510#08 Some note that references a local [1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 A note about life...
   - 240510#0B With a note
   - 240510#0C Some note in section 0
@@ -552,6 +554,7 @@
   - 240510#08 Some note that references a local [1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 id::1 http://www.example.com
   - 240510#09 A note about life...
   - 240510#0B With a note
@@ -693,6 +696,7 @@
   - 240510#08 Some note that references a local [1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 id::1 http://www.example.com
   - 240510#09 A note about life...
   - 240510#0B With a note
@@ -907,6 +911,7 @@
   - 240510#08 Some note that references a local [1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 id::1 http://www.example.com
   
   
