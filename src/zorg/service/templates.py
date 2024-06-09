@@ -33,6 +33,8 @@ def init_from_template(
             used to determine which template to use if the {template} argument
             is not provided.
         new_path: The path of the file you want to initialize.
+        should_overwrite_existing: If {new_path} exists, should we overwrite
+            its contents or return early?
         template: Optional path to a .zot template file that should be used to
             render {new_path}.
         var_map: A map of template variable keys to values.
