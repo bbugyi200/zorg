@@ -87,6 +87,14 @@ def test_run_db_create__contexts(
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
 
 
+def test_run_db_create__links(
+    sql_cursor: sqlite3.Cursor, snapshot: Snapshot
+) -> None:
+    """Check what links are indexed by running 'zorg db create'."""
+    sql_cursor.execute("SELECT name FROM link")
+    assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
+
+
 def test_run_db_create__properties(
     sql_cursor: sqlite3.Cursor, snapshot: Snapshot
 ) -> None:

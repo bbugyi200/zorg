@@ -30,6 +30,16 @@
 # name: test_run_db_create__file_count[YAMLConfigFile]
   10
 # ---
+# name: test_run_db_create__links[YAMLConfigFile]
+  list([
+    'bar.sh',
+    'baz',
+    'buz#fuzz',
+    'desd_cd_kdzb.yhdxx',
+    'eswz_xqow::empiz_ljyiwjbmi_szstj',
+    'xmind/zorg_e2e_query_arch.xmind',
+  ])
+# ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
   142
 # ---
