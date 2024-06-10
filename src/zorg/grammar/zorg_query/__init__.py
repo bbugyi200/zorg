@@ -9,5 +9,5 @@ Examples
 W P0-2 G file
 
 // Show all people involved with the +foobar project.
-S people W +foobar
+S % W +foobar
 """
