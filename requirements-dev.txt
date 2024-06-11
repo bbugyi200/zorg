@@ -142,7 +142,7 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
-packaging==24.0
+packaging==24.1
     # via
     #   black
     #   build
@@ -174,7 +174,7 @@ pydantic==2.7.3
     #   sqlmodel
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.1
+pydantic-settings==2.3.2
     # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
