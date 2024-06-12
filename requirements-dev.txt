@@ -167,7 +167,7 @@ py==1.11.0
     # via tox
 pycodestyle==2.11.1
     # via flake8
-pydantic==2.7.3
+pydantic==2.7.4
     # via
     #   bolton-clack
     #   pydantic-settings
