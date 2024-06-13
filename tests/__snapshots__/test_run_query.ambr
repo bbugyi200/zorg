@@ -22,6 +22,7 @@
   
   
   ################################ [[property]]
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
   
   
@@ -210,6 +211,7 @@
   
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
   
@@ -295,6 +297,7 @@
   
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
   
@@ -345,6 +348,7 @@
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   o P3 240510#1t This todo has checkboxes
     * [X] Done subtask
     * [ ] Open subtask
@@ -518,6 +522,7 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   o P3 240510#1t This todo has checkboxes
     * [X] Done subtask
     * [ ] Open subtask
@@ -679,6 +684,7 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   o P3 240510#1t This todo has checkboxes
     * [X] Done subtask
     * [ ] Open subtask
@@ -945,6 +951,7 @@
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   
   
   ################################ [[scrambled_prj_notes]]
@@ -1127,6 +1134,7 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
+  o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   o P3 240510#1t This todo has checkboxes
     * [X] Done subtask
     * [ ] Open subtask

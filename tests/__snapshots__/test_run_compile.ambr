@@ -579,7 +579,20 @@
               'projects': [],
               'properties': {'p': '1', 'type': 'awesome note'},
               'todo_payload': None,
-              'zid': '240510#0M'}]}
+              'zid': '240510#0M'},
+             {'areas': [],
+              'body': ' 240510#0N This recurring todo also uses an inline '
+                      'property | [recur::M+Th]',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {'p': '1', 'recur': 'M+Th'},
+              'todo_payload': {'priority': 'P3',
+                               'status': <NoteType.OPEN_TODO: 2>},
+              'zid': '240510#0N'}]}
   
   '''
 # ---
