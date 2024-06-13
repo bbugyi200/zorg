@@ -3,6 +3,8 @@
   '''
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   - 240510#1c foobar
   
   '''
@@ -24,6 +26,8 @@
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   
   
   ################################ [[scrambled_prj_notes]]
@@ -214,6 +218,8 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   
   
   ################################ [[scrambled_prj_notes]]
@@ -300,6 +306,8 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   
   '''
 # ---
@@ -379,6 +387,8 @@
   - 240510#0H Note D
   - 240510#0J Note E
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0N Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
@@ -574,6 +584,8 @@
   - 240510#0H Note D
   - 240510#0J Note E
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0P Eongcgfy tho pscz giwq arjebc@?
@@ -718,6 +730,8 @@
   - 240510#0H Note D
   - 240510#0J Note E
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   - 240510#1c foobar
   - 240510#1e Todo subnote A
   - 240510#1f Todo subnote B
@@ -950,6 +964,8 @@
   ################################ [[property]]
   - 240330#02 This note contains a key::value pair.
   - 240510#0M This [type:: awesome note] has an inline property.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   

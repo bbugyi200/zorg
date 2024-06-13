@@ -592,7 +592,19 @@
               'properties': {'p': '1', 'recur': 'M+Th'},
               'todo_payload': {'priority': 'P3',
                                'status': <NoteType.OPEN_TODO: 2>},
-              'zid': '240510#0N'}]}
+              'zid': '240510#0N'},
+             {'areas': [],
+              'body': '240510#0P This note has a single-line bullet property.\n'
+                      '  * foo:: bar baz buz',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {'p': '1'},
+              'todo_payload': None,
+              'zid': '240510#0P'}]}
   
   '''
 # ---

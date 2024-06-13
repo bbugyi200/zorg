@@ -46,7 +46,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  146
+  147
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
