@@ -5,3 +5,5 @@
 o 240510#0K This todo is @due today! | due::2024-03-13
 - 240510#0M This [type:: awesome note] has an inline property.
 o 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+- 240510#0P This note has a single-line bullet property.
+  * foo:: bar baz buz
