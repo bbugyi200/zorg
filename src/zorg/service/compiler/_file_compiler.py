@@ -231,10 +231,10 @@ class ZorgFileCompiler(ZorgFileListener):
                 ),
             },
         )
-        id_note_body = ctx.id_note_body()
-        if id_note_body is None:
+        note_body = ctx.note_body()
+        if note_body is None:
             _LOGGER.warning("Skipping todo with no note body")
-        elif id_note_body.getText().strip() == "":
+        elif note_body.getText().strip() == "":
             _LOGGER.warning("Skipping todo with empty note body")
         elif self.error_manager.errors:
             _LOGGER.warning(
@@ -243,7 +243,7 @@ class ZorgFileCompiler(ZorgFileListener):
             )
             self.zorg_file.has_errors = True
         else:
-            todo = Note(id_note_body.getText(), **kwargs)
+            todo = Note(note_body.getText(), **kwargs)
             self.zorg_file.notes.append(todo)
 
         # Reset todo priority and status back to defaults.
@@ -322,7 +322,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_note = False
         extra_kwargs: dict[str, Any] = {}
         kwargs = self._get_note_kwargs(ctx, extra_kwargs)
-        body: str = ctx.id_note_body().getText().strip()
+        body: str = ctx.note_body().getText().strip()
         if body == "":
             _LOGGER.warning(
                 "Skipping note with empty body",

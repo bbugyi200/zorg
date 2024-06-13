@@ -17,15 +17,14 @@ footnote    : ref COLON space_atoms NL ;
 
 // notes
 note         : DASH base_note subnote* ;
-base_note    : id_note_body NL ;
-id_note_body : note_body ;
+base_note    : note_body NL ;
 note_body    : space_atoms (NL SPACE+ space_atoms)* ;
 subnote      : TWO_SPACE_DASH base_note subsubnote*;
 subsubnote   : FOUR_SPACE_DASH base_note ;
 
 // todos
 todo        : base_todo subnote* ;
-base_todo   : todo_prefix (SPACE priority)? id_note_body NL ;
+base_todo   : todo_prefix (SPACE priority)? note_body NL ;
 todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : PRIORITY ;
