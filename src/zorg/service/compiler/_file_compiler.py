@@ -141,6 +141,14 @@ class ZorgFileCompiler(ZorgFileListener):
                     zorg_id_date, "%Y%m%d"
                 ).date()
 
+    def enterInline_prop(
+        self, ctx: ZorgFileParser.Inline_propContext
+    ) -> None:  # noqa: D102
+        words = ctx.getText().split(" ")
+        key = words.pop(0)[1:]
+        value = " ".join(words)[:-1]
+        self._add_prop(key, value)
+
     def enterItem(self, ctx: ZorgFileParser.ItemContext) -> None:  # noqa: D102
         del ctx
         self._reset_note_context()
@@ -172,22 +180,11 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.todo_priority = ctx.getText().upper()
 
-    def enterProperty(
-        self, ctx: ZorgFileParser.PropertyContext
+    def enterSimple_prop(
+        self, ctx: ZorgFileParser.Simple_propContext
     ) -> None:  # noqa: D102
         key, value = ctx.ID().getText(), ctx.id_group().getText()
-        if self._s.in_head:
-            self._s.file_props[key] = value
-        elif self._s.in_h1_header:
-            self._s.h1_props[key] = value
-        elif self._s.in_h2_header:
-            self._s.h2_props[key] = value
-        elif self._s.in_h3_header:
-            self._s.h3_props[key] = value
-        elif self._s.in_h4_header:
-            self._s.h4_props[key] = value
-        elif self._s.in_note:
-            self._s.note_props[key] = value
+        self._add_prop(key, value)
 
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102
         self._s.in_note = True
@@ -375,6 +372,20 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.note_props = {}
         self._s.note_date = None
         self._s.modify_date = None
+
+    def _add_prop(self, key: str, value: str) -> None:
+        if self._s.in_head:
+            self._s.file_props[key] = value
+        elif self._s.in_h1_header:
+            self._s.h1_props[key] = value
+        elif self._s.in_h2_header:
+            self._s.h2_props[key] = value
+        elif self._s.in_h3_header:
+            self._s.h3_props[key] = value
+        elif self._s.in_h4_header:
+            self._s.h4_props[key] = value
+        elif self._s.in_note:
+            self._s.note_props[key] = value
 
     def _add_tag(self, tag_name: TagName, tag_value: str) -> None:
         if all(ch.isdigit() for ch in tag_value):

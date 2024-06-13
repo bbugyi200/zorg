@@ -3,3 +3,4 @@
 ################################ p::1
 - 240330#02 This note contains a key::value pair.
 o 240510#0K This todo is @due today! | due::2024-03-13
+- 240510#0M This [type:: awesome note] has an inline property.

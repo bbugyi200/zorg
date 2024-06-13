@@ -567,7 +567,19 @@
               'properties': {'due': '2024-03-13', 'p': '1'},
               'todo_payload': {'priority': 'P3',
                                'status': <NoteType.OPEN_TODO: 2>},
-              'zid': '240510#0K'}]}
+              'zid': '240510#0K'},
+             {'areas': [],
+              'body': '240510#0M This [type:: awesome note] has an inline '
+                      'property.',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {'p': '1', 'type::': 'awesome note'},
+              'todo_payload': None,
+              'zid': '240510#0M'}]}
   
   '''
 # ---
