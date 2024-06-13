@@ -90,7 +90,7 @@ docutils==0.20.1
     #   sphinx-rtd-theme
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.14.0
+filelock==3.15.1
     # via
     #   tox
     #   virtualenv
@@ -174,7 +174,7 @@ pydantic==2.7.4
     #   sqlmodel
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.2
+pydantic-settings==2.3.3
     # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
