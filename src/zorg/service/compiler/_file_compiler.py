@@ -145,7 +145,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Inline_propContext
     ) -> None:  # noqa: D102
         words = ctx.getText().split(" ")
-        key = words.pop(0)[1:]
+        key = words.pop(0)[1:-2]
         value = " ".join(words)[:-1]
         self._add_prop(key, value)
 

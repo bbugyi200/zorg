@@ -577,7 +577,7 @@
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],
-              'properties': {'p': '1', 'type::': 'awesome note'},
+              'properties': {'p': '1', 'type': 'awesome note'},
               'todo_payload': None,
               'zid': '240510#0M'}]}
   

@@ -93,7 +93,7 @@
     'id',
     'key',
     'p',
-    'type::',
+    'type',
   ])
 # ---
 # name: test_run_db_create__table_names[YAMLConfigFile]
