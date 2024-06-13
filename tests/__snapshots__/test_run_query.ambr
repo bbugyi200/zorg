@@ -25,9 +25,15 @@
   
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
   
   
   ################################ [[scrambled_prj_notes]]
@@ -216,10 +222,16 @@
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   
   
   ################################ [[scrambled_prj_notes]]
@@ -304,10 +316,16 @@
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   
   '''
 # ---
@@ -364,6 +382,9 @@
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240408#N2 Da nah nah nuh...
   - 240510#00 First note in first block
@@ -386,9 +407,12 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0N Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
@@ -540,6 +564,9 @@
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
   - 240323#0L +zorg Parametrize test_run_compile()
@@ -583,9 +610,12 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
   - 240510#0M Reqzlu Zkba Inzlqq Zusqxur: pclx://hn/oqdu-syxf-oxzpzp-hxdszea
   - 240510#0P Eongcgfy tho pscz giwq arjebc@?
@@ -706,6 +736,12 @@
   o P3 240510#26 Some foobar todo.
   
   
+  ################################ 3 | CANCELED TODOS
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
+  
+  
   ################################ 4 | NOTES
   - 240330#02 This note contains a key::value pair.
   - 240510#00 First note in first block
@@ -729,9 +765,12 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#1c foobar
   - 240510#1e Todo subnote A
   - 240510#1f Todo subnote B
@@ -963,11 +1002,17 @@
   
   ################################ [[property]]
   - 240330#02 This note contains a key::value pair.
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   
   
   ################################ [[scrambled_prj_notes]]

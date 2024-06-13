@@ -46,7 +46,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  147
+  149
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -117,7 +117,7 @@
   ])
 # ---
 # name: test_run_db_create__todo_count[YAMLConfigFile]
-  14
+  15
 # ---
 # name: test_run_db_create__todo_priorities[YAMLConfigFile]
   list([
@@ -129,6 +129,7 @@
 # ---
 # name: test_run_db_create__todo_statuses[YAMLConfigFile]
   list([
+    'CANCELED_TODO',
     'OPEN_TODO',
   ])
 # ---
@@ -182,6 +183,7 @@
     '240510#0M',
     '240510#0N',
     '240510#0P',
+    '240510#0Q',
     '240510#0R',
     '240510#0b',
     '240510#0c',

@@ -74,11 +74,17 @@
   
   ################################ [[property]]
   - 240330#02 This note contains a key::value pair.
-  - 240510#0M This [type:: awesome note] has an inline property.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  - 240510#0M This [type:: awesome note] has an inline property.
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+    | demonstrate a multiline bullet property.
   
   
   ################################ [[scrambled_prj_notes]]

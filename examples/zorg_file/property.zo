@@ -1,9 +1,16 @@
 # A zorg file containing properties.
 
+- 240510#0P This note has a single-line bullet property.
+  * foo:: bar baz buz
+- 240510#0Q q:: Can a note headline use a bullet property or do bullet
+  properties need to be defined _under_ the headline?
+  * a:: Yes! Bullet properties are powerful!
+~ 240613 240510#0R A canceled todo with a multiline explanation
+  * x:: This todo was not really canceled. It is an example todo used to
+  | demonstrate a multiline bullet property.
+
 ################################ p::1
 - 240330#02 This note contains a key::value pair.
 o 240510#0K This todo is @due today! | due::2024-03-13
 - 240510#0M This [type:: awesome note] has an inline property.
 o 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-- 240510#0P This note has a single-line bullet property.
-  * foo:: bar baz buz

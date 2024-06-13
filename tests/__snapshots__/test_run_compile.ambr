@@ -546,6 +546,48 @@
 # name: test_compile[YAMLConfigFile-property]
   '''
   {'notes': [{'areas': [],
+              'body': '240510#0P This note has a single-line bullet property.\n'
+                      '  * foo:: bar baz buz',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {},
+              'todo_payload': None,
+              'zid': '240510#0P'},
+             {'areas': [],
+              'body': '240510#0Q q:: Can a note headline use a bullet property '
+                      'or do bullet\n'
+                      '  properties need to be defined _under_ the headline?\n'
+                      '  * a:: Yes! Bullet properties are powerful!',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 5, 10),
+              'people': [],
+              'projects': [],
+              'properties': {},
+              'todo_payload': None,
+              'zid': '240510#0Q'},
+             {'areas': [],
+              'body': ' 240613 240510#0R A canceled todo with a multiline '
+                      'explanation\n'
+                      '  * x:: This todo was not really canceled. It is an '
+                      'example todo used to\n'
+                      '  | demonstrate a multiline bullet property.',
+              'contexts': [],
+              'create_date': FakeDate(2024, 5, 10),
+              'links': [],
+              'modify_date': FakeDate(2024, 6, 13),
+              'people': [],
+              'projects': [],
+              'properties': {},
+              'todo_payload': {'priority': 'P3',
+                               'status': <NoteType.CANCELED_TODO: 4>},
+              'zid': '240510#0R'},
+             {'areas': [],
               'body': '240330#02 This note contains a key::value pair.',
               'contexts': [],
               'create_date': FakeDate(2024, 3, 30),
@@ -592,19 +634,7 @@
               'properties': {'p': '1', 'recur': 'M+Th'},
               'todo_payload': {'priority': 'P3',
                                'status': <NoteType.OPEN_TODO: 2>},
-              'zid': '240510#0N'},
-             {'areas': [],
-              'body': '240510#0P This note has a single-line bullet property.\n'
-                      '  * foo:: bar baz buz',
-              'contexts': [],
-              'create_date': FakeDate(2024, 5, 10),
-              'links': [],
-              'modify_date': FakeDate(2024, 5, 10),
-              'people': [],
-              'projects': [],
-              'properties': {'p': '1'},
-              'todo_payload': None,
-              'zid': '240510#0P'}]}
+              'zid': '240510#0N'}]}
   
   '''
 # ---
