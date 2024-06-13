@@ -133,7 +133,7 @@ def serializedATN():
         3,50,25,0,298,299,5,32,0,0,299,301,3,50,25,0,300,298,1,0,0,0,301,
         304,1,0,0,0,302,300,1,0,0,0,302,303,1,0,0,0,303,305,1,0,0,0,304,
         302,1,0,0,0,305,306,5,2,0,0,306,49,1,0,0,0,307,317,3,52,26,0,308,
-        310,3,62,31,0,309,308,1,0,0,0,310,311,1,0,0,0,311,309,1,0,0,0,311,
+        310,3,58,29,0,309,308,1,0,0,0,310,311,1,0,0,0,311,309,1,0,0,0,311,
         312,1,0,0,0,312,313,1,0,0,0,313,314,3,52,26,0,314,316,1,0,0,0,315,
         309,1,0,0,0,316,319,1,0,0,0,317,315,1,0,0,0,317,318,1,0,0,0,318,
         51,1,0,0,0,319,317,1,0,0,0,320,330,5,15,0,0,321,330,5,18,0,0,322,
@@ -2128,11 +2128,11 @@ class ZorgFileParser ( Parser ):
                 return self.getTypedRuleContext(ZorgFileParser.IdContext,i)
 
 
-        def id_symbol(self, i:int=None):
+        def any_symbol(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ZorgFileParser.Id_symbolContext)
+                return self.getTypedRuleContexts(ZorgFileParser.Any_symbolContext)
             else:
-                return self.getTypedRuleContext(ZorgFileParser.Id_symbolContext,i)
+                return self.getTypedRuleContext(ZorgFileParser.Any_symbolContext,i)
 
 
         def getRuleIndex(self):
@@ -2168,11 +2168,11 @@ class ZorgFileParser ( Parser ):
                     _la = self._input.LA(1)
                     while True:
                         self.state = 308
-                        self.id_symbol()
+                        self.any_symbol()
                         self.state = 311 
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 35220610875392) != 0)):
+                        if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 70364415655936) != 0)):
                             break
 
                     self.state = 313
