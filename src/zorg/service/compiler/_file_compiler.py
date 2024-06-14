@@ -4,9 +4,8 @@ from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
 import re
-from typing import Any, Final, Literal, Optional
+from typing import Any, Final, Literal, Mapping, Optional
 
-import antlr4
 from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
@@ -223,13 +222,14 @@ class ZorgFileCompiler(ZorgFileListener):
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
+        extra_kwargs: dict[str, Any] = {
+            "todo_payload": TodoPayload(
+                priority=self._s.todo_priority, status=self._s.todo_status
+            ),
+        }
         self._add_note(
             ctx.note_body(),
-            **{
-                "todo_payload": TodoPayload(
-                    priority=self._s.todo_priority, status=self._s.todo_status
-                ),
-            },
+            **extra_kwargs,
         )
         self._s.in_note = False
 
@@ -312,10 +312,8 @@ class ZorgFileCompiler(ZorgFileListener):
     def _get_note_kwargs(
         self,
         line_no: int,
-        **extra_kwargs: dict[str, Any],
+        **extra_kwargs: Mapping[str, Any],
     ) -> dict[str, Any]:
-        if extra_kwargs is None:
-            extra_kwargs = {}
         kwargs: dict[str, Any] = {
             "areas": self._s.areas,
             "contexts": self._s.contexts,
@@ -382,7 +380,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def _add_note(
         self,
         note_body: Optional[ZorgFileParser.Note_bodyContext],
-        **extra_kwargs: dict[str, Any],
+        **extra_kwargs: Mapping[str, Any],
     ) -> None:
         if note_body is None:
             _LOGGER.warning("Skipping todo with no note body")
