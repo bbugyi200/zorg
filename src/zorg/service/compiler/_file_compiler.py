@@ -394,7 +394,8 @@ class ZorgFileCompiler(ZorgFileListener):
             self.zorg_file.has_errors = True
         else:
             body = note_body.getText().strip()
-            for bullet in body.split(" * "):
+            bullets = body.split(" * ") if ":: " in body else []
+            for bullet in bullets:
                 words = bullet.split(" ")
                 if zdt.is_short_date_spec(words[0]):
                     words.pop(0)
