@@ -579,7 +579,7 @@
                       'explanation\n'
                       '  * x:: This todo was not really canceled. It is an '
                       'example todo used to\n'
-                      '  | demonstrate a multiline bullet property.',
+                      '    demonstrate a multiline bullet property.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -587,8 +587,8 @@
               'people': [],
               'projects': [],
               'properties': {'x': 'This todo was not really canceled. It is an '
-                                  'example todo used to | demonstrate a '
-                                  'multiline bullet property.'},
+                                  'example todo used to demonstrate a multiline '
+                                  'bullet property.'},
               'todo_payload': {'priority': 'P3',
                                'status': <NoteType.CANCELED_TODO: 4>},
               'zid': '240510#0R'},

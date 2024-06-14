@@ -27,7 +27,7 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
@@ -224,7 +224,7 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
@@ -318,7 +318,7 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240510#0P This note has a single-line bullet property.
     * foo:: bar baz buz
@@ -384,7 +384,7 @@
   o P3 240510#26 Some foobar todo.
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
   - 240408#N2 Da nah nah nuh...
   - 240510#00 First note in first block
@@ -566,7 +566,7 @@
   o P3 240510#26 Some foobar todo.
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
   - 240323#0L +zorg Parametrize test_run_compile()
@@ -739,7 +739,7 @@
   ################################ 3 | CANCELED TODOS
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   
   
   ################################ 4 | NOTES
@@ -1012,7 +1012,7 @@
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
-    | demonstrate a multiline bullet property.
+      demonstrate a multiline bullet property.
   
   
   ################################ [[scrambled_prj_notes]]

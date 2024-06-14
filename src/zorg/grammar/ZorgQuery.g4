@@ -37,7 +37,7 @@ project        : PLUS id ;
 subfilter      : '(' or_filter ')' ;
 create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
-prop_filter    : not_op? ID COLON prop_op? (id | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+ | STAR) ;
+prop_filter    : not_op? id COLON prop_op? (id | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+ | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
 desc_filter    : not_op? 'c'? SQUOTE any_non_squote* id (SPACE id)* SQUOTE ;
 file_filter    : not_op? 'f=' (id FSLASH)* (STAR UNDERSCORE?)? id STAR? ;

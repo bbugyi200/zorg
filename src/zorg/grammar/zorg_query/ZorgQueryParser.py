@@ -98,7 +98,7 @@ def serializedATN():
         1,0,0,0,219,220,1,0,0,0,220,49,1,0,0,0,221,223,5,35,0,0,222,224,
         5,36,0,0,223,222,1,0,0,0,223,224,1,0,0,0,224,51,1,0,0,0,225,227,
         3,36,18,0,226,225,1,0,0,0,226,227,1,0,0,0,227,228,1,0,0,0,228,229,
-        5,38,0,0,229,231,5,68,0,0,230,232,3,54,27,0,231,230,1,0,0,0,231,
+        3,64,32,0,229,231,5,68,0,0,230,232,3,54,27,0,231,230,1,0,0,0,231,
         232,1,0,0,0,232,240,1,0,0,0,233,241,3,64,32,0,234,236,7,2,0,0,235,
         234,1,0,0,0,236,237,1,0,0,0,237,235,1,0,0,0,237,238,1,0,0,0,238,
         241,1,0,0,0,239,241,5,65,0,0,240,233,1,0,0,0,240,235,1,0,0,0,240,
@@ -1874,15 +1874,15 @@ class ZorgQueryParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self):
-            return self.getToken(ZorgQueryParser.ID, 0)
+        def id_(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ZorgQueryParser.IdContext)
+            else:
+                return self.getTypedRuleContext(ZorgQueryParser.IdContext,i)
+
 
         def COLON(self):
             return self.getToken(ZorgQueryParser.COLON, 0)
-
-        def id_(self):
-            return self.getTypedRuleContext(ZorgQueryParser.IdContext,0)
-
 
         def STAR(self):
             return self.getToken(ZorgQueryParser.STAR, 0)
@@ -1925,7 +1925,7 @@ class ZorgQueryParser ( Parser ):
 
 
             self.state = 228
-            self.match(ZorgQueryParser.ID)
+            self.id_()
             self.state = 229
             self.match(ZorgQueryParser.COLON)
             self.state = 231
