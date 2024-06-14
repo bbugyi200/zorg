@@ -396,16 +396,17 @@ class ZorgFileCompiler(ZorgFileListener):
             self.zorg_file.has_errors = True
         else:
             body = note_body.getText().strip()
-            words = body.split(" ")
-            if zdt.is_short_date_spec(words[0]):
-                words.pop(0)
-            if zdt.is_zid(words[0]):
-                words.pop(0)
-            first_word = words.pop(0)
-            if first_word.endswith("::"):
-                key = first_word[:-2]
-                value = _normalize_big_prop_value(" ".join(words))
-                self._add_prop(key, value)
+            for bullet in body.split(" * "):
+                words = bullet.split(" ")
+                if zdt.is_short_date_spec(words[0]):
+                    words.pop(0)
+                if zdt.is_zid(words[0]):
+                    words.pop(0)
+                first_word = words.pop(0)
+                if first_word.endswith("::"):
+                    key = first_word[:-2]
+                    value = _normalize_big_prop_value(" ".join(words))
+                    self._add_prop(key, value)
             kwargs = self._get_note_kwargs(
                 note_body.start.line, **extra_kwargs
             )

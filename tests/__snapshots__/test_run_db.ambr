@@ -89,13 +89,16 @@
 # ---
 # name: test_run_db_create__properties[YAMLConfigFile]
   list([
+    'a',
     'due',
+    'foo',
     'id',
     'key',
     'p',
     'q',
     'recur',
     'type',
+    'x',
   ])
 # ---
 # name: test_run_db_create__table_names[YAMLConfigFile]
