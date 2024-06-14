@@ -405,7 +405,7 @@ class ZorgFileCompiler(ZorgFileListener):
                 first_word = words.pop(0)
                 if first_word.endswith("::"):
                     key = first_word[:-2]
-                    value = _normalize_big_prop_value(" ".join(words))
+                    value = re.sub(r"\s+", " ", " ".join(words).strip())
                     self._add_prop(key, value)
             kwargs = self._get_note_kwargs(
                 note_body.start.line, **extra_kwargs
@@ -422,15 +422,6 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
         "people": [],
         "projects": [],
     }
-
-
-def _normalize_big_prop_value(value: str) -> str:
-    single_line_val = re.sub(r"\s+", " ", value)
-    if idx := single_line_val.find(" * "):
-        new_value = single_line_val[:idx]
-    else:
-        new_value = single_line_val
-    return new_value
 
 
 @dataclass

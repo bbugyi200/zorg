@@ -554,7 +554,7 @@
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],
-              'properties': {'foo': 'bar baz bu'},
+              'properties': {'foo': 'bar baz buz'},
               'todo_payload': None,
               'zid': '240510#0P'},
              {'areas': [],
@@ -568,7 +568,7 @@
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],
-              'properties': {'a': 'Yes! Bullet properties are powerful',
+              'properties': {'a': 'Yes! Bullet properties are powerful!',
                              'q': 'Can a note headline use a bullet property or '
                                   'do bullet properties need to be defined '
                                   '_under_ the headline?'},
@@ -588,7 +588,7 @@
               'projects': [],
               'properties': {'x': 'This todo was not really canceled. It is an '
                                   'example todo used to | demonstrate a '
-                                  'multiline bullet property'},
+                                  'multiline bullet property.'},
               'todo_payload': {'priority': 'P3',
                                'status': <NoteType.CANCELED_TODO: 4>},
               'zid': '240510#0R'},
