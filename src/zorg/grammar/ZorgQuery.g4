@@ -39,7 +39,9 @@ create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
 prop_filter    : not_op? id COLON prop_op? (id | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+ | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
-desc_filter    : not_op? 'c'? SQUOTE any_non_squote* id (SPACE id)* SQUOTE ;
+desc_filter    : not_op? 'c'? (s_desc_filter | d_desc_filter) ;
+s_desc_filter  : SQUOTE any_non_squote* id any_non_squote* (SPACE any_non_squote* id any_non_squote*)* SQUOTE ;
+d_desc_filter  : DQUOTE any_non_dquote* id any_non_dquote* (SPACE any_non_dquote* id any_non_dquote*)* DQUOTE ;
 file_filter    : not_op? 'f=' (id FSLASH)* (STAR UNDERSCORE?)? id STAR? ;
 link_filter    : not_op? '[[' (id FSLASH)* id ']]' ;
 
@@ -49,7 +51,9 @@ date : DATE ;
 time : TIME ;
 
 // symbols
-any_non_squote : DQUOTE | HAT | DOLLAR | non_tag_symbol | tag_symbol | id_symbol ;
+any_non_squote : DQUOTE | desc_symbol ;
+any_non_dquote : SQUOTE | desc_symbol ;
+desc_symbol    : HAT | DOLLAR | non_tag_symbol | tag_symbol | id_symbol ;
 non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_symbol      : DASH | DOT | FSLASH | COLON ;
 tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;

@@ -269,6 +269,24 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#s_desc_filter.
+    def enterS_desc_filter(self, ctx:ZorgQueryParser.S_desc_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#s_desc_filter.
+    def exitS_desc_filter(self, ctx:ZorgQueryParser.S_desc_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#d_desc_filter.
+    def enterD_desc_filter(self, ctx:ZorgQueryParser.D_desc_filterContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#d_desc_filter.
+    def exitD_desc_filter(self, ctx:ZorgQueryParser.D_desc_filterContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#file_filter.
     def enterFile_filter(self, ctx:ZorgQueryParser.File_filterContext):
         pass
@@ -329,6 +347,24 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#any_non_squote.
     def exitAny_non_squote(self, ctx:ZorgQueryParser.Any_non_squoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#any_non_dquote.
+    def enterAny_non_dquote(self, ctx:ZorgQueryParser.Any_non_dquoteContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#any_non_dquote.
+    def exitAny_non_dquote(self, ctx:ZorgQueryParser.Any_non_dquoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#desc_symbol.
+    def enterDesc_symbol(self, ctx:ZorgQueryParser.Desc_symbolContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#desc_symbol.
+    def exitDesc_symbol(self, ctx:ZorgQueryParser.Desc_symbolContext):
         pass
 
 

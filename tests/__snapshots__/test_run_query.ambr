@@ -9,6 +9,16 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-desc_filter__foo_double_quote]
+  '''
+  o P3 240510#21 Some foobar todo.
+  o P3 240510#26 Some foobar todo.
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
+  - 240510#1c foobar
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-desc_filter__s_u_p]
   '''
   ################################ [[20240323]]
