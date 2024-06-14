@@ -568,7 +568,9 @@
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],
-              'properties': {},
+              'properties': {'q': 'Can a note headline use a bullet property or '
+                                  'do bullet properties need to be defined '
+                                  '_under_ the headline?'},
               'todo_payload': None,
               'zid': '240510#0Q'},
              {'areas': [],

@@ -223,16 +223,15 @@ class ZorgFileCompiler(ZorgFileListener):
     def exitBase_todo(
         self, ctx: ZorgFileParser.Base_todoContext
     ) -> None:  # noqa: D102
-        self._s.in_note = False
-        kwargs = self._get_note_kwargs(
-            ctx,
-            {
+        self._add_note(
+            ctx.note_body(),
+            **{
                 "todo_payload": TodoPayload(
                     priority=self._s.todo_priority, status=self._s.todo_status
                 ),
             },
         )
-        self._add_note(ctx.note_body(), **kwargs)
+        self._s.in_note = False
 
         # Reset todo priority and status back to defaults.
         self._s.todo_priority = _DEFAULT_PRIORITY
@@ -307,15 +306,13 @@ class ZorgFileCompiler(ZorgFileListener):
     def exitBase_note(
         self, ctx: ZorgFileParser.Base_noteContext
     ) -> None:  # noqa: D102
+        self._add_note(ctx.note_body())
         self._s.in_note = False
-        extra_kwargs: dict[str, Any] = {}
-        kwargs = self._get_note_kwargs(ctx, extra_kwargs)
-        self._add_note(ctx.note_body(), **kwargs)
 
     def _get_note_kwargs(
         self,
-        ctx: antlr4.ParserRuleContext,
-        extra_kwargs: dict[str, Any] = None,
+        line_no: int,
+        **extra_kwargs: dict[str, Any],
     ) -> dict[str, Any]:
         if extra_kwargs is None:
             extra_kwargs = {}
@@ -324,7 +321,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "contexts": self._s.contexts,
             "create_date": self._s.create_date,
             "file_path": self.zorg_file.path,
-            "line_no": ctx.start.line,
+            "line_no": line_no,
             "links": self._s.links,
             "modify_date": (
                 self._s.modify_date
@@ -385,7 +382,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def _add_note(
         self,
         note_body: Optional[ZorgFileParser.Note_bodyContext],
-        **kwargs: dict[str, Any],
+        **extra_kwargs: dict[str, Any],
     ) -> None:
         if note_body is None:
             _LOGGER.warning("Skipping todo with no note body")
@@ -398,8 +395,22 @@ class ZorgFileCompiler(ZorgFileListener):
             )
             self.zorg_file.has_errors = True
         else:
-            todo = Note(note_body.getText().strip(), **kwargs)
-            self.zorg_file.notes.append(todo)
+            body = note_body.getText().strip()
+            words = body.split(" ")
+            if zdt.is_short_date_spec(words[0]):
+                words.pop(0)
+            if zdt.is_zid(words[0]):
+                words.pop(0)
+            first_word = words.pop(0)
+            if first_word.endswith("::"):
+                key = first_word[:-2]
+                value = _normalize_big_prop_value(" ".join(words))
+                self._add_prop(key, value)
+            kwargs = self._get_note_kwargs(
+                note_body.start.line, **extra_kwargs
+            )
+            note = Note(body, **kwargs)
+            self.zorg_file.notes.append(note)
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:

@@ -93,6 +93,7 @@
     'id',
     'key',
     'p',
+    'q',
     'recur',
     'type',
   ])
