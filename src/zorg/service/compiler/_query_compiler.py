@@ -187,6 +187,7 @@ class ZorgQueryCompiler(ZorgQueryListener):
         for group_by_atom in cast(
             list[ZorgQueryParser.Group_by_atomContext], ctx.group_by_atom()
         ):
+            group_by_type: Optional[GroupByType] = None
             if group_by_atom.AT_SIGN():
                 group_by_type = GroupByType.CONTEXT
             elif group_by_atom.HASH():
@@ -202,11 +203,12 @@ class ZorgQueryCompiler(ZorgQueryListener):
             elif group_by_atom.priority():
                 group_by_type = GroupByType.PRIORITY
             else:
-                raise RuntimeError(
-                    f"Invalid GROUP BY atom: {group_by_atom.getText()}"
-                )
+                assert (
+                    group_by_atom.getText() == "none"
+                ), f"Invalid GROUP BY atom: {group_by_atom.getText()}"
 
-            group_by_types.append(group_by_type)
+            if group_by_type is not None:
+                group_by_types.append(group_by_type)
         self.zorg_query.group_by = tuple(group_by_types)
 
     def enterOrder_by_body(

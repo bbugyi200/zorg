@@ -340,11 +340,16 @@ def _fix_database_url(kwargs: dict[str, Any]) -> None:
 
 
 def _process_query(kwargs: dict[str, Any]) -> None:
-    if kwargs["command"] == "query" and not kwargs["query"].startswith(
-        ("S ", "W ")
-    ):
+    if kwargs["command"] != "query":
+        return
+
+    if not kwargs["query"].startswith(("S ", "W ")):
         query = kwargs["query"]
         kwargs["query"] = f"W {query}"
+
+    if not kwargs["query"].startswith("S ") and " G " not in kwargs["query"]:
+        query = kwargs["query"]
+        kwargs["query"] = f"{query} G file"
 
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
