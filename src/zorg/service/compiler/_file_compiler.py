@@ -3,6 +3,7 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
+import re
 from typing import Any, Final, Literal, Optional
 
 import antlr4
@@ -231,20 +232,7 @@ class ZorgFileCompiler(ZorgFileListener):
                 ),
             },
         )
-        note_body = ctx.note_body()
-        if note_body is None:
-            _LOGGER.warning("Skipping todo with no note body")
-        elif note_body.getText().strip() == "":
-            _LOGGER.warning("Skipping todo with empty note body")
-        elif self.error_manager.errors:
-            _LOGGER.warning(
-                "Skipping note since zorg file has errors.",
-                file_path=str(self.zorg_file.path),
-            )
-            self.zorg_file.has_errors = True
-        else:
-            todo = Note(note_body.getText(), **kwargs)
-            self.zorg_file.notes.append(todo)
+        self._add_note(ctx.note_body(), **kwargs)
 
         # Reset todo priority and status back to defaults.
         self._s.todo_priority = _DEFAULT_PRIORITY
@@ -322,24 +310,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_note = False
         extra_kwargs: dict[str, Any] = {}
         kwargs = self._get_note_kwargs(ctx, extra_kwargs)
-        body: str = ctx.note_body().getText().strip()
-        if body == "":
-            _LOGGER.warning(
-                "Skipping note with empty body",
-                file_path=str(self.zorg_file.path),
-            )
-            return
-
-        if self.error_manager.errors:
-            _LOGGER.warning(
-                "Skipping note since zorg file has errors.",
-                file_path=str(self.zorg_file.path),
-            )
-            self.zorg_file.has_errors = True
-            return
-
-        note = Note(body, **kwargs)
-        self.zorg_file.notes.append(note)
+        self._add_note(ctx.note_body(), **kwargs)
 
     def _get_note_kwargs(
         self,
@@ -411,6 +382,25 @@ class ZorgFileCompiler(ZorgFileListener):
         elif self._s.in_note:
             self._s.note_tags[tag_name].append(tag_value)
 
+    def _add_note(
+        self,
+        note_body: Optional[ZorgFileParser.Note_bodyContext],
+        **kwargs: dict[str, Any],
+    ) -> None:
+        if note_body is None:
+            _LOGGER.warning("Skipping todo with no note body")
+        elif note_body.getText().strip() == "":
+            _LOGGER.warning("Skipping todo with empty note body")
+        elif self.error_manager.errors:
+            _LOGGER.warning(
+                "Skipping note since zorg file has errors.",
+                file_path=str(self.zorg_file.path),
+            )
+            self.zorg_file.has_errors = True
+        else:
+            todo = Note(note_body.getText().strip(), **kwargs)
+            self.zorg_file.notes.append(todo)
+
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:
     return {
@@ -420,6 +410,15 @@ def _get_default_tags_map() -> dict[TagName, list[str]]:
         "people": [],
         "projects": [],
     }
+
+
+def _normalize_big_prop_value(value: str) -> str:
+    single_line_val = re.sub(r"\s+", " ", value)
+    if idx := single_line_val.find(" * "):
+        new_value = single_line_val[:idx]
+    else:
+        new_value = single_line_val
+    return new_value
 
 
 @dataclass

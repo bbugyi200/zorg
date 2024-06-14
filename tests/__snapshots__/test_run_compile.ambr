@@ -227,7 +227,7 @@
               'todo_payload': None,
               'zid': '240510#01'},
              {'areas': [],
-              'body': ' 240510#02 bazbuz is ok too...',
+              'body': '240510#02 bazbuz is ok too...',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -365,7 +365,7 @@
 # name: test_compile[YAMLConfigFile-multiblocks]
   '''
   {'notes': [{'areas': [],
-              'body': ' 240510#07 Some todo',
+              'body': '240510#07 Some todo',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -377,7 +377,7 @@
                                'status': <NoteType.OPEN_TODO: 2>},
               'zid': '240510#07'},
              {'areas': [],
-              'body': ' 240510#08 Another related todo',
+              'body': '240510#08 Another related todo',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -400,7 +400,7 @@
               'todo_payload': None,
               'zid': '240510#09'},
              {'areas': [],
-              'body': ' 240510#0A Some other todo',
+              'body': '240510#0A Some other todo',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -505,7 +505,7 @@
 # name: test_compile[YAMLConfigFile-priority]
   '''
   {'notes': [{'areas': [],
-              'body': ' 240313#03 High Priority TODO',
+              'body': '240313#03 High Priority TODO',
               'contexts': [],
               'create_date': FakeDate(2024, 3, 13),
               'links': [],
@@ -517,7 +517,7 @@
                                'status': <NoteType.OPEN_TODO: 2>},
               'zid': '240313#03'},
              {'areas': [],
-              'body': ' 240313#04 Medium Priority TODO',
+              'body': '240313#04 Medium Priority TODO',
               'contexts': [],
               'create_date': FakeDate(2024, 3, 13),
               'links': [],
@@ -529,7 +529,7 @@
                                'status': <NoteType.OPEN_TODO: 2>},
               'zid': '240313#04'},
              {'areas': [],
-              'body': ' 240313#05 Low Priority TODO',
+              'body': '240313#05 Low Priority TODO',
               'contexts': [],
               'create_date': FakeDate(2024, 3, 13),
               'links': [],
@@ -572,7 +572,7 @@
               'todo_payload': None,
               'zid': '240510#0Q'},
              {'areas': [],
-              'body': ' 240613 240510#0R A canceled todo with a multiline '
+              'body': '240613 240510#0R A canceled todo with a multiline '
                       'explanation\n'
                       '  * x:: This todo was not really canceled. It is an '
                       'example todo used to\n'
@@ -599,7 +599,7 @@
               'todo_payload': None,
               'zid': '240330#02'},
              {'areas': [],
-              'body': ' 240510#0K This todo is @due today! | due::2024-03-13',
+              'body': '240510#0K This todo is @due today! | due::2024-03-13',
               'contexts': ['due'],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -623,7 +623,7 @@
               'todo_payload': None,
               'zid': '240510#0M'},
              {'areas': [],
-              'body': ' 240510#0N This recurring todo also uses an inline '
+              'body': '240510#0N This recurring todo also uses an inline '
                       'property | [recur::M+Th]',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
@@ -1396,7 +1396,7 @@
               'todo_payload': None,
               'zid': '240510#1c'},
              {'areas': [],
-              'body': ' 240510#1t This todo has checkboxes\n'
+              'body': '240510#1t This todo has checkboxes\n'
                       '  * [X] Done subtask\n'
                       '  * [ ] Open subtask',
               'contexts': [],
@@ -1410,7 +1410,7 @@
                                'status': <NoteType.OPEN_TODO: 2>},
               'zid': '240510#1t'},
              {'areas': [],
-              'body': ' 240510#1d This todo is due::2024-03-30 and has some '
+              'body': '240510#1d This todo is due::2024-03-30 and has some '
                       'subnotes',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
@@ -1560,7 +1560,7 @@
               'todo_payload': None,
               'zid': '240510#1v'},
              {'areas': [],
-              'body': ' 240510#1w A todo for something',
+              'body': '240510#1w A todo for something',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -1605,7 +1605,7 @@
               'todo_payload': None,
               'zid': '240510#20'},
              {'areas': [],
-              'body': ' 240510#21 Some foobar todo.',
+              'body': '240510#21 Some foobar todo.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -1661,7 +1661,7 @@
               'todo_payload': None,
               'zid': '240510#25'},
              {'areas': [],
-              'body': ' 240510#26 Some foobar todo.',
+              'body': '240510#26 Some foobar todo.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
