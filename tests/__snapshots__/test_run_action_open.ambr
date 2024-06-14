@@ -31,12 +31,10 @@
   - 240323#0c +laundry wash delicates
   - 240323#0d +zorg [[xmind/zorg_e2e_query_arch.xmind]]
   
-  
   ################################ [[basic]]
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
   o P3 240510#02 bazbuz is ok too...
-  
   
   ################################ [[links]]
   - 240510#03 Some note with a [[bar.sh]] link to a bash script.
@@ -49,7 +47,6 @@
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#07 Some note that references a ZID in another file. See [240408#0X].
   - 240510#09 id::1 http://www.example.com
-  
   
   ################################ [[multiblocks]]
   - 240510#09 A note about life...
@@ -65,12 +62,10 @@
   o P3 240510#08 Another related todo
   o P3 240510#0A Some other todo
   
-  
   ################################ [[priority]]
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  
   
   ################################ [[property]]
   - 240330#02 This note contains a key::value pair.
@@ -85,7 +80,6 @@
   ~ P3 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
-  
   
   ################################ [[scrambled_prj_notes]]
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -156,7 +150,6 @@
   - 240510#1a Rzq-itde mpfj
   - 240510#1b Zee-lpfg uqogce bk khxsvgrkq bbgvmf
   
-  
   ################################ [[subnotes]]
   - 240510#1c foobar
   - 240510#1e Todo subnote A
@@ -173,7 +166,6 @@
     * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
   
-  
   ################################ [[subsections]]
   - 240510#1t Note about A1
   - 240510#1u Note about something
@@ -189,7 +181,6 @@
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
-  
   
   ################################ [[tags_and_ids]]
   - 240408#0X Some note

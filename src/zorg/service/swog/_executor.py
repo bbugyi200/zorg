@@ -59,7 +59,9 @@ def execute(session: SQLSession, query_string: str) -> str:
     ordered_note_group = _order_notes_by(note_group, query.order_by)
 
     ### (S)ELECT
-    result = _select(query.select, ordered_note_group)
+    result = _select(
+        query.select, ordered_note_group, num_of_levels=len(query.group_by)
+    )
 
     return result.strip()
 
@@ -113,7 +115,11 @@ def _order_by_keyfunc(order_bys: Iterable[OrderByType]) -> KeyFunc:
 
 
 def _select(
-    select_type: SelectType, note_group: NoteGroup, *, level: int = 1
+    select_type: SelectType,
+    note_group: NoteGroup,
+    *,
+    num_of_levels: int,
+    level: int = 1,
 ) -> str:
     result = ""
     if isinstance(note_group, list):
@@ -140,8 +146,15 @@ def _select(
         assert isinstance(note_group, dict)
         for group_name, note_subgroup in note_group.items():
             if group_name:
-                result += f"{_get_header(level)} {group_name}\n"
-            result += _select(select_type, note_subgroup, level=level + 1)
+                result += (
+                    f"{_get_header(level, num_of_levels=num_of_levels)} {group_name}\n"
+                )
+            result += _select(
+                select_type,
+                note_subgroup,
+                level=level + 1,
+                num_of_levels=num_of_levels,
+            )
     return result
 
 
@@ -175,9 +188,10 @@ def _select_file(notes: list[Note]) -> str:
     return "\n".join(sorted(file_paths))
 
 
-def _get_header(level: int) -> str:
+def _get_header(level: int, *, num_of_levels: int) -> str:
+    newline = "\n" if num_of_levels > 1 else ""
     if level == 1:
-        return f"\n{'#' * 32}"
+        return f"{newline}{'#' * 32}"
     elif level == 2:
         return f"{'=' * 24}"
     elif level == 3:
