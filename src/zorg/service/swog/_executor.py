@@ -146,9 +146,8 @@ def _select(
         assert isinstance(note_group, dict)
         for group_name, note_subgroup in note_group.items():
             if group_name:
-                result += (
-                    f"{_get_header(level, num_of_levels=num_of_levels)} {group_name}\n"
-                )
+                header = _get_header(level, num_of_levels=num_of_levels)
+                result += f"{header} {group_name}\n"
             result += _select(
                 select_type,
                 note_subgroup,
