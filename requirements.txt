@@ -59,7 +59,7 @@ pyyaml==6.0.1
     # via bolton-clack
 rich==13.7.1
     # via -r requirements.in
-sqlalchemy==2.0.30
+sqlalchemy==2.0.31
     # via sqlmodel
 sqlmodel==0.0.19
     # via -r requirements.in

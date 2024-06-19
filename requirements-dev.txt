@@ -94,7 +94,7 @@ filelock==3.15.1
     # via
     #   tox
     #   virtualenv
-flake8==7.0.0
+flake8==7.1.0
     # via -r requirements-dev.in
 freezegun==1.5.1
     # via -r requirements-dev.in
@@ -165,7 +165,7 @@ pluggy==1.5.0
     #   tox
 py==1.11.0
     # via tox
-pycodestyle==2.11.1
+pycodestyle==2.12.0
     # via flake8
 pydantic==2.7.4
     # via
@@ -242,7 +242,7 @@ sphinx==7.3.7
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.1.1
+sphinx-autodoc-typehints==2.2.0
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
@@ -260,7 +260,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.30
+sqlalchemy==2.0.31
     # via sqlmodel
 sqlmodel==0.0.19
     # via
@@ -314,7 +314,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
 vimala==0.2.0
     # via
@@ -328,7 +328,7 @@ wheel==0.43.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.0
     # via pip-tools
-setuptools==70.0.0
+setuptools==70.1.0
     # via
     #   pip-tools
     #   setuptools-scm
