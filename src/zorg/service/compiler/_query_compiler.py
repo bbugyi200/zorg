@@ -268,14 +268,14 @@ def _get_date_range(
         ZorgQueryParser.Create_rangeContext,
         ZorgQueryParser.Modify_rangeContext,
     ],
-    short_start_date: str,
+    date_spec: str,
 ) -> DateRange:
-    start_date = zdt.from_short_date_spec(short_start_date)
+    start_date = zdt.from_date_spec(date_spec)
 
     end_date: Optional[dt.date] = None
     if date_range_tail := range_ctx.DATE_RANGE_TAIL():
         short_end_date = date_range_tail.getText()[1:]
-        end_date = zdt.from_short_date_spec(short_end_date)
+        end_date = zdt.from_date_spec(short_end_date)
 
     return DateRange(start_date, end_date)
 
