@@ -386,6 +386,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#embedded_link.
+    def enterEmbedded_link(self, ctx:ZorgFileParser.Embedded_linkContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#embedded_link.
+    def exitEmbedded_link(self, ctx:ZorgFileParser.Embedded_linkContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#ref.
     def enterRef(self, ctx:ZorgFileParser.RefContext):
         pass
