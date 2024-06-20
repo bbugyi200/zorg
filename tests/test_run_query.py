@@ -49,6 +49,8 @@ params = mark.parametrize
         ),
         param("[[buz]] G none", id="link_filter__buz"),
         param("[[tags_and_ids]] G none", id="link_filter__tags_and_ids"),
+        param("^0d", id="relative_date"),
+        param("^-1d:0d", id="relative_date_range"),
     ],
 )
 def test_query(

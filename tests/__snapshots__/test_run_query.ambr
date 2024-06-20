@@ -1195,6 +1195,21 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-relative_date]
+  '''
+  ################################ [[basic]]
+  o P3 000103#00 Old todo
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-relative_date_range]
+  '''
+  ################################ [[basic]]
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-select_files_with_todos]
   '''
   basic.zo
