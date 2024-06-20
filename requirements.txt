@@ -53,12 +53,16 @@ pydantic-settings==2.3.3
     # via bolton-clack
 pygments==2.18.0
     # via rich
+python-dateutil==2.9.0.post0
+    # via -r requirements.in
 python-dotenv==1.0.1
     # via pydantic-settings
 pyyaml==6.0.1
     # via bolton-clack
 rich==13.7.1
     # via -r requirements.in
+six==1.16.0
+    # via python-dateutil
 sqlalchemy==2.0.31
     # via sqlmodel
 sqlmodel==0.0.19

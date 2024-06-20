@@ -202,8 +202,10 @@ pytest-mock==3.14.0
     # via -r requirements-dev.in
 python-dateutil==2.9.0.post0
     # via
+    #   -r requirements.in
     #   arrow
     #   freezegun
+    #   zettel-org
 python-dotenv==1.0.1
     # via pydantic-settings
 python-slugify==8.0.4

@@ -3,6 +3,7 @@ bolton-clack ~= 0.3.12
 bolton-logrus ~= 0.1.1
 bolton-typist ~= 0.2.0
 jinja2
+python-dateutil ~= 2.9
 rich ~= 13.7
 sqlmodel ~= 0.0.16
 tqdm ~= 4.66
