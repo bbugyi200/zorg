@@ -51,7 +51,7 @@ def serializedATN():
         1,47,1,48,1,48,1,49,1,49,1,50,1,50,1,51,1,51,1,51,0,0,52,0,2,4,6,
         8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,
         52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,
-        96,98,100,102,0,7,4,0,31,32,54,54,67,67,69,70,1,0,7,15,2,0,7,15,
+        96,98,100,102,0,7,4,0,36,37,54,54,67,67,69,70,1,0,7,15,2,0,7,15,
         17,17,2,0,18,19,69,70,4,0,51,51,57,57,59,60,67,70,2,0,54,56,71,71,
         1,0,61,64,484,0,104,1,0,0,0,2,110,1,0,0,0,4,115,1,0,0,0,6,126,1,
         0,0,0,8,128,1,0,0,0,10,132,1,0,0,0,12,136,1,0,0,0,14,140,1,0,0,0,
@@ -65,7 +65,7 @@ def serializedATN():
         1,0,0,0,78,399,1,0,0,0,80,401,1,0,0,0,82,403,1,0,0,0,84,405,1,0,
         0,0,86,407,1,0,0,0,88,428,1,0,0,0,90,430,1,0,0,0,92,442,1,0,0,0,
         94,444,1,0,0,0,96,446,1,0,0,0,98,448,1,0,0,0,100,450,1,0,0,0,102,
-        452,1,0,0,0,104,106,3,2,1,0,105,107,5,30,0,0,106,105,1,0,0,0,106,
+        452,1,0,0,0,104,106,3,2,1,0,105,107,5,35,0,0,106,105,1,0,0,0,106,
         107,1,0,0,0,107,1,1,0,0,0,108,111,3,4,2,0,109,111,3,6,3,0,110,108,
         1,0,0,0,110,109,1,0,0,0,111,3,1,0,0,0,112,113,3,8,4,0,113,114,5,
         58,0,0,114,116,1,0,0,0,115,112,1,0,0,0,115,116,1,0,0,0,116,117,1,
@@ -93,7 +93,7 @@ def serializedATN():
         180,1,0,0,0,184,181,1,0,0,0,184,182,1,0,0,0,184,183,1,0,0,0,185,
         27,1,0,0,0,186,188,3,30,15,0,187,186,1,0,0,0,188,189,1,0,0,0,189,
         187,1,0,0,0,189,190,1,0,0,0,190,29,1,0,0,0,191,192,7,0,0,0,192,31,
-        1,0,0,0,193,196,5,38,0,0,194,195,5,54,0,0,195,197,7,1,0,0,196,194,
+        1,0,0,0,193,196,5,40,0,0,194,195,5,54,0,0,195,197,7,1,0,0,196,194,
         1,0,0,0,196,197,1,0,0,0,197,33,1,0,0,0,198,200,3,36,18,0,199,198,
         1,0,0,0,199,200,1,0,0,0,200,205,1,0,0,0,201,206,3,38,19,0,202,206,
         3,40,20,0,203,206,3,42,21,0,204,206,3,44,22,0,205,201,1,0,0,0,205,
@@ -102,9 +102,9 @@ def serializedATN():
         1,0,0,0,212,213,5,62,0,0,213,214,3,68,34,0,214,41,1,0,0,0,215,216,
         5,64,0,0,216,217,3,68,34,0,217,43,1,0,0,0,218,219,5,63,0,0,219,220,
         3,68,34,0,220,45,1,0,0,0,221,222,5,59,0,0,222,223,3,22,11,0,223,
-        224,5,60,0,0,224,47,1,0,0,0,225,227,5,35,0,0,226,228,5,37,0,0,227,
-        226,1,0,0,0,227,228,1,0,0,0,228,49,1,0,0,0,229,231,5,36,0,0,230,
-        232,5,37,0,0,231,230,1,0,0,0,231,232,1,0,0,0,232,51,1,0,0,0,233,
+        224,5,60,0,0,224,47,1,0,0,0,225,227,5,30,0,0,226,228,5,32,0,0,227,
+        226,1,0,0,0,227,228,1,0,0,0,228,49,1,0,0,0,229,231,5,31,0,0,230,
+        232,5,32,0,0,231,230,1,0,0,0,231,232,1,0,0,0,232,51,1,0,0,0,233,
         235,3,36,18,0,234,233,1,0,0,0,234,235,1,0,0,0,235,236,1,0,0,0,236,
         237,3,68,34,0,237,239,5,71,0,0,238,240,3,54,27,0,239,238,1,0,0,0,
         239,240,1,0,0,0,240,248,1,0,0,0,241,249,3,68,34,0,242,244,7,2,0,
@@ -145,13 +145,13 @@ def serializedATN():
         1,0,0,0,356,357,1,0,0,0,357,363,5,22,0,0,358,359,3,68,34,0,359,360,
         5,56,0,0,360,362,1,0,0,0,361,358,1,0,0,0,362,365,1,0,0,0,363,361,
         1,0,0,0,363,364,1,0,0,0,364,366,1,0,0,0,365,363,1,0,0,0,366,367,
-        3,68,34,0,367,368,5,23,0,0,368,65,1,0,0,0,369,370,5,40,0,0,370,67,
-        1,0,0,0,371,381,5,39,0,0,372,381,5,44,0,0,373,381,5,37,0,0,374,381,
-        5,38,0,0,375,381,3,70,35,0,376,381,3,72,36,0,377,381,3,66,33,0,378,
-        381,5,31,0,0,379,381,5,32,0,0,380,371,1,0,0,0,380,372,1,0,0,0,380,
+        3,68,34,0,367,368,5,23,0,0,368,65,1,0,0,0,369,370,5,42,0,0,370,67,
+        1,0,0,0,371,381,5,41,0,0,372,381,5,43,0,0,373,381,5,32,0,0,374,381,
+        5,40,0,0,375,381,3,70,35,0,376,381,3,72,36,0,377,381,3,66,33,0,378,
+        381,5,36,0,0,379,381,5,37,0,0,380,371,1,0,0,0,380,372,1,0,0,0,380,
         373,1,0,0,0,380,374,1,0,0,0,380,375,1,0,0,0,380,376,1,0,0,0,380,
         377,1,0,0,0,380,378,1,0,0,0,380,379,1,0,0,0,381,69,1,0,0,0,382,383,
-        5,33,0,0,383,71,1,0,0,0,384,385,5,34,0,0,385,73,1,0,0,0,386,389,
+        5,38,0,0,383,71,1,0,0,0,384,385,5,39,0,0,385,73,1,0,0,0,386,389,
         5,66,0,0,387,389,3,78,39,0,388,386,1,0,0,0,388,387,1,0,0,0,389,75,
         1,0,0,0,390,393,5,65,0,0,391,393,3,78,39,0,392,390,1,0,0,0,392,391,
         1,0,0,0,393,77,1,0,0,0,394,400,5,53,0,0,395,400,5,52,0,0,396,400,
@@ -193,9 +193,9 @@ class ZorgQueryParser ( Parser ):
                      "'|'", "'1'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", 
                      "'8'", "'9'", "'!'", "'0'", "'<='", "'>='", "'c'", 
                      "'f='", "'[['", "']]'", "'none'", "'create'", "'modify'", 
-                     "'priority'", "'file'", "'type'", "<INVALID>", "'o'", 
-                     "'x'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'priority'", "'file'", "'type'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'o'", "'x'", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "'################################'", "'========================'", 
                      "'++++++++++++++++'", "'--------'", "'  -'", "'    -'", 
@@ -210,10 +210,10 @@ class ZorgQueryParser ( Parser ):
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "NL", "LOWER_O", "LOWER_X", 
-                      "DATE", "TIME", "CREATE_RANGE_HEAD", "MODIFY_RANGE_HEAD", 
-                      "DATE_RANGE_TAIL", "PRIORITY", "ID", "ZID", "ZDATE", 
-                      "SHORT_DATE", "RELATIVE_DATE", "NUM_ID", "H1_HEADER", 
+                      "<INVALID>", "<INVALID>", "CREATE_RANGE_HEAD", "MODIFY_RANGE_HEAD", 
+                      "DATE_RANGE_TAIL", "ZDATE", "RELATIVE_DATE", "NL", 
+                      "LOWER_O", "LOWER_X", "DATE", "TIME", "PRIORITY", 
+                      "ID", "ZID", "NUM_ID", "SHORT_DATE", "H1_HEADER", 
                       "H2_HEADER", "H3_HEADER", "H4_HEADER", "TWO_SPACE_DASH", 
                       "FOUR_SPACE_DASH", "SYMBOL", "DOLLAR", "HAT", "DASH", 
                       "DOT", "FSLASH", "UNDERSCORE", "SPACE", "LPAREN", 
@@ -316,21 +316,21 @@ class ZorgQueryParser ( Parser ):
     T__26=27
     T__27=28
     T__28=29
-    NL=30
-    LOWER_O=31
-    LOWER_X=32
-    DATE=33
-    TIME=34
-    CREATE_RANGE_HEAD=35
-    MODIFY_RANGE_HEAD=36
-    DATE_RANGE_TAIL=37
-    PRIORITY=38
-    ID=39
-    ZID=40
-    ZDATE=41
-    SHORT_DATE=42
-    RELATIVE_DATE=43
-    NUM_ID=44
+    CREATE_RANGE_HEAD=30
+    MODIFY_RANGE_HEAD=31
+    DATE_RANGE_TAIL=32
+    ZDATE=33
+    RELATIVE_DATE=34
+    NL=35
+    LOWER_O=36
+    LOWER_X=37
+    DATE=38
+    TIME=39
+    PRIORITY=40
+    ID=41
+    ZID=42
+    NUM_ID=43
+    SHORT_DATE=44
     H1_HEADER=45
     H2_HEADER=46
     H3_HEADER=47
@@ -408,7 +408,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 106
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==30:
+            if _la==35:
                 self.state = 105
                 self.match(ZorgQueryParser.NL)
 
@@ -1297,7 +1297,7 @@ class ZorgQueryParser ( Parser ):
                 self.state = 189 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (((((_la - 31)) & ~0x3f) == 0 and ((1 << (_la - 31)) & 893361586179) != 0)):
+                if not (((((_la - 36)) & ~0x3f) == 0 and ((1 << (_la - 36)) & 27917549571) != 0)):
                     break
 
         except RecognitionException as re:
@@ -1357,7 +1357,7 @@ class ZorgQueryParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 191
             _la = self._input.LA(1)
-            if not(((((_la - 31)) & ~0x3f) == 0 and ((1 << (_la - 31)) & 893361586179) != 0)):
+            if not(((((_la - 36)) & ~0x3f) == 0 and ((1 << (_la - 36)) & 27917549571) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1836,7 +1836,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 227
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==37:
+            if _la==32:
                 self.state = 226
                 self.match(ZorgQueryParser.DATE_RANGE_TAIL)
 
@@ -1889,7 +1889,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 231
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==37:
+            if _la==32:
                 self.state = 230
                 self.match(ZorgQueryParser.DATE_RANGE_TAIL)
 
@@ -1975,7 +1975,7 @@ class ZorgQueryParser ( Parser ):
             self.state = 248
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [31, 32, 33, 34, 37, 38, 39, 40, 44]:
+            if token in [32, 36, 37, 38, 39, 40, 41, 42, 43]:
                 self.state = 241
                 self.id_()
                 pass
@@ -2678,47 +2678,47 @@ class ZorgQueryParser ( Parser ):
             self.state = 380
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [39]:
+            if token in [41]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 371
                 self.match(ZorgQueryParser.ID)
                 pass
-            elif token in [44]:
+            elif token in [43]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 372
                 self.match(ZorgQueryParser.NUM_ID)
                 pass
-            elif token in [37]:
+            elif token in [32]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 373
                 self.match(ZorgQueryParser.DATE_RANGE_TAIL)
                 pass
-            elif token in [38]:
+            elif token in [40]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 374
                 self.match(ZorgQueryParser.PRIORITY)
                 pass
-            elif token in [33]:
+            elif token in [38]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 375
                 self.date()
                 pass
-            elif token in [34]:
+            elif token in [39]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 376
                 self.time()
                 pass
-            elif token in [40]:
+            elif token in [42]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 377
                 self.zid()
                 pass
-            elif token in [31]:
+            elif token in [36]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 378
                 self.match(ZorgQueryParser.LOWER_O)
                 pass
-            elif token in [32]:
+            elif token in [37]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 379
                 self.match(ZorgQueryParser.LOWER_X)

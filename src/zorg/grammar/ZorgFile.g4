@@ -42,7 +42,7 @@ property    : simple_prop | inline_prop ;
 simple_prop : id COLON COLON id_group ;
 inline_prop : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
 id_group    : id (any_symbol+ id)* ;
-id          : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
+id          : ID | NUM_ID | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
 

@@ -72,3 +72,10 @@ priority      :  'priority' ;
 // shared subrules
 file : 'file' ;
 type : 'type' ;
+
+//// lexer rules
+CREATE_RANGE_HEAD : HAT ZDATE ;
+MODIFY_RANGE_HEAD : DOLLAR ZDATE ;
+DATE_RANGE_TAIL   : COLON ZDATE ;
+ZDATE             : SHORT_DATE | RELATIVE_DATE ;
+RELATIVE_DATE     : DASH? NUM+ ('d' | 'm' | 'y') ;
