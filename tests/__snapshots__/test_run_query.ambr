@@ -329,6 +329,8 @@
 # name: test_query[YAMLConfigFile-file_filter_basic]
   '''
   ################################ [[basic]]
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
@@ -367,6 +369,8 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
@@ -542,6 +546,8 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
@@ -710,6 +716,8 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
@@ -951,6 +959,8 @@
   ################################ [[basic]]
   - 240510#00 First note in first block
   - 240510#01 Second note in first block
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   
   ################################ [[links]]
@@ -1143,6 +1153,7 @@
   - 240323#0b +laundry fold darks
   
   ################################ [[basic]]
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   
   ################################ [[priority]]
@@ -1166,6 +1177,8 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
+  o P3 000102#00 Older todo
+  o P3 000103#00 Old todo
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#08 Another related todo
