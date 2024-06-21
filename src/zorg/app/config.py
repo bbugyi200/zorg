@@ -21,6 +21,7 @@ Command = Literal[
     "edit",
     "init",
     "list",
+    "move",
     "open",
     "query",
     "reindex",
@@ -85,6 +86,16 @@ class EditConfig(Config):
     file_group_map: FileGroupMapType = {}
     keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     vim_commands: list[str] = []
+
+
+class NoteMoveConfig(Config):
+    """Clack config for the 'note move' command."""
+
+    command: Literal["move"]
+
+    zid: str
+    new_page: Path
+    mutate: Optional[str] = None
 
 
 class OpenActionConfig(Config):
@@ -264,6 +275,35 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         type=Path,
         nargs="*",
         help="The .zo files we want to open in an editor.",
+    )
+
+    # --- 'note' command
+    note_parser = new_command(
+        "note", help="Commands for managing individual notes."
+    )
+    new_note_command = clack.new_command_factory(note_parser)
+    # --- 'note move' command
+    note_move_parser = new_note_command(
+        "move", help="Move a note to a different page."
+    )
+    note_move_parser.add_argument(
+        "zid", help="ZID of the note we want to move."
+    )
+    note_move_parser.add_argument(
+        "new_page",
+        type=Path,
+        help=(
+            "Path to the destination page (i.e. where our note will be moved"
+            " to)."
+        ),
+    )
+    note_move_parser.add_argument(
+        "mutate",
+        nargs="?",
+        help=(
+            "Zorg mutate command which, if provided, specifies modifications"
+            " that should be made to the note before moving it."
+        ),
     )
 
     # --- 'query' command

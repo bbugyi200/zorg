@@ -69,6 +69,8 @@ for cmd in [
     "db create",
     "db reindex",
     "edit",
+    "note",
+    "note move",
     "query",
     "template",
     "template init",
@@ -83,7 +85,7 @@ for cmd in [
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,compile,db,edit,query,template} ...
+            {action,compile,db,edit,note,query,template} ...
 
 The zettel note manager of the future.
 
@@ -113,13 +115,14 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,compile,db,edit,query,template}
+  {action,compile,db,edit,note,query,template}
     action              Used to interface with vim via an action protocol.
     compile             Compiles zorg (*.zo) files into zorc (*.zoc) files.
     db                  Commands for managing Zorg's SQL database.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
+    note                Commands for managing individual notes.
     query               Run a zorg query against your zettel directory.
     template            Commands for managing .zot templates.
 ```
@@ -222,6 +225,39 @@ Generate new day logs from templates and open the main day log in your system's 
 
 positional arguments:
   zo_paths    The .zo files we want to open in an editor.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `zorg note --help`
+
+```
+usage: zorg note [-h] {move} ...
+
+Commands for managing individual notes.
+
+options:
+  -h, --help  show this help message and exit
+
+subcommands:
+  {move}
+    move      Move a note to a different page.
+```
+
+### `zorg note move --help`
+
+```
+usage: zorg note move [-h] zid new_page [mutate]
+
+Move a note to a different page.
+
+positional arguments:
+  mutate      Zorg mutate command which, if provided, specifies modifications
+              that should be made to the note before moving it.
+  new_page    Path to the destination page (i.e. where our note will be moved
+              to).
+  zid         ZID of the note we want to move.
 
 options:
   -h, --help  show this help message and exit

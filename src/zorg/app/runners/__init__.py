@@ -10,6 +10,7 @@ from . import (
     _run_compile,
     _run_db,
     _run_edit,
+    _run_note,
     _run_query,
     _run_template,
 )
@@ -18,6 +19,14 @@ from ._runners import RUNNERS
 
 # HACK: It is necessary that we import these runner modules so the '@runner'
 # decorator registers functions as runners.
-del _run_action, _run_compile, _run_db, _run_edit, _run_query, _run_template
+del (
+    _run_action,
+    _run_compile,
+    _run_db,
+    _run_edit,
+    _run_note,
+    _run_query,
+    _run_template,
+)
 
 __all__ = ["RUNNERS"]
