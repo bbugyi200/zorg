@@ -25,12 +25,12 @@ class Note:
     """A Zorg note."""
 
     body: str
+    line_no: int
 
     areas: list[str] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
     file_path: Optional[Path] = None
-    line_no: Optional[int] = None
     links: list[str] = field(default_factory=lambda: [])
     modify_date: dt.date = field(default_factory=dt.date.today)
     people: list[str] = field(default_factory=lambda: [])
@@ -45,6 +45,17 @@ class Note:
             and self.body == other.body
             and self.todo_payload == other.todo_payload
         )
+
+    def to_string(self) -> str:
+        """Convert a Note to a string that can be stored in a *.zo file."""
+        note_type = (
+            self.todo_payload.status if self.todo_payload else NoteType.BASIC
+        )
+        char = note_type.to_prefix_char()
+        priority = (
+            f" {self.todo_payload.priority}" if self.todo_payload else ""
+        )
+        return f"{char}{priority} {self.body.strip()}\n"
 
 
 @dataclass

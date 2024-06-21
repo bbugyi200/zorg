@@ -160,14 +160,7 @@ def _select(
 def _select_note(notes: list[Note]) -> str:
     result = ""
     for note in notes:
-        note_type = (
-            note.todo_payload.status if note.todo_payload else NoteType.BASIC
-        )
-        char = note_type.to_prefix_char()
-        priority = (
-            f" {note.todo_payload.priority}" if note.todo_payload else ""
-        )
-        result += f"{char}{priority} {note.body.strip()}\n"
+        result += note.to_string()
     return result
 
 

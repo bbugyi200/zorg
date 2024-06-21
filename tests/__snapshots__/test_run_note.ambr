@@ -1,0 +1,79 @@
+# serializer version: 1
+# name: test_note_move[YAMLConfigFile-basic]
+  '''
+  # Some test file.
+  #
+  # blah blah blah
+  
+  - 240510#00 First note in first block
+  - 240510#01 Second note in first block
+  
+  ################################ Foobar Rocks!
+  o 000103#00 Old todo
+  o 000102#00 Older todo
+  
+  '''
+# ---
+# name: test_note_move[YAMLConfigFile-basic].1
+  '''
+  # A zorg file containing properties.
+  
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+      demonstrate a multiline bullet property.
+  
+  ################################ p::1
+  - 240330#02 This note contains a key::value pair.
+  o 240510#0K This todo is @due today! | due::2024-03-13
+  - 240510#0M This [type:: awesome note] has an inline property.
+  o 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  o P3 240510#02 bazbuz is ok too...
+  
+  '''
+# ---
+# name: test_note_move[YAMLConfigFile-multiline]
+  '''
+  # A zorg file containing properties.
+  
+  - 240510#0P This note has a single-line bullet property.
+    * foo:: bar baz buz
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
+    * x:: This todo was not really canceled. It is an example todo used to
+      demonstrate a multiline bullet property.
+  
+  ################################ p::1
+  - 240330#02 This note contains a key::value pair.
+  o 240510#0K This todo is @due today! | due::2024-03-13
+  - 240510#0M This [type:: awesome note] has an inline property.
+  o 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
+  o P3 240510#02 bazbuz is ok too...
+  
+  '''
+# ---
+# name: test_note_move[YAMLConfigFile-multiline].1
+  '''
+  # A file with lots of #tags and zorg IDs.
+  
+  ################################ +foobar @fat_pig
+  - 240408#0X Some note
+  - 240509 240408#0X Some note with a modify date
+  
+  ======================== +bazbuz #thoughts
+  - 301231#X0 When I talk to %pig I always want to @puke. | id::pig_is_gross
+  
+  ################################ +bad
+  ======================== +to_the_bone
+  - 240408#N2 Da nah nah nuh...
+  ======================== +2_be_or_not_2_be +123
+  - 240510#29 Projects can start with a number, but CANNOT be all numbers
+  - 240510#0Q q:: Can a note headline use a bullet property or do bullet
+    properties need to be defined _under_ the headline?
+    * a:: Yes! Bullet properties are powerful!
+  
+  '''
+# ---
