@@ -25,12 +25,12 @@ class Note:
     """A Zorg note."""
 
     body: str
+    file_path: Path
     line_no: int
 
     areas: list[str] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
-    file_path: Optional[Path] = None
     links: list[str] = field(default_factory=lambda: [])
     modify_date: dt.date = field(default_factory=dt.date.today)
     people: list[str] = field(default_factory=lambda: [])

@@ -123,13 +123,13 @@ class ZorgNote(Base, table=True):
 
     # table columns
     body: str
+    line_no: int
 
     # TODO(bugyi): Make zid required to persist to DB.
     # TODO(bugyi): Make zid unique.
     zid: Optional[str] = Field(default=None)
 
     create_date: dt.date = Field(default_factory=dt.date.today)
-    line_no: Optional[int] = None
     modify_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
     todo_status: Optional[NoteType] = None
