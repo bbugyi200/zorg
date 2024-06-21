@@ -22,7 +22,6 @@ No notable changes have been made.
 * Add support for relative dates (e.g. `0d`, `-2m`, `1y`).
 * Add support for inline and bullet properties.
 * Add support for link filters in queries.
-* Add support for ZIDs to `zorg action open` command.
 
 
 ## [0.7.4](https://github.com/bbugyi200/zorg/compare/0.7.3...0.7.4) - 2024-05-26
