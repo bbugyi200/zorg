@@ -12,6 +12,8 @@ Error = NewType("Error", str)
 
 
 class FileManager:
+    """Zorg (i.e *.zo) file manager."""
+
     def __init__(self, zdir: Path, session: SQLSession) -> None:
         self._zdir = zdir
         self._session = session
