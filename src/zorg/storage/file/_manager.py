@@ -3,9 +3,9 @@
 from pathlib import Path
 from typing import NewType, Optional
 
-from ..sql.session import SQLSession
 from ...domain.models import FileFilter, Note, WhereAndFilter, WhereOrFilter
 from ...service.common import prepend_zdir
+from ..sql.session import SQLSession
 
 
 Error = NewType("Error", str)

@@ -10,12 +10,7 @@ from logrus import Logger
 from typist import assert_never
 
 from ...domain.models import Note, Query
-from ...domain.types import (
-    GroupByType,
-    KeyFunc,
-    OrderByType,
-    SelectType,
-)
+from ...domain.types import GroupByType, KeyFunc, OrderByType, SelectType
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
 

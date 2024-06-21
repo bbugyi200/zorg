@@ -2,8 +2,8 @@
 
 from logrus import Logger
 
-from ...storage.sql.session import SQLSession
 from ...storage.file import FileManager
+from ...storage.sql.session import SQLSession
 from ..config import NoteMoveConfig
 from ._runners import runner
 
