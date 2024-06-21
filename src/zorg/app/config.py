@@ -162,6 +162,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         argv_after_opts[0] == "template"
         and len(argv_after_opts) > 1
         and argv_after_opts[1] not in literal_to_list(Command)
+        and all(opt not in argv for opt in ["-h", "--help"])
     ):
         argv = (
             argv_before_opts
