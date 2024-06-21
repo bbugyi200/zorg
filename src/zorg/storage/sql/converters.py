@@ -511,6 +511,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             results = session.exec(stmt)
             sql_zorg_note.zorg_file = results.first()
 
+        sql_zorg_note.line_no = entity.line_no
         return sql_zorg_note
 
     def to_entity(self, sql_model: sql.ZorgNote) -> Note:
@@ -530,6 +531,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             contexts=list(context.name for context in sql_model.contexts),
             create_date=sql_model.create_date,
             file_path=Path(sql_model.zorg_file.path),
+            line_no=sql_model.line_no,
             links=[link.name for link in sql_model.links],
             modify_date=sql_model.modify_date,
             people=list(person.name for person in sql_model.people),

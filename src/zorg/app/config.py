@@ -28,9 +28,8 @@ Command = Literal[
     "render",
 ]
 
-_LOGGER = Logger(__name__)
-
 _DEFAULT_ZETTEL_DIR: Final[Path] = Path.home() / "org"
+_LOGGER = Logger(__name__)
 
 
 def _get_default_database_url(zdir: Path) -> str:
