@@ -13,7 +13,6 @@ from ...domain.models import Note, Query
 from ...domain.types import (
     GroupByType,
     KeyFunc,
-    NoteType,
     OrderByType,
     SelectType,
 )
