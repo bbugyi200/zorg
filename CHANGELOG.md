@@ -9,11 +9,20 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.4...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.5...HEAD)
+
+No notable changes have been made.
+
+
+## [0.7.5](https://github.com/bbugyi200/zorg/compare/0.7.4...0.7.5) - 2024-06-21
 
 ### Added
 
 * Add support to `action open` command for targeting ZIDs.
+* Add support for relative dates (e.g. `0d`, `-2m`, `1y`).
+* Add support for inline and bullet properties.
+* Add support for link filters in queries.
+* Add support for ZIDs to `zorg action open` command.
 
 
 ## [0.7.4](https://github.com/bbugyi200/zorg/compare/0.7.3...0.7.4) - 2024-05-26
