@@ -70,6 +70,12 @@ function run() {
     antlr4 -Dlanguage=Python3 $g4_stem.g4 -o $dir
     popd >/dev/null
 
+    # If no example files exist...
+    if ! [[ -d examples/$dir ]]; then
+      # ...then we won't bother looking for them.
+      continue
+    fi
+
     for f in examples/$dir/*.zo*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
         continue
