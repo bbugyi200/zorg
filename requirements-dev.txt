@@ -90,7 +90,7 @@ docutils==0.20.1
     #   sphinx-rtd-theme
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.15.3
+filelock==3.15.4
     # via
     #   tox
     #   virtualenv
@@ -244,7 +244,7 @@ sphinx==7.3.7
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.2.0
+sphinx-autodoc-typehints==2.2.2
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
@@ -322,7 +322,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.26.2
+virtualenv==20.26.3
     # via tox
 wheel==0.43.0
     # via pip-tools
