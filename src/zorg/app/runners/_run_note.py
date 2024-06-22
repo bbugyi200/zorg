@@ -49,7 +49,9 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
     file_man.delete_note(note)
     return 0
 
+
 def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
     where_query = build_zorg_query(cfg.where_query).where
     notes = session.repo.get_notes_by_query(where_query)
+    del notes
     return 0
