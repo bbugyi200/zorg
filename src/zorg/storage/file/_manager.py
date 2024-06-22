@@ -23,11 +23,12 @@ class FileManager:
         zpage = prepend_zdir(self._zdir, [page])[0]
         if not zpage.exists():
             return Error("Page does not exist")
-        zlines = zpage.read_text().split("\n")
+
         page_query = WhereOrFilter(
             and_filters=[WhereAndFilter(file_filters={FileFilter(str(page))})]
         )
         page_notes = self._session.repo.get_notes_by_query(page_query)
+        zlines = zpage.read_text().split("\n")
         if page_notes:
             last_note = max(page_notes, key=lambda note: note.line_no)
             new_note_line_no = last_note.line_no + len(

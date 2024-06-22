@@ -71,6 +71,7 @@ for cmd in [
     "edit",
     "note",
     "note move",
+    "note mutate",
     "query",
     "template",
     "template init",
@@ -233,16 +234,17 @@ options:
 ### `zorg note --help`
 
 ```
-usage: zorg note [-h] {move} ...
+usage: zorg note [-h] {move,mutate} ...
 
 Commands for managing individual notes.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help     show this help message and exit
 
 subcommands:
-  {move}
-    move      Move a note to a different page.
+  {move,mutate}
+    move         Move a note to a different page.
+    mutate       Bulk update notes
 ```
 
 ### `zorg note move --help`
@@ -261,6 +263,21 @@ positional arguments:
 
 options:
   -h, --help  show this help message and exit
+```
+
+### `zorg note mutate --help`
+
+```
+usage: zorg note mutate [-h] where_query mutate
+
+Bulk update notes
+
+positional arguments:
+  mutate       Mutate command that specifies how each note will be updated.
+  where_query  Notes matching this WHERE query will be targeted for updates.
+
+options:
+  -h, --help   show this help message and exit
 ```
 
 ### `zorg query --help`

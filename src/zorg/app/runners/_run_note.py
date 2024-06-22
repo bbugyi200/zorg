@@ -2,9 +2,10 @@
 
 from logrus import Logger
 
+from ...service.compiler import build_zorg_query
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
-from ..config import NoteMoveConfig
+from ..config import NoteMoveConfig, NoteMutateConfig
 from ._runners import runner
 
 
@@ -18,6 +19,15 @@ def run_note_move(cfg: NoteMoveConfig) -> int:
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
         return _move_note(cfg, session)
+
+
+@runner
+def run_note_mutate(cfg: NoteMutateConfig) -> int:
+    """Runner for the 'note move' command."""
+    with SQLSession(
+        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
+    ) as session:
+        return _mutate_notes(cfg, session)
 
 
 def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
@@ -37,4 +47,9 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1
     file_man.delete_note(note)
+    return 0
+
+def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
+    where_query = build_zorg_query(cfg.where_query).where
+    notes = session.repo.get_notes_by_query(where_query)
     return 0
