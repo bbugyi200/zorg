@@ -76,7 +76,7 @@ link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
 local_link    : '[' ID ']' ;
 zid_link      : '[' zid ']' ;
-embedded_link : '[(' id_group ')]' ;
+embedded_link : '((' id_group '))' ;
 ref_link      : '[@' ID ']' ;
 footnote_head : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
 

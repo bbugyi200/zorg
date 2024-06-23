@@ -216,7 +216,7 @@ class ZorgFileParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'['", "']'", "'[['", "']]'", "'[#'", 
-                     "'[('", "')]'", "'[@'", "<INVALID>", "'o'", "'x'", 
+                     "'(('", "'))'", "'[@'", "<INVALID>", "'o'", "'x'", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "'################################'", 
                      "'========================'", "'++++++++++++++++'", 
