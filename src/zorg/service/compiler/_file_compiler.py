@@ -183,6 +183,11 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.todo_priority = ctx.getText().upper()
 
+    def enterRef_link(
+        self, ctx: ZorgFileParser.Ref_linkContext
+    ) -> None:  # noqa: D102
+        self._add_tag("links", f"ref:{ctx.children[1].getText()}")
+
     def enterSimple_prop(
         self, ctx: ZorgFileParser.Simple_propContext
     ) -> None:  # noqa: D102
