@@ -376,7 +376,7 @@
               'body': '240510#0B Some note with a ref link. See [@foobar].',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
-              'links': [],
+              'links': ['ref:foobar'],
               'modify_date': FakeDate(2024, 5, 10),
               'people': [],
               'projects': [],

@@ -42,6 +42,7 @@
     'global:pig_is_gross',
     'local:1',
     'poop',
+    'ref:foobar',
     'xmind/zorg_e2e_query_arch.xmind',
     'zid:240408#0X',
     'zid:240510#03',
