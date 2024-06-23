@@ -54,7 +54,11 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             found_primary_zid = True
 
     # If the provided line is a zorg query...
-    if zo_line.startswith(("# S ", "# W ")) and is_zoq_file:
+    if (
+        zo_line.startswith(("# S ", "# W "))
+        and not zo_line.startswith(("# S = ", "# W = "))
+        and is_zoq_file
+    ):
         _refresh_zoq_file(cfg, zo_path)
         print(f"EDIT {zo_path}")
     # Else if the provided line contains targets (e.g. links)...
