@@ -154,7 +154,7 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
     cite_key = z_cite_key.split("::")[1]
     sp.Popen(
-        ["papis", "zotero", "import", "-s", str(zdir / "zotero")]
+        ["papis", "--cc", "zotero", "import", "-s", str(zdir / "zotero")]
     ).communicate()
     popen = sp.Popen(["papis", "list", f"ref:{cite_key}"], stdout=sp.PIPE)
     stdout, _ = popen.communicate()
