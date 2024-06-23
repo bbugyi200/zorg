@@ -9,6 +9,7 @@
 # ---
 # name: test_run_db_create__contexts[YAMLConfigFile]
   list([
+    'READ',
     'due',
     'dzwk',
     'fat_pig',
@@ -42,14 +43,14 @@
     'global:pig_is_gross',
     'local:1',
     'poop',
-    'ref:foobar',
+    'ref:some_article',
     'xmind/zorg_e2e_query_arch.xmind',
     'zid:240408#0X',
     'zid:240510#03',
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  153
+  154
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -100,7 +101,9 @@
     'p',
     'q',
     'recur',
+    'rid',
     'type',
+    'url',
     'x',
   ])
 # ---
@@ -240,5 +243,6 @@
     '240510#27',
     '240510#29',
     '301231#X0',
+    '301231#X1',
   ])
 # ---
