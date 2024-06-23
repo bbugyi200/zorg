@@ -13,7 +13,7 @@ body    : NL+ block* h2_section* h1_section* ;
 // blocks
 block       : item+ NL* ;
 item        : todo | note | footnote | comment ;
-footnote    : ref COLON space_atoms NL ;
+footnote    : footnote_head COLON space_atoms NL ;
 
 // notes
 note         : DASH base_note subnote* ;
@@ -31,8 +31,19 @@ priority    : PRIORITY ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? ref? ;
-atom        : tag_symbol | tag | link | property | id_group | global_link | local_link | zid_link | embedded_link | ref | priority ;
+space_atom  : SPACE (SQUOTE non_tag_symbol)? (non_tag_symbol | DQUOTE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? footnote_head? ;
+atom        : tag_symbol
+            | tag
+            | link
+            | property
+            | id_group
+            | global_link
+            | local_link
+            | zid_link
+            | embedded_link
+            | ref_link
+            | footnote_head
+            | priority ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -66,7 +77,8 @@ global_link   : '[#' ID ']' ;
 local_link    : '[' ID ']' ;
 zid_link      : '[' zid ']' ;
 embedded_link : '[(' id_group ')]' ;
-ref           : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
+ref_link      : '[@' ID ']' ;
+footnote_head : '[' id_group (SPACE id_group)* ']' | '[' SPACE ']';
 
 // sections
 h1_section : h1_header NL* block* (NL? h2_section)* ;

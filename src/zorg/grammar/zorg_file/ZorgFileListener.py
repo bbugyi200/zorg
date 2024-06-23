@@ -395,12 +395,21 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#ref.
-    def enterRef(self, ctx:ZorgFileParser.RefContext):
+    # Enter a parse tree produced by ZorgFileParser#ref_link.
+    def enterRef_link(self, ctx:ZorgFileParser.Ref_linkContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#ref.
-    def exitRef(self, ctx:ZorgFileParser.RefContext):
+    # Exit a parse tree produced by ZorgFileParser#ref_link.
+    def exitRef_link(self, ctx:ZorgFileParser.Ref_linkContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#footnote_head.
+    def enterFootnote_head(self, ctx:ZorgFileParser.Footnote_headContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#footnote_head.
+    def exitFootnote_head(self, ctx:ZorgFileParser.Footnote_headContext):
         pass
 
 
