@@ -40,7 +40,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             found_primary_zid or is_zoq_file or i == 0
         )
         is_id_link = word.find("[#") >= 0 and word.find("]") >= 0
-        if is_link or _is_local_link(word) or is_id_link:
+        is_rid_link = word.find("[@") >= 0 and word.find("]") >= 0
+        if is_link or _is_local_link(word) or is_id_link or is_rid_link:
             all_targets_in_line.append(word)
         elif is_targetable_zid:
             all_targets_in_line.append(zid_word)
@@ -88,6 +89,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 return _open_local_link(target)
             elif target.startswith("[#") and target.endswith("]"):
                 return _open_id_link(cfg, target)
+            elif target.startswith("[@") and target.endswith("]"):
+                return _open_rid_link(cfg, target)
             else:
                 return _open_zid(cfg, target)
     # Else we tell vim to echo an error message.
@@ -168,6 +171,34 @@ def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
     print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
+
+    return 0
+
+
+def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
+    rid_key = rid_link[2:-1]
+    with SQLSession(
+        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
+    ) as session:
+        notes = session.repo.get_notes_by_id(rid_key, id_key="rid")
+
+    if not notes:
+        print(f"ECHO No notes with found with the id::{rid_key} property")
+        return 1
+
+    if len(notes) > 1:
+        matched_files = " ".join(sorted({str(n.file_path) for n in notes}))
+        print(
+            f"ECHO Multiple notes found the with the id::{rid_key} property:"
+            f" {matched_files}"
+        )
+        return 1
+
+    note = notes[0]
+    assert note.file_path is not None
+    note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
+    print(f"EDIT {note_file_path}")
+    print(f"SEARCH rid::{rid_key}\\(\\s\\|$\\)")
 
     return 0
 

@@ -105,7 +105,7 @@ class SQLRepo:
             )
             return None
 
-    def get_notes_by_id(self, id_: str) -> list[Note]:
+    def get_notes_by_id(self, id_: str, *, id_key: str = "id") -> list[Note]:
         """Fetch a list of notes using an id:: property."""
         stmt = (
             select(sql.ZorgNote)
@@ -123,7 +123,9 @@ class SQLRepo:
                 ),
             )
             .where(
-                and_(sql.Property.name == "id", sql.PropertyLink.value == id_)
+                and_(
+                    sql.Property.name == id_key, sql.PropertyLink.value == id_
+                )
             )
         )
         results = self._session.exec(stmt)
