@@ -1,6 +1,7 @@
 """Contains runners for the 'zorg action' command."""
 
 from pathlib import Path
+import subprocess as sp
 from typing import Final, Optional
 
 from logrus import Logger
@@ -41,7 +42,14 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         )
         is_id_link = word.find("[#") >= 0 and word.find("]") >= 0
         is_rid_link = word.find("[@") >= 0 and word.find("]") >= 0
-        if is_link or _is_local_link(word) or is_id_link or is_rid_link:
+        is_cite_key_link = word.startswith("z::")
+        if (
+            is_link
+            or _is_local_link(word)
+            or is_id_link
+            or is_rid_link
+            or is_cite_key_link
+        ):
             all_targets_in_line.append(word)
         elif is_targetable_zid:
             all_targets_in_line.append(zid_word)
@@ -91,6 +99,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 return _open_id_link(cfg, target)
             elif target.startswith("[@") and target.endswith("]"):
                 return _open_rid_link(cfg, target)
+            elif target.startswith("z::"):
+                return _open_cite_key_link(cfg.zettel_dir, target)
             else:
                 return _open_zid(cfg, target)
     # Else we tell vim to echo an error message.
@@ -138,6 +148,18 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     if len(link_parts) > 1:
         print(f"SEARCH id::{link_parts[1][:-2]}")
 
+    return 0
+
+
+def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
+    cite_key = z_cite_key.split("::")[1]
+    sp.Popen(
+        ["papis", "zotero", "import", "-s", str(zdir / "zotero")]
+    ).communicate()
+    popen = sp.Popen(["papis", "list", f"ref:{cite_key}"], stdout=sp.PIPE)
+    stdout, _ = popen.communicate()
+    papis_item_dir = stdout.decode().strip()
+    print(f"EDIT {papis_item_dir}/info.yaml")
     return 0
 
 
