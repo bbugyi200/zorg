@@ -127,12 +127,13 @@ def test_action_open__zid(
     ]
 
 
-@params("lineno", [param(12, id="line_with_local_link")])
+@params("lineno,id_key", [param(12, "1"), param(18, "some_loc_link")])
 def test_action_open__local_link(
     main: c.MainType,
     capsys: CaptureFixture,
     db_zettel_dir: Path,
     lineno: int,
+    id_key: str,
 ) -> None:
     """Test the 'action open' command can target ZIDs."""
     exit_code = main(
@@ -146,7 +147,7 @@ def test_action_open__local_link(
     assert exit_code == 0
 
     capture = capsys.readouterr()
-    assert capture.out.strip() == "SEARCH id::1\\(\\s\\|$\\)"
+    assert capture.out.strip() == f"SEARCH id::{id_key}\\(\\s\\|$\\)"
 
 
 @params("lineno", [param(13, id="line_with_id_link")])
