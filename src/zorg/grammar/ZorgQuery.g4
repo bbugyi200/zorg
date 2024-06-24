@@ -37,7 +37,7 @@ project        : PLUS id ;
 subfilter      : '(' or_filter ')' ;
 create_range   : CREATE_RANGE_HEAD DATE_RANGE_TAIL? ;
 modify_range   : MODIFY_RANGE_HEAD DATE_RANGE_TAIL? ;
-prop_filter    : not_op? id COLON prop_op? (id | ('0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')+ | STAR) ;
+prop_filter    : not_op? id COLON prop_op? (id | STAR) ;
 prop_op        : '<' | '<=' | '>=' | '>' ;
 desc_filter    : not_op? 'c'? (s_desc_filter | d_desc_filter) ;
 s_desc_filter  : SQUOTE any_non_squote* id any_non_squote* (SPACE any_non_squote* id any_non_squote*)* SQUOTE ;
@@ -46,7 +46,7 @@ file_filter    : not_op? 'f=' (id FSLASH)* (STAR UNDERSCORE?)? id STAR? ;
 link_filter    : not_op? '[[' (id FSLASH)* id ']]' ;
 
 zid  : ZID  ;
-id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
+id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | file | type | LOWER_O | LOWER_X ;
 date : DATE ;
 time : TIME ;
 
