@@ -74,7 +74,7 @@ project : PLUS id ;
 quoted        : (SQUOTE (atom | priority | '[[' | ']]')+ SQUOTE | DQUOTE atom+ DQUOTE) ;
 link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
-local_link    : '[' ID ']' ;
+local_link    : '[^' ID ']' ;
 zid_link      : '[' zid ']' ;
 embedded_link : '((' id_group '))' ;
 ref_link      : '[@' ID ']' ;

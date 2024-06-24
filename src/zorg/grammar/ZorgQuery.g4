@@ -24,7 +24,17 @@ note        : 'note' ;
 where_body     : or_filter ;
 or_filter      : and_filter (SPACE '|' SPACE and_filter)* ;
 and_filter     : where_atom (SPACE where_atom)* ;
-where_atom     : note_type | priority_range | tag | subfilter | create_range | modify_range | prop_filter | desc_filter | file_filter | link_filter ;
+where_atom     : note_type
+               | priority_range
+               | tag
+               | subfilter
+               | create_range
+               | modify_range
+               | prop_filter
+               | desc_filter
+               | file_filter
+               | link_filter
+               ;
 note_type      : note_type_char+ ;
 note_type_char : DASH | LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority_range : PRIORITY (DASH ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'))? ;

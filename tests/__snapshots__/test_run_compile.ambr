@@ -326,7 +326,7 @@
               'todo_payload': None,
               'zid': '240510#07'},
              {'areas': [],
-              'body': '240510#08 Some note that references a local [1] link.',
+              'body': '240510#08 Some note that references a local [^1] link.',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': ['local:1'],

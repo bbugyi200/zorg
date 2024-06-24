@@ -86,7 +86,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [1] link.
+  - 240510#08 Some note that references a local [^1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].
@@ -405,7 +405,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [1] link.
+  - 240510#08 Some note that references a local [^1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].
@@ -610,7 +610,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [1] link.
+  - 240510#08 Some note that references a local [^1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].
@@ -770,7 +770,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [1] link.
+  - 240510#08 Some note that references a local [^1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].
@@ -996,7 +996,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [1] link.
+  - 240510#08 Some note that references a local [^1] link.
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].

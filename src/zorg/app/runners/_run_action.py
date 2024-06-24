@@ -13,6 +13,7 @@ from ..config import OpenActionConfig
 from ._runners import runner
 
 
+_LOCAL_LINK_LEFT_MARK = "[^"
 _LOGGER = Logger(__name__)
 _MSG_NOTHING_TO_OPEN: Final = (
     "We did not find anything zorg knows how to open on line"
@@ -111,13 +112,9 @@ def run_action_open(cfg: OpenActionConfig) -> int:
 
 
 def _is_local_link(word: str) -> bool:
-    left_idx = word.find("[")
+    left_idx = word.find(_LOCAL_LINK_LEFT_MARK)
     right_idx = word.find("]")
-    return (
-        left_idx >= 0
-        and right_idx >= 0
-        and word[left_idx + 1 : right_idx].isdigit()
-    )
+    return left_idx >= 0 and right_idx >= 0
 
 
 def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
@@ -164,7 +161,7 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
 
 
 def _open_local_link(local_link: str) -> int:
-    id_key = local_link[1:-1]
+    id_key = local_link[len(_LOCAL_LINK_LEFT_MARK) : -1]
     print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
     return 0
 
