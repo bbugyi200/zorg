@@ -153,9 +153,11 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
     sp.Popen(
         ["papis", "--cc", "zotero", "import", "-s", str(zdir / "zotero")]
     ).communicate()
-    popen = sp.Popen(["papis", "list", f"ref:{cite_key}"], stdout=sp.PIPE)
+    popen = sp.Popen(
+        ["papis", "list", "-a", f"ref:{cite_key}"], stdout=sp.PIPE
+    )
     stdout, _ = popen.communicate()
-    papis_item_dir = stdout.decode().strip()
+    papis_item_dir = stdout.decode().strip().split("\n")[0]
     print(f"EDIT {papis_item_dir}/info.yaml")
     return 0
 
