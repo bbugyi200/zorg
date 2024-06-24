@@ -42,6 +42,7 @@
     'eswz_xqow::empiz_ljyiwjbmi_szstj',
     'global:pig_is_gross',
     'local:1',
+    'local:some_loc_link',
     'poop',
     'ref:some_article',
     'xmind/zorg_e2e_query_arch.xmind',
@@ -50,7 +51,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  154
+  156
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
