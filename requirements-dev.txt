@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.10.0
+mypy==1.10.1
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
@@ -174,7 +174,7 @@ pydantic==2.7.4
     #   sqlmodel
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.3
+pydantic-settings==2.3.4
     # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
@@ -330,7 +330,7 @@ wheel==0.43.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.1
     # via pip-tools
-setuptools==70.1.0
+setuptools==70.1.1
     # via
     #   pip-tools
     #   setuptools-scm
