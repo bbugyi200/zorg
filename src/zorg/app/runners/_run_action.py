@@ -157,7 +157,7 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
         ["papis", "list", "-a", f"ref:{cite_key}"], stdout=sp.PIPE
     )
     stdout, _ = popen.communicate()
-    papis_item_dir = stdout.decode().strip().split("\n")[0]
+    papis_item_dir = stdout.decode().strip().split("\n", maxsplit=1)[0]
     print(f"EDIT {papis_item_dir}/info.yaml")
     return 0
 
