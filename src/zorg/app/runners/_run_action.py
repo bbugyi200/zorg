@@ -103,7 +103,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             elif target.startswith("z::"):
                 return _open_cite_key_link(cfg.zettel_dir, target)
             else:
-                return _open_zid(cfg, target)
+                return _open_zid_link(cfg, target)
     # Else we tell vim to echo an error message.
     else:
         print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
@@ -224,7 +224,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     return 0
 
 
-def _open_zid(cfg: OpenActionConfig, zid: str) -> int:
+def _open_zid_link(cfg: OpenActionConfig, zid: str) -> int:
     with SQLSession(
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
