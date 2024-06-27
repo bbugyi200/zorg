@@ -147,9 +147,11 @@ def create_database(
         elif (
             not zorg_file.has_errors and zorg_file_path_str in old_error_files
         ):
-            _LOGGER.info(
-                "Previously broken Zorg file has been fixed!:"
-                f" {zorg_file.path}"
+            c.zprint(
+                "PREVIOUSLY BROKEN ZORG FILE HAS BEEN FIXED!",
+                zorg_file_path_str,
+                fg_color=Color.WHITE,
+                bg_color=Color.GREEN,
             )
 
     _LOGGER.info(
@@ -180,7 +182,7 @@ def reindex_database(
     )
 
     error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
-    old_error_files = error_file_whitelist.read_text().split("\n")
+    error_files = error_file_whitelist.read_text().split("\n")
 
     num_of_updates = 0
     for zorg_file_name, hash_ in file_to_hash.copy().items():
@@ -212,11 +214,19 @@ def reindex_database(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
             zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
-            if (
-                zorg_file.has_errors
-                and zorg_file_path_str not in old_error_files
-            ):
+            if zorg_file.has_errors and zorg_file_path_str not in error_files:
                 raise RuntimeError(f"Zorg file has errors!: {zorg_file.path}")
+            elif (
+                not zorg_file.has_errors and zorg_file_path_str in error_files
+            ):
+                c.zprint(
+                    "PREVIOUSLY BROKEN ZORG FILE HAS BEEN FIXED!",
+                    zorg_file_path_str,
+                    fg_color=Color.WHITE,
+                    bg_color=Color.GREEN,
+                )
+                error_files.remove(zorg_file_path_str)
+
             _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add_file(zorg_file)
@@ -226,6 +236,7 @@ def reindex_database(
         c.zprint("NO ZORG FILES HAVE BEEN MODIFIED")
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
+    error_file_whitelist.write_text("\n".join(sorted(error_files)))
     session.commit()
 
 
