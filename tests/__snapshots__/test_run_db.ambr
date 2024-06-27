@@ -94,15 +94,15 @@
 # ---
 # name: test_run_db_create__properties[YAMLConfigFile]
   list([
+    'ID',
+    'RID',
     'a',
     'due',
     'foo',
-    'id',
     'key',
     'p',
     'q',
     'recur',
-    'rid',
     'type',
     'url',
     'x',
