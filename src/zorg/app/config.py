@@ -47,7 +47,9 @@ class Config(clack.Config):
 
     # ----- CONFIG
     database_url: str = _get_default_database_url(_DEFAULT_ZETTEL_DIR)
+    keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
     template_pattern_map: TemplatePatternMapType = {}
+    vim_commands: list[str] = []
 
 
 class CompileConfig(Config):
@@ -86,8 +88,6 @@ class EditConfig(Config):
 
     # ----- CONFIG
     file_group_map: FileGroupMapType = {}
-    keep_alive_file: Path = Path("/tmp/zorg_keep_alive")
-    vim_commands: list[str] = []
 
 
 class NoteMoveConfig(Config):
@@ -127,6 +127,7 @@ class QueryConfig(Config):
 
     # ----- ARGUMENTS
     query: str
+    open_in_editor: bool = False
 
 
 class TemplateListConfig(Config):
@@ -342,6 +343,15 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         "query", help="Run a zorg query against your zettel directory."
     )
     query_parser.add_argument("query", help="The zorg query we will run.")
+    query_parser.add_argument(
+        "-e",
+        "--open-in-editor",
+        action="store_true",
+        help=(
+            "Store query results in a temporary Zorg query page and then open"
+            " this page in an editor."
+        ),
+    )
 
     # --- 'template' command
     template_parser = new_command(
