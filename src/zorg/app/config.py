@@ -128,6 +128,7 @@ class QueryConfig(Config):
     # ----- ARGUMENTS
     query: str
     open_in_editor: bool = False
+    store_in_file: bool = False
 
 
 class TemplateListConfig(Config):
@@ -350,6 +351,15 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         help=(
             "Store query results in a temporary Zorg query page and then open"
             " this page in an editor."
+        ),
+    )
+    query_parser.add_argument(
+        "-s",
+        "--store-in-file",
+        action="store_true",
+        help=(
+            "Store query results in temporary Zorg query page and then print"
+            " that page's file path to STDOUT."
         ),
     )
 

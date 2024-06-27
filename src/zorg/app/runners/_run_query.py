@@ -15,23 +15,28 @@ from ._runners import runner
 @runner
 def run_query(cfg: QueryConfig) -> int:
     """Runner for the 'query' command."""
-    if cfg.open_in_editor:
+    if cfg.open_in_editor or cfg.store_in_file:
         tmp_zorg_dir = str(cfg.zettel_dir / "query/tmp")
         tmp_zoq_path = Path(_create_temp_query_page(tmp_zorg_dir))
         tmp_zoq_path.write_text(f"# {cfg.query}\n")
-        messagebus.handle(
-            [
-                commands.EditCommand(
-                    keep_alive_file=cfg.keep_alive_file,
-                    paths=[tmp_zoq_path],
-                    verbose=cfg.verbose,
-                    vim_commands=cfg.vim_commands,
-                    zettel_dir=cfg.zettel_dir,
-                ),
-            ],
-            SQLSession(cfg.zettel_dir, cfg.database_url),
-        )
-        print(str(tmp_zoq_path))
+        sql_session = SQLSession(cfg.zettel_dir, cfg.database_url)
+        if cfg.open_in_editor:
+            messagebus.handle(
+                [
+                    commands.EditCommand(
+                        keep_alive_file=cfg.keep_alive_file,
+                        paths=[tmp_zoq_path],
+                        verbose=cfg.verbose,
+                        vim_commands=cfg.vim_commands,
+                        zettel_dir=cfg.zettel_dir,
+                    ),
+                ],
+                sql_session,
+            )
+        elif cfg.store_in_file:
+            with sql_session as session:
+                swog.refresh_zoq_file(session, tmp_zoq_path)
+            print(str(tmp_zoq_path))
         return 0
 
     with SQLSession(
