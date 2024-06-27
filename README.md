@@ -194,12 +194,16 @@ subcommands:
 ### `zorg db create --help`
 
 ```
-usage: zorg db create [-h]
+usage: zorg db create [-h] [-f]
 
 Create zorg's backend database from scratch.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -f, --update-error-file-whitelist
+                        If this option is NOT provided, any errors in Zorg
+                        files that are NOT already in the error file whitelist
+                        will cause Zorg to abort database creation.
 ```
 
 ### `zorg db reindex --help`
