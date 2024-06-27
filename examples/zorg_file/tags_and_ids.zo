@@ -5,9 +5,9 @@
 - 240509 240408#0X Some note with a modify date
 
 ======================== +bazbuz #thoughts
-- 301231#X0 When I talk to %pig I always want to @puke. | id::pig_is_gross
+- 301231#X0 When I talk to %pig I always want to @puke. | ID::pig_is_gross
 - 301231#X1 @READ Some article
-  * rid::some_article
+  * RID::some_article
   * url::http://www.example.com
 
 ################################ +bad

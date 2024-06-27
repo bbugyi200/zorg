@@ -143,7 +143,7 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 
     print(f"EDIT {link_path}")
     if len(link_parts) > 1:
-        print(f"SEARCH lid::{link_parts[1][:-2]}")
+        print(f"SEARCH LID::{link_parts[1][:-2]}")
 
     return 0
 
@@ -164,7 +164,7 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
 
 def _open_local_link(local_link: str) -> int:
     lid_value = local_link[len(_LOCAL_LINK_LEFT_MARK) : -1]
-    print(f"SEARCH lid::{lid_value}\\(\\s\\|$\\)")
+    print(f"SEARCH LID::{lid_value}\\(\\s\\|$\\)")
     return 0
 
 
@@ -176,7 +176,7 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
         notes = session.repo.get_notes_by_id(id_key)
 
     if not notes:
-        print(f"ECHO No notes with found with the id::{id_key} property")
+        print(f"ECHO No notes with found with the ID::{id_key} property")
         return 1
 
     pages = list({note.file_path for note in notes})
@@ -184,14 +184,14 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
         matched_files = " ".join(sorted({str(page) for page in pages}))
         print(
             "ECHO Multiple pages found containing notes with the"
-            f" id::{id_key} property: {matched_files}"
+            f" ID::{id_key} property: {matched_files}"
         )
         return 1
 
     page = pages[0]
     full_page_path = c.prepend_zdir(cfg.zettel_dir, [page])[0]
     print(f"EDIT {full_page_path}")
-    print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
+    print(f"SEARCH ID::{id_key}\\(\\s\\|$\\)")
 
     return 0
 
@@ -201,16 +201,16 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     with SQLSession(
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
-        notes = session.repo.get_notes_by_id(rid_key, id_key="rid")
+        notes = session.repo.get_notes_by_id(rid_key, id_key="RID")
 
     if not notes:
-        print(f"ECHO No notes with found with the id::{rid_key} property")
+        print(f"ECHO No notes with found with the RID::{rid_key} property")
         return 1
 
     if len(notes) > 1:
         matched_files = " ".join(sorted({str(n.file_path) for n in notes}))
         print(
-            f"ECHO Multiple notes found the with the id::{rid_key} property:"
+            f"ECHO Multiple notes found the with the ID::{rid_key} property:"
             f" {matched_files}"
         )
         return 1
@@ -219,7 +219,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     assert note.file_path is not None
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
-    print(f"SEARCH rid::{rid_key}\\(\\s\\|$\\)")
+    print(f"SEARCH RID::{rid_key}\\(\\s\\|$\\)")
 
     return 0
 

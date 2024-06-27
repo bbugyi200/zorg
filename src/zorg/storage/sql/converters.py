@@ -349,7 +349,7 @@ def _global_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
     conds = []
     for note in notes:
         for prop_link in note.property_links:
-            if prop_link.prop.name == "id":
+            if prop_link.prop.name == "ID":
                 conds.append(
                     cast(
                         ColumnElement,
@@ -363,7 +363,7 @@ def _ref_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
     conds = []
     for note in notes:
         for prop_link in note.property_links:
-            if prop_link.prop.name == "rid":
+            if prop_link.prop.name == "RID":
                 conds.append(
                     cast(
                         ColumnElement,

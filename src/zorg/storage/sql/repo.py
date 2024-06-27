@@ -105,7 +105,7 @@ class SQLRepo:
             )
             return None
 
-    def get_notes_by_id(self, id_: str, *, id_key: str = "id") -> list[Note]:
+    def get_notes_by_id(self, id_: str, *, id_key: str = "ID") -> list[Note]:
         """Fetch a list of notes using an id:: property."""
         stmt = (
             select(sql.ZorgNote)

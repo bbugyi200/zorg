@@ -83,7 +83,7 @@ def testActionOpen_withProperty_sendsSearchMsg(
     zo_path = db_zettel_dir / zo_name
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        f"SEARCH lid::{link_prop}",
+        f"SEARCH LID::{link_prop}",
     ]
 
 
@@ -147,7 +147,7 @@ def test_action_open__local_link(
     assert exit_code == 0
 
     capture = capsys.readouterr()
-    assert capture.out.strip() == f"SEARCH lid::{id_key}\\(\\s\\|$\\)"
+    assert capture.out.strip() == f"SEARCH LID::{id_key}\\(\\s\\|$\\)"
 
 
 @params("lineno", [param(13, id="line_with_id_link")])
@@ -172,7 +172,7 @@ def test_action_open__id_link(
     zo_path = db_zettel_dir / "tags_and_ids.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH id::pig_is_gross\\(\\s\\|$\\)",
+        "SEARCH ID::pig_is_gross\\(\\s\\|$\\)",
     ]
 
 
@@ -198,7 +198,7 @@ def test_action_open__rid_link(
     zo_path = db_zettel_dir / "tags_and_ids.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH rid::some_article\\(\\s\\|$\\)",
+        "SEARCH RID::some_article\\(\\s\\|$\\)",
     ]
 
 
