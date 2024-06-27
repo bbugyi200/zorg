@@ -134,16 +134,19 @@ def create_database(
         )
         session.repo.add_file(zorg_file)
         zorg_files.append(zorg_file)
+        zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
         if zorg_file.has_errors and (
-            zorg_file.path in old_error_files
+            zorg_file_path_str in old_error_files
             or cmd.update_error_file_whitelist
         ):
-            error_files.append(c.strip_zdir(cmd.zettel_dir, zorg_file.path))
+            error_files.append(zorg_file_path_str)
         elif zorg_file.has_errors:
             raise RuntimeError(
                 f"Previously valid Zorg file now has errors!: {zorg_file.path}"
             )
-        elif not zorg_file.has_errors and zorg_file.path in old_error_files:
+        elif (
+            not zorg_file.has_errors and zorg_file_path_str in old_error_files
+        ):
             _LOGGER.info(
                 "Previously broken Zorg file has been fixed!:"
                 f" {zorg_file.path}"
@@ -158,7 +161,7 @@ def create_database(
     file_hash_path = _get_file_hash_path(cmd.zettel_dir)
     file_to_hash = _get_file_hash_map(cmd.zettel_dir)
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
-    error_file_whitelist.write_text("\n".join(error_files))
+    error_file_whitelist.write_text("\n".join(sorted(error_files)))
     session.commit()
 
 
