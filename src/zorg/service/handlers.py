@@ -179,6 +179,9 @@ def reindex_database(
         else {}
     )
 
+    error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
+    old_error_files = error_file_whitelist.read_text().split("\n")
+
     num_of_updates = 0
     for zorg_file_name, hash_ in file_to_hash.copy().items():
         # If this file has never been indexed OR the file contents have changed
@@ -208,6 +211,12 @@ def reindex_database(
             zorg_file = walk_zorg_file(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
+            zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
+            if (
+                zorg_file.has_errors
+                and zorg_file_path_str not in old_error_files
+            ):
+                raise RuntimeError(f"Zorg file has errors!: {zorg_file.path}")
             _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
             session.repo.add_file(zorg_file)

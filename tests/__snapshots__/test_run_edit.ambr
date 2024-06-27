@@ -8,7 +8,7 @@
   # > = [[2000/20000104_day]]
   # @ = [[day_log.zot]]
   
-  o #gtd pomodoro
+  o 000103#00 #gtd pomodoro
     * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
     * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
     * Copy any important gchat convos from yesterday into chat/*.txt
@@ -22,9 +22,9 @@
     * <100 emails in bbugyi@google
     * Review ~/org diffs from yesterday and commit them to git
   
-  ######### @event
+  ################################ @event
   
-  ######### @pomodoro
+  ################################ @pomodoro
   '''
 # ---
 # name: test_edit_day_logs[YAMLConfigFile].1
@@ -42,19 +42,19 @@
   run (miles): ? / ?
   time_of_1st_pomodoro: ????
   wfo: ? / ?
-  ======= CL
+  ======================== CL
   R0 bounces: ? / ?
   RN bounces: ? / ?
   submits:    ? / ?
-  ======= pm routine
+  ======================== pm routine
   brush teeth:  ? / ?
   rubber bands: ? / ?
-  ======= pomodoros
+  ======================== pomodoros
   all:  ? / ?
   work: ? / ?
   overflow: ? / ?
   
-  ######### Expenses
+  ################################ Expenses
   
   total: 0.00 / 0.00
   '''
