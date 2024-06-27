@@ -287,15 +287,19 @@ options:
 ### `zorg query --help`
 
 ```
-usage: zorg query [-h] query
+usage: zorg query [-h] [-e] [-s] query
 
 Run a zorg query against your zettel directory.
 
 positional arguments:
-  query       The zorg query we will run.
+  query                 The zorg query we will run.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -e, --open-in-editor  Store query results in a temporary Zorg query page and
+                        then open this page in an editor.
+  -s, --store-in-file   Store query results in temporary Zorg query page and
+                        then print that page's file path to STDOUT.
 ```
 
 ### `zorg template --help`
