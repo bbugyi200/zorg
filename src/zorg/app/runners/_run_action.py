@@ -179,7 +179,7 @@ def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
         print(f"ECHO No notes with found with the id::{id_key} property")
         return 1
 
-    pages = [note.file_path for note in notes]
+    pages = list({note.file_path for note in notes})
     if len(pages) > 1:
         matched_files = " ".join(sorted({str(page) for page in pages}))
         print(
