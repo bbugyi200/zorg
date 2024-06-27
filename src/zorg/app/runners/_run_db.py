@@ -13,7 +13,15 @@ def run_db_create(cfg: DbCreateConfig) -> int:
     session = SQLSession(
         cfg.zettel_dir, cfg.database_url, should_delete_existing_db=True
     )
-    messagebus.handle([commands.CreateDBCommand(cfg.zettel_dir)], session)
+    messagebus.handle(
+        [
+            commands.CreateDBCommand(
+                cfg.zettel_dir,
+                update_error_file_whitelist=cfg.update_error_file_whitelist,
+            )
+        ],
+        session,
+    )
     return 0
 
 

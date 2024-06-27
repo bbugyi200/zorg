@@ -64,6 +64,8 @@ class DbCreateConfig(Config):
 
     command: Literal["create"]
 
+    update_error_file_whitelist: bool = False
+
 
 class DbReindexConfig(Config):
     """Clack config for the 'db reindex' command."""
@@ -252,9 +254,19 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     )
     new_db_command = clack.new_command_factory(db_parser)
     # --- 'db create' command
-    new_db_command(
+    db_create_parser = new_db_command(
         "create",
         help="Create zorg's backend database from scratch.",
+    )
+    db_create_parser.add_argument(
+        "-f",
+        "--update-error-file-whitelist",
+        action="store_true",
+        help=(
+            "If this option is NOT provided, any errors in Zorg files that are"
+            " NOT already in the error file whitelist will cause Zorg to abort"
+            " database creation."
+        ),
     )
     # --- 'db reindex' command
     db_reindex_parser = new_db_command(

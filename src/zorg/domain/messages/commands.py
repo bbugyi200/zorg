@@ -25,6 +25,8 @@ class EditCommand(Command):
 class CreateDBCommand(Command):
     """Command to (re)create zorg's database from scratch."""
 
+    update_error_file_whitelist: bool
+
 
 @dataclass(frozen=True)
 class ReindexDBCommand(Command):

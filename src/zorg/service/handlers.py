@@ -108,6 +108,9 @@ def create_database(
     zorg_files = []
     total_num_notes = 0
     total_num_todos = 0
+    error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
+    old_error_files = error_file_whitelist.read_text().split("\n")
+    error_files = []
     for zo_path in tqdm(
         _get_zo_paths_to_index(cmd.zettel_dir),
         desc="Reading notes from zorg files",
@@ -131,12 +134,31 @@ def create_database(
         )
         session.repo.add_file(zorg_file)
         zorg_files.append(zorg_file)
+        if zorg_file.has_errors and (
+            zorg_file.path in old_error_files
+            or cmd.update_error_file_whitelist
+        ):
+            error_files.append(c.strip_zdir(cmd.zettel_dir, zorg_file.path))
+        elif zorg_file.has_errors:
+            raise RuntimeError(
+                f"Previously valid Zorg file now has errors!: {zorg_file.path}"
+            )
+        elif not zorg_file.has_errors and zorg_file.path in old_error_files:
+            _LOGGER.info(
+                "Previously broken Zorg file has been fixed!:"
+                f" {zorg_file.path}"
+            )
+
     _LOGGER.info(
         "Finished reading zettel org directory",
         num_files=len(zorg_files),
         num_notes=total_num_notes,
         num_todos=total_num_todos,
     )
+    file_hash_path = _get_file_hash_path(cmd.zettel_dir)
+    file_to_hash = _get_file_hash_map(cmd.zettel_dir)
+    _write_file_hash_to_disk(file_hash_path, file_to_hash)
+    error_file_whitelist.write_text("\n".join(error_files))
     session.commit()
 
 
@@ -253,9 +275,21 @@ def _get_file_hash_map(
 
 
 def _get_file_hash_path(zdir: Path) -> Path:
+    zorg_data_dir = _get_data_dir(zdir)
+    return zorg_data_dir / "file_hash.json"
+
+
+def _get_error_file_whitelist(zdir: Path) -> Path:
+    zorg_data_dir = _get_data_dir(zdir)
+    error_file_whitelist = zorg_data_dir / "error_file_whitelist.txt"
+    error_file_whitelist.touch()
+    return error_file_whitelist
+
+
+def _get_data_dir(zdir: Path) -> Path:
     zorg_data_dir = zdir / f".{APP_NAME}"
     zorg_data_dir.mkdir(parents=True, exist_ok=True)
-    return zorg_data_dir / "file_hash.json"
+    return zorg_data_dir
 
 
 def _write_file_hash_to_disk(
