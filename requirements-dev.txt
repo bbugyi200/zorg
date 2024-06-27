@@ -184,7 +184,7 @@ pygments==2.18.0
     # via
     #   rich
     #   sphinx
-pylint==3.2.3
+pylint==3.2.4
     # via -r requirements-dev.in
 pyproject-hooks==1.1.0
     # via
@@ -328,7 +328,7 @@ wheel==0.43.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==24.1
+pip==24.1.1
     # via pip-tools
 setuptools==70.1.1
     # via
