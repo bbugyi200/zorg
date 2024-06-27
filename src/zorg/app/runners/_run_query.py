@@ -47,15 +47,17 @@ def _create_temp_query_page(directory: str):
     os.makedirs(directory, exist_ok=True)
 
     # Generate a random string for the filename
-    random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
+    random_string = "".join(
+        random.choices(string.ascii_uppercase + string.digits, k=3)
+    )
 
     # Construct the full path for the new temporary file
     file_path = os.path.join(directory, f"tmp_{random_string}.zoq")
 
     # Create a new empty file at the specified path
-    with open(file_path, 'w') as temp_file:
+    with open(file_path, "w") as temp_file:
         # You can write data to the file if necessary
-        temp_file.write('')  # Just creates an empty file for now
+        temp_file.write("")  # Just creates an empty file for now
 
     # Return the path of the newly created file
     return file_path
