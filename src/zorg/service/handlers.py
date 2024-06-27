@@ -37,7 +37,9 @@ def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
         *cmd.paths,
         commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),
     ).unwrap()
-    session.add_message(events.EditorClosedEvent(edit_cmd=cmd))
+    session.add_message(  # pylint: disable=unreachable
+        events.EditorClosedEvent(edit_cmd=cmd)
+    )
 
 
 def check_keep_alive_file(
