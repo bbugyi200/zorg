@@ -43,7 +43,7 @@ def run_query(cfg: QueryConfig) -> int:
     return 0
 
 
-def _create_temp_query_page(directory: str):
+def _create_temp_query_page(directory: str) -> str:
     # Ensure the directory exists
     os.makedirs(directory, exist_ok=True)
 
