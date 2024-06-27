@@ -97,7 +97,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
             elif _is_local_link(target):
                 return _open_local_link(target)
             elif target.startswith("[#") and target.endswith("]"):
-                return _open_id_link(cfg, target)
+                return _open_global_link(cfg, target)
             elif target.startswith("[@") and target.endswith("]"):
                 return _open_rid_link(cfg, target)
             elif target.startswith("z::"):
@@ -143,7 +143,7 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
 
     print(f"EDIT {link_path}")
     if len(link_parts) > 1:
-        print(f"SEARCH id::{link_parts[1][:-2]}")
+        print(f"SEARCH lid::{link_parts[1][:-2]}")
 
     return 0
 
@@ -163,12 +163,12 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
 
 
 def _open_local_link(local_link: str) -> int:
-    id_key = local_link[len(_LOCAL_LINK_LEFT_MARK) : -1]
-    print(f"SEARCH id::{id_key}\\(\\s\\|$\\)")
+    lid_value = local_link[len(_LOCAL_LINK_LEFT_MARK) : -1]
+    print(f"SEARCH lid::{lid_value}\\(\\s\\|$\\)")
     return 0
 
 
-def _open_id_link(cfg: OpenActionConfig, id_link: str) -> int:
+def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
     id_key = id_link[2:-1]
     with SQLSession(
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
