@@ -107,7 +107,6 @@ def create_database(
     """Create a new zorg DB from scratch."""
     zorg_files = []
     total_num_notes = 0
-    total_num_todos = 0
     error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
     old_error_files = error_file_whitelist.read_text().split("\n")
     error_files = []
@@ -119,18 +118,12 @@ def create_database(
         _LOGGER.info("Starting to walk zorg file", zorg_file=str(zo_path))
         zorg_file = walk_zorg_file(cmd.zettel_dir, zo_path)
         num_notes = len(zorg_file.notes)
-        num_todos = len(
-            [note for note in zorg_file.notes if note.todo_payload]
-        )
         total_num_notes += num_notes
-        total_num_todos += num_todos
         _LOGGER.info(
             "Finished walking zorg file",
             zorg_file=zo_path.name,
             num_notes=num_notes,
-            num_todos=num_todos,
             total_num_notes=total_num_notes,
-            total_num_todos=total_num_todos,
         )
         session.repo.add_file(zorg_file)
         zorg_files.append(zorg_file)
@@ -156,9 +149,9 @@ def create_database(
 
     _LOGGER.info(
         "Finished reading zettel org directory",
-        num_files=len(zorg_files),
-        num_notes=total_num_notes,
-        num_todos=total_num_todos,
+        good_files=len(zorg_files) - len(error_files),
+        bad_files=len(error_files),
+        notes=total_num_notes,
     )
     file_hash_path = _get_file_hash_path(cmd.zettel_dir)
     file_to_hash = _get_file_hash_map(cmd.zettel_dir)
@@ -214,11 +207,7 @@ def reindex_database(
                 cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
             )
             zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
-            if zorg_file.has_errors and zorg_file_path_str not in error_files:
-                raise RuntimeError(f"Zorg file has errors!: {zorg_file.path}")
-            elif (
-                not zorg_file.has_errors and zorg_file_path_str in error_files
-            ):
+            if not zorg_file.has_errors and zorg_file_path_str in error_files:
                 c.zprint(
                     "PREVIOUSLY BROKEN ZORG FILE HAS BEEN FIXED!",
                     zorg_file_path_str,
@@ -226,6 +215,10 @@ def reindex_database(
                     bg_color=Color.GREEN,
                 )
                 error_files.remove(zorg_file_path_str)
+            elif (
+                zorg_file.has_errors and zorg_file_path_str not in error_files
+            ):
+                raise RuntimeError(f"Zorg file has errors!: {zorg_file.path}")
 
             _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
             _LOGGER.debug("Adding zorg file", file=zorg_file_name)
