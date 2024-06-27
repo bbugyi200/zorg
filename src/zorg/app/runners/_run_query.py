@@ -31,6 +31,7 @@ def run_query(cfg: QueryConfig) -> int:
             ],
             SQLSession(cfg.zettel_dir, cfg.database_url),
         )
+        print(str(tmp_zoq_path))
         return 0
 
     with SQLSession(
