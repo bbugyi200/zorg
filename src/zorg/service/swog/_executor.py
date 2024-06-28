@@ -61,7 +61,10 @@ def execute(session: SQLSession, query_string: str) -> str:
 
     ### (S)ELECT
     result = _select(
-        query.select, ordered_note_group, num_of_levels=len(query.group_by)
+        query.select,
+        ordered_note_group,
+        alpha_sort=set(query.order_by) == {OrderByType.ALPHA},
+        num_of_levels=len(query.group_by),
     )
 
     return result.strip()
@@ -119,6 +122,7 @@ def _select(
     select_type: SelectType,
     note_group: NoteGroup,
     *,
+    alpha_sort: bool,
     num_of_levels: int,
     level: int = 1,
 ) -> str:
@@ -126,23 +130,25 @@ def _select(
     if isinstance(note_group, list):
         selector = _select_note
         if select_type is SelectStaticType.AREA:
-            selector = partial(_select_tags, "areas")
+            selector = partial(_select_tags, "areas", alpha_sort=alpha_sort)
         elif select_type is SelectStaticType.CONTEXT:
-            selector = partial(_select_tags, "contexts")
+            selector = partial(_select_tags, "contexts", alpha_sort=alpha_sort)
         elif select_type is SelectStaticType.FILE:
             selector = _select_file
         elif select_type is SelectStaticType.NOTE:
             selector = _select_note
         elif select_type is SelectStaticType.PERSON:
-            selector = partial(_select_tags, "people")
+            selector = partial(_select_tags, "people", alpha_sort=alpha_sort)
         elif select_type is SelectStaticType.PROJECT:
-            selector = partial(_select_tags, "projects")
+            selector = partial(_select_tags, "projects", alpha_sort=alpha_sort)
         elif select_type is SelectStaticType.PROPERTY:
-            selector = _select_prop_keys
+            selector = partial(_select_prop_keys, alpha_sort=alpha_sort)
         elif select_type is SelectStaticType.LINKS:
-            selector = _select_links
+            selector = partial(_select_links, alpha_sort=alpha_sort)
         elif isinstance(select_type, SelectPropertyValues):
-            selector = partial(_select_prop_values, select_type.key)
+            selector = partial(
+                _select_prop_values, select_type.key, alpha_sort=alpha_sort
+            )
         else:
             assert_never(select_type)
 
@@ -157,6 +163,7 @@ def _select(
                 select_type,
                 note_subgroup,
                 level=level + 1,
+                alpha_sort=alpha_sort,
                 num_of_levels=num_of_levels,
             )
     return result
@@ -169,36 +176,43 @@ def _select_note(notes: list[Note]) -> str:
     return result
 
 
-def _select_tags(attr: str, notes: list[Note]) -> str:
-    tags: set[str] = set()
+def _select_tags(attr: str, notes: list[Note], *, alpha_sort: bool) -> str:
+    tags: list[str] = []
     for note in notes:
         for tag in getattr(note, attr):
-            tags.add(tag)
-    return "\n".join(sorted(tags))
+            if tag not in tags:
+                tags.append(tag)
+    return "\n".join(sorted(tags) if alpha_sort else tags) + "\n"
 
 
-def _select_prop_keys(notes: list[Note]) -> str:
-    prop_keys: set[str] = set()
+def _select_prop_keys(notes: list[Note], *, alpha_sort: bool) -> str:
+    prop_keys: list[str] = []
     for note in notes:
         for prop_key in note.properties.keys():
-            prop_keys.add(prop_key)
-    return "\n".join(sorted(prop_keys))
+            if prop_key not in prop_keys:
+                prop_keys.append(prop_key)
+    return "\n".join(sorted(prop_keys) if alpha_sort else prop_keys) + "\n"
 
 
-def _select_prop_values(prop_key: str, notes: list[Note]) -> str:
-    prop_values: set[str] = set()
+def _select_prop_values(
+    prop_key: str, notes: list[Note], *, alpha_sort: bool
+) -> str:
+    prop_values: list[str] = []
     for note in notes:
         if prop_key in note.properties:
-            prop_values.add(note.properties[prop_key])
-    return "\n".join(sorted(prop_values))
+            prop_value = note.properties[prop_key]
+            if prop_value not in prop_values:
+                prop_values.append(prop_value)
+    return "\n".join(sorted(prop_values) if alpha_sort else prop_values) + "\n"
 
 
-def _select_links(notes: list[Note]) -> str:
-    links: set[str] = set()
+def _select_links(notes: list[Note], *, alpha_sort: bool) -> str:
+    links: list[str] = []
     for note in notes:
         for link in note.links:
-            links.add(link)
-    return "\n".join(sorted(links))
+            if link not in links:
+                links.append(link)
+    return "\n".join(sorted(links) if alpha_sort else links) + "\n"
 
 
 def _select_file(notes: list[Note]) -> str:
@@ -206,7 +220,7 @@ def _select_file(notes: list[Note]) -> str:
     for note in notes:
         assert note.file_path is not None
         file_paths.add(str(note.file_path))
-    return "\n".join(sorted(file_paths))
+    return "\n".join(sorted(file_paths)) + "\n"
 
 
 def _get_header(level: int, *, num_of_levels: int) -> str:

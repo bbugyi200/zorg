@@ -6,9 +6,11 @@ import CommonLexerRules;
 prog : query NL? ;
 
 // query
-query        : where_query | select_query ;
-where_query  : (select SPACE)? where (SPACE order_by)? (SPACE group_by)? ;
-select_query : select ;
+query           : where_query | select_query ;
+where_query     : (select SPACE)? where order_and_group ;
+order_and_group : (SPACE order_by)? (SPACE group_by)?
+                | (SPACE group_by)? (SPACE order_by)? ;
+select_query    : select order_and_group ;
 
 // S W O G
 select   : 'S' SPACE select_body ;
@@ -73,17 +75,19 @@ tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // --- GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
-group_by_atom : file | type | priority | 'none' | AT_SIGN | HASH | PERCENT | PLUS ;
+group_by_atom : file | type | priority | none | AT_SIGN | HASH | PERCENT | PLUS ;
 
 // --- ORDER BY
-order_by_body :  order_by_atom (SPACE order_by_atom)* ;
-order_by_atom :  create | modify | priority | type ;
-create        :  'create' ;
-modify        :  'modify' ;
-priority      :  'priority' ;
+order_by_body : order_by_atom (SPACE order_by_atom)* ;
+order_by_atom : alpha | create | modify | priority | type | none ;
+alpha         : 'alpha' ;
+create        : 'create' ;
+modify        : 'modify' ;
+priority      : 'priority' ;
 
 // shared subrules
 file : 'file' ;
+none : 'none' ;
 type : 'type' ;
 
 //// lexer rules

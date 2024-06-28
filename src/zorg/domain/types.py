@@ -161,15 +161,19 @@ class GroupByType(enum.Enum):
 class OrderByType(enum.Enum):
     """Represents a single ORDER BY field for zorg queries."""
 
+    ALPHA = enum.auto()
     CREATE_DATE = enum.auto()
     MODIFY_DATE = enum.auto()
+    NONE = enum.auto()
     NOTE_TYPE = enum.auto()
     PRIORITY = enum.auto()
 
     @property
     def keyfunc(self) -> KeyFunc:
         """Returns a callable that can be used sort notes."""
-        if self is OrderByType.CREATE_DATE:
+        if self is OrderByType.ALPHA:
+            return lambda note: note.to_string()
+        elif self is OrderByType.CREATE_DATE:
             return lambda note: _to_comparable_date(note.create_date)
         elif self is OrderByType.MODIFY_DATE:
             return lambda note: _to_comparable_date(note.modify_date)
@@ -177,6 +181,8 @@ class OrderByType(enum.Enum):
             return lambda note: _to_comparable_note_type(note.todo_payload)
         elif self is OrderByType.PRIORITY:
             return lambda note: _to_comparable_priority(note.todo_payload)
+        elif self is OrderByType.NONE:
+            return lambda note: f"{str(note.file_path)}::{note.line_no}"
         else:
             assert_never(self)
 

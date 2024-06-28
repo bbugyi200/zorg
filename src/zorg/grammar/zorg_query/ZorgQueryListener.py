@@ -35,6 +35,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#order_and_group.
+    def enterOrder_and_group(self, ctx:ZorgQueryParser.Order_and_groupContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#order_and_group.
+    def exitOrder_and_group(self, ctx:ZorgQueryParser.Order_and_groupContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#select_query.
     def enterSelect_query(self, ctx:ZorgQueryParser.Select_queryContext):
         pass
@@ -458,6 +467,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#alpha.
+    def enterAlpha(self, ctx:ZorgQueryParser.AlphaContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#alpha.
+    def exitAlpha(self, ctx:ZorgQueryParser.AlphaContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#create.
     def enterCreate(self, ctx:ZorgQueryParser.CreateContext):
         pass
@@ -491,6 +509,15 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#file.
     def exitFile(self, ctx:ZorgQueryParser.FileContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#none.
+    def enterNone(self, ctx:ZorgQueryParser.NoneContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#none.
+    def exitNone(self, ctx:ZorgQueryParser.NoneContext):
         pass
 
 

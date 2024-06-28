@@ -228,7 +228,9 @@ class ZorgQueryCompiler(ZorgQueryListener):
         for order_by_atom in cast(
             list[ZorgQueryParser.Order_by_atomContext], ctx.order_by_atom()
         ):
-            if order_by_atom.create():
+            if order_by_atom.alpha():
+                order_by_type = OrderByType.ALPHA
+            elif order_by_atom.create():
                 order_by_type = OrderByType.CREATE_DATE
             elif order_by_atom.modify():
                 order_by_type = OrderByType.MODIFY_DATE
@@ -236,6 +238,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 order_by_type = OrderByType.PRIORITY
             elif order_by_atom.type_():
                 order_by_type = OrderByType.NOTE_TYPE
+            elif order_by_atom.none():
+                order_by_type = OrderByType.NONE
             else:
                 raise RuntimeError(
                     f"Invalid GROUP BY atom: {order_by_atom.getText()}"

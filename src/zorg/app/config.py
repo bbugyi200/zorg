@@ -435,13 +435,15 @@ def _process_query(kwargs: dict[str, Any]) -> None:
     if kwargs["command"] != "query":
         return
 
-    if not kwargs["query"].startswith(("S ", "W ")):
-        query = kwargs["query"]
-        kwargs["query"] = f"W {query}"
+    q = kwargs["query"]
+    if not q.startswith(("S ", "W ")):
+        q = kwargs["query"] = f"W {q}"
 
-    if not kwargs["query"].startswith("S ") and " G " not in kwargs["query"]:
-        query = kwargs["query"]
-        kwargs["query"] = f"{query} G file"
+    if not q.startswith("S ") and " G " not in kwargs["query"]:
+        q = kwargs["query"] = f"{q} G file"
+
+    if q.startswith("S ") and not q.startswith("S note") and " O " not in q:
+        q = kwargs["query"] = f"{q} O alpha"
 
 
 def _process_zo_paths(kwargs: dict[str, Any]) -> None:
