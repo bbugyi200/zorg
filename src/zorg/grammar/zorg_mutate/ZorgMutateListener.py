@@ -17,6 +17,15 @@ class ZorgMutateListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgMutateParser#mut_cmd.
+    def enterMut_cmd(self, ctx:ZorgMutateParser.Mut_cmdContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#mut_cmd.
+    def exitMut_cmd(self, ctx:ZorgMutateParser.Mut_cmdContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgMutateParser#mut_tag.
     def enterMut_tag(self, ctx:ZorgMutateParser.Mut_tagContext):
         pass
@@ -59,6 +68,15 @@ class ZorgMutateListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgMutateParser#project.
     def exitProject(self, ctx:ZorgMutateParser.ProjectContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgMutateParser#mut_prop.
+    def enterMut_prop(self, ctx:ZorgMutateParser.Mut_propContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#mut_prop.
+    def exitMut_prop(self, ctx:ZorgMutateParser.Mut_propContext):
         pass
 
 

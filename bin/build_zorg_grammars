@@ -76,7 +76,7 @@ function run() {
       continue
     fi
 
-    for f in examples/$dir/*.zo*; do
+    for f in examples/$dir/*.z*; do
       if [[ "${f}" != *"${ZO_NAME}"* ]]; then
         continue
       fi
