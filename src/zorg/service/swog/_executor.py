@@ -4,7 +4,7 @@ from collections import defaultdict
 from functools import partial
 import itertools as it
 import time
-from typing import Iterable, Sequence, Union
+from typing import Callable, Iterable, Sequence, Union
 
 from logrus import Logger
 from typist import assert_never
@@ -26,6 +26,7 @@ _LOGGER = Logger(__name__)
 
 GroupNoteMap = dict[str, "NoteGroup"]
 NoteGroup = Union[list[Note], GroupNoteMap]
+Selector = Callable[[list[Note]], list[str]]
 
 
 def execute(session: SQLSession, query_string: str) -> str:
@@ -128,31 +129,8 @@ def _select(
 ) -> str:
     result = ""
     if isinstance(note_group, list):
-        selector = _select_note
-        if select_type is SelectStaticType.AREA:
-            selector = partial(_select_tags, "areas", alpha_sort=alpha_sort)
-        elif select_type is SelectStaticType.CONTEXT:
-            selector = partial(_select_tags, "contexts", alpha_sort=alpha_sort)
-        elif select_type is SelectStaticType.FILE:
-            selector = _select_file
-        elif select_type is SelectStaticType.NOTE:
-            selector = _select_note
-        elif select_type is SelectStaticType.PERSON:
-            selector = partial(_select_tags, "people", alpha_sort=alpha_sort)
-        elif select_type is SelectStaticType.PROJECT:
-            selector = partial(_select_tags, "projects", alpha_sort=alpha_sort)
-        elif select_type is SelectStaticType.PROPERTY:
-            selector = partial(_select_prop_keys, alpha_sort=alpha_sort)
-        elif select_type is SelectStaticType.LINKS:
-            selector = partial(_select_links, alpha_sort=alpha_sort)
-        elif isinstance(select_type, SelectPropertyValues):
-            selector = partial(
-                _select_prop_values, select_type.key, alpha_sort=alpha_sort
-            )
-        else:
-            assert_never(select_type)
-
-        result += selector(note_group) + "\n"
+        selector = _get_selector(select_type, alpha_sort=alpha_sort)
+        result += "\n".join(selector(note_group)) + "\n\n"
     else:
         assert isinstance(note_group, dict)
         for group_name, note_subgroup in note_group.items():
@@ -169,58 +147,87 @@ def _select(
     return result
 
 
-def _select_note(notes: list[Note]) -> str:
-    result = ""
+def _get_selector(select_type: SelectType, *, alpha_sort: bool) -> Selector:
+    selector = _select_note
+    if select_type is SelectStaticType.AREA:
+        selector = partial(_select_tags, "areas", alpha_sort=alpha_sort)
+    elif select_type is SelectStaticType.CONTEXT:
+        selector = partial(_select_tags, "contexts", alpha_sort=alpha_sort)
+    elif select_type is SelectStaticType.FILE:
+        selector = _select_file
+    elif select_type is SelectStaticType.NOTE:
+        selector = _select_note
+    elif select_type is SelectStaticType.PERSON:
+        selector = partial(_select_tags, "people", alpha_sort=alpha_sort)
+    elif select_type is SelectStaticType.PROJECT:
+        selector = partial(_select_tags, "projects", alpha_sort=alpha_sort)
+    elif select_type is SelectStaticType.PROPERTY:
+        selector = partial(_select_prop_keys, alpha_sort=alpha_sort)
+    elif select_type is SelectStaticType.LINKS:
+        selector = partial(_select_links, alpha_sort=alpha_sort)
+    elif isinstance(select_type, SelectPropertyValues):
+        selector = partial(
+            _select_prop_values, select_type.key, alpha_sort=alpha_sort
+        )
+    else:
+        assert_never(select_type)
+    return selector
+
+
+def _select_note(notes: list[Note]) -> list[str]:
+    note_strings = []
     for note in notes:
-        result += note.to_string()
-    return result
+        note_strings.append(note.to_string().rstrip())
+    return note_strings
 
 
-def _select_tags(attr: str, notes: list[Note], *, alpha_sort: bool) -> str:
+def _select_tags(
+    attr: str, notes: list[Note], *, alpha_sort: bool
+) -> list[str]:
     tags: list[str] = []
     for note in notes:
         for tag in getattr(note, attr):
             if tag not in tags:
                 tags.append(tag)
-    return "\n".join(sorted(tags) if alpha_sort else tags) + "\n"
+    return sorted(tags) if alpha_sort else tags
 
 
-def _select_prop_keys(notes: list[Note], *, alpha_sort: bool) -> str:
+def _select_prop_keys(notes: list[Note], *, alpha_sort: bool) -> list[str]:
     prop_keys: list[str] = []
     for note in notes:
         for prop_key in note.properties.keys():
             if prop_key not in prop_keys:
                 prop_keys.append(prop_key)
-    return "\n".join(sorted(prop_keys) if alpha_sort else prop_keys) + "\n"
+    return sorted(prop_keys) if alpha_sort else prop_keys
 
 
 def _select_prop_values(
     prop_key: str, notes: list[Note], *, alpha_sort: bool
-) -> str:
+) -> list[str]:
     prop_values: list[str] = []
     for note in notes:
         if prop_key in note.properties:
             prop_value = note.properties[prop_key]
             if prop_value not in prop_values:
                 prop_values.append(prop_value)
-    return "\n".join(sorted(prop_values) if alpha_sort else prop_values) + "\n"
+    return sorted(prop_values) if alpha_sort else prop_values
 
 
-def _select_links(notes: list[Note], *, alpha_sort: bool) -> str:
+def _select_links(notes: list[Note], *, alpha_sort: bool) -> list[str]:
     links: list[str] = []
     for note in notes:
         for link in note.links:
             if link not in links:
                 links.append(link)
-    return "\n".join(sorted(links) if alpha_sort else links) + "\n"
+    return sorted(links) if alpha_sort else links
 
 
-def _select_file(notes: list[Note]) -> str:
+def _select_file(notes: list[Note]) -> list[str]:
     file_paths: set[str] = set()
     for note in notes:
         assert note.file_path is not None
         file_paths.add(str(note.file_path))
-    return "\n".join(sorted(file_paths)) + "\n"
+    return sorted(file_paths)
 
 
 def _get_header(level: int, *, num_of_levels: int) -> str:

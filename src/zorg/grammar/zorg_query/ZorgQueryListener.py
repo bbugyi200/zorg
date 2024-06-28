@@ -107,6 +107,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#select_agg.
+    def enterSelect_agg(self, ctx:ZorgQueryParser.Select_aggContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#select_agg.
+    def exitSelect_agg(self, ctx:ZorgQueryParser.Select_aggContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#prop.
     def enterProp(self, ctx:ZorgQueryParser.PropContext):
         pass

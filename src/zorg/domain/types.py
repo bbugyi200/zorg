@@ -35,7 +35,10 @@ T = TypeVar("T")
 
 KeyFunc = Callable[["Note"], str]
 FileGroupMapType = Mapping[str, Sequence[str]]
-SelectType = Union["SelectStaticType", "SelectPropertyValues"]
+FuncName = Literal["count"]
+SelectType = Union[
+    "SelectAggregation", "SelectStaticType", "SelectPropertyValues"
+]
 TodoPriorityType = Literal[
     "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
 ]
@@ -214,6 +217,14 @@ class SelectPropertyValues:
     """(S)ELECT property values (e.g. via prop:foo selector)"""
 
     key: str
+
+
+@dataclass(frozen=True)
+class SelectAggregation:
+    """(S)ELECT aggregation function call [e.g. count(note)]"""
+
+    func_name: FuncName
+    select_type: SelectType
 
 
 class PropertyOperator(enum.Enum):

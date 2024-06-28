@@ -20,14 +20,15 @@ order_by : 'O' SPACE order_by_body ;
 group_by : 'G' SPACE group_by_body ;
 
 // --- SELECT
-select_body : select_field
-            | func_name '(' select_field ')'
-            ;
+select_body  : select_field
+             | select_agg
+             ;
 select_field : file | note | prop | prop_values | links | AT_SIGN | HASH | PLUS | PERCENT ;
-prop        : 'prop' ;
-prop_values : prop COLON id ;
-links       : 'links' ;
-note        : 'note' ;
+select_agg   : func_name '(' select_field ')' ;
+prop         : 'prop' ;
+prop_values  : prop COLON id ;
+links        : 'links' ;
+note         : 'note' ;
 
 // functions
 func_name : 'count' ;

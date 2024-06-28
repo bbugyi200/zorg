@@ -23,6 +23,7 @@ from ...domain.types import (
     OrderByType,
     PropertyOperator,
     PropertyValueType,
+    SelectAggregation,
     SelectPropertyValues,
     SelectStaticType,
     SelectType,
@@ -52,31 +53,17 @@ class ZorgQueryCompiler(ZorgQueryListener):
         select_field = cast(
             ZorgQueryParser.Select_fieldContext, select_body.select_field()
         )
-        select: SelectType
-        if select_field.HASH():
-            select = SelectStaticType.AREA
-        elif select_field.AT_SIGN():
-            select = SelectStaticType.CONTEXT
-        elif select_field.PERCENT():
-            select = SelectStaticType.PERSON
-        elif select_field.PLUS():
-            select = SelectStaticType.PROJECT
-        elif select_field.file_():
-            select = SelectStaticType.FILE
-        elif select_field.note():
-            select = SelectStaticType.NOTE
-        elif select_field.prop():
-            select = SelectStaticType.PROPERTY
-        elif s := select_field.prop_values():
-            select = SelectPropertyValues(
-                s.getText().split(":", maxsplit=1)[1]
-            )
-        elif select_field.links():
-            select = SelectStaticType.LINKS
+        if select_field:
+            select = _get_select_from_field(select_field)
         else:
-            emsg = "Unrecognized select body"
-            _LOGGER.error(emsg, select_field=select_field.getText())
-            raise RuntimeError(emsg)
+            select_agg = cast(
+                ZorgQueryParser.Select_aggContext, select_body.select_agg()
+            )
+            func_name = select_agg.func_name().getText()
+            select_field = select_agg.select_field()
+            select = SelectAggregation(
+                func_name, _get_select_from_field(select_agg.select_field())
+            )
 
         self.zorg_query.select = select
 
@@ -278,6 +265,35 @@ class ZorgQueryCompiler(ZorgQueryListener):
         del ctx
         where = WhereOrFilter(self._and_filter_groups[-1])
         self.zorg_query.where = where
+
+
+def _get_select_from_field(
+    select_field: ZorgQueryParser.Select_fieldContext,
+) -> SelectType:
+    select: SelectType
+    if select_field.HASH():
+        select = SelectStaticType.AREA
+    elif select_field.AT_SIGN():
+        select = SelectStaticType.CONTEXT
+    elif select_field.PERCENT():
+        select = SelectStaticType.PERSON
+    elif select_field.PLUS():
+        select = SelectStaticType.PROJECT
+    elif select_field.file_():
+        select = SelectStaticType.FILE
+    elif select_field.note():
+        select = SelectStaticType.NOTE
+    elif select_field.prop():
+        select = SelectStaticType.PROPERTY
+    elif s := select_field.prop_values():
+        select = SelectPropertyValues(s.getText().split(":", maxsplit=1)[1])
+    elif select_field.links():
+        select = SelectStaticType.LINKS
+    else:
+        emsg = "Unrecognized select body"
+        _LOGGER.error(emsg, select_field=select_field.getText())
+        raise RuntimeError(emsg)
+    return select
 
 
 def _get_date_range(
