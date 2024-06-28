@@ -74,7 +74,7 @@ project : PLUS id ;
 
 // quotes
 quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
-quoted_word_body : any_sym | word | priority ;
+quoted_word_body : any_sym | '[' | ']' | '[[' | ']]' | word | priority ;
 
 // links
 link          : '[[' id_group ']]' ;
