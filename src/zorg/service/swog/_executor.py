@@ -14,6 +14,7 @@ from ...domain.types import (
     GroupByType,
     KeyFunc,
     OrderByType,
+    SelectAggregation,
     SelectPropertyValues,
     SelectStaticType,
     SelectType,
@@ -129,8 +130,15 @@ def _select(
 ) -> str:
     result = ""
     if isinstance(note_group, list):
-        selector = _get_selector(select_type, alpha_sort=alpha_sort)
-        result += "\n".join(selector(note_group)) + "\n\n"
+        if isinstance(select_type, SelectAggregation):
+            selector = _get_selector(
+                select_type.select_type, alpha_sort=alpha_sort
+            )
+            result += str(select_type.aggregate(selector(note_group)))
+        else:
+            selector = _get_selector(select_type, alpha_sort=alpha_sort)
+            result += "\n".join(selector(note_group))
+        result += "\n\n"
     else:
         assert isinstance(note_group, dict)
         for group_name, note_subgroup in note_group.items():

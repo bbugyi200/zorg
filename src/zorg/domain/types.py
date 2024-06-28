@@ -226,6 +226,13 @@ class SelectAggregation:
     func_name: FuncName
     select_type: SelectType
 
+    def aggregate(self, values: list[str]) -> int:
+        """Aggregates a list of values (e.g. notes, property values)."""
+        if self.func_name == "count":
+            return len(values)
+        else:
+            assert_never(self)
+
 
 class PropertyOperator(enum.Enum):
     """Used to determine what kind of property constraint has been specified."""

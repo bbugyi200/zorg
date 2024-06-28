@@ -57,6 +57,7 @@ params = mark.parametrize
         param("S prop:LID W LID:*", id="select_property_values"),
         param("S links", id="select_links"),
         param("S links O none", id="select_links__no_order"),
+        param("S count(note) W o", id="select_count_of_todos"),
     ],
 )
 def test_query(
