@@ -10,17 +10,17 @@ else:
 
 def serializedATN():
     return [
-        4,1,37,40,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,35,40,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,1,0,1,0,1,1,3,1,18,8,1,1,1,1,1,1,1,1,1,3,1,24,8,1,1,2,1,2,1,2,
         1,3,1,3,1,3,1,4,1,4,1,4,1,5,1,5,1,5,1,6,1,6,1,6,0,0,7,0,2,4,6,8,
         10,12,0,1,1,0,2,9,36,0,14,1,0,0,0,2,17,1,0,0,0,4,25,1,0,0,0,6,28,
         1,0,0,0,8,31,1,0,0,0,10,34,1,0,0,0,12,37,1,0,0,0,14,15,3,2,1,0,15,
-        1,1,0,0,0,16,18,5,20,0,0,17,16,1,0,0,0,17,18,1,0,0,0,18,23,1,0,0,
+        1,1,0,0,0,16,18,5,18,0,0,17,16,1,0,0,0,17,18,1,0,0,0,18,23,1,0,0,
         0,19,24,3,4,2,0,20,24,3,6,3,0,21,24,3,8,4,0,22,24,3,10,5,0,23,19,
         1,0,0,0,23,20,1,0,0,0,23,21,1,0,0,0,23,22,1,0,0,0,24,3,1,0,0,0,25,
-        26,5,27,0,0,26,27,3,12,6,0,27,5,1,0,0,0,28,29,5,28,0,0,29,30,3,12,
-        6,0,30,7,1,0,0,0,31,32,5,30,0,0,32,33,3,12,6,0,33,9,1,0,0,0,34,35,
-        5,29,0,0,35,36,3,12,6,0,36,11,1,0,0,0,37,38,7,0,0,0,38,13,1,0,0,
+        26,5,25,0,0,26,27,3,12,6,0,27,5,1,0,0,0,28,29,5,26,0,0,29,30,3,12,
+        6,0,30,7,1,0,0,0,31,32,5,28,0,0,32,33,3,12,6,0,33,9,1,0,0,0,34,35,
+        5,27,0,0,35,36,3,12,6,0,36,11,1,0,0,0,37,38,7,0,0,0,38,13,1,0,0,
         0,2,17,23
     ]
 
@@ -38,18 +38,17 @@ class ZorgMutateParser ( Parser ):
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "'################################'", 
                      "'========================'", "'++++++++++++++++'", 
-                     "'--------'", "'  -'", "'    -'", "<INVALID>", "'$'", 
-                     "'^'", "'-'", "'.'", "'/'", "'_'", "' '", "'('", "')'", 
-                     "'#'", "'@'", "'+'", "'%'", "'''", "'\"'", "'~'", "'*'", 
-                     "'<'", "'>'", "':'" ]
+                     "'--------'", "<INVALID>", "'$'", "'^'", "'-'", "'.'", 
+                     "'/'", "'_'", "' '", "'('", "')'", "'#'", "'@'", "'+'", 
+                     "'%'", "'''", "'\"'", "'~'", "'*'", "'<'", "'>'", "':'" ]
 
     symbolicNames = [ "<INVALID>", "NL", "LOWER_O", "LOWER_X", "DATE", "TIME", 
                       "PRIORITY", "ID", "ZID", "NUM_ID", "SHORT_DATE", "H1_HEADER", 
-                      "H2_HEADER", "H3_HEADER", "H4_HEADER", "TWO_SPACE_DASH", 
-                      "FOUR_SPACE_DASH", "SYMBOL", "DOLLAR", "HAT", "DASH", 
-                      "DOT", "FSLASH", "UNDERSCORE", "SPACE", "LPAREN", 
-                      "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", "SQUOTE", 
-                      "DQUOTE", "TILDE", "STAR", "LANGLE", "RANGLE", "COLON" ]
+                      "H2_HEADER", "H3_HEADER", "H4_HEADER", "SYMBOL", "DOLLAR", 
+                      "HAT", "DASH", "DOT", "FSLASH", "UNDERSCORE", "SPACE", 
+                      "LPAREN", "RPAREN", "HASH", "AT_SIGN", "PLUS", "PERCENT", 
+                      "SQUOTE", "DQUOTE", "TILDE", "STAR", "LANGLE", "RANGLE", 
+                      "COLON" ]
 
     RULE_prog = 0
     RULE_mut_tag = 1
@@ -77,29 +76,27 @@ class ZorgMutateParser ( Parser ):
     H2_HEADER=12
     H3_HEADER=13
     H4_HEADER=14
-    TWO_SPACE_DASH=15
-    FOUR_SPACE_DASH=16
-    SYMBOL=17
-    DOLLAR=18
-    HAT=19
-    DASH=20
-    DOT=21
-    FSLASH=22
-    UNDERSCORE=23
-    SPACE=24
-    LPAREN=25
-    RPAREN=26
-    HASH=27
-    AT_SIGN=28
-    PLUS=29
-    PERCENT=30
-    SQUOTE=31
-    DQUOTE=32
-    TILDE=33
-    STAR=34
-    LANGLE=35
-    RANGLE=36
-    COLON=37
+    SYMBOL=15
+    DOLLAR=16
+    HAT=17
+    DASH=18
+    DOT=19
+    FSLASH=20
+    UNDERSCORE=21
+    SPACE=22
+    LPAREN=23
+    RPAREN=24
+    HASH=25
+    AT_SIGN=26
+    PLUS=27
+    PERCENT=28
+    SQUOTE=29
+    DQUOTE=30
+    TILDE=31
+    STAR=32
+    LANGLE=33
+    RANGLE=34
+    COLON=35
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -202,7 +199,7 @@ class ZorgMutateParser ( Parser ):
             self.state = 17
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==20:
+            if _la==18:
                 self.state = 16
                 self.match(ZorgMutateParser.DASH)
 
@@ -210,19 +207,19 @@ class ZorgMutateParser ( Parser ):
             self.state = 23
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [27]:
+            if token in [25]:
                 self.state = 19
                 self.area()
                 pass
-            elif token in [28]:
+            elif token in [26]:
                 self.state = 20
                 self.context()
                 pass
-            elif token in [30]:
+            elif token in [28]:
                 self.state = 21
                 self.person()
                 pass
-            elif token in [29]:
+            elif token in [27]:
                 self.state = 22
                 self.project()
                 pass
