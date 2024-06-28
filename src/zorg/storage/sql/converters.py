@@ -540,6 +540,10 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             and sql_model.todo_status is not None
             else None
         )
+        properties: dict[str, str] = {}
+        for prop_link in sql_model.property_links:
+            properties[prop_link.prop.name] = prop_link.value
+
         return Note(
             sql_model.body,
             areas=list(area.name for area in sql_model.areas),
@@ -551,6 +555,7 @@ class ZorgNoteConverter(EntityConverter[Note, sql.ZorgNote]):
             modify_date=sql_model.modify_date,
             people=list(person.name for person in sql_model.people),
             projects=list(project.name for project in sql_model.projects),
+            properties=properties,
             todo_payload=todo_payload,
             zid=sql_model.zid,
         )

@@ -130,6 +130,10 @@ def _select(
             selector = partial(_select_tags, "people")
         elif select_type is SelectType.PROJECT:
             selector = partial(_select_tags, "projects")
+        elif select_type is SelectType.PROPERTY:
+            selector = _select_props
+        elif select_type is SelectType.LINKS:
+            selector = _select_links
         else:
             assert_never(select_type)
 
@@ -162,6 +166,22 @@ def _select_tags(attr: str, notes: list[Note]) -> str:
         for tag in getattr(note, attr):
             tags.add(tag)
     return "\n".join(sorted(tags))
+
+
+def _select_props(notes: list[Note]) -> str:
+    prop_keys: set[str] = set()
+    for note in notes:
+        for prop_key in note.properties.keys():
+            prop_keys.add(prop_key)
+    return "\n".join(sorted(prop_keys))
+
+
+def _select_links(notes: list[Note]) -> str:
+    links: set[str] = set()
+    for note in notes:
+        for link in note.links:
+            links.add(link)
+    return "\n".join(sorted(links))
 
 
 def _select_file(notes: list[Note]) -> str:

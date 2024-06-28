@@ -60,6 +60,10 @@ class ZorgQueryCompiler(ZorgQueryListener):
             select = SelectType.FILE
         elif select_body.note():
             select = SelectType.NOTE
+        elif select_body.prop():
+            select = SelectType.PROPERTY
+        elif select_body.links():
+            select = SelectType.LINKS
         else:
             emsg = "Unrecognized select body"
             _LOGGER.error(emsg, select_body=select_body.getText())

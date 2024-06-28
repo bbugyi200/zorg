@@ -183,6 +183,12 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         self._s.todo_priority = ctx.getText().upper()
 
+    def enterQuoted_word(
+        self, ctx: ZorgFileParser.Quoted_wordContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._s.in_quoted_word = True
+
     def enterRef_link(
         self, ctx: ZorgFileParser.Ref_linkContext
     ) -> None:  # noqa: D102
@@ -314,6 +320,12 @@ class ZorgFileCompiler(ZorgFileListener):
         self._add_note(ctx.note_body())
         self._s.in_note = False
 
+    def exitQuoted_word(
+        self, ctx: ZorgFileParser.Quoted_wordContext
+    ) -> None:  # noqa: D102
+        del ctx
+        self._s.in_quoted_word = False
+
     def _get_note_kwargs(
         self,
         line_no: int,
@@ -348,6 +360,10 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.modify_date = None
 
     def _add_prop(self, key: str, value: str) -> None:
+        if self._s.in_quoted_word:
+            _LOGGER.debug("Skipping quoted property", key=key, value=value)
+            return
+
         if self._s.in_head:
             self._s.file_props[key] = value
         elif self._s.in_h1_header:
@@ -446,6 +462,7 @@ class _ZorgFileCompilerState:
     in_h3_header: bool = False
     in_h4_header: bool = False
     in_note: bool = False
+    in_quoted_word: bool = False
 
     file_tags: dict[TagName, list[str]] = field(
         default_factory=_get_default_tags_map

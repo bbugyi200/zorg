@@ -193,6 +193,12 @@ class SelectType(enum.Enum):
     PERSON = enum.auto()
     PROJECT = enum.auto()
 
+    # Select property keys.
+    PROPERTY = enum.auto()
+
+    # Select links.
+    LINKS = enum.auto()
+
 
 class PropertyOperator(enum.Enum):
     """Used to determine what kind of property constraint has been specified."""
