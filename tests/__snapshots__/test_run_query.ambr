@@ -1334,6 +1334,24 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-select_links]
+  '''
+  bar.sh
+  baz
+  buz#fuzz
+  desd_cd_kdzb.yhdxx
+  eswz_xqow::empiz_ljyiwjbmi_szstj
+  global:pig_is_gross
+  local:1
+  local:some_loc_link
+  poop
+  ref:some_article
+  xmind/zorg_e2e_query_arch.xmind
+  zid:240408#0X
+  zid:240510#03
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-select_projects]
   '''
   2_be_or_not_2_be
@@ -1365,6 +1383,23 @@
   xoao
   zorg
   zv_jzdd_djqa
+  
+  '''
+# ---
+# name: test_query[YAMLConfigFile-select_property_keys]
+  '''
+  ID
+  RID
+  a
+  due
+  foo
+  key
+  p
+  q
+  recur
+  type
+  url
+  x
   
   '''
 # ---
