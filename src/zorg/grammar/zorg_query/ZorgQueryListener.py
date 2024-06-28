@@ -98,6 +98,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#select_field.
+    def enterSelect_field(self, ctx:ZorgQueryParser.Select_fieldContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#select_field.
+    def exitSelect_field(self, ctx:ZorgQueryParser.Select_fieldContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#prop.
     def enterProp(self, ctx:ZorgQueryParser.PropContext):
         pass
@@ -131,6 +140,15 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#note.
     def exitNote(self, ctx:ZorgQueryParser.NoteContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#func_name.
+    def enterFunc_name(self, ctx:ZorgQueryParser.Func_nameContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#func_name.
+    def exitFunc_name(self, ctx:ZorgQueryParser.Func_nameContext):
         pass
 
 

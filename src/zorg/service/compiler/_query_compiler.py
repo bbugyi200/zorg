@@ -49,30 +49,33 @@ class ZorgQueryCompiler(ZorgQueryListener):
         select_body = cast(
             ZorgQueryParser.Select_bodyContext, ctx.select_body()
         )
+        select_field = cast(
+            ZorgQueryParser.Select_fieldContext, select_body.select_field()
+        )
         select: SelectType
-        if select_body.HASH():
+        if select_field.HASH():
             select = SelectStaticType.AREA
-        elif select_body.AT_SIGN():
+        elif select_field.AT_SIGN():
             select = SelectStaticType.CONTEXT
-        elif select_body.PERCENT():
+        elif select_field.PERCENT():
             select = SelectStaticType.PERSON
-        elif select_body.PLUS():
+        elif select_field.PLUS():
             select = SelectStaticType.PROJECT
-        elif select_body.file_():
+        elif select_field.file_():
             select = SelectStaticType.FILE
-        elif select_body.note():
+        elif select_field.note():
             select = SelectStaticType.NOTE
-        elif select_body.prop():
+        elif select_field.prop():
             select = SelectStaticType.PROPERTY
-        elif s := select_body.prop_values():
+        elif s := select_field.prop_values():
             select = SelectPropertyValues(
                 s.getText().split(":", maxsplit=1)[1]
             )
-        elif select_body.links():
+        elif select_field.links():
             select = SelectStaticType.LINKS
         else:
             emsg = "Unrecognized select body"
-            _LOGGER.error(emsg, select_body=select_body.getText())
+            _LOGGER.error(emsg, select_field=select_field.getText())
             raise RuntimeError(emsg)
 
         self.zorg_query.select = select

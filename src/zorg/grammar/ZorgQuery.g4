@@ -9,7 +9,8 @@ prog : query NL? ;
 query           : where_query | select_query ;
 where_query     : (select SPACE)? where order_and_group ;
 order_and_group : (SPACE order_by)? (SPACE group_by)?
-                | (SPACE group_by)? (SPACE order_by)? ;
+                | (SPACE group_by)? (SPACE order_by)?
+                ;
 select_query    : select order_and_group ;
 
 // S W O G
@@ -19,11 +20,17 @@ order_by : 'O' SPACE order_by_body ;
 group_by : 'G' SPACE group_by_body ;
 
 // --- SELECT
-select_body : file | note | prop | prop_values | links | AT_SIGN | HASH | PLUS | PERCENT ;
+select_body : select_field
+            | func_name '(' select_field ')'
+            ;
+select_field : file | note | prop | prop_values | links | AT_SIGN | HASH | PLUS | PERCENT ;
 prop        : 'prop' ;
 prop_values : prop COLON id ;
 links       : 'links' ;
 note        : 'note' ;
+
+// functions
+func_name : 'count' ;
 
 // --- WHERE
 where_body     : or_filter ;
