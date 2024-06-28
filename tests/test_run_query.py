@@ -52,6 +52,7 @@ params = mark.parametrize
         param("^0d", id="relative_date"),
         param("^-1d:0d", id="relative_date_range"),
         param("S prop", id="select_property_keys"),
+        param("S prop:LID W LID:*", id="select_property_values"),
         param("S links", id="select_links"),
     ],
 )

@@ -1404,6 +1404,13 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-select_property_values]
+  '''
+  1
+  some_loc_link
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-zorg_notes]
   '''
   ################################ [[20240323]]
