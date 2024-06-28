@@ -148,8 +148,8 @@ def serializedATN():
         355,1,0,0,0,346,348,5,41,0,0,347,349,3,70,35,0,348,347,1,0,0,0,349,
         350,1,0,0,0,350,348,1,0,0,0,350,351,1,0,0,0,351,352,1,0,0,0,352,
         353,5,41,0,0,353,355,1,0,0,0,354,338,1,0,0,0,354,346,1,0,0,0,355,
-        69,1,0,0,0,356,361,3,32,16,0,357,361,3,26,13,0,358,361,5,1,0,0,359,
-        361,5,2,0,0,360,356,1,0,0,0,360,357,1,0,0,0,360,358,1,0,0,0,360,
+        69,1,0,0,0,356,361,5,1,0,0,357,361,5,2,0,0,358,361,3,32,16,0,359,
+        361,3,26,13,0,360,356,1,0,0,0,360,357,1,0,0,0,360,358,1,0,0,0,360,
         359,1,0,0,0,361,71,1,0,0,0,362,363,5,3,0,0,363,364,3,42,21,0,364,
         365,5,4,0,0,365,73,1,0,0,0,366,367,5,5,0,0,367,368,5,16,0,0,368,
         369,5,2,0,0,369,75,1,0,0,0,370,371,5,6,0,0,371,372,5,16,0,0,372,
@@ -2828,25 +2828,25 @@ class ZorgFileParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 356
-                self.atom()
+                self.match(ZorgFileParser.T__0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 357
-                self.priority()
+                self.match(ZorgFileParser.T__1)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 358
-                self.match(ZorgFileParser.T__0)
+                self.atom()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 359
-                self.match(ZorgFileParser.T__1)
+                self.priority()
                 pass
 
 
