@@ -36,6 +36,8 @@ params = mark.parametrize
         param("p:>5 G none", id="filter_by_property_gt"),
         param("'foo' G none", id="desc_filter__foo"),
         param('"foo" G none', id="desc_filter__foo_double_quote"),
+        param("'foo' O none G none", id="desc_filter__foo_no_order"),
+        param("'foo' O alpha G none", id="desc_filter__foo_alpha_order"),
         param("c's' c'u' c'p' G file", id="desc_filter__s_u_p"),
         param("S +", id="select_projects"),
         param("S file W o G none", id="select_files_with_todos"),
@@ -54,6 +56,7 @@ params = mark.parametrize
         param("S prop", id="select_property_keys"),
         param("S prop:LID W LID:*", id="select_property_values"),
         param("S links", id="select_links"),
+        param("S links O none", id="select_links__no_order"),
     ],
 )
 def test_query(
