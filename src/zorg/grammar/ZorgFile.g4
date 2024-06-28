@@ -16,14 +16,12 @@ item        : todo | note | footnote | comment ;
 footnote    : footnote_head COLON space_atoms NL ;
 
 // notes
-note         : DASH base_note subnote* ;
+note         : DASH base_note ;
 base_note    : note_body NL ;
 note_body    : space_atoms (NL SPACE+ space_atoms)* ;
-subnote      : TWO_SPACE_DASH base_note subsubnote*;
-subsubnote   : FOUR_SPACE_DASH base_note ;
 
 // todos
-todo        : base_todo subnote* ;
+todo        : base_todo ;
 base_todo   : todo_prefix (SPACE priority)? note_body NL ;
 todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
