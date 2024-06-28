@@ -120,8 +120,6 @@ def _select(
         selector = _select_note
         if select_type is SelectType.AREA:
             selector = partial(_select_tags, "areas")
-        elif select_type is SelectType.BLOCK:
-            raise NotImplementedError("Selecting blocks is not yet supported.")
         elif select_type is SelectType.CONTEXT:
             selector = partial(_select_tags, "contexts")
         elif select_type is SelectType.FILE:
