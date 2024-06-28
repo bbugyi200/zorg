@@ -103,8 +103,8 @@ def serializedATN():
         5,27,0,0,210,211,5,36,0,0,211,215,5,31,0,0,212,215,5,39,0,0,213,
         215,5,38,0,0,214,208,1,0,0,0,214,209,1,0,0,0,214,210,1,0,0,0,214,
         212,1,0,0,0,214,213,1,0,0,0,215,218,1,0,0,0,216,214,1,0,0,0,216,
-        217,1,0,0,0,217,221,1,0,0,0,218,216,1,0,0,0,219,222,3,32,16,0,220,
-        222,3,68,34,0,221,219,1,0,0,0,221,220,1,0,0,0,221,222,1,0,0,0,222,
+        217,1,0,0,0,217,221,1,0,0,0,218,216,1,0,0,0,219,222,3,68,34,0,220,
+        222,3,32,16,0,221,219,1,0,0,0,221,220,1,0,0,0,221,222,1,0,0,0,222,
         231,1,0,0,0,223,228,3,50,25,0,224,227,3,50,25,0,225,227,3,44,22,
         0,226,224,1,0,0,0,226,225,1,0,0,0,227,230,1,0,0,0,228,226,1,0,0,
         0,228,229,1,0,0,0,229,232,1,0,0,0,230,228,1,0,0,0,231,223,1,0,0,
@@ -1337,12 +1337,12 @@ class ZorgFileParser ( Parser ):
             else:
                 return self.getToken(ZorgFileParser.SQUOTE, i)
 
-        def atom(self):
-            return self.getTypedRuleContext(ZorgFileParser.AtomContext,0)
-
-
         def quoted(self):
             return self.getTypedRuleContext(ZorgFileParser.QuotedContext,0)
+
+
+        def atom(self):
+            return self.getTypedRuleContext(ZorgFileParser.AtomContext,0)
 
 
         def any_sym(self, i:int=None):
@@ -1428,11 +1428,11 @@ class ZorgFileParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
             if la_ == 1:
                 self.state = 219
-                self.atom()
+                self.quoted()
 
             elif la_ == 2:
                 self.state = 220
-                self.quoted()
+                self.atom()
 
 
             self.state = 231
