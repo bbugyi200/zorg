@@ -62,15 +62,6 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#footnote.
-    def enterFootnote(self, ctx:ZorgFileParser.FootnoteContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#footnote.
-    def exitFootnote(self, ctx:ZorgFileParser.FootnoteContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#note.
     def enterNote(self, ctx:ZorgFileParser.NoteContext):
         pass
@@ -332,6 +323,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#quoted_atom.
+    def enterQuoted_atom(self, ctx:ZorgFileParser.Quoted_atomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#quoted_atom.
+    def exitQuoted_atom(self, ctx:ZorgFileParser.Quoted_atomContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#link.
     def enterLink(self, ctx:ZorgFileParser.LinkContext):
         pass
@@ -368,6 +368,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#square_atom.
+    def enterSquare_atom(self, ctx:ZorgFileParser.Square_atomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#square_atom.
+    def exitSquare_atom(self, ctx:ZorgFileParser.Square_atomContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#embedded_link.
     def enterEmbedded_link(self, ctx:ZorgFileParser.Embedded_linkContext):
         pass
@@ -383,15 +392,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#ref_link.
     def exitRef_link(self, ctx:ZorgFileParser.Ref_linkContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#footnote_head.
-    def enterFootnote_head(self, ctx:ZorgFileParser.Footnote_headContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#footnote_head.
-    def exitFootnote_head(self, ctx:ZorgFileParser.Footnote_headContext):
         pass
 
 
