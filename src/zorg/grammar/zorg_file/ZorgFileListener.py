@@ -233,21 +233,21 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#any_symbol.
-    def enterAny_symbol(self, ctx:ZorgFileParser.Any_symbolContext):
+    # Enter a parse tree produced by ZorgFileParser#any_sym.
+    def enterAny_sym(self, ctx:ZorgFileParser.Any_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#any_symbol.
-    def exitAny_symbol(self, ctx:ZorgFileParser.Any_symbolContext):
+    # Exit a parse tree produced by ZorgFileParser#any_sym.
+    def exitAny_sym(self, ctx:ZorgFileParser.Any_symContext):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#non_tag_symbol.
-    def enterNon_tag_symbol(self, ctx:ZorgFileParser.Non_tag_symbolContext):
+    # Enter a parse tree produced by ZorgFileParser#non_tag_sym.
+    def enterNon_tag_sym(self, ctx:ZorgFileParser.Non_tag_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#non_tag_symbol.
-    def exitNon_tag_symbol(self, ctx:ZorgFileParser.Non_tag_symbolContext):
+    # Exit a parse tree produced by ZorgFileParser#non_tag_sym.
+    def exitNon_tag_sym(self, ctx:ZorgFileParser.Non_tag_symContext):
         pass
 
 

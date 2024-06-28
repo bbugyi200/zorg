@@ -28,7 +28,7 @@ priority    : PRIORITY ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE ((SQUOTE | DQUOTE) any_symbol)? (non_tag_symbol | DASH | PLUS SPACE)* (atom | quoted)? (any_symbol (any_symbol | id)*)? square_atom? ;
+space_atom  : SPACE (non_tag_sym | DASH | PLUS SPACE | DQUOTE | SQUOTE)* (atom | quoted)? (any_sym (any_sym | id)*)? square_atom? ;
 atom        : tag_symbol
             | tag
             | link
@@ -49,16 +49,16 @@ zid : ZID  ;
 property    : simple_prop | inline_prop ;
 simple_prop : id COLON COLON id_group ;
 inline_prop : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
-id_group    : id (any_symbol+ id)* ;
+id_group    : id (any_sym+ id)* ;
 id          : ID | NUM_ID | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_symbol     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_symbol | tag_symbol | id_symbol ;
-non_tag_symbol : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
-id_symbol      : HASH | DASH | DOT | FSLASH | COLON ;
-tag_symbol     : HASH | AT_SIGN | PERCENT | PLUS ;
+any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_symbol | id_symbol ;
+non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
+id_symbol   : HASH | DASH | DOT | FSLASH | COLON ;
+tag_symbol  : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // tag
 tag     : area | context | person | project ;
