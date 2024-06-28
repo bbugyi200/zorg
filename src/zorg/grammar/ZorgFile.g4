@@ -69,7 +69,7 @@ project : PLUS id ;
 
 // quotes and links
 quoted        : (SQUOTE quoted_atom+ SQUOTE | DQUOTE quoted_atom+ DQUOTE) ;
-quoted_atom   : '[' | ']' | atom | priority ;
+quoted_atom   : '[' | ']' | '[[' | ']]' | atom | priority ;
 link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
 local_link    : '[^' ID ']' ;
