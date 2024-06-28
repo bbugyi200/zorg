@@ -1,6 +1,7 @@
 """Custom types used by zorg."""
 
 import abc
+from dataclasses import dataclass
 import datetime as dt
 import enum
 from pathlib import Path
@@ -17,6 +18,7 @@ from typing import (
     Protocol,
     Sequence,
     TypeVar,
+    Union,
 )
 
 from sqlalchemy.future import Engine
@@ -33,6 +35,7 @@ T = TypeVar("T")
 
 KeyFunc = Callable[["Note"], str]
 FileGroupMapType = Mapping[str, Sequence[str]]
+SelectType = Union["SelectStaticType", "SelectPropertyValues"]
 TodoPriorityType = Literal[
     "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
 ]
@@ -178,7 +181,7 @@ class OrderByType(enum.Enum):
             assert_never(self)
 
 
-class SelectType(enum.Enum):
+class SelectStaticType(enum.Enum):
     """A zorg query (S)ELECT."""
 
     # Select file paths.
@@ -198,6 +201,13 @@ class SelectType(enum.Enum):
 
     # Select links.
     LINKS = enum.auto()
+
+
+@dataclass(frozen=True)
+class SelectPropertyValues:
+    """(S)ELECT property values (e.g. via prop:foo selector)"""
+
+    key: str
 
 
 class PropertyOperator(enum.Enum):

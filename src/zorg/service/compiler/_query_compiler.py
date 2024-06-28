@@ -23,6 +23,8 @@ from ...domain.types import (
     OrderByType,
     PropertyOperator,
     PropertyValueType,
+    SelectPropertyValues,
+    SelectStaticType,
     SelectType,
     TodoPriorityType,
 )
@@ -49,21 +51,25 @@ class ZorgQueryCompiler(ZorgQueryListener):
         )
         select: SelectType
         if select_body.HASH():
-            select = SelectType.AREA
+            select = SelectStaticType.AREA
         elif select_body.AT_SIGN():
-            select = SelectType.CONTEXT
+            select = SelectStaticType.CONTEXT
         elif select_body.PERCENT():
-            select = SelectType.PERSON
+            select = SelectStaticType.PERSON
         elif select_body.PLUS():
-            select = SelectType.PROJECT
+            select = SelectStaticType.PROJECT
         elif select_body.file_():
-            select = SelectType.FILE
+            select = SelectStaticType.FILE
         elif select_body.note():
-            select = SelectType.NOTE
+            select = SelectStaticType.NOTE
         elif select_body.prop():
-            select = SelectType.PROPERTY
+            select = SelectStaticType.PROPERTY
+        elif s := select_body.prop_values():
+            select = SelectPropertyValues(
+                s.getText().split(":", maxsplit=1)[1]
+            )
         elif select_body.links():
-            select = SelectType.LINKS
+            select = SelectStaticType.LINKS
         else:
             emsg = "Unrecognized select body"
             _LOGGER.error(emsg, select_body=select_body.getText())

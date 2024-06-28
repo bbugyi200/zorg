@@ -98,6 +98,15 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#prop_values.
+    def enterProp_values(self, ctx:ZorgQueryParser.Prop_valuesContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#prop_values.
+    def exitProp_values(self, ctx:ZorgQueryParser.Prop_valuesContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#links.
     def enterLinks(self, ctx:ZorgQueryParser.LinksContext):
         pass

@@ -17,8 +17,9 @@ order_by : 'O' SPACE order_by_body ;
 group_by : 'G' SPACE group_by_body ;
 
 // --- SELECT
-select_body : file | note | prop | links | AT_SIGN | HASH | PLUS | PERCENT ;
+select_body : file | note | prop | prop_values | links | AT_SIGN | HASH | PLUS | PERCENT ;
 prop        : 'prop' ;
+prop_values : prop COLON id ;
 links       : 'links' ;
 note        : 'note' ;
 

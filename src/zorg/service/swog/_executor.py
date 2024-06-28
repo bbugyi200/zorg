@@ -10,7 +10,14 @@ from logrus import Logger
 from typist import assert_never
 
 from ...domain.models import Note, Query
-from ...domain.types import GroupByType, KeyFunc, OrderByType, SelectType
+from ...domain.types import (
+    GroupByType,
+    KeyFunc,
+    OrderByType,
+    SelectPropertyValues,
+    SelectStaticType,
+    SelectType,
+)
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
 
@@ -118,22 +125,24 @@ def _select(
     result = ""
     if isinstance(note_group, list):
         selector = _select_note
-        if select_type is SelectType.AREA:
+        if select_type is SelectStaticType.AREA:
             selector = partial(_select_tags, "areas")
-        elif select_type is SelectType.CONTEXT:
+        elif select_type is SelectStaticType.CONTEXT:
             selector = partial(_select_tags, "contexts")
-        elif select_type is SelectType.FILE:
+        elif select_type is SelectStaticType.FILE:
             selector = _select_file
-        elif select_type is SelectType.NOTE:
+        elif select_type is SelectStaticType.NOTE:
             selector = _select_note
-        elif select_type is SelectType.PERSON:
+        elif select_type is SelectStaticType.PERSON:
             selector = partial(_select_tags, "people")
-        elif select_type is SelectType.PROJECT:
+        elif select_type is SelectStaticType.PROJECT:
             selector = partial(_select_tags, "projects")
-        elif select_type is SelectType.PROPERTY:
-            selector = _select_props
-        elif select_type is SelectType.LINKS:
+        elif select_type is SelectStaticType.PROPERTY:
+            selector = _select_prop_keys
+        elif select_type is SelectStaticType.LINKS:
             selector = _select_links
+        elif isinstance(select_type, SelectPropertyValues):
+            selector = partial(_select_prop_values, select_type.key)
         else:
             assert_never(select_type)
 
@@ -168,12 +177,20 @@ def _select_tags(attr: str, notes: list[Note]) -> str:
     return "\n".join(sorted(tags))
 
 
-def _select_props(notes: list[Note]) -> str:
+def _select_prop_keys(notes: list[Note]) -> str:
     prop_keys: set[str] = set()
     for note in notes:
         for prop_key in note.properties.keys():
             prop_keys.add(prop_key)
     return "\n".join(sorted(prop_keys))
+
+
+def _select_prop_values(prop_key: str, notes: list[Note]) -> str:
+    prop_values: set[str] = set()
+    for note in notes:
+        if prop_key in note.properties:
+            prop_values.add(note.properties[prop_key])
+    return "\n".join(sorted(prop_values))
 
 
 def _select_links(notes: list[Note]) -> str:

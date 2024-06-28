@@ -11,6 +11,7 @@ from ..types import (
     OrderByType,
     PropertyOperator,
     PropertyValueType,
+    SelectStaticType,
     SelectType,
     TodoPriorityType,
 )
@@ -107,7 +108,7 @@ class Query:
     (G)ROUP BY
     """
 
-    select: SelectType = field(default=SelectType.NOTE)
+    select: SelectType = field(default=SelectStaticType.NOTE)
     where: Optional[WhereOrFilter] = None
     order_by: tuple[OrderByType, ...] = (
         OrderByType.NOTE_TYPE,
