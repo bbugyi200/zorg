@@ -11,14 +11,14 @@ comment : HASH space_atoms? NL ;
 body    : NL+ block* h2_section* h1_section* ;
 
 // blocks
-block       : item+ NL* ;
-item        : todo | note | footnote | comment ;
-footnote    : footnote_head COLON space_atoms NL ;
+block    : item+ NL* ;
+item     : todo | note | footnote | comment ;
+footnote : footnote_head COLON space_atoms NL ;
 
 // notes
-note         : DASH base_note ;
-base_note    : note_body NL ;
-note_body    : space_atoms (NL SPACE+ space_atoms)* ;
+note      : DASH base_note ;
+base_note : note_body NL ;
+note_body : space_atoms (NL SPACE+ space_atoms)* ;
 
 // todos
 todo        : base_todo ;
