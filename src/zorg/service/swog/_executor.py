@@ -177,6 +177,11 @@ def _get_selector(select_type: SelectType, *, alpha_sort: bool) -> Selector:
         selector = partial(
             _select_prop_values, select_type.key, alpha_sort=alpha_sort
         )
+    elif isinstance(select_type, SelectAggregation):
+        raise RuntimeError(
+            "Aggregations are performed ON selector results, so it doesn't"
+            " make sense to contruct a selector FROM an aggregation."
+        )
     else:
         assert_never(select_type)
     return selector
