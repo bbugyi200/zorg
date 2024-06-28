@@ -34,6 +34,7 @@ word_group  : before_word* word? after_word* ;
 before_word : non_tag_sym | DASH ;
 word        : quoted_word | unquoted_word ;
 after_word  : any_sym (any_sym | id)* | square_word ;
+square_word   : '[' (id_group | SPACE) (SPACE id_group)* ']' ;
 
 // quoted and unquoted words
 unquoted_word    : tag
@@ -79,7 +80,6 @@ link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
 local_link    : '[^' ID ']' ;
 zid_link      : '[' zid ']' ;
-square_word   : '[' (id_group | SPACE) (SPACE id_group)* ']' ;
 embedded_link : '((' id_group '))' ;
 ref_link      : '[@' ID ']' ;
 

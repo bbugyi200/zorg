@@ -197,6 +197,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#square_word.
+    def enterSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#square_word.
+    def exitSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#unquoted_word.
     def enterUnquoted_word(self, ctx:ZorgFileParser.Unquoted_wordContext):
         pass
@@ -410,15 +419,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#zid_link.
     def exitZid_link(self, ctx:ZorgFileParser.Zid_linkContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#square_word.
-    def enterSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#square_word.
-    def exitSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
         pass
 
 
