@@ -27,21 +27,25 @@ x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : PRIORITY ;
 
 // atoms
-space_atoms : space_atom+ ;
-space_atom  : SPACE atom ;
-atom        : ((SQUOTE | DQUOTE) any_sym)* (non_tag_sym | DASH | PLUS SPACE)* (word | quoted)? (any_sym (any_sym | id)*)? square_word? ;
-word        : tag_sym
-            | tag
-            | link
-            | property
-            | id_group
-            | global_link
-            | local_link
-            | zid_link
-            | embedded_link
-            | ref_link
-            | square_word
-            | priority ;
+space_atoms   : space_atom+ ;
+space_atom    : SPACE atom ;
+atom          : tag_sym | word_group ;
+word_group    : before_word* word? after_word* ;
+before_word   : non_tag_sym | DASH ;
+after_word    : any_sym (any_sym | id)* | square_word ;
+word          : tag_sym
+              | tag
+              | link
+              | property
+              | id_group
+              | global_link
+              | local_link
+              | zid_link
+              | embedded_link
+              | ref_link
+              | square_word
+              | priority
+              | quoted_word ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -68,9 +72,11 @@ context : AT_SIGN id ;
 person  : PERCENT id ;
 project : PLUS id ;
 
-// quotes and links
-quoted        : SQUOTE quoted_word+ SQUOTE? | DQUOTE quoted_word+ DQUOTE? ;
-quoted_word   : '[' | ']' | '[[' | ']]' | word | priority ;
+// quotes
+quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
+quoted_word_body : any_sym | word | priority ;
+
+// links
 link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
 local_link    : '[^' ID ']' ;

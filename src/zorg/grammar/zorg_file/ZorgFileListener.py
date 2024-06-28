@@ -161,6 +161,33 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#word_group.
+    def enterWord_group(self, ctx:ZorgFileParser.Word_groupContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#word_group.
+    def exitWord_group(self, ctx:ZorgFileParser.Word_groupContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#before_word.
+    def enterBefore_word(self, ctx:ZorgFileParser.Before_wordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#before_word.
+    def exitBefore_word(self, ctx:ZorgFileParser.Before_wordContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#after_word.
+    def enterAfter_word(self, ctx:ZorgFileParser.After_wordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#after_word.
+    def exitAfter_word(self, ctx:ZorgFileParser.After_wordContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#word.
     def enterWord(self, ctx:ZorgFileParser.WordContext):
         pass
@@ -323,21 +350,21 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#quoted.
-    def enterQuoted(self, ctx:ZorgFileParser.QuotedContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#quoted.
-    def exitQuoted(self, ctx:ZorgFileParser.QuotedContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#quoted_word.
     def enterQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
         pass
 
     # Exit a parse tree produced by ZorgFileParser#quoted_word.
     def exitQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#quoted_word_body.
+    def enterQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#quoted_word_body.
+    def exitQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
         pass
 
 
