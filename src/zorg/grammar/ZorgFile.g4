@@ -28,7 +28,7 @@ priority    : PRIORITY ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE ((SQUOTE | DQUOTE) any_sym)? (non_tag_sym | DASH | PLUS SPACE)* (atom | quoted)? (any_sym (any_sym | id)*)? square_atom? ;
+space_atom  : SPACE ((SQUOTE | DQUOTE) any_sym)* (non_tag_sym | DASH | PLUS SPACE)* (atom | quoted)? (any_sym (any_sym | id)*)? square_atom? ;
 atom        : tag_symbol
             | tag
             | link
@@ -68,7 +68,7 @@ person  : PERCENT id ;
 project : PLUS id ;
 
 // quotes and links
-quoted        : (SQUOTE quoted_atom+ SQUOTE | DQUOTE quoted_atom+ DQUOTE) ;
+quoted        : (SQUOTE quoted_atom+ SQUOTE? | DQUOTE quoted_atom+ DQUOTE?) ;
 quoted_atom   : '[' | ']' | '[[' | ']]' | atom | priority ;
 link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
