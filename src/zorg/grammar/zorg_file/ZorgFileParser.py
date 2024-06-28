@@ -1108,23 +1108,26 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.Todo_prefixContext(self, self._ctx, self.state)
         self.enterRule(localctx, 22, self.RULE_todo_prefix)
         try:
-            self.enterOuterAlt(localctx, 1)
             self.state = 201
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [11]:
+                self.enterOuterAlt(localctx, 1)
                 self.state = 197
                 self.match(ZorgFileParser.LOWER_O)
                 pass
             elif token in [12, 40]:
+                self.enterOuterAlt(localctx, 2)
                 self.state = 198
                 self.x_or_tilde()
                 pass
             elif token in [42]:
+                self.enterOuterAlt(localctx, 3)
                 self.state = 199
                 self.match(ZorgFileParser.LANGLE)
                 pass
             elif token in [43]:
+                self.enterOuterAlt(localctx, 4)
                 self.state = 200
                 self.match(ZorgFileParser.RANGLE)
                 pass

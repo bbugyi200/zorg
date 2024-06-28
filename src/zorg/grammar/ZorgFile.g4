@@ -11,8 +11,8 @@ comment : HASH space_atoms? NL ;
 body    : NL+ block* h2_section* h1_section* ;
 
 // blocks
-block    : item+ NL* ;
-item     : todo | note | comment ;
+block : item+ NL* ;
+item  : todo | note | comment ;
 
 // notes
 note      : DASH base_note ;
@@ -22,28 +22,28 @@ note_body : space_atoms (NL SPACE+ space_atoms)* ;
 // todos
 todo        : base_todo ;
 base_todo   : todo_prefix (SPACE priority)? note_body NL ;
-todo_prefix : (LOWER_O | x_or_tilde | LANGLE | RANGLE) ;
+todo_prefix : LOWER_O | x_or_tilde | LANGLE | RANGLE ;
 x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
 priority    : PRIORITY ;
 
 // atoms
-space_atoms   : space_atom+ ;
-space_atom    : SPACE atom ;
-atom          : tag_sym | word_group ;
-word_group    : before_word* word? after_word* ;
-before_word   : non_tag_sym | DASH ;
-after_word    : any_sym (any_sym | id)* | square_word ;
-word          : tag
-              | link
-              | property
-              | id_group
-              | global_link
-              | local_link
-              | zid_link
-              | embedded_link
-              | ref_link
-              | priority
-              | quoted_word ;
+space_atoms : space_atom+ ;
+space_atom  : SPACE atom ;
+atom        : tag_sym | word_group ;
+word_group  : before_word* word? after_word* ;
+before_word : non_tag_sym | DASH ;
+after_word  : any_sym (any_sym | id)* | square_word ;
+word        : tag
+            | link
+            | property
+            | id_group
+            | global_link
+            | local_link
+            | zid_link
+            | embedded_link
+            | ref_link
+            | priority
+            | quoted_word ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
