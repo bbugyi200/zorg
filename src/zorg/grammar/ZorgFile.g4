@@ -28,7 +28,7 @@ priority    : PRIORITY ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE (non_tag_sym | DASH | PLUS SPACE | DQUOTE | SQUOTE)* (quoted | atom)? (any_sym (any_sym | id)*)? square_atom? ;
+space_atom  : SPACE ((SQUOTE | DQUOTE) any_sym)? (non_tag_sym | DASH | PLUS SPACE)* (atom | quoted)? (any_sym (any_sym | id)*)? square_atom? ;
 atom        : tag_symbol
             | tag
             | link
