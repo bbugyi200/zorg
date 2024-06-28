@@ -1363,6 +1363,12 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-select_count_of_todos]
+  '''
+  16
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-select_files_with_todos]
   '''
   basic.zo
