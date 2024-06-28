@@ -33,8 +33,7 @@ atom          : tag_sym | word_group ;
 word_group    : before_word* word? after_word* ;
 before_word   : non_tag_sym | DASH ;
 after_word    : any_sym (any_sym | id)* | square_word ;
-word          : tag_sym
-              | tag
+word          : tag
               | link
               | property
               | id_group
@@ -43,7 +42,6 @@ word          : tag_sym
               | zid_link
               | embedded_link
               | ref_link
-              | square_word
               | priority
               | quoted_word ;
 
