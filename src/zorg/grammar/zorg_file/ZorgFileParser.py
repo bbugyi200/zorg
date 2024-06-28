@@ -155,7 +155,7 @@ def serializedATN():
         370,5,39,0,0,369,368,1,0,0,0,369,370,1,0,0,0,370,372,1,0,0,0,371,
         353,1,0,0,0,371,362,1,0,0,0,372,77,1,0,0,0,373,381,3,58,29,0,374,
         381,5,1,0,0,375,381,5,2,0,0,376,381,5,3,0,0,377,381,5,4,0,0,378,
-        381,3,40,20,0,379,381,3,26,13,0,380,373,1,0,0,0,380,374,1,0,0,0,
+        381,3,50,25,0,379,381,3,26,13,0,380,373,1,0,0,0,380,374,1,0,0,0,
         380,375,1,0,0,0,380,376,1,0,0,0,380,377,1,0,0,0,380,378,1,0,0,0,
         380,379,1,0,0,0,381,79,1,0,0,0,382,383,5,3,0,0,383,384,3,50,25,0,
         384,385,5,4,0,0,385,81,1,0,0,0,386,387,5,5,0,0,387,388,5,16,0,0,
@@ -2990,8 +2990,8 @@ class ZorgFileParser ( Parser ):
             return self.getTypedRuleContext(ZorgFileParser.Any_symContext,0)
 
 
-        def word(self):
-            return self.getTypedRuleContext(ZorgFileParser.WordContext,0)
+        def id_group(self):
+            return self.getTypedRuleContext(ZorgFileParser.Id_groupContext,0)
 
 
         def priority(self):
@@ -3053,7 +3053,7 @@ class ZorgFileParser ( Parser ):
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 378
-                self.word()
+                self.id_group()
                 pass
 
             elif la_ == 7:
