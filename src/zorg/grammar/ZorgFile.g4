@@ -28,8 +28,9 @@ priority    : PRIORITY ;
 
 // atoms
 space_atoms : space_atom+ ;
-space_atom  : SPACE ((SQUOTE | DQUOTE) any_sym)* (non_tag_sym | DASH | PLUS SPACE)* (atom | quoted)? (any_sym (any_sym | id)*)? square_atom? ;
-atom        : tag_symbol
+space_atom  : SPACE atom ;
+atom        : ((SQUOTE | DQUOTE) any_sym)* (non_tag_sym | DASH | PLUS SPACE)* (word | quoted)? (any_sym (any_sym | id)*)? square_word? ;
+word        : tag_sym
             | tag
             | link
             | property
@@ -39,7 +40,7 @@ atom        : tag_symbol
             | zid_link
             | embedded_link
             | ref_link
-            | square_atom
+            | square_word
             | priority ;
 
 // Zorg YYMMDD#XX IDs
@@ -55,10 +56,10 @@ date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_symbol | id_symbol ;
+any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym ;
 non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
-id_symbol   : HASH | DASH | DOT | FSLASH | COLON ;
-tag_symbol  : HASH | AT_SIGN | PERCENT | PLUS ;
+id_sym      : HASH | DASH | DOT | FSLASH | COLON ;
+tag_sym     : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // tag
 tag     : area | context | person | project ;
@@ -68,13 +69,13 @@ person  : PERCENT id ;
 project : PLUS id ;
 
 // quotes and links
-quoted        : (SQUOTE quoted_atom+ SQUOTE? | DQUOTE quoted_atom+ DQUOTE?) ;
-quoted_atom   : '[' | ']' | '[[' | ']]' | atom | priority ;
+quoted        : SQUOTE quoted_word+ SQUOTE? | DQUOTE quoted_word+ DQUOTE? ;
+quoted_word   : '[' | ']' | '[[' | ']]' | word | priority ;
 link          : '[[' id_group ']]' ;
 global_link   : '[#' ID ']' ;
 local_link    : '[^' ID ']' ;
 zid_link      : '[' zid ']' ;
-square_atom   : '[' (id_group | SPACE) (SPACE id_group)* ']' ;
+square_word   : '[' (id_group | SPACE) (SPACE id_group)* ']' ;
 embedded_link : '((' id_group '))' ;
 ref_link      : '[@' ID ']' ;
 

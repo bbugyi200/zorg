@@ -161,6 +161,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#word.
+    def enterWord(self, ctx:ZorgFileParser.WordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#word.
+    def exitWord(self, ctx:ZorgFileParser.WordContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#zid.
     def enterZid(self, ctx:ZorgFileParser.ZidContext):
         pass
@@ -251,21 +260,21 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#id_symbol.
-    def enterId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
+    # Enter a parse tree produced by ZorgFileParser#id_sym.
+    def enterId_sym(self, ctx:ZorgFileParser.Id_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#id_symbol.
-    def exitId_symbol(self, ctx:ZorgFileParser.Id_symbolContext):
+    # Exit a parse tree produced by ZorgFileParser#id_sym.
+    def exitId_sym(self, ctx:ZorgFileParser.Id_symContext):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#tag_symbol.
-    def enterTag_symbol(self, ctx:ZorgFileParser.Tag_symbolContext):
+    # Enter a parse tree produced by ZorgFileParser#tag_sym.
+    def enterTag_sym(self, ctx:ZorgFileParser.Tag_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#tag_symbol.
-    def exitTag_symbol(self, ctx:ZorgFileParser.Tag_symbolContext):
+    # Exit a parse tree produced by ZorgFileParser#tag_sym.
+    def exitTag_sym(self, ctx:ZorgFileParser.Tag_symContext):
         pass
 
 
@@ -323,12 +332,12 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#quoted_atom.
-    def enterQuoted_atom(self, ctx:ZorgFileParser.Quoted_atomContext):
+    # Enter a parse tree produced by ZorgFileParser#quoted_word.
+    def enterQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#quoted_atom.
-    def exitQuoted_atom(self, ctx:ZorgFileParser.Quoted_atomContext):
+    # Exit a parse tree produced by ZorgFileParser#quoted_word.
+    def exitQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
         pass
 
 
@@ -368,12 +377,12 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#square_atom.
-    def enterSquare_atom(self, ctx:ZorgFileParser.Square_atomContext):
+    # Enter a parse tree produced by ZorgFileParser#square_word.
+    def enterSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#square_atom.
-    def exitSquare_atom(self, ctx:ZorgFileParser.Square_atomContext):
+    # Exit a parse tree produced by ZorgFileParser#square_word.
+    def exitSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
         pass
 
 
