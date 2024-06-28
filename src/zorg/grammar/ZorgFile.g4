@@ -32,18 +32,22 @@ space_atom  : SPACE atom ;
 atom        : tag_sym | word_group ;
 word_group  : before_word* word? after_word* ;
 before_word : non_tag_sym | DASH ;
+word        : quoted_word | unquoted_word ;
 after_word  : any_sym (any_sym | id)* | square_word ;
-word        : tag
-            | link
-            | property
-            | id_group
-            | global_link
-            | local_link
-            | zid_link
-            | embedded_link
-            | ref_link
-            | priority
-            | quoted_word ;
+
+// quoted and unquoted words
+unquoted_word    : tag
+                 | link
+                 | property
+                 | id_group
+                 | global_link
+                 | local_link
+                 | zid_link
+                 | embedded_link
+                 | ref_link
+                 | priority ;
+quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
+quoted_word_body : any_sym | '[' | ']' | '[[' | ']]' | unquoted_word | priority ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -69,10 +73,6 @@ area    : HASH id ;
 context : AT_SIGN id ;
 person  : PERCENT id ;
 project : PLUS id ;
-
-// quotes
-quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
-quoted_word_body : any_sym | '[' | ']' | '[[' | ']]' | id_group | priority ;
 
 // links
 link          : '[[' id_group ']]' ;

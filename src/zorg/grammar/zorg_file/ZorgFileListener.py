@@ -179,6 +179,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#word.
+    def enterWord(self, ctx:ZorgFileParser.WordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#word.
+    def exitWord(self, ctx:ZorgFileParser.WordContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#after_word.
     def enterAfter_word(self, ctx:ZorgFileParser.After_wordContext):
         pass
@@ -188,12 +197,30 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#word.
-    def enterWord(self, ctx:ZorgFileParser.WordContext):
+    # Enter a parse tree produced by ZorgFileParser#unquoted_word.
+    def enterUnquoted_word(self, ctx:ZorgFileParser.Unquoted_wordContext):
         pass
 
-    # Exit a parse tree produced by ZorgFileParser#word.
-    def exitWord(self, ctx:ZorgFileParser.WordContext):
+    # Exit a parse tree produced by ZorgFileParser#unquoted_word.
+    def exitUnquoted_word(self, ctx:ZorgFileParser.Unquoted_wordContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#quoted_word.
+    def enterQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#quoted_word.
+    def exitQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#quoted_word_body.
+    def enterQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#quoted_word_body.
+    def exitQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
         pass
 
 
@@ -347,24 +374,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#project.
     def exitProject(self, ctx:ZorgFileParser.ProjectContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#quoted_word.
-    def enterQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#quoted_word.
-    def exitQuoted_word(self, ctx:ZorgFileParser.Quoted_wordContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#quoted_word_body.
-    def enterQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#quoted_word_body.
-    def exitQuoted_word_body(self, ctx:ZorgFileParser.Quoted_word_bodyContext):
         pass
 
 
