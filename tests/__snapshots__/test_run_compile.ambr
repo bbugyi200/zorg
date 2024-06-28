@@ -1158,7 +1158,7 @@
                       'subnotes\n'
                       '  * Todo subnote A\n'
                       '  * Todo subnote B\n'
-                      '    * Todo subsubnote C',
+                      '    - Todo subsubnote C',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],
@@ -1174,8 +1174,11 @@
                       '  * This note contains a key::value pair.\n'
                       '  * bazbuz\n'
                       '  * pig\n'
-                      '    * is fat\n'
-                      '    * is stinky',
+                      '    - is fat\n'
+                      '      + foo\n'
+                      '      + bar\n'
+                      '      + baz\n'
+                      '    - is stinky',
               'contexts': [],
               'create_date': FakeDate(2024, 5, 10),
               'links': [],

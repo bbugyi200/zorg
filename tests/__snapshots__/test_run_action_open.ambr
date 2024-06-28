@@ -162,15 +162,18 @@
     * This note contains a key::value pair.
     * bazbuz
     * pig
-      * is fat
-      * is stinky
+      - is fat
+        + foo
+        + bar
+        + baz
+      - is stinky
   o P3 240510#1t This todo has checkboxes
     * [X] Done subtask
     * [ ] Open subtask
   o P3 240510#1d This todo is due::2024-03-30 and has some subnotes
     * Todo subnote A
     * Todo subnote B
-      * Todo subsubnote C
+      - Todo subsubnote C
   
   ################################ [[subsections]]
   - 240510#1t Note about A1
