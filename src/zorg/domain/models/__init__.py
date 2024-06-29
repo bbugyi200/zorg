@@ -30,7 +30,7 @@ __all__ = [
     "File",
     "FileFilter",
     "LinkFilter",
-    "MetadataType",
+    "MetadataMutate",
     "Mutate",
     "Note",
     "NoteTypeMutate",

@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
 import re
-from typing import Any, Final, Literal, Mapping, Optional
+from typing import Any, Final, Mapping, Optional
 
 from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
@@ -12,12 +12,10 @@ from typist import assert_never
 
 from .. import dates as zdt
 from ...domain.models import File, Note, TodoPayload
-from ...domain.types import NoteType, TodoPriorityType, TodoStatusPrefixChar
+from ...domain.types import NoteType, TagName, TodoPriorityType, TodoStatusPrefixChar
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
-
-TagName = Literal["areas", "contexts", "links", "people", "projects"]
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"
 _LOGGER = Logger(__name__)

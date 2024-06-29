@@ -10,7 +10,7 @@ from ...domain.models import (
     OpenTodoType,
     StaticNoteTypeMutate,
 )
-from ...domain.types import TodoPriorityType
+from ...domain.types import MetadataType, TodoPriorityType
 from ...grammar.zorg_mutate.ZorgMutateListener import ZorgMutateListener
 from ...grammar.zorg_mutate.ZorgMutateParser import ZorgMutateParser
 
@@ -25,15 +25,16 @@ class ZorgMutateCompiler(ZorgMutateListener):
     def enterMut_link(
         self, ctx: ZorgMutateParser.Mut_linkContext
     ) -> None:  # noqa: D102
+        id_ctx = cast(ZorgMutateParser.IdContext, ctx.id_())
         self._metadata_mutates.append(
-            MetadataMutate(mtype="links", value=ctx.id_().getText())
+            MetadataMutate(mtype="links", value=id_ctx.getText())
         )
 
     def enterMut_note_type(
         self, ctx: ZorgMutateParser.Mut_note_typeContext
     ) -> None:  # noqa: D102
         mut_note_type = ctx.getText()
-        priority: Optional[TodoPriorityType] = "P2"
+        priority: TodoPriorityType = "P2"
         if mut_note_type[0].isdigit():
             priority = cast(TodoPriorityType, "P" + mut_note_type[0])
             mut_note_type = mut_note_type[1:]
@@ -58,6 +59,7 @@ class ZorgMutateCompiler(ZorgMutateListener):
         self, ctx: ZorgMutateParser.Mut_tagContext
     ) -> None:  # noqa: D102
         tag = cast(ZorgMutateParser.TagContext, ctx.tag())
+        mtype: MetadataType
         if t := tag.area():
             mtype = "areas"
             value = t.id_().getText()

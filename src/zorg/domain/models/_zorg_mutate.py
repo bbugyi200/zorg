@@ -55,7 +55,8 @@ class Mutate:
         """The method that is called to actually modify a Note."""
         new_note = replace(note)
         if self.note_type_mutate is not None:
-            kwargs: dict[str, str] = {}
+            kwargs: dict[str, TodoPriorityType] = {}
+            note_type: Union[StaticNoteTypeMutate, OpenTodoType]
             if isinstance(self.note_type_mutate, OpenTodoNoteTypeMutate):
                 kwargs["priority"] = self.note_type_mutate.priority
                 note_type = self.note_type_mutate.todo_type
