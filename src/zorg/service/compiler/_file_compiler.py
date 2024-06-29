@@ -12,7 +12,12 @@ from typist import assert_never
 
 from .. import dates as zdt
 from ...domain.models import File, Note, TodoPayload
-from ...domain.types import NoteType, TagName, TodoPriorityType, TodoStatusPrefixChar
+from ...domain.types import (
+    NoteType,
+    TagName,
+    TodoPriorityType,
+    TodoStatusPrefixChar,
+)
 from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
 
