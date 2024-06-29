@@ -89,8 +89,13 @@ def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
 
 
 def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
-    where_query = build_zorg_query(cfg.where_query).where
-    notes = session.repo.get_notes_by_query(where_query)
+    where_query = (
+        cfg.where_query
+        if cfg.where_query.startswith("W ")
+        else f"W {cfg.where_query}"
+    )
+    query = build_zorg_query(where_query).where
+    notes = session.repo.get_notes_by_query(query)
     mutate = build_zorg_mutate(cfg.mutate)
     for note in notes:
         print(mutate.mutate_note(note).to_string())
