@@ -1,7 +1,10 @@
 """Contains runners for the 'zorg note' command."""
 
+from dataclasses import replace
+
 from logrus import Logger
 
+from ...domain.models import MetadataMutate, Mutate, Note
 from ...service.compiler import build_zorg_mutate, build_zorg_query
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
@@ -43,11 +46,45 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
     )
 
     file_man = FileManager(cfg.zettel_dir, session)
-    if error := file_man.add_note(note, cfg.new_page):
+    if cfg.mutate is not None:
+        mutate = build_zorg_mutate(cfg.mutate)
+        mutate = _add_hidden_mdata_mutates(mutate, note)
+        mutated_note = mutate.mutate_note(note)
+    else:
+        mutated_note = note
+    if error := file_man.add_note(mutated_note, cfg.new_page):
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1
     file_man.delete_note(note)
     return 0
+
+
+def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
+    new_mut = replace(mutate)
+    new_mut.metadata_mutates.append(
+        MetadataMutate(
+            mtype="links", value=str(note.file_path).replace(".zo", "")
+        )
+    )
+    for ch, tag_name, tags in [
+        ("+", "projects", note.projects),
+        ("#", "areas", note.areas),
+        ("@", "contexts", note.contexts),
+        ("%", "people", note.people),
+    ]:
+        for tag in tags:
+            if f"{ch}{tag}" not in note.body:
+                new_mut.metadata_mutates.append(
+                    MetadataMutate(mtype=tag_name, value=tag)
+                )
+
+    for key, value in note.properties.items():
+        prop_value = f"{key}::{value}"
+        if prop_value not in note.body:
+            new_mut.metadata_mutates.append(
+                MetadataMutate(mtype="properties", value=prop_value)
+            )
+    return new_mut
 
 
 def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
