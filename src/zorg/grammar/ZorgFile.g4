@@ -58,7 +58,7 @@ zid : ZID  ;
 property    : simple_prop | inline_prop ;
 simple_prop : id COLON COLON id_group ;
 inline_prop : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
-id_group    : id (any_sym+ id)* ;
+id_group    : id (any_sym+ | id)* ;
 id          : ID | NUM_ID | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
