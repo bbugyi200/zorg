@@ -236,7 +236,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#02'},
              {'areas': [],
               'body': '000103#00 Old todo',
@@ -248,7 +248,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '000103#00'},
              {'areas': [],
               'body': '000102#00 Older todo',
@@ -260,7 +260,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '000102#00'}]}
   
   '''
@@ -444,7 +444,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#07'},
              {'areas': [],
               'body': '240510#08 Another related todo',
@@ -456,7 +456,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#08'},
              {'areas': [],
               'body': '240510#09 A note about life...',
@@ -479,7 +479,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#0A'},
              {'areas': [],
               'body': '240510#0B With a note',
@@ -584,7 +584,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P0',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240313#03'},
              {'areas': [],
               'body': '240313#04 Medium Priority TODO',
@@ -596,7 +596,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P1',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240313#04'},
              {'areas': [],
               'body': '240313#05 Low Priority TODO',
@@ -608,7 +608,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P2',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240313#05'}]}
   
   '''
@@ -660,7 +660,7 @@
                                   'example todo used to demonstrate a multiline '
                                   'bullet property.'},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.CANCELED_TODO: 4>},
+                               'status': <NoteType.CANCELED_TODO: '~'>},
               'zid': '240510#0R'},
              {'areas': [],
               'body': '240330#02 This note contains a key::value pair.',
@@ -683,7 +683,7 @@
               'projects': [],
               'properties': {'due': '2024-03-13', 'p': '1'},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#0K'},
              {'areas': [],
               'body': '240510#0M This [type:: awesome note] has an inline '
@@ -708,7 +708,7 @@
               'projects': [],
               'properties': {'p': '1', 'recur': 'M+Th'},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#0N'}]}
   
   '''
@@ -1151,7 +1151,7 @@
               'projects': [],
               'properties': {'p': '1'},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#1t'},
              {'areas': [],
               'body': '240510#1d This todo is due::2024-03-30 and has some '
@@ -1167,7 +1167,7 @@
               'projects': [],
               'properties': {'due': '2024-03-30', 'p': '1'},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#1d'},
              {'areas': [],
               'body': '240510#1k This note has many subnotes.\n'
@@ -1236,7 +1236,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#1w'},
              {'areas': [],
               'body': '240510#1x A note on the second section.',
@@ -1281,7 +1281,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#21'},
              {'areas': [],
               'body': '240510#22 This is inside of h4_section!',
@@ -1337,7 +1337,7 @@
               'projects': [],
               'properties': {},
               'todo_payload': {'priority': 'P3',
-                               'status': <NoteType.OPEN_TODO: 2>},
+                               'status': <NoteType.OPEN_TODO: 'o'>},
               'zid': '240510#26'},
              {'areas': [],
               'body': '240510#27 This is the final section!',

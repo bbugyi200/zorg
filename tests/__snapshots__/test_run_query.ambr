@@ -93,7 +93,7 @@
   
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
@@ -332,7 +332,7 @@
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
@@ -424,7 +424,7 @@
   ################################ [[property]]
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
@@ -497,7 +497,7 @@
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   - 240330#02 This note contains a key::value pair.
@@ -687,7 +687,7 @@
   o P3 240510#1w A todo for something
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   - 240323#0J #gtd pomodoro
@@ -870,7 +870,7 @@
   
   
   ################################ 3 | CANCELED TODOS
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   
@@ -1151,7 +1151,7 @@
   - 240510#0M This [type:: awesome note] has an inline property.
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-  ~ P3 240613 240510#0R A canceled todo with a multiline explanation
+  ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
   
