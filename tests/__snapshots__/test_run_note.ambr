@@ -65,10 +65,9 @@
   o P0 240313#03 High Priority TODO
   o P1 240313#04 Medium Priority TODO
   o P2 240313#05 Low Priority TODO
-  o P0 301231#X1 @READ Some article
+  o P0 301231#X1 +bazbuz +foobar #tags #thoughts @fat_pig @READ Some article
     * RID::some_article
     * url::http://www.example.com
-    *-----> +bazbuz +foobar #tags #thoughts @fat_pig
   
   '''
 # ---
@@ -125,13 +124,11 @@
 # ---
 # name: test_note_mutate[YAMLConfigFile-high_priority_thoughts]
   '''
-  o P0 301231#X0 When I talk to %pig I always want to @puke. | ID::pig_is_gross
-    *-----> [[deep_work]] +brainstorm @THINKING
+  o P0 301231#X0 [[deep_work]] +brainstorm @THINKING When I talk to %pig I always want to @puke. | ID::pig_is_gross
   
-  o P0 301231#X1 @READ Some article
+  o P0 301231#X1 [[deep_work]] +brainstorm @THINKING @READ Some article
     * RID::some_article
     * url::http://www.example.com
-    *-----> [[deep_work]] +brainstorm @THINKING
   
   
   '''

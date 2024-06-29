@@ -70,11 +70,7 @@ class Mutate:
                     status=NoteType(note_type.value), **kwargs
                 )
             new_note.todo_payload = todo_payload
-        if len(self.metadata_mutates) > 1:
-            empty_extra_tags = "  *----->"
-        else:
-            empty_extra_tags = ""
-        extra_tags = empty_extra_tags
+        extra_tags = ""
         for tag_link_mutate in self.metadata_mutates:
             prefix_chars: str = ""
             suffix_chars: str = ""
@@ -95,12 +91,9 @@ class Mutate:
             extra_tags += (
                 f" {prefix_chars}{tag_link_mutate.value}{suffix_chars}"
             )
-        if extra_tags != empty_extra_tags:
+        if extra_tags != "":
             assert new_note.zid is not None
-            if len(self.metadata_mutates) > 1:
-                new_note.body = f"{new_note.body}\n{extra_tags}"
-            else:
-                new_note.body = new_note.body.replace(
-                    new_note.zid, f"{new_note.zid}{extra_tags}"
-                )
+            new_note.body = new_note.body.replace(
+                new_note.zid, f"{new_note.zid}{extra_tags}"
+            )
         return new_note
