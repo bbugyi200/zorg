@@ -1367,7 +1367,7 @@
               'todo_payload': None,
               'zid': '240408#0X'},
              {'areas': ['tags'],
-              'body': '240509 240408#0X Some note with a modify date',
+              'body': '240509 240408#0Y Some note with a modify date',
               'contexts': ['fat_pig'],
               'create_date': FakeDate(2024, 4, 8),
               'links': [],
@@ -1376,7 +1376,7 @@
               'projects': ['foobar'],
               'properties': {},
               'todo_payload': None,
-              'zid': '240408#0X'},
+              'zid': '240408#0Y'},
              {'areas': ['tags', 'thoughts'],
               'body': '301231#X0 When I talk to %pig I always want to @puke. | '
                       'ID::pig_is_gross',
