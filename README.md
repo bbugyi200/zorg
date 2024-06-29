@@ -272,18 +272,16 @@ options:
 ### `zorg note mutate --help`
 
 ```
-usage: zorg note mutate [-h] [-n] where_query mutate
+usage: zorg note mutate [-h] where_query mutate
 
 Bulk update notes
 
 positional arguments:
-  mutate         Mutate command that specifies how each note will be updated.
-  where_query    Notes matching this WHERE query will be targeted for updates.
+  mutate       Mutate command that specifies how each note will be updated.
+  where_query  Notes matching this WHERE query will be targeted for updates.
 
 options:
-  -n, --dry-run  Print the mutated notes to STDOUT instead of modifying them
-                 in-place.
-  -h, --help     show this help message and exit
+  -h, --help   show this help message and exit
 ```
 
 ### `zorg query --help`
