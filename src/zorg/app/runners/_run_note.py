@@ -70,7 +70,10 @@ def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
         ("%", cast_tag_name("people"), note.people),
     ]:
         for tag in sorted(tags):
-            if f"{ch}{tag}" not in note.body:
+            if all(
+                val not in note.body
+                for val in [f" {ch}{tag} ", f" {ch}{tag}\n"]
+            ) and not note.body.endswith(f" {ch}{tag}"):
                 new_mut.metadata_mutates.append(
                     MetadataMutate(mtype=tag_name, value=tag)
                 )
