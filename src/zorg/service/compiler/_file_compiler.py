@@ -351,7 +351,6 @@ class ZorgFileCompiler(ZorgFileListener):
             "properties": self._s.properties,
             "zid": self._s.zid,
         }
-        self._s.next_id += 1
         return kwargs | extra_kwargs
 
     def _reset_note_context(self) -> None:
@@ -454,9 +453,6 @@ class _ZorgFileCompilerState:
     zid: Optional[str] = None
 
     ids_in_note: int = 0
-
-    # TODO(bugyi): Figure out a better way to track parent/child relationship
-    next_id: int = 1
 
     in_first_comment: bool = True
     in_head: bool = False
