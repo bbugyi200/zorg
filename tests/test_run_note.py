@@ -47,7 +47,7 @@ def test_note_move(
         param("'240408#0X '", "x +foobar", id="done_foobar_note"),
         param(
             "#thoughts",
-            "0o +brainstorm @THINKING",
+            "0o [[deep_work]] +brainstorm @THINKING",
             id="high_priority_thoughts",
         ),
     ],
