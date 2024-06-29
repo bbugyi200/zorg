@@ -5,6 +5,7 @@ from dataclasses import replace
 from logrus import Logger
 
 from ...domain.models import MetadataMutate, Mutate, Note
+from ...domain.types import cast_tag_name
 from ...service.compiler import build_zorg_mutate, build_zorg_query
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
@@ -67,10 +68,10 @@ def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
         )
     )
     for ch, tag_name, tags in [
-        ("+", "projects", note.projects),
-        ("#", "areas", note.areas),
-        ("@", "contexts", note.contexts),
-        ("%", "people", note.people),
+        ("+", cast_tag_name("projects"), note.projects),
+        ("#", cast_tag_name("areas"), note.areas),
+        ("@", cast_tag_name("contexts"), note.contexts),
+        ("%", cast_tag_name("people"), note.people),
     ]:
         for tag in tags:
             if f"{ch}{tag}" not in note.body:
