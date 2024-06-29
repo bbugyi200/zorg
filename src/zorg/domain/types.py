@@ -53,6 +53,7 @@ def cast_tag_name(name: TagName) -> TagName:
     """Typing helper for working with TagNames."""
     return name
 
+
 class NoteType(enum.Enum):
     """Zorg note status."""
 
