@@ -49,10 +49,11 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
     file_man = FileManager(cfg.zettel_dir, session)
     if cfg.mutate is not None:
         mutate = build_zorg_mutate(cfg.mutate)
-        mutate = _add_hidden_mdata_mutates(mutate, note)
-        mutated_note = mutate.mutate_note(note)
     else:
-        mutated_note = note
+        mutate = Mutate()
+
+    mutate = _add_hidden_mdata_mutates(mutate, note)
+    mutated_note = mutate.mutate_note(note)
     if error := file_man.add_note(mutated_note, cfg.new_page):
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1
@@ -62,26 +63,21 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
 
 def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
     new_mut = replace(mutate)
-    new_mut.metadata_mutates.append(
-        MetadataMutate(
-            mtype="links", value=str(note.file_path).replace(".zo", "")
-        )
-    )
     for ch, tag_name, tags in [
         ("+", cast_tag_name("projects"), note.projects),
         ("#", cast_tag_name("areas"), note.areas),
         ("@", cast_tag_name("contexts"), note.contexts),
         ("%", cast_tag_name("people"), note.people),
     ]:
-        for tag in tags:
+        for tag in sorted(tags):
             if f"{ch}{tag}" not in note.body:
                 new_mut.metadata_mutates.append(
                     MetadataMutate(mtype=tag_name, value=tag)
                 )
 
-    for key, value in note.properties.items():
+    for key, value in sorted(note.properties.items()):
         prop_value = f"{key}::{value}"
-        if prop_value not in note.body:
+        if all(val not in note.body for val in [prop_value, f" {key}:: "]):
             new_mut.metadata_mutates.append(
                 MetadataMutate(mtype="properties", value=prop_value)
             )
