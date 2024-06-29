@@ -80,3 +80,23 @@
   
   '''
 # ---
+# name: test_note_mutate[YAMLConfigFile-done_foobar_note]
+  '''
+  x 240408#0X +foobar Some note
+  
+  
+  '''
+# ---
+# name: test_note_mutate[YAMLConfigFile-high_priority_thoughts]
+  '''
+  o P0 301231#X0 When I talk to %pig I always want to @puke. | ID::pig_is_gross
+    *-----> +brainstorm @THINKING
+  
+  o P0 301231#X1 @READ Some article
+    * RID::some_article
+    * url::http://www.example.com
+    *-----> +brainstorm @THINKING
+  
+  
+  '''
+# ---

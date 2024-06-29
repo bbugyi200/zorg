@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from _pytest.capture import CaptureFixture
 from pytest import mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
@@ -38,3 +39,32 @@ def test_note_move(
     assert exit_code == 0
     assert snapshot == src_path.read_text()
     assert snapshot == dest_path.read_text()
+
+
+@params(
+    "where_query,mutate",
+    [
+        param("'240408#0X '", "x +foobar", id="done_foobar_note"),
+        param(
+            "#thoughts",
+            "0o +brainstorm @THINKING",
+            id="high_priority_thoughts",
+        ),
+    ],
+)
+def test_note_mutate(
+    main: c.MainType,
+    db_zettel_dir: Path,
+    snapshot: Snapshot,
+    capsys: CaptureFixture,
+    where_query: str,
+    mutate: str,
+) -> None:
+    """Tests the 'note mutate' command."""
+    exit_code = main(
+        "--dir", str(db_zettel_dir), "note", "mutate", where_query, mutate
+    )
+    capture = capsys.readouterr()
+
+    assert exit_code == 0
+    assert capture.out == snapshot
