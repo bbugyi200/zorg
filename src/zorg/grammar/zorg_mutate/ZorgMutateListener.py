@@ -26,12 +26,30 @@ class ZorgMutateListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgMutateParser#mut_note_type.
+    def enterMut_note_type(self, ctx:ZorgMutateParser.Mut_note_typeContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#mut_note_type.
+    def exitMut_note_type(self, ctx:ZorgMutateParser.Mut_note_typeContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgMutateParser#mut_tag.
     def enterMut_tag(self, ctx:ZorgMutateParser.Mut_tagContext):
         pass
 
     # Exit a parse tree produced by ZorgMutateParser#mut_tag.
     def exitMut_tag(self, ctx:ZorgMutateParser.Mut_tagContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgMutateParser#tag.
+    def enterTag(self, ctx:ZorgMutateParser.TagContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#tag.
+    def exitTag(self, ctx:ZorgMutateParser.TagContext):
         pass
 
 
@@ -77,6 +95,33 @@ class ZorgMutateListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgMutateParser#mut_prop.
     def exitMut_prop(self, ctx:ZorgMutateParser.Mut_propContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgMutateParser#key.
+    def enterKey(self, ctx:ZorgMutateParser.KeyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#key.
+    def exitKey(self, ctx:ZorgMutateParser.KeyContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgMutateParser#value.
+    def enterValue(self, ctx:ZorgMutateParser.ValueContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#value.
+    def exitValue(self, ctx:ZorgMutateParser.ValueContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgMutateParser#mut_link.
+    def enterMut_link(self, ctx:ZorgMutateParser.Mut_linkContext):
+        pass
+
+    # Exit a parse tree produced by ZorgMutateParser#mut_link.
+    def exitMut_link(self, ctx:ZorgMutateParser.Mut_linkContext):
         pass
 
 

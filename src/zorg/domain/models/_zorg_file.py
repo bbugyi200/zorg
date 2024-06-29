@@ -53,7 +53,11 @@ class Note:
         )
         char = note_type.to_prefix_char()
         priority = (
-            f" {self.todo_payload.priority}" if self.todo_payload else ""
+            f" {self.todo_payload.priority}"
+            if self.todo_payload
+            and self.todo_payload.status
+            not in [NoteType.CLOSED_TODO, NoteType.CANCELED_TODO]
+            else ""
         )
         return f"{char}{priority} {self.body.strip()}\n"
 

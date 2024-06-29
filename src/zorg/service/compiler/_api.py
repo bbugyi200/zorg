@@ -4,12 +4,15 @@ from pathlib import Path
 
 import antlr4
 
-from ...domain.models import File, Query
+from ...domain.models import File, Mutate, Query
 from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
 from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from ...grammar.zorg_mutate.ZorgMutateLexer import ZorgMutateLexer
+from ...grammar.zorg_mutate.ZorgMutateParser import ZorgMutateParser
 from ...grammar.zorg_query.ZorgQueryLexer import ZorgQueryLexer
 from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 from ._file_compiler import ErrorManager, ZorgFileCompiler
+from ._mutate_compiler import ZorgMutateCompiler
 from ._query_compiler import ZorgQueryCompiler
 
 
@@ -48,3 +51,16 @@ def build_zorg_query(query: str) -> Query:
     walker = antlr4.ParseTreeWalker()
     walker.walk(compiler, tree)
     return zorg_query
+
+
+def build_zorg_mutate(mutate: str) -> Mutate:
+    """Constructs a new Mutate using {mutate}."""
+    stream = antlr4.InputStream(mutate)
+    lexer = ZorgMutateLexer(stream)
+    tokens = antlr4.CommonTokenStream(lexer)
+    parser = ZorgMutateParser(tokens)
+    tree = parser.prog()  # type: ignore[no-untyped-call]
+    compiler = ZorgMutateCompiler()
+    walker = antlr4.ParseTreeWalker()
+    walker.walk(compiler, tree)
+    return compiler.mutate

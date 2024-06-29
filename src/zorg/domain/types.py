@@ -39,6 +39,8 @@ FuncName = Literal["count"]
 SelectType = Union[
     "SelectAggregation", "SelectStaticType", "SelectPropertyValues"
 ]
+TagName = Literal["areas", "contexts", "links", "people", "projects"]
+MetadataType = Literal[TagName, "properties"]
 TodoPriorityType = Literal[
     "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
 ]
@@ -50,12 +52,12 @@ TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 class NoteType(enum.Enum):
     """Zorg note status."""
 
-    BASIC = enum.auto()  # -
-    OPEN_TODO = enum.auto()  # o
-    CLOSED_TODO = enum.auto()  # x
-    CANCELED_TODO = enum.auto()  # ~
-    BLOCKED_TODO = enum.auto()  # <
-    PARENT_TODO = enum.auto()  # >
+    BASIC = '-'  # -
+    OPEN_TODO = 'o'  # o
+    CLOSED_TODO = 'x'  # x
+    CANCELED_TODO = '~'  # ~
+    BLOCKED_TODO = '<'  # <
+    PARENT_TODO = '>'  # >
 
     def to_header_label(self) -> str:
         """Converts to a header label that can be used by GROUP BY."""

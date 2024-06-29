@@ -2,7 +2,7 @@
 
 from logrus import Logger
 
-from ...service.compiler import build_zorg_query
+from ...service.compiler import build_zorg_query, build_zorg_mutate
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
 from ..config import NoteMoveConfig, NoteMutateConfig
@@ -53,5 +53,7 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
 def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
     where_query = build_zorg_query(cfg.where_query).where
     notes = session.repo.get_notes_by_query(where_query)
-    del notes
+    mutate = build_zorg_mutate(cfg.mutate)
+    for note in notes:
+        print(mutate.mutate_note(note).to_string())
     return 0
