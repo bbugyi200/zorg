@@ -107,7 +107,6 @@ class NoteMutateConfig(Config):
 
     where_query: str
     mutate: str
-    dry_run: bool = False
 
 
 class OpenActionConfig(Config):
@@ -338,15 +337,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     note_mutate_parser.add_argument(
         "mutate",
         help="Mutate command that specifies how each note will be updated.",
-    )
-    note_mutate_parser.add_argument(
-        "-n",
-        "--dry-run",
-        action="store_true",
-        help=(
-            "Print the mutated notes to STDOUT instead of modifying them"
-            " in-place."
-        ),
     )
 
     # --- 'query' command
