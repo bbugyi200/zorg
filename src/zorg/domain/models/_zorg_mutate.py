@@ -4,7 +4,7 @@ from dataclasses import dataclass, field, replace
 import enum
 from typing import Optional, Union
 
-from ...domain.types import NoteType, MetadataType, TodoPriorityType
+from ...domain.types import MetadataType, NoteType, TodoPriorityType
 from ._zorg_file import Note, TodoPayload
 
 

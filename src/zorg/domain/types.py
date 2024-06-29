@@ -52,12 +52,12 @@ TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
 class NoteType(enum.Enum):
     """Zorg note status."""
 
-    BASIC = '-'  # -
-    OPEN_TODO = 'o'  # o
-    CLOSED_TODO = 'x'  # x
-    CANCELED_TODO = '~'  # ~
-    BLOCKED_TODO = '<'  # <
-    PARENT_TODO = '>'  # >
+    BASIC = "-"  # -
+    OPEN_TODO = "o"  # o
+    CLOSED_TODO = "x"  # x
+    CANCELED_TODO = "~"  # ~
+    BLOCKED_TODO = "<"  # <
+    PARENT_TODO = ">"  # >
 
     def to_header_label(self) -> str:
         """Converts to a header label that can be used by GROUP BY."""

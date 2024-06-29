@@ -2,7 +2,7 @@
 
 from logrus import Logger
 
-from ...service.compiler import build_zorg_query, build_zorg_mutate
+from ...service.compiler import build_zorg_mutate, build_zorg_query
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
 from ..config import NoteMoveConfig, NoteMutateConfig

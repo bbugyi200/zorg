@@ -2,7 +2,6 @@
 
 from typing import Optional, cast
 
-from ...domain.types import TodoPriorityType
 from ...domain.models import (
     MetadataMutate,
     Mutate,
@@ -11,6 +10,7 @@ from ...domain.models import (
     OpenTodoType,
     StaticNoteTypeMutate,
 )
+from ...domain.types import TodoPriorityType
 from ...grammar.zorg_mutate.ZorgMutateListener import ZorgMutateListener
 from ...grammar.zorg_mutate.ZorgMutateParser import ZorgMutateParser
 
