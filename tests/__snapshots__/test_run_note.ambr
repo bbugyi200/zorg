@@ -26,6 +26,10 @@
   ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
+  - 240629#00 A note with a bullet property that contains a sublist
+    * url::
+      - https://www.foobar.com
+      - https://www.bazbuz.com
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.
@@ -80,6 +84,10 @@
   ~ 240613 240510#0R A canceled todo with a multiline explanation
     * x:: This todo was not really canceled. It is an example todo used to
       demonstrate a multiline bullet property.
+  - 240629#00 A note with a bullet property that contains a sublist
+    * url::
+      - https://www.foobar.com
+      - https://www.bazbuz.com
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.

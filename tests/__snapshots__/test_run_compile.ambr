@@ -663,6 +663,21 @@
                                'status': <NoteType.CANCELED_TODO: '~'>},
               'zid': '240510#0R'},
              {'areas': [],
+              'body': '240629#00 A note with a bullet property that contains a '
+                      'sublist\n'
+                      '  * url::\n'
+                      '    - https://www.foobar.com\n'
+                      '    - https://www.bazbuz.com',
+              'contexts': [],
+              'create_date': FakeDate(2024, 6, 29),
+              'links': [],
+              'modify_date': FakeDate(2024, 6, 29),
+              'people': [],
+              'projects': [],
+              'properties': {},
+              'todo_payload': None,
+              'zid': '240629#00'},
+             {'areas': [],
               'body': '240330#02 This note contains a key::value pair.',
               'contexts': [],
               'create_date': FakeDate(2024, 3, 30),
