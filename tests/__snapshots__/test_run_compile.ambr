@@ -674,7 +674,8 @@
               'modify_date': FakeDate(2024, 6, 29),
               'people': [],
               'projects': [],
-              'properties': {},
+              'properties': {'url': '- https://www.foobar.com - '
+                                    'https://www.bazbuz.com'},
               'todo_payload': None,
               'zid': '240629#00'},
              {'areas': [],
