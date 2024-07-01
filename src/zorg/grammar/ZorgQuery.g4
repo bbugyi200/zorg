@@ -69,7 +69,7 @@ file_filter    : not_op? 'f=' (id FSLASH)* (STAR UNDERSCORE?)? id STAR? ;
 link_filter    : not_op? '[[' (id FSLASH)* id ']]' ;
 
 zid  : ZID  ;
-id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | file | type | LOWER_O | LOWER_X ;
+id   : ID | NUM_ID | DATE_RANGE_TAIL | PRIORITY | date | time | zid | keyword | LOWER_O | LOWER_X ;
 date : DATE ;
 time : TIME ;
 
@@ -88,15 +88,16 @@ group_by_atom : file | type | priority | none | AT_SIGN | HASH | PERCENT | PLUS 
 // --- ORDER BY
 order_by_body : order_by_atom (SPACE order_by_atom)* ;
 order_by_atom : alpha | create | modify | priority | type | none ;
-alpha         : 'alpha' ;
-create        : 'create' ;
-modify        : 'modify' ;
-priority      : 'priority' ;
 
-// shared subrules
-file : 'file' ;
-none : 'none' ;
-type : 'type' ;
+// keywords
+keyword  : file | none | type | priority | alpha | create | modify ;
+file     : 'file' ;
+none     : 'none' ;
+type     : 'type' ;
+priority : 'priority' ;
+alpha    : 'alpha' ;
+create   : 'create' ;
+modify   : 'modify' ;
 
 //// lexer rules
 CREATE_RANGE_HEAD : HAT ZDATE ;

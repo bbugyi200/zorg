@@ -494,39 +494,12 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#alpha.
-    def enterAlpha(self, ctx:ZorgQueryParser.AlphaContext):
+    # Enter a parse tree produced by ZorgQueryParser#keyword.
+    def enterKeyword(self, ctx:ZorgQueryParser.KeywordContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#alpha.
-    def exitAlpha(self, ctx:ZorgQueryParser.AlphaContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgQueryParser#create.
-    def enterCreate(self, ctx:ZorgQueryParser.CreateContext):
-        pass
-
-    # Exit a parse tree produced by ZorgQueryParser#create.
-    def exitCreate(self, ctx:ZorgQueryParser.CreateContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgQueryParser#modify.
-    def enterModify(self, ctx:ZorgQueryParser.ModifyContext):
-        pass
-
-    # Exit a parse tree produced by ZorgQueryParser#modify.
-    def exitModify(self, ctx:ZorgQueryParser.ModifyContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgQueryParser#priority.
-    def enterPriority(self, ctx:ZorgQueryParser.PriorityContext):
-        pass
-
-    # Exit a parse tree produced by ZorgQueryParser#priority.
-    def exitPriority(self, ctx:ZorgQueryParser.PriorityContext):
+    # Exit a parse tree produced by ZorgQueryParser#keyword.
+    def exitKeyword(self, ctx:ZorgQueryParser.KeywordContext):
         pass
 
 
@@ -554,6 +527,42 @@ class ZorgQueryListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgQueryParser#type.
     def exitType(self, ctx:ZorgQueryParser.TypeContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#priority.
+    def enterPriority(self, ctx:ZorgQueryParser.PriorityContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#priority.
+    def exitPriority(self, ctx:ZorgQueryParser.PriorityContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#alpha.
+    def enterAlpha(self, ctx:ZorgQueryParser.AlphaContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#alpha.
+    def exitAlpha(self, ctx:ZorgQueryParser.AlphaContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#create.
+    def enterCreate(self, ctx:ZorgQueryParser.CreateContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#create.
+    def exitCreate(self, ctx:ZorgQueryParser.CreateContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#modify.
+    def enterModify(self, ctx:ZorgQueryParser.ModifyContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#modify.
+    def exitModify(self, ctx:ZorgQueryParser.ModifyContext):
         pass
 
 
