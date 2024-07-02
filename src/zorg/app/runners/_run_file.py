@@ -12,6 +12,7 @@ _LOGGER = Logger(__name__)
 
 @runner
 def run_file_rename(cfg: FileRenameConfig) -> int:
+    """Runner for the 'file rename' command."""
     src_name = cfg.src_name if "." in cfg.src_name else cfg.src_name + ".zo"
     dest_name = (
         cfg.dest_name if "." in cfg.dest_name else cfg.dest_name + ".zo"
