@@ -6,7 +6,6 @@ https://docs.pytest.org/en/6.2.x/fixture.html#conftest-py-sharing-fixtures-acros
 
 from __future__ import annotations
 
-import itertools as it
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Iterator
 
