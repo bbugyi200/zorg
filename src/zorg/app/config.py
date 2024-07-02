@@ -26,6 +26,7 @@ Command = Literal[
     "open",
     "query",
     "reindex",
+    "rename",
     "render",
 ]
 
@@ -118,6 +119,16 @@ class OpenActionConfig(Config):
     zo_path: Path
     line_number: int
     option_idx: Optional[int] = None
+
+
+class FileRenameConfig(Config):
+    """Clack config for the 'file rename' command."""
+
+    command: Literal["rename"]
+
+    # ----- ARGUMENTS
+    src_name: str
+    dest_name: str
 
 
 class QueryConfig(Config):
@@ -337,6 +348,16 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     note_mutate_parser.add_argument(
         "mutate",
         help="Mutate command that specifies how each note will be updated.",
+    )
+
+    # --- 'file' command
+    file_parser = new_command("file", help="Commands for managing files.")
+    new_file_command = clack.new_command_factory(file_parser)
+    # --- 'file rename' command
+    file_rename_parser = new_file_command("rename", help="Rename a file.")
+    file_rename_parser.add_argument("src_name", help="The source filename.")
+    file_rename_parser.add_argument(
+        "dest_name", help="The destination filename."
     )
 
     # --- 'query' command

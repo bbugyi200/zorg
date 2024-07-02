@@ -69,6 +69,8 @@ for cmd in [
     "db create",
     "db reindex",
     "edit",
+    "file",
+    "file rename",
     "note",
     "note move",
     "note mutate",
@@ -86,7 +88,7 @@ for cmd in [
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,compile,db,edit,note,query,template} ...
+            {action,compile,db,edit,note,file,query,template} ...
 
 The zettel note manager of the future.
 
@@ -116,7 +118,7 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,compile,db,edit,note,query,template}
+  {action,compile,db,edit,note,file,query,template}
     action              Used to interface with vim via an action protocol.
     compile             Compiles zorg (*.zo) files into zorc (*.zoc) files.
     db                  Commands for managing Zorg's SQL database.
@@ -124,6 +126,7 @@ subcommands:
                         day log in your system's editor. This is the default
                         subcommand.
     note                Commands for managing individual notes.
+    file                Commands for managing files.
     query               Run a zorg query against your zettel directory.
     template            Commands for managing .zot templates.
 ```
@@ -230,6 +233,36 @@ Generate new day logs from templates and open the main day log in your system's 
 
 positional arguments:
   zo_paths    The .zo files we want to open in an editor.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `zorg file --help`
+
+```
+usage: zorg file [-h] {rename} ...
+
+Commands for managing files.
+
+options:
+  -h, --help  show this help message and exit
+
+subcommands:
+  {rename}
+    rename    Rename a file.
+```
+
+### `zorg file rename --help`
+
+```
+usage: zorg file rename [-h] src_name dest_name
+
+Rename a file.
+
+positional arguments:
+  dest_name   The destination filename.
+  src_name    The source filename.
 
 options:
   -h, --help  show this help message and exit
