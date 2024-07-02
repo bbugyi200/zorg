@@ -91,6 +91,16 @@ class EditConfig(Config):
     file_group_map: FileGroupMapType = {}
 
 
+class FileRenameConfig(Config):
+    """Clack config for the 'file rename' command."""
+
+    command: Literal["rename"]
+
+    # ----- ARGUMENTS
+    src_name: str
+    dest_name: str
+
+
 class NoteMoveConfig(Config):
     """Clack config for the 'note move' command."""
 
@@ -119,16 +129,6 @@ class OpenActionConfig(Config):
     zo_path: Path
     line_number: int
     option_idx: Optional[int] = None
-
-
-class FileRenameConfig(Config):
-    """Clack config for the 'file rename' command."""
-
-    command: Literal["rename"]
-
-    # ----- ARGUMENTS
-    src_name: str
-    dest_name: str
 
 
 class QueryConfig(Config):
