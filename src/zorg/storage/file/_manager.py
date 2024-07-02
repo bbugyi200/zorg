@@ -43,7 +43,7 @@ class FileManager:
                 last_note.body.split("\n")
             )
         else:
-            new_note_line_no = len(zlines) - 1
+            new_note_line_no = len(zlines)
         start_idx = new_note_line_no - 1
         end_idx = new_note_line_no
         new_zlines = (
