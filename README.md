@@ -88,7 +88,7 @@ for cmd in [
 ```
 usage: zorg [-h] [-c CONFIG_FILE] [-L [FILE[:LEVEL][@FORMAT]]] [-v]
             [--version] [-d ZETTEL_DIR]
-            {action,compile,db,edit,note,file,query,template} ...
+            {action,compile,db,edit,file,note,query,template} ...
 
 The zettel note manager of the future.
 
@@ -118,15 +118,15 @@ options:
   --version             show program's version number and exit
 
 subcommands:
-  {action,compile,db,edit,note,file,query,template}
+  {action,compile,db,edit,file,note,query,template}
     action              Used to interface with vim via an action protocol.
     compile             Compiles zorg (*.zo) files into zorc (*.zoc) files.
     db                  Commands for managing Zorg's SQL database.
     edit                Generate new day logs from templates and open the main
                         day log in your system's editor. This is the default
                         subcommand.
-    note                Commands for managing individual notes.
     file                Commands for managing files.
+    note                Commands for managing individual notes.
     query               Run a zorg query against your zettel directory.
     template            Commands for managing .zot templates.
 ```
