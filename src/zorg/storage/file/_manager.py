@@ -53,7 +53,6 @@ class FileManager:
         )
         new_zcontents = "\n".join(new_zlines)
         zpage.write_text(new_zcontents)
-        return None
 
     def delete_note(self, note: Note) -> None:
         """Removes {note} from its last known *.zo file."""
