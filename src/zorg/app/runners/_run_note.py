@@ -46,7 +46,7 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
         f" {str(note.file_path)}::{note.line_no}"
     )
 
-    file_man = FileManager(cfg.zettel_dir, session, cfg.template_pattern_map)
+    file_man = FileManager(cfg.zettel_dir, cfg.template_pattern_map)
     if cfg.mutate is not None:
         mutate = build_zorg_mutate(cfg.mutate)
     else:
@@ -57,7 +57,12 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
     if error := file_man.add_note(mutated_note, cfg.new_page):
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1
-    file_man.delete_note(note)
+
+    if error := file_man.delete_note(note):
+        _LOGGER.error(
+            "Failed to delete note from page", error=f"'{error.upper()}'"
+        )
+        return 1
     return 0
 
 
