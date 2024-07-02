@@ -4,7 +4,9 @@ from pathlib import Path
 from typing import NewType, Optional
 
 from ...domain.models import FileFilter, Note, WhereAndFilter, WhereOrFilter
+from ...domain.types import TemplatePatternMapType
 from ...service.common import prepend_zdir
+from ...service.templates import init_from_template
 from ..sql.session import SQLSession
 
 
@@ -14,15 +16,21 @@ Error = NewType("Error", str)
 class FileManager:
     """Zorg (i.e *.zo) file manager."""
 
-    def __init__(self, zdir: Path, session: SQLSession) -> None:
+    def __init__(
+        self,
+        zdir: Path,
+        session: SQLSession,
+        template_pattern_map: TemplatePatternMapType,
+    ) -> None:
         self._zdir = zdir
         self._session = session
+        self._template_pattern_map = template_pattern_map
 
     def add_note(self, note: Note, page: Path) -> Optional[Error]:
         """Adds {note} to the bottom of {page}."""
         zpage = prepend_zdir(self._zdir, [page])[0]
         if not zpage.exists():
-            return Error("Page does not exist")
+            init_from_template(self._zdir, self._template_pattern_map, zpage)
 
         page_query = WhereOrFilter(
             and_filters=[WhereAndFilter(file_filters={FileFilter(str(page))})]

@@ -46,7 +46,7 @@ def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
         f" {str(note.file_path)}::{note.line_no}"
     )
 
-    file_man = FileManager(cfg.zettel_dir, session)
+    file_man = FileManager(cfg.zettel_dir, session, cfg.template_pattern_map)
     if cfg.mutate is not None:
         mutate = build_zorg_mutate(cfg.mutate)
     else:
