@@ -31,7 +31,7 @@ def run_file_rename(cfg: FileRenameConfig) -> int:
     }
     for zpath in c.get_all_zfiles(cfg.zettel_dir):
         zcontents = zpath.read_text()
-        if not any(src_str in zcontents for src_str in link_map.keys()):
+        if not any(src_str in zcontents for src_str in link_map):
             _LOGGER.debug("Skipping file that has no links", file=str(zpath))
             continue
 
