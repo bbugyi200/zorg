@@ -15,8 +15,9 @@ from freezegun import freeze_time
 from pytest import fixture
 
 from zorg.app.__main__ import main as zorg_main
+from zorg.service import common as c
 
-from . import common as c
+from . import common as test_c
 
 
 pytest_plugins = ["clack.pytest_plugin", "vimala.pytest_plugin"]
@@ -41,7 +42,7 @@ def query_zettel_dir_fixture(tmp_path_factory: TempPathFactory) -> Path:
 
 
 @fixture(scope="session")
-def db_zettel_dir(main: c.MainType, query_zettel_dir: Path) -> Path:
+def db_zettel_dir(main: test_c.MainType, query_zettel_dir: Path) -> Path:
     """Returns zettel dir containing pre-initialized database.."""
     ec = main("--log=null", "--dir", str(query_zettel_dir), "db", "create")
     assert ec == 0
@@ -58,7 +59,7 @@ def _get_zettel_dir(tmp_path: Path) -> Path:
 
 
 @fixture(scope="session", name="main")
-def main_fixture(make_config_file: MakeConfigFile) -> c.MainType:
+def main_fixture(make_config_file: MakeConfigFile) -> test_c.MainType:
     """Returns a wrapper around zorg's main() function."""
 
     def inner_main(*args: str, **kwargs: Any) -> int:
@@ -77,7 +78,7 @@ def main_fixture(make_config_file: MakeConfigFile) -> c.MainType:
 @fixture(autouse=True, scope="session")
 def frozen_time() -> Iterator[None]:
     """Freeze time until our tests are done running."""
-    with freeze_time(f"{c.TODAY}T{c.hh}:{c.mm}:00.123456Z"):
+    with freeze_time(f"{test_c.TODAY}T{test_c.hh}:{test_c.mm}:00.123456Z"):
         yield
 
 
@@ -87,10 +88,4 @@ def _get_all_zo_paths() -> list[Path]:
     These names will be relative to the zorg root directory.
     """
     zorg_root_dir = Path(__file__).parent.parent
-    return list(
-        it.chain(
-            zorg_root_dir.rglob("*.zo"),
-            zorg_root_dir.rglob("*.zot"),
-            zorg_root_dir.rglob("*.zoq"),
-        )
-    )
+    return list(c.get_all_zfiles(zorg_root_dir))

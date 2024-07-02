@@ -1,10 +1,11 @@
 """Helper logic that is shared broadly across this package."""
 
 import datetime as dt
+import itertools as it
 from pathlib import Path
 import re
 import sys
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
 import rich
 from typist import PathLike
@@ -35,6 +36,14 @@ def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
             path if zdir_path in path.parents else zdir_path / path
         )
     return new_paths
+
+
+def simplify_fname(zdir: PathLike, path: PathLike) -> str:
+    """Remove '.zo' extension and strip {zdir} from {path}."""
+    fname = strip_zdir(zdir, path)
+    if fname.endswith(".zo"):
+        fname = fname[:-3]
+    return fname
 
 
 def strip_zdir(zdir: PathLike, path: PathLike) -> str:
@@ -74,6 +83,14 @@ def zinput(prompt: str) -> str:
     """Custom input() wrapper used by Zorg."""
     print(prompt, file=sys.stderr, end="")
     return input()
+
+
+def get_all_zfiles(zdir: PathLike) -> Iterator[Path]:
+    """Returns all *.zo, *.zot, and *.zoq files."""
+    zdir = Path(zdir)
+    return it.chain(
+        zdir.rglob("*.zo"), zdir.rglob("*.zot"), zdir.rglob("*.zoq")
+    )
 
 
 def _var_map_value(value: str) -> Any:

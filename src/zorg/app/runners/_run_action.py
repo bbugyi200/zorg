@@ -126,9 +126,7 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
 
     if not link_path.exists():
-        parent = str(zo_path).replace(str(cfg.zettel_dir) + "/", "")
-        if parent.endswith(".zo"):
-            parent = parent[:-3]
+        parent = c.simplify_fname(cfg.zettel_dir, zo_path)
         init_from_template(
             cfg.zettel_dir,
             cfg.template_pattern_map,
