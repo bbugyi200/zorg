@@ -3,11 +3,10 @@
 from pathlib import Path
 from typing import NewType, Optional
 
-from ...domain.models import FileFilter, Note, WhereAndFilter, WhereOrFilter
+from ...domain.models import Note
 from ...domain.types import TemplatePatternMapType
 from ...service.common import prepend_zdir
 from ...service.templates import init_from_template
-from ..sql.session import SQLSession
 
 
 Error = NewType("Error", str)
