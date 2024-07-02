@@ -167,12 +167,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.0
     # via flake8
-pydantic==2.7.4
+pydantic==2.8.0
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.18.4
+pydantic-core==2.20.0
     # via pydantic
 pydantic-settings==2.3.4
     # via bolton-clack
@@ -330,7 +330,7 @@ wheel==0.43.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.1.1
     # via pip-tools
-setuptools==70.1.1
+setuptools==70.2.0
     # via
     #   pip-tools
     #   setuptools-scm
