@@ -39,9 +39,9 @@ def walk_zorg_file(
     return zorg_file
 
 
-def build_zorg_query(query: str) -> Query:
-    """Constructs a new Query using {query}."""
-    stream = antlr4.InputStream(query)
+def build_zorg_query(qstring: str) -> Query:
+    """Constructs a new Query using {qstring}."""
+    stream = antlr4.InputStream(qstring)
     lexer = ZorgQueryLexer(stream)
     tokens = antlr4.CommonTokenStream(lexer)
     parser = ZorgQueryParser(tokens)

@@ -32,7 +32,6 @@ if TYPE_CHECKING:
 E = TypeVar("E")
 T = TypeVar("T")
 
-
 KeyFunc = Callable[["Note"], str]
 FileGroupMapType = Mapping[str, Sequence[str]]
 FuncName = Literal["count"]

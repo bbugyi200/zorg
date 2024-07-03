@@ -9,7 +9,7 @@ import jinja2
 from logrus import Logger
 from typist import PathLike
 
-from . import common
+from . import common as c
 from ..domain.types import TemplatePatternMapType, VarMapType
 
 
@@ -40,7 +40,7 @@ def init_from_template(
         var_map: A map of template variable keys to values.
     """
     zdir = Path(zdir)
-    new_path = common.prepend_zdir(zdir, [Path(new_path)])[0]
+    new_path = c.prepend_zdir(zdir, [Path(new_path)])[0]
     var_map = {} if var_map is None else dict(var_map)
 
     if new_path.exists() and not should_overwrite_existing:
@@ -48,7 +48,7 @@ def init_from_template(
 
     matched_template = template
     for pattern, tmpl_path in template_pattern_map.items():
-        if match := pattern.match(common.strip_zdir(zdir, new_path)):
+        if match := pattern.match(c.strip_zdir(zdir, new_path)):
             matched_template = tmpl_path
             var_map |= match.groupdict()
             break
@@ -68,8 +68,8 @@ def init_from_template(
     )
     tmpl_manager = ZorgTemplateManager(zdir)
     contents = tmpl_manager.render(
-        common.prepend_zdir(zdir, [matched_template])[0],
-        common.process_var_map(var_map),
+        c.prepend_zdir(zdir, [matched_template])[0],
+        c.process_var_map(var_map),
     )
     new_path.parent.mkdir(parents=True, exist_ok=True)
     new_path.write_text(contents)

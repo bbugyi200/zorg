@@ -21,6 +21,7 @@ from ...domain.types import (
 )
 from ...storage.sql.session import SQLSession
 from ..compiler import build_zorg_query
+from ._saved_queries import expand_saved_queries
 
 
 _LOGGER = Logger(__name__)
@@ -30,7 +31,7 @@ NoteGroup = Union[list[Note], GroupNoteMap]
 Selector = Callable[[list[Note]], list[str]]
 
 
-def execute(session: SQLSession, query_string: str) -> str:
+def execute(session: SQLSession, qstring: str) -> str:
     """Execute a zorg query and then render it as a .zo file.
 
     In other words, a Zorg query goes in and a Zorg file comes out.
@@ -39,7 +40,7 @@ def execute(session: SQLSession, query_string: str) -> str:
     ----------
     session: A zorg SQL session that MUST be instantiated (e.g. using `with
         session`) by the caller.
-    query_string: A zorg query that MUST conform to the syntax defined by the
+    qstring: A zorg query that MUST conform to the syntax defined by the
         [[src/zorg/grammar/ZorgQuery.g4]] grammar.
 
     Return:
@@ -47,10 +48,13 @@ def execute(session: SQLSession, query_string: str) -> str:
     A string that MUST conform to the syntax defined by the
     [[src/zorg/grammar/ZorgFile.g4]] grammar's "body" parser rule.
     """
-    query = build_zorg_query(query_string)
-    _LOGGER.debug(
-        "Built query from string", query=query, query_string=query_string
-    )
+    expanded_qstring = expand_saved_queries(session.zdir, qstring)
+    if expanded_qstring is None:
+        raise RuntimeError(
+            f"Unable to expand saved queries | qstring={qstring}"
+        )
+    query = build_zorg_query(expanded_qstring)
+    _LOGGER.debug("Built query from string", query=query, qstring=qstring)
 
     ### (W)HERE
     notes = _get_notes_by_query(session, query)

@@ -27,7 +27,7 @@ class SQLSession:
 
     def __init__(
         self,
-        zettel_dir: Path,
+        zdir: Path,
         db_url: str,
         *,
         engine_factory: CreateEngineType = create_cached_engine,
@@ -42,7 +42,7 @@ class SQLSession:
 
         _prep_sqlite_db(db_url, should_delete=should_delete_existing_db)
         self._engine_factory = partial(engine_factory, db_url, **engine_kwargs)
-        self._zettel_dir = zettel_dir
+        self.zdir = zdir
         self._messages: list[Message] = []
         self._last_messages: list[Message] = []
         self._verbose = verbose
@@ -53,9 +53,7 @@ class SQLSession:
     def __enter__(self) -> SQLSession:
         """Called before entering a SQLSession with-block."""
         self._session = Session(self._engine_factory())
-        self._repo = SQLRepo(
-            self._zettel_dir, self._session, verbose=self._verbose
-        )
+        self._repo = SQLRepo(self.zdir, self._session, verbose=self._verbose)
         return self
 
     def __exit__(

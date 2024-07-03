@@ -1,4 +1,4 @@
-"""Contains utilities for working with *.zoq files."""
+"""Contains utilities for refreshing *.zoq files."""
 
 import datetime as dt
 from functools import partial
@@ -22,8 +22,8 @@ def refresh_zoq_file(session: SQLSession, zoq_path: Path) -> None:
         zoq_path.exists()
     ), "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST exist."
     zoq_lines = zoq_path.read_text().split("\n")
-    query_string = zoq_lines[0].strip()[2:]
-    query_results = execute(session, query_string)
+    qstring = zoq_lines[0].strip()[2:]
+    query_results = execute(session, qstring)
     date_spec = dt.datetime.now().strftime("%Y-%m-%d AT %H:%M:%S")
     stats_line_start = "# SAVED QUERY GENERATED ON"
     old_header_lines = it.takewhile(
