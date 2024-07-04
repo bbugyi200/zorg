@@ -38,6 +38,7 @@ after_word  : any_sym (any_sym | id)* ;
 unquoted_word    : tag
                  | link
                  | property
+                 | url
                  | id_group
                  | global_link
                  | local_link
@@ -57,7 +58,7 @@ property    : simple_prop | inline_prop ;
 simple_prop : id COLON COLON id_group ;
 inline_prop : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
 id_group    : id (any_sym+ | id)* ;
-id          : ID | NUM_ID | PRIORITY | date | time | zid | LOWER_O | LOWER_X ;
+id          : ID | NUM_ID | PRIORITY | date | time | zid | url | LOWER_O | LOWER_X ;
 date        : DATE ;
 time        : TIME ;
 
@@ -92,3 +93,6 @@ h2_header  : H2_HEADER space_atoms eol ;
 h3_header  : H3_HEADER space_atoms eol ;
 h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
+
+// URL
+url: ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID)* ;
