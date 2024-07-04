@@ -62,7 +62,7 @@ date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']';
+any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' | '[[' | ']]';
 non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_sym      : HASH | DASH | DOT | FSLASH | COLON ;
 tag_sym     : HASH | AT_SIGN | PERCENT | PLUS ;
