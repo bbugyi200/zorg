@@ -47,7 +47,7 @@ unquoted_word    : tag
                  | priority
                  ;
 quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
-quoted_word_body : any_sym | unquoted_word ;
+quoted_word_body : any_sym | unquoted_word | '[[' | ']]';
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -62,7 +62,7 @@ date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' | '[[' | ']]';
+any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' ;
 non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_sym      : HASH | DASH | DOT | FSLASH | COLON ;
 tag_sym     : HASH | AT_SIGN | PERCENT | PLUS ;

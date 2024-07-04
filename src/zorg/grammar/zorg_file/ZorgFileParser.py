@@ -32,13 +32,13 @@ def serializedATN():
         1,19,1,19,1,19,5,19,238,8,19,10,19,12,19,241,9,19,1,20,1,20,1,20,
         1,20,1,20,1,20,1,20,1,20,1,20,1,20,3,20,253,8,20,1,21,1,21,4,21,
         257,8,21,11,21,12,21,258,1,21,3,21,262,8,21,1,21,1,21,4,21,266,8,
-        21,11,21,12,21,267,1,21,3,21,271,8,21,3,21,273,8,21,1,22,1,22,3,
-        22,277,8,22,1,23,1,23,1,24,1,24,3,24,283,8,24,1,25,1,25,1,25,1,25,
-        1,25,1,26,1,26,1,26,1,26,1,26,3,26,295,8,26,1,26,1,26,1,26,5,26,
-        300,8,26,10,26,12,26,303,9,26,1,26,1,26,1,27,1,27,4,27,309,8,27,
-        11,27,12,27,310,1,27,5,27,314,8,27,10,27,12,27,317,9,27,1,28,1,28,
-        1,28,1,28,1,28,1,28,1,28,1,28,3,28,327,8,28,1,29,1,29,1,30,1,30,
-        1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,3,31,344,
+        21,11,21,12,21,267,1,21,3,21,271,8,21,3,21,273,8,21,1,22,1,22,1,
+        22,1,22,3,22,279,8,22,1,23,1,23,1,24,1,24,3,24,285,8,24,1,25,1,25,
+        1,25,1,25,1,25,1,26,1,26,1,26,1,26,1,26,3,26,297,8,26,1,26,1,26,
+        1,26,5,26,302,8,26,10,26,12,26,305,9,26,1,26,1,26,1,27,1,27,4,27,
+        311,8,27,11,27,12,27,312,1,27,5,27,316,8,27,10,27,12,27,319,9,27,
+        1,28,1,28,1,28,1,28,1,28,1,28,1,28,1,28,3,28,329,8,28,1,29,1,29,
+        1,30,1,30,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,3,31,344,
         8,31,1,32,1,32,1,33,1,33,1,34,1,34,1,35,1,35,1,35,1,35,3,35,356,
         8,35,1,36,1,36,1,36,1,37,1,37,1,37,1,38,1,38,1,38,1,39,1,39,1,39,
         1,40,1,40,1,40,1,40,1,41,1,41,1,41,1,41,1,42,1,42,1,42,1,42,1,43,
@@ -61,9 +61,9 @@ def serializedATN():
         0,14,169,1,0,0,0,16,172,1,0,0,0,18,185,1,0,0,0,20,187,1,0,0,0,22,
         195,1,0,0,0,24,197,1,0,0,0,26,200,1,0,0,0,28,204,1,0,0,0,30,209,
         1,0,0,0,32,214,1,0,0,0,34,228,1,0,0,0,36,232,1,0,0,0,38,234,1,0,
-        0,0,40,252,1,0,0,0,42,272,1,0,0,0,44,276,1,0,0,0,46,278,1,0,0,0,
-        48,282,1,0,0,0,50,284,1,0,0,0,52,289,1,0,0,0,54,306,1,0,0,0,56,326,
-        1,0,0,0,58,328,1,0,0,0,60,330,1,0,0,0,62,343,1,0,0,0,64,345,1,0,
+        0,0,40,252,1,0,0,0,42,272,1,0,0,0,44,278,1,0,0,0,46,280,1,0,0,0,
+        48,284,1,0,0,0,50,286,1,0,0,0,52,291,1,0,0,0,54,308,1,0,0,0,56,328,
+        1,0,0,0,58,330,1,0,0,0,60,332,1,0,0,0,62,343,1,0,0,0,64,345,1,0,
         0,0,66,347,1,0,0,0,68,349,1,0,0,0,70,355,1,0,0,0,72,357,1,0,0,0,
         74,360,1,0,0,0,76,363,1,0,0,0,78,366,1,0,0,0,80,369,1,0,0,0,82,373,
         1,0,0,0,84,377,1,0,0,0,86,381,1,0,0,0,88,385,1,0,0,0,90,389,1,0,
@@ -119,29 +119,29 @@ def serializedATN():
         273,1,0,0,0,263,265,5,39,0,0,264,266,3,44,22,0,265,264,1,0,0,0,266,
         267,1,0,0,0,267,265,1,0,0,0,267,268,1,0,0,0,268,270,1,0,0,0,269,
         271,5,39,0,0,270,269,1,0,0,0,270,271,1,0,0,0,271,273,1,0,0,0,272,
-        254,1,0,0,0,272,263,1,0,0,0,273,43,1,0,0,0,274,277,3,62,31,0,275,
-        277,3,40,20,0,276,274,1,0,0,0,276,275,1,0,0,0,277,45,1,0,0,0,278,
-        279,5,17,0,0,279,47,1,0,0,0,280,283,3,50,25,0,281,283,3,52,26,0,
-        282,280,1,0,0,0,282,281,1,0,0,0,283,49,1,0,0,0,284,285,3,56,28,0,
-        285,286,5,44,0,0,286,287,5,44,0,0,287,288,3,54,27,0,288,51,1,0,0,
-        0,289,290,5,1,0,0,290,291,3,56,28,0,291,292,5,44,0,0,292,294,5,44,
-        0,0,293,295,5,31,0,0,294,293,1,0,0,0,294,295,1,0,0,0,295,296,1,0,
-        0,0,296,301,3,54,27,0,297,298,5,31,0,0,298,300,3,54,27,0,299,297,
-        1,0,0,0,300,303,1,0,0,0,301,299,1,0,0,0,301,302,1,0,0,0,302,304,
-        1,0,0,0,303,301,1,0,0,0,304,305,5,2,0,0,305,53,1,0,0,0,306,315,3,
-        56,28,0,307,309,3,62,31,0,308,307,1,0,0,0,309,310,1,0,0,0,310,308,
-        1,0,0,0,310,311,1,0,0,0,311,314,1,0,0,0,312,314,3,56,28,0,313,308,
-        1,0,0,0,313,312,1,0,0,0,314,317,1,0,0,0,315,313,1,0,0,0,315,316,
-        1,0,0,0,316,55,1,0,0,0,317,315,1,0,0,0,318,327,5,16,0,0,319,327,
-        5,18,0,0,320,327,5,15,0,0,321,327,3,58,29,0,322,327,3,60,30,0,323,
-        327,3,46,23,0,324,327,5,11,0,0,325,327,5,12,0,0,326,318,1,0,0,0,
-        326,319,1,0,0,0,326,320,1,0,0,0,326,321,1,0,0,0,326,322,1,0,0,0,
-        326,323,1,0,0,0,326,324,1,0,0,0,326,325,1,0,0,0,327,57,1,0,0,0,328,
-        329,5,13,0,0,329,59,1,0,0,0,330,331,5,14,0,0,331,61,1,0,0,0,332,
-        344,5,38,0,0,333,344,5,39,0,0,334,344,5,26,0,0,335,344,5,25,0,0,
-        336,344,3,64,32,0,337,344,3,68,34,0,338,344,3,66,33,0,339,344,5,
-        1,0,0,340,344,5,2,0,0,341,344,5,3,0,0,342,344,5,4,0,0,343,332,1,
-        0,0,0,343,333,1,0,0,0,343,334,1,0,0,0,343,335,1,0,0,0,343,336,1,
+        254,1,0,0,0,272,263,1,0,0,0,273,43,1,0,0,0,274,279,3,62,31,0,275,
+        279,3,40,20,0,276,279,5,1,0,0,277,279,5,2,0,0,278,274,1,0,0,0,278,
+        275,1,0,0,0,278,276,1,0,0,0,278,277,1,0,0,0,279,45,1,0,0,0,280,281,
+        5,17,0,0,281,47,1,0,0,0,282,285,3,50,25,0,283,285,3,52,26,0,284,
+        282,1,0,0,0,284,283,1,0,0,0,285,49,1,0,0,0,286,287,3,56,28,0,287,
+        288,5,44,0,0,288,289,5,44,0,0,289,290,3,54,27,0,290,51,1,0,0,0,291,
+        292,5,3,0,0,292,293,3,56,28,0,293,294,5,44,0,0,294,296,5,44,0,0,
+        295,297,5,31,0,0,296,295,1,0,0,0,296,297,1,0,0,0,297,298,1,0,0,0,
+        298,303,3,54,27,0,299,300,5,31,0,0,300,302,3,54,27,0,301,299,1,0,
+        0,0,302,305,1,0,0,0,303,301,1,0,0,0,303,304,1,0,0,0,304,306,1,0,
+        0,0,305,303,1,0,0,0,306,307,5,4,0,0,307,53,1,0,0,0,308,317,3,56,
+        28,0,309,311,3,62,31,0,310,309,1,0,0,0,311,312,1,0,0,0,312,310,1,
+        0,0,0,312,313,1,0,0,0,313,316,1,0,0,0,314,316,3,56,28,0,315,310,
+        1,0,0,0,315,314,1,0,0,0,316,319,1,0,0,0,317,315,1,0,0,0,317,318,
+        1,0,0,0,318,55,1,0,0,0,319,317,1,0,0,0,320,329,5,16,0,0,321,329,
+        5,18,0,0,322,329,5,15,0,0,323,329,3,58,29,0,324,329,3,60,30,0,325,
+        329,3,46,23,0,326,329,5,11,0,0,327,329,5,12,0,0,328,320,1,0,0,0,
+        328,321,1,0,0,0,328,322,1,0,0,0,328,323,1,0,0,0,328,324,1,0,0,0,
+        328,325,1,0,0,0,328,326,1,0,0,0,328,327,1,0,0,0,329,57,1,0,0,0,330,
+        331,5,13,0,0,331,59,1,0,0,0,332,333,5,14,0,0,333,61,1,0,0,0,334,
+        344,5,38,0,0,335,344,5,39,0,0,336,344,5,26,0,0,337,344,5,25,0,0,
+        338,344,3,64,32,0,339,344,3,68,34,0,340,344,3,66,33,0,341,344,5,
+        3,0,0,342,344,5,4,0,0,343,334,1,0,0,0,343,335,1,0,0,0,343,336,1,
         0,0,0,343,337,1,0,0,0,343,338,1,0,0,0,343,339,1,0,0,0,343,340,1,
         0,0,0,343,341,1,0,0,0,343,342,1,0,0,0,344,63,1,0,0,0,345,346,7,1,
         0,0,346,65,1,0,0,0,347,348,7,2,0,0,348,67,1,0,0,0,349,350,7,3,0,
@@ -150,13 +150,13 @@ def serializedATN():
         0,0,0,355,354,1,0,0,0,356,71,1,0,0,0,357,358,5,34,0,0,358,359,3,
         56,28,0,359,73,1,0,0,0,360,361,5,35,0,0,361,362,3,56,28,0,362,75,
         1,0,0,0,363,364,5,37,0,0,364,365,3,56,28,0,365,77,1,0,0,0,366,367,
-        5,36,0,0,367,368,3,56,28,0,368,79,1,0,0,0,369,370,5,3,0,0,370,371,
-        3,54,27,0,371,372,5,4,0,0,372,81,1,0,0,0,373,374,5,5,0,0,374,375,
-        5,16,0,0,375,376,5,2,0,0,376,83,1,0,0,0,377,378,5,6,0,0,378,379,
-        5,16,0,0,379,380,5,2,0,0,380,85,1,0,0,0,381,382,5,1,0,0,382,383,
-        3,46,23,0,383,384,5,2,0,0,384,87,1,0,0,0,385,386,5,7,0,0,386,387,
+        5,36,0,0,367,368,3,56,28,0,368,79,1,0,0,0,369,370,5,1,0,0,370,371,
+        3,54,27,0,371,372,5,2,0,0,372,81,1,0,0,0,373,374,5,5,0,0,374,375,
+        5,16,0,0,375,376,5,4,0,0,376,83,1,0,0,0,377,378,5,6,0,0,378,379,
+        5,16,0,0,379,380,5,4,0,0,380,85,1,0,0,0,381,382,5,3,0,0,382,383,
+        3,46,23,0,383,384,5,4,0,0,384,87,1,0,0,0,385,386,5,7,0,0,386,387,
         3,54,27,0,387,388,5,8,0,0,388,89,1,0,0,0,389,390,5,9,0,0,390,391,
-        5,16,0,0,391,392,5,2,0,0,392,91,1,0,0,0,393,397,3,100,50,0,394,396,
+        5,16,0,0,391,392,5,4,0,0,392,91,1,0,0,0,393,397,3,100,50,0,394,396,
         5,10,0,0,395,394,1,0,0,0,396,399,1,0,0,0,397,395,1,0,0,0,397,398,
         1,0,0,0,398,403,1,0,0,0,399,397,1,0,0,0,400,402,3,8,4,0,401,400,
         1,0,0,0,402,405,1,0,0,0,403,401,1,0,0,0,403,404,1,0,0,0,404,412,
@@ -186,7 +186,7 @@ def serializedATN():
         1,0,0,0,484,485,5,23,0,0,485,486,3,26,13,0,486,487,3,108,54,0,487,
         107,1,0,0,0,488,489,7,4,0,0,489,109,1,0,0,0,52,112,119,123,130,135,
         141,147,153,158,164,177,182,190,202,209,214,218,223,228,232,237,
-        239,252,258,261,267,270,272,276,282,294,301,310,313,315,326,343,
+        239,252,258,261,267,270,272,278,284,296,303,312,315,317,328,343,
         355,397,403,407,412,419,425,429,434,441,447,451,456,463,469
     ]
 
@@ -200,7 +200,7 @@ class ZorgFileParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'['", "']'", "'[['", "']]'", "'[#'", 
+    literalNames = [ "<INVALID>", "'[['", "']]'", "'['", "']'", "'[#'", 
                      "'[^'", "'(('", "'))'", "'[@'", "<INVALID>", "'o'", 
                      "'x'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "'################################'", 
@@ -1386,7 +1386,7 @@ class ZorgFileParser ( Parser ):
             self.state = 223
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 35182207827998) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 35182207827992) != 0):
                 self.state = 220
                 self.after_word()
                 self.state = 225
@@ -1570,7 +1570,7 @@ class ZorgFileParser ( Parser ):
                     self.state = 237
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]:
+                    if token in [3, 4, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]:
                         self.state = 235
                         self.any_sym()
                         pass
@@ -1881,7 +1881,7 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.Quoted_word_bodyContext(self, self._ctx, self.state)
         self.enterRule(localctx, 44, self.RULE_quoted_word_body)
         try:
-            self.state = 276
+            self.state = 278
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
             if la_ == 1:
@@ -1894,6 +1894,18 @@ class ZorgFileParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 275
                 self.unquoted_word()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 276
+                self.match(ZorgFileParser.T__0)
+                pass
+
+            elif la_ == 4:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 277
+                self.match(ZorgFileParser.T__1)
                 pass
 
 
@@ -1936,7 +1948,7 @@ class ZorgFileParser ( Parser ):
         self.enterRule(localctx, 46, self.RULE_zid)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 278
+            self.state = 280
             self.match(ZorgFileParser.ZID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1981,17 +1993,17 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.PropertyContext(self, self._ctx, self.state)
         self.enterRule(localctx, 48, self.RULE_property)
         try:
-            self.state = 282
+            self.state = 284
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [11, 12, 13, 14, 15, 16, 17, 18]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 280
+                self.state = 282
                 self.simple_prop()
                 pass
-            elif token in [1]:
+            elif token in [3]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 281
+                self.state = 283
                 self.inline_prop()
                 pass
             else:
@@ -2047,13 +2059,13 @@ class ZorgFileParser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_simple_prop)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 284
-            self.id_()
-            self.state = 285
-            self.match(ZorgFileParser.COLON)
             self.state = 286
-            self.match(ZorgFileParser.COLON)
+            self.id_()
             self.state = 287
+            self.match(ZorgFileParser.COLON)
+            self.state = 288
+            self.match(ZorgFileParser.COLON)
+            self.state = 289
             self.id_group()
         except RecognitionException as re:
             localctx.exception = re
@@ -2115,38 +2127,38 @@ class ZorgFileParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 289
-            self.match(ZorgFileParser.T__0)
-            self.state = 290
-            self.id_()
             self.state = 291
-            self.match(ZorgFileParser.COLON)
+            self.match(ZorgFileParser.T__2)
             self.state = 292
+            self.id_()
+            self.state = 293
             self.match(ZorgFileParser.COLON)
             self.state = 294
+            self.match(ZorgFileParser.COLON)
+            self.state = 296
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==31:
-                self.state = 293
+                self.state = 295
                 self.match(ZorgFileParser.SPACE)
 
 
-            self.state = 296
+            self.state = 298
             self.id_group()
-            self.state = 301
+            self.state = 303
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==31:
-                self.state = 297
+                self.state = 299
                 self.match(ZorgFileParser.SPACE)
-                self.state = 298
+                self.state = 300
                 self.id_group()
-                self.state = 303
+                self.state = 305
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 304
-            self.match(ZorgFileParser.T__1)
+            self.state = 306
+            self.match(ZorgFileParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2197,40 +2209,40 @@ class ZorgFileParser ( Parser ):
         self.enterRule(localctx, 54, self.RULE_id_group)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 306
+            self.state = 308
             self.id_()
-            self.state = 315
+            self.state = 317
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,34,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 313
+                    self.state = 315
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]:
-                        self.state = 308 
+                    if token in [3, 4, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]:
+                        self.state = 310 
                         self._errHandler.sync(self)
                         _alt = 1
                         while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                             if _alt == 1:
-                                self.state = 307
+                                self.state = 309
                                 self.any_sym()
 
                             else:
                                 raise NoViableAltException(self)
-                            self.state = 310 
+                            self.state = 312 
                             self._errHandler.sync(self)
                             _alt = self._interp.adaptivePredict(self._input,32,self._ctx)
 
                         pass
                     elif token in [11, 12, 13, 14, 15, 16, 17, 18]:
-                        self.state = 312
+                        self.state = 314
                         self.id_()
                         pass
                     else:
                         raise NoViableAltException(self)
              
-                self.state = 317
+                self.state = 319
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,34,self._ctx)
 
@@ -2296,47 +2308,47 @@ class ZorgFileParser ( Parser ):
         localctx = ZorgFileParser.IdContext(self, self._ctx, self.state)
         self.enterRule(localctx, 56, self.RULE_id)
         try:
-            self.state = 326
+            self.state = 328
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [16]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 318
+                self.state = 320
                 self.match(ZorgFileParser.ID)
                 pass
             elif token in [18]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 319
+                self.state = 321
                 self.match(ZorgFileParser.NUM_ID)
                 pass
             elif token in [15]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 320
+                self.state = 322
                 self.match(ZorgFileParser.PRIORITY)
                 pass
             elif token in [13]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 321
+                self.state = 323
                 self.date()
                 pass
             elif token in [14]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 322
+                self.state = 324
                 self.time()
                 pass
             elif token in [17]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 323
+                self.state = 325
                 self.zid()
                 pass
             elif token in [11]:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 324
+                self.state = 326
                 self.match(ZorgFileParser.LOWER_O)
                 pass
             elif token in [12]:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 325
+                self.state = 327
                 self.match(ZorgFileParser.LOWER_X)
                 pass
             else:
@@ -2381,7 +2393,7 @@ class ZorgFileParser ( Parser ):
         self.enterRule(localctx, 58, self.RULE_date)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 328
+            self.state = 330
             self.match(ZorgFileParser.DATE)
         except RecognitionException as re:
             localctx.exception = re
@@ -2422,7 +2434,7 @@ class ZorgFileParser ( Parser ):
         self.enterRule(localctx, 60, self.RULE_time)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 330
+            self.state = 332
             self.match(ZorgFileParser.TIME)
         except RecognitionException as re:
             localctx.exception = re
@@ -2488,66 +2500,54 @@ class ZorgFileParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 332
+                self.state = 334
                 self.match(ZorgFileParser.SQUOTE)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 333
+                self.state = 335
                 self.match(ZorgFileParser.DQUOTE)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 334
+                self.state = 336
                 self.match(ZorgFileParser.HAT)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 335
+                self.state = 337
                 self.match(ZorgFileParser.DOLLAR)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 336
+                self.state = 338
                 self.non_tag_sym()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 337
+                self.state = 339
                 self.tag_sym()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 338
+                self.state = 340
                 self.id_sym()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 339
-                self.match(ZorgFileParser.T__0)
-                pass
-
-            elif la_ == 9:
-                self.enterOuterAlt(localctx, 9)
-                self.state = 340
-                self.match(ZorgFileParser.T__1)
-                pass
-
-            elif la_ == 10:
-                self.enterOuterAlt(localctx, 10)
                 self.state = 341
                 self.match(ZorgFileParser.T__2)
                 pass
 
-            elif la_ == 11:
-                self.enterOuterAlt(localctx, 11)
+            elif la_ == 9:
+                self.enterOuterAlt(localctx, 9)
                 self.state = 342
                 self.match(ZorgFileParser.T__3)
                 pass
@@ -3042,11 +3042,11 @@ class ZorgFileParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 369
-            self.match(ZorgFileParser.T__2)
+            self.match(ZorgFileParser.T__0)
             self.state = 370
             self.id_group()
             self.state = 371
-            self.match(ZorgFileParser.T__3)
+            self.match(ZorgFileParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3091,7 +3091,7 @@ class ZorgFileParser ( Parser ):
             self.state = 374
             self.match(ZorgFileParser.ID)
             self.state = 375
-            self.match(ZorgFileParser.T__1)
+            self.match(ZorgFileParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3136,7 +3136,7 @@ class ZorgFileParser ( Parser ):
             self.state = 378
             self.match(ZorgFileParser.ID)
             self.state = 379
-            self.match(ZorgFileParser.T__1)
+            self.match(ZorgFileParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3178,11 +3178,11 @@ class ZorgFileParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 381
-            self.match(ZorgFileParser.T__0)
+            self.match(ZorgFileParser.T__2)
             self.state = 382
             self.zid()
             self.state = 383
-            self.match(ZorgFileParser.T__1)
+            self.match(ZorgFileParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3273,7 +3273,7 @@ class ZorgFileParser ( Parser ):
             self.state = 390
             self.match(ZorgFileParser.ID)
             self.state = 391
-            self.match(ZorgFileParser.T__1)
+            self.match(ZorgFileParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
