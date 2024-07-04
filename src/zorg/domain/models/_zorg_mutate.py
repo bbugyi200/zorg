@@ -92,9 +92,6 @@ class Mutate:
                 f" {prefix_chars}{tag_link_mutate.value}{suffix_chars}"
             )
 
-        if len(self.metadata_mutates) > 1:
-            extra_tags += " |"
-
         if extra_tags != "":
             assert new_note.zid is not None
             new_note.body = new_note.body.replace(

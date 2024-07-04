@@ -7,6 +7,7 @@ from logrus import Logger
 from ...domain.models import MetadataMutate, Mutate, Note
 from ...domain.types import cast_tag_name
 from ...service.compiler import build_zorg_mutate, build_zorg_query
+from ...service.note_utils import note_body_has_tag
 from ...storage.file import FileManager
 from ...storage.sql.session import SQLSession
 from ..config import NoteMoveConfig, NoteMutateConfig
@@ -75,17 +76,15 @@ def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
         ("%", cast_tag_name("people"), note.people),
     ]:
         for tag in sorted(tags):
-            if all(
-                val not in note.body
-                for val in [f" {ch}{tag} ", f" {ch}{tag}\n"]
-            ) and not note.body.endswith(f" {ch}{tag}"):
+            tag_word = f"{ch}{tag}"
+            if not note_body_has_tag(note.body, tag_word):
                 new_mut.metadata_mutates.append(
                     MetadataMutate(mtype=tag_name, value=tag)
                 )
 
     for key, value in sorted(note.properties.items()):
         prop_value = f"{key}::{value}"
-        if all(val not in note.body for val in [prop_value, f" {key}:: "]):
+        if f"{key}::" not in note.body:
             new_mut.metadata_mutates.append(
                 MetadataMutate(mtype="properties", value=prop_value)
             )
