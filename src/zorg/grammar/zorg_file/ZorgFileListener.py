@@ -242,6 +242,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#simple_prop_value.
+    def enterSimple_prop_value(self, ctx:ZorgFileParser.Simple_prop_valueContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#simple_prop_value.
+    def exitSimple_prop_value(self, ctx:ZorgFileParser.Simple_prop_valueContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#inline_prop.
     def enterInline_prop(self, ctx:ZorgFileParser.Inline_propContext):
         pass

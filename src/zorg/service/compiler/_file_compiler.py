@@ -200,7 +200,7 @@ class ZorgFileCompiler(ZorgFileListener):
     def enterSimple_prop(
         self, ctx: ZorgFileParser.Simple_propContext
     ) -> None:  # noqa: D102
-        key, value = ctx.id_().getText(), ctx.id_group().getText()
+        key, value = ctx.id_().getText(), ctx.simple_prop_value().getText()
         self._add_prop(key, value)
 
     def enterTodo(self, ctx: ZorgFileParser.TodoContext) -> None:  # noqa: D102

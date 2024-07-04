@@ -54,13 +54,14 @@ quoted_word_body : any_sym | unquoted_word | '[[' | ']]';
 zid : ZID  ;
 
 // property
-property    : simple_prop | inline_prop ;
-simple_prop : id COLON COLON id_group ;
-inline_prop : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
-id_group    : id (any_sym+ | id)* ;
-id          : ID | NUM_ID | PRIORITY | date | time | zid | url | LOWER_O | LOWER_X ;
-date        : DATE ;
-time        : TIME ;
+property          : simple_prop | inline_prop ;
+simple_prop       : id COLON COLON simple_prop_value ;
+simple_prop_value : id | url ;
+inline_prop       : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
+id_group          : id (any_sym+ | id)* ;
+id                : ID | NUM_ID | PRIORITY | date | time | zid | url | LOWER_O | LOWER_X ;
+date              : DATE ;
+time              : TIME ;
 
 // symbols
 any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' ;
