@@ -116,15 +116,6 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgFileParser#x_or_tilde.
-    def enterX_or_tilde(self, ctx:ZorgFileParser.X_or_tildeContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#x_or_tilde.
-    def exitX_or_tilde(self, ctx:ZorgFileParser.X_or_tildeContext):
-        pass
-
-
     # Enter a parse tree produced by ZorgFileParser#priority.
     def enterPriority(self, ctx:ZorgFileParser.PriorityContext):
         pass
@@ -194,15 +185,6 @@ class ZorgFileListener(ParseTreeListener):
 
     # Exit a parse tree produced by ZorgFileParser#after_word.
     def exitAfter_word(self, ctx:ZorgFileParser.After_wordContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgFileParser#square_word.
-    def enterSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
-        pass
-
-    # Exit a parse tree produced by ZorgFileParser#square_word.
-    def exitSquare_word(self, ctx:ZorgFileParser.Square_wordContext):
         pass
 
 

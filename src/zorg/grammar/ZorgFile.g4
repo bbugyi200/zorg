@@ -22,8 +22,7 @@ note_body : space_atoms (NL SPACE+ space_atoms)* ;
 // todos
 todo        : base_todo ;
 base_todo   : todo_prefix (SPACE priority)? note_body NL ;
-todo_prefix : LOWER_O | x_or_tilde | LANGLE | RANGLE ;
-x_or_tilde  : (LOWER_X | TILDE) (COLON time)? ;
+todo_prefix : LOWER_O | LOWER_X | TILDE | LANGLE | RANGLE ;
 priority    : PRIORITY ;
 
 // atoms
@@ -33,8 +32,7 @@ atom        : tag_sym | word_group ;
 word_group  : before_word* word? after_word* ;
 before_word : non_tag_sym | DASH ;
 word        : quoted_word | unquoted_word ;
-after_word  : any_sym (any_sym | id)* | square_word ;
-square_word : '[' (id_group | SPACE) (SPACE id_group)* ']' ;
+after_word  : any_sym (any_sym | id)* ;
 
 // quoted and unquoted words
 unquoted_word    : tag
@@ -49,7 +47,7 @@ unquoted_word    : tag
                  | priority
                  ;
 quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
-quoted_word_body : any_sym | '[' | ']' | '[[' | ']]' | unquoted_word ;
+quoted_word_body : any_sym | unquoted_word ;
 
 // Zorg YYMMDD#XX IDs
 zid : ZID  ;
@@ -64,7 +62,7 @@ date        : DATE ;
 time        : TIME ;
 
 // symbols
-any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym ;
+any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']';
 non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
 id_sym      : HASH | DASH | DOT | FSLASH | COLON ;
 tag_sym     : HASH | AT_SIGN | PERCENT | PLUS ;
