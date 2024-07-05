@@ -15,7 +15,7 @@ from ._runners import runner
 
 _LOCAL_LINK_LEFT_MARK = "[^"
 _LOGGER = Logger(__name__)
-_SEARCH_END: Final = "\\ze\\([\\s),.?!;:]\\|$\\)"
+_SEARCH_END: Final = "\\ze\\([ ),.?!;:]\\|$\\)"
 _MSG_NOTHING_TO_OPEN: Final = (
     "We did not find anything zorg knows how to open on line"
 )
