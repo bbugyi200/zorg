@@ -9,8 +9,9 @@ from _pytest.capture import CaptureFixture
 from pytest import fixture, mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
-from . import common as c
 from zorg.app.runners._run_action import _SEARCH_END
+
+from . import common as c
 
 
 params = mark.parametrize
