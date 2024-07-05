@@ -423,7 +423,7 @@
               'body': '240704#00 LID::2 https://go/foo-bar-baz',
               'contexts': ['footnote'],
               'create_date': FakeDate(2024, 7, 4),
-              'links': ['x:https://go/foo'],
+              'links': ['x:https://go/foo-bar-baz'],
               'modify_date': FakeDate(2024, 7, 4),
               'people': [],
               'projects': [],

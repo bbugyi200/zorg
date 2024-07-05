@@ -1450,7 +1450,7 @@
   poop
   ref:some_article
   x:http://www.example.com
-  x:https://go/foo
+  x:https://go/foo-bar-baz
   x:https://www.bazbuz.com
   x:https://www.foobar.com
   xmind/zorg_e2e_query_arch.xmind
@@ -1471,7 +1471,7 @@
   ref:some_article
   local:some_loc_link
   x:http://www.example.com
-  x:https://go/foo
+  x:https://go/foo-bar-baz
   bar.sh
   baz
   buz#fuzz
