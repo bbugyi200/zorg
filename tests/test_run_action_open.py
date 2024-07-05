@@ -10,6 +10,7 @@ from pytest import fixture, mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
 from . import common as c
+from zorg.app.runners._run_action import _SEARCH_END
 
 
 params = mark.parametrize
@@ -148,7 +149,7 @@ def test_action_open__local_link(
     assert exit_code == 0
 
     capture = capsys.readouterr()
-    assert capture.out.strip() == f"SEARCH LID::{id_key}\\(\\s\\|$\\)"
+    assert capture.out.strip() == f"SEARCH LID::{id_key}{_SEARCH_END}"
 
 
 @params("lineno", [param(13, id="line_with_id_link")])
@@ -173,7 +174,7 @@ def test_action_open__id_link(
     zo_path = db_zettel_dir / "tags_and_ids.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH ID::pig_is_gross\\(\\s\\|$\\)",
+        f"SEARCH ID::pig_is_gross{_SEARCH_END}",
     ]
 
 
@@ -199,7 +200,7 @@ def test_action_open__rid_link(
     zo_path = db_zettel_dir / "tags_and_ids.zo"
     assert capture.out.strip().split("\n") == [
         f"EDIT {zo_path}",
-        "SEARCH RID::some_article\\(\\s\\|$\\)",
+        f"SEARCH RID::some_article{_SEARCH_END}",
     ]
 
 

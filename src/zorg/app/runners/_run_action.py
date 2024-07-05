@@ -15,6 +15,7 @@ from ._runners import runner
 
 _LOCAL_LINK_LEFT_MARK = "[^"
 _LOGGER = Logger(__name__)
+_SEARCH_END: Final = "\\ze\\([\\s),.?!;:]\\|$\\)"
 _MSG_NOTHING_TO_OPEN: Final = (
     "We did not find anything zorg knows how to open on line"
 )
@@ -159,7 +160,7 @@ def _open_cite_key_link(zdir: Path, z_cite_key: str) -> int:
 
 def _open_local_link(local_link: str) -> int:
     lid_value = local_link[len(_LOCAL_LINK_LEFT_MARK) : -1]
-    print(f"SEARCH LID::{lid_value}\\(\\s\\|$\\)")
+    print(f"SEARCH LID::{lid_value}{_SEARCH_END}")
     return 0
 
 
@@ -186,7 +187,7 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
     page = pages[0]
     full_page_path = c.prepend_zdir(cfg.zettel_dir, [page])[0]
     print(f"EDIT {full_page_path}")
-    print(f"SEARCH ID::{id_key}\\(\\s\\|$\\)")
+    print(f"SEARCH ID::{id_key}{_SEARCH_END}")
 
     return 0
 
@@ -214,7 +215,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     assert note.file_path is not None
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
-    print(f"SEARCH RID::{rid_key}\\(\\s\\|$\\)")
+    print(f"SEARCH RID::{rid_key}{_SEARCH_END}")
 
     return 0
 
