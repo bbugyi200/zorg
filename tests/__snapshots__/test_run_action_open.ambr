@@ -44,7 +44,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240510#06 Some note with no targets.
   - 240510#07 Some note that references a local [240510#03] ZID.
-  - 240510#08 Some note that references a local [^1] link.
+  - 240510#08 Some note that references some local links | [^1] [^2]
   - 240510#09 Some note that references an ID in another file | [#pig_is_gross]
   - 240510#04 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240510#0A Some note that references a ZID in another file. See [240408#0X].
@@ -53,6 +53,7 @@
   - 240510#08 Some note that references a local, non-numeric [^some_loc_link] link.
   - 240510#09 LID::1 http://www.example.com
   - 240510#0D LID::some_loc_link Some local link lives here
+  - 240704#00 LID::2 https://go/foo-bar-baz
   
   ################################ [[multiblocks]]
   - 240510#09 A note about life...

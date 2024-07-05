@@ -28,6 +28,7 @@
     '2024-04-08',
     '2024-05-10',
     '2024-06-29',
+    '2024-07-04',
     '2030-12-31',
   ])
 # ---
@@ -43,10 +44,12 @@
     'eswz_xqow::empiz_ljyiwjbmi_szstj',
     'global:pig_is_gross',
     'local:1',
+    'local:2',
     'local:some_loc_link',
     'poop',
     'ref:some_article',
     'x:http://www.example.com',
+    'x:https://go/foo',
     'x:https://www.bazbuz.com',
     'x:https://www.foobar.com',
     'xmind/zorg_e2e_query_arch.xmind',
@@ -55,7 +58,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  116
+  117
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -250,6 +253,7 @@
     '240510#27',
     '240510#29',
     '240629#00',
+    '240704#00',
     '301231#X0',
     '301231#X1',
   ])

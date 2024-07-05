@@ -143,6 +143,7 @@ def test_action_open__local_link(
         "open",
         str(db_zettel_dir / "links.zo"),
         str(lineno),
+        "1",  # Select [^1] instead of [^2].
     )
     assert exit_code == 0
 
