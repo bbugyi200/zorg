@@ -1436,6 +1436,9 @@
   local:some_loc_link
   poop
   ref:some_article
+  x:http://www.example.com
+  x:https://www.bazbuz.com
+  x:https://www.foobar.com
   xmind/zorg_e2e_query_arch.xmind
   zid:240408#0X
   zid:240510#03
@@ -1452,9 +1455,12 @@
   zid:240408#0X
   ref:some_article
   local:some_loc_link
+  x:http://www.example.com
   bar.sh
   baz
   buz#fuzz
+  x:https://www.bazbuz.com
+  x:https://www.foobar.com
   eswz_xqow::empiz_ljyiwjbmi_szstj
   desd_cd_kdzb.yhdxx
   

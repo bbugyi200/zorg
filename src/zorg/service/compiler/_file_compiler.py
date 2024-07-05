@@ -228,6 +228,10 @@ class ZorgFileCompiler(ZorgFileListener):
 
             self._s.todo_status = status
 
+    def enterUrl(self, ctx: ZorgFileParser.UrlContext) -> None:  # noqa: D102
+        url = ctx.getText()
+        self._add_tag("links", f"x:{url}")
+
     def enterZid_link(
         self, ctx: ZorgFileParser.Zid_linkContext
     ) -> None:  # noqa: D102
