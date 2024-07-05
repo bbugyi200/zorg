@@ -96,4 +96,4 @@ h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
 
 // URL
-url: ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID)* ;
+url: ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID (DASH ID)*)* ;
