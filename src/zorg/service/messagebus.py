@@ -37,10 +37,16 @@ def handle(
     messages: Sequence[Message],
     *,
     verbose: int = 0,
+    should_delete_existing_db: bool = False,
 ) -> None:
     """Entry point into Zorg's event messagebus loop."""
     zdir = Path(zdir)
-    with SQLSession(zdir, db_url, verbose=verbose) as session:
+    with SQLSession(
+        zdir,
+        db_url,
+        should_delete_existing_db=should_delete_existing_db,
+        verbose=verbose,
+    ) as session:
         return _handle(messages, session)
 
 

@@ -19,6 +19,7 @@ def run_db_create(cfg: DbCreateConfig) -> int:
                 update_error_file_whitelist=cfg.update_error_file_whitelist,
             )
         ],
+        should_delete_existing_db=True,
         verbose=cfg.verbose,
     )
     return 0
