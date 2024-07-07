@@ -68,8 +68,8 @@ def zprint(
         space_call_count = f" {space_call_count}"
     hhmmss = dt.datetime.now().strftime("%H:%M:%S")
     msg = " | ".join(msg_parts)
-    bg = bg_color.to_rich_spec()
-    fg = fg_color.to_rich_spec()
+    bg = bg_color.value
+    fg = fg_color.value
 
     # print final message
     contents = f"{space_call_count} | {hhmmss} | {msg}"

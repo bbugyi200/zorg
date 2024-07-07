@@ -1,5 +1,7 @@
 """Custom types used by zorg."""
 
+# pyright: reportGeneralTypeIssues=false
+
 import abc
 from dataclasses import dataclass
 import datetime as dt
@@ -45,8 +47,11 @@ TodoPriorityType = Literal[
 ]
 TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
-DoneTodoStatusPrefixChar = Literal["x", "~"]
-TodoStatusPrefixChar = Literal[DoneTodoStatusPrefixChar, "o", "<", ">"]
+
+# Prefix characters that specifies the type of a Zorg note.
+DoneTodoTypeChar = Literal["x", "~"]
+TodoTypeChar = Literal[DoneTodoTypeChar, "o", "<", ">"]
+NoteTypeChar = Literal[TodoTypeChar, "-"]
 
 
 def cast_tag_name(name: TagName) -> TagName:
@@ -57,12 +62,12 @@ def cast_tag_name(name: TagName) -> TagName:
 class NoteType(enum.Enum):
     """Zorg note status."""
 
-    BASIC = "-"  # -
-    OPEN_TODO = "o"  # o
-    CLOSED_TODO = "x"  # x
-    CANCELED_TODO = "~"  # ~
-    BLOCKED_TODO = "<"  # <
-    PARENT_TODO = ">"  # >
+    BASIC = "-"
+    OPEN_TODO = "o"
+    CLOSED_TODO = "x"
+    CANCELED_TODO = "~"
+    BLOCKED_TODO = "<"
+    PARENT_TODO = ">"
 
     def to_header_label(self) -> str:
         """Converts to a header label that can be used by GROUP BY."""
@@ -82,44 +87,14 @@ class NoteType(enum.Enum):
         else:
             assert_never(self)
 
-    def to_prefix_char(self) -> str:  # pyright: reportGeneralTypeIssues=false
-        """Converts a note's type to its corresponding prefix character."""
-        if self is NoteType.BASIC:
-            return "-"
-        elif self is NoteType.OPEN_TODO:
-            return "o"
-        elif self is NoteType.CLOSED_TODO:
-            return "x"
-        elif self is NoteType.CANCELED_TODO:
-            return "~"
-        elif self is NoteType.BLOCKED_TODO:
-            return "<"
-        elif self is NoteType.PARENT_TODO:
-            return ">"
-        else:
-            assert_never(self)
-
 
 class Color(enum.Enum):
     """Represents colors that Zorg uses."""
 
-    BLACK = enum.auto()
-    GREEN = enum.auto()
-    WHITE = enum.auto()
-    YELLOW = enum.auto()
-
-    def to_rich_spec(self) -> str:
-        """Converts a Color to a string spec that rich understands."""
-        if self is Color.BLACK:
-            return "black"
-        elif self is Color.GREEN:
-            return "#1A7E23"
-        elif self is Color.WHITE:
-            return "#FFFFFF"
-        elif self is Color.YELLOW:
-            return "#FFFEB8"
-        else:
-            assert_never(self)
+    BLACK = "black"
+    GREEN = "#1A7E23"
+    WHITE = "#FFFFFF"
+    YELLOW = "#FFFEB8"
 
 
 class CreateEngineType(Protocol):

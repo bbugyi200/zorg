@@ -15,7 +15,7 @@ from zorg.domain.types import (
     NoteType,
     TagName,
     TodoPriorityType,
-    TodoStatusPrefixChar,
+    TodoTypeChar,
 )
 from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
@@ -212,7 +212,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         status = NoteType.OPEN_TODO
         if self._s.in_note:
-            ch: TodoStatusPrefixChar = ctx.getText()[0]
+            ch: TodoTypeChar = ctx.getText()[0]
             if ch == "o":
                 status = NoteType.OPEN_TODO
             elif ch == "x":

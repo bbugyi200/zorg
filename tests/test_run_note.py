@@ -19,14 +19,18 @@ params = mark.parametrize
     [
         param("240510#02", "basic.zo", "property.zo", None, id="basic"),
         param(
-            "240510#0Q", "property.zo", "tags_and_ids.zo", None, id="multiline"
+            "240510#0Q",
+            "property.zo",
+            "tags_and_ids.zo",
+            "~",
+            id="canceled_multiline",
         ),
         param(
             "301231#X1",
             "tags_and_ids.zo",
             "priority.zo",
-            "0o",
-            id="inherited_tags",
+            "x",
+            id="done_inherited_tags",
         ),
     ],
 )

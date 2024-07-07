@@ -51,7 +51,7 @@ class Note:
         note_type = (
             self.todo_payload.status if self.todo_payload else NoteType.BASIC
         )
-        char = note_type.to_prefix_char()
+        char = note_type.value
         priority = (
             f" {self.todo_payload.priority}"
             if self.todo_payload

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from argparse import ArgumentTypeError
 import itertools as it
 from pathlib import Path
-from typing import Any, Final, Literal, Optional, Sequence
+from typing import Any, Final, Literal, Optional, Sequence, cast
 
 import clack
 from logrus import Logger
@@ -12,7 +13,7 @@ from typist import literal_to_list
 
 from zorg import APP_NAME
 from zorg.domain.types import (
-    DoneTodoStatusPrefixChar,
+    DoneTodoTypeChar,
     FileGroupMapType,
     TemplatePatternMapType,
     VarMapType,
@@ -112,7 +113,7 @@ class NoteMoveConfig(Config):
 
     zid: str
     new_page: Path
-    note_type: Optional[DoneTodoStatusPrefixChar] = None
+    note_type: Optional[DoneTodoTypeChar] = None
 
 
 class OpenActionConfig(Config):
@@ -339,12 +340,12 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     note_move_parser.add_argument(
         "note_type",
         nargs="?",
-        type=DoneTodoStatusPrefixChar,  # type: ignore[arg-type]
+        type=_valid_done_type,
         help=(
             "If provided, this argument specifies a new note type for the"
             " moved note. This can be used, for example, to mark an OPEN todo"
             " as DONE before moving it to a file dedicated to done todos."
-            f" Valid values: {literal_to_list(DoneTodoStatusPrefixChar)}"
+            f" Valid values: {literal_to_list(DoneTodoTypeChar)}"
         ),
     )
 
@@ -433,6 +434,15 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     _fix_database_url(kwargs)
 
     return kwargs
+
+
+def _valid_done_type(value: str) -> DoneTodoTypeChar:
+    if value not in literal_to_list(DoneTodoTypeChar):
+        raise ArgumentTypeError(
+            "Invalid done type character. Choose from one of the following"
+            f" valid values: {literal_to_list(DoneTodoTypeChar)}"
+        )
+    return cast(DoneTodoTypeChar, value)
 
 
 def _fix_database_url(kwargs: dict[str, Any]) -> None:
