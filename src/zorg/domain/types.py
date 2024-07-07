@@ -45,7 +45,8 @@ TodoPriorityType = Literal[
 ]
 TemplatePatternMapType = Mapping[Pattern, Path]
 VarMapType = Mapping[str, Any]
-TodoStatusPrefixChar = Literal["o", "x", "~", "<", ">"]
+DoneTodoStatusPrefixChar = Literal["x", "~"]
+TodoStatusPrefixChar = Literal[DoneTodoStatusPrefixChar, "o", "<", ">"]
 
 
 def cast_tag_name(name: TagName) -> TagName:

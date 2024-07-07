@@ -285,15 +285,17 @@ subcommands:
 ### `zorg note move --help`
 
 ```
-usage: zorg note move [-h] zid new_page [mutate]
+usage: zorg note move [-h] zid new_page [note_type]
 
 Move a note to a different page.
 
 positional arguments:
-  mutate      Zorg mutate command which, if provided, specifies modifications
-              that should be made to the note before moving it.
   new_page    Path to the destination page (i.e. where our note will be moved
               to).
+  note_type   If provided, this argument specifies a new note type for the
+              moved note. This can be used, for example, to mark an OPEN todo
+              as DONE before moving it to a file dedicated to done todos.
+              Valid values: ['x', '~']
   zid         ZID of the note we want to move.
 
 options:

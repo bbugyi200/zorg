@@ -12,6 +12,7 @@ from typist import literal_to_list
 
 from zorg import APP_NAME
 from zorg.domain.types import (
+    DoneTodoStatusPrefixChar,
     FileGroupMapType,
     TemplatePatternMapType,
     VarMapType,
@@ -111,7 +112,7 @@ class NoteMoveConfig(Config):
 
     zid: str
     new_page: Path
-    mutate: Optional[str] = None
+    note_type: Optional[DoneTodoStatusPrefixChar] = None
 
 
 class OpenActionConfig(Config):
@@ -336,11 +337,14 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         ),
     )
     note_move_parser.add_argument(
-        "mutate",
+        "note_type",
         nargs="?",
+        type=DoneTodoStatusPrefixChar,
         help=(
-            "Zorg mutate command which, if provided, specifies modifications"
-            " that should be made to the note before moving it."
+            "If provided, this argument specifies a new note type for the"
+            " moved note. This can be used, for example, to mark an OPEN todo"
+            " as DONE before moving it to a file dedicated to done todos."
+            f" Valid values: {literal_to_list(DoneTodoStatusPrefixChar)}"
         ),
     )
 
