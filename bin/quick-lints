@@ -17,6 +17,9 @@ function run() {
     printf -- "\n---------- Running 'quick-lints' Script ----------\n"
     log::info "Running 'render_all_cogs' script to verify that any existing cogs have been rendered..."
     "${BIN}"/render_all_cogs --check
+
+    log::info "Running 'check_import_rules' script to verify our layered architecture import rules..."
+    "${BIN}"/check_import_rules
 }
 
 if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then

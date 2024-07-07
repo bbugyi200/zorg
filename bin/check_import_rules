@@ -1,0 +1,50 @@
+#!/bin/bash
+
+readonly BIN="$(dirname "$0")"
+readonly ROOT="$(dirname "${BIN}")"
+
+source "${ROOT}"/lib/bugyi.sh
+
+function run() {
+  local ec=0
+  if ! check_forbidden_imports "src/zorg/app/" "zorg.storage"; then
+    ec=$((ec + 1))
+  fi
+
+  if ! check_forbidden_imports "src/zorg/storage/" "zorg.service"; then
+    ec=$((ec + 1))
+  fi
+
+  return "${ec}"
+}
+
+# Function to check for forbidden imports in Python files
+check_forbidden_imports() {
+    local directory=$1
+    local package=$2
+
+    log::info "Verifying that NO module in %s imports from the %s package." "${directory}" "${package}"
+
+    local bad_imports=0
+
+    # Check if directory exists
+    if [[ ! -d "$directory" ]]; then
+        echo "Directory does not exist: $directory"
+        return 1
+    fi
+
+    # Iterate over all Python files in the directory and subdirectories
+    for file in $(find "$directory" -type f -name '*.py'); do
+        # Search for direct and relative imports from the specified package
+        if grep -qE "from $package" "$file" || grep -q "import $package" "$file"; then
+            log::error "Forbidden $package import found in $file"
+            bad_imports=$((bad_imports + 1))
+        fi
+    done
+
+    return ${bad_imports}
+}
+
+if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then
+    run "$@"
+fi
