@@ -36,7 +36,7 @@ def handle(
     db_url: str,
     messages: Sequence[Message],
     *,
-    verbose: bool = False,
+    verbose: int = 0,
 ) -> None:
     """Entry point into Zorg's event messagebus loop."""
     zdir = Path(zdir)

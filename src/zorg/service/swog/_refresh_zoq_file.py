@@ -13,9 +13,9 @@ from ._executor import execute_with_session
 
 
 def refresh_zoq_file(
-    zdir: PathLike, db_url: str, zoq_path: Path, *, verbose: bool = False
+    zdir: PathLike, db_url: str, zoq_path: Path, *, verbose: int = 0
 ) -> None:
-    """Refresh the query execution results contained in a provided *.zoq file."""
+    """Refresh the query execution results contained in {zoq_path}."""
     zdir = Path(zdir)
     with SQLSession(zdir, db_url, verbose=verbose) as session:
         refresh_zoq_file_with_session(session, zoq_path)

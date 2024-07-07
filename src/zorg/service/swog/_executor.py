@@ -34,7 +34,7 @@ Selector = Callable[[list[Note]], list[str]]
 
 
 def execute(
-    zdir: PathLike, db_url: str, qstring: str, *, verbose: bool = False
+    zdir: PathLike, db_url: str, qstring: str, *, verbose: int = 0
 ) -> str:
     """Execute a zorg query and then render it as a .zo file."""
     zdir = Path(zdir)

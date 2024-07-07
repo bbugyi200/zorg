@@ -30,7 +30,7 @@ def move_note(
     zid: str,
     new_page: PathLike,
     note_type: Optional[DoneTodoTypeChar],
-    verbose: bool = False,
+    verbose: int = 0,
 ) -> int:
     """Move note associated with {zid} to {new_page}."""
     zdir = Path(zdir)
@@ -51,7 +51,7 @@ def get_notes_by_id(
     id_: str,
     *,
     id_key: str = "ID",
-    verbose: bool = False,
+    verbose: int = 0,
 ) -> list[Note]:
     """Fetch a list of notes using an id:: property."""
     zdir = Path(zdir)
@@ -60,7 +60,7 @@ def get_notes_by_id(
 
 
 def get_note_by_zid(
-    zdir: PathLike, db_url: str, zid: str, *, verbose: bool = False
+    zdir: PathLike, db_url: str, zid: str, *, verbose: int = 0
 ) -> Optional[Note]:
     """Fetch a single note using its unique ZID."""
     zdir = Path(zdir)
