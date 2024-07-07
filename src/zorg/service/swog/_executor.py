@@ -21,7 +21,7 @@ from zorg.domain.types import (
     SelectType,
 )
 from zorg.service.compiler import build_zorg_query
-from zorg.storage.sql.session import SQLSession
+from zorg.storage.sql import SQLSession
 
 from ._saved_queries import expand_saved_queries
 

@@ -17,7 +17,7 @@ from zorg.domain.types import (
 )
 from zorg.service.templates import init_from_template
 from zorg.storage.file import FileManager
-from zorg.storage.sql.session import SQLSession
+from zorg.storage.sql import SQLSession
 
 
 _LOGGER: Final = Logger(__name__)

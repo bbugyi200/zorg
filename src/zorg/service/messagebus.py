@@ -10,7 +10,7 @@ from typist import PathLike, assert_never
 
 from zorg.domain.messages import Message, commands, events
 from zorg.service import handlers
-from zorg.storage.sql.session import SQLSession
+from zorg.storage.sql import SQLSession
 
 
 _LOGGER = Logger(__name__)

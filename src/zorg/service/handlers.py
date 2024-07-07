@@ -20,7 +20,7 @@ from zorg.domain.types import Color
 from zorg.service import swog
 from zorg.service.compiler import walk_zorg_file
 from zorg.shared import common as c, dates as zdt
-from zorg.storage.sql.session import SQLSession
+from zorg.storage.sql import SQLSession
 
 
 _LOGGER = Logger(__name__)

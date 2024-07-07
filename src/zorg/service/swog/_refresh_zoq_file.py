@@ -7,7 +7,7 @@ from pathlib import Path
 
 from typist import PathLike
 
-from zorg.storage.sql.session import SQLSession
+from zorg.storage.sql import SQLSession
 
 from ._executor import execute_with_session
 
