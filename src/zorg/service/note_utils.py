@@ -15,8 +15,9 @@ from zorg.domain.types import (
     TemplatePatternMapType,
     cast_tag_name,
 )
-from zorg.storage.sql.session import SQLSession
 from zorg.storage.file import FileManager
+from zorg.storage.sql.session import SQLSession
+
 
 _LOGGER: Final = Logger(__name__)
 

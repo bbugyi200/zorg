@@ -30,10 +30,9 @@ def refresh_zoq_file_with_session(session: SQLSession, zoq_path: Path) -> None:
         session`) by the caller.
     zoq_path: The path of an existing *.zoq file we are going to refresh.
     """
-    assert zoq_path.exists(), (
-        "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST"
-        " exist."
-    )
+    assert (
+        zoq_path.exists()
+    ), "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST exist."
     zoq_lines = zoq_path.read_text().split("\n")
     qstring = zoq_lines[0].strip()[2:]
     query_results = execute_with_session(session, qstring)
