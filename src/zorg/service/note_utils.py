@@ -36,11 +36,10 @@ def move_note(
     new_page = Path(new_page)
     with SQLSession(zdir, db_url, verbose=verbose) as session:
         return _move_note(
+            file_man=FileManager(zdir, template_pattern_map),
             new_page=new_page,
             note_type=note_type,
             session=session,
-            template_pattern_map=template_pattern_map,
-            zdir=zdir,
             zid=zid,
         )
 
@@ -78,12 +77,11 @@ class _MetadataMutate:
 
 def _move_note(
     *,
-    zdir: Path,
-    template_pattern_map: TemplatePatternMapType,
-    zid: str,
+    file_man: FileManager,
     new_page: Path,
     note_type: Optional[DoneTodoTypeChar],
     session: SQLSession,
+    zid: str,
 ) -> int:
     note = session.repo.get_note_by_zid(zid)
 
@@ -95,7 +93,6 @@ def _move_note(
         f"Note with ZID={zid} found | {str(note.file_path)}::{note.line_no}"
     )
 
-    file_man = FileManager(zdir, template_pattern_map)
     new_note = note
     if note_type is not None:
         new_note = _to_done_note(new_note, note_type)
