@@ -1,24 +1,124 @@
 """Miscellaneous utilities for working with Notes live here."""
 
 from dataclasses import dataclass, replace
+from pathlib import Path
+from typing import Final, Optional
+
+from logrus import Logger
+from typist import PathLike
 
 from zorg.domain.models import Note, TodoPayload
 from zorg.domain.types import (
     DoneTodoTypeChar,
     MetadataType,
     NoteType,
+    TemplatePatternMapType,
     cast_tag_name,
 )
+from zorg.storage.sql.session import SQLSession
+from zorg.storage.file import FileManager
+
+_LOGGER: Final = Logger(__name__)
 
 
-def to_done_note(note: Note, done_type: DoneTodoTypeChar) -> Note:
+def move_note(
+    zdir: PathLike,
+    db_url: str,
+    template_pattern_map: TemplatePatternMapType,
+    *,
+    zid: str,
+    new_page: PathLike,
+    note_type: Optional[DoneTodoTypeChar],
+    verbose: bool = False,
+) -> int:
+    zdir = Path(zdir)
+    new_page = Path(new_page)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        return _move_note(
+            new_page=new_page,
+            note_type=note_type,
+            session=session,
+            template_pattern_map=template_pattern_map,
+            zdir=zdir,
+            zid=zid,
+        )
+
+
+def get_notes_by_id(
+    zdir: PathLike,
+    db_url: str,
+    id_: str,
+    *,
+    id_key: str = "ID",
+    verbose: bool = False,
+) -> list[Note]:
+    """Fetch a list of notes using an id:: property."""
+    zdir = Path(zdir)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        return session.repo.get_notes_by_id(id_, id_key=id_key)
+
+
+def get_note_by_zid(
+    zdir: PathLike, db_url: str, zid: str, *, verbose: bool = False
+) -> Optional[Note]:
+    """Fetch a single note using its unique ZID."""
+    zdir = Path(zdir)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        return session.repo.get_note_by_zid(zid)
+
+
+@dataclass(frozen=True)
+class _MetadataMutate:
+    """Mutates a tag/link."""
+
+    mtype: MetadataType
+    value: str
+
+
+def _move_note(
+    *,
+    zdir: Path,
+    template_pattern_map: TemplatePatternMapType,
+    zid: str,
+    new_page: Path,
+    note_type: Optional[DoneTodoTypeChar],
+    session: SQLSession,
+) -> int:
+    note = session.repo.get_note_by_zid(zid)
+
+    if note is None:
+        _LOGGER.error("No Zorg note with the given ZID", zid=zid)
+        return 1
+
+    _LOGGER.debug(
+        f"Note with ZID={zid} found | {str(note.file_path)}::{note.line_no}"
+    )
+
+    file_man = FileManager(zdir, template_pattern_map)
+    new_note = note
+    if note_type is not None:
+        new_note = _to_done_note(new_note, note_type)
+    new_note = _add_hidden_metadata(new_note)
+    if error := file_man.add_note(new_note, new_page):
+        _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
+        return 1
+
+    if error := file_man.delete_note(note):
+        _LOGGER.error(
+            "Failed to delete note from page", error=f"'{error.upper()}'"
+        )
+        return 1
+    return 0
+
+
+def _to_done_note(note: Note, done_type: DoneTodoTypeChar) -> Note:
     """Changes the note type of {note} to {done_type}."""
     new_note = replace(note)
     new_note.todo_payload = TodoPayload(status=NoteType(done_type))
     return new_note
 
 
-def add_hidden_metadata(note: Note) -> Note:
+def _add_hidden_metadata(note: Note) -> Note:
     """Modifies the body of {note} by adding hidden metadata to it."""
     new_note = replace(note)
     extra_tags = ""
@@ -47,14 +147,6 @@ def add_hidden_metadata(note: Note) -> Note:
             new_note.zid, f"{new_note.zid}{extra_tags}"
         )
     return new_note
-
-
-@dataclass(frozen=True)
-class _MetadataMutate:
-    """Mutates a tag/link."""
-
-    mtype: MetadataType
-    value: str
 
 
 def _get_hidden_metadata_mutates(note: Note) -> list[_MetadataMutate]:

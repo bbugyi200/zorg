@@ -9,9 +9,8 @@ from typist import literal_to_list
 
 from zorg.app.config import OpenActionConfig
 from zorg.domain.types import NoteTypeChar
-from zorg.service import common as c, dates as zdt, swog
+from zorg.service import common as c, dates as zdt, note_utils, swog
 from zorg.service.templates import init_from_template
-from zorg.storage.sql.session import SQLSession
 
 from ._runners import runner
 
@@ -168,14 +167,13 @@ def _open_local_link(local_link: str) -> int:
 
 
 def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
-    id_key = id_link[2:-1]
-    with SQLSession(
-        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-    ) as session:
-        notes = session.repo.get_notes_by_id(id_key)
+    id_ = id_link[2:-1]
+    notes = note_utils.get_notes_by_id(
+        cfg.zettel_dir, cfg.database_url, id_, verbose=cfg.verbose
+    )
 
     if not notes:
-        print(f"ECHO No notes with found with the ID::{id_key} property")
+        print(f"ECHO No notes with found with the ID::{id_} property")
         return 1
 
     pages = list({note.file_path for note in notes})
@@ -183,33 +181,36 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
         matched_files = " ".join(sorted({str(page) for page in pages}))
         print(
             "ECHO Multiple pages found containing notes with the"
-            f" ID::{id_key} property: {matched_files}"
+            f" ID::{id_} property: {matched_files}"
         )
         return 1
 
     page = pages[0]
     full_page_path = c.prepend_zdir(cfg.zettel_dir, [page])[0]
     print(f"EDIT {full_page_path}")
-    print(f"SEARCH ID::{id_key}{_SEARCH_END}")
+    print(f"SEARCH ID::{id_}{_SEARCH_END}")
 
     return 0
 
 
 def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
-    rid_key = rid_link[2:-1]
-    with SQLSession(
-        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-    ) as session:
-        notes = session.repo.get_notes_by_id(rid_key, id_key="RID")
+    rid = rid_link[2:-1]
+    notes = note_utils.get_notes_by_id(
+        cfg.zettel_dir,
+        cfg.database_url,
+        rid,
+        id_key="RID",
+        verbose=cfg.verbose,
+    )
 
     if not notes:
-        print(f"ECHO No notes with found with the RID::{rid_key} property")
+        print(f"ECHO No notes with found with the RID::{rid} property")
         return 1
 
     if len(notes) > 1:
         matched_files = " ".join(sorted({str(n.file_path) for n in notes}))
         print(
-            f"ECHO Multiple notes found the with the ID::{rid_key} property:"
+            f"ECHO Multiple notes found the with the ID::{rid} property:"
             f" {matched_files}"
         )
         return 1
@@ -218,16 +219,15 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     assert note.file_path is not None
     note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
     print(f"EDIT {note_file_path}")
-    print(f"SEARCH RID::{rid_key}{_SEARCH_END}")
+    print(f"SEARCH RID::{rid}{_SEARCH_END}")
 
     return 0
 
 
 def _open_zid_link(cfg: OpenActionConfig, zid: str) -> int:
-    with SQLSession(
-        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-    ) as session:
-        note = session.repo.get_note_by_zid(zid)
+    note = note_utils.get_note_by_zid(
+        cfg.zettel_dir, cfg.database_url, zid, verbose=cfg.verbose
+    )
 
     if note is None:
         return 1
@@ -241,10 +241,9 @@ def _open_zid_link(cfg: OpenActionConfig, zid: str) -> int:
 
 
 def _refresh_zoq_file(cfg: OpenActionConfig, zoq_path: Path) -> None:
-    with SQLSession(
-        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-    ) as session:
-        swog.refresh_zoq_file(session, zoq_path)
+    swog.refresh_zoq_file(
+        cfg.zettel_dir, cfg.database_url, zoq_path, verbose=cfg.verbose
+    )
 
 
 def _is_priority(word: str) -> bool:

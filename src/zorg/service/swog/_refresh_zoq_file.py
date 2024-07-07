@@ -5,12 +5,23 @@ from functools import partial
 import itertools as it
 from pathlib import Path
 
+from typist import PathLike
+
 from zorg.storage.sql.session import SQLSession
 
-from ._executor import execute
+from ._executor import execute_with_session
 
 
-def refresh_zoq_file(session: SQLSession, zoq_path: Path) -> None:
+def refresh_zoq_file(
+    zdir: PathLike, db_url: str, zoq_path: Path, *, verbose: bool = False
+) -> None:
+    """Refresh the query execution results contained in a provided *.zoq file."""
+    zdir = Path(zdir)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        refresh_zoq_file_with_session(session, zoq_path)
+
+
+def refresh_zoq_file_with_session(session: SQLSession, zoq_path: Path) -> None:
     """Refresh the query execution results contained in a provided *.zoq file.
 
     Arguments:
@@ -19,12 +30,13 @@ def refresh_zoq_file(session: SQLSession, zoq_path: Path) -> None:
         session`) by the caller.
     zoq_path: The path of an existing *.zoq file we are going to refresh.
     """
-    assert (
-        zoq_path.exists()
-    ), "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST exist."
+    assert zoq_path.exists(), (
+        "PRECONDITION: Provided *.zoq path (i.e. zoq_path argument) MUST"
+        " exist."
+    )
     zoq_lines = zoq_path.read_text().split("\n")
     qstring = zoq_lines[0].strip()[2:]
-    query_results = execute(session, qstring)
+    query_results = execute_with_session(session, qstring)
     date_spec = dt.datetime.now().strftime("%Y-%m-%d AT %H:%M:%S")
     stats_line_start = "# SAVED QUERY GENERATED ON"
     old_header_lines = it.takewhile(

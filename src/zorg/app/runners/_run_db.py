@@ -3,7 +3,6 @@
 from zorg.app.config import DbCreateConfig, DbReindexConfig
 from zorg.domain.messages import commands
 from zorg.service import messagebus
-from zorg.storage.sql.session import SQLSession
 
 from ._runners import runner
 
@@ -11,17 +10,16 @@ from ._runners import runner
 @runner
 def run_db_create(cfg: DbCreateConfig) -> int:
     """Runner for the 'db create' command."""
-    session = SQLSession(
-        cfg.zettel_dir, cfg.database_url, should_delete_existing_db=True
-    )
     messagebus.handle(
+        cfg.zettel_dir,
+        cfg.database_url,
         [
             commands.CreateDBCommand(
                 cfg.zettel_dir,
                 update_error_file_whitelist=cfg.update_error_file_whitelist,
             )
         ],
-        session,
+        verbose=cfg.verbose,
     )
     return 0
 
@@ -29,8 +27,9 @@ def run_db_create(cfg: DbCreateConfig) -> int:
 @runner
 def run_db_reindex(cfg: DbReindexConfig) -> int:
     """Runner for the 'db reindex' command."""
-    session = SQLSession(cfg.zettel_dir, cfg.database_url)
     messagebus.handle(
+        cfg.zettel_dir,
+        cfg.database_url,
         [
             commands.ReindexDBCommand(
                 zettel_dir=cfg.zettel_dir,
@@ -38,6 +37,6 @@ def run_db_reindex(cfg: DbReindexConfig) -> int:
                 verbose=bool(cfg.verbose),
             )
         ],
-        session,
+        verbose=cfg.verbose,
     )
     return 0

@@ -9,7 +9,7 @@ Serves as a data pipeline used to execute zorg queries.
 """
 
 from ._executor import execute
-from ._refresh_zoq_file import refresh_zoq_file
+from ._refresh_zoq_file import refresh_zoq_file, refresh_zoq_file_with_session
 
 
-__all__ = ["execute", "refresh_zoq_file"]
+__all__ = ["execute", "refresh_zoq_file", "refresh_zoq_file_with_session"]

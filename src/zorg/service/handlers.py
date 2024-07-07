@@ -32,7 +32,7 @@ def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
     """Command handler for the EditCommand."""
     for path in cmd.paths:
         if path.suffix == ".zoq":
-            swog.refresh_zoq_file(session, path)
+            swog.refresh_zoq_file_with_session(session, path)
     vimala.vim(
         *cmd.paths,
         commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),

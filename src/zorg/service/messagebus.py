@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Callable, Sequence
 
 from logrus import Logger
-from typist import assert_never
+from typist import PathLike, assert_never
 
 from zorg.domain.messages import Message, commands, events
 from zorg.service import handlers
@@ -30,8 +31,20 @@ EVENT_HANDLERS: dict[type[events.Event], list[MessageHandler]] = {
 }
 
 
-def handle(messages: Sequence[Message], session: SQLSession) -> None:
+def handle(
+    zdir: PathLike,
+    db_url: str,
+    messages: Sequence[Message],
+    *,
+    verbose: bool = False,
+) -> None:
     """Entry point into Zorg's event messagebus loop."""
+    zdir = Path(zdir)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        return _handle(messages, session)
+
+
+def _handle(messages: Sequence[Message], session: SQLSession) -> None:
     queue = list(messages)
     while queue := sorted(
         queue, key=lambda x: isinstance(x, commands.Command)

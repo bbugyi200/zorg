@@ -3,11 +3,12 @@
 from collections import defaultdict
 from functools import partial
 import itertools as it
+from pathlib import Path
 import time
 from typing import Callable, Iterable, Sequence, Union
 
 from logrus import Logger
-from typist import assert_never
+from typist import PathLike, assert_never
 
 from zorg.domain.models import Note, Query
 from zorg.domain.types import (
@@ -32,23 +33,16 @@ NoteGroup = Union[list[Note], GroupNoteMap]
 Selector = Callable[[list[Note]], list[str]]
 
 
-def execute(session: SQLSession, qstring: str) -> str:
-    """Execute a zorg query and then render it as a .zo file.
+def execute(
+    zdir: PathLike, db_url: str, qstring: str, *, verbose: bool = False
+) -> str:
+    """Execute a zorg query and then render it as a .zo file."""
+    zdir = Path(zdir)
+    with SQLSession(zdir, db_url, verbose=verbose) as session:
+        return execute_with_session(session, qstring)
 
-    In other words, a Zorg query goes in and a Zorg file comes out.
 
-    Arguments:
-    ----------
-    session: A zorg SQL session that MUST be instantiated (e.g. using `with
-        session`) by the caller.
-    qstring: A zorg query that MUST conform to the syntax defined by the
-        [[src/zorg/grammar/ZorgQuery.g4]] grammar.
-
-    Return:
-    -------
-    A string that MUST conform to the syntax defined by the
-    [[src/zorg/grammar/ZorgFile.g4]] grammar's "body" parser rule.
-    """
+def execute_with_session(session: SQLSession, qstring: str) -> str:
     expanded_qstring = expand_saved_queries(session.zdir, qstring)
     if expanded_qstring is None:
         raise RuntimeError(

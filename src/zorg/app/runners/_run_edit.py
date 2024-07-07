@@ -6,7 +6,6 @@ from zorg.service import messagebus
 from zorg.service.common import prepend_zdir
 from zorg.service.file_groups import expand_file_group_paths
 from zorg.service.templates import init_from_template
-from zorg.storage.sql.session import SQLSession
 
 from ._runners import runner
 
@@ -22,6 +21,8 @@ def run_edit(cfg: EditConfig) -> int:
         init_from_template(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
 
     messagebus.handle(
+        cfg.zettel_dir,
+        cfg.database_url,
         [
             commands.EditCommand(
                 keep_alive_file=cfg.keep_alive_file,
@@ -31,6 +32,6 @@ def run_edit(cfg: EditConfig) -> int:
                 zettel_dir=cfg.zettel_dir,
             ),
         ],
-        SQLSession(cfg.zettel_dir, cfg.database_url),
+        verbose=cfg.verbose,
     )
     return 0
