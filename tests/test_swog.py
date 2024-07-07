@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from zorg.service.swog import expand_saved_queries
+from zorg.service.swog._saved_queries import expand_saved_queries
 
 
 def test_expand_saved_queries__good(zettel_dir: Path) -> None:
