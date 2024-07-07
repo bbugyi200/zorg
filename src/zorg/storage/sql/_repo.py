@@ -14,13 +14,13 @@ from sqlmodel.sql.expression import ColumnElement
 from zorg.domain.messages.events import NewZorgNotesEvent
 from zorg.domain.models import File, Note, WhereOrFilter
 from zorg.shared import dates as zdt
-from zorg.storage.sql import models as sql
 
 from ._converters import (
     ZorgFileConverter,
     ZorgNoteConverter,
     to_select_of_note,
 )
+from . import _models as sql
 from ._zid_manager import ZIDManager
 
 

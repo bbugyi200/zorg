@@ -28,7 +28,8 @@ from zorg.domain.types import (
     TodoPriorityType,
 )
 from zorg.shared import common, dates as zdt
-from zorg.storage.sql import models as sql
+
+from . import _models as sql
 
 
 _SONConverterParser = Callable[["_SONConverter"], Optional[ColumnElement]]
