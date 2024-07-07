@@ -5,8 +5,10 @@ import subprocess as sp
 from typing import Final, Optional
 
 from logrus import Logger
+from typist import literal_to_list
 
 from zorg.app.config import OpenActionConfig
+from zorg.domain.types import NoteTypeChar
 from zorg.service import common as c, dates as zdt, swog
 from zorg.service.templates import init_from_template
 from zorg.storage.sql.session import SQLSession
@@ -250,4 +252,4 @@ def _is_priority(word: str) -> bool:
 
 
 def _is_prefix_symbol(word: str) -> bool:
-    return word in ["-", "<", ">", "o", "x"]
+    return word in literal_to_list(NoteTypeChar)

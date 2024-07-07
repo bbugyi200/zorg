@@ -51,6 +51,7 @@ VarMapType = Mapping[str, Any]
 # Prefix characters that specifies the type of a Zorg note.
 DoneTodoTypeChar = Literal["x", "~"]
 TodoTypeChar = Literal[DoneTodoTypeChar, "o", "<", ">"]
+NoteTypeChar = Literal[TodoTypeChar, "-"]
 
 
 def cast_tag_name(name: TagName) -> TagName:
