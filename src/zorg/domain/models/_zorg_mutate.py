@@ -89,9 +89,7 @@ class Mutate:
                 suffix_chars = "]]"
             elif mtype == "properties":
                 pass
-            extra_tags += (
-                f" {prefix_chars}{mdata_mutate.value}{suffix_chars}"
-            )
+            extra_tags += f" {prefix_chars}{mdata_mutate.value}{suffix_chars}"
 
         if extra_tags != "":
             assert new_note.zid is not None

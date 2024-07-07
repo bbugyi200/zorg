@@ -4,10 +4,10 @@ from dataclasses import dataclass, replace
 
 from zorg.domain.models import Note, TodoPayload
 from zorg.domain.types import (
-    cast_tag_name,
     DoneTodoTypeChar,
     MetadataType,
     NoteType,
+    cast_tag_name,
 )
 
 
