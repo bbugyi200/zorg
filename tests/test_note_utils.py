@@ -4,7 +4,7 @@ from typing import Final
 
 from pytest import mark, param
 
-from zorg.service.note_utils import note_body_has_tag
+from zorg.service.note_utils import _note_body_has_tag
 
 
 params = mark.parametrize
@@ -22,5 +22,5 @@ fat_pig_body: Final = (
     ],
 )
 def test_note_body_has_tag(body: str, word: str, expected: bool) -> None:
-    """Flexes the note_body_has_tag() function."""
-    assert note_body_has_tag(body, word) == expected
+    """Flexes the _note_body_has_tag() function."""
+    assert _note_body_has_tag(body, word) == expected

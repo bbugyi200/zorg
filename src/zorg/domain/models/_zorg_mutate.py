@@ -72,10 +72,10 @@ class Mutate:
                 )
             new_note.todo_payload = todo_payload
         extra_tags = ""
-        for tag_link_mutate in self.metadata_mutates:
+        for mdata_mutate in self.metadata_mutates:
             prefix_chars: str = ""
             suffix_chars: str = ""
-            mtype = tag_link_mutate.mtype
+            mtype = mdata_mutate.mtype
             if mtype == "areas":
                 prefix_chars = "#"
             elif mtype == "contexts":
@@ -90,7 +90,7 @@ class Mutate:
             elif mtype == "properties":
                 pass
             extra_tags += (
-                f" {prefix_chars}{tag_link_mutate.value}{suffix_chars}"
+                f" {prefix_chars}{mdata_mutate.value}{suffix_chars}"
             )
 
         if extra_tags != "":
