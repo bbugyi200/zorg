@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import re
-from typing import Optional
+from typing import Final, Optional
 
 from logrus import Logger
 from typist import PathLike
@@ -10,7 +10,7 @@ from typist import PathLike
 from ...service import common as c
 
 
-_LOGGER = Logger(__name__)
+_LOGGER: Final = Logger(__name__)
 
 
 def expand_saved_queries(zdir: PathLike, qstring: str) -> Optional[str]:
@@ -20,9 +20,37 @@ def expand_saved_queries(zdir: PathLike, qstring: str) -> Optional[str]:
     for qname in _get_saved_query_names(qstring):
         sub_where_filter = _get_saved_where_filter(zdir, qname)
         if sub_where_filter is None:
+            _LOGGER.error(
+                "Failed to get saved WHERE filter from query name",
+                query_name=qname,
+            )
             return None
         new_qstring = new_qstring.replace(f"{{{qname}}}", sub_where_filter)
+    _LOGGER.debug(
+        "All saved query references have been expanded",
+        original_query=qstring,
+        expanded_query=new_qstring,
+    )
     return new_qstring
+
+
+def _get_saved_query_names(qstring: str) -> set[str]:
+    """
+    Extracts all saved query names from the given query string.
+
+    Arguments:
+    ----------
+    qstring: The input string containing saved queries.
+
+    Return:
+    -------
+    A set of saved query names.
+    """
+    # Regex to match the pattern of saved queries in the form {FOOBAR}
+    pattern = r"\{(.*?)\}"
+    # Find all matches in the query string
+    matches = re.findall(pattern, qstring)
+    return set(matches)
 
 
 def _get_saved_where_filter(zdir: PathLike, query_name: str) -> Optional[str]:
@@ -57,29 +85,13 @@ def _get_saved_where_filter(zdir: PathLike, query_name: str) -> Optional[str]:
     for sub_query_name in _get_saved_query_names(where_filter):
         sub_where_filter = _get_saved_where_filter(zdir, sub_query_name)
         if sub_where_filter is None:
+            _LOGGER.error(
+                "Failed to get saved WHERE filter from subquery",
+                query_name=query_name,
+                sub_query_name=sub_query_name,
+            )
             return None
         where_filter = where_filter.replace(
             f"{{{sub_query_name}}}", sub_where_filter
         )
     return where_filter
-
-
-def _get_saved_query_names(qstring: str) -> set[str]:
-    """
-    Extracts all saved query names from the given query string.
-
-    Arguments
-    ---------
-        qstring (str): The input string containing saved queries.
-
-    Returns
-    -------
-        A set of saved query names.
-    """
-    # Regex to match the pattern of saved queries in the form {FOOBAR}
-    pattern = r"\{(.*?)\}"
-
-    # Find all matches in the query string
-    matches = re.findall(pattern, qstring)
-
-    return set(matches)
