@@ -20,7 +20,7 @@ def run_query(cfg: QueryConfig) -> int:
         tmp_zoq_path = Path(_create_temp_query_page(tmp_zorg_dir))
         tmp_zoq_path.write_text(f"# {cfg.query}\n")
         if cfg.open_in_editor:
-            messagebus.handle(
+            messagebus.handle(  # pylint: disable=duplicate-code
                 cfg.zettel_dir,
                 cfg.database_url,
                 [
