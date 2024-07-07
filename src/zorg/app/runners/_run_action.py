@@ -10,8 +10,8 @@ from typist import literal_to_list
 from zorg.app.config import OpenActionConfig
 from zorg.domain.types import NoteTypeChar
 from zorg.service import note_utils, swog
-from zorg.shared import common as c, dates as zdt
 from zorg.service.templates import init_from_template
+from zorg.shared import common as c, dates as zdt
 
 from ._runners import runner
 

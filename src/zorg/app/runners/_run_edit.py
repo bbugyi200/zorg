@@ -3,9 +3,9 @@
 from zorg.app.config import EditConfig
 from zorg.domain.messages import commands
 from zorg.service import messagebus
-from zorg.shared.common import prepend_zdir
 from zorg.service.file_groups import expand_file_group_paths
 from zorg.service.templates import init_from_template
+from zorg.shared.common import prepend_zdir
 
 from ._runners import runner
 
