@@ -32,6 +32,7 @@ def move_note(
     note_type: Optional[DoneTodoTypeChar],
     verbose: bool = False,
 ) -> int:
+    """Move note associated with {zid} to {new_page}."""
     zdir = Path(zdir)
     new_page = Path(new_page)
     with SQLSession(zdir, db_url, verbose=verbose) as session:

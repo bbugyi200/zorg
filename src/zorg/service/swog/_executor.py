@@ -43,6 +43,7 @@ def execute(
 
 
 def execute_with_session(session: SQLSession, qstring: str) -> str:
+    """Execute a zorg query using {session} and then render it as a .zo file."""
     expanded_qstring = expand_saved_queries(session.zdir, qstring)
     if expanded_qstring is None:
         raise RuntimeError(
