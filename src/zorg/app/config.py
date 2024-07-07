@@ -26,7 +26,6 @@ Command = Literal[
     "init",
     "list",
     "move",
-    "mutate",
     "open",
     "query",
     "reindex",
@@ -113,15 +112,6 @@ class NoteMoveConfig(Config):
     zid: str
     new_page: Path
     mutate: Optional[str] = None
-
-
-class NoteMutateConfig(Config):
-    """Clack config for the 'note mutate' command."""
-
-    command: Literal["mutate"]
-
-    where_query: str
-    mutate: str
 
 
 class OpenActionConfig(Config):
@@ -352,16 +342,6 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
             "Zorg mutate command which, if provided, specifies modifications"
             " that should be made to the note before moving it."
         ),
-    )
-    # --- 'note mutate' command
-    note_mutate_parser = new_note_command("mutate", help="Bulk update notes")
-    note_mutate_parser.add_argument(
-        "where_query",
-        help="Notes matching this WHERE query will be targeted for updates.",
-    )
-    note_mutate_parser.add_argument(
-        "mutate",
-        help="Mutate command that specifies how each note will be updated.",
     )
 
     # --- 'query' command

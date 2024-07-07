@@ -123,21 +123,3 @@
   
   '''
 # ---
-# name: test_note_mutate[YAMLConfigFile-done_foobar_note]
-  '''
-  x 240408#0X +foobar Some note
-  
-  
-  '''
-# ---
-# name: test_note_mutate[YAMLConfigFile-high_priority_thoughts]
-  '''
-  o P0 301231#X0 [[deep_work]] +brainstorm @THINKING When I talk to %pig I always want to @puke. | ID::pig_is_gross
-  
-  o P0 301231#X1 [[deep_work]] +brainstorm @THINKING @READ Some article
-    * RID::some_article
-    * url::http://www.example.com
-  
-  
-  '''
-# ---

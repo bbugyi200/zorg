@@ -4,10 +4,10 @@ from dataclasses import replace
 
 from logrus import Logger
 
-from zorg.app.config import NoteMoveConfig, NoteMutateConfig
+from zorg.app.config import NoteMoveConfig
 from zorg.domain.models import MetadataMutate, Mutate, Note
 from zorg.domain.types import cast_tag_name
-from zorg.service.compiler import build_zorg_mutate, build_zorg_query
+from zorg.service.compiler import build_zorg_mutate
 from zorg.service.note_utils import note_body_has_tag
 from zorg.storage.file import FileManager
 from zorg.storage.sql.session import SQLSession
@@ -25,15 +25,6 @@ def run_note_move(cfg: NoteMoveConfig) -> int:
         cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
     ) as session:
         return _move_note(cfg, session)
-
-
-@runner
-def run_note_mutate(cfg: NoteMutateConfig) -> int:
-    """Runner for the 'note move' command."""
-    with SQLSession(
-        cfg.zettel_dir, cfg.database_url, verbose=cfg.verbose
-    ) as session:
-        return _mutate_notes(cfg, session)
 
 
 def _move_note(cfg: NoteMoveConfig, session: SQLSession) -> int:
@@ -90,17 +81,3 @@ def _add_hidden_mdata_mutates(mutate: Mutate, note: Note) -> Mutate:
                 MetadataMutate(mtype="properties", value=prop_value)
             )
     return new_mut
-
-
-def _mutate_notes(cfg: NoteMutateConfig, session: SQLSession) -> int:
-    where_query = (
-        cfg.where_query
-        if cfg.where_query.startswith("W ")
-        else f"W {cfg.where_query}"
-    )
-    query = build_zorg_query(where_query).where
-    notes = session.repo.get_notes_by_query(query)
-    mutate = build_zorg_mutate(cfg.mutate)
-    for note in notes:
-        print(mutate.mutate_note(note).to_string())
-    return 0
