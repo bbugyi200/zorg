@@ -12,7 +12,6 @@ from sqlalchemy import func
 from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
-from zorg.domain import models as sql
 from zorg.domain.models import (
     File,
     Note,
@@ -29,6 +28,7 @@ from zorg.domain.types import (
     TodoPriorityType,
 )
 from zorg.service import common, dates as zdt
+from zorg.storage.sql import models as sql
 
 
 _SONConverterParser = Callable[["_SONConverter"], Optional[ColumnElement]]
