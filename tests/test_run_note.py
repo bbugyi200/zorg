@@ -5,7 +5,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from _pytest.capture import CaptureFixture
 from pytest import mark, param
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
