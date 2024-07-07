@@ -15,6 +15,7 @@ from zorg.domain.types import (
     TemplatePatternMapType,
     cast_tag_name,
 )
+from zorg.service.templates import init_from_template
 from zorg.storage.file import FileManager
 from zorg.storage.sql.session import SQLSession
 
@@ -37,10 +38,11 @@ def move_note(
     new_page = Path(new_page)
     with SQLSession(zdir, db_url, verbose=verbose) as session:
         return _move_note(
-            file_man=FileManager(zdir, template_pattern_map),
             new_page=new_page,
             note_type=note_type,
             session=session,
+            template_pattern_map=template_pattern_map,
+            zdir=zdir,
             zid=zid,
         )
 
@@ -78,10 +80,11 @@ class _MetadataMutate:
 
 def _move_note(
     *,
-    file_man: FileManager,
     new_page: Path,
     note_type: Optional[DoneTodoTypeChar],
     session: SQLSession,
+    template_pattern_map: TemplatePatternMapType,
+    zdir: Path,
     zid: str,
 ) -> int:
     note = session.repo.get_note_by_zid(zid)
@@ -98,6 +101,11 @@ def _move_note(
     if note_type is not None:
         new_note = _to_done_note(new_note, note_type)
     new_note = _add_hidden_metadata(new_note)
+
+    if not new_page.exists():
+        init_from_template(zdir, template_pattern_map, new_page)
+
+    file_man = FileManager(zdir)
     if error := file_man.add_note(new_note, new_page):
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1

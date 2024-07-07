@@ -4,9 +4,7 @@ from pathlib import Path
 from typing import NewType, Optional
 
 from zorg.domain.models import Note
-from zorg.domain.types import TemplatePatternMapType
 from zorg.service.common import prepend_zdir
-from zorg.service.templates import init_from_template
 
 
 Error = NewType("Error", str)
@@ -18,10 +16,8 @@ class FileManager:
     def __init__(
         self,
         zdir: Path,
-        template_pattern_map: TemplatePatternMapType,
     ) -> None:
         self._zdir = zdir
-        self._template_pattern_map = template_pattern_map
 
     def add_note(  # pylint: disable=useless-return
         self, note: Note, page: Path
@@ -29,7 +25,7 @@ class FileManager:
         """Adds {note} to the bottom of {page}."""
         zpage = prepend_zdir(self._zdir, [page])[0]
         if not zpage.exists():
-            init_from_template(self._zdir, self._template_pattern_map, zpage)
+            return Error(f"Page does NOT exist: {zpage}")
 
         zlines = zpage.read_text().split("\n")
         in_note = False
