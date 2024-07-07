@@ -339,7 +339,7 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
     note_move_parser.add_argument(
         "note_type",
         nargs="?",
-        type=DoneTodoStatusPrefixChar,
+        type=DoneTodoStatusPrefixChar,  # type: ignore[arg-type]
         help=(
             "If provided, this argument specifies a new note type for the"
             " moved note. This can be used, for example, to mark an OPEN todo"
