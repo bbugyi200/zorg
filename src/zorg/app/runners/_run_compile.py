@@ -4,9 +4,10 @@ from dataclasses import asdict
 from pprint import pprint
 from typing import Any
 
-from ...domain.models import File
-from ...service.compiler import walk_zorg_file
-from ..config import CompileConfig
+from zorg.app.config import CompileConfig
+from zorg.domain.models import File
+from zorg.service.compiler import walk_zorg_file
+
 from ._runners import runner
 
 

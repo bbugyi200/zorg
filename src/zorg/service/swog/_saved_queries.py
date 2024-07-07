@@ -7,7 +7,7 @@ from typing import Final, Optional
 from logrus import Logger
 from typist import PathLike
 
-from ...service import common as c
+from zorg.service import common as c
 
 
 _LOGGER: Final = Logger(__name__)

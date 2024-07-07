@@ -10,16 +10,16 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from .. import dates as zdt
-from ...domain.models import File, Note, TodoPayload
-from ...domain.types import (
+from zorg.domain.models import File, Note, TodoPayload
+from zorg.domain.types import (
     NoteType,
     TagName,
     TodoPriorityType,
     TodoStatusPrefixChar,
 )
-from ...grammar.zorg_file.ZorgFileListener import ZorgFileListener
-from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
+from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from zorg.service import dates as zdt
 
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"

@@ -4,14 +4,15 @@ from pathlib import Path
 import sys
 from typing import Any, Iterable
 
-from ...domain.types import VarMapType
-from ...service import common as c
-from ...service.templates import ZorgTemplateManager, init_from_template
-from ..config import (
+from zorg.app.config import (
     TemplateInitConfig,
     TemplateListConfig,
     TemplateRenderConfig,
 )
+from zorg.domain.types import VarMapType
+from zorg.service import common as c
+from zorg.service.templates import ZorgTemplateManager, init_from_template
+
 from ._runners import runner
 
 

@@ -5,10 +5,11 @@ from pathlib import Path
 import random
 import string
 
-from ...domain.messages import commands
-from ...service import messagebus, swog
-from ...storage.sql.session import SQLSession
-from ..config import QueryConfig
+from zorg.app.config import QueryConfig
+from zorg.domain.messages import commands
+from zorg.service import messagebus, swog
+from zorg.storage.sql.session import SQLSession
+
 from ._runners import runner
 
 

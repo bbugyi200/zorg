@@ -5,8 +5,7 @@ from typing import Optional, Union, cast
 
 from logrus import Logger
 
-from .. import dates as zdt
-from ...domain.models import (
+from zorg.domain.models import (
     DateRange,
     DescFilter,
     FileFilter,
@@ -16,7 +15,7 @@ from ...domain.models import (
     WhereAndFilter,
     WhereOrFilter,
 )
-from ...domain.types import (
+from zorg.domain.types import (
     DescOperator,
     GroupByType,
     NoteType,
@@ -29,8 +28,9 @@ from ...domain.types import (
     SelectType,
     TodoPriorityType,
 )
-from ...grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
-from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
+from zorg.grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
+from zorg.grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
+from zorg.service import dates as zdt
 
 
 _LOGGER = Logger(__name__)

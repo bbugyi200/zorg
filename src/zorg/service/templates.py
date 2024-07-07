@@ -9,8 +9,8 @@ import jinja2
 from logrus import Logger
 from typist import PathLike
 
-from . import common as c
-from ..domain.types import TemplatePatternMapType, VarMapType
+from zorg.domain.types import TemplatePatternMapType, VarMapType
+from zorg.service import common as c
 
 
 _LOGGER = Logger(__name__)

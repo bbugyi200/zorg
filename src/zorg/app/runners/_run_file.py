@@ -2,8 +2,9 @@
 
 from logrus import Logger
 
-from ...service import common as c
-from ..config import FileRenameConfig
+from zorg.app.config import FileRenameConfig
+from zorg.service import common as c
+
 from ._runners import runner
 
 

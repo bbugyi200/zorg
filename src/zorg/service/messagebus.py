@@ -7,9 +7,9 @@ from typing import Any, Callable, Sequence
 from logrus import Logger
 from typist import assert_never
 
-from . import handlers
-from ..domain.messages import Message, commands, events
-from ..storage.sql.session import SQLSession
+from zorg.domain.messages import Message, commands, events
+from zorg.service import handlers
+from zorg.storage.sql.session import SQLSession
 
 
 _LOGGER = Logger(__name__)

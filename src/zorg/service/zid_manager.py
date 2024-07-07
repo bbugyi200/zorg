@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Final, Optional, cast
 
-from .. import APP_NAME
+from zorg import APP_NAME
 
 
 _UNSUPPORTED_ZID_CHARS: Final[tuple[str, ...]] = (

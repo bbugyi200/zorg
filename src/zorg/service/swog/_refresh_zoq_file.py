@@ -5,7 +5,8 @@ from functools import partial
 import itertools as it
 from pathlib import Path
 
-from ...storage.sql.session import SQLSession
+from zorg.storage.sql.session import SQLSession
+
 from ._executor import execute
 
 

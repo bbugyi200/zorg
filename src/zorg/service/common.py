@@ -10,7 +10,7 @@ from typing import Any, Iterable, Iterator
 import rich
 from typist import PathLike
 
-from ..domain.types import Color, VarMapType
+from zorg.domain.types import Color, VarMapType
 
 
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:

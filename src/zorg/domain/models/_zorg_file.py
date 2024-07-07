@@ -5,7 +5,7 @@ import datetime as dt
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
-from ..types import NoteType, TodoPriorityType
+from zorg.domain.types import NoteType, TodoPriorityType
 
 
 if TYPE_CHECKING:

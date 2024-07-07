@@ -10,9 +10,13 @@ import clack
 from logrus import Logger
 from typist import literal_to_list
 
-from .. import APP_NAME
-from ..domain.types import FileGroupMapType, TemplatePatternMapType, VarMapType
-from ..service import common
+from zorg import APP_NAME
+from zorg.domain.types import (
+    FileGroupMapType,
+    TemplatePatternMapType,
+    VarMapType,
+)
+from zorg.service import common
 
 
 Command = Literal[

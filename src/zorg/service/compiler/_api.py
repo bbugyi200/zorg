@@ -4,13 +4,14 @@ from pathlib import Path
 
 import antlr4
 
-from ...domain.models import File, Mutate, Query
-from ...grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
-from ...grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from ...grammar.zorg_mutate.ZorgMutateLexer import ZorgMutateLexer
-from ...grammar.zorg_mutate.ZorgMutateParser import ZorgMutateParser
-from ...grammar.zorg_query.ZorgQueryLexer import ZorgQueryLexer
-from ...grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
+from zorg.domain.models import File, Mutate, Query
+from zorg.grammar.zorg_file.ZorgFileLexer import ZorgFileLexer
+from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
+from zorg.grammar.zorg_mutate.ZorgMutateLexer import ZorgMutateLexer
+from zorg.grammar.zorg_mutate.ZorgMutateParser import ZorgMutateParser
+from zorg.grammar.zorg_query.ZorgQueryLexer import ZorgQueryLexer
+from zorg.grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
+
 from ._file_compiler import ErrorManager, ZorgFileCompiler
 from ._mutate_compiler import ZorgMutateCompiler
 from ._query_compiler import ZorgQueryCompiler

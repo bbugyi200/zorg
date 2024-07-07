@@ -3,8 +3,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from . import commands
-from ..models import Note
+from zorg.domain.messages import commands
+from zorg.domain.models import Note
 
 
 @dataclass(frozen=True)

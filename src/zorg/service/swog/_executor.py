@@ -9,8 +9,8 @@ from typing import Callable, Iterable, Sequence, Union
 from logrus import Logger
 from typist import assert_never
 
-from ...domain.models import Note, Query
-from ...domain.types import (
+from zorg.domain.models import Note, Query
+from zorg.domain.types import (
     GroupByType,
     KeyFunc,
     OrderByType,
@@ -19,8 +19,9 @@ from ...domain.types import (
     SelectStaticType,
     SelectType,
 )
-from ...storage.sql.session import SQLSession
-from ..compiler import build_zorg_query
+from zorg.service.compiler import build_zorg_query
+from zorg.storage.sql.session import SQLSession
+
 from ._saved_queries import expand_saved_queries
 
 

@@ -6,10 +6,11 @@ from typing import Final, Optional
 
 from logrus import Logger
 
-from ...service import common as c, dates as zdt, swog
-from ...service.templates import init_from_template
-from ...storage.sql.session import SQLSession
-from ..config import OpenActionConfig
+from zorg.app.config import OpenActionConfig
+from zorg.service import common as c, dates as zdt, swog
+from zorg.service.templates import init_from_template
+from zorg.storage.sql.session import SQLSession
+
 from ._runners import runner
 
 

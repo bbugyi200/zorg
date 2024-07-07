@@ -13,13 +13,13 @@ from logrus import Logger
 from tqdm import tqdm
 import vimala
 
-from . import common as c, dates as zdt, swog
-from .. import APP_NAME
-from ..domain.messages import commands, events
-from ..domain.models import File, Note
-from ..domain.types import Color
-from ..storage.sql.session import SQLSession
-from .compiler import walk_zorg_file
+from zorg import APP_NAME
+from zorg.domain.messages import commands, events
+from zorg.domain.models import File, Note
+from zorg.domain.types import Color
+from zorg.service import common as c, dates as zdt, swog
+from zorg.service.compiler import walk_zorg_file
+from zorg.storage.sql.session import SQLSession
 
 
 _LOGGER = Logger(__name__)

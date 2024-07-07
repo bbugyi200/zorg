@@ -1,12 +1,13 @@
 """Contains runners for the 'zorg edit' command."""
 
-from ...domain.messages import commands
-from ...service import messagebus
-from ...service.common import prepend_zdir
-from ...service.file_groups import expand_file_group_paths
-from ...service.templates import init_from_template
-from ...storage.sql.session import SQLSession
-from ..config import EditConfig
+from zorg.app.config import EditConfig
+from zorg.domain.messages import commands
+from zorg.service import messagebus
+from zorg.service.common import prepend_zdir
+from zorg.service.file_groups import expand_file_group_paths
+from zorg.service.templates import init_from_template
+from zorg.storage.sql.session import SQLSession
+
 from ._runners import runner
 
 

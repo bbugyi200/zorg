@@ -11,12 +11,16 @@ from logrus import Logger
 from sqlmodel import Session, and_, select
 from sqlmodel.sql.expression import ColumnElement
 
-from . import models as sql
-from ...domain.messages.events import NewZorgNotesEvent
-from ...domain.models import File, Note, WhereOrFilter
-from ...service import dates as zdt
-from ...service.zid_manager import ZIDManager
-from .converters import ZorgFileConverter, ZorgNoteConverter, to_select_of_note
+from zorg.domain.messages.events import NewZorgNotesEvent
+from zorg.domain.models import File, Note, WhereOrFilter
+from zorg.service import dates as zdt
+from zorg.service.zid_manager import ZIDManager
+from zorg.storage.sql import models as sql
+from zorg.storage.sql.converters import (
+    ZorgFileConverter,
+    ZorgNoteConverter,
+    to_select_of_note,
+)
 
 
 _LOGGER = Logger(__name__)

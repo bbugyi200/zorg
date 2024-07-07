@@ -26,7 +26,7 @@ from typist import assert_never
 
 
 if TYPE_CHECKING:
-    from .models import Note, TodoPayload
+    from zorg.domain.models import Note, TodoPayload
 
 
 E = TypeVar("E")

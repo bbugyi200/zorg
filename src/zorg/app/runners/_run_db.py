@@ -1,9 +1,10 @@
 """Contains runners for the 'zorg db' command."""
 
-from ...domain.messages import commands
-from ...service import messagebus
-from ...storage.sql.session import SQLSession
-from ..config import DbCreateConfig, DbReindexConfig
+from zorg.app.config import DbCreateConfig, DbReindexConfig
+from zorg.domain.messages import commands
+from zorg.service import messagebus
+from zorg.storage.sql.session import SQLSession
+
 from ._runners import runner
 
 

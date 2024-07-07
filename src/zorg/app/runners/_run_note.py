@@ -4,13 +4,14 @@ from dataclasses import replace
 
 from logrus import Logger
 
-from ...domain.models import MetadataMutate, Mutate, Note
-from ...domain.types import cast_tag_name
-from ...service.compiler import build_zorg_mutate, build_zorg_query
-from ...service.note_utils import note_body_has_tag
-from ...storage.file import FileManager
-from ...storage.sql.session import SQLSession
-from ..config import NoteMoveConfig, NoteMutateConfig
+from zorg.app.config import NoteMoveConfig, NoteMutateConfig
+from zorg.domain.models import MetadataMutate, Mutate, Note
+from zorg.domain.types import cast_tag_name
+from zorg.service.compiler import build_zorg_mutate, build_zorg_query
+from zorg.service.note_utils import note_body_has_tag
+from zorg.storage.file import FileManager
+from zorg.storage.sql.session import SQLSession
+
 from ._runners import runner
 
 

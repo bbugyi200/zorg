@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 import datetime as dt
 from typing import Iterable, Optional
 
-from ..types import (
+from zorg.domain.types import (
     DescOperator,
     GroupByType,
     NoteType,
