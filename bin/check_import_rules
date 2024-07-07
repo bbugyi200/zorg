@@ -7,13 +7,17 @@ source "${ROOT}"/lib/bugyi.sh
 
 function run() {
   local ec=0
-  if ! check_forbidden_imports "src/zorg/app/" "zorg.storage"; then
-    ec=$((ec + 1))
-  fi
+  for dir in "app" "domain" "shared"; do
+    if ! check_forbidden_imports "src/zorg/${dir}/" "zorg.storage"; then
+      ec=$((ec + 1))
+    fi
+  done
 
-  if ! check_forbidden_imports "src/zorg/storage/" "zorg.service"; then
-    ec=$((ec + 1))
-  fi
+  for dir in "domain" "shared" "storage"; do
+    if ! check_forbidden_imports "src/zorg/${dir}/" "zorg.service"; then
+      ec=$((ec + 1))
+    fi
+  done
 
   return "${ec}"
 }
