@@ -86,7 +86,7 @@ def _get_saved_where_filter(zdir: PathLike, query_name: str) -> Optional[str]:
         sub_where_filter = _get_saved_where_filter(zdir, sub_query_name)
         if sub_where_filter is None:
             _LOGGER.error(
-                "Failed to get saved WHERE filter from subquery",
+                "Failed to get saved WHERE filter from subquery name",
                 query_name=query_name,
                 sub_query_name=sub_query_name,
             )
