@@ -12,8 +12,9 @@ from sqlmodel import Session
 
 from zorg.domain.messages import Message
 from zorg.domain.types import CreateEngineType
-from zorg.storage.sql.engine import create_cached_engine
-from zorg.storage.sql.repo import SQLRepo
+
+from ._engine import create_cached_engine
+from ._repo import SQLRepo
 
 
 _LOGGER = Logger(__name__)
