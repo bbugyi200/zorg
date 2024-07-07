@@ -15,12 +15,12 @@ from zorg.domain.messages.events import NewZorgNotesEvent
 from zorg.domain.models import File, Note, WhereOrFilter
 from zorg.shared import dates as zdt
 from zorg.storage.sql import models as sql
-from zorg.storage.sql.converters import (
+
+from ._converters import (
     ZorgFileConverter,
     ZorgNoteConverter,
     to_select_of_note,
 )
-
 from ._zid_manager import ZIDManager
 
 
