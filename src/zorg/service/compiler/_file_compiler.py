@@ -14,7 +14,7 @@ from zorg.domain.models import File, Note, TodoPayload
 from zorg.domain.types import NoteType, TagName, TodoPriorityType, TodoTypeChar
 from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
-from zorg.service import dates as zdt
+from zorg.shared import dates as zdt
 
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"

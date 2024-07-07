@@ -3,7 +3,7 @@
 from logrus import Logger
 
 from zorg.app.config import FileRenameConfig
-from zorg.service import common as c
+from zorg.shared import common as c
 
 from ._runners import runner
 

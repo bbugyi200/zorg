@@ -18,7 +18,7 @@ from zorg.domain.types import (
     TemplatePatternMapType,
     VarMapType,
 )
-from zorg.service import common
+from zorg.shared import common
 
 
 Command = Literal[

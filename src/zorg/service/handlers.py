@@ -17,7 +17,8 @@ from zorg import APP_NAME
 from zorg.domain.messages import commands, events
 from zorg.domain.models import File, Note
 from zorg.domain.types import Color
-from zorg.service import common as c, dates as zdt, swog
+from zorg.shared import common as c, dates as zdt
+from zorg.service import swog
 from zorg.service.compiler import walk_zorg_file
 from zorg.storage.sql.session import SQLSession
 

@@ -10,7 +10,7 @@ from zorg.app.config import (
     TemplateRenderConfig,
 )
 from zorg.domain.types import VarMapType
-from zorg.service import common as c
+from zorg.shared import common as c
 from zorg.service.templates import ZorgTemplateManager, init_from_template
 
 from ._runners import runner

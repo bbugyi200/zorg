@@ -27,7 +27,7 @@ from zorg.domain.types import (
     PropertyValueType,
     TodoPriorityType,
 )
-from zorg.service import common, dates as zdt
+from zorg.shared import common, dates as zdt
 from zorg.storage.sql import models as sql
 
 

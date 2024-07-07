@@ -10,7 +10,7 @@ from logrus import Logger
 from typist import PathLike
 
 from zorg.domain.types import TemplatePatternMapType, VarMapType
-from zorg.service import common as c
+from zorg.shared import common as c
 
 
 _LOGGER = Logger(__name__)

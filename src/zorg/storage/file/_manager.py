@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import NewType, Optional
 
 from zorg.domain.models import Note
-from zorg.service.common import prepend_zdir
+from zorg.shared.common import prepend_zdir
 
 
 Error = NewType("Error", str)

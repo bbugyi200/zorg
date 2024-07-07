@@ -14,7 +14,7 @@ from freezegun import freeze_time
 from pytest import fixture
 
 from zorg.app.__main__ import main as zorg_main
-from zorg.service import common as c
+from zorg.shared import common as c
 
 from . import common as test_c
 
