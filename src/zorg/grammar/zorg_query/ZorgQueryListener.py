@@ -422,6 +422,24 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#any_non_squote_sym.
+    def enterAny_non_squote_sym(self, ctx:ZorgQueryParser.Any_non_squote_symContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#any_non_squote_sym.
+    def exitAny_non_squote_sym(self, ctx:ZorgQueryParser.Any_non_squote_symContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#any_non_dquote_sym.
+    def enterAny_non_dquote_sym(self, ctx:ZorgQueryParser.Any_non_dquote_symContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#any_non_dquote_sym.
+    def exitAny_non_dquote_sym(self, ctx:ZorgQueryParser.Any_non_dquote_symContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgQueryParser#desc_symbol.
     def enterDesc_symbol(self, ctx:ZorgQueryParser.Desc_symbolContext):
         pass
