@@ -75,12 +75,12 @@ def _handle_event(
     session: SQLSession,
 ) -> None:
     for handler in EVENT_HANDLERS[type(event)]:
+        _LOGGER.debug(
+            "handling event with handler",
+            zorg_event=str(event),
+            handler=str(handler),
+        )
         try:
-            _LOGGER.debug(
-                "handling event with handler",
-                zorg_event=str(event),
-                handler=str(handler),
-            )
             handler(event, session)
         except Exception:
             _LOGGER.exception("Exception handling event", zorg_event=event)
