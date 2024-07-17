@@ -88,7 +88,7 @@ docutils==0.20.1
     #   m2r2
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.2.1
+exceptiongroup==1.2.2
     # via pytest
 filelock==3.15.4
     # via
@@ -238,13 +238,13 @@ snowballstemmer==2.2.0
     # via
     #   pydocstyle
     #   sphinx
-sphinx==7.3.7
+sphinx==7.4.5
     # via
     #   -r requirements-dev.in
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.2.2
+sphinx-autodoc-typehints==2.2.3
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
@@ -264,11 +264,11 @@ sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 sqlalchemy==2.0.31
     # via sqlmodel
-sqlmodel==0.0.19
+sqlmodel==0.0.20
     # via
     #   -r requirements.in
     #   zettel-org
-structlog==24.2.0
+structlog==24.4.0
     # via bolton-logrus
 syrupy==4.6.1
     # via -r requirements-dev.in

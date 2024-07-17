@@ -65,9 +65,9 @@ six==1.16.0
     # via python-dateutil
 sqlalchemy==2.0.31
     # via sqlmodel
-sqlmodel==0.0.19
+sqlmodel==0.0.20
     # via -r requirements.in
-structlog==24.2.0
+structlog==24.4.0
     # via bolton-logrus
 tqdm==4.66.4
     # via -r requirements.in
