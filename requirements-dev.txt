@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.10.1
+mypy==1.11.0
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
