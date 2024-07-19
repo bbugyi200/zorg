@@ -47,7 +47,11 @@ unquoted_word    : tag
                  | ref_link
                  | priority
                  ;
-quoted_word      : SQUOTE quoted_word_body+ SQUOTE? | DQUOTE quoted_word_body+ DQUOTE? ;
+quoted_word      : SQUOTE quoted_word_body+ SQUOTE?
+                 | quoted_word_body+ SQUOTE
+                 | DQUOTE quoted_word_body+ DQUOTE?
+                 | quoted_word_body+ DQUOTE
+                 ;
 quoted_word_body : any_sym | unquoted_word | '[[' | ']]';
 
 // Zorg YYMMDD#XX IDs
