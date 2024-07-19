@@ -42,7 +42,6 @@ def move_note(
             note_type=note_type,
             session=session,
             template_pattern_map=template_pattern_map,
-            zdir=zdir,
             zid=zid,
         )
 
@@ -84,7 +83,6 @@ def _move_note(
     note_type: Optional[DoneTodoTypeChar],
     session: SQLSession,
     template_pattern_map: TemplatePatternMapType,
-    zdir: Path,
     zid: str,
 ) -> int:
     note = session.repo.get_note_by_zid(zid)
@@ -103,9 +101,9 @@ def _move_note(
     new_note = _add_hidden_metadata(new_note)
 
     if not new_page.exists():
-        init_from_template(zdir, template_pattern_map, new_page)
+        init_from_template(session.zdir, template_pattern_map, new_page)
 
-    file_man = FileManager(zdir)
+    file_man = FileManager(session.zdir)
     if error := file_man.add_note(new_note, new_page):
         _LOGGER.error("Failed to add note to page", error=f"'{error.upper()}'")
         return 1
