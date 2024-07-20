@@ -45,11 +45,11 @@ class ZorgFileCompiler(ZorgFileListener):
     """Listener that compiles zorg files.
 
     This compiler takes as input a single *.zo file. When walked, it produces
-    as output the {zorg_file} instance attribute.
+    as output the {page} instance attribute.
     """
 
-    def __init__(self, zorg_file: Page, error_manager: ErrorManager) -> None:
-        self.zorg_file = zorg_file
+    def __init__(self, page: Page, error_manager: ErrorManager) -> None:
+        self.page = page
         self.error_manager = error_manager
 
         self._s = _ZorgFileCompilerState()
@@ -337,7 +337,7 @@ class ZorgFileCompiler(ZorgFileListener):
             "areas": self._s.areas,
             "contexts": self._s.contexts,
             "create_date": self._s.create_date,
-            "file_path": self.zorg_file.path,
+            "file_path": self.page.path,
             "line_no": line_no,
             "links": self._s.links,
             "modify_date": (
@@ -411,9 +411,9 @@ class ZorgFileCompiler(ZorgFileListener):
         elif self.error_manager.errors:
             _LOGGER.warning(
                 "Skipping note since zorg file has errors.",
-                file_path=str(self.zorg_file.path),
+                file_path=str(self.page.path),
             )
-            self.zorg_file.has_errors = True
+            self.page.has_errors = True
         else:
             body = note_body.getText().strip()
             bullets = (
@@ -436,7 +436,7 @@ class ZorgFileCompiler(ZorgFileListener):
                 note_body.start.line, **extra_kwargs
             )
             note = Note(body, **kwargs)
-            self.zorg_file.notes.append(note)
+            self.page.notes.append(note)
 
 
 def _get_default_tags_map() -> dict[TagName, list[str]]:

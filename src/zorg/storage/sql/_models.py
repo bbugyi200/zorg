@@ -18,13 +18,13 @@ SelectOfScalar.inherit_cache = True
 ###############################################################################
 # abstract model classes
 ###############################################################################
-class Base(SQLModel):
+class _Base(SQLModel):
     """Abstract base model class."""
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
 
-class NoteLink(SQLModel):
+class _NoteLinkBase(SQLModel):
     """Abstract model for association/link models."""
 
     note_id: Optional[int] = Field(
@@ -32,8 +32,8 @@ class NoteLink(SQLModel):
     )
 
 
-class Tag(Base):
-    """Abstract model class for todo.txt tags."""
+class _HasNameBase(_Base):
+    """Abstract model class for models w/ a 'name' field (e.g. tag/prop models)."""
 
     name: str = Field(sa_type=String)
 
@@ -41,7 +41,7 @@ class Tag(Base):
 ###############################################################################
 # link models (i.e. assocation tables for many-to-many relationships)
 ###############################################################################
-class ProjectLink(NoteLink, table=True):
+class ProjectLink(_NoteLinkBase, table=True):
     """Association model for notes-to-projects relationships."""
 
     project_id: Optional[int] = Field(
@@ -49,7 +49,7 @@ class ProjectLink(NoteLink, table=True):
     )
 
 
-class ContextLink(NoteLink, table=True):
+class ContextLink(_NoteLinkBase, table=True):
     """Association model for notes-to-contexts relationships."""
 
     context_id: Optional[int] = Field(
@@ -57,7 +57,7 @@ class ContextLink(NoteLink, table=True):
     )
 
 
-class AreaLink(NoteLink, table=True):
+class AreaLink(_NoteLinkBase, table=True):
     """Association model for notes-to-areas relationships."""
 
     area_id: Optional[int] = Field(
@@ -65,7 +65,7 @@ class AreaLink(NoteLink, table=True):
     )
 
 
-class PersonLink(NoteLink, table=True):
+class PersonLink(_NoteLinkBase, table=True):
     """Association model for notes-to-areas relationships."""
 
     person_id: Optional[int] = Field(
@@ -73,7 +73,7 @@ class PersonLink(NoteLink, table=True):
     )
 
 
-class PropertyLink(NoteLink, table=True):
+class PropertyLink(_NoteLinkBase, table=True):
     """Association model for note-to-property relationships."""
 
     prop_id: Optional[int] = Field(
@@ -86,7 +86,7 @@ class PropertyLink(NoteLink, table=True):
     value: str
 
 
-class LinkLink(NoteLink, table=True):
+class LinkLink(_NoteLinkBase, table=True):
     """Association model for note-to-link relationships."""
 
     link_id: Optional[int] = Field(
@@ -97,45 +97,49 @@ class LinkLink(NoteLink, table=True):
 ###############################################################################
 # models used to track zorg file sections
 ###############################################################################
-class H1(Base, table=True):
+class H1(_Base, table=True):
     """Model class for H1 sections in zorg files."""
 
     zorg_file_id: int = Field(foreign_key="zorgfile.id")
 
     zorg_file: "ZorgFile" = Relationship(back_populates="h1s")
     h2s: List["H2"] = Relationship(back_populates="h1")
+    blocks: List["Block"] = Relationship(back_populates="h1")
 
 
-class H2(Base, table=True):
+class H2(_Base, table=True):
     """Model class for H2 sections in zorg files."""
 
     h1_id: int = Field(foreign_key="h1.id")
 
     h1: H1 = Relationship(back_populates="h2s")
     h3s: List["H3"] = Relationship(back_populates="h2")
+    blocks: List["Block"] = Relationship(back_populates="h2")
 
 
-class H3(Base, table=True):
+class H3(_Base, table=True):
     """Model class for H3 sections in zorg files."""
 
     h2_id: int = Field(foreign_key="h2.id")
 
     h2: H2 = Relationship(back_populates="h3s")
     h4s: List["H4"] = Relationship(back_populates="h3")
+    blocks: List["Block"] = Relationship(back_populates="h3")
 
 
-class H4(Base, table=True):
+class H4(_Base, table=True):
     """Model class for H4 sections in zorg files."""
 
     h3_id: int = Field(foreign_key="h3.id")
 
     h3: H3 = Relationship(back_populates="h4s")
+    blocks: List["Block"] = Relationship(back_populates="h4")
 
 
 ###############################################################################
 # model used to track zorg (*.zo) files
 ###############################################################################
-class ZorgFile(Base, table=True):
+class ZorgFile(_Base, table=True):
     """Model class for zorg (*.zo) files."""
 
     path: str
@@ -145,9 +149,25 @@ class ZorgFile(Base, table=True):
 
 
 ###############################################################################
-# model used to store notes
+# models used to store notes in blocks
 ###############################################################################
-class ZorgNote(Base, table=True):
+class Block(_Base, table=True):
+    """Model class for zorg note blocks."""
+
+    notes: List["ZorgNote"] = Relationship(back_populates="block")
+
+    h1_id: Optional[int] = Field(default=None, foreign_key="h1.id")
+    h2_id: Optional[int] = Field(default=None, foreign_key="h2.id")
+    h3_id: Optional[int] = Field(default=None, foreign_key="h3.id")
+    h4_id: Optional[int] = Field(default=None, foreign_key="h4.id")
+
+    h1: Optional[H1] = Relationship(back_populates="blocks")
+    h2: Optional[H2] = Relationship(back_populates="blocks")
+    h3: Optional[H3] = Relationship(back_populates="blocks")
+    h4: Optional[H4] = Relationship(back_populates="blocks")
+
+
+class ZorgNote(_Base, table=True):
     """Model class for zorg notes."""
 
     # table columns
@@ -164,9 +184,12 @@ class ZorgNote(Base, table=True):
     todo_status: Optional[NoteType] = None
 
     zorg_file_id: int = Field(foreign_key="zorgfile.id")
+    # TODO(bugyi): Make this field NOT optional
+    block_id: Optional[int] = Field(foreign_key="block.id")
 
     # relationships
     zorg_file: ZorgFile = Relationship(back_populates="notes")
+    block: Block = Relationship(back_populates="notes")
     links: List["Link"] = Relationship(
         back_populates="notes", link_model=LinkLink
     )
@@ -188,7 +211,7 @@ class ZorgNote(Base, table=True):
 ###############################################################################
 # tag models
 ###############################################################################
-class Project(Tag, table=True):
+class Project(_HasNameBase, table=True):
     """Model class for todo.txt project tags (e.g. +zorg)."""
 
     notes: List[ZorgNote] = Relationship(
@@ -196,7 +219,7 @@ class Project(Tag, table=True):
     )
 
 
-class Context(Tag, table=True):
+class Context(_HasNameBase, table=True):
     """Model class for todo.txt context tags (e.g. @home)."""
 
     notes: List[ZorgNote] = Relationship(
@@ -204,7 +227,7 @@ class Context(Tag, table=True):
     )
 
 
-class Area(Tag, table=True):
+class Area(_HasNameBase, table=True):
     """Model class for todo.txt area tags (e.g. #gtd)."""
 
     notes: List[ZorgNote] = Relationship(
@@ -212,7 +235,7 @@ class Area(Tag, table=True):
     )
 
 
-class Person(Tag, table=True):
+class Person(_HasNameBase, table=True):
     """Model class for todo.txt person tags (e.g. %john)."""
 
     notes: List[ZorgNote] = Relationship(
@@ -220,13 +243,13 @@ class Person(Tag, table=True):
     )
 
 
-class Property(Tag, table=True):
+class Property(_HasNameBase, table=True):
     """Model class for properties (e.g. due::2022-06-01)."""
 
     links: List[PropertyLink] = Relationship(back_populates="prop")
 
 
-class Link(Tag, table=True):
+class Link(_HasNameBase, table=True):
     """Model class for links (e.g. [[foobar]])."""
 
     notes: List[ZorgNote] = Relationship(
