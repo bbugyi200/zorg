@@ -10,10 +10,7 @@ from sqlalchemy import func
 from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
-from zorg.domain.models import (
-    WhereAndFilter,
-    WhereOrFilter,
-)
+from zorg.domain.models import WhereAndFilter, WhereOrFilter
 from zorg.domain.types import (
     DescOperator,
     NoteType,

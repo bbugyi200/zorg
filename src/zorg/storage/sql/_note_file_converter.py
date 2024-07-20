@@ -6,15 +6,8 @@ from typing import Any, cast
 
 from sqlmodel import Session, select
 
-from zorg.domain.models import (
-    Note,
-    Page,
-    TodoPayload,
-)
-from zorg.domain.types import (
-    EntityConverter,
-    TodoPriorityType,
-)
+from zorg.domain.models import Note, Page, TodoPayload
+from zorg.domain.types import EntityConverter, TodoPriorityType
 from zorg.shared import common
 
 from . import _models as sql

@@ -16,10 +16,7 @@ from zorg.domain.models import Note, Page, WhereOrFilter
 from zorg.shared import dates as zdt
 
 from . import _models as sql
-from ._note_file_converter import (
-    ZorgFileConverter,
-    ZorgNoteConverter,
-)
+from ._note_file_converter import ZorgFileConverter, ZorgNoteConverter
 from ._query_converter import convert_query
 from ._zid_manager import ZIDManager
 
