@@ -3,7 +3,7 @@
 Contains Domain-layer models.
 """
 
-from ._zorg_page import Note, Page, TodoPayload
+from ._zorg_page import Block, H1, H2, H3, H4, Note, Page, TodoPayload
 from ._zorg_query import (
     DateRange,
     DescFilter,
@@ -17,10 +17,15 @@ from ._zorg_query import (
 
 
 __all__ = [
+    "Block",
     "DateRange",
     "DescFilter",
     "Page",
     "FileFilter",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
     "LinkFilter",
     "Note",
     "PropertyFilter",

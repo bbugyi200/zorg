@@ -16,6 +16,7 @@ if TYPE_CHECKING:
 class Section:
     """An H1-H4 section."""
 
+    title: str
     blocks: list["Block"]
 
 
@@ -73,6 +74,7 @@ class Note:
     body: str
     file_path: Path
     line_no: int
+    block: Block
 
     areas: list[str] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
@@ -115,5 +117,7 @@ class Page:
     path: Path
     has_errors: bool = False
     notes: list[Note] = field(default_factory=list)
-    h1s: list[H1] = field(default_factory=list)
     events: list["Event"] = field(default_factory=list)
+
+    h0: Optional[H1] = None
+    h1s: list[H1] = field(default_factory=list)
