@@ -131,7 +131,6 @@
     'property',
     'propertylink',
     'zorgfile',
-    'zorgfilelink',
     'zorgnote',
   ])
 # ---

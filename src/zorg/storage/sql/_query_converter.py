@@ -43,14 +43,8 @@ def convert_query(
     return (
         select(sql.ZorgNote)
         .join(
-            sql.ZorgFileLink,
-            cast(ColumnElement, sql.ZorgNote.id == sql.ZorgFileLink.note_id),
-        )
-        .join(
             sql.ZorgFile,
-            cast(
-                ColumnElement, sql.ZorgFileLink.zorg_file_id == sql.ZorgFile.id
-            ),
+            cast(ColumnElement, sql.ZorgNote.zorg_file_id == sql.ZorgFile.id),
         )
         .where(
             or_(*[
@@ -327,7 +321,6 @@ class _QueryConverter:
 def _get_notes_in_file(session: Session, file_name: str) -> list[sql.ZorgNote]:
     stmt = (
         select(sql.ZorgNote)
-        .join(sql.ZorgFileLink)
         .join(sql.ZorgFile)
         .where(sql.ZorgFile.path == f"{file_name}.zo")
     )
