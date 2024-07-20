@@ -58,7 +58,6 @@ class Block:
     notes: list["Note"] = field(default_factory=list)
 
 
-
 @dataclass(frozen=True)
 class TodoPayload:
     """Extra fields that are added to ZorgNotes that are todos."""
