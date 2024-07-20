@@ -95,6 +95,44 @@ class LinkLink(NoteLink, table=True):
 
 
 ###############################################################################
+# models used to track zorg file sections
+###############################################################################
+class H1(Base, table=True):
+    """Model class for H1 sections in zorg files."""
+
+    zorg_file_id: int = Field(foreign_key="zorgfile.id")
+
+    zorg_file: "ZorgFile" = Relationship(back_populates="h1s")
+    h2s: List["H2"] = Relationship(back_populates="h1")
+
+
+class H2(Base, table=True):
+    """Model class for H2 sections in zorg files."""
+
+    h1_id: int = Field(foreign_key="h1.id")
+
+    h1: H1 = Relationship(back_populates="h2s")
+    h3s: List["H3"] = Relationship(back_populates="h2")
+
+
+class H3(Base, table=True):
+    """Model class for H3 sections in zorg files."""
+
+    h2_id: int = Field(foreign_key="h2.id")
+
+    h2: H2 = Relationship(back_populates="h3s")
+    h4s: List["H4"] = Relationship(back_populates="h3")
+
+
+class H4(Base, table=True):
+    """Model class for H4 sections in zorg files."""
+
+    h3_id: int = Field(foreign_key="h3.id")
+
+    h3: H3 = Relationship(back_populates="h4s")
+
+
+###############################################################################
 # model used to track zorg (*.zo) files
 ###############################################################################
 class ZorgFile(Base, table=True):
@@ -103,6 +141,7 @@ class ZorgFile(Base, table=True):
     path: str
     has_errors: bool = False
     notes: List["ZorgNote"] = Relationship(back_populates="zorg_file")
+    h1s: List[H1] = Relationship(back_populates="zorg_file")
 
 
 ###############################################################################
