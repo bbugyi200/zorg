@@ -16,11 +16,11 @@ from zorg.domain.models import Note, Page, WhereOrFilter
 from zorg.shared import dates as zdt
 
 from . import _models as sql
-from ._converters import (
+from ._note_file_converter import (
     ZorgFileConverter,
     ZorgNoteConverter,
-    to_select_of_note,
 )
+from ._query_converter import convert_query
 from ._zid_manager import ZIDManager
 
 
@@ -86,7 +86,7 @@ class SQLRepo:
 
     def get_notes_by_query(self, query: Optional[WhereOrFilter]) -> list[Note]:
         """Get note(s) from DB by using a query."""
-        select_of_note = to_select_of_note(query, self._session)
+        select_of_note = convert_query(query, self._session)
         # If the user asked for really verbose output...
         if self._verbose > 1:
             # ... then we print the SELECT statement.
