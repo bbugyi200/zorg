@@ -13,7 +13,7 @@ from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
 from zorg.domain.models import (
-    File,
+    Page,
     Note,
     TodoPayload,
     WhereAndFilter,
@@ -398,15 +398,15 @@ def _to_todo_status(note_type: NoteType) -> Optional[NoteType]:
         return note_type
 
 
-class ZorgFileConverter(EntityConverter[File, sql.ZorgFile]):
-    """Converts File domain entities to/from ZorgFile sqlmodels."""
+class ZorgFileConverter(EntityConverter[Page, sql.ZorgFile]):
+    """Converts Page domain entities to/from ZorgFile sqlmodels."""
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._zdir = zdir
         self._note_converter = ZorgNoteConverter(zdir, session)
         self._all_sql_notes: list[sql.ZorgNote] = []
 
-    def from_entity(self, entity: File) -> sql.ZorgFile:
+    def from_entity(self, entity: Page) -> sql.ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
         sql_notes = []
         for note in entity.notes:
@@ -419,9 +419,9 @@ class ZorgFileConverter(EntityConverter[File, sql.ZorgFile]):
             has_errors=entity.has_errors,
         )
 
-    def to_entity(self, sql_model: sql.ZorgFile) -> File:
-        """Model-to-SQL-model converter for a File."""
-        return File(
+    def to_entity(self, sql_model: sql.ZorgFile) -> Page:
+        """Model-to-SQL-model converter for a Page."""
+        return Page(
             Path(common.strip_zdir(self._zdir, sql_model.path)),
             has_errors=sql_model.has_errors,
             notes=[

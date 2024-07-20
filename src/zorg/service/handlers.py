@@ -15,10 +15,10 @@ import vimala
 
 from zorg import APP_NAME
 from zorg.domain.messages import commands, events
-from zorg.domain.models import File, Note
+from zorg.domain.models import Page, Note
 from zorg.domain.types import Color
 from zorg.service import swog
-from zorg.service.compiler import walk_zorg_file
+from zorg.service.compiler import walk_zorg_page
 from zorg.shared import common as c, dates as zdt
 from zorg.storage.sql import SQLSession
 
@@ -106,7 +106,7 @@ def create_database(
     cmd: commands.CreateDBCommand, session: SQLSession
 ) -> None:
     """Create a new zorg DB from scratch."""
-    zorg_files = []
+    zorg_pages = []
     total_num_notes = 0
     error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
     old_error_files = error_file_whitelist.read_text().split("\n")
@@ -116,41 +116,41 @@ def create_database(
         desc="Reading notes from zorg files",
         file=sys.stdout,
     ):
-        _LOGGER.info("Starting to walk zorg file", zorg_file=str(zo_path))
-        zorg_file = walk_zorg_file(cmd.zettel_dir, zo_path)
-        num_notes = len(zorg_file.notes)
+        _LOGGER.info("Starting to walk zorg file", zorg_page=str(zo_path))
+        zorg_page = walk_zorg_page(cmd.zettel_dir, zo_path)
+        num_notes = len(zorg_page.notes)
         total_num_notes += num_notes
         _LOGGER.info(
             "Finished walking zorg file",
-            zorg_file=zo_path.name,
+            zorg_page=zo_path.name,
             num_notes=num_notes,
             total_num_notes=total_num_notes,
         )
-        session.repo.add_file(zorg_file)
-        zorg_files.append(zorg_file)
-        zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
-        if zorg_file.has_errors and (
-            zorg_file_path_str in old_error_files
+        session.repo.add_file(zorg_page)
+        zorg_pages.append(zorg_page)
+        zorg_page_path_str = c.strip_zdir(cmd.zettel_dir, zorg_page.path)
+        if zorg_page.has_errors and (
+            zorg_page_path_str in old_error_files
             or cmd.update_error_file_whitelist
         ):
-            error_files.append(zorg_file_path_str)
-        elif zorg_file.has_errors:
+            error_files.append(zorg_page_path_str)
+        elif zorg_page.has_errors:
             raise RuntimeError(
-                f"Previously valid Zorg file now has errors!: {zorg_file.path}"
+                f"Previously valid Zorg file now has errors!: {zorg_page.path}"
             )
         elif (
-            not zorg_file.has_errors and zorg_file_path_str in old_error_files
+            not zorg_page.has_errors and zorg_page_path_str in old_error_files
         ):
             c.zprint(
                 "PREVIOUSLY BROKEN ZORG FILE HAS BEEN FIXED!",
-                zorg_file_path_str,
+                zorg_page_path_str,
                 fg_color=Color.WHITE,
                 bg_color=Color.GREEN,
             )
 
     _LOGGER.info(
         "Finished reading zettel org directory",
-        good_files=len(zorg_files) - len(error_files),
+        good_files=len(zorg_pages) - len(error_files),
         bad_files=len(error_files),
         notes=total_num_notes,
     )
@@ -179,51 +179,51 @@ def reindex_database(
     error_files = error_file_whitelist.read_text().split("\n")
 
     num_of_updates = 0
-    for zorg_file_name, hash_ in file_to_hash.copy().items():
+    for zorg_page_name, hash_ in file_to_hash.copy().items():
         # If this file has never been indexed OR the file contents have changed
         # since the last time it was indexed.
         if (
-            zorg_file_name not in old_file_to_hash.keys()
-            or old_file_to_hash[zorg_file_name] != hash_
+            zorg_page_name not in old_file_to_hash.keys()
+            or old_file_to_hash[zorg_page_name] != hash_
         ):
             num_of_updates += 1
-            old_zorg_file = session.repo.remove_file_by_name(zorg_file_name)
-            if old_zorg_file is not None:
-                _LOGGER.debug("Removing file from DB", file=zorg_file_name)
+            old_zorg_page = session.repo.remove_file_by_name(zorg_page_name)
+            if old_zorg_page is not None:
+                _LOGGER.debug("Removing file from DB", file=zorg_page_name)
                 c.zprint(
                     "UPDATING EXISTING FILE",
-                    zorg_file_name,
+                    zorg_page_name,
                     fg_color=Color.BLACK,
                     bg_color=Color.YELLOW,
                 )
             else:
                 c.zprint(
                     "ADDING NEW FILE",
-                    zorg_file_name,
+                    zorg_page_name,
                     fg_color=Color.WHITE,
                     bg_color=Color.GREEN,
                 )
 
-            zorg_file = walk_zorg_file(
-                cmd.zettel_dir, Path(zorg_file_name), verbose=cmd.verbose
+            zorg_page = walk_zorg_page(
+                cmd.zettel_dir, Path(zorg_page_name), verbose=cmd.verbose
             )
-            zorg_file_path_str = c.strip_zdir(cmd.zettel_dir, zorg_file.path)
-            if not zorg_file.has_errors and zorg_file_path_str in error_files:
+            zorg_page_path_str = c.strip_zdir(cmd.zettel_dir, zorg_page.path)
+            if not zorg_page.has_errors and zorg_page_path_str in error_files:
                 c.zprint(
                     "PREVIOUSLY BROKEN ZORG FILE HAS BEEN FIXED!",
-                    zorg_file_path_str,
+                    zorg_page_path_str,
                     fg_color=Color.WHITE,
                     bg_color=Color.GREEN,
                 )
-                error_files.remove(zorg_file_path_str)
+                error_files.remove(zorg_page_path_str)
             elif (
-                zorg_file.has_errors and zorg_file_path_str not in error_files
+                zorg_page.has_errors and zorg_page_path_str not in error_files
             ):
-                raise RuntimeError(f"Zorg file has errors!: {zorg_file.path}")
+                raise RuntimeError(f"Zorg file has errors!: {zorg_page.path}")
 
-            _check_for_modified_notes(cmd.zettel_dir, zorg_file, old_zorg_file)
-            _LOGGER.debug("Adding zorg file", file=zorg_file_name)
-            session.repo.add_file(zorg_file)
+            _check_for_modified_notes(cmd.zettel_dir, zorg_page, old_zorg_page)
+            _LOGGER.debug("Adding zorg file", file=zorg_page_name)
+            session.repo.add_file(zorg_page)
             session.commit()
 
     if num_of_updates == 0:
@@ -251,7 +251,7 @@ def add_zids_to_notes_in_file(
 
     _update_zo_file(
         zdir=event.zettel_dir,
-        zo_path=event.zorg_file_path,
+        zo_path=event.zorg_page_path,
         notes_to_update=event.new_notes,
         add_thing_to_first_line=_add_zid_to_line,
         get_thing=attrgetter("zid"),
@@ -267,7 +267,7 @@ def update_note_modify_dates(
     today_short_date = zdt.to_short_date_spec(dt.date.today())
     _update_zo_file(
         zdir=event.zettel_dir,
-        zo_path=event.zorg_file_path,
+        zo_path=event.zorg_page_path,
         notes_to_update=event.modified_notes,
         add_thing_to_first_line=_add_or_update_modify_date,
         get_thing=lambda _: today_short_date,
@@ -364,13 +364,13 @@ def _process_vim_commands(
 
 
 def _check_for_modified_notes(
-    zdir: Path, zorg_file: File, old_zorg_file: Optional[File]
+    zdir: Path, zorg_page: Page, old_zorg_page: Optional[Page]
 ) -> None:
     today = dt.date.today()
     modified_notes: list[Note] = []
-    notes = old_zorg_file.notes if old_zorg_file else []
+    notes = old_zorg_page.notes if old_zorg_page else []
     old_zid_map = {note.zid: note for note in notes if note.zid is not None}
-    for note in zorg_file.notes:
+    for note in zorg_page.notes:
         old_note = old_zid_map.get(note.zid, None) if note.zid else None
         note_has_changed = old_note and note != old_note
         if note.modify_date != today and note_has_changed:
@@ -388,8 +388,8 @@ def _check_for_modified_notes(
             note.body = f"{modify_short_date} {old_body}"
             modified_notes.append(note)
     if modified_notes:
-        zorg_file.events.append(
-            events.ModifiedZorgNotesEvent(zdir, zorg_file.path, modified_notes)
+        zorg_page.events.append(
+            events.ModifiedZorgNotesEvent(zdir, zorg_page.path, modified_notes)
         )
 
 
@@ -444,7 +444,7 @@ def _update_zo_file(
 
     _LOGGER.info(
         log_message,
-        zorg_file=str(zo_path),
+        zorg_page=str(zo_path),
         notes_to_update=len(notes_to_update),
     )
     zo_path.write_text("\n".join(zlines))

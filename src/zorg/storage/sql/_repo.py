@@ -12,7 +12,7 @@ from sqlmodel import Session, and_, select
 from sqlmodel.sql.expression import ColumnElement
 
 from zorg.domain.messages.events import NewZorgNotesEvent
-from zorg.domain.models import File, Note, WhereOrFilter
+from zorg.domain.models import Page, Note, WhereOrFilter
 from zorg.shared import dates as zdt
 
 from . import _models as sql
@@ -39,25 +39,25 @@ class SQLRepo:
         self._note_converter = ZorgNoteConverter(zettel_dir, session)
         self._verbose = verbose
 
-        self.seen: list[File] = []
+        self.seen: list[Page] = []
 
-    def add_file(self, zorg_file: File, /, *, key: str = None) -> None:
+    def add_file(self, zorg_page: Page, /, *, key: str = None) -> None:
         """Adds a new file to the DB."""
         del key
-        self._seen_zorg_file(zorg_file)
-        _add_zids(self._zettel_dir, zorg_file)
-        sql_zorg_file = self._converter.from_entity(zorg_file)
-        self._session.add(sql_zorg_file)
+        self._seen_zorg_page(zorg_page)
+        _add_zids(self._zettel_dir, zorg_page)
+        sql_zorg_page = self._converter.from_entity(zorg_page)
+        self._session.add(sql_zorg_page)
 
-    def remove_file_by_name(self, filename: str) -> Optional[File]:
+    def remove_file_by_name(self, filename: str) -> Optional[Page]:
         """Remove a zorg file from the repo by path."""
         stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == filename)
         results = self._session.exec(stmt)
-        sql_zorg_file = results.first()
-        if sql_zorg_file:
-            zorg_file = self._converter.to_entity(sql_model=sql_zorg_file)
-            _LOGGER.debug("Deleting Zorg File", zorg_file=zorg_file)
-            for sql_note in sql_zorg_file.notes:
+        sql_zorg_page = results.first()
+        if sql_zorg_page:
+            zorg_page = self._converter.to_entity(sql_model=sql_zorg_page)
+            _LOGGER.debug("Deleting Zorg Page", zorg_page=zorg_page)
+            for sql_note in sql_zorg_page.notes:
                 for prop_link in sql_note.property_links:
                     delete_prop = len(prop_link.prop.links) == 1
                     self._session.delete(prop_link)
@@ -77,8 +77,8 @@ class SQLRepo:
                             self._session.commit()
 
                 self._session.delete(sql_note)
-            self._session.delete(sql_zorg_file)
-            return zorg_file
+            self._session.delete(sql_zorg_page)
+            return zorg_page
         else:
             emsg = "Cannot delete zorg file since it does not exist."
             _LOGGER.debug(emsg, path=filename)
@@ -139,14 +139,14 @@ class SQLRepo:
             for sql_note in results.all()
         ]
 
-    def _seen_zorg_file(self, zorg_file: File) -> None:
-        self.seen.append(zorg_file)
+    def _seen_zorg_page(self, zorg_page: Page) -> None:
+        self.seen.append(zorg_page)
 
 
-def _add_zids(zdir: Path, zorg_file: File) -> None:
+def _add_zids(zdir: Path, zorg_page: Page) -> None:
     new_notes = []
     zid_manager = ZIDManager(zdir)
-    for note in zorg_file.notes:
+    for note in zorg_page.notes:
         if note.zid is None:
             _LOGGER.debug("Found new zorg note", zorg_note=note)
             zid = zid_manager.get_next(note.create_date)
@@ -157,8 +157,8 @@ def _add_zids(zdir: Path, zorg_file: File) -> None:
             note.body = f"{zid} {old_body}"
             new_notes.append(note)
     if new_notes:
-        zorg_file.events.append(
+        zorg_page.events.append(
             NewZorgNotesEvent(
-                zdir, zorg_file_path=zorg_file.path, new_notes=new_notes
+                zdir, zorg_page_path=zorg_page.path, new_notes=new_notes
             )
         )

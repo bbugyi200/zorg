@@ -25,7 +25,7 @@ class NewZorgNotesEvent(Event):
     """Broadcast when new zorg notes are indexed."""
 
     zettel_dir: Path
-    zorg_file_path: Path
+    zorg_page_path: Path
     new_notes: list[Note]
 
 
@@ -34,5 +34,5 @@ class ModifiedZorgNotesEvent(Event):
     """Broadcast when zorg notes should have their modify date updated."""
 
     zettel_dir: Path
-    zorg_file_path: Path
+    zorg_page_path: Path
     modified_notes: list[Note]
