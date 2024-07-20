@@ -12,6 +12,53 @@ if TYPE_CHECKING:
     from ..messages.events import Event
 
 
+@dataclass
+class Section:
+    """An H1-H4 section."""
+
+    blocks: list["Block"]
+
+
+@dataclass
+class H1(Section):
+    """An H1 section."""
+
+    page: "Page"
+    h2s: list["H2"] = field(default_factory=list)
+
+
+@dataclass
+class H2(Section):
+    """An H2 section."""
+
+    h1: "H1"
+    h3s: list["H3"] = field(default_factory=list)
+
+
+@dataclass
+class H3(Section):
+    """An H3 section."""
+
+    h2: "H2"
+    h4s: list["H4"] = field(default_factory=list)
+
+
+@dataclass
+class H4(Section):
+    """An H4 section."""
+
+    h3: "H3"
+
+
+@dataclass
+class Block:
+    """A block of notes."""
+
+    section: Section
+    notes: list["Note"] = field(default_factory=list)
+
+
+
 @dataclass(frozen=True)
 class TodoPayload:
     """Extra fields that are added to ZorgNotes that are todos."""
@@ -69,4 +116,5 @@ class Page:
     path: Path
     has_errors: bool = False
     notes: list[Note] = field(default_factory=list)
+    h1s: list[H1] = field(default_factory=list)
     events: list["Event"] = field(default_factory=list)

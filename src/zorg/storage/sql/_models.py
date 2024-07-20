@@ -33,9 +33,15 @@ class _NoteLinkBase(SQLModel):
 
 
 class _HasNameBase(_Base):
-    """Abstract model class for models w/ a 'name' field (e.g. tag/prop models)."""
+    """Abstract model class for models w/ a 'name' field."""
 
     name: str = Field(sa_type=String)
+
+
+class _HasTitleBase(_Base):
+    """Abstract model class for models w/ a 'title' field."""
+
+    title: str = Field(sa_type=String)
 
 
 ###############################################################################
@@ -97,7 +103,7 @@ class LinkLink(_NoteLinkBase, table=True):
 ###############################################################################
 # models used to track zorg file sections
 ###############################################################################
-class H1(_Base, table=True):
+class H1(_HasTitleBase, table=True):
     """Model class for H1 sections in zorg files."""
 
     zorg_file_id: int = Field(foreign_key="zorgfile.id")
@@ -107,7 +113,7 @@ class H1(_Base, table=True):
     blocks: List["Block"] = Relationship(back_populates="h1")
 
 
-class H2(_Base, table=True):
+class H2(_HasTitleBase, table=True):
     """Model class for H2 sections in zorg files."""
 
     h1_id: int = Field(foreign_key="h1.id")
@@ -117,7 +123,7 @@ class H2(_Base, table=True):
     blocks: List["Block"] = Relationship(back_populates="h2")
 
 
-class H3(_Base, table=True):
+class H3(_HasTitleBase, table=True):
     """Model class for H3 sections in zorg files."""
 
     h2_id: int = Field(foreign_key="h2.id")
@@ -127,7 +133,7 @@ class H3(_Base, table=True):
     blocks: List["Block"] = Relationship(back_populates="h3")
 
 
-class H4(_Base, table=True):
+class H4(_HasTitleBase, table=True):
     """Model class for H4 sections in zorg files."""
 
     h3_id: int = Field(foreign_key="h3.id")
@@ -144,6 +150,7 @@ class ZorgFile(_Base, table=True):
 
     path: str
     has_errors: bool = False
+    # TODO(bugyi): Replace with @property field
     notes: List["ZorgNote"] = Relationship(back_populates="zorg_file")
     h1s: List[H1] = Relationship(back_populates="zorg_file")
 
@@ -188,6 +195,7 @@ class ZorgNote(_Base, table=True):
     block_id: Optional[int] = Field(foreign_key="block.id")
 
     # relationships
+    # TODO(bugyi): Remove 'zorg_file' field
     zorg_file: ZorgFile = Relationship(back_populates="notes")
     block: Block = Relationship(back_populates="notes")
     links: List["Link"] = Relationship(

@@ -19,6 +19,7 @@ from zorg.shared import dates as zdt
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"
 _LOGGER = Logger(__name__)
+_TagDict = dict[TagName, list[str]]
 
 
 class ErrorManager(ErrorListener):
@@ -61,6 +62,11 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.Base_noteContext
     ) -> None:  # noqa: D102
         self._s.in_note = True
+        del ctx
+
+    def enterBlock(
+        self, ctx: ZorgFileParser.BlockContext
+    ) -> None:  # noqa: D102
         del ctx
 
     def enterContext(
@@ -439,7 +445,7 @@ class ZorgFileCompiler(ZorgFileListener):
             self.page.notes.append(note)
 
 
-def _get_default_tags_map() -> dict[TagName, list[str]]:
+def _get_default_tags_map() -> _TagDict:
     return {
         "areas": [],
         "contexts": [],
@@ -466,24 +472,12 @@ class _ZorgFileCompilerState:
     in_note: bool = False
     in_quoted_word: bool = False
 
-    file_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
-    h1_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
-    h2_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
-    h3_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
-    h4_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
-    note_tags: dict[TagName, list[str]] = field(
-        default_factory=_get_default_tags_map
-    )
+    file_tags: _TagDict = field(default_factory=_get_default_tags_map)
+    h1_tags: _TagDict = field(default_factory=_get_default_tags_map)
+    h2_tags: _TagDict = field(default_factory=_get_default_tags_map)
+    h3_tags: _TagDict = field(default_factory=_get_default_tags_map)
+    h4_tags: _TagDict = field(default_factory=_get_default_tags_map)
+    note_tags: _TagDict = field(default_factory=_get_default_tags_map)
 
     file_props: dict[str, Any] = field(default_factory=lambda: {})
     h1_props: dict[str, Any] = field(default_factory=lambda: {})
