@@ -15,7 +15,7 @@ import vimala
 
 from zorg import APP_NAME
 from zorg.domain.messages import commands, events
-from zorg.domain.models import Page, Note
+from zorg.domain.models import Note, Page
 from zorg.domain.types import Color
 from zorg.service import swog
 from zorg.service.compiler import walk_zorg_page

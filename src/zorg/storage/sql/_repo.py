@@ -12,7 +12,7 @@ from sqlmodel import Session, and_, select
 from sqlmodel.sql.expression import ColumnElement
 
 from zorg.domain.messages.events import NewZorgNotesEvent
-from zorg.domain.models import Page, Note, WhereOrFilter
+from zorg.domain.models import Note, Page, WhereOrFilter
 from zorg.shared import dates as zdt
 
 from . import _models as sql

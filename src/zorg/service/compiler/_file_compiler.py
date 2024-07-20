@@ -10,7 +10,7 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from zorg.domain.models import Page, Note, TodoPayload
+from zorg.domain.models import Note, Page, TodoPayload
 from zorg.domain.types import NoteType, TagName, TodoPriorityType, TodoTypeChar
 from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser

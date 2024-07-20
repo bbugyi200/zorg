@@ -3,7 +3,7 @@
 Contains Domain-layer models.
 """
 
-from ._zorg_page import Page, Note, TodoPayload
+from ._zorg_page import Note, Page, TodoPayload
 from ._zorg_query import (
     DateRange,
     DescFilter,

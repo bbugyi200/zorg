@@ -13,8 +13,8 @@ from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
 from zorg.domain.models import (
-    Page,
     Note,
+    Page,
     TodoPayload,
     WhereAndFilter,
     WhereOrFilter,
