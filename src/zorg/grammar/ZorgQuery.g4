@@ -85,14 +85,14 @@ tag_symbol         : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // --- GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;
-group_by_atom : file | type | priority | none | AT_SIGN | HASH | PERCENT | PLUS ;
+group_by_atom : file | section | type | priority | none | AT_SIGN | HASH | PERCENT | PLUS ;
 
 // --- ORDER BY
 order_by_body : order_by_atom (SPACE order_by_atom)* ;
 order_by_atom : alpha | create | modify | priority | type | none ;
 
 // keywords
-keyword  : file | none | type | priority | alpha | create | modify ;
+keyword  : file | none | type | priority | alpha | create | modify | section ;
 file     : 'file' ;
 none     : 'none' ;
 type     : 'type' ;
@@ -100,6 +100,7 @@ priority : 'priority' ;
 alpha    : 'alpha' ;
 create   : 'create' ;
 modify   : 'modify' ;
+section  : 'section' ;
 
 //// lexer rules
 CREATE_RANGE_HEAD : HAT ZDATE ;

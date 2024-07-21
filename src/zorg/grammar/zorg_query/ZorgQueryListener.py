@@ -584,5 +584,14 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgQueryParser#section.
+    def enterSection(self, ctx:ZorgQueryParser.SectionContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#section.
+    def exitSection(self, ctx:ZorgQueryParser.SectionContext):
+        pass
+
+
 
 del ZorgQueryParser
