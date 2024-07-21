@@ -238,7 +238,7 @@ snowballstemmer==2.2.0
     # via
     #   pydocstyle
     #   sphinx
-sphinx==7.4.6
+sphinx==7.4.7
     # via
     #   -r requirements-dev.in
     #   sphinx-autodoc-typehints
@@ -264,7 +264,7 @@ sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 sqlalchemy==2.0.31
     # via sqlmodel
-sqlmodel==0.0.20
+sqlmodel==0.0.21
     # via
     #   -r requirements.in
     #   zettel-org
