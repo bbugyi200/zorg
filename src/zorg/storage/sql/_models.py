@@ -107,7 +107,7 @@ class LinkLink(_NoteLinkBase, table=True):
 class H1(_HasTitleBase, table=True):
     """Model class for H1 sections in zorg files."""
 
-    zorg_file_id: int = Field(foreign_key="zorgfile.id")
+    zorg_file_id: Optional[int] = Field(foreign_key="zorgfile.id")
 
     zorg_file: "ZorgFile" = Relationship(back_populates="h1s")
     h2s: List["H2"] = Relationship(back_populates="h1")
@@ -117,7 +117,7 @@ class H1(_HasTitleBase, table=True):
 class H2(_HasTitleBase, table=True):
     """Model class for H2 sections in zorg files."""
 
-    h1_id: int = Field(foreign_key="h1.id")
+    h1_id: Optional[int] = Field(foreign_key="h1.id")
 
     h1: H1 = Relationship(back_populates="h2s")
     h3s: List["H3"] = Relationship(back_populates="h2")
@@ -127,7 +127,7 @@ class H2(_HasTitleBase, table=True):
 class H3(_HasTitleBase, table=True):
     """Model class for H3 sections in zorg files."""
 
-    h2_id: int = Field(foreign_key="h2.id")
+    h2_id: Optional[int] = Field(foreign_key="h2.id")
 
     h2: H2 = Relationship(back_populates="h3s")
     h4s: List["H4"] = Relationship(back_populates="h3")
@@ -137,7 +137,7 @@ class H3(_HasTitleBase, table=True):
 class H4(_HasTitleBase, table=True):
     """Model class for H4 sections in zorg files."""
 
-    h3_id: int = Field(foreign_key="h3.id")
+    h3_id: Optional[int] = Field(foreign_key="h3.id")
 
     h3: H3 = Relationship(back_populates="h4s")
     blocks: List["Block"] = Relationship(back_populates="h4")
