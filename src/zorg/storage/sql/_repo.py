@@ -141,8 +141,10 @@ class SQLRepo:
         ]
 
     def _record_seen_page(self, page: Page) -> None:
-        self.seen_pages.append(page)
-        self._path_to_seen_page[str(page.path)] = page
+        if page not in self.seen_pages:
+            self.seen_pages.append(page)
+        if str(page.path) not in self._path_to_seen_page:
+            self._path_to_seen_page[str(page.path)] = page
 
     def _get_page(self, sql_note: sql.ZorgNote) -> Page:
         page_path = sql_note.page_path
