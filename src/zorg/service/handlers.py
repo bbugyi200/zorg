@@ -224,7 +224,6 @@ def reindex_database(
             _check_for_modified_notes(cmd.zettel_dir, zorg_page, old_zorg_page)
             _LOGGER.debug("Adding zorg file", file=zorg_page_name)
             session.repo.add_file(zorg_page)
-            session.commit()
 
     if num_of_updates == 0:
         c.zprint("NO ZORG FILES HAVE BEEN MODIFIED")
