@@ -10,7 +10,17 @@ from antlr4.error.ErrorListener import ErrorListener
 from logrus import Logger
 from typist import assert_never
 
-from zorg.domain.models import H1, H2, H3, H4, Block, Note, Page, TodoPayload
+from zorg.domain.models import (
+    H1,
+    H2,
+    H3,
+    H4,
+    Block,
+    Note,
+    Page,
+    Section,
+    TodoPayload,
+)
 from zorg.domain.types import NoteType, TagName, TodoPriorityType, TodoTypeChar
 from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
@@ -69,6 +79,7 @@ class ZorgFileCompiler(ZorgFileListener):
     ) -> None:  # noqa: D102
         del ctx
         self._s.block = Block()
+        section: Section
         if self._s.h1 is None:
             if self.page.h0 is None:
                 self.page.h0 = H1("", [])

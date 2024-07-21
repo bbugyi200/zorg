@@ -8,6 +8,7 @@ from sqlmodel import Field, Relationship, SQLModel, String
 from sqlmodel.sql.expression import Select, SelectOfScalar
 
 from zorg.domain.types import NoteType
+from zorg.shared import common as c
 
 
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
@@ -151,6 +152,11 @@ class ZorgFile(_Base, table=True):
     path: str
     has_errors: bool = False
     h1s: List[H1] = Relationship(back_populates="zorg_file")
+
+    @property
+    def notes(self) -> list["ZorgNote"]:
+        """Returns all Notes on this Page."""
+        return c.flatten_h1_notes(self.h1s)
 
 
 ###############################################################################

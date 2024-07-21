@@ -243,7 +243,7 @@ class EntityConverter(Generic[E, T], abc.ABC):
         """Converts some non-domain object into a domain entity."""
 
     @abc.abstractmethod
-    def from_entity(self, entity: E) -> T:
+    def from_entity(self, _: E) -> T:
         """Converts some domain entity into something else."""
 
 

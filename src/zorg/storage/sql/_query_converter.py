@@ -8,7 +8,6 @@ from typing import Any, Callable, Final, Iterable, Optional, TypeVar, cast
 from logrus import Logger
 import metaman
 from sqlalchemy import func
-from sqlalchemy.orm import joinedload
 from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
@@ -26,18 +25,18 @@ from . import _models as sql
 
 _BASE_SELECTOR: Final = (
     select(sql.ZorgNote)
-    .join(sql.H1, sql.ZorgFile.h1s)
-    .outerjoin(sql.H2, sql.H1.h2s)
-    .outerjoin(sql.H3, sql.H2.h3s)
-    .outerjoin(sql.H4, sql.H3.h4s)
+    .join(sql.H1, cast(ColumnElement, sql.ZorgFile.h1s))
+    .outerjoin(sql.H2, cast(ColumnElement, sql.H1.h2s))
+    .outerjoin(sql.H3, cast(ColumnElement, sql.H2.h3s))
+    .outerjoin(sql.H4, cast(ColumnElement, sql.H3.h4s))
     .join(
         sql.Block,
-        (sql.Block.h1_id == sql.H1.id)
-        | (sql.Block.h2_id == sql.H2.id)
-        | (sql.Block.h3_id == sql.H3.id)
-        | (sql.Block.h4_id == sql.H4.id),
+        cast(ColumnElement, sql.Block.h1_id == sql.H1.id)
+        | cast(ColumnElement, sql.Block.h2_id == sql.H2.id)
+        | cast(ColumnElement, sql.Block.h3_id == sql.H3.id)
+        | cast(ColumnElement, sql.Block.h4_id == sql.H4.id),
     )
-    .join(sql.ZorgNote, sql.Block.notes)
+    .join(sql.ZorgNote, cast(ColumnElement, sql.Block.notes))
     .distinct()
 )
 _LOGGER: Final = Logger(__name__)

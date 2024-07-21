@@ -52,7 +52,7 @@ class SQLRepo:
         results = self._session.exec(stmt)
         sql_zorg_page = results.first()
         if sql_zorg_page:
-            zorg_page = self._converter.to_entity(sql_model=sql_zorg_page)
+            zorg_page = self._converter.to_entity(sql_zorg_page)
             _LOGGER.debug("Deleting Zorg Page", zorg_page=zorg_page)
             for sql_note in sql_zorg_page.notes:
                 for prop_link in sql_note.property_links:

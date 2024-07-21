@@ -3,7 +3,7 @@
 Contains Domain-layer models.
 """
 
-from ._page import H1, H2, H3, H4, Block, Note, Page, TodoPayload
+from ._page import H1, H2, H3, H4, Block, Note, Page, Section, TodoPayload
 from ._query import (
     DateRange,
     DescFilter,
@@ -30,6 +30,7 @@ __all__ = [
     "Note",
     "PropertyFilter",
     "Query",
+    "Section",
     "TodoPayload",
     "WhereAndFilter",
     "WhereOrFilter",

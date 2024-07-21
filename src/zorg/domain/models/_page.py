@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
 from zorg.domain.types import NoteType, TodoPriorityType
+from zorg.shared import common as c
 
 
 if TYPE_CHECKING:
@@ -117,19 +118,7 @@ class Page:
     @property
     def notes(self) -> list[Note]:
         """Returns all notes on this page."""
-        notes = []
         h1s = list(self.h1s)
         if self.h0:
             h1s = [self.h0] + h1s
-        blocks = []
-        for h1 in h1s:
-            blocks.extend(h1.blocks)
-            for h2 in h1.h2s:
-                blocks.extend(h2.blocks)
-                for h3 in h2.h3s:
-                    blocks.extend(h3.blocks)
-                    for h4 in h3.h4s:
-                        blocks.extend(h4.blocks)
-        for block in blocks:
-            notes.extend(block.notes)
-        return notes
+        return c.flatten_h1_notes(h1s)

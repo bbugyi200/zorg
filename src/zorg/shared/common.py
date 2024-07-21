@@ -93,6 +93,23 @@ def get_all_zfiles(zdir: PathLike) -> Iterator[Path]:
     )
 
 
+def flatten_h1_notes(h1s: list[Any]) -> list[Any]:
+    """Flattens the notes contained in a list of domain/SQL H1 sections."""
+    notes = []
+    blocks = []
+    for h1 in h1s:
+        blocks.extend(h1.blocks)
+        for h2 in h1.h2s:
+            blocks.extend(h2.blocks)
+            for h3 in h2.h3s:
+                blocks.extend(h3.blocks)
+                for h4 in h3.h4s:
+                    blocks.extend(h4.blocks)
+    for block in blocks:
+        notes.extend(block.notes)
+    return notes
+
+
 def _var_map_value(value: str) -> Any:
     if re.match("^[0-9]{4}[01][0-9][0-3][0-9]$", value):
         return dt.datetime.strptime(value, "%Y%m%d")
