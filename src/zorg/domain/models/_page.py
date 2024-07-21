@@ -25,6 +25,7 @@ class Section:
 class H1(Section):
     """An H1 section."""
 
+    page: Optional["Page"] = None
     h2s: list["H2"] = field(default_factory=list)
 
 
@@ -32,6 +33,7 @@ class H1(Section):
 class H2(Section):
     """An H2 section."""
 
+    h1: Optional["H1"] = None
     h3s: list["H3"] = field(default_factory=list)
 
 
@@ -39,12 +41,15 @@ class H2(Section):
 class H3(Section):
     """An H3 section."""
 
+    h2: Optional["H2"] = None
     h4s: list["H4"] = field(default_factory=list)
 
 
 @dataclass
 class H4(Section):
     """An H4 section."""
+
+    h3: Optional["H3"] = None
 
 
 @dataclass
