@@ -57,7 +57,7 @@ class H1Converter(EntityConverter[H1, sql.H1]):
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._block_converter = BlockConverter(zdir, session)
-        self._h2_converter = H2Converter(zdir, session, self._block_converter)
+        self._h2_converter = H2Converter(self._block_converter)
 
     def from_entity(self, h1: H1) -> sql.H1:  # noqa: D102
         sql_h2s = []
@@ -87,10 +87,8 @@ class H1Converter(EntityConverter[H1, sql.H1]):
 class H2Converter(EntityConverter[H2, sql.H2]):
     """Converts H2 domain entities to/from H2 sqlmodels."""
 
-    def __init__(
-        self, zdir: Path, session: Session, block_converter: "BlockConverter"
-    ) -> None:
-        self._h3_converter = H3Converter(zdir, session, block_converter)
+    def __init__(self, block_converter: "BlockConverter") -> None:
+        self._h3_converter = H3Converter(block_converter)
         self._block_converter = block_converter
 
     def from_entity(self, h2: H2) -> sql.H2:  # noqa: D102
@@ -119,9 +117,7 @@ class H2Converter(EntityConverter[H2, sql.H2]):
 class H3Converter(EntityConverter[H3, sql.H3]):
     """Converts H3 domain entities to/from H3 sqlmodels."""
 
-    def __init__(
-        self, zdir: Path, session: Session, block_converter: "BlockConverter"
-    ) -> None:
+    def __init__(self, block_converter: "BlockConverter") -> None:
         self._h4_converter = H4Converter(block_converter)
         self._block_converter = block_converter
 
