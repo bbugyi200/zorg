@@ -121,6 +121,7 @@ class GroupByType(enum.Enum):
     PERSON = enum.auto()
     PRIORITY = enum.auto()
     PROJECT = enum.auto()
+    SECTION = enum.auto()
 
     @property
     def keyfunc(self) -> KeyFunc:
@@ -139,6 +140,8 @@ class GroupByType(enum.Enum):
             return _to_comparable_tag_factory("projects", "+")
         elif self is GroupByType.PRIORITY:
             return lambda note: _to_comparable_priority(note.todo_payload)
+        elif self is GroupByType.SECTION:
+            return lambda note: _to_comparable_section(note)
         else:
             assert_never(self)
 
@@ -278,3 +281,8 @@ def _to_comparable_tag_factory(attr: str, tag_symbol: str) -> KeyFunc:
         )
 
     return _keyfunc
+
+
+def _to_comparable_section(note: "Note") -> str:
+    del note
+    return "SECTION"

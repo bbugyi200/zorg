@@ -202,6 +202,8 @@ class ZorgQueryCompiler(ZorgQueryListener):
                 group_by_type = GroupByType.NOTE_TYPE
             elif group_by_atom.priority():
                 group_by_type = GroupByType.PRIORITY
+            elif group_by_atom.section():
+                group_by_type = GroupByType.SECTION
             else:
                 assert (
                     group_by_atom.getText() == "none"
