@@ -76,6 +76,7 @@ class Note:
     line_no: int
 
     areas: list[str] = field(default_factory=lambda: [])
+    block: Optional[Block] = None
     contexts: list[str] = field(default_factory=lambda: [])
     create_date: dt.date = field(default_factory=dt.date.today)
     links: list[str] = field(default_factory=lambda: [])

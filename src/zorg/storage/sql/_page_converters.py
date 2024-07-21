@@ -47,8 +47,16 @@ class PageConverter(EntityConverter[Page, sql.ZorgFile]):
         h0: Optional[H1] = None
         if sql_page.h1s and sql_page.h1s[0].title == "":
             h0 = self._h1_converter.to_entity(sql_h1s.pop(0))
+            h0.page = page
         page.h0 = h0
-        page.h1s = [self._h1_converter.to_entity(sql_h1) for sql_h1 in sql_h1s]
+
+        h1s = []
+        for sql_h1 in sql_h1s:
+            h1 = self._h1_converter.to_entity(sql_h1)
+            h1.page = page
+            h1s.append(h1)
+        page.h1s = h1s
+
         return page
 
 
@@ -72,16 +80,20 @@ class H1Converter(EntityConverter[H1, sql.H1]):
         return sql_h1
 
     def to_entity(self, sql_h1: sql.H1) -> H1:  # noqa: D102
-        return H1(
+        h1 = H1(
             title=sql_h1.title,
-            h2s=[
-                self._h2_converter.to_entity(sql_h2) for sql_h2 in sql_h1.h2s
-            ],
             blocks=[
                 self._block_converter.to_entity(sql_block)
                 for sql_block in sql_h1.blocks
             ],
         )
+        h2s = []
+        for sql_h2 in sql_h1.h2s:
+            h2 = self._h2_converter.to_entity(sql_h2)
+            h2.h1 = h1
+            h2s.append(h2)
+        h1.h2s = h2s
+        return h1
 
 
 class H2Converter(EntityConverter[H2, sql.H2]):
@@ -102,16 +114,20 @@ class H2Converter(EntityConverter[H2, sql.H2]):
         return sql_h2
 
     def to_entity(self, sql_h2: sql.H2) -> H2:  # noqa: D102
-        return H2(
+        h2 = H2(
             title=sql_h2.title,
-            h3s=[
-                self._h3_converter.to_entity(sql_h3) for sql_h3 in sql_h2.h3s
-            ],
             blocks=[
                 self._block_converter.to_entity(sql_block)
                 for sql_block in sql_h2.blocks
             ],
         )
+        h3s = []
+        for sql_h3 in sql_h2.h3s:
+            h3 = self._h3_converter.to_entity(sql_h3)
+            h3.h2 = h2
+            h3s.append(h3)
+        h2.h3s = h3s
+        return h2
 
 
 class H3Converter(EntityConverter[H3, sql.H3]):
@@ -134,16 +150,20 @@ class H3Converter(EntityConverter[H3, sql.H3]):
         return sql_h3
 
     def to_entity(self, sql_h3: sql.H3) -> H3:  # noqa: D102
-        return H3(
+        h3 = H3(
             title=sql_h3.title,
-            h4s=[
-                self._h4_converter.to_entity(sql_h4) for sql_h4 in sql_h3.h4s
-            ],
             blocks=[
                 self._block_converter.to_entity(sql_block)
                 for sql_block in sql_h3.blocks
             ],
         )
+        h4s = []
+        for sql_h4 in sql_h3.h4s:
+            h4 = self._h4_converter.to_entity(sql_h4)
+            h4.h3 = h3
+            h4s.append(h4)
+        h3.h4s = h4s
+        return h3
 
 
 class H4Converter(EntityConverter[H4, sql.H4]):
@@ -184,12 +204,14 @@ class BlockConverter(EntityConverter[Block, sql.Block]):
         return sql_block
 
     def to_entity(self, sql_block: sql.Block) -> Block:  # noqa: D102
-        return Block(
-            notes=[
-                self._note_converter.to_entity(sql_note)
-                for sql_note in sql_block.notes
-            ]
-        )
+        block = Block()
+        notes = []
+        for sql_note in sql_block.notes:
+            note = self._note_converter.to_entity(sql_note)
+            note.block = block
+            notes.append(note)
+        block.notes = notes
+        return block
 
 
 class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
