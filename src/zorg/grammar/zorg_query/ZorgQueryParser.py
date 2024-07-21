@@ -153,7 +153,7 @@ def serializedATN():
         0,0,0,389,380,1,0,0,0,389,381,1,0,0,0,389,382,1,0,0,0,389,383,1,
         0,0,0,389,384,1,0,0,0,389,385,1,0,0,0,389,386,1,0,0,0,389,387,1,
         0,0,0,389,388,1,0,0,0,390,83,1,0,0,0,391,392,5,42,0,0,392,85,1,0,
-        0,0,393,394,5,43,0,0,394,87,1,0,0,0,395,398,3,94,47,0,396,398,3,
+        0,0,393,394,5,43,0,0,394,87,1,0,0,0,395,398,3,92,46,0,396,398,3,
         82,41,0,397,395,1,0,0,0,397,396,1,0,0,0,398,399,1,0,0,0,399,397,
         1,0,0,0,399,400,1,0,0,0,400,89,1,0,0,0,401,404,3,94,47,0,402,404,
         3,82,41,0,403,401,1,0,0,0,403,402,1,0,0,0,404,405,1,0,0,0,405,403,
@@ -3158,11 +3158,11 @@ class ZorgQueryParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def any_non_dquote_sym(self, i:int=None):
+        def any_non_squote_sym(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ZorgQueryParser.Any_non_dquote_symContext)
+                return self.getTypedRuleContexts(ZorgQueryParser.Any_non_squote_symContext)
             else:
-                return self.getTypedRuleContext(ZorgQueryParser.Any_non_dquote_symContext,i)
+                return self.getTypedRuleContext(ZorgQueryParser.Any_non_squote_symContext,i)
 
 
         def id_(self, i:int=None):
@@ -3190,33 +3190,32 @@ class ZorgQueryParser ( Parser ):
 
         localctx = ZorgQueryParser.Any_non_squoteContext(self, self._ctx, self.state)
         self.enterRule(localctx, 88, self.RULE_any_non_squote)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 397 
             self._errHandler.sync(self)
-            _alt = 1
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt == 1:
-                    self.state = 397
-                    self._errHandler.sync(self)
-                    token = self._input.LA(1)
-                    if token in [53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 69, 70, 71, 72, 73]:
-                        self.state = 395
-                        self.any_non_dquote_sym()
-                        pass
-                    elif token in [26, 27, 28, 29, 30, 31, 32, 33, 36, 40, 41, 42, 43, 44, 45, 46, 47]:
-                        self.state = 396
-                        self.id_()
-                        pass
-                    else:
-                        raise NoViableAltException(self)
-
-
+            _la = self._input.LA(1)
+            while True:
+                self.state = 397
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 68, 69, 70, 71, 72, 73]:
+                    self.state = 395
+                    self.any_non_squote_sym()
+                    pass
+                elif token in [26, 27, 28, 29, 30, 31, 32, 33, 36, 40, 41, 42, 43, 44, 45, 46, 47]:
+                    self.state = 396
+                    self.id_()
+                    pass
                 else:
                     raise NoViableAltException(self)
+
                 self.state = 399 
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,36,self._ctx)
+                _la = self._input.LA(1)
+                if not (((((_la - 26)) & ~0x3f) == 0 and ((1 << (_la - 26)) & 279258643547391) != 0)):
+                    break
 
         except RecognitionException as re:
             localctx.exception = re

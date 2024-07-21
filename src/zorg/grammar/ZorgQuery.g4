@@ -74,7 +74,7 @@ date : DATE ;
 time : TIME ;
 
 // symbols
-any_non_squote     : (any_non_dquote_sym | id)+ ;
+any_non_squote     : (any_non_squote_sym | id)+ ;
 any_non_dquote     : (any_non_dquote_sym | id)+ ;
 any_non_squote_sym : DQUOTE | desc_symbol ;
 any_non_dquote_sym : SQUOTE | desc_symbol ;
