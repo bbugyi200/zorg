@@ -56,6 +56,7 @@ class H4(Section):
 class Block:
     """A block of notes."""
 
+    section: Optional[Section] = None
     notes: list["Note"] = field(default_factory=list)
 
 

@@ -80,19 +80,20 @@ class H1Converter(EntityConverter[H1, sql.H1]):
         return sql_h1
 
     def to_entity(self, sql_h1: sql.H1) -> H1:  # noqa: D102
-        h1 = H1(
-            title=sql_h1.title,
-            blocks=[
-                self._block_converter.to_entity(sql_block)
-                for sql_block in sql_h1.blocks
-            ],
-        )
+        h1 = H1(title=sql_h1.title, blocks=[])
+
         h2s = []
         for sql_h2 in sql_h1.h2s:
             h2 = self._h2_converter.to_entity(sql_h2)
             h2.h1 = h1
             h2s.append(h2)
         h1.h2s = h2s
+
+        for sql_block in sql_h1.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h1
+            h1.blocks.append(block)
+
         return h1
 
 
@@ -114,19 +115,20 @@ class H2Converter(EntityConverter[H2, sql.H2]):
         return sql_h2
 
     def to_entity(self, sql_h2: sql.H2) -> H2:  # noqa: D102
-        h2 = H2(
-            title=sql_h2.title,
-            blocks=[
-                self._block_converter.to_entity(sql_block)
-                for sql_block in sql_h2.blocks
-            ],
-        )
+        h2 = H2(title=sql_h2.title, blocks=[])
+
         h3s = []
         for sql_h3 in sql_h2.h3s:
             h3 = self._h3_converter.to_entity(sql_h3)
             h3.h2 = h2
             h3s.append(h3)
         h2.h3s = h3s
+
+        for sql_block in sql_h2.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h2
+            h2.blocks.append(block)
+
         return h2
 
 
@@ -150,19 +152,20 @@ class H3Converter(EntityConverter[H3, sql.H3]):
         return sql_h3
 
     def to_entity(self, sql_h3: sql.H3) -> H3:  # noqa: D102
-        h3 = H3(
-            title=sql_h3.title,
-            blocks=[
-                self._block_converter.to_entity(sql_block)
-                for sql_block in sql_h3.blocks
-            ],
-        )
+        h3 = H3(title=sql_h3.title, blocks=[])
+
         h4s = []
         for sql_h4 in sql_h3.h4s:
             h4 = self._h4_converter.to_entity(sql_h4)
             h4.h3 = h3
             h4s.append(h4)
         h3.h4s = h4s
+
+        for sql_block in sql_h3.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h3
+            h3.blocks.append(block)
+
         return h3
 
 
@@ -180,13 +183,12 @@ class H4Converter(EntityConverter[H4, sql.H4]):
         return sql_h4
 
     def to_entity(self, sql_h4: sql.H4) -> H4:  # noqa: D102
-        return H4(
-            title=sql_h4.title,
-            blocks=[
-                self._block_converter.to_entity(sql_block)
-                for sql_block in sql_h4.blocks
-            ],
-        )
+        h4 = H4(title=sql_h4.title, blocks=[])
+        for sql_block in sql_h4.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h4
+            h4.blocks.append(block)
+        return h4
 
 
 class BlockConverter(EntityConverter[Block, sql.Block]):
