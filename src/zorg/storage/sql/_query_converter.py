@@ -40,18 +40,17 @@ _BASE_SELECTOR: Final = (
     .distinct()
 )
 _LOGGER: Final = Logger(__name__)
-_SONConverterParser = Callable[["_QueryConverter"], Optional[ColumnElement]]
-# the @_son_converter_parser decorator should be used to mark a _QueryConverter
-# parser method
-_SON_CONVERTER_PARSERS: list[_SONConverterParser] = []
-_son_converter_parser = metaman.register_function_factory(
-    _SON_CONVERTER_PARSERS
-)
+
+_ToSqlWhereHelper = Callable[["_AndFilterToSqlWhere"], Optional[ColumnElement]]
+# The @_to_sql_where_helper decorator should be used to mark a
+# _AndFilterToSqlWhere parser method.
+_TO_SQL_WHERE_HELPERS: list[_ToSqlWhereHelper] = []
+_to_sql_where_helper = metaman.register_function_factory(_TO_SQL_WHERE_HELPERS)
 
 _T = TypeVar("_T")
 
 
-def convert_query(
+def to_sql_select(
     or_filter: Optional[WhereOrFilter], session: Session
 ) -> SelectOfScalar[sql.ZorgNote]:
     """Converts a WhereOrFilter to a SQL SELECT that will fetch ZorgNotes."""
@@ -60,7 +59,7 @@ def convert_query(
 
     select_query = _BASE_SELECTOR.where(
         or_(*[
-            _QueryConverter(and_filter, session).to_note_clause()
+            _AndFilterToSqlWhere(and_filter, session).to_sql_where()
             for and_filter in or_filter.and_filters
         ])
     ).order_by(cast(Column, sql.ZorgNote.id))
@@ -69,16 +68,16 @@ def convert_query(
 
 
 @dataclass(frozen=True)
-class _QueryConverter:
-    """Converts a WhereAndFilter to a ColumnElement."""
+class _AndFilterToSqlWhere:
+    """Converts a WhereAndFilter to a SQL WHERE filter."""
 
     and_filter: WhereAndFilter
     session: Session
 
-    def to_note_clause(self) -> ColumnElement:
+    def to_sql_where(self) -> ColumnElement:
         """Constructs a SQL statement from the provided WhereAndFilter."""
         and_clauses = []
-        for parse in _SON_CONVERTER_PARSERS:
+        for parse in _TO_SQL_WHERE_HELPERS:
             clause = parse(self)
             if clause is not None:
                 and_clauses.append(clause)
@@ -90,7 +89,7 @@ class _QueryConverter:
         )
         return where
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def note_type(self) -> Optional[ColumnElement]:
         """Converter for done status (e.g. '-' or 'ox~<>')."""
         if not self.and_filter.allowed_note_types:
@@ -101,7 +100,7 @@ class _QueryConverter:
             for note_type in self.and_filter.allowed_note_types
         ])
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def priority_range(self) -> Optional[ColumnElement]:
         """Converter for priority range filters."""
         priorities = self.and_filter.priorities
@@ -113,7 +112,7 @@ class _QueryConverter:
         else:
             return None
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def tags(self) -> Optional[ColumnElement]:
         """Parser for prefix tags (e.g. '@home' or '+zorg')."""
         conditions = []
@@ -147,7 +146,7 @@ class _QueryConverter:
         else:
             return None
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def or_filters(self) -> Optional[ColumnElement]:
         """Converter that handles nested OR filters."""
         or_filters = self.and_filter.or_filters
@@ -158,7 +157,9 @@ class _QueryConverter:
         for or_filter in or_filters:
             or_conds.append(
                 or_(*[
-                    _QueryConverter(and_filter, self.session).to_note_clause()
+                    _AndFilterToSqlWhere(
+                        and_filter, self.session
+                    ).to_sql_where()
                     for and_filter in or_filter.and_filters
                 ])
             )
@@ -168,7 +169,7 @@ class _QueryConverter:
             else or_conds[0]
         )
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def date_ranges(self) -> Optional[ColumnElement]:
         """Converter that handles create/modify date ranges."""
         and_conds = []
@@ -189,7 +190,7 @@ class _QueryConverter:
         else:
             return None
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def property_filters(self) -> Optional[ColumnElement]:
         """Converter tht handles property filters."""
         if not self.and_filter.property_filters:
@@ -239,7 +240,7 @@ class _QueryConverter:
 
         return and_(and_conds[0], *and_conds[1:])
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def desc_filters(self) -> Optional[ColumnElement]:
         """Converter tht handles desc filters."""
         and_conds = []
@@ -283,7 +284,7 @@ class _QueryConverter:
             and_conds.append(op(op_arg))
         return and_(and_conds[0], *and_conds[1:])
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def file_filters(self) -> Optional[ColumnElement]:
         """Converter tht handles file filters."""
         and_conds = []
@@ -298,7 +299,7 @@ class _QueryConverter:
             and_conds.append(like_op(file_filter.path_glob.replace("*", "%")))
         return and_(and_conds[0], *and_conds[1:])
 
-    @_son_converter_parser
+    @_to_sql_where_helper
     def link_filters(self) -> Optional[ColumnElement]:
         """Converter tht handles link filters."""
         and_conds = []
