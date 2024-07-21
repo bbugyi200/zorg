@@ -28,7 +28,7 @@ from typist import assert_never
 
 
 if TYPE_CHECKING:
-    from zorg.domain.models import Note, TodoPayload
+    from zorg.domain.models import Note, Section, TodoPayload
 
 
 E = TypeVar("E")
@@ -141,7 +141,7 @@ class GroupByType(enum.Enum):
         elif self is GroupByType.PRIORITY:
             return lambda note: _to_comparable_priority(note.todo_payload)
         elif self is GroupByType.SECTION:
-            return lambda note: _to_comparable_section(note)
+            return lambda note: _to_comparable_section_from_note(note)
         else:
             assert_never(self)
 
@@ -283,6 +283,37 @@ def _to_comparable_tag_factory(attr: str, tag_symbol: str) -> KeyFunc:
     return _keyfunc
 
 
-def _to_comparable_section(note: "Note") -> str:
-    del note
-    return "SECTION"
+def _to_comparable_section_from_note(note: "Note") -> str:
+    assert note.block is not None
+    assert note.block.section is not None
+    return _to_comparable_section_from_section(note.block.section)
+
+
+def _to_comparable_section_from_section(section: "Section") -> str:
+    from zorg.domain.models import H1, H2, H3, H4
+
+    result = ""
+    if isinstance(section, H1):
+        h1 = section
+    else:
+        if isinstance(section, H2):
+            h2 = section
+        else:
+            if isinstance(section, H3):
+                h3 = section
+            else:
+                assert isinstance(section, H4)
+                result = section.title
+                assert section.h3 is not None
+                h3 = section.h3
+            assert h3.h2 is not None
+            h2 = h3.h2
+            result = result if result == "" else f" | {result}"
+            result = f"{h3.title}{result}"
+        assert h2.h1 is not None
+        h1 = h2.h1
+        result = result if result == "" else f" | {result}"
+        result = f"{h2.title}{result}"
+    result = result if result == "" else f" | {result}"
+    result = f"{h1.title}{result}"
+    return result

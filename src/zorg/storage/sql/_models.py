@@ -109,7 +109,7 @@ class H1(_HasTitleBase, table=True):
 
     zorg_file_id: Optional[int] = Field(foreign_key="zorgfile.id")
 
-    zorg_file: "ZorgFile" = Relationship(back_populates="h1s")
+    page: "ZorgFile" = Relationship(back_populates="h1s")
     h2s: List["H2"] = Relationship(back_populates="h1")
     blocks: List["Block"] = Relationship(back_populates="h1")
 
@@ -151,7 +151,7 @@ class ZorgFile(_Base, table=True):
 
     path: str
     has_errors: bool = False
-    h1s: List[H1] = Relationship(back_populates="zorg_file")
+    h1s: List[H1] = Relationship(back_populates="page")
 
     @property
     def notes(self) -> list["ZorgNote"]:

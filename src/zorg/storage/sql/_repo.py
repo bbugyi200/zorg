@@ -28,22 +28,24 @@ class SQLRepo:
     """Repo that stores zorg notes in sqlite database."""
 
     def __init__(
-        self, zettel_dir: Path, session: Session, *, verbose: int = 0
+        self, zdir: Path, session: Session, *, verbose: int = 0
     ) -> None:
-        self._zettel_dir = zettel_dir
+        self._zdir = zdir
         self._session = session
-        self._converter = PageConverter(zettel_dir, session)
-        self._note_converter = NoteConverter(zettel_dir, session)
         self._verbose = verbose
 
-        self.seen: list[Page] = []
+        self._page_converter = PageConverter(zdir, session)
+        self._note_converter = NoteConverter(zdir, session)
+        self._path_to_seen_page: dict[str, Page] = {}
 
-    def add_file(self, zorg_page: Page, /, *, key: str = None) -> None:
+        self.seen_pages: list[Page] = []
+
+    def add_file(self, page: Page, /, *, key: str = None) -> None:
         """Adds a new file to the DB."""
         del key
-        self._seen_zorg_page(zorg_page)
-        _add_zids(self._zettel_dir, zorg_page)
-        sql_zorg_page = self._converter.from_entity(zorg_page)
+        self._record_seen_page(page)
+        _add_zids(self._zdir, page)
+        sql_zorg_page = self._page_converter.from_entity(page)
         self._session.add(sql_zorg_page)
 
     def remove_file_by_name(self, filename: str) -> Optional[Page]:
@@ -52,8 +54,8 @@ class SQLRepo:
         results = self._session.exec(stmt)
         sql_zorg_page = results.first()
         if sql_zorg_page:
-            zorg_page = self._converter.to_entity(sql_zorg_page)
-            _LOGGER.debug("Deleting Zorg Page", zorg_page=zorg_page)
+            page = self._page_converter.to_entity(sql_zorg_page)
+            _LOGGER.debug("Deleting Zorg Page", page=page)
             for sql_note in sql_zorg_page.notes:
                 for prop_link in sql_note.property_links:
                     delete_prop = len(prop_link.prop.links) == 1
@@ -75,7 +77,7 @@ class SQLRepo:
 
                 self._session.delete(sql_note)
             self._session.delete(sql_zorg_page)
-            return zorg_page
+            return page
         else:
             emsg = "Cannot delete zorg file since it does not exist."
             _LOGGER.debug(emsg, path=filename)
@@ -89,10 +91,12 @@ class SQLRepo:
             # ... then we print the SELECT statement.
             print(select_of_note)
 
-        result: list[Note] = []
+        notes: list[Note] = []
         for sql_note in self._session.exec(select_of_note):
-            result.append(self._note_converter.to_entity(sql_note))
-        return result
+            page = self._get_page(sql_note)
+            note = [note for note in page.notes if note.zid == sql_note.zid][0]
+            notes.append(note)
+        return notes
 
     def get_note_by_zid(self, zid: str) -> Optional[Note]:
         """Fetch a single note using its unique ZID."""
@@ -136,14 +140,21 @@ class SQLRepo:
             for sql_note in results.all()
         ]
 
-    def _seen_zorg_page(self, zorg_page: Page) -> None:
-        self.seen.append(zorg_page)
+    def _record_seen_page(self, page: Page) -> None:
+        self.seen_pages.append(page)
+        self._path_to_seen_page[str(page.path)] = page
+
+    def _get_page(self, sql_note: sql.ZorgNote) -> Page:
+        page_path = sql_note.page_path
+        if page_path not in self._path_to_seen_page:
+            self._record_seen_page(_get_page(sql_note, self._page_converter))
+        return self._path_to_seen_page[page_path]
 
 
-def _add_zids(zdir: Path, zorg_page: Page) -> None:
+def _add_zids(zdir: Path, page: Page) -> None:
     new_notes = []
     zid_manager = ZIDManager(zdir)
-    for note in zorg_page.notes:
+    for note in page.notes:
         if note.zid is None:
             _LOGGER.debug("Found new zorg note", zorg_note=note)
             zid = zid_manager.get_next(note.create_date)
@@ -154,8 +165,25 @@ def _add_zids(zdir: Path, zorg_page: Page) -> None:
             note.body = f"{zid} {old_body}"
             new_notes.append(note)
     if new_notes:
-        zorg_page.events.append(
+        page.events.append(
             NewZorgNotesEvent(
-                zdir, zorg_page_path=zorg_page.path, new_notes=new_notes
+                zdir, zorg_page_path=page.path, new_notes=new_notes
             )
         )
+
+
+def _get_page(sql_note: sql.ZorgNote, page_converter: PageConverter) -> Page:
+    sql_block = sql_note.block
+    if sql_h1 := sql_block.h1:
+        sql_page = sql_h1.page
+    elif sql_h2 := sql_block.h2:
+        sql_page = sql_h2.h1.page
+    elif sql_h3 := sql_block.h3:
+        sql_page = sql_h3.h2.h1.page
+    elif sql_h4 := sql_block.h4:
+        sql_page = sql_h4.h3.h2.h1.page
+    else:
+        raise RuntimeError(
+            f"A block MUST be associated with an H1-H4 section | {sql_block}"
+        )
+    return page_converter.to_entity(sql_page)
