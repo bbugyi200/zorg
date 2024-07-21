@@ -3,10 +3,12 @@
 from dataclasses import dataclass
 from functools import partial
 import operator
-from typing import Any, Callable, Iterable, Optional, TypeVar, cast
+from typing import Any, Callable, Final, Iterable, Optional, TypeVar, cast
 
+from logrus import Logger
 import metaman
 from sqlalchemy import func
+from sqlalchemy.orm import joinedload
 from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar
 
@@ -22,6 +24,23 @@ from zorg.shared import dates as zdt
 from . import _models as sql
 
 
+_BASE_SELECTOR: Final = (
+    select(sql.ZorgNote)
+    .join(sql.H1, sql.ZorgFile.h1s)
+    .outerjoin(sql.H2, sql.H1.h2s)
+    .outerjoin(sql.H3, sql.H2.h3s)
+    .outerjoin(sql.H4, sql.H3.h4s)
+    .join(
+        sql.Block,
+        (sql.Block.h1_id == sql.H1.id)
+        | (sql.Block.h2_id == sql.H2.id)
+        | (sql.Block.h3_id == sql.H3.id)
+        | (sql.Block.h4_id == sql.H4.id),
+    )
+    .join(sql.ZorgNote, sql.Block.notes)
+    .distinct()
+)
+_LOGGER: Final = Logger(__name__)
 _SONConverterParser = Callable[["_QueryConverter"], Optional[ColumnElement]]
 # the @_son_converter_parser decorator should be used to mark a _QueryConverter
 # parser method
@@ -40,20 +59,14 @@ def convert_query(
     if or_filter is None or not or_filter.and_filters:
         return select(sql.ZorgNote)
 
-    return (
-        select(sql.ZorgNote)
-        .join(
-            sql.ZorgFile,
-            cast(ColumnElement, sql.ZorgNote.zorg_file_id == sql.ZorgFile.id),
-        )
-        .where(
-            or_(*[
-                _QueryConverter(and_filter, session).to_note_clause()
-                for and_filter in or_filter.and_filters
-            ])
-        )
-        .order_by(cast(Column, sql.ZorgNote.id))
-    )
+    select_query = _BASE_SELECTOR.where(
+        or_(*[
+            _QueryConverter(and_filter, session).to_note_clause()
+            for and_filter in or_filter.and_filters
+        ])
+    ).order_by(cast(Column, sql.ZorgNote.id))
+    _LOGGER.debug("Converted query", query=str(select_query))
+    return select_query
 
 
 @dataclass(frozen=True)
@@ -319,11 +332,7 @@ class _QueryConverter:
 
 
 def _get_notes_in_file(session: Session, file_name: str) -> list[sql.ZorgNote]:
-    stmt = (
-        select(sql.ZorgNote)
-        .join(sql.ZorgFile)
-        .where(sql.ZorgFile.path == f"{file_name}.zo")
-    )
+    stmt = _BASE_SELECTOR.where(sql.ZorgFile.path == f"{file_name}.zo")
     return list(session.exec(stmt).all())
 
 

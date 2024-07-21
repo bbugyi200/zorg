@@ -3,8 +3,8 @@
 Contains Domain-layer models.
 """
 
-from ._zorg_page import H1, H2, H3, H4, Block, Note, Page, TodoPayload
-from ._zorg_query import (
+from ._page import H1, H2, H3, H4, Block, Note, Page, TodoPayload
+from ._query import (
     DateRange,
     DescFilter,
     FileFilter,

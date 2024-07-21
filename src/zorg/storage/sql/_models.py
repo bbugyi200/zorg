@@ -150,8 +150,6 @@ class ZorgFile(_Base, table=True):
 
     path: str
     has_errors: bool = False
-    # TODO(bugyi): Replace with @property field
-    notes: List["ZorgNote"] = Relationship(back_populates="zorg_file")
     h1s: List[H1] = Relationship(back_populates="zorg_file")
 
 
@@ -189,14 +187,11 @@ class ZorgNote(_Base, table=True):
     modify_date: dt.date = Field(default_factory=dt.date.today)
     todo_priority: Optional[str] = None
     todo_status: Optional[NoteType] = None
-
-    zorg_file_id: int = Field(foreign_key="zorgfile.id")
     # TODO(bugyi): Make this field NOT optional
     block_id: Optional[int] = Field(foreign_key="block.id")
+    page_path: str = Field(sa_type=String)
 
     # relationships
-    # TODO(bugyi): Remove 'zorg_file' field
-    zorg_file: ZorgFile = Relationship(back_populates="notes")
     block: Block = Relationship(back_populates="notes")
     links: List["Link"] = Relationship(
         back_populates="notes", link_model=LinkLink

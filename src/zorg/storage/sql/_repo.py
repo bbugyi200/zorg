@@ -16,7 +16,7 @@ from zorg.domain.models import Note, Page, WhereOrFilter
 from zorg.shared import dates as zdt
 
 from . import _models as sql
-from ._file_and_note_converters import ZorgFileConverter, ZorgNoteConverter
+from ._page_converters import PageConverter, NoteConverter
 from ._query_converter import convert_query
 from ._zid_manager import ZIDManager
 
@@ -32,8 +32,8 @@ class SQLRepo:
     ) -> None:
         self._zettel_dir = zettel_dir
         self._session = session
-        self._converter = ZorgFileConverter(zettel_dir, session)
-        self._note_converter = ZorgNoteConverter(zettel_dir, session)
+        self._converter = PageConverter(zettel_dir, session)
+        self._note_converter = NoteConverter(zettel_dir, session)
         self._verbose = verbose
 
         self.seen: list[Page] = []

@@ -24,7 +24,6 @@ class Section:
 class H1(Section):
     """An H1 section."""
 
-    page: "Page"
     h2s: list["H2"] = field(default_factory=list)
 
 
@@ -32,7 +31,6 @@ class H1(Section):
 class H2(Section):
     """An H2 section."""
 
-    h1: "H1"
     h3s: list["H3"] = field(default_factory=list)
 
 
@@ -40,7 +38,6 @@ class H2(Section):
 class H3(Section):
     """An H3 section."""
 
-    h2: "H2"
     h4s: list["H4"] = field(default_factory=list)
 
 
@@ -48,14 +45,11 @@ class H3(Section):
 class H4(Section):
     """An H4 section."""
 
-    h3: "H3"
-
 
 @dataclass
 class Block:
     """A block of notes."""
 
-    section: Section
     notes: list["Note"] = field(default_factory=list)
 
 
@@ -74,7 +68,6 @@ class Note:
     body: str
     file_path: Path
     line_no: int
-    block: Block
 
     areas: list[str] = field(default_factory=lambda: [])
     contexts: list[str] = field(default_factory=lambda: [])
@@ -116,8 +109,27 @@ class Page:
 
     path: Path
     has_errors: bool = False
-    notes: list[Note] = field(default_factory=list)
     events: list["Event"] = field(default_factory=list)
 
     h0: Optional[H1] = None
     h1s: list[H1] = field(default_factory=list)
+
+    @property
+    def notes(self) -> list[Note]:
+        """Returns all notes on this page."""
+        notes = []
+        h1s = list(self.h1s)
+        if self.h0:
+            h1s = [self.h0] + h1s
+        blocks = []
+        for h1 in h1s:
+            blocks.extend(h1.blocks)
+            for h2 in h1.h2s:
+                blocks.extend(h2.blocks)
+                for h3 in h2.h3s:
+                    blocks.extend(h3.blocks)
+                    for h4 in h3.h4s:
+                        blocks.extend(h4.blocks)
+        for block in blocks:
+            notes.extend(block.notes)
+        return notes

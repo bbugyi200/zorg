@@ -68,9 +68,10 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.BlockContext
     ) -> None:  # noqa: D102
         del ctx
+        self._s.block = Block()
         if self._s.h1 is None:
             if self.page.h0 is None:
-                self.page.h0 = H1("", [], page=self.page)
+                self.page.h0 = H1("", [])
             section = self.page.h0
         elif self._s.h4 is not None:
             section = self._s.h4
@@ -81,7 +82,7 @@ class ZorgFileCompiler(ZorgFileListener):
         else:
             assert self._s.h1 is not None
             section = self._s.h1
-        self._s.block = Block(section)
+        section.blocks.append(self._s.block)
 
     def enterContext(
         self, ctx: ZorgFileParser.ContextContext
@@ -113,9 +114,7 @@ class ZorgFileCompiler(ZorgFileListener):
         self, ctx: ZorgFileParser.H1_headerContext
     ) -> None:  # noqa: D102
         self._s.in_h1_header = True
-        self._s.h1 = H1(
-            ctx.space_atoms().getText().strip(), [], page=self.page
-        )
+        self._s.h1 = H1(ctx.space_atoms().getText().strip(), [])
         self.page.h1s.append(self._s.h1)
 
     def enterH2_header(
@@ -124,25 +123,28 @@ class ZorgFileCompiler(ZorgFileListener):
         self._s.in_h2_header = True
         if self._s.h1 is None:
             if self.page.h0 is None:
-                h1 = self.page.h0 = H1("", [], page=self.page)
+                self.page.h0 = H1("", [])
             h1 = self.page.h0
         else:
             h1 = self._s.h1
-        self._s.h2 = H2(ctx.space_atoms().getText().strip(), [], h1=h1)
+        self._s.h2 = H2(ctx.space_atoms().getText().strip(), [])
+        h1.h2s.append(self._s.h2)
 
     def enterH3_header(
         self, ctx: ZorgFileParser.H3_headerContext
     ) -> None:  # noqa: D102
         self._s.in_h3_header = True
         assert self._s.h2 is not None
-        self._s.h3 = H3(ctx.space_atoms().getText().strip(), [], h2=self._s.h2)
+        self._s.h3 = H3(ctx.space_atoms().getText().strip(), [])
+        self._s.h2.h3s.append(self._s.h3)
 
     def enterH4_header(
         self, ctx: ZorgFileParser.H4_headerContext
     ) -> None:  # noqa: D102
         self._s.in_h4_header = True
         assert self._s.h3 is not None
-        self._s.h4 = H4(ctx.space_atoms().getText().strip(), [], h3=self._s.h3)
+        self._s.h4 = H4(ctx.space_atoms().getText().strip(), [])
+        self._s.h3.h4s.append(self._s.h4)
 
     def enterGlobal_link(
         self, ctx: ZorgFileParser.Global_linkContext
@@ -372,7 +374,6 @@ class ZorgFileCompiler(ZorgFileListener):
             "areas": self._s.areas,
             "contexts": self._s.contexts,
             "create_date": self._s.create_date,
-            "file_path": self.page.path,
             "line_no": line_no,
             "links": self._s.links,
             "modify_date": (
@@ -471,9 +472,8 @@ class ZorgFileCompiler(ZorgFileListener):
                 note_body.start.line, **extra_kwargs
             )
             assert self._s.block is not None
-            note = Note(body, block=self._s.block, **kwargs)
+            note = Note(body, file_path=self.page.path, **kwargs)
             self._s.block.notes.append(note)
-            self.page.notes.append(note)
 
 
 def _get_default_tags_map() -> _TagDict:
