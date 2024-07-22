@@ -5,12 +5,26 @@ import itertools as it
 from pathlib import Path
 import re
 import sys
-from typing import Any, Iterable, Iterator
+from typing import Any, Iterable, Iterator, TypeVar
 
 import rich
 from typist import PathLike
 
 from zorg.domain.types import Color, VarMapType
+
+
+_T = TypeVar("_T")
+
+
+def get_only_item(items: Iterable[_T]) -> _T:
+    """Returns the only element in {items} OR raises a ValueError."""
+    items = list(items)
+    if len(items) == 1:
+        return items[0]
+    elif not items:
+        raise ValueError("Iterable has NO elements")
+    else:
+        raise ValueError(f"Iterable has too many elements: {items}")
 
 
 def process_var_map(var_map: VarMapType) -> dict[str, Any]:

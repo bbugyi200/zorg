@@ -13,7 +13,7 @@ from sqlmodel.sql.expression import ColumnElement
 
 from zorg.domain.messages.events import NewZorgNotesEvent
 from zorg.domain.models import Note, Page, WhereOrFilter
-from zorg.shared import dates as zdt
+from zorg.shared import common as c, dates as zdt
 
 from . import _models as sql
 from ._page_converters import NoteConverter, PageConverter
@@ -94,7 +94,9 @@ class SQLRepo:
         notes: list[Note] = []
         for sql_note in self._session.exec(select_of_note):
             page = self._get_page(sql_note)
-            note = [note for note in page.notes if note.zid == sql_note.zid][0]
+            note = c.get_only_item(
+                [note for note in page.notes if note.zid == sql_note.zid]
+            )
             notes.append(note)
         return notes
 
