@@ -87,7 +87,7 @@ class PropertyLink(_NoteLinkBase, table=True):
         default=None, foreign_key="property.id", primary_key=True
     )
 
-    note: "ZorgNote" = Relationship(back_populates="property_links")
+    note: "Note" = Relationship(back_populates="property_links")
     prop: "Property" = Relationship(back_populates="links")
 
     value: str
@@ -109,7 +109,7 @@ class H1(_HasTitleBase, table=True):
 
     zorg_file_id: Optional[int] = Field(foreign_key="zorgfile.id")
 
-    page: "ZorgFile" = Relationship(back_populates="h1s")
+    page: "Page" = Relationship(back_populates="h1s")
     h2s: List["H2"] = Relationship(back_populates="h1")
     blocks: List["Block"] = Relationship(back_populates="h1")
 
@@ -146,7 +146,7 @@ class H4(_HasTitleBase, table=True):
 ###############################################################################
 # model used to track zorg (*.zo) files
 ###############################################################################
-class ZorgFile(_Base, table=True):
+class Page(_Base, table=True):
     """Model class for zorg (*.zo) files."""
 
     path: str = Field(index=True)
@@ -154,7 +154,7 @@ class ZorgFile(_Base, table=True):
     h1s: List[H1] = Relationship(back_populates="page")
 
     @property
-    def notes(self) -> list["ZorgNote"]:
+    def notes(self) -> list["Note"]:
         """Returns all Notes on this Page."""
         return c.flatten_h1_notes(self.h1s)
 
@@ -165,7 +165,7 @@ class ZorgFile(_Base, table=True):
 class Block(_Base, table=True):
     """Model class for zorg note blocks."""
 
-    notes: List["ZorgNote"] = Relationship(back_populates="block")
+    notes: List["Note"] = Relationship(back_populates="block")
 
     h1_id: Optional[int] = Field(default=None, foreign_key="h1.id")
     h2_id: Optional[int] = Field(default=None, foreign_key="h2.id")
@@ -178,7 +178,7 @@ class Block(_Base, table=True):
     h4: Optional[H4] = Relationship(back_populates="blocks")
 
 
-class ZorgNote(_Base, table=True):
+class Note(_Base, table=True):
     """Model class for zorg notes."""
 
     # table columns
@@ -223,7 +223,7 @@ class ZorgNote(_Base, table=True):
 class Project(_HasNameBase, table=True):
     """Model class for todo.txt project tags (e.g. +zorg)."""
 
-    notes: List[ZorgNote] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="projects", link_model=ProjectLink
     )
 
@@ -231,7 +231,7 @@ class Project(_HasNameBase, table=True):
 class Context(_HasNameBase, table=True):
     """Model class for todo.txt context tags (e.g. @home)."""
 
-    notes: List[ZorgNote] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="contexts", link_model=ContextLink
     )
 
@@ -239,7 +239,7 @@ class Context(_HasNameBase, table=True):
 class Area(_HasNameBase, table=True):
     """Model class for todo.txt area tags (e.g. #gtd)."""
 
-    notes: List[ZorgNote] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="areas", link_model=AreaLink
     )
 
@@ -247,7 +247,7 @@ class Area(_HasNameBase, table=True):
 class Person(_HasNameBase, table=True):
     """Model class for todo.txt person tags (e.g. %john)."""
 
-    notes: List[ZorgNote] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="people", link_model=PersonLink
     )
 
@@ -261,6 +261,6 @@ class Property(_HasNameBase, table=True):
 class Link(_HasNameBase, table=True):
     """Model class for links (e.g. [[foobar]])."""
 
-    notes: List[ZorgNote] = Relationship(
+    notes: List[Note] = Relationship(
         back_populates="links", link_model=LinkLink
     )

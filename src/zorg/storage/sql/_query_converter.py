@@ -24,10 +24,9 @@ from . import _models as sql
 
 
 _BASE_SELECTOR: Final = (
-    select(sql.ZorgNote)
+    select(sql.Note)
     .join(
-        sql.ZorgFile,
-        cast(ColumnElement, sql.ZorgFile.path == sql.ZorgNote.page_path),
+        sql.Page, cast(ColumnElement, sql.Page.path == sql.Note.page_path)
     )
     .distinct()
 )
@@ -44,17 +43,17 @@ _T = TypeVar("_T")
 
 def to_sql_select(
     or_filter: Optional[WhereOrFilter], session: Session
-) -> SelectOfScalar[sql.ZorgNote]:
+) -> SelectOfScalar[sql.Note]:
     """Converts a WhereOrFilter to a SQL SELECT that will fetch ZorgNotes."""
     if or_filter is None or not or_filter.and_filters:
-        return select(sql.ZorgNote)
+        return select(sql.Note)
 
     select_query = _BASE_SELECTOR.where(
         or_(*[
             _AndFilterToSqlWhere(and_filter, session).to_sql_where()
             for and_filter in or_filter.and_filters
         ])
-    ).order_by(cast(Column, sql.ZorgNote.zid))
+    ).order_by(cast(Column, sql.Note.zid))
     _LOGGER.debug("Converted query", query=str(select_query))
     return select_query
 
@@ -88,7 +87,7 @@ class _AndFilterToSqlWhere:
             return None
 
         return or_(*[
-            sql.ZorgNote.todo_status == _to_todo_status(note_type)
+            sql.Note.todo_status == _to_todo_status(note_type)
             for note_type in self.and_filter.allowed_note_types
         ])
 
@@ -98,7 +97,7 @@ class _AndFilterToSqlWhere:
         priorities = self.and_filter.priorities
         if priorities:
             return or_(*[
-                sql.ZorgNote.todo_priority == priority
+                sql.Note.todo_priority == priority
                 for priority in priorities
             ])
         else:
@@ -115,7 +114,7 @@ class _AndFilterToSqlWhere:
             (self.and_filter.projects, sql.ProjectLink, sql.Project),
         ]:
             base_subquery = (
-                select(sql.ZorgNote.id).join(link_model).join(model)
+                select(sql.Note.id).join(link_model).join(model)
             )
             for prefix_tag in prefix_tag_list:
                 name = prefix_tag
@@ -123,9 +122,9 @@ class _AndFilterToSqlWhere:
                 if name.startswith("-"):
                     # remove '-' from name
                     name = name[1:]
-                    in_op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+                    in_op = sql.Note.id.not_in  # type: ignore[union-attr]
                 else:
-                    in_op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+                    in_op = sql.Note.id.in_  # type: ignore[union-attr]
 
                 subquery = base_subquery.where(model.name == name)
                 conditions.append(in_op(subquery))
@@ -166,8 +165,8 @@ class _AndFilterToSqlWhere:
         """Converter that handles create/modify date ranges."""
         and_conds = []
         for date_range_list, sql_date in [
-            (self.and_filter.create_date_ranges, sql.ZorgNote.create_date),
-            (self.and_filter.modify_date_ranges, sql.ZorgNote.modify_date),
+            (self.and_filter.create_date_ranges, sql.Note.create_date),
+            (self.and_filter.modify_date_ranges, sql.Note.modify_date),
         ]:
             for date_range in date_range_list:
                 date_filters = [sql_date >= date_range.start]
@@ -198,15 +197,15 @@ class _AndFilterToSqlWhere:
                 PropertyOperator.GE: operator.lt if negated else operator.ge,
             }
             subquery = (
-                select(sql.ZorgNote.id)
+                select(sql.Note.id)
                 .join(sql.PropertyLink)
                 .join(sql.Property)
                 .where(sql.Property.name == property_filter.key)
             )
 
-            op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+            op = sql.Note.id.in_  # type: ignore[union-attr]
             if property_filter.op == PropertyOperator.EXISTS and negated:
-                op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+                op = sql.Note.id.not_in  # type: ignore[union-attr]
             elif property_filter.op != PropertyOperator.EXISTS:
                 comp_op = comp_op_map[property_filter.op]
 
@@ -247,8 +246,8 @@ class _AndFilterToSqlWhere:
             like_arg = f"%{desc_filter.value}%".replace("_", "\\_")
             op_arg: Any
             if case_sensitive:
-                cond = sql.ZorgNote.body.like(like_arg)  # type: ignore[attr-defined]
-                subquery = select(sql.ZorgNote.id, sql.ZorgNote.body).where(
+                cond = sql.Note.body.like(like_arg)  # type: ignore[attr-defined]
+                subquery = select(sql.Note.id, sql.Note.body).where(
                     cond
                 )
                 id_list: list[int] = []
@@ -260,15 +259,15 @@ class _AndFilterToSqlWhere:
                         id_list.append(ID)
 
                 op_map: dict[DescOperator, Any] = {
-                    DescOperator.CONTAINS: sql.ZorgNote.id.in_,  # type: ignore[union-attr]
-                    DescOperator.NOT_CONTAINS: sql.ZorgNote.id.not_in,  # type: ignore[union-attr]
+                    DescOperator.CONTAINS: sql.Note.id.in_,  # type: ignore[union-attr]
+                    DescOperator.NOT_CONTAINS: sql.Note.id.not_in,  # type: ignore[union-attr]
                 }
                 op = op_map[desc_filter.op]
                 op_arg = id_list
             else:
                 op_map = {
-                    DescOperator.CONTAINS: sql.ZorgNote.body.ilike,  # type: ignore[attr-defined]
-                    DescOperator.NOT_CONTAINS: sql.ZorgNote.body.not_ilike,  # type: ignore[attr-defined]
+                    DescOperator.CONTAINS: sql.Note.body.ilike,  # type: ignore[attr-defined]
+                    DescOperator.NOT_CONTAINS: sql.Note.body.not_ilike,  # type: ignore[attr-defined]
                 }
                 op = partial(op_map[desc_filter.op], escape="\\")
                 op_arg = like_arg
@@ -284,9 +283,9 @@ class _AndFilterToSqlWhere:
             return None
         for file_filter in self.and_filter.file_filters:
             like_op = (
-                sql.ZorgFile.path.not_like  # type: ignore[attr-defined]
+                sql.Page.path.not_like  # type: ignore[attr-defined]
                 if file_filter.negated
-                else sql.ZorgFile.path.like  # type: ignore[attr-defined]
+                else sql.Page.path.like  # type: ignore[attr-defined]
             )
             and_conds.append(like_op(file_filter.path_glob.replace("*", "%")))
         return and_(and_conds[0], *and_conds[1:])
@@ -298,14 +297,14 @@ class _AndFilterToSqlWhere:
         if not self.and_filter.link_filters:
             return None
         base_subquery = (
-            select(sql.ZorgNote.id).join(sql.LinkLink).join(sql.Link)
+            select(sql.Note.id).join(sql.LinkLink).join(sql.Link)
         )
         for link_filter in self.and_filter.link_filters:
             if link_filter.negated:
-                in_op = sql.ZorgNote.id.not_in  # type: ignore[union-attr]
+                in_op = sql.Note.id.not_in  # type: ignore[union-attr]
                 like_op = sql.Link.name.not_like  # type: ignore[attr-defined]
             else:
-                in_op = sql.ZorgNote.id.in_  # type: ignore[union-attr]
+                in_op = sql.Note.id.in_  # type: ignore[union-attr]
                 like_op = sql.Link.name.like  # type: ignore[attr-defined]
 
             link_name = link_filter.link
@@ -323,12 +322,12 @@ class _AndFilterToSqlWhere:
         return and_(and_conds[0], *and_conds[1:])
 
 
-def _get_notes_in_file(session: Session, file_name: str) -> list[sql.ZorgNote]:
-    stmt = _BASE_SELECTOR.where(sql.ZorgFile.path == f"{file_name}.zo")
+def _get_notes_in_file(session: Session, file_name: str) -> list[sql.Note]:
+    stmt = _BASE_SELECTOR.where(sql.Page.path == f"{file_name}.zo")
     return list(session.exec(stmt).all())
 
 
-def _global_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
+def _global_link_conds(notes: Iterable[sql.Note]) -> list[ColumnElement]:
     conds = []
     for note in notes:
         for prop_link in note.property_links:
@@ -342,7 +341,7 @@ def _global_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
     return conds
 
 
-def _ref_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
+def _ref_link_conds(notes: Iterable[sql.Note]) -> list[ColumnElement]:
     conds = []
     for note in notes:
         for prop_link in note.property_links:
@@ -356,7 +355,7 @@ def _ref_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
     return conds
 
 
-def _zid_link_conds(notes: Iterable[sql.ZorgNote]) -> list[ColumnElement]:
+def _zid_link_conds(notes: Iterable[sql.Note]) -> list[ColumnElement]:
     conds = []
     for note in notes:
         conds.append(cast(ColumnElement, sql.Link.name == f"zid:{note.zid}"))

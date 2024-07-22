@@ -1,4 +1,4 @@
-"""Convert domain Pages/Notes to/from SQL ZorgFile/ZorgNote models."""
+"""Convert domain Pages/Notes to/from SQL Page/Note models."""
 
 from collections import defaultdict
 from pathlib import Path
@@ -13,21 +13,21 @@ from zorg.shared import common
 from . import _models as sql
 
 
-class PageConverter(EntityConverter[Page, sql.ZorgFile]):
-    """Converts Page domain entities to/from ZorgFile sqlmodels."""
+class PageConverter(EntityConverter[Page, sql.Page]):
+    """Converts Page domain entities to/from Page sqlmodels."""
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._zdir = zdir
         self._h1_converter = _H1Converter(self._zdir, session)
 
-    def from_entity(self, page: Page) -> sql.ZorgFile:
-        """Model-to-SQL-model converter for a ZorgFile."""
+    def from_entity(self, page: Page) -> sql.Page:
+        """Model-to-SQL-model converter for a Page."""
         sql_h1s = []
         h1s = list(page.h1s)
         if page.h0:
             h1s = [page.h0] + h1s
 
-        sql_zorg_file = sql.ZorgFile(
+        sql_zorg_file = sql.Page(
             path=common.strip_zdir(self._zdir, page.path),
             has_errors=page.has_errors,
         )
@@ -37,7 +37,7 @@ class PageConverter(EntityConverter[Page, sql.ZorgFile]):
         sql_zorg_file.h1s = sql_h1s
         return sql_zorg_file
 
-    def to_entity(self, sql_page: sql.ZorgFile) -> Page:
+    def to_entity(self, sql_page: sql.Page) -> Page:
         """Model-to-SQL-model converter for a Page."""
         page = Page(
             Path(common.strip_zdir(self._zdir, sql_page.path)),
@@ -60,8 +60,8 @@ class PageConverter(EntityConverter[Page, sql.ZorgFile]):
         return page
 
 
-class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
-    """Converts Note domain entities to/from ZorgNote sqlmodels."""
+class NoteConverter(EntityConverter[Note, sql.Note]):
+    """Converts Note domain entities to/from Note sqlmodels."""
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._zdir = zdir
@@ -70,16 +70,16 @@ class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
         self._tag_cache: dict[Any, dict[str, Any]] = defaultdict(lambda: {})
         self._property_cache: dict[str, sql.Property] = {}
 
-    def from_entity(self, note: Note) -> sql.ZorgNote:
-        """Model-to-SQL-model converter for a ZorgNote."""
+    def from_entity(self, note: Note) -> sql.Note:
+        """Model-to-SQL-model converter for a Note."""
         # HACK: Needed to prevent errors of the form:
-        #   SAWarning: Object of type <ZorgNote> not in session...
+        #   SAWarning: Object of type <Note> not in session...
         with self._session.no_autoflush as session:
             return self._from_entity_with_session(note, cast(Session, session))
 
     def _from_entity_with_session(
         self, note: Note, session: Session
-    ) -> sql.ZorgNote:
+    ) -> sql.Note:
         kwargs: dict[str, Any] = {
             "body": note.body,
             "create_date": note.create_date,
@@ -89,7 +89,7 @@ class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
         if note.todo_payload:
             kwargs["todo_status"] = note.todo_payload.status
             kwargs["todo_priority"] = note.todo_payload.priority
-        sql_zorg_note = sql.ZorgNote(**kwargs)
+        sql_zorg_note = sql.Note(**kwargs)
 
         stmt: Any
         for attr, tag_model in [
@@ -147,7 +147,7 @@ class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
         sql_zorg_note.page_path = common.strip_zdir(self._zdir, note.file_path)
         return sql_zorg_note
 
-    def to_entity(self, sql_note: sql.ZorgNote) -> Note:
+    def to_entity(self, sql_note: sql.Note) -> Note:
         """Model-to-SQL-model converter for a Note."""
         todo_payload = (
             TodoPayload(

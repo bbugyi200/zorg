@@ -50,7 +50,7 @@ class SQLRepo:
 
     def remove_file_by_name(self, filename: str) -> Optional[Page]:
         """Remove a zorg file from the repo by path."""
-        stmt = select(sql.ZorgFile).where(sql.ZorgFile.path == filename)
+        stmt = select(sql.Page).where(sql.Page.path == filename)
         results = self._session.exec(stmt)
         sql_zorg_page = results.first()
         if sql_zorg_page:
@@ -102,7 +102,7 @@ class SQLRepo:
 
     def get_note_by_zid(self, zid: str) -> Optional[Note]:
         """Fetch a single note using its unique ZID."""
-        stmt = select(sql.ZorgNote).where(sql.ZorgNote.zid == zid)
+        stmt = select(sql.Note).where(sql.Note.zid == zid)
         results = self._session.exec(stmt)
         sql_note = results.first()
         if sql_note:
@@ -116,11 +116,11 @@ class SQLRepo:
     def get_notes_by_id(self, id_: str, *, id_key: str = "ID") -> list[Note]:
         """Fetch a list of notes using an id:: property."""
         stmt = (
-            select(sql.ZorgNote)
+            select(sql.Note)
             .join(
                 sql.PropertyLink,
                 cast(
-                    ColumnElement, sql.ZorgNote.id == sql.PropertyLink.note_id
+                    ColumnElement, sql.Note.id == sql.PropertyLink.note_id
                 ),
             )
             .join(
@@ -148,7 +148,7 @@ class SQLRepo:
         if str(page.path) not in self._path_to_seen_page:
             self._path_to_seen_page[str(page.path)] = page
 
-    def _get_page(self, sql_note: sql.ZorgNote) -> Page:
+    def _get_page(self, sql_note: sql.Note) -> Page:
         page_path = sql_note.page_path
         if page_path not in self._path_to_seen_page:
             self._record_seen_page(_get_page(sql_note, self._page_converter))
@@ -176,7 +176,7 @@ def _add_zids(zdir: Path, page: Page) -> None:
         )
 
 
-def _get_page(sql_note: sql.ZorgNote, page_converter: PageConverter) -> Page:
+def _get_page(sql_note: sql.Note, page_converter: PageConverter) -> Page:
     sql_block = sql_note.block
     if sql_h1 := sql_block.h1:
         sql_page = sql_h1.page
