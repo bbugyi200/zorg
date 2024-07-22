@@ -107,7 +107,7 @@ def get_all_zfiles(zdir: PathLike) -> Iterator[Path]:
     )
 
 
-def flatten_h1_notes(h1s: list[Any]) -> list[Any]:
+def flatten_h1_notes(h1s: Iterable[Any]) -> list[Any]:
     """Flattens the notes contained in a list of domain/SQL H1 sections."""
     notes = []
     blocks = []
