@@ -149,7 +149,7 @@ class H4(_HasTitleBase, table=True):
 class ZorgFile(_Base, table=True):
     """Model class for zorg (*.zo) files."""
 
-    path: str
+    path: str = Field(index=True)
     has_errors: bool = False
     h1s: List[H1] = Relationship(back_populates="page")
 
@@ -195,7 +195,7 @@ class ZorgNote(_Base, table=True):
     todo_status: Optional[NoteType] = None
     # TODO(bugyi): Make this field NOT optional
     block_id: Optional[int] = Field(foreign_key="block.id")
-    page_path: str = Field(sa_type=String)
+    page_path: str = Field(index=True)
 
     # relationships
     block: Block = Relationship(back_populates="notes")

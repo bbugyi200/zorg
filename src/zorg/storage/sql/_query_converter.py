@@ -25,18 +25,10 @@ from . import _models as sql
 
 _BASE_SELECTOR: Final = (
     select(sql.ZorgNote)
-    .join(sql.H1, cast(ColumnElement, sql.ZorgFile.h1s))
-    .outerjoin(sql.H2, cast(ColumnElement, sql.H1.h2s))
-    .outerjoin(sql.H3, cast(ColumnElement, sql.H2.h3s))
-    .outerjoin(sql.H4, cast(ColumnElement, sql.H3.h4s))
     .join(
-        sql.Block,
-        cast(ColumnElement, sql.Block.h1_id == sql.H1.id)
-        | cast(ColumnElement, sql.Block.h2_id == sql.H2.id)
-        | cast(ColumnElement, sql.Block.h3_id == sql.H3.id)
-        | cast(ColumnElement, sql.Block.h4_id == sql.H4.id),
+        sql.ZorgFile,
+        cast(ColumnElement, sql.ZorgFile.path == sql.ZorgNote.page_path),
     )
-    .join(sql.ZorgNote, cast(ColumnElement, sql.Block.notes))
     .distinct()
 )
 _LOGGER: Final = Logger(__name__)
