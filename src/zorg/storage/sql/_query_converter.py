@@ -62,7 +62,7 @@ def to_sql_select(
             _AndFilterToSqlWhere(and_filter, session).to_sql_where()
             for and_filter in or_filter.and_filters
         ])
-    ).order_by(cast(Column, sql.ZorgNote.id))
+    ).order_by(cast(Column, sql.ZorgNote.zid))
     _LOGGER.debug("Converted query", query=str(select_query))
     return select_query
 
