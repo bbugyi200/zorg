@@ -18,7 +18,7 @@ class PageConverter(EntityConverter[Page, sql.ZorgFile]):
 
     def __init__(self, zdir: Path, session: Session) -> None:
         self._zdir = zdir
-        self._h1_converter = H1Converter(self._zdir, session)
+        self._h1_converter = _H1Converter(self._zdir, session)
 
     def from_entity(self, page: Page) -> sql.ZorgFile:
         """Model-to-SQL-model converter for a ZorgFile."""
@@ -58,162 +58,6 @@ class PageConverter(EntityConverter[Page, sql.ZorgFile]):
         page.h1s = h1s
 
         return page
-
-
-class H1Converter(EntityConverter[H1, sql.H1]):
-    """Converts H1 domain entities to/from H1 sqlmodels."""
-
-    def __init__(self, zdir: Path, session: Session) -> None:
-        self._block_converter = BlockConverter(zdir, session)
-        self._h2_converter = H2Converter(self._block_converter)
-
-    def from_entity(self, h1: H1) -> sql.H1:  # noqa: D102
-        sql_h2s = []
-        for h2 in h1.h2s:
-            sql_h2s.append(self._h2_converter.from_entity(h2))
-
-        sql_h1 = sql.H1(title=h1.title)
-        sql_h1.h2s = sql_h2s
-        sql_h1.blocks = [
-            self._block_converter.from_entity(block) for block in h1.blocks
-        ]
-        return sql_h1
-
-    def to_entity(self, sql_h1: sql.H1) -> H1:  # noqa: D102
-        h1 = H1(title=sql_h1.title, blocks=[])
-
-        h2s = []
-        for sql_h2 in sql_h1.h2s:
-            h2 = self._h2_converter.to_entity(sql_h2)
-            h2.h1 = h1
-            h2s.append(h2)
-        h1.h2s = h2s
-
-        for sql_block in sql_h1.blocks:
-            block = self._block_converter.to_entity(sql_block)
-            block.section = h1
-            h1.blocks.append(block)
-
-        return h1
-
-
-class H2Converter(EntityConverter[H2, sql.H2]):
-    """Converts H2 domain entities to/from H2 sqlmodels."""
-
-    def __init__(self, block_converter: "BlockConverter") -> None:
-        self._h3_converter = H3Converter(block_converter)
-        self._block_converter = block_converter
-
-    def from_entity(self, h2: H2) -> sql.H2:  # noqa: D102
-        sql_h2 = sql.H2(
-            title=h2.title,
-            h3s=[self._h3_converter.from_entity(h3) for h3 in h2.h3s],
-        )
-        sql_h2.blocks = [
-            self._block_converter.from_entity(block) for block in h2.blocks
-        ]
-        return sql_h2
-
-    def to_entity(self, sql_h2: sql.H2) -> H2:  # noqa: D102
-        h2 = H2(title=sql_h2.title, blocks=[])
-
-        h3s = []
-        for sql_h3 in sql_h2.h3s:
-            h3 = self._h3_converter.to_entity(sql_h3)
-            h3.h2 = h2
-            h3s.append(h3)
-        h2.h3s = h3s
-
-        for sql_block in sql_h2.blocks:
-            block = self._block_converter.to_entity(sql_block)
-            block.section = h2
-            h2.blocks.append(block)
-
-        return h2
-
-
-class H3Converter(EntityConverter[H3, sql.H3]):
-    """Converts H3 domain entities to/from H3 sqlmodels."""
-
-    def __init__(self, block_converter: "BlockConverter") -> None:
-        self._h4_converter = H4Converter(block_converter)
-        self._block_converter = block_converter
-
-    def from_entity(self, h3: H3) -> sql.H3:  # noqa: D102
-        sql_h4s = []
-        for h4 in h3.h4s:
-            sql_h4s.append(self._h4_converter.from_entity(h4))
-
-        sql_h3 = sql.H3(title=h3.title)
-        sql_h3.h4s = sql_h4s
-        sql_h3.blocks = [
-            self._block_converter.from_entity(block) for block in h3.blocks
-        ]
-        return sql_h3
-
-    def to_entity(self, sql_h3: sql.H3) -> H3:  # noqa: D102
-        h3 = H3(title=sql_h3.title, blocks=[])
-
-        h4s = []
-        for sql_h4 in sql_h3.h4s:
-            h4 = self._h4_converter.to_entity(sql_h4)
-            h4.h3 = h3
-            h4s.append(h4)
-        h3.h4s = h4s
-
-        for sql_block in sql_h3.blocks:
-            block = self._block_converter.to_entity(sql_block)
-            block.section = h3
-            h3.blocks.append(block)
-
-        return h3
-
-
-class H4Converter(EntityConverter[H4, sql.H4]):
-    """Converts H4 domain entities to/from H4 sqlmodels."""
-
-    def __init__(self, block_converter: "BlockConverter") -> None:
-        self._block_converter = block_converter
-
-    def from_entity(self, h4: H4) -> sql.H4:  # noqa: D102
-        sql_h4 = sql.H4(title=h4.title)
-        sql_h4.blocks = [
-            self._block_converter.from_entity(block) for block in h4.blocks
-        ]
-        return sql_h4
-
-    def to_entity(self, sql_h4: sql.H4) -> H4:  # noqa: D102
-        h4 = H4(title=sql_h4.title, blocks=[])
-        for sql_block in sql_h4.blocks:
-            block = self._block_converter.to_entity(sql_block)
-            block.section = h4
-            h4.blocks.append(block)
-        return h4
-
-
-class BlockConverter(EntityConverter[Block, sql.Block]):
-    """Converts Block domain entities to/from Block sqlmodels."""
-
-    def __init__(self, zdir: Path, session: Session) -> None:
-        self._note_converter = NoteConverter(zdir, session)
-
-    def from_entity(self, block: Block) -> sql.Block:  # noqa: D102
-        sql_block = sql.Block(
-            notes=[
-                self._note_converter.from_entity(note) for note in block.notes
-            ]
-        )
-        return sql_block
-
-    def to_entity(self, sql_block: sql.Block) -> Block:  # noqa: D102
-        block = Block()
-        notes = []
-        for sql_note in sql_block.notes:
-            note = self._note_converter.to_entity(sql_note)
-            note.block = block
-            notes.append(note)
-        block.notes = notes
-        return block
 
 
 class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
@@ -333,3 +177,159 @@ class NoteConverter(EntityConverter[Note, sql.ZorgNote]):
             todo_payload=todo_payload,
             zid=sql_note.zid,
         )
+
+
+class _H1Converter(EntityConverter[H1, sql.H1]):
+    """Converts H1 domain entities to/from H1 sqlmodels."""
+
+    def __init__(self, zdir: Path, session: Session) -> None:
+        self._block_converter = _BlockConverter(zdir, session)
+        self._h2_converter = _H2Converter(self._block_converter)
+
+    def from_entity(self, h1: H1) -> sql.H1:  # noqa: D102
+        sql_h2s = []
+        for h2 in h1.h2s:
+            sql_h2s.append(self._h2_converter.from_entity(h2))
+
+        sql_h1 = sql.H1(title=h1.title)
+        sql_h1.h2s = sql_h2s
+        sql_h1.blocks = [
+            self._block_converter.from_entity(block) for block in h1.blocks
+        ]
+        return sql_h1
+
+    def to_entity(self, sql_h1: sql.H1) -> H1:  # noqa: D102
+        h1 = H1(title=sql_h1.title, blocks=[])
+
+        h2s = []
+        for sql_h2 in sql_h1.h2s:
+            h2 = self._h2_converter.to_entity(sql_h2)
+            h2.h1 = h1
+            h2s.append(h2)
+        h1.h2s = h2s
+
+        for sql_block in sql_h1.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h1
+            h1.blocks.append(block)
+
+        return h1
+
+
+class _H2Converter(EntityConverter[H2, sql.H2]):
+    """Converts H2 domain entities to/from H2 sqlmodels."""
+
+    def __init__(self, block_converter: "_BlockConverter") -> None:
+        self._h3_converter = _H3Converter(block_converter)
+        self._block_converter = block_converter
+
+    def from_entity(self, h2: H2) -> sql.H2:  # noqa: D102
+        sql_h2 = sql.H2(
+            title=h2.title,
+            h3s=[self._h3_converter.from_entity(h3) for h3 in h2.h3s],
+        )
+        sql_h2.blocks = [
+            self._block_converter.from_entity(block) for block in h2.blocks
+        ]
+        return sql_h2
+
+    def to_entity(self, sql_h2: sql.H2) -> H2:  # noqa: D102
+        h2 = H2(title=sql_h2.title, blocks=[])
+
+        h3s = []
+        for sql_h3 in sql_h2.h3s:
+            h3 = self._h3_converter.to_entity(sql_h3)
+            h3.h2 = h2
+            h3s.append(h3)
+        h2.h3s = h3s
+
+        for sql_block in sql_h2.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h2
+            h2.blocks.append(block)
+
+        return h2
+
+
+class _H3Converter(EntityConverter[H3, sql.H3]):
+    """Converts H3 domain entities to/from H3 sqlmodels."""
+
+    def __init__(self, block_converter: "_BlockConverter") -> None:
+        self._h4_converter = _H4Converter(block_converter)
+        self._block_converter = block_converter
+
+    def from_entity(self, h3: H3) -> sql.H3:  # noqa: D102
+        sql_h4s = []
+        for h4 in h3.h4s:
+            sql_h4s.append(self._h4_converter.from_entity(h4))
+
+        sql_h3 = sql.H3(title=h3.title)
+        sql_h3.h4s = sql_h4s
+        sql_h3.blocks = [
+            self._block_converter.from_entity(block) for block in h3.blocks
+        ]
+        return sql_h3
+
+    def to_entity(self, sql_h3: sql.H3) -> H3:  # noqa: D102
+        h3 = H3(title=sql_h3.title, blocks=[])
+
+        h4s = []
+        for sql_h4 in sql_h3.h4s:
+            h4 = self._h4_converter.to_entity(sql_h4)
+            h4.h3 = h3
+            h4s.append(h4)
+        h3.h4s = h4s
+
+        for sql_block in sql_h3.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h3
+            h3.blocks.append(block)
+
+        return h3
+
+
+class _H4Converter(EntityConverter[H4, sql.H4]):
+    """Converts H4 domain entities to/from H4 sqlmodels."""
+
+    def __init__(self, block_converter: "_BlockConverter") -> None:
+        self._block_converter = block_converter
+
+    def from_entity(self, h4: H4) -> sql.H4:  # noqa: D102
+        sql_h4 = sql.H4(title=h4.title)
+        sql_h4.blocks = [
+            self._block_converter.from_entity(block) for block in h4.blocks
+        ]
+        return sql_h4
+
+    def to_entity(self, sql_h4: sql.H4) -> H4:  # noqa: D102
+        h4 = H4(title=sql_h4.title, blocks=[])
+        for sql_block in sql_h4.blocks:
+            block = self._block_converter.to_entity(sql_block)
+            block.section = h4
+            h4.blocks.append(block)
+        return h4
+
+
+class _BlockConverter(EntityConverter[Block, sql.Block]):
+    """Converts Block domain entities to/from Block sqlmodels."""
+
+    def __init__(self, zdir: Path, session: Session) -> None:
+        self._note_converter = NoteConverter(zdir, session)
+
+    def from_entity(self, block: Block) -> sql.Block:  # noqa: D102
+        sql_block = sql.Block(
+            notes=[
+                self._note_converter.from_entity(note) for note in block.notes
+            ]
+        )
+        return sql_block
+
+    def to_entity(self, sql_block: sql.Block) -> Block:  # noqa: D102
+        block = Block()
+        notes = []
+        for sql_note in sql_block.notes:
+            note = self._note_converter.to_entity(sql_note)
+            note.block = block
+            notes.append(note)
+        block.notes = notes
+        return block
