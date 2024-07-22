@@ -80,16 +80,16 @@ class ZorgFileCompiler(ZorgFileListener):
         del ctx
         self._s.block = Block()
         section: Section
-        if self._s.h1 is None:
-            if self.page.h0 is None:
-                self.page.h0 = H1("", [])
-            section = self.page.h0
-        elif self._s.h4 is not None:
+        if self._s.h4 is not None:
             section = self._s.h4
         elif self._s.h3 is not None:
             section = self._s.h3
         elif self._s.h2 is not None:
             section = self._s.h2
+        elif self._s.h1 is None:
+            if self.page.h0 is None:
+                self.page.h0 = H1("", [])
+            section = self.page.h0
         else:
             assert self._s.h1 is not None
             section = self._s.h1
