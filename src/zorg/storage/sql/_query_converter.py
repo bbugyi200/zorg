@@ -25,9 +25,7 @@ from . import _models as sql
 
 _BASE_SELECTOR: Final = (
     select(sql.Note)
-    .join(
-        sql.Page, cast(ColumnElement, sql.Page.path == sql.Note.page_path)
-    )
+    .join(sql.Page, cast(ColumnElement, sql.Page.path == sql.Note.page_path))
     .distinct()
 )
 _LOGGER: Final = Logger(__name__)
@@ -97,8 +95,7 @@ class _AndFilterToSqlWhere:
         priorities = self.and_filter.priorities
         if priorities:
             return or_(*[
-                sql.Note.todo_priority == priority
-                for priority in priorities
+                sql.Note.todo_priority == priority for priority in priorities
             ])
         else:
             return None
@@ -113,9 +110,7 @@ class _AndFilterToSqlWhere:
             (self.and_filter.people, sql.PersonLink, sql.Person),
             (self.and_filter.projects, sql.ProjectLink, sql.Project),
         ]:
-            base_subquery = (
-                select(sql.Note.id).join(link_model).join(model)
-            )
+            base_subquery = select(sql.Note.id).join(link_model).join(model)
             for prefix_tag in prefix_tag_list:
                 name = prefix_tag
 
@@ -247,9 +242,7 @@ class _AndFilterToSqlWhere:
             op_arg: Any
             if case_sensitive:
                 cond = sql.Note.body.like(like_arg)  # type: ignore[attr-defined]
-                subquery = select(sql.Note.id, sql.Note.body).where(
-                    cond
-                )
+                subquery = select(sql.Note.id, sql.Note.body).where(cond)
                 id_list: list[int] = []
                 for ID, body in self.session.exec(subquery).all():
                     assert (
@@ -296,9 +289,7 @@ class _AndFilterToSqlWhere:
         and_conds = []
         if not self.and_filter.link_filters:
             return None
-        base_subquery = (
-            select(sql.Note.id).join(sql.LinkLink).join(sql.Link)
-        )
+        base_subquery = select(sql.Note.id).join(sql.LinkLink).join(sql.Link)
         for link_filter in self.and_filter.link_filters:
             if link_filter.negated:
                 in_op = sql.Note.id.not_in  # type: ignore[union-attr]

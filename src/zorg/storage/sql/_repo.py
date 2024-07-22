@@ -119,9 +119,7 @@ class SQLRepo:
             select(sql.Note)
             .join(
                 sql.PropertyLink,
-                cast(
-                    ColumnElement, sql.Note.id == sql.PropertyLink.note_id
-                ),
+                cast(ColumnElement, sql.Note.id == sql.PropertyLink.note_id),
             )
             .join(
                 sql.Property,
