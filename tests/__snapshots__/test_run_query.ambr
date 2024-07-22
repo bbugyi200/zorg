@@ -226,9 +226,9 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
+  - 240721#0C Some note in section 0
   - 240721#09 A note about life...
   - 240721#0B With a note
-  - 240721#0C Some note in section 0
   - 240721#0D Note A1
   
   ################################ [[scrambled_prj_notes]]
@@ -640,9 +640,9 @@
   - 240721#01 Some note that references a local [240510#03] ZID.
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#00 Some note with duplicate links, like [[poop]] and [[poop]].
+  - 240721#0C Some note in section 0
   - 240721#09 A note about life...
   - 240721#0B With a note
-  - 240721#0C Some note in section 0
   - 240721#0D Note A1
   - 240721#0N Tzus %clyzajrm: +cmeq ylevgv frxb gevcfp xa 26cb
   - 240721#0P Eongcgfy tho pscz giwq arjebc@?
@@ -859,9 +859,9 @@
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#00 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240721#19 LID::1 http://www.example.com
+  - 240721#0C Some note in section 0
   - 240721#09 A note about life...
   - 240721#0B With a note
-  - 240721#0C Some note in section 0
   - 240721#0D Note A1
   - 240721#0P Eongcgfy tho pscz giwq arjebc@?
   - 240721#0R Crxekimyx kq fjboaq:
@@ -1014,9 +1014,9 @@
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#00 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240721#19 LID::1 http://www.example.com
+  - 240721#0C Some note in section 0
   - 240721#09 A note about life...
   - 240721#0B With a note
-  - 240721#0C Some note in section 0
   - 240721#0D Note A1
   
   ++++++++++++++++ +arms
@@ -1218,9 +1218,9 @@
   - 240510#0G Note C
   - 240510#0H Note D
   - 240510#0J Note E
+  - 240721#0C Some note in section 0
   - 240721#09 A note about life...
   - 240721#0B With a note
-  - 240721#0C Some note in section 0
   - 240721#0D Note A1
   o P3 240510#07 Some todo
   o P3 240721#08 Another related todo

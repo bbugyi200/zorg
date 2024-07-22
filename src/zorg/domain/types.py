@@ -314,6 +314,6 @@ def _to_comparable_section_from_section(section: "Section") -> str:
         h1 = h2.h1
         result = result if result == "" else f" | {result}"
         result = f"{h2.title}{result}"
-    result = result if result == "" else f" | {result}"
+    result = result if result == "" or h1.title == "" else f" | {result}"
     result = f"{h1.title}{result}"
     return result
