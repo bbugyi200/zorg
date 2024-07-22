@@ -886,6 +886,47 @@
   
   '''
 # ---
+# name: test_query[YAMLConfigFile-group_by_section]
+  '''
+  ################################ [[subsections]]
+  ======================== A1
+  - 240510#1t Note about A1
+  
+  ======================== A1 | A2.1
+  - 240510#1u Note about something
+  - 240510#1v Another note
+  
+  ======================== A1 | A2.2
+  o P3 240510#1w A todo for something
+  
+  ======================== B1
+  - 240510#1x A note on the second section.
+  
+  ======================== B1 | B2
+  - 240510#1z A sub-note.
+  - 240510#20 And another note.
+  
+  ======================== B1 | B2 | B3
+  o P3 240510#21 Some foobar todo.
+  
+  ======================== B1 | B2 | B3 | B4
+  - 240510#22 This is inside of h4_section!
+  
+  ======================== C1
+  - 240510#23 A note on the third section.
+  
+  ======================== C1 | C2
+  - 240510#24 A sub-note.
+  - 240510#25 And another note.
+  
+  ======================== C1 | C2 | C3
+  o P3 240510#26 Some foobar todo.
+  
+  ======================== C1 | C2 | C3 | C4
+  - 240510#27 This is the final section!
+  
+  '''
+# ---
 # name: test_query[YAMLConfigFile-group_by_type_area_project]
   '''
   ################################ 1 | OPEN TODOS

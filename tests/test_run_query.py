@@ -58,6 +58,7 @@ params = mark.parametrize
         param("S links", id="select_links"),
         param("S links O none", id="select_links__no_order"),
         param("S count(note) W o", id="select_count_of_todos"),
+        param("f=subsections G file section", id="group_by_section"),
     ],
 )
 def test_query(
