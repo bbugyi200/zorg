@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, cast
+from typing import Iterable, Optional, cast
 
 from logrus import Logger
 from sqlmodel import Session, and_, select
@@ -45,18 +45,18 @@ class SQLRepo:
         del key
         self._record_seen_page(page)
         _add_zids(self._zdir, page)
-        sql_zorg_page = self._page_converter.from_entity(page)
-        self._session.add(sql_zorg_page)
+        sql_page = self._page_converter.from_entity(page)
+        self._session.add(sql_page)
 
     def remove_file_by_name(self, filename: str) -> Optional[Page]:
         """Remove a zorg file from the repo by path."""
         stmt = select(sql.Page).where(sql.Page.path == filename)
         results = self._session.exec(stmt)
-        sql_zorg_page = results.first()
-        if sql_zorg_page:
-            page = self._page_converter.to_entity(sql_zorg_page)
+        sql_page: sql.Page | None = results.first()
+        if sql_page:
+            page = self._page_converter.to_entity(sql_page)
             _LOGGER.debug("Deleting Zorg Page", page=page)
-            for sql_note in sql_zorg_page.notes:
+            for sql_note in sql_page.notes:
                 for prop_link in sql_note.property_links:
                     delete_prop = len(prop_link.prop.links) == 1
                     self._session.delete(prop_link)
@@ -76,7 +76,9 @@ class SQLRepo:
                             self._session.commit()
 
                 self._session.delete(sql_note)
-            self._session.delete(sql_zorg_page)
+
+            _delete_sections_and_blocks(self._session, sql_page.h1s)
+            self._session.delete(sql_page)
             return page
         else:
             emsg = "Cannot delete zorg file since it does not exist."
@@ -189,3 +191,24 @@ def _get_page(sql_note: sql.Note, page_converter: PageConverter) -> Page:
             f"A block MUST be associated with an H1-H4 section | {sql_block}"
         )
     return page_converter.to_entity(sql_page)
+
+
+def _delete_sections_and_blocks(
+    session: Session, sql_h1s: Iterable[sql.H1]
+) -> None:
+    sql_blocks = []
+    for sql_h1 in sql_h1s:
+        sql_blocks.extend(sql_h1.blocks)
+        for sql_h2 in sql_h1.h2s:
+            sql_blocks.extend(sql_h2.blocks)
+            for sql_h3 in sql_h2.h3s:
+                sql_blocks.extend(sql_h3.blocks)
+                for sql_h4 in sql_h3.h4s:
+                    sql_blocks.extend(sql_h4.blocks)
+                    session.delete(sql_h4)
+                session.delete(sql_h3)
+            session.delete(sql_h2)
+        session.delete(sql_h1)
+
+    for sql_block in sql_blocks:
+        session.delete(sql_block)
