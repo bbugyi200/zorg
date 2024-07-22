@@ -130,14 +130,14 @@
     'h4',
     'link',
     'linklink',
+    'note',
+    'page',
     'person',
     'personlink',
     'project',
     'projectlink',
     'property',
     'propertylink',
-    'zorgfile',
-    'zorgnote',
   ])
 # ---
 # name: test_run_db_create__todo_count[YAMLConfigFile]

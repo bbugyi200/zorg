@@ -33,7 +33,7 @@ def test_run_db_create__file_count(
     sql_cursor: sqlite3.Cursor, snapshot: Snapshot
 ) -> None:
     """Check the number of *.zo files indexed by running 'zorg db create'."""
-    sql_cursor.execute("SELECT COUNT(*) FROM zorgfile")
+    sql_cursor.execute("SELECT COUNT(*) FROM page")
     assert snapshot == sql_cursor.fetchone()[0]
 
 
@@ -41,7 +41,7 @@ def test_run_db_create__note_count(
     sql_cursor: sqlite3.Cursor, snapshot: Snapshot
 ) -> None:
     """Check the number of zorg notes indexed by running 'zorg db create'."""
-    sql_cursor.execute("SELECT COUNT(*) FROM zorgnote")
+    sql_cursor.execute("SELECT COUNT(*) FROM note")
     assert snapshot == sql_cursor.fetchone()[0]
 
 
@@ -50,7 +50,7 @@ def test_run_db_create__todo_count(
 ) -> None:
     """Check the number of zorg todos indexed by running 'zorg db create'."""
     sql_cursor.execute(
-        "SELECT COUNT(*) FROM zorgnote WHERE todo_status IS NOT NULL"
+        "SELECT COUNT(*) FROM note WHERE todo_status IS NOT NULL"
     )
     assert snapshot == sql_cursor.fetchone()[0]
 
@@ -107,7 +107,7 @@ def test_run_db_create__create_dates(
     sql_cursor: sqlite3.Cursor, snapshot: Snapshot
 ) -> None:
     """Check what create dates are indexed by running 'zorg db create'."""
-    sql_cursor.execute("SELECT DISTINCT create_date FROM zorgnote")
+    sql_cursor.execute("SELECT DISTINCT create_date FROM note")
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
 
 
@@ -116,7 +116,7 @@ def test_run_db_create__todo_priorities(
 ) -> None:
     """Check what todo priorities are indexed by running 'zorg db create'."""
     sql_cursor.execute(
-        "SELECT DISTINCT todo_priority FROM zorgnote WHERE todo_priority IS"
+        "SELECT DISTINCT todo_priority FROM note WHERE todo_priority IS"
         " NOT NULL"
     )
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
@@ -127,7 +127,7 @@ def test_run_db_create__todo_statuses(
 ) -> None:
     """Check what todo statuses are indexed by running 'zorg db create'."""
     sql_cursor.execute(
-        "SELECT DISTINCT todo_status FROM zorgnote WHERE todo_status IS NOT"
+        "SELECT DISTINCT todo_status FROM note WHERE todo_status IS NOT"
         " NULL"
     )
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
@@ -137,7 +137,7 @@ def test_run_db_create__zids(
     sql_cursor: sqlite3.Cursor, snapshot: Snapshot
 ) -> None:
     """Check what create dates are indexed by running 'zorg db create'."""
-    sql_cursor.execute("SELECT DISTINCT zid FROM zorgnote")
+    sql_cursor.execute("SELECT DISTINCT zid FROM note")
     assert snapshot == sorted(
         row[0] for row in sql_cursor.fetchall() if row[0]
     )

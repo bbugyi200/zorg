@@ -29,7 +29,7 @@ class _NoteLinkBase(SQLModel):
     """Abstract model for association/link models."""
 
     note_id: Optional[int] = Field(
-        default=None, foreign_key="zorgnote.id", primary_key=True
+        default=None, foreign_key="note.id", primary_key=True
     )
 
 
@@ -107,7 +107,7 @@ class LinkLink(_NoteLinkBase, table=True):
 class H1(_HasTitleBase, table=True):
     """Model class for H1 sections in zorg files."""
 
-    zorg_file_id: Optional[int] = Field(foreign_key="zorgfile.id")
+    page_id: Optional[int] = Field(foreign_key="page.id")
 
     page: "Page" = Relationship(back_populates="h1s")
     h2s: List["H2"] = Relationship(back_populates="h1")
