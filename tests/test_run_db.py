@@ -127,8 +127,7 @@ def test_run_db_create__todo_statuses(
 ) -> None:
     """Check what todo statuses are indexed by running 'zorg db create'."""
     sql_cursor.execute(
-        "SELECT DISTINCT todo_status FROM note WHERE todo_status IS NOT"
-        " NULL"
+        "SELECT DISTINCT todo_status FROM note WHERE todo_status IS NOT NULL"
     )
     assert snapshot == sorted(row[0] for row in sql_cursor.fetchall())
 
