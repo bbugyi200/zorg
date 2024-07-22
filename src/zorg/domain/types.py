@@ -141,7 +141,7 @@ class GroupByType(enum.Enum):
         elif self is GroupByType.PRIORITY:
             return lambda note: _to_comparable_priority(note.todo_payload)
         elif self is GroupByType.SECTION:
-            return lambda note: _to_comparable_section_from_note(note)
+            return _to_comparable_section_from_note
         else:
             assert_never(self)
 
