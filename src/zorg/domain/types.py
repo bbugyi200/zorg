@@ -53,6 +53,8 @@ DoneTodoTypeChar = Literal["x", "~"]
 TodoTypeChar = Literal[DoneTodoTypeChar, "o", "<", ">"]
 NoteTypeChar = Literal[TodoTypeChar, "-"]
 
+_SECTION_SEP: Final = "|"
+
 
 def cast_tag_name(name: TagName) -> TagName:
     """Typing helper for working with TagNames."""
@@ -308,12 +310,15 @@ def _to_comparable_section_from_section(section: "Section") -> str:
                 h3 = section.h3
             assert h3.h2 is not None
             h2 = h3.h2
-            result = result if result == "" else f" | {result}"
-            result = f"{h3.title}{result}"
+            result = _prepend_to_header(result, h3.title)
         assert h2.h1 is not None
         h1 = h2.h1
-        result = result if result == "" else f" | {result}"
-        result = f"{h2.title}{result}"
-    result = result if result == "" or h1.title == "" else f" | {result}"
-    result = f"{h1.title}{result}"
+        result = _prepend_to_header(result, h2.title)
+    if h1.title:
+        result = _prepend_to_header(result, h1.title)
     return result
+
+
+def _prepend_to_header(header: str, value: str) -> str:
+    header = header if header == "" else f" {_SECTION_SEP} {header}"
+    return f"{value}{header}"
