@@ -9,9 +9,27 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning]: https://semver.org/
 
 
-## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.7.5...HEAD)
+## [Unreleased](https://github.com/bbugyi200/zorg/compare/0.8.0...HEAD)
 
 No notable changes have been made.
+
+
+## [0.8.0](https://github.com/bbugyi200/zorg/compare/0.7.5...0.8.0) - 2024-07-28
+
+### Added
+
+* Add support for grouping by section.
+* Add `zorg note move` command.
+
+### Changed
+
+* *BREAKING CHANGE*: Change data model to include representation for H1-H4
+  sections and note blocks.
+
+### Miscellaneous
+
+* Many other changes were made that I chose not to document here (I need to
+  release more often).
 
 
 ## [0.7.5](https://github.com/bbugyi200/zorg/compare/0.7.4...0.7.5) - 2024-06-21
