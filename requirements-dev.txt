@@ -248,19 +248,19 @@ sphinx-autodoc-typehints==2.2.3
     # via -r requirements-dev.in
 sphinx-rtd-theme==2.0.0
     # via -r requirements-dev.in
-sphinxcontrib-applehelp==1.0.8
+sphinxcontrib-applehelp==2.0.0
     # via sphinx
-sphinxcontrib-devhelp==1.0.6
+sphinxcontrib-devhelp==2.0.0
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.6
+sphinxcontrib-htmlhelp==2.1.0
     # via sphinx
 sphinxcontrib-jquery==4.1
     # via sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
-sphinxcontrib-qthelp==1.0.8
+sphinxcontrib-qthelp==2.0.0
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.10
+sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 sqlalchemy==2.0.31
     # via sqlmodel
@@ -328,7 +328,7 @@ wheel==0.43.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==24.1.2
+pip==24.2
     # via pip-tools
 setuptools==71.1.0
     # via
