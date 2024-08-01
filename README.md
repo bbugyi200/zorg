@@ -73,6 +73,7 @@ for cmd in [
     "file rename",
     "note",
     "note move",
+    "note promote",
     "query",
     "template",
     "template init",

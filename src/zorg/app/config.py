@@ -29,6 +29,7 @@ Command = Literal[
     "list",
     "move",
     "open",
+    "promote",
     "query",
     "reindex",
     "rename",
@@ -114,6 +115,12 @@ class NoteMoveConfig(Config):
     zid: str
     new_page: Path
     note_type: Optional[DoneTodoTypeChar] = None
+
+
+class NotePromoteConfig(Config):
+    """Clack config for the 'note promote' command."""
+
+    command: Literal["promote"]
 
 
 class OpenActionConfig(Config):
@@ -348,6 +355,8 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
             f" Valid values: {literal_to_list(DoneTodoTypeChar)}"
         ),
     )
+    # --- 'note promote' command
+    new_note_command("promote", help="Promote a note to a file.")
 
     # --- 'query' command
     query_parser = new_command(

@@ -1,6 +1,6 @@
 """Contains runners for the 'zorg note' command."""
 
-from zorg.app.config import NoteMoveConfig
+from zorg.app.config import NoteMoveConfig, NotePromoteConfig
 from zorg.service.note_utils import move_note
 
 from ._runners import runner
@@ -18,3 +18,10 @@ def run_note_move(cfg: NoteMoveConfig) -> int:
         note_type=cfg.note_type,
         verbose=cfg.verbose,
     )
+
+
+@runner
+def run_note_promote(cfg: NotePromoteConfig) -> int:
+    """Runner for the 'note promote' command."""
+    del cfg
+    return 0
