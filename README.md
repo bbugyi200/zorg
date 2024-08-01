@@ -271,16 +271,17 @@ options:
 ### `zorg note --help`
 
 ```
-usage: zorg note [-h] {move} ...
+usage: zorg note [-h] {move,promote} ...
 
 Commands for managing individual notes.
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help      show this help message and exit
 
 subcommands:
-  {move}
-    move      Move a note to a different page.
+  {move,promote}
+    move          Move a note to a different page.
+    promote       Promote a note to a file.
 ```
 
 ### `zorg note move --help`
@@ -298,6 +299,17 @@ positional arguments:
               as DONE before moving it to a file dedicated to done todos.
               Valid values: ['x', '~']
   zid         ZID of the note we want to move.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `zorg note promote --help`
+
+```
+usage: zorg note promote [-h]
+
+Promote a note to a file.
 
 options:
   -h, --help  show this help message and exit
