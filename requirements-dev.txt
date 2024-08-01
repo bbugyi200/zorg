@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.11.0
+mypy==1.11.1
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
@@ -174,7 +174,7 @@ pydantic==2.8.2
     #   sqlmodel
 pydantic-core==2.20.1
     # via pydantic
-pydantic-settings==2.3.4
+pydantic-settings==2.4.0
     # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
