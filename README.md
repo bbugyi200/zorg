@@ -307,12 +307,23 @@ options:
 ### `zorg note promote --help`
 
 ```
-usage: zorg note promote [-h]
+usage: zorg note promote [-h] [-n NEW_PAGE_NAME] [-p PARENT_PAGE_NAME] zid
 
 Promote a note to a file.
 
+positional arguments:
+  zid                   ZID of the note we want to promote to a file.
+
 options:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -n NEW_PAGE_NAME, --new-page-name NEW_PAGE_NAME
+                        Name of the new page we create from the target note.
+                        Defaults to using the first ID property defined by the
+                        target note OR crashes if no ID property is found.
+  -p PARENT_PAGE_NAME, --parent-page-name PARENT_PAGE_NAME
+                        Name of the page that should be considered the parent
+                        of the new page we create. Defaults to the file
+                        containing the target note.
 ```
 
 ### `zorg query --help`
