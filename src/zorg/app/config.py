@@ -122,6 +122,10 @@ class NotePromoteConfig(Config):
 
     command: Literal["promote"]
 
+    zid: str
+    parent_page_name: Optional[str] = None
+    new_page_name: Optional[str] = None
+
 
 class OpenActionConfig(Config):
     """Clack config for the 'action open' command."""
@@ -356,7 +360,29 @@ def clack_parser(argv: Sequence[str]) -> dict[str, Any]:
         ),
     )
     # --- 'note promote' command
-    new_note_command("promote", help="Promote a note to a file.")
+    note_promote_parser = new_note_command(
+        "promote", help="Promote a note to a file."
+    )
+    note_promote_parser.add_argument(
+        "zid", help="ZID of the note we want to promote to a file."
+    )
+    note_promote_parser.add_argument(
+        "-n",
+        "--new-page-name",
+        help=(
+            "Name of the new page we create from the target note. Defaults to"
+            " using the first ID property defined by the target note OR"
+            " crashes if no ID property is found."
+        ),
+    )
+    note_promote_parser.add_argument(
+        "-p",
+        "--parent-page-name",
+        help=(
+            "Name of the page that should be considered the parent of the new"
+            " page we create. Defaults to the file containing the target note."
+        ),
+    )
 
     # --- 'query' command
     query_parser = new_command(
