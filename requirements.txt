@@ -6,7 +6,7 @@
 #
 annotated-types==0.7.0
     # via pydantic
-antlr4-python3-runtime==4.13.1
+antlr4-python3-runtime==4.13.2
     # via -r requirements.in
 bolton-clack==0.3.12
     # via -r requirements.in
@@ -69,7 +69,7 @@ sqlmodel==0.0.21
     # via -r requirements.in
 structlog==24.4.0
     # via bolton-logrus
-tqdm==4.66.4
+tqdm==4.66.5
     # via -r requirements.in
 typing-extensions==4.12.2
     # via

@@ -10,7 +10,7 @@ alabaster==0.7.16
     # via sphinx
 annotated-types==0.7.0
     # via pydantic
-antlr4-python3-runtime==4.13.1
+antlr4-python3-runtime==4.13.2
     # via
     #   -r requirements.in
     #   zettel-org
@@ -297,7 +297,7 @@ tox==3.28.0
     #   tox-pyenv
 tox-pyenv==1.1.0
     # via -r requirements-dev.in
-tqdm==4.66.4
+tqdm==4.66.5
     # via
     #   -r requirements.in
     #   zettel-org
