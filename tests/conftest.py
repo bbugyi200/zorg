@@ -27,9 +27,12 @@ if TYPE_CHECKING:  # fixes pytest warning
 
 
 @fixture
-def local_zettel_dir(tmp_path: Path) -> Path:
+def local_db_zettel_dir(main: test_c.MainType, tmp_path: Path) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
-    return _get_zettel_dir(tmp_path)
+    zdir = _get_zettel_dir(tmp_path)
+    ec = main("--log=null", "--dir", str(zdir), "db", "create")
+    assert ec == 0
+    return zdir
 
 
 @fixture(scope="session")

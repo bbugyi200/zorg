@@ -59,7 +59,6 @@
   o 240510#0K This todo is @due today! | due::2024-03-13
   - 240510#0M This [type:: awesome note] has an inline property.
   o 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
-  o P3 240510#02 bazbuz is ok too...
   
   '''
 # ---
@@ -104,9 +103,6 @@
   - 240408#N2 Da nah nah nuh...
   ======================== +2_be_or_not_2_be +123
   - 240510#29 Projects can start with a number, but CANNOT be all numbers
-  ~ 240510#0Q q:: Can a note headline use a bullet property or do bullet
-    properties need to be defined _under_ the headline?
-    * a:: Yes! Bullet properties are powerful!
   
   '''
 # ---

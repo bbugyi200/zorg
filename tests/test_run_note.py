@@ -36,7 +36,7 @@ params = mark.parametrize
 )
 def test_note_move(
     main: c.MainType,
-    db_zettel_dir: Path,
+    local_db_zettel_dir: Path,
     snapshot: Snapshot,
     zid: str,
     src_name: str,
@@ -44,13 +44,20 @@ def test_note_move(
     mutate: Optional[str],
 ) -> None:
     """Tests the 'note move' command."""
-    main_args = ["--dir", str(db_zettel_dir), "note", "move", zid, dest_name]
+    main_args = [
+        "--dir",
+        str(local_db_zettel_dir),
+        "note",
+        "move",
+        zid,
+        dest_name,
+    ]
     if mutate is not None:
         main_args.append(mutate)
     exit_code = main(*main_args)
 
-    src_path = db_zettel_dir / src_name
-    dest_path = db_zettel_dir / dest_name
+    src_path = local_db_zettel_dir / src_name
+    dest_path = local_db_zettel_dir / dest_name
     assert exit_code == 0
     assert snapshot == src_path.read_text()
     assert snapshot == dest_path.read_text()
@@ -62,13 +69,13 @@ def test_note_move(
 )
 def test_note_promote(
     main: c.MainType,
-    local_zettel_dir: Path,
+    local_db_zettel_dir: Path,
     zid: str,
     new_page_name: Optional[str],
     parent_page_name: Optional[str],
 ) -> None:
     """Flexes the 'zorg note promote' command."""
-    main_args = ["--dir", str(local_zettel_dir), "note", "promote", zid]
+    main_args = ["--dir", str(local_db_zettel_dir), "note", "promote", zid]
     if new_page_name is not None:
         main_args.extend(["--new-page-name", new_page_name])
     if parent_page_name is not None:
