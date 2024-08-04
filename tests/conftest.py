@@ -26,6 +26,12 @@ if TYPE_CHECKING:  # fixes pytest warning
     from clack.pytest_plugin import MakeConfigFile
 
 
+@fixture
+def local_zettel_dir(tmp_path: Path) -> Path:
+    """Returns a zettel directory that contains copies of all *.zo files."""
+    return _get_zettel_dir(tmp_path)
+
+
 @fixture(scope="session")
 def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""

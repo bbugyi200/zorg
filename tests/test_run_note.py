@@ -54,3 +54,26 @@ def test_note_move(
     assert exit_code == 0
     assert snapshot == src_path.read_text()
     assert snapshot == dest_path.read_text()
+
+
+@params(
+    "zid,new_page_name,parent_page_name",
+    [param("301231#X0", None, None, id="pig_is_gross")],
+)
+def test_note_promote(
+    main: c.MainType,
+    local_zettel_dir: Path,
+    zid: str,
+    new_page_name: Optional[str],
+    parent_page_name: Optional[str],
+) -> None:
+    """Flexes the 'zorg note promote' command."""
+    main_args = ["--dir", str(local_zettel_dir), "note", "promote", zid]
+    if new_page_name is not None:
+        main_args.extend(["--new-page-name", new_page_name])
+    if parent_page_name is not None:
+        main_args.extend(["--parent-page-name", parent_page_name])
+
+    exit_code = main(*main_args)
+
+    assert exit_code == 0

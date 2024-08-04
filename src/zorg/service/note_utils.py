@@ -23,6 +23,56 @@ from zorg.storage.sql import SQLSession
 _LOGGER: Final = Logger(__name__)
 
 
+def convert_note_to_page(
+    zdir: PathLike,
+    db_url: str,
+    note: Note,
+    new_page_name: str,
+    parent_page_name: str,
+) -> int:
+    zdir = Path(zdir)
+
+    # Create new <ZO_PAGE> and add a related file link (key: ^) to the page
+    # header.
+    pass
+
+    # Determine the next available related file link <KEY> from the parent
+    # page.
+    pass
+
+    # Add a new related file link using <KEY> to the parent page.
+    pass
+
+    # Get a list of all L1 <BULLETS> from the target note and filter any
+    # property bullets from this list.
+    pass
+
+    # Add <BULLETS> to <ZO_PAGE> as notes.
+    pass
+
+    # Get a list (<INLINE_PROPS>) of all properties that can be inlined via the
+    # [foo::bar] syntax. Include CDATE:: and MDATE:: properties in this list.
+    pass
+
+    # Add <INLINE_PROPS> to <ZO_PAGE>'s header.
+    pass
+
+    # Get a list (<BULLET_PROPS>) of all properties that contain spaces.
+    pass
+
+    # Add <BULLET_PROPS> to <ZO_PAGE>'s header.
+    pass
+
+    # Replace all instances of [#<new_page_name>] or [<note.zid>] with
+    # [[<new_page_name>]].
+    pass
+
+    # Delete the newly promoted note from the page it used to be contained in.
+    pass
+
+    return 0
+
+
 def move_note(
     zdir: PathLike,
     db_url: str,

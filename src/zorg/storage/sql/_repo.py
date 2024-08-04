@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable, Optional, cast
+from typing import Final, Iterable, Optional, cast
 
 from logrus import Logger
 from sqlmodel import Session, and_, select
@@ -21,7 +21,7 @@ from ._query_converter import to_sql_select
 from ._zid_manager import ZIDManager
 
 
-_LOGGER = Logger(__name__)
+_LOGGER: Final = Logger(__name__)
 
 
 class SQLRepo:
