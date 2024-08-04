@@ -53,6 +53,8 @@ def run_note_promote(cfg: NotePromoteConfig) -> int:
         cfg.zettel_dir, note.file_path
     )
 
-    return convert_note_to_page(
+    page = convert_note_to_page(
         cfg.zettel_dir, cfg.database_url, note, new_page_name, parent_page_name
     )
+    _LOGGER.info("Converted note to page", zid=note.zid, page=str(page.path))
+    return 0

@@ -7,7 +7,7 @@ from typing import Final, Optional
 from logrus import Logger
 from typist import PathLike
 
-from zorg.domain.models import Note, TodoPayload
+from zorg.domain.models import Note, Page, TodoPayload
 from zorg.domain.types import (
     DoneTodoTypeChar,
     MetadataType,
@@ -29,9 +29,12 @@ def convert_note_to_page(
     note: Note,
     new_page_name: str,
     parent_page_name: str,
-) -> int:
-    del db_url, note, new_page_name, parent_page_name
+) -> Page:
+    """Converts a Note into a Page."""
+    del db_url, note, parent_page_name
+
     zdir = Path(zdir)
+    new_page_path = zdir / new_page_name
 
     # Create new <ZO_PAGE> and add a related file link (key: ^) to the page
     # header.
@@ -71,7 +74,7 @@ def convert_note_to_page(
     # Delete the newly promoted note from the page it used to be contained in.
     pass  # pylint: disable=unnecessary-pass
 
-    return 0
+    return Page(new_page_path)
 
 
 def move_note(
