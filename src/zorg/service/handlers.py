@@ -56,7 +56,6 @@ def check_keep_alive_file(
         return
 
     zdir = event.edit_cmd.zettel_dir
-    bulk_prepend_zdir = partial(c.bulk_prepend_zdir, zdir)
     vim_commands = list(event.edit_cmd.vim_commands)
     if keep_alive_file.stat().st_size == 0:
         _LOGGER.debug(
@@ -71,8 +70,8 @@ def check_keep_alive_file(
             cmd for cmd in vim_commands if not cmd.startswith("edit ")
         ]
         vim_commands.append(f"edit {focused_filename}")
-        new_paths = bulk_prepend_zdir(
-            [Path(p.strip()) for p in keep_alive_lines]
+        new_paths = c.bulk_prepend_zdir(
+            zdir, [Path(p.strip()) for p in keep_alive_lines]
         )
         _LOGGER.debug(
             "Editing files specified in the keep alive file.",
