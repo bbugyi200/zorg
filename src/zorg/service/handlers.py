@@ -1,7 +1,6 @@
 """Zorg's event and command handlers live here."""
 
 import datetime as dt
-from functools import partial
 import hashlib
 import json
 from operator import attrgetter
