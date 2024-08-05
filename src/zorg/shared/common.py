@@ -42,13 +42,11 @@ def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
         A new list of paths constructed by prepending {zdir} to each Path in
         {paths}.
     """
-    zdir_path = Path(zdir)
+    zdir = Path(zdir)
     new_paths = []
     for p in paths:
-        path = Path(p)
-        new_paths.append(
-            path if zdir_path in path.parents else zdir_path / path
-        )
+        path = Path(p if "." in str(p) else f"{p}.zo")
+        new_paths.append(path if zdir in path.parents else zdir / path)
     return new_paths
 
 
