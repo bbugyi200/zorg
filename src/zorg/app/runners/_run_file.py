@@ -18,8 +18,8 @@ def run_file_rename(cfg: FileRenameConfig) -> int:
     dest_name = (
         cfg.dest_name if "." in cfg.dest_name else cfg.dest_name + ".zo"
     )
-    src_path = c.prepend_zdir(cfg.zettel_dir, [src_name])[0]
-    dest_path = c.prepend_zdir(cfg.zettel_dir, [dest_name])[0]
+    src_path = c.prepend_zdir(cfg.zettel_dir, src_name)
+    dest_path = c.prepend_zdir(cfg.zettel_dir, dest_name)
     src_path.rename(dest_path)
     _LOGGER.info(
         "Moved file", src_path=str(src_path), dest_path=str(dest_path)

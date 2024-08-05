@@ -60,7 +60,7 @@ def _get_saved_where_filter(zdir: PathLike, query_name: str) -> Optional[str]:
     file, if it exists. Otherwise, returns None.
     """
     zdir = Path(zdir)
-    zoq_path = c.prepend_zdir(zdir, [f"query/{query_name}.zoq"])[0]
+    zoq_path = c.prepend_zdir(zdir, f"query/{query_name}.zoq")
     if not zoq_path.exists():
         _LOGGER.error("Zorg query file does NOT exist", zoq_path=str(zoq_path))
         return None

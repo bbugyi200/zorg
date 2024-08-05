@@ -5,7 +5,7 @@ from zorg.domain.messages import commands
 from zorg.service import messagebus
 from zorg.service.file_groups import expand_file_group_paths
 from zorg.service.templates import init_from_template
-from zorg.shared.common import prepend_zdir
+from zorg.shared import common as c
 
 from ._runners import runner
 
@@ -16,7 +16,7 @@ def run_edit(cfg: EditConfig) -> int:
     zo_paths = expand_file_group_paths(
         cfg.zo_paths, file_group_map=cfg.file_group_map
     )
-    zo_paths = prepend_zdir(cfg.zettel_dir, zo_paths)
+    zo_paths = c.bulk_prepend_zdir(cfg.zettel_dir, zo_paths)
     for zo_path in zo_paths:
         init_from_template(cfg.zettel_dir, cfg.template_pattern_map, zo_path)
 

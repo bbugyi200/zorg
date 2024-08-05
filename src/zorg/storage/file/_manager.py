@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import NewType, Optional
 
 from zorg.domain.models import Note
-from zorg.shared.common import prepend_zdir
+from zorg.shared import common as c
 
 
 Error = NewType("Error", str)
@@ -23,7 +23,7 @@ class FileManager:
         self, note: Note, page: Path
     ) -> Optional[Error]:
         """Adds {note} to the bottom of {page}."""
-        zpage = prepend_zdir(self._zdir, [page])[0]
+        zpage = c.prepend_zdir(self._zdir, page)
         if not zpage.exists():
             return Error(f"Page does NOT exist: {zpage}")
 
@@ -48,7 +48,7 @@ class FileManager:
 
     def delete_note(self, note: Note) -> Optional[Error]:
         """Removes {note} from its last known *.zo file."""
-        zpage = prepend_zdir(self._zdir, [note.file_path])[0]
+        zpage = c.prepend_zdir(self._zdir, note.file_path)
         assert note.zid is not None
         for i, line in enumerate(zpage.read_text().split("\n")):
             if f" {note.zid} " in line:

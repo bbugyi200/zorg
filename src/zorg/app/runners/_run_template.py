@@ -56,7 +56,7 @@ def run_template_render(cfg: TemplateRenderConfig) -> int:
 
 
 def _get_zot_path(zettel_dir: Path, template: Path) -> Path:
-    zot_path = c.prepend_zdir(zettel_dir, [template])[0]
+    zot_path = c.prepend_zdir(zettel_dir, template)
     if not zot_path.exists() or not zot_path.is_file():
         matched_zot_paths: list[Path] = []
         for some_zot_path in sorted(zettel_dir.rglob("*.zot")):

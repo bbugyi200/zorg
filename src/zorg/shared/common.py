@@ -35,8 +35,13 @@ def process_var_map(var_map: VarMapType) -> dict[str, Any]:
     return new_var_map
 
 
-def prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
-    """Prepend the given zettel directory to all given paths.
+def prepend_zdir(zdir: PathLike, path: PathLike) -> Path:
+    """Prepends {zdir} to {path} and add .zo ext if necessary."""
+    return bulk_prepend_zdir(zdir, [path])[0]
+
+
+def bulk_prepend_zdir(zdir: PathLike, paths: Iterable[PathLike]) -> list[Path]:
+    """Prepend the given zettel directory to all given paths and append .zo ext.
 
     Returns:
         A new list of paths constructed by prepending {zdir} to each Path in

@@ -35,7 +35,7 @@ def convert_note_to_page(
     del db_url, note, parent_page_name
 
     zdir = Path(zdir)
-    new_page_path = c.prepend_zdir(zdir, [new_page_name])[0]
+    new_page_path = c.prepend_zdir(zdir, new_page_name)
 
     # Create new <ZO_PAGE> and add a related file link (key: ^) to the page
     # header.

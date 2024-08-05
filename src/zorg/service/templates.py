@@ -40,7 +40,7 @@ def init_from_template(
         var_map: A map of template variable keys to values.
     """
     zdir = Path(zdir)
-    new_path = c.prepend_zdir(zdir, [Path(new_path)])[0]
+    new_path = c.prepend_zdir(zdir, Path(new_path))
     var_map = {} if var_map is None else dict(var_map)
 
     if new_path.exists() and not should_overwrite_existing:
@@ -68,7 +68,7 @@ def init_from_template(
     )
     tmpl_manager = ZorgTemplateManager(zdir)
     contents = tmpl_manager.render(
-        c.prepend_zdir(zdir, [matched_template])[0],
+        c.prepend_zdir(zdir, matched_template),
         c.process_var_map(var_map),
     )
     new_path.parent.mkdir(parents=True, exist_ok=True)

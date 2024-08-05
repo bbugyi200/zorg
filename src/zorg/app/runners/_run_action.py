@@ -27,7 +27,7 @@ _SEARCH_END: Final = "\\ze\\(\\s\\|[),.?!;:]\\|$\\)"
 @runner
 def run_action_open(cfg: OpenActionConfig) -> int:
     """Runner for the 'action open' command."""
-    zo_path = c.prepend_zdir(cfg.zettel_dir, [cfg.zo_path])[0]
+    zo_path = c.prepend_zdir(cfg.zettel_dir, cfg.zo_path)
     is_zoq_file = zo_path.suffix == ".zoq"
     zo_lines = zo_path.read_text().split("\n")
     zo_line = zo_lines[cfg.line_number - 1]
@@ -127,7 +127,7 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
         link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
     )
     link_base = link_base if "." in link_base else f"{link_base}.zo"
-    link_path = c.prepend_zdir(cfg.zettel_dir, [Path(link_base)])[0]
+    link_path = c.prepend_zdir(cfg.zettel_dir, Path(link_base))
 
     if not link_path.exists():
         parent = c.simplify_fname(cfg.zettel_dir, zo_path)
@@ -187,7 +187,7 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
         return 1
 
     page = pages[0]
-    full_page_path = c.prepend_zdir(cfg.zettel_dir, [page])[0]
+    full_page_path = c.prepend_zdir(cfg.zettel_dir, page)
     print(f"EDIT {full_page_path}")
     print(f"SEARCH ID::{id_}{_SEARCH_END}")
 
@@ -218,7 +218,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
 
     note = notes[0]
     assert note.file_path is not None
-    note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
+    note_file_path = c.prepend_zdir(cfg.zettel_dir, note.file_path)
     print(f"EDIT {note_file_path}")
     print(f"SEARCH RID::{rid}{_SEARCH_END}")
 
@@ -234,7 +234,7 @@ def _open_zid_link(cfg: OpenActionConfig, zid: str) -> int:
         return 1
 
     assert note.file_path is not None
-    note_file_path = c.prepend_zdir(cfg.zettel_dir, [note.file_path])[0]
+    note_file_path = c.prepend_zdir(cfg.zettel_dir, note.file_path)
     print(f"EDIT {note_file_path}")
     print(f"SEARCH \\s\\zs{zid}")
 
