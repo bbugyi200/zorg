@@ -38,8 +38,8 @@ def zettel_dir(db_zettel_dir: Path) -> Path:
     return _get_zdir(db_zettel_dir)
 
 
-@fixture(scope="session")
-def db_zettel_dir(
+@fixture(scope="session", name="db_zettel_dir")
+def db_zettel_dir_fixture(
     main: test_c.MainType, tmp_path_factory: TempPathFactory
 ) -> Path:
     """Returns zettel dir containing pre-initialized database.."""
