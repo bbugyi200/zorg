@@ -27,42 +27,24 @@ if TYPE_CHECKING:  # fixes pytest warning
 
 
 @fixture
-def local_db_zettel_dir(main: test_c.MainType, tmp_path: Path) -> Path:
+def local_zettel_dir(db_zettel_dir: Path) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
-    zdir = _get_zettel_dir(tmp_path)
-    ec = main("--log=null", "--dir", str(zdir), "db", "create")
-    assert ec == 0
-    return zdir
+    return _get_zdir(db_zettel_dir)
 
 
 @fixture(scope="session")
-def zettel_dir(tmp_path_factory: TempPathFactory) -> Path:
+def zettel_dir(db_zettel_dir: Path) -> Path:
     """Returns a zettel directory that contains copies of all *.zo files."""
-    return _get_zettel_dir(tmp_path_factory.getbasetemp())
-
-
-@fixture(scope="session", name="query_zettel_dir")
-def query_zettel_dir_fixture(tmp_path_factory: TempPathFactory) -> Path:
-    """Returns a zettel directory that contains copies of all *.zo files."""
-    tmp_path = tmp_path_factory.getbasetemp() / "query_tests"
-    tmp_path.mkdir()
-    return _get_zettel_dir(tmp_path)
+    return _get_zdir(db_zettel_dir)
 
 
 @fixture(scope="session")
-def db_zettel_dir(main: test_c.MainType, query_zettel_dir: Path) -> Path:
+def db_zettel_dir(
+    main: test_c.MainType, tmp_path_factory: TempPathFactory
+) -> Path:
     """Returns zettel dir containing pre-initialized database.."""
-    ec = main("--log=null", "--dir", str(query_zettel_dir), "db", "create")
-    assert ec == 0
-    return query_zettel_dir
-
-
-def _get_zettel_dir(tmp_path: Path) -> Path:
-    zdir = tmp_path / "org"
-    zdir.mkdir()
-    for zo_path in _get_all_zo_paths():
-        zettel_zo_path = zdir / zo_path.name
-        zettel_zo_path.write_bytes(zo_path.read_bytes())
+    zdir = _get_zdir(tmp_path_factory.getbasetemp())
+    assert main("--log=null", "--dir", str(zdir), "db", "create") == 0
     return zdir
 
 
@@ -88,6 +70,15 @@ def frozen_time() -> Iterator[None]:
     """Freeze time until our tests are done running."""
     with freeze_time(f"{test_c.TODAY}T{test_c.hh}:{test_c.mm}:00.123456Z"):
         yield
+
+
+def _get_zdir(tmp_path: Path) -> Path:
+    zdir = tmp_path / "org"
+    zdir.mkdir(exist_ok=True)
+    for zo_path in _get_all_zo_paths():
+        zettel_zo_path = zdir / zo_path.name
+        zettel_zo_path.write_bytes(zo_path.read_bytes())
+    return zdir
 
 
 def _get_all_zo_paths() -> list[Path]:
