@@ -75,7 +75,7 @@ cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.6.0
+coverage[toml]==7.6.1
     # via pytest-cov
 cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
@@ -94,7 +94,7 @@ filelock==3.15.4
     # via
     #   tox
     #   virtualenv
-flake8==7.1.0
+flake8==7.1.1
     # via -r requirements-dev.in
 freezegun==1.5.1
     # via -r requirements-dev.in
@@ -165,7 +165,7 @@ pluggy==1.5.0
     #   tox
 py==1.11.0
     # via tox
-pycodestyle==2.12.0
+pycodestyle==2.12.1
     # via flake8
 pydantic==2.8.2
     # via
@@ -324,7 +324,7 @@ vimala==0.2.0
     #   zettel-org
 virtualenv==20.26.3
     # via tox
-wheel==0.43.0
+wheel==0.44.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
