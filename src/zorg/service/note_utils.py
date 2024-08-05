@@ -16,6 +16,7 @@ from zorg.domain.types import (
     cast_tag_name,
 )
 from zorg.service.templates import init_from_template
+from zorg.shared import common as c
 from zorg.storage.file import FileManager
 from zorg.storage.sql import SQLSession
 
@@ -34,7 +35,7 @@ def convert_note_to_page(
     del db_url, note, parent_page_name
 
     zdir = Path(zdir)
-    new_page_path = zdir / new_page_name
+    new_page_path = c.prepend_zdir(zdir, [new_page_name])[0]
 
     # Create new <ZO_PAGE> and add a related file link (key: ^) to the page
     # header.
