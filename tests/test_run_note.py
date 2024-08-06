@@ -103,4 +103,5 @@ def test_note_promote(
     new_page_path = local_zettel_dir / expected_new_page_name
     assert exit_code == 0
     assert snapshot == old_parent_path.read_text()
+    # TODO(bugyi): Replace below assert with new_page_path.read_text() assert
     assert not new_page_path.exists()
