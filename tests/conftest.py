@@ -73,7 +73,9 @@ def frozen_time() -> Iterator[None]:
 
 
 def _get_zdir(tmp_path: Path) -> Path:
-    zdir = tmp_path / "org"
+    zdir = tmp_path
+    if zdir.name != "org":
+        zdir = tmp_path / "org"
     zdir.mkdir(exist_ok=True)
     for zo_path in _get_all_zo_paths():
         zettel_zo_path = zdir / zo_path.name

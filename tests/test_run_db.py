@@ -8,15 +8,11 @@ import sqlite3
 from pytest import fixture
 from syrupy.assertion import SnapshotAssertion as Snapshot
 
-from . import common as c
-
 
 @fixture(name="sql_cursor", scope="session")
-def sql_cursor_fixture(main: c.MainType, zettel_dir: Path) -> sqlite3.Cursor:
+def sql_cursor_fixture(zettel_dir: Path) -> sqlite3.Cursor:
     """Connects to the zorg DB created by 'zorg db create'."""
     db_path_str = f"{zettel_dir}/.zorg/zorg.db"
-    exit_code = main("--dir", str(zettel_dir), "db", "create")
-    assert exit_code == 0
     conn = sqlite3.connect(db_path_str)
     return conn.cursor()
 

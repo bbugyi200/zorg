@@ -64,15 +64,31 @@ def test_note_move(
 
 
 @params(
-    "zid,new_page_name,parent_page_name",
-    [param("301231#X0", None, None, id="pig_is_gross")],
+    "zid"
+    " ,new_page_name"
+    " ,parent_page_name"
+    " ,old_parent_name"
+    " ,expected_new_page_name",
+    [
+        param(
+            "301231#X0",
+            None,
+            None,
+            "tags_and_ids.zo",
+            "pig_is_gross.zo",
+            id="pig_is_gross",
+        )
+    ],
 )
 def test_note_promote(
     main: c.MainType,
     local_zettel_dir: Path,
+    snapshot: Snapshot,
     zid: str,
     new_page_name: Optional[str],
     parent_page_name: Optional[str],
+    old_parent_name: str,
+    expected_new_page_name: str,
 ) -> None:
     """Flexes the 'zorg note promote' command."""
     main_args = ["--dir", str(local_zettel_dir), "note", "promote", zid]
@@ -83,4 +99,8 @@ def test_note_promote(
 
     exit_code = main(*main_args)
 
+    old_parent_path = local_zettel_dir / old_parent_name
+    new_page_path = local_zettel_dir / expected_new_page_name
     assert exit_code == 0
+    assert snapshot == old_parent_path.read_text()
+    assert not new_page_path.exists()

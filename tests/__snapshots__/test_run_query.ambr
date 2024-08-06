@@ -101,6 +101,21 @@
 # ---
 # name: test_query[YAMLConfigFile-desc_filter__s_u_p]
   '''
+  ################################ [[2000/20000103]]
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
+  
   ################################ [[20240323]]
   - 240323#0L +zorg Parametrize test_run_compile()
   - 240323#0M +zorg Move models.py and file_groups.py
@@ -515,6 +530,19 @@
   o P2 240313#05 Low Priority TODO
   o P3 000102#00 Older todo
   o P3 000103#00 Old todo
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
@@ -709,6 +737,19 @@
   o P2 240313#05 Low Priority TODO
   o P3 000102#00 Older todo
   o P3 000103#00 Old todo
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
@@ -952,6 +993,21 @@
     * [X] Done subtask
     * [ ] Open subtask
   
+  ======================== #gtd
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
+  
   
   ################################ 3 | CANCELED TODOS
   ~ 240613 240510#0R A canceled todo with a multiline explanation
@@ -1168,6 +1224,21 @@
 # ---
 # name: test_query[YAMLConfigFile-grouped_and_ordered]
   '''
+  ################################ [[2000/20000103]]
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
+  
   ################################ [[20240323]]
   - 240323#0J #gtd pomodoro
   - 240323#0K #own Buy rubber duck
@@ -1426,6 +1497,19 @@
   o P2 240313#05 Low Priority TODO
   o P3 000102#00 Older todo
   o P3 000103#00 Old todo
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
   o P3 240510#02 bazbuz is ok too...
   o P3 240510#07 Some todo
   o P3 240510#0K This todo is @due today! | due::2024-03-13
@@ -1447,6 +1531,21 @@
 # ---
 # name: test_query[YAMLConfigFile-relative_date]
   '''
+  ################################ [[2000/20000103]]
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
+  
   ################################ [[basic]]
   o P3 000103#00 Old todo
   
@@ -1454,6 +1553,21 @@
 # ---
 # name: test_query[YAMLConfigFile-relative_date_range]
   '''
+  ################################ [[2000/20000103]]
+  o P3 000103#00 #gtd pomodoro
+    * Google Calendar (bbugyi@google + bryanbugyi34@gmail)
+    * Process yesterday's bujo log (e.g. close events, add missing pomodoros, rollover goals)
+    * Copy any important gchat convos from yesterday into chat/*.txt
+    * Check today's tickler file: [[tick_03]]
+    * Fill out yesterday's habit tracker: [[2000/20000102_habit]]
+    * go/g3co
+    * Review Google Keep Inbox
+    * Review [[inbox]]
+    * Review '@A' todos (are any >=2d old? which '@B' todos should be promoted?)
+    * <50 emails in bryanbugyi34@gmail
+    * <100 emails in bbugyi@google
+    * Review ~/org diffs from yesterday and commit them to git
+  
   ################################ [[basic]]
   o P3 000102#00 Older todo
   o P3 000103#00 Old todo
@@ -1462,12 +1576,13 @@
 # ---
 # name: test_query[YAMLConfigFile-select_count_of_todos]
   '''
-  16
+  17
   
   '''
 # ---
 # name: test_query[YAMLConfigFile-select_files_with_todos]
   '''
+  2000/20000103.zo
   basic.zo
   multiblocks.zo
   priority.zo
@@ -1479,17 +1594,20 @@
 # ---
 # name: test_query[YAMLConfigFile-select_links]
   '''
+  2000/20000102_habit
   bar.sh
   baz
   buz#fuzz
   desd_cd_kdzb.yhdxx
   eswz_xqow::empiz_ljyiwjbmi_szstj
   global:pig_is_gross
+  inbox
   local:1
   local:2
   local:some_loc_link
   poop
   ref:some_article
+  tick_03
   x:http://www.example.com
   x:https://go/foo-bar-baz
   x:https://www.bazbuz.com
@@ -1502,6 +1620,9 @@
 # ---
 # name: test_query[YAMLConfigFile-select_links__no_order]
   '''
+  2000/20000102_habit
+  inbox
+  tick_03
   xmind/zorg_e2e_query_arch.xmind
   zid:240510#03
   local:1
