@@ -913,8 +913,7 @@
                                                 'ylist': '+ 123 + 456 + 789',
                                                 'zlist': '111, 222, 333',
                                                 'zlong': 'Some property value '
-                                                         'with spaces in it. * '
-                                                         'ZBOTTOM:'},
+                                                         'with spaces in it.'},
                                  'todo_payload': None,
                                  'zid': '240806#00'}],
                       'section': None}],

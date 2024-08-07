@@ -3,6 +3,7 @@
 from dataclasses import dataclass, field
 import datetime as dt
 from functools import partial
+import itertools as it
 import re
 from typing import Any, Final, Mapping, Optional
 
@@ -463,13 +464,15 @@ class ZorgFileCompiler(ZorgFileListener):
             self.page.has_errors = True
         else:
             body: Final = note_body.getText().strip()
+            l1_bullet_prefix: Final = "  * "
+            l2_bullet_prefix: Final = "    - "
+            l3_bullet_prefix: Final = "      + "
             bullets = (
-                body.split("  * ")
+                body.split(l1_bullet_prefix)
                 if any(val in body for val in [":: ", "::\n"])
                 else []
             )
 
-            l2_bullet_prefix: Final = "    - "
             if any(
                 any(
                     "::" in b.split()[0]
@@ -477,9 +480,16 @@ class ZorgFileCompiler(ZorgFileListener):
                 )
                 for bullet in bullets
             ):
-                bullets = body.split(l2_bullet_prefix)
+                bullets = [
+                    "\n".join(
+                        it.takewhile(
+                            lambda x: not x.startswith(l1_bullet_prefix),
+                            b.split("\n"),
+                        )
+                    )
+                    for b in body.split(l2_bullet_prefix)
+                ]
 
-            l3_bullet_prefix: Final = "      + "
             if any(
                 any(
                     "::" in b.split()[0]
@@ -487,7 +497,17 @@ class ZorgFileCompiler(ZorgFileListener):
                 )
                 for bullet in bullets
             ):
-                bullets = body.split(l3_bullet_prefix)
+                bullets = [
+                    "\n".join(
+                        it.takewhile(
+                            lambda x: not x.startswith(
+                                (l1_bullet_prefix, l2_bullet_prefix)
+                            ),
+                            b.split("\n"),
+                        )
+                    )
+                    for b in body.split(l3_bullet_prefix)
+                ]
 
             for bullet in bullets:
                 words = bullet.split()
