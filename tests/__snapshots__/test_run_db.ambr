@@ -119,6 +119,7 @@
     'x',
     'ylist',
     'zlist',
+    'zlong',
   ])
 # ---
 # name: test_run_db_create__table_names[YAMLConfigFile]

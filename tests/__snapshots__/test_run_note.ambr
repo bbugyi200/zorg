@@ -33,11 +33,15 @@
   - 240806#00 Some note with a property drawer...
     * PROPERTY:
       - drawer_desc:: A drawer of property bullets.
-      - ylist:: 111, 222, 333
-      - zlist::
+      - ylist::
         + 123
         + 456
         + 789
+      - zlist:: 111, 222, 333
+      - zlong:: Some property value with spaces in it.
+    * ZBOTTOM:
+      - Another drawer with...
+      - ...two L2 bullets.
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.
@@ -64,11 +68,15 @@
   - 240806#00 Some note with a property drawer...
     * PROPERTY:
       - drawer_desc:: A drawer of property bullets.
-      - ylist:: 111, 222, 333
-      - zlist::
+      - ylist::
         + 123
         + 456
         + 789
+      - zlist:: 111, 222, 333
+      - zlong:: Some property value with spaces in it.
+    * ZBOTTOM:
+      - Another drawer with...
+      - ...two L2 bullets.
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.

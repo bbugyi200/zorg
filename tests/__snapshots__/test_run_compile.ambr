@@ -891,11 +891,16 @@
                                          '  * PROPERTY:\n'
                                          '    - drawer_desc:: A drawer of '
                                          'property bullets.\n'
-                                         '    - ylist:: 111, 222, 333\n'
-                                         '    - zlist::\n'
+                                         '    - ylist::\n'
                                          '      + 123\n'
                                          '      + 456\n'
-                                         '      + 789',
+                                         '      + 789\n'
+                                         '    - zlist:: 111, 222, 333\n'
+                                         '    - zlong:: Some property value with '
+                                         'spaces in it.\n'
+                                         '  * ZBOTTOM:\n'
+                                         '    - Another drawer with...\n'
+                                         '    - ...two L2 bullets.',
                                  'contexts': [],
                                  'create_date': FakeDate(2024, 8, 6),
                                  'links': [],
@@ -905,8 +910,11 @@
                                  'properties': {'drawer_desc': 'A drawer of '
                                                                'property '
                                                                'bullets.',
-                                                'ylist': '111, 222, 333',
-                                                'zlist': '+ 123 + 456 + 789'},
+                                                'ylist': '+ 123 + 456 + 789',
+                                                'zlist': '111, 222, 333',
+                                                'zlong': 'Some property value '
+                                                         'with spaces in it. * '
+                                                         'ZBOTTOM:'},
                                  'todo_payload': None,
                                  'zid': '240806#00'}],
                       'section': None}],
