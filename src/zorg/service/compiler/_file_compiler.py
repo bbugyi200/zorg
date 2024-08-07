@@ -490,7 +490,7 @@ class ZorgFileCompiler(ZorgFileListener):
                 bullets = body.split(l3_bullet_prefix)
 
             for bullet in bullets:
-                words: Final = bullet.split()
+                words = bullet.split()
                 if zdt.is_short_date_spec(words[0]):
                     words.pop(0)
                 if zdt.is_zid(words[0]):
