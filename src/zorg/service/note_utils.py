@@ -22,24 +22,30 @@ from zorg.storage.sql import SQLSession
 
 
 _LOGGER: Final = Logger(__name__)
+_NOTE_PAGE_TMPL: Final = """# {headline}
+#
+# ^ = [[{parent}]]
+"""
 
 
 def convert_note_to_page(
     zdir: PathLike,
-    db_url: str,
     note: Note,
     new_page_name: str,
     parent_page_name: str,
 ) -> Page:
     """Converts a Note into a Page."""
-    del db_url, note, parent_page_name
-
     zdir = Path(zdir)
-    new_page_path = c.prepend_zdir(zdir, new_page_name)
+    parent_page_name = parent_page_name.rstrip(".zo")
 
     # Create new <ZO_PAGE> and add a related file link (key: ^) to the page
     # header.
-    pass  # pylint: disable=unnecessary-pass
+    new_page_path = c.prepend_zdir(zdir, new_page_name)
+    new_page_path.write_text(
+        _NOTE_PAGE_TMPL.format(
+            headline=note.body.split("  * ")[0], parent=parent_page_name
+        )
+    )
 
     # Determine the next available related file link <KEY> from the parent
     # page.

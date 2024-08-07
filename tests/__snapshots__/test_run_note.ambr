@@ -165,3 +165,11 @@
   
   '''
 # ---
+# name: test_note_promote[YAMLConfigFile-pig_is_gross].1
+  '''
+  # 301231#X0 When I talk to %pig I always want to @puke. | ID::pig_is_gross
+  #
+  # ^ = [[tags_and_ids]]
+  
+  '''
+# ---
