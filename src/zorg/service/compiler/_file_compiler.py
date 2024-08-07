@@ -467,13 +467,13 @@ class ZorgFileCompiler(ZorgFileListener):
             l1_bullet_prefix: Final = "  * "
             l2_bullet_prefix: Final = "    - "
             l3_bullet_prefix: Final = "      + "
+
             bullets = (
                 body.split(l1_bullet_prefix)
                 # TODO(bugyi): Check if this optimization is necessary
                 if any(val in body for val in [":: ", "::\n"])
                 else []
             )
-
             if any(
                 any(
                     "::" in b.split()[0]
@@ -490,7 +490,6 @@ class ZorgFileCompiler(ZorgFileListener):
                     )
                     for b in body.split(l2_bullet_prefix)
                 ]
-
             if any(
                 any(
                     "::" in b.split()[0]
