@@ -462,14 +462,35 @@ class ZorgFileCompiler(ZorgFileListener):
             )
             self.page.has_errors = True
         else:
-            body = note_body.getText().strip()
+            body: Final = note_body.getText().strip()
             bullets = (
-                body.split(" * ")
+                body.split("  * ")
                 if any(val in body for val in [":: ", "::\n"])
                 else []
             )
+
+            l2_bullet_prefix: Final = "    - "
+            if any(
+                any(
+                    "::" in b.split()[0]
+                    for b in bullet.split(l2_bullet_prefix)[1:]
+                )
+                for bullet in bullets
+            ):
+                bullets = body.split(l2_bullet_prefix)
+
+            l3_bullet_prefix: Final = "      + "
+            if any(
+                any(
+                    "::" in b.split()[0]
+                    for b in bullet.split(l3_bullet_prefix)[1:]
+                )
+                for bullet in bullets
+            ):
+                bullets = body.split(l3_bullet_prefix)
+
             for bullet in bullets:
-                words = bullet.split()
+                words: Final = bullet.split()
                 if zdt.is_short_date_spec(words[0]):
                     words.pop(0)
                 if zdt.is_zid(words[0]):

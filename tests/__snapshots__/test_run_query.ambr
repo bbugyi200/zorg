@@ -141,6 +141,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ################################ [[scrambled_prj_notes]]
   - 240510#0c sorj
@@ -386,6 +394,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ################################ [[scrambled_prj_notes]]
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -482,6 +498,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   '''
 # ---
@@ -684,6 +708,14 @@
     * Gziien fxfmhul
     * Ajfn dz Rhyt (ty 6499 cw 6075)
   - 240721#18 Some note that references some local links | [^1] [^2]
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ################################ @READ | @fat_pig
   - 301231#X1 @READ Some article
@@ -915,6 +947,14 @@
     * Ajfn dz Rhyt (ty 6499 cw 6075)
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#19 LID::1 http://www.example.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   - 301231#X1 @READ Some article
     * RID::some_article
     * url::http://www.example.com
@@ -1074,6 +1114,14 @@
   - 240721#0D Note A1
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#19 LID::1 http://www.example.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ++++++++++++++++ +arms
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -1314,6 +1362,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ 240613 240510#0R A canceled todo with a multiline explanation
@@ -1684,6 +1740,7 @@
   LID
   RID
   a
+  drawer_desc
   due
   foo
   key
@@ -1693,6 +1750,8 @@
   type
   url
   x
+  ylist
+  zlist
   
   '''
 # ---

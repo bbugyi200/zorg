@@ -30,6 +30,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.
@@ -53,6 +61,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   
   ################################ p::1
   - 240330#02 This note contains a key::value pair.

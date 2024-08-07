@@ -30,6 +30,7 @@
     '2024-06-29',
     '2024-07-04',
     '2024-07-21',
+    '2024-08-06',
     '2030-12-31',
   ])
 # ---
@@ -59,7 +60,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  117
+  118
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -106,6 +107,7 @@
     'LID',
     'RID',
     'a',
+    'drawer_desc',
     'due',
     'foo',
     'key',
@@ -115,6 +117,8 @@
     'type',
     'url',
     'x',
+    'ylist',
+    'zlist',
   ])
 # ---
 # name: test_run_db_create__table_names[YAMLConfigFile]
@@ -274,6 +278,7 @@
     '240721#18',
     '240721#19',
     '240721#1t',
+    '240806#00',
     '301231#X0',
     '301231#X1',
   ])

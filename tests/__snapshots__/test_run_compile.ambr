@@ -883,7 +883,32 @@
                                                        '- '
                                                        'https://www.bazbuz.com'},
                                  'todo_payload': None,
-                                 'zid': '240629#00'}],
+                                 'zid': '240629#00'},
+                                {'areas': [],
+                                 'block': None,
+                                 'body': '240806#00 Some note with a property '
+                                         'drawer...\n'
+                                         '  * PROPERTY:\n'
+                                         '    - drawer_desc:: A drawer of '
+                                         'property bullets.\n'
+                                         '    - ylist:: 111, 222, 333\n'
+                                         '    - zlist::\n'
+                                         '      + 123\n'
+                                         '      + 456\n'
+                                         '      + 789',
+                                 'contexts': [],
+                                 'create_date': FakeDate(2024, 8, 6),
+                                 'links': [],
+                                 'modify_date': FakeDate(2024, 8, 6),
+                                 'people': [],
+                                 'projects': [],
+                                 'properties': {'drawer_desc': 'A drawer of '
+                                                               'property '
+                                                               'bullets.',
+                                                'ylist': '111, 222, 333',
+                                                'zlist': '+ 123 + 456 + 789'},
+                                 'todo_payload': None,
+                                 'zid': '240806#00'}],
                       'section': None}],
           'h2s': [],
           'page': None,

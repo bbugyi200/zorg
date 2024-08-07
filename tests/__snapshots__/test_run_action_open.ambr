@@ -86,6 +86,14 @@
     * url::
       - https://www.foobar.com
       - https://www.bazbuz.com
+  - 240806#00 Some note with a property drawer...
+    * PROPERTY:
+      - drawer_desc:: A drawer of property bullets.
+      - ylist:: 111, 222, 333
+      - zlist::
+        + 123
+        + 456
+        + 789
   o P3 240510#0K This todo is @due today! | due::2024-03-13
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
   ~ 240613 240510#0R A canceled todo with a multiline explanation
