@@ -468,6 +468,11 @@ class ZorgFileCompiler(ZorgFileListener):
             l2_bullet_prefix: Final = "    - "
             l3_bullet_prefix: Final = "      + "
 
+            # Allow bullet properties to be defined on L1, L2, or L3 bullets;
+            # however, all bullet properties on a single note MUST be defined
+            # on the same bullet level.
+            #
+            # Otherwise, favor bullet properties using this rank: L3>L2>L1
             bullets = (
                 body.split(l1_bullet_prefix)
                 # TODO(bugyi): Check if this optimization is necessary
