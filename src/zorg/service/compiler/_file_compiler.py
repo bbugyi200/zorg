@@ -469,6 +469,7 @@ class ZorgFileCompiler(ZorgFileListener):
             l3_bullet_prefix: Final = "      + "
             bullets = (
                 body.split(l1_bullet_prefix)
+                # TODO(bugyi): Check if this optimization is necessary
                 if any(val in body for val in [":: ", "::\n"])
                 else []
             )
