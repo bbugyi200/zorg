@@ -20,7 +20,7 @@ arrow==1.3.0
     # via cookiecutter
 astroid==3.2.4
     # via pylint
-babel==2.15.0
+babel==2.16.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
@@ -210,7 +210,7 @@ python-dotenv==1.0.1
     # via pydantic-settings
 python-slugify==8.0.4
     # via cookiecutter
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via
     #   bolton-clack
     #   cookiecutter
