@@ -139,8 +139,8 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     elif link_path.suffix == ".zoq":
         _refresh_zoq_file(cfg, link_path)
 
-    if link_path.suffix in cfg.binary_exts:
-        proc = sp.run(["open", str(link_path)])
+    if link_path.suffix.lstrip(".") in cfg.binary_exts:
+        proc = sp.run(["open", str(link_path)], check=False)
         return proc.returncode
     else:
         print(f"EDIT {link_path}")
