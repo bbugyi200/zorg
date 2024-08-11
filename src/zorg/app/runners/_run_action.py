@@ -84,7 +84,7 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         elif cfg.option_idx is None:
             link_choice_msg_part = " ".join(all_targets_in_line)
             print(f"PROMPT {link_choice_msg_part}")
-        elif cfg.option_idx == "-1":
+        elif cfg.option_idx == -1:
             target = all_targets_in_line[-1]
         else:
             for i, word in enumerate(all_targets_in_line):
