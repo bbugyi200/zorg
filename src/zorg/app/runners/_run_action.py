@@ -126,7 +126,6 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     link_base = (
         link_parts[0][2:-2] if len(link_parts) == 1 else link_parts[0][2:]
     )
-    link_base = link_base if "." in link_base else f"{link_base}.zo"
     link_path = c.prepend_zdir(cfg.zettel_dir, Path(link_base))
 
     if not link_path.exists():
@@ -140,9 +139,13 @@ def _open_file_link(cfg: OpenActionConfig, zo_path: Path, link: str) -> int:
     elif link_path.suffix == ".zoq":
         _refresh_zoq_file(cfg, link_path)
 
-    print(f"EDIT {link_path}")
-    if len(link_parts) > 1:
-        print(f"SEARCH LID::{link_parts[1][:-2]}")
+    if link_path.suffix in cfg.binary_exts:
+        proc = sp.run(["open", str(link_path)])
+        return proc.returncode
+    else:
+        print(f"EDIT {link_path}")
+        if len(link_parts) > 1:
+            print(f"SEARCH LID::{link_parts[1][:-2]}")
 
     return 0
 

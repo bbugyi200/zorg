@@ -5,7 +5,7 @@ from __future__ import annotations
 from argparse import ArgumentTypeError
 import itertools as it
 from pathlib import Path
-from typing import Any, Final, Literal, Optional, Sequence, cast
+from typing import Any, Final, List, Literal, Optional, Sequence, cast
 
 import clack
 from logrus import Logger
@@ -136,6 +136,9 @@ class OpenActionConfig(Config):
     zo_path: Path
     line_number: int
     option_idx: Optional[int] = None
+
+    # ----- CONFIG
+    binary_exts: List[str] = ["epub", "jpeg", "pdf", "png", "xmind"]
 
 
 class QueryConfig(Config):
