@@ -289,7 +289,7 @@ tomli==2.0.1
     #   setuptools-scm
     #   sphinx
     #   tox
-tomlkit==0.13.0
+tomlkit==0.13.2
     # via pylint
 tox==3.28.0
     # via
