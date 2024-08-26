@@ -218,7 +218,7 @@ requests==2.32.3
     # via
     #   cookiecutter
     #   sphinx
-rich==13.7.1
+rich==13.8.0
     # via
     #   -r requirements.in
     #   cookiecutter
