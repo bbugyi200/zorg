@@ -47,12 +47,14 @@ def run_action_open(cfg: OpenActionConfig) -> int:
         )
         is_id_link = word.find("[#") >= 0 and word.find("]") >= 0
         is_rid_link = word.find("[@") >= 0 and word.find("]") >= 0
+        is_url_link = word.find("[!") >= 0 and word.find("]") >= 0
         is_cite_key_link = word.startswith("z::")
         if (
             is_link
             or _is_local_link(word)
             or is_id_link
             or is_rid_link
+            or is_url_link
             or is_cite_key_link
         ):
             all_targets_in_line.append(word)
@@ -106,6 +108,8 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 return _open_global_link(cfg, target)
             elif target.startswith("[@") and target.endswith("]"):
                 return _open_rid_link(cfg, target)
+            elif target.startswith("[!") and target.endswith("]"):
+                return _open_url_link(cfg, target)
             elif target.startswith("z::"):
                 return _open_cite_key_link(cfg.zettel_dir, target)
             else:
@@ -216,7 +220,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     if len(notes) > 1:
         matched_files = " ".join(sorted({str(n.file_path) for n in notes}))
         print(
-            f"ECHO Multiple notes found the with the ID::{rid} property:"
+            f"ECHO Multiple notes found the with the RID::{rid} property:"
             f" {matched_files}"
         )
         return 1
@@ -228,6 +232,39 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     print(f"SEARCH RID::{rid}{_SEARCH_END}")
 
     return 0
+
+
+def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
+    id_ = url_link[2:-1]
+    notes = note_utils.get_notes_by_id(
+        cfg.zettel_dir, cfg.database_url, id_, verbose=cfg.verbose
+    )
+
+    if not notes:
+        print(f"ECHO No notes with found with the ID::{id_} property")
+        return 1
+    elif len(notes) > 1:
+        matched_zids = " ".join(sorted({n.zid or "" for n in notes}))
+        print(
+            f"ECHO Multiple notes found with the ID::{id_} property:"
+            f" {matched_zids}"
+        )
+        return 1
+
+    note = c.get_only_item(notes)
+    x_links = [link[2:] for link in note.links if link.startswith("x:")]
+
+    if len(x_links) != 1:
+        print(
+            f"ECHO Exactly one URL MUST be associated with ID::{id_} to link"
+            f" to it as a named URL. Actual URLs: [{', '.join(x_links)}]"
+        )
+        return 1
+
+    x_link = c.get_only_item(x_links)
+    print(f"ECHO Opening in browser: {x_link}")
+    proc = sp.run(["open", x_link], check=True)
+    return proc.returncode
 
 
 def _open_zid_link(cfg: OpenActionConfig, zid: str) -> int:
