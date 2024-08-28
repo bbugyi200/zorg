@@ -1725,7 +1725,7 @@
   x:http://www.example.com
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
-  x:https://go/foo?a
+  x:https://go/foo?a=/&b=2&c=/
   x:https://go/foo?env=dev&bar=2&baz=3
   x:https://www.bazbuz.com
   x:https://www.foobar.com
@@ -1753,7 +1753,7 @@
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
   x:https://go/foo?env=dev&bar=2&baz=3
-  x:https://go/foo?a
+  x:https://go/foo?a=/&b=2&c=/
   bar.sh
   baz
   buz#fuzz
