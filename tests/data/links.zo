@@ -23,3 +23,4 @@
 - 240510#0D LID::some_loc_link Some local link lives here
 - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
 - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+- 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/

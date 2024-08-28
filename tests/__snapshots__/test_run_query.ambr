@@ -23,6 +23,7 @@
   - 240704#00 LID::2 https://go/foo-bar-baz
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   '''
 # ---
@@ -48,6 +49,7 @@
   - 240704#00 LID::2 https://go/foo-bar-baz
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
   
@@ -77,6 +79,7 @@
   - 240704#00 LID::2 https://go/foo-bar-baz
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   '''
 # ---
@@ -86,6 +89,7 @@
   - 240704#00 LID::2 https://go/foo-bar-baz
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   - 240629#00 A note with a bullet property that contains a sublist
     * url::
       - https://www.foobar.com
@@ -134,6 +138,7 @@
   - 240510#05 Some note with a link in parens and a block-level link ([[buz#fuzz]]).
   - 240721#00 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
@@ -254,6 +259,7 @@
   - 240721#19 LID::1 http://www.example.com
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   ################################ [[multiblocks]]
   o P3 240510#07 Some todo
@@ -768,6 +774,7 @@
   - 240721#19 LID::1 http://www.example.com
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   ################################ @pomodoro
   - 240323#0J #gtd pomodoro
@@ -990,6 +997,7 @@
       - ...two L2 bullets.
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   - 301231#X1 @READ Some article
     * RID::some_article
     * url::http://www.example.com
@@ -1163,6 +1171,7 @@
       - ...two L2 bullets.
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   ++++++++++++++++ +arms
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -1373,6 +1382,7 @@
   - 240721#19 LID::1 http://www.example.com
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
+  - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
   
   ################################ [[multiblocks]]
   - 240510#0E Note A2
@@ -1715,6 +1725,7 @@
   x:http://www.example.com
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
+  x:https://go/foo?a
   x:https://go/foo?env=dev&bar=2&baz=3
   x:https://www.bazbuz.com
   x:https://www.foobar.com
@@ -1742,6 +1753,7 @@
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
   x:https://go/foo?env=dev&bar=2&baz=3
+  x:https://go/foo?a
   bar.sh
   baz
   buz#fuzz
