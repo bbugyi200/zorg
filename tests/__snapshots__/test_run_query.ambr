@@ -1713,9 +1713,9 @@
   ref:some_article
   tick_03
   x:http://www.example.com
-  x:https://go/foo
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
+  x:https://go/foo?env
   x:https://www.bazbuz.com
   x:https://www.foobar.com
   xmind/zorg_e2e_query_arch.xmind
@@ -1741,7 +1741,7 @@
   x:http://www.example.com
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
-  x:https://go/foo
+  x:https://go/foo?env
   bar.sh
   baz
   buz#fuzz

@@ -4073,17 +4073,17 @@ class ZorgFileParser ( Parser ):
             else:
                 return self.getToken(ZorgFileParser.FSLASH, i)
 
-        def DASH(self, i:int=None):
-            if i is None:
-                return self.getTokens(ZorgFileParser.DASH)
-            else:
-                return self.getToken(ZorgFileParser.DASH, i)
-
         def AMP(self, i:int=None):
             if i is None:
                 return self.getTokens(ZorgFileParser.AMP)
             else:
                 return self.getToken(ZorgFileParser.AMP, i)
+
+        def DASH(self, i:int=None):
+            if i is None:
+                return self.getTokens(ZorgFileParser.DASH)
+            else:
+                return self.getToken(ZorgFileParser.DASH, i)
 
         def QMARK(self, i:int=None):
             if i is None:
