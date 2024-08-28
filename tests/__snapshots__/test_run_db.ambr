@@ -31,6 +31,7 @@
     '2024-07-04',
     '2024-07-21',
     '2024-08-06',
+    '2024-08-28',
     '2030-12-31',
   ])
 # ---
@@ -51,6 +52,7 @@
     'poop',
     'ref:some_article',
     'x:http://www.example.com',
+    'x:https://go/foo',
     'x:https://go/foo-bar-baz',
     'x:https://www.bazbuz.com',
     'x:https://www.foobar.com',
@@ -60,7 +62,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  118
+  119
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -280,6 +282,7 @@
     '240721#19',
     '240721#1t',
     '240806#00',
+    '240828#00',
     '301231#X0',
     '301231#X1',
   ])

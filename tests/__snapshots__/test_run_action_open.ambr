@@ -54,6 +54,7 @@
   - 240721#01 Some note that references a local [240510#03] ZID.
   - 240721#18 Some note that references some local links | [^1] [^2]
   - 240721#19 LID::1 http://www.example.com
+  - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   
   ################################ [[multiblocks]]
   - 240510#0E Note A2

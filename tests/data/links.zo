@@ -21,3 +21,4 @@
 - 240721#19 LID::1 http://www.example.com
 - 240704#00 LID::2 https://go/foo-bar-baz
 - 240510#0D LID::some_loc_link Some local link lives here
+- 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
