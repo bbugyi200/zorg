@@ -100,25 +100,30 @@ def run_action_open(cfg: OpenActionConfig) -> int:
                 return 1
 
         if target is not None:
-            if target.startswith("[[") and target.endswith("]]"):
-                return _open_file_link(cfg, zo_path, target)
-            elif _is_local_link(target):
-                return _open_local_link(target)
-            elif target.startswith("[#") and target.endswith("]"):
-                return _open_global_link(cfg, target)
-            elif target.startswith("[@") and target.endswith("]"):
-                return _open_rid_link(cfg, target)
-            elif target.startswith("[!") and target.endswith("]"):
-                return _open_url_link(cfg, target)
-            elif target.startswith("z::"):
-                return _open_cite_key_link(cfg.zettel_dir, target)
-            else:
-                return _open_zid_link(cfg, target)
+            return _open_link(cfg, target)
     # Else we tell vim to echo an error message.
     else:
         print(f"ECHO {_MSG_NOTHING_TO_OPEN} #{cfg.line_number}")
 
     return 0
+
+
+def _open_link(cfg: OpenActionConfig, target: str) -> int:
+    zo_path = c.prepend_zdir(cfg.zettel_dir, cfg.zo_path)
+    if target.startswith("[[") and target.endswith("]]"):
+        return _open_file_link(cfg, zo_path, target)
+    elif _is_local_link(target):
+        return _open_local_link(target)
+    elif target.startswith("[#") and target.endswith("]"):
+        return _open_global_link(cfg, target)
+    elif target.startswith("[@") and target.endswith("]"):
+        return _open_rid_link(cfg, target)
+    elif target.startswith("[!") and target.endswith("]"):
+        return _open_url_link(cfg, target)
+    elif target.startswith("z::"):
+        return _open_cite_key_link(cfg.zettel_dir, target)
+    else:
+        return _open_zid_link(cfg, target)
 
 
 def _is_local_link(word: str) -> bool:
