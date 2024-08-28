@@ -65,7 +65,17 @@ time              : TIME ;
 
 // symbols
 any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' ;
-non_tag_sym : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
+non_tag_sym : SYMBOL
+            | AMP
+            | LANGLE
+            | LPAREN
+            | QMARK
+            | RANGLE
+            | RPAREN
+            | STAR
+            | TILDE
+            | UNDERSCORE
+            ;
 id_sym      : HASH | DASH | DOT | FSLASH | COLON ;
 tag_sym     : HASH | AT_SIGN | PERCENT | PLUS ;
 
@@ -96,4 +106,4 @@ h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
 
 // URL
-url: ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID ((DASH | COLON) ID)*)* ;
+url : ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID ((DASH | COLON | '&' | '?') ID)*)* ;

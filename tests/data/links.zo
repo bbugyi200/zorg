@@ -22,3 +22,4 @@
 - 240704#00 LID::2 https://go/foo-bar-baz
 - 240510#0D LID::some_loc_link Some local link lives here
 - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
+- 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3

@@ -76,12 +76,22 @@ time : TIME ;
 // symbols
 any_non_squote     : (any_non_squote_sym | id)+ ;
 any_non_dquote     : (any_non_dquote_sym | id)+ ;
-any_non_squote_sym : DQUOTE | desc_symbol ;
-any_non_dquote_sym : SQUOTE | desc_symbol ;
-desc_symbol        : HAT | DOLLAR | non_tag_symbol | tag_symbol | id_symbol ;
-non_tag_symbol     : LANGLE | RANGLE | STAR | TILDE | SYMBOL | LPAREN | RPAREN | UNDERSCORE ;
-id_symbol          : DASH | DOT | FSLASH | COLON ;
-tag_symbol         : HASH | AT_SIGN | PERCENT | PLUS ;
+any_non_squote_sym : DQUOTE | desc_sym ;
+any_non_dquote_sym : SQUOTE | desc_sym ;
+desc_sym           : HAT | DOLLAR | non_tag_sym | tag_sym | id_sym ;
+non_tag_sym        : SYMBOL
+                   | AMP
+                   | LANGLE
+                   | LPAREN
+                   | QMARK
+                   | RANGLE
+                   | RPAREN
+                   | STAR
+                   | TILDE
+                   | UNDERSCORE
+                   ;
+id_sym          : DASH | DOT | FSLASH | COLON ;
+tag_sym         : HASH | AT_SIGN | PERCENT | PLUS ;
 
 // --- GROUP BY
 group_by_body : group_by_atom (SPACE group_by_atom)? (SPACE group_by_atom)? (SPACE group_by_atom)? ;

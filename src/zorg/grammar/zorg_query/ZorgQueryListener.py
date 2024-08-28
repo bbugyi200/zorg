@@ -440,39 +440,39 @@ class ZorgQueryListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#desc_symbol.
-    def enterDesc_symbol(self, ctx:ZorgQueryParser.Desc_symbolContext):
+    # Enter a parse tree produced by ZorgQueryParser#desc_sym.
+    def enterDesc_sym(self, ctx:ZorgQueryParser.Desc_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#desc_symbol.
-    def exitDesc_symbol(self, ctx:ZorgQueryParser.Desc_symbolContext):
-        pass
-
-
-    # Enter a parse tree produced by ZorgQueryParser#non_tag_symbol.
-    def enterNon_tag_symbol(self, ctx:ZorgQueryParser.Non_tag_symbolContext):
-        pass
-
-    # Exit a parse tree produced by ZorgQueryParser#non_tag_symbol.
-    def exitNon_tag_symbol(self, ctx:ZorgQueryParser.Non_tag_symbolContext):
+    # Exit a parse tree produced by ZorgQueryParser#desc_sym.
+    def exitDesc_sym(self, ctx:ZorgQueryParser.Desc_symContext):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#id_symbol.
-    def enterId_symbol(self, ctx:ZorgQueryParser.Id_symbolContext):
+    # Enter a parse tree produced by ZorgQueryParser#non_tag_sym.
+    def enterNon_tag_sym(self, ctx:ZorgQueryParser.Non_tag_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#id_symbol.
-    def exitId_symbol(self, ctx:ZorgQueryParser.Id_symbolContext):
+    # Exit a parse tree produced by ZorgQueryParser#non_tag_sym.
+    def exitNon_tag_sym(self, ctx:ZorgQueryParser.Non_tag_symContext):
         pass
 
 
-    # Enter a parse tree produced by ZorgQueryParser#tag_symbol.
-    def enterTag_symbol(self, ctx:ZorgQueryParser.Tag_symbolContext):
+    # Enter a parse tree produced by ZorgQueryParser#id_sym.
+    def enterId_sym(self, ctx:ZorgQueryParser.Id_symContext):
         pass
 
-    # Exit a parse tree produced by ZorgQueryParser#tag_symbol.
-    def exitTag_symbol(self, ctx:ZorgQueryParser.Tag_symbolContext):
+    # Exit a parse tree produced by ZorgQueryParser#id_sym.
+    def exitId_sym(self, ctx:ZorgQueryParser.Id_symContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgQueryParser#tag_sym.
+    def enterTag_sym(self, ctx:ZorgQueryParser.Tag_symContext):
+        pass
+
+    # Exit a parse tree produced by ZorgQueryParser#tag_sym.
+    def exitTag_sym(self, ctx:ZorgQueryParser.Tag_symContext):
         pass
 
 

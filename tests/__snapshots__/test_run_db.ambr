@@ -52,6 +52,7 @@
     'poop',
     'ref:some_article',
     'x:http://www.example.com',
+    'x:https://go/foo',
     'x:https://go/foo-bar-baz',
     'x:https://go/foo:bar:baz',
     'x:https://www.bazbuz.com',
@@ -62,7 +63,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  119
+  120
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -283,6 +284,7 @@
     '240721#1t',
     '240806#00',
     '240828#00',
+    '240828#01',
     '301231#X0',
     '301231#X1',
   ])
