@@ -67,6 +67,7 @@ time              : TIME ;
 any_sym     : SQUOTE | DQUOTE | HAT | DOLLAR | non_tag_sym | tag_sym | id_sym | '[' | ']' ;
 non_tag_sym : SYMBOL
             | AMP
+            | EQUAL
             | LANGLE
             | LPAREN
             | QMARK
@@ -106,4 +107,4 @@ h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
 
 // URL
-url : ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID ((AMP | COLON | DASH | QMARK) ID)*)* ;
+url : ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' ID ((AMP | COLON | DASH | EQUAL | QMARK) ID)*)* ;

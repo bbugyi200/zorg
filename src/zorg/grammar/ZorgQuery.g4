@@ -81,6 +81,7 @@ any_non_dquote_sym : SQUOTE | desc_sym ;
 desc_sym           : HAT | DOLLAR | non_tag_sym | tag_sym | id_sym ;
 non_tag_sym        : SYMBOL
                    | AMP
+                   | EQUAL
                    | LANGLE
                    | LPAREN
                    | QMARK
