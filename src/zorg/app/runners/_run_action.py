@@ -271,7 +271,7 @@ def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
 
     x_link = c.get_only_item(x_links)
     if x_arg:
-        x_link = x_link.replace("%s", x_arg)
+        x_link = x_link.replace("%s", x_arg).replace("%", "%20")
     print(f"ECHO Opening in browser: {x_link}")
     proc = sp.run(["open", x_link], check=True)
     return proc.returncode
