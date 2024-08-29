@@ -55,6 +55,7 @@
     'x:https://go/foo-bar-baz',
     'x:https://go/foo:bar:baz',
     'x:https://go/foo?a=/&b=2&c=/',
+    'x:https://go/foo?bar',
     'x:https://go/foo?env=dev&bar=2&baz=3',
     'x:https://www.bazbuz.com',
     'x:https://www.foobar.com',
@@ -64,7 +65,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  121
+  122
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -287,6 +288,7 @@
     '240828#00',
     '240828#01',
     '240828#02',
+    '240828#03',
     '301231#X0',
     '301231#X1',
   ])

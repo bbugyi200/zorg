@@ -24,6 +24,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   '''
 # ---
@@ -50,6 +51,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   o P3 240510#21 Some foobar todo.
   o P3 240510#26 Some foobar todo.
   
@@ -80,6 +82,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   '''
 # ---
@@ -90,6 +93,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   - 240629#00 A note with a bullet property that contains a sublist
     * url::
       - https://www.foobar.com
@@ -139,6 +143,7 @@
   - 240721#00 Some note with duplicate links, like [[poop]] and [[poop]].
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
@@ -260,6 +265,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ################################ [[multiblocks]]
   o P3 240510#07 Some todo
@@ -775,6 +781,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ################################ @pomodoro
   - 240323#0J #gtd pomodoro
@@ -998,6 +1005,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   - 301231#X1 @READ Some article
     * RID::some_article
     * url::http://www.example.com
@@ -1172,6 +1180,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ++++++++++++++++ +arms
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -1383,6 +1392,7 @@
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
   - 240828#01 ID::foo_with_url_query https://go/foo?env=dev&bar=2&baz=3
   - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ################################ [[multiblocks]]
   - 240510#0E Note A2
@@ -1591,6 +1601,7 @@
   ################################ [[links]]
   - 240704#00 LID::2 https://go/foo-bar-baz
   - 240828#00 ID::foo_bar_baz https://go/foo:bar:baz
+  - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   
   ################################ [[priority]]
   o P0 240313#03 High Priority TODO
@@ -1726,6 +1737,7 @@
   x:https://go/foo-bar-baz
   x:https://go/foo:bar:baz
   x:https://go/foo?a=/&b=2&c=/
+  x:https://go/foo?bar
   x:https://go/foo?env=dev&bar=2&baz=3
   x:https://www.bazbuz.com
   x:https://www.foobar.com
@@ -1754,6 +1766,7 @@
   x:https://go/foo:bar:baz
   x:https://go/foo?env=dev&bar=2&baz=3
   x:https://go/foo?a=/&b=2&c=/
+  x:https://go/foo?bar
   bar.sh
   baz
   buz#fuzz
