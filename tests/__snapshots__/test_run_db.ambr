@@ -55,7 +55,7 @@
     'x:https://go/foo-bar-baz',
     'x:https://go/foo:bar:baz',
     'x:https://go/foo?a=/&b=2&c=/',
-    'x:https://go/foo?bar',
+    'x:https://go/foo?bar=%s',
     'x:https://go/foo?env=dev&bar=2&baz=3',
     'x:https://www.bazbuz.com',
     'x:https://www.foobar.com',

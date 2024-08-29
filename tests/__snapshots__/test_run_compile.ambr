@@ -619,7 +619,7 @@
                                            'https://go/foo?bar=%s',
                                    'contexts': ['footnote'],
                                    'create_date': FakeDate(2024, 8, 28),
-                                   'links': ['x:https://go/foo?bar'],
+                                   'links': ['x:https://go/foo?bar=%s'],
                                    'modify_date': FakeDate(2024, 8, 28),
                                    'people': [],
                                    'projects': [],
