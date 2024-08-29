@@ -105,21 +105,13 @@ def test_action_open__bad(
 
 @params("lineno", [param(11, id="line_with_zid_ref")])
 def test_action_open__zid(
-    main: c.MainType,
+    open_action_main: c.MainType,
     capsys: CaptureFixture,
     db_zettel_dir: Path,
     lineno: int,
 ) -> None:
     """Test the 'action open' command can target ZIDs."""
-    exit_code = main(
-        "--dir",
-        str(db_zettel_dir),
-        "action",
-        "open",
-        str(db_zettel_dir / "links.zo"),
-        str(lineno),
-    )
-    assert exit_code == 0
+    open_action_main(str(lineno), zdir=db_zettel_dir)
 
     capture = capsys.readouterr()
     zo_path = db_zettel_dir / "links.zo"
@@ -155,21 +147,13 @@ def test_action_open__local_link(
 
 @params("lineno", [param(13, id="line_with_id_link")])
 def test_action_open__id_link(
-    main: c.MainType,
+    open_action_main: c.MainType,
     capsys: CaptureFixture,
     db_zettel_dir: Path,
     lineno: int,
 ) -> None:
     """Test the 'action open' command can target ZIDs."""
-    exit_code = main(
-        "--dir",
-        str(db_zettel_dir),
-        "action",
-        "open",
-        str(db_zettel_dir / "links.zo"),
-        str(lineno),
-    )
-    assert exit_code == 0
+    open_action_main(str(lineno), zdir=db_zettel_dir)
 
     capture = capsys.readouterr()
     zo_path = db_zettel_dir / "tags_and_ids.zo"
@@ -181,21 +165,13 @@ def test_action_open__id_link(
 
 @params("lineno", [param(16, id="line_with_rid_link")])
 def test_action_open__rid_link(
-    main: c.MainType,
+    open_action_main: c.MainType,
     capsys: CaptureFixture,
     db_zettel_dir: Path,
     lineno: int,
 ) -> None:
     """Test the 'action open' command can target ZIDs."""
-    exit_code = main(
-        "--dir",
-        str(db_zettel_dir),
-        "action",
-        "open",
-        str(db_zettel_dir / "links.zo"),
-        str(lineno),
-    )
-    assert exit_code == 0
+    open_action_main(str(lineno), zdir=db_zettel_dir)
 
     capture = capsys.readouterr()
     zo_path = db_zettel_dir / "tags_and_ids.zo"
