@@ -58,7 +58,7 @@ build==1.2.1
     # via pip-tools
 bump2version==1.0.1
     # via -r requirements-dev.in
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 chardet==5.2.0
     # via binaryornot
