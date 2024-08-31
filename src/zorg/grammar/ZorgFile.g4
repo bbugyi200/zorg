@@ -107,4 +107,7 @@ h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
 
 // URL
-url : ('https://' | 'http://') ID ('.' ID)* (':' NUM_ID)? ('/' PERCENT? ID ((AMP | COLON | DASH | EQUAL | QMARK) PERCENT? (ID | FSLASH))*)* ;
+url : url_schema url_domain url_port? ('/' PERCENT? ID ((AMP | COLON | DASH | EQUAL | QMARK) PERCENT? (ID | FSLASH))*)* ;
+url_schema : 'https://' | 'http://' ;
+url_domain : ID ('.' ID)* ;
+url_port : ':' NUM_ID ;
