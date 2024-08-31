@@ -115,6 +115,6 @@ url_path : (FSLASH url_path_part+)+ ;
 url_path_part : PERCENT | COLON | DASH | ID  ;
 url_query : QMARK url_key_val (AMP url_key_val)* ;
 url_key_val : url_atom EQUAL url_atom* ;
-url_fragment : HASH url_path ;
+url_fragment : FSLASH? HASH url_path_part+ url_path? ;
 url_atom : ID | PERCENT | DASH | COLON | FSLASH ;
 https : 'https' | 'http' ;

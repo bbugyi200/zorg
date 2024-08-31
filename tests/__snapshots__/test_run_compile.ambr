@@ -645,7 +645,7 @@
                                            'https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI',
                                    'contexts': ['footnote'],
                                    'create_date': FakeDate(2024, 8, 31),
-                                   'links': ['x:https://mail.google.com/chat/u/0'],
+                                   'links': ['x:https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI'],
                                    'modify_date': FakeDate(2024, 8, 31),
                                    'people': [],
                                    'projects': [],
