@@ -641,7 +641,9 @@
                                    'zid': '240828#04'},
                                   {'areas': [],
                                    'block': None,
-                                   'body': '240831#00 ID::gchat_convo '
+                                   'body': '240831#00 ID::gchat_convo with '
+                                           "'http' inside a string\n"
+                                           '  '
                                            'https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI',
                                    'contexts': ['footnote'],
                                    'create_date': FakeDate(2024, 8, 31),
