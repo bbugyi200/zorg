@@ -184,7 +184,7 @@ pygments==2.18.0
     # via
     #   rich
     #   sphinx
-pylint==3.2.6
+pylint==3.2.7
     # via -r requirements-dev.in
 pyproject-hooks==1.1.0
     # via
@@ -264,7 +264,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 sqlalchemy==2.0.32
     # via sqlmodel
-sqlmodel==0.0.21
+sqlmodel==0.0.22
     # via
     #   -r requirements.in
     #   zettel-org
