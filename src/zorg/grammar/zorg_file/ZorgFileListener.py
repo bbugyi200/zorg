@@ -602,5 +602,14 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#https.
+    def enterHttps(self, ctx:ZorgFileParser.HttpsContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#https.
+    def exitHttps(self, ctx:ZorgFileParser.HttpsContext):
+        pass
+
+
 
 del ZorgFileParser

@@ -59,7 +59,7 @@ simple_prop       : id COLON COLON simple_prop_value ;
 simple_prop_value : id | url ;
 inline_prop       : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
 id_group          : id (any_sym+ | id)* ;
-id                : ID | NUM_ID | PRIORITY | date | time | zid | url | LOWER_O | LOWER_X ;
+id                : ID | NUM_ID | PRIORITY | https | date | time | zid | url | LOWER_O | LOWER_X ;
 date              : DATE ;
 time              : TIME ;
 
@@ -108,7 +108,7 @@ eol        : NL | EOF ;
 
 // URL
 url : url_schema url_domain url_port? url_path? url_query? url_fragment? ;
-url_schema : ('https' | 'http') COLON FSLASH FSLASH ;
+url_schema : https COLON FSLASH FSLASH ;
 url_domain : ID ('.' ID)* ;
 url_port : ':' NUM_ID ;
 url_path : (FSLASH url_path_part+)+ ;
@@ -117,3 +117,4 @@ url_query : QMARK url_key_val (AMP url_key_val)* ;
 url_key_val : url_atom EQUAL url_atom* ;
 url_fragment : HASH url_path ;
 url_atom : ID | PERCENT | DASH | COLON | FSLASH ;
+https : 'https' | 'http' ;
