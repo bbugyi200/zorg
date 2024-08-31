@@ -26,3 +26,4 @@
 - 240828#02 ID::foo_with_slashes_query https://go/foo?a=/&b=2&c=/
 - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
 - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
+- 240831#00 ID::gchat_convo https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI

@@ -32,6 +32,7 @@
     '2024-07-21',
     '2024-08-06',
     '2024-08-28',
+    '2024-08-31',
     '2030-12-31',
   ])
 # ---
@@ -58,6 +59,7 @@
     'x:https://go/foo?a=/&b=2&c=/',
     'x:https://go/foo?bar=%s',
     'x:https://go/foo?env=dev&bar=2&baz=3',
+    'x:https://mail.google.com/chat/u/0',
     'x:https://www.bazbuz.com',
     'x:https://www.foobar.com',
     'xmind/zorg_e2e_query_arch.xmind',
@@ -66,7 +68,7 @@
   ])
 # ---
 # name: test_run_db_create__note_count[YAMLConfigFile]
-  123
+  124
 # ---
 # name: test_run_db_create__people[YAMLConfigFile]
   list([
@@ -291,6 +293,7 @@
     '240828#02',
     '240828#03',
     '240828#04',
+    '240831#00',
     '301231#X0',
     '301231#X1',
   ])
