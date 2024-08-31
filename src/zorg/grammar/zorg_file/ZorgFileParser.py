@@ -149,12 +149,12 @@ def serializedATN():
         1,0,0,0,341,339,1,0,0,0,341,342,1,0,0,0,342,345,1,0,0,0,343,345,
         3,58,29,0,344,339,1,0,0,0,344,343,1,0,0,0,345,348,1,0,0,0,346,344,
         1,0,0,0,346,347,1,0,0,0,347,57,1,0,0,0,348,346,1,0,0,0,349,360,5,
-        18,0,0,350,360,5,20,0,0,351,360,5,17,0,0,352,360,3,132,66,0,353,
-        360,3,60,30,0,354,360,3,62,31,0,355,360,3,46,23,0,356,360,3,112,
-        56,0,357,360,5,13,0,0,358,360,5,14,0,0,359,349,1,0,0,0,359,350,1,
-        0,0,0,359,351,1,0,0,0,359,352,1,0,0,0,359,353,1,0,0,0,359,354,1,
-        0,0,0,359,355,1,0,0,0,359,356,1,0,0,0,359,357,1,0,0,0,359,358,1,
-        0,0,0,360,59,1,0,0,0,361,362,5,15,0,0,362,61,1,0,0,0,363,364,5,16,
+        18,0,0,350,360,5,20,0,0,351,360,5,17,0,0,352,360,3,60,30,0,353,360,
+        3,62,31,0,354,360,3,46,23,0,355,360,3,112,56,0,356,360,3,132,66,
+        0,357,360,5,13,0,0,358,360,5,14,0,0,359,349,1,0,0,0,359,350,1,0,
+        0,0,359,351,1,0,0,0,359,352,1,0,0,0,359,353,1,0,0,0,359,354,1,0,
+        0,0,359,355,1,0,0,0,359,356,1,0,0,0,359,357,1,0,0,0,359,358,1,0,
+        0,0,360,59,1,0,0,0,361,362,5,15,0,0,362,61,1,0,0,0,363,364,5,16,
         0,0,364,63,1,0,0,0,365,375,5,43,0,0,366,375,5,44,0,0,367,375,5,31,
         0,0,368,375,5,30,0,0,369,375,3,66,33,0,370,375,3,70,35,0,371,375,
         3,68,34,0,372,375,5,3,0,0,373,375,5,4,0,0,374,365,1,0,0,0,374,366,
@@ -2399,10 +2399,6 @@ class ZorgFileParser ( Parser ):
         def PRIORITY(self):
             return self.getToken(ZorgFileParser.PRIORITY, 0)
 
-        def https(self):
-            return self.getTypedRuleContext(ZorgFileParser.HttpsContext,0)
-
-
         def date(self):
             return self.getTypedRuleContext(ZorgFileParser.DateContext,0)
 
@@ -2417,6 +2413,10 @@ class ZorgFileParser ( Parser ):
 
         def url(self):
             return self.getTypedRuleContext(ZorgFileParser.UrlContext,0)
+
+
+        def https(self):
+            return self.getTypedRuleContext(ZorgFileParser.HttpsContext,0)
 
 
         def LOWER_O(self):
@@ -2468,31 +2468,31 @@ class ZorgFileParser ( Parser ):
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 352
-                self.https()
+                self.date()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 353
-                self.date()
+                self.time()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 354
-                self.time()
+                self.zid()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 355
-                self.zid()
+                self.url()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 356
-                self.url()
+                self.https()
                 pass
 
             elif la_ == 9:

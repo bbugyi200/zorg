@@ -59,7 +59,7 @@ simple_prop       : id COLON COLON simple_prop_value ;
 simple_prop_value : id | url ;
 inline_prop       : '[' id COLON COLON SPACE? id_group (SPACE id_group)* ']';
 id_group          : id (any_sym+ | id)* ;
-id                : ID | NUM_ID | PRIORITY | https | date | time | zid | url | LOWER_O | LOWER_X ;
+id                : ID | NUM_ID | PRIORITY | date | time | zid | url | https | LOWER_O | LOWER_X ;
 date              : DATE ;
 time              : TIME ;
 
