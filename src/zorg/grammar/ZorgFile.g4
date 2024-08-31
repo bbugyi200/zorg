@@ -107,9 +107,13 @@ h4_header  : H4_HEADER space_atoms eol ;
 eol        : NL | EOF ;
 
 // URL
-url : url_schema url_domain url_port? url_path? (AMP | COLON | DASH | EQUAL | QMARK | ID | FSLASH | PERCENT)* ;
-url_schema : 'https://' | 'http://' ;
+url : url_schema url_domain url_port? url_path? url_query? url_fragment? ;
+url_schema : ('https' | 'http') COLON FSLASH FSLASH ;
 url_domain : ID ('.' ID)* ;
 url_port : ':' NUM_ID ;
 url_path : (FSLASH url_path_part+)+ ;
 url_path_part : PERCENT | COLON | DASH | ID  ;
+url_query : QMARK url_key_val (AMP url_key_val)* ;
+url_key_val : url_atom EQUAL url_atom* ;
+url_fragment : HASH url_path ;
+url_atom : ID | PERCENT | DASH | COLON | FSLASH ;

@@ -566,5 +566,41 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#url_query.
+    def enterUrl_query(self, ctx:ZorgFileParser.Url_queryContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_query.
+    def exitUrl_query(self, ctx:ZorgFileParser.Url_queryContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#url_key_val.
+    def enterUrl_key_val(self, ctx:ZorgFileParser.Url_key_valContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_key_val.
+    def exitUrl_key_val(self, ctx:ZorgFileParser.Url_key_valContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#url_fragment.
+    def enterUrl_fragment(self, ctx:ZorgFileParser.Url_fragmentContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_fragment.
+    def exitUrl_fragment(self, ctx:ZorgFileParser.Url_fragmentContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#url_atom.
+    def enterUrl_atom(self, ctx:ZorgFileParser.Url_atomContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_atom.
+    def exitUrl_atom(self, ctx:ZorgFileParser.Url_atomContext):
+        pass
+
+
 
 del ZorgFileParser
