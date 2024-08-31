@@ -548,5 +548,23 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#url_path.
+    def enterUrl_path(self, ctx:ZorgFileParser.Url_pathContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_path.
+    def exitUrl_path(self, ctx:ZorgFileParser.Url_pathContext):
+        pass
+
+
+    # Enter a parse tree produced by ZorgFileParser#url_path_part.
+    def enterUrl_path_part(self, ctx:ZorgFileParser.Url_path_partContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#url_path_part.
+    def exitUrl_path_part(self, ctx:ZorgFileParser.Url_path_partContext):
+        pass
+
+
 
 del ZorgFileParser
