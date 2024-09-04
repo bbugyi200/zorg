@@ -241,14 +241,18 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
 
 def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
     id_ = url_link[2:-1]
+
+    # An optional URL argument can be provided after a colon. These arguments
+    # should contain NO spaces. They should, instead, use the % symbol to
+    # represent spaces.
     x_arg = ""
     if ":" in id_:
         id_, x_arg = id_.split(":")
         x_arg = x_arg.replace("%", "%20")
+
     notes = note_utils.get_notes_by_id(
         cfg.zettel_dir, cfg.database_url, id_, verbose=cfg.verbose
     )
-
     if not notes:
         print(f"ECHO No notes with found with the ID::{id_} property")
         return 1
