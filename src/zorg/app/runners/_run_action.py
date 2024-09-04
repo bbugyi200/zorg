@@ -244,6 +244,7 @@ def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
     x_arg = ""
     if ":" in id_:
         id_, x_arg = id_.split(":")
+        x_arg = x_arg.replace("%", "%20")
     notes = note_utils.get_notes_by_id(
         cfg.zettel_dir, cfg.database_url, id_, verbose=cfg.verbose
     )
@@ -269,7 +270,7 @@ def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
         )
         return 1
 
-    x_link = c.get_only_item(x_links).replace("%s", x_arg).replace("%", "%20")
+    x_link = c.get_only_item(x_links).replace("%s", x_arg)
     print(f"ECHO Opening in browser: {x_link}")
     proc = sp.run(["open", x_link], check=True)
     return proc.returncode
