@@ -150,6 +150,7 @@
   - 240828#03 ID::foo_with_url_arg https://go/foo?bar=%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   
   ################################ [[property]]
   o P3 240510#0N This recurring todo also uses an inline property | [recur::M+Th]
@@ -275,6 +276,7 @@
   - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   
   ################################ [[multiblocks]]
   o P3 240510#07 Some todo
@@ -794,6 +796,7 @@
   - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   
   ################################ @pomodoro
   - 240323#0J #gtd pomodoro
@@ -1021,6 +1024,7 @@
   - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   - 301231#X1 @READ Some article
     * RID::some_article
     * url::http://www.example.com
@@ -1199,6 +1203,7 @@
   - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   
   ++++++++++++++++ +arms
   - 240510#0L Sqtdicu Gfwebkj: fdxd://rd/czge-nxgz-vmuncaf
@@ -1414,6 +1419,7 @@
   - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
   - 240831#00 ID::gchat_convo with 'http' inside a string
     https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  - 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   
   ################################ [[multiblocks]]
   - 240510#0E Note A2
@@ -1763,6 +1769,7 @@
   x:https://go/foo?bar=%s
   x:https://go/foo?env=dev&bar=2&baz=3
   x:https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  x:https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   x:https://www.bazbuz.com
   x:https://www.foobar.com
   xmind/zorg_e2e_query_arch.xmind
@@ -1793,6 +1800,7 @@
   x:https://go/foo?bar=%s
   x:https://go/foo/bar/%s
   x:https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+  x:https://mail.google.com/mail/u/1/#label/%40%2FNEXT
   bar.sh
   baz
   buz#fuzz

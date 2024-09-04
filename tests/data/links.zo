@@ -28,3 +28,4 @@
 - 240828#04 ID::foo_slash_arg https://go/foo/bar/%s
 - 240831#00 ID::gchat_convo with 'http' inside a string
   https://mail.google.com/chat/u/0/#chat/space/AAAAKA-qATI
+- 240904#00 ID::gmail_with_percents https://mail.google.com/mail/u/1/#label/%40%2FNEXT
