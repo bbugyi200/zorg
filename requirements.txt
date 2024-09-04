@@ -63,7 +63,7 @@ rich==13.8.0
     # via -r requirements.in
 six==1.16.0
     # via python-dateutil
-sqlalchemy==2.0.32
+sqlalchemy==2.0.34
     # via sqlmodel
 sqlmodel==0.0.22
     # via -r requirements.in
