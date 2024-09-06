@@ -42,12 +42,12 @@ markupsafe==2.1.5
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.8.2
+pydantic==2.9.0
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.20.1
+pydantic-core==2.23.2
     # via pydantic
 pydantic-settings==2.4.0
     # via bolton-clack
@@ -76,5 +76,7 @@ typing-extensions==4.12.2
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
+tzdata==2024.1
+    # via pydantic
 vimala==0.2.0
     # via -r requirements.in
