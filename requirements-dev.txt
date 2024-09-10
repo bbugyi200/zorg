@@ -174,7 +174,7 @@ pydantic==2.9.1
     #   sqlmodel
 pydantic-core==2.23.3
     # via pydantic
-pydantic-settings==2.4.0
+pydantic-settings==2.5.0
     # via bolton-clack
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
@@ -218,7 +218,7 @@ requests==2.32.3
     # via
     #   cookiecutter
     #   sphinx
-rich==13.8.0
+rich==13.8.1
     # via
     #   -r requirements.in
     #   cookiecutter
