@@ -102,7 +102,7 @@ gitdb==4.0.11
     # via gitpython
 gitpython==3.1.43
     # via cruft
-greenlet==3.0.3
+greenlet==3.1.0
     # via sqlalchemy
 idna==3.8
     # via requests
@@ -175,7 +175,10 @@ pydantic==2.9.1
 pydantic-core==2.23.3
     # via pydantic
 pydantic-settings==2.5.0
-    # via bolton-clack
+    # via
+    #   -r requirements.in
+    #   bolton-clack
+    #   zettel-org
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
 pyflakes==3.2.0
