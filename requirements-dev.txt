@@ -319,7 +319,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.2
+urllib3==2.2.3
     # via requests
 vimala==0.2.0
     # via
