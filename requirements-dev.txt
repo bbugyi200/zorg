@@ -104,7 +104,7 @@ gitpython==3.1.43
     # via cruft
 greenlet==3.1.0
     # via sqlalchemy
-idna==3.9
+idna==3.10
     # via requests
 imagesize==1.4.1
     # via sphinx
