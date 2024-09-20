@@ -278,6 +278,15 @@ class ZorgFileListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ZorgFileParser#priv_id.
+    def enterPriv_id(self, ctx:ZorgFileParser.Priv_idContext):
+        pass
+
+    # Exit a parse tree produced by ZorgFileParser#priv_id.
+    def exitPriv_id(self, ctx:ZorgFileParser.Priv_idContext):
+        pass
+
+
     # Enter a parse tree produced by ZorgFileParser#date.
     def enterDate(self, ctx:ZorgFileParser.DateContext):
         pass
