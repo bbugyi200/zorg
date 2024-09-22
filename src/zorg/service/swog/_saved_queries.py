@@ -56,11 +56,11 @@ def _get_saved_query_names(qstring: str) -> set[str]:
 def _get_saved_where_filter(zdir: PathLike, query_name: str) -> Optional[str]:
     """Attempt to fetch a saved where filter string.
 
-    Returns a where filter string taken from the {zdir}/query/{query_name}.zoq
+    Returns a where filter string taken from the {zdir}/zoq/{query_name}.zoq
     file, if it exists. Otherwise, returns None.
     """
     zdir = Path(zdir)
-    zoq_path = c.prepend_zdir(zdir, f"query/{query_name}.zoq")
+    zoq_path = c.prepend_zdir(zdir, f"zoq/{query_name}.zoq")
     if not zoq_path.exists():
         _LOGGER.error("Zorg query file does NOT exist", zoq_path=str(zoq_path))
         return None

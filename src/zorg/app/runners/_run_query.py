@@ -16,7 +16,7 @@ from ._runners import runner
 def run_query(cfg: QueryConfig) -> int:
     """Runner for the 'query' command."""
     if cfg.open_in_editor or cfg.store_in_file:
-        tmp_zorg_dir = str(cfg.zettel_dir / "query/tmp")
+        tmp_zorg_dir = str(cfg.zettel_dir / "zoq/tmp")
         tmp_zoq_path = Path(_create_temp_query_page(tmp_zorg_dir))
         tmp_zoq_path.write_text(f"# {cfg.query}\n")
         if cfg.open_in_editor:
