@@ -7,9 +7,9 @@ from zorg.service.swog._saved_queries import expand_saved_queries
 
 def test_expand_saved_queries__good(zettel_dir: Path) -> None:
     """Flexes the expand_saved_queries() service method."""
-    foo_zoq_path = zettel_dir / "query/foo.zoq"
-    bar_zoq_path = zettel_dir / "query/bar.zoq"
-    baz_zoq_path = zettel_dir / "query/baz.zoq"
+    foo_zoq_path = zettel_dir / "zoq/foo.zoq"
+    bar_zoq_path = zettel_dir / "zoq/bar.zoq"
+    baz_zoq_path = zettel_dir / "zoq/baz.zoq"
     foo_zoq_path.parent.mkdir()
     bar_where = "#foo +bar"
     baz_where = "@BAZ buz:*"
