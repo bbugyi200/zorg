@@ -221,7 +221,7 @@ requests==2.32.3
     # via
     #   cookiecutter
     #   sphinx
-rich==13.8.1
+rich==13.9.1
     # via
     #   -r requirements.in
     #   cookiecutter
@@ -317,6 +317,7 @@ typing-extensions==4.12.2
     #   mypy
     #   pydantic
     #   pydantic-core
+    #   rich
     #   sqlalchemy
     #   typer
 urllib3==2.2.3
