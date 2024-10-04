@@ -18,7 +18,7 @@ antlr4-tools==0.2.1
     # via -r requirements-dev.in
 arrow==1.3.0
     # via cookiecutter
-astroid==3.3.4
+astroid==3.3.5
     # via pylint
 babel==2.16.0
     # via sphinx
@@ -221,7 +221,7 @@ requests==2.32.3
     # via
     #   cookiecutter
     #   sphinx
-rich==13.9.1
+rich==13.9.2
     # via
     #   -r requirements.in
     #   cookiecutter
