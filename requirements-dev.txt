@@ -24,7 +24,7 @@ babel==2.16.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.8.0
+black==24.10.0
     # via -r requirements-dev.in
 bolton-clack==0.3.12
     # via
