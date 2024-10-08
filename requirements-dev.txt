@@ -126,7 +126,7 @@ m2r2==0.3.3.post2
     # via -r requirements-dev.in
 markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.5
+markupsafe==3.0.0
     # via jinja2
 mccabe==0.7.0
     # via
