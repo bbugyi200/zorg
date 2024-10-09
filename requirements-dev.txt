@@ -81,7 +81,7 @@ cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
 dill==0.3.9
     # via pylint
-distlib==0.3.8
+distlib==0.3.9
     # via virtualenv
 docutils==0.21.2
     # via
