@@ -62,7 +62,7 @@ certifi==2024.8.30
     # via requests
 chardet==5.2.0
     # via binaryornot
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via
@@ -75,7 +75,7 @@ cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.6.1
+coverage[toml]==7.6.2
     # via pytest-cov
 cruft[pyproject]==2.15.0
     # via -r requirements-dev.in
@@ -126,7 +126,7 @@ m2r2==0.3.3.post2
     # via -r requirements-dev.in
 markdown-it-py==3.0.0
     # via rich
-markupsafe==3.0.0
+markupsafe==3.0.1
     # via jinja2
 mccabe==0.7.0
     # via
@@ -247,9 +247,9 @@ sphinx==8.0.2
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-autodoc-typehints==2.4.4
+sphinx-autodoc-typehints==2.5.0
     # via -r requirements-dev.in
-sphinx-rtd-theme==3.0.0
+sphinx-rtd-theme==3.0.1
     # via -r requirements-dev.in
 sphinxcontrib-applehelp==2.0.0
     # via sphinx
