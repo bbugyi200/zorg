@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/python-boltons/cc-python",
-  "commit": "9bf66fb22364c3bd192f79ca59ddfa59c7f02657",
+  "commit": "fedee07ac86479b2e3ad89600427a7784f97ebc4",
   "checkout": null,
   "context": {
     "cookiecutter": {
