@@ -265,7 +265,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.35
+sqlalchemy==2.0.36
     # via sqlmodel
 sqlmodel==0.0.22
     # via
@@ -334,7 +334,7 @@ wheel==0.44.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.2
     # via pip-tools
-setuptools==75.1.0
+setuptools==75.2.0
     # via
     #   pip-tools
     #   setuptools-scm
