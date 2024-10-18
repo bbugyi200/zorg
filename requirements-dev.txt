@@ -126,7 +126,7 @@ m2r2==0.3.3.post2
     # via -r requirements-dev.in
 markdown-it-py==3.0.0
     # via rich
-markupsafe==3.0.1
+markupsafe==3.0.2
     # via jinja2
 mccabe==0.7.0
     # via
@@ -326,7 +326,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.26.6
+virtualenv==20.27.0
     # via tox
 wheel==0.44.0
     # via pip-tools
