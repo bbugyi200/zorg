@@ -61,7 +61,7 @@ python-dotenv==1.0.1
     # via pydantic-settings
 pyyaml==6.0.2
     # via bolton-clack
-rich==13.9.3
+rich==13.9.4
     # via -r requirements.in
 six==1.16.0
     # via python-dateutil
