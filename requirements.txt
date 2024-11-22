@@ -42,12 +42,12 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.10.0
+pydantic==2.10.1
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.27.0
+pydantic-core==2.27.1
     # via pydantic
 pydantic-settings==2.4.0
     # via
