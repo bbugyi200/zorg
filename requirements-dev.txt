@@ -167,7 +167,7 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.1
     # via flake8
-pydantic==2.10.1
+pydantic==2.10.2
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -330,7 +330,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.27.1
+virtualenv==20.28.0
     # via tox
 wheel==0.45.1
     # via pip-tools
