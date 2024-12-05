@@ -167,7 +167,7 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.1
     # via flake8
-pydantic==2.10.2
+pydantic==2.10.3
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -231,7 +231,7 @@ setuptools-scm==8.1.0
     # via -r requirements-dev.in
 shellingham==1.5.4
     # via typer
-six==1.16.0
+six==1.17.0
     # via
     #   python-dateutil
     #   tox
@@ -304,7 +304,7 @@ tqdm==4.67.1
     # via
     #   -r requirements.in
     #   zettel-org
-typer==0.14.0
+typer==0.15.1
     # via cruft
 types-python-dateutil==2.9.0.20241003
     # via arrow
