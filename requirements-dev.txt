@@ -167,12 +167,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.1
     # via flake8
-pydantic==2.10.3
+pydantic==2.10.4
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.27.1
+pydantic-core==2.27.2
     # via pydantic
 pydantic-settings==2.4.0
     # via
