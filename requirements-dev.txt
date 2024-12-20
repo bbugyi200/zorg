@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.13.0
+mypy==1.14.0
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
@@ -310,7 +310,7 @@ types-python-dateutil==2.9.0.20241206
     # via arrow
 types-requests==2.32.0.20241016
     # via types-tqdm
-types-tqdm==4.67.0.20241119
+types-tqdm==4.67.0.20241220
     # via -r requirements-dev.in
 typing-extensions==4.12.2
     # via
