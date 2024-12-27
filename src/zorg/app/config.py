@@ -152,6 +152,9 @@ class QueryConfig(Config):
     open_in_editor: bool = False
     store_in_file: bool = False
 
+    # ----- CONFIG
+    vim_exe: str = "vim"
+
 
 class TemplateListConfig(Config):
     """Clack config for the 'template' command."""

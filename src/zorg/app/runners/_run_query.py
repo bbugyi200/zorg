@@ -19,8 +19,13 @@ def run_query(cfg: QueryConfig) -> int:
         tmp_zorg_dir = str(cfg.zettel_dir / "zoq/tmp")
         tmp_zoq_path = Path(_create_temp_query_page(tmp_zorg_dir))
         tmp_zoq_path.write_text(f"# {cfg.query}\n")
+
+        # TODO: Fix pylint complaint about duplicate code between this module
+        #       and _run_edit.py and re-enable this lint!
+        #
+        # pylint: disable=duplicate-code
         if cfg.open_in_editor:
-            messagebus.handle(  # pylint: disable=duplicate-code
+            messagebus.handle(
                 cfg.zettel_dir,
                 cfg.database_url,
                 [
@@ -29,6 +34,7 @@ def run_query(cfg: QueryConfig) -> int:
                         paths=[tmp_zoq_path],
                         verbose=cfg.verbose,
                         vim_commands=cfg.vim_commands,
+                        vim_exe=cfg.vim_exe,
                         zettel_dir=cfg.zettel_dir,
                     ),
                 ],

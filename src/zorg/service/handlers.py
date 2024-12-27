@@ -99,6 +99,7 @@ def check_keep_alive_file(
             keep_alive_file=keep_alive_file,
             verbose=verbose,
             vim_commands=vim_commands,
+            vim_exe=event.edit_cmd.vim_exe,
         )
     )
 
