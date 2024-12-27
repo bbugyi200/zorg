@@ -20,8 +20,8 @@ def run_query(cfg: QueryConfig) -> int:
         tmp_zoq_path = Path(_create_temp_query_page(tmp_zorg_dir))
         tmp_zoq_path.write_text(f"# {cfg.query}\n")
 
-        # TODO: Fix pylint complaint about duplicate code between this module
-        #       and _run_edit.py and re-enable this lint!
+        # TODO(bugyi): Fix pylint complaint about duplicate code between this
+        #              module and _run_edit.py and re-enable this lint!
         #
         # pylint: disable=duplicate-code
         if cfg.open_in_editor:
