@@ -29,6 +29,7 @@ def run_edit(cfg: EditConfig) -> int:
                 paths=zo_paths,
                 verbose=cfg.verbose,
                 vim_commands=cfg.vim_commands,
+                vim_exe=cfg.vim_exe,
                 zettel_dir=cfg.zettel_dir,
             ),
         ],

@@ -36,6 +36,7 @@ def edit_files(cmd: commands.EditCommand, session: SQLSession) -> None:
     vimala.vim(
         *cmd.paths,
         commands=_process_vim_commands(cmd.zettel_dir, cmd.vim_commands),
+        vim_exe=cmd.vim_exe,
     ).unwrap()
     session.add_message(  # pylint: disable=unreachable
         events.EditorClosedEvent(edit_cmd=cmd)

@@ -95,6 +95,7 @@ class EditConfig(Config):
 
     # ----- CONFIG
     file_group_map: FileGroupMapType = {}
+    vim_exe: str = "vim"
 
 
 class FileRenameConfig(Config):

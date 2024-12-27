@@ -18,6 +18,7 @@ class EditCommand(Command):
     paths: list[Path]
     keep_alive_file: Path
     vim_commands: list[str]
+    vim_exe: str
     verbose: int = 0
 
 
