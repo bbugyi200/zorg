@@ -271,7 +271,7 @@ sqlmodel==0.0.22
     # via
     #   -r requirements.in
     #   zettel-org
-structlog==24.4.0
+structlog==25.1.0
     # via bolton-logrus
 syrupy==4.8.1
     # via -r requirements-dev.in
@@ -321,6 +321,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   rich
     #   sqlalchemy
+    #   structlog
     #   typer
 urllib3==2.3.0
     # via
@@ -330,7 +331,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.28.1
+virtualenv==20.29.0
     # via tox
 wheel==0.45.1
     # via pip-tools

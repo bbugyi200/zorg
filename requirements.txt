@@ -69,7 +69,7 @@ sqlalchemy==2.0.37
     # via sqlmodel
 sqlmodel==0.0.22
     # via -r requirements.in
-structlog==24.4.0
+structlog==25.1.0
     # via bolton-logrus
 tqdm==4.67.1
     # via -r requirements.in
@@ -79,5 +79,6 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   rich
     #   sqlalchemy
+    #   structlog
 vimala==0.2.0
     # via -r requirements.in
