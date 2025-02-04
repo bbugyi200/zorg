@@ -20,11 +20,11 @@ arrow==1.3.0
     # via cookiecutter
 astroid==3.3.8
     # via pylint
-babel==2.16.0
+babel==2.17.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==24.10.0
+black==25.1.0
     # via -r requirements-dev.in
 bolton-clack==0.3.12
     # via
@@ -58,7 +58,7 @@ build==1.2.2.post1
     # via pip-tools
 bump2version==1.0.1
     # via -r requirements-dev.in
-certifi==2024.12.14
+certifi==2025.1.31
     # via requests
 chardet==5.2.0
     # via binaryornot
@@ -112,7 +112,7 @@ iniconfig==2.0.0
     # via pytest
 install-jdk==1.1.0
     # via antlr4-tools
-isort==5.13.2
+isort==6.0.0
     # via
     #   -r requirements-dev.in
     #   pylint
@@ -167,7 +167,7 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.1
     # via flake8
-pydantic==2.10.5
+pydantic==2.10.6
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -187,7 +187,7 @@ pygments==2.19.1
     # via
     #   rich
     #   sphinx
-pylint==3.3.3
+pylint==3.3.4
     # via -r requirements-dev.in
 pyproject-hooks==1.2.0
     # via
@@ -337,7 +337,7 @@ wheel==0.45.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==24.3.1
+pip==25.0
     # via pip-tools
 setuptools==75.8.0
     # via
