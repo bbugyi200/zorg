@@ -1,8 +1,8 @@
 """Contains utilities for refreshing *.zoq files."""
 
 import datetime as dt
-import itertools as it
 from functools import partial
+import itertools as it
 from pathlib import Path
 
 from typist import PathLike

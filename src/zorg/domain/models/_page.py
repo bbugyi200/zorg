@@ -1,7 +1,7 @@
 """This file contains Zorg's domain model classes."""
 
-import datetime as dt
 from dataclasses import dataclass, field
+import datetime as dt
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 

@@ -1,7 +1,7 @@
 """Contains utilities for working with saved queries."""
 
-import re
 from pathlib import Path
+import re
 from typing import Final, Optional
 
 from logrus import Logger

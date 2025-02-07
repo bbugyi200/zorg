@@ -1,10 +1,10 @@
 """Logic for executing zorg queries lives in this module."""
 
-import itertools as it
-import time
 from collections import defaultdict
 from functools import partial
+import itertools as it
 from pathlib import Path
+import time
 from typing import Callable, Iterable, Sequence, Union
 
 from logrus import Logger

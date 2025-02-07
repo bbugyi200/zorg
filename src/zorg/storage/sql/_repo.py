@@ -13,8 +13,7 @@ from sqlmodel.sql.expression import ColumnElement
 
 from zorg.domain.messages.events import NewZorgNotesEvent
 from zorg.domain.models import Note, Page, WhereOrFilter
-from zorg.shared import common as c
-from zorg.shared import dates as zdt
+from zorg.shared import common as c, dates as zdt
 
 from . import _models as sql
 from ._page_converters import NoteConverter, PageConverter

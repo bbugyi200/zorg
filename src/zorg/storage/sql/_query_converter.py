@@ -1,12 +1,12 @@
 """Contains logic to convert domain Query model to SQL select statement."""
 
-import operator
 from dataclasses import dataclass
 from functools import partial
+import operator
 from typing import Any, Callable, Final, Iterable, Optional, TypeVar, cast
 
-import metaman
 from logrus import Logger
+import metaman
 from sqlalchemy import func
 from sqlmodel import Integer, Session, and_, or_, select
 from sqlmodel.sql.expression import Column, ColumnElement, SelectOfScalar

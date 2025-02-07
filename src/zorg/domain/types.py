@@ -3,9 +3,9 @@
 # pyright: reportGeneralTypeIssues=false
 
 import abc
+from dataclasses import dataclass
 import datetime as dt
 import enum
-from dataclasses import dataclass
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,

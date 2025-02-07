@@ -1,10 +1,10 @@
 """Contains service logic used to compile zorg files."""
 
+from dataclasses import dataclass, field
 import datetime as dt
+from functools import partial
 import itertools as it
 import re
-from dataclasses import dataclass, field
-from functools import partial
 from typing import Any, Final, Mapping, Optional
 
 from antlr4.error.ErrorListener import ErrorListener

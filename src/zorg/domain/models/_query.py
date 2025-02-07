@@ -1,7 +1,7 @@
 """Contains the Query domain entity."""
 
-import datetime as dt
 from dataclasses import dataclass, field
+import datetime as dt
 from typing import Iterable, Optional
 
 from zorg.domain.types import (

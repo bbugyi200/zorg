@@ -6,8 +6,7 @@ from functools import lru_cache as cache
 from typing import Any
 
 from sqlalchemy.future import Engine
-from sqlmodel import SQLModel
-from sqlmodel import create_engine as sqlmodel_create_engine
+from sqlmodel import SQLModel, create_engine as sqlmodel_create_engine
 
 
 @cache
