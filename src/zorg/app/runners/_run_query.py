@@ -1,9 +1,9 @@
 """Contains runners for the 'zorg query' command."""
 
 import os
-from pathlib import Path
 import random
 import string
+from pathlib import Path
 
 from zorg.app.config import QueryConfig
 from zorg.domain.messages import commands

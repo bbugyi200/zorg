@@ -6,7 +6,6 @@ from pytest import mark, param
 
 from zorg.service.note_utils import _note_body_has_tag
 
-
 params = mark.parametrize
 fat_pig_body: Final = (
     "P0 240704 240701#00 Hey there @MR +pig. You are age::11 years old and are"

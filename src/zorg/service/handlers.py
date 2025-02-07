@@ -3,14 +3,14 @@
 import datetime as dt
 import hashlib
 import json
+import sys
 from operator import attrgetter
 from pathlib import Path
-import sys
 from typing import Callable, Iterable, Iterator, Optional, Sequence
 
+import vimala
 from logrus import Logger
 from tqdm import tqdm
-import vimala
 
 from zorg import APP_NAME
 from zorg.domain.messages import commands, events
@@ -18,9 +18,9 @@ from zorg.domain.models import Note, Page
 from zorg.domain.types import Color
 from zorg.service import swog
 from zorg.service.compiler import walk_zorg_page
-from zorg.shared import common as c, dates as zdt
+from zorg.shared import common as c
+from zorg.shared import dates as zdt
 from zorg.storage.sql import SQLSession
-
 
 _LOGGER = Logger(__name__)
 

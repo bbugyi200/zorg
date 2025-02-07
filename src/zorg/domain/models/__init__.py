@@ -15,7 +15,6 @@ from ._query import (
     WhereOrFilter,
 )
 
-
 __all__ = [
     "Block",
     "DateRange",

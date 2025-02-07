@@ -7,7 +7,6 @@ from zorg.shared import common as c
 
 from ._runners import runner
 
-
 _LOGGER = Logger(__name__)
 
 

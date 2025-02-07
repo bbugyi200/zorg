@@ -1,13 +1,12 @@
 """This file contains Zorg's domain model classes."""
 
-from dataclasses import dataclass, field
 import datetime as dt
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
 from zorg.domain.types import NoteType, TodoPriorityType
 from zorg.shared import common as c
-
 
 if TYPE_CHECKING:
     from ..messages.events import Event

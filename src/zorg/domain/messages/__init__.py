@@ -8,7 +8,6 @@ from typing import Union
 
 from . import commands, events
 
-
 Message = Union[commands.Command, events.Event]
 
 __all__ = ["Message", "commands", "events"]

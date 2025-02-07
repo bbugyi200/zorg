@@ -14,7 +14,6 @@ from zorg.shared import common as c
 
 from ._runners import runner
 
-
 _LOGGER: Final = Logger(__name__)
 
 

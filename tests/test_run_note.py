@@ -10,7 +10,6 @@ from syrupy.assertion import SnapshotAssertion as Snapshot
 
 from . import common as c
 
-
 params = mark.parametrize
 
 

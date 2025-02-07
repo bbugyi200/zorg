@@ -1,7 +1,7 @@
 """Contains runners for the 'zorg template' command."""
 
-from pathlib import Path
 import sys
+from pathlib import Path
 from typing import Any, Iterable
 
 from zorg.app.config import (

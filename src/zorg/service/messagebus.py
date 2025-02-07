@@ -12,7 +12,6 @@ from zorg.domain.messages import Message, commands, events
 from zorg.service import handlers
 from zorg.storage.sql import SQLSession
 
-
 _LOGGER = Logger(__name__)
 
 MessageHandler = Callable[[Any, SQLSession], None]

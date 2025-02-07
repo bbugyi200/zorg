@@ -18,7 +18,6 @@ from zorg.shared import common as c
 
 from . import common as test_c
 
-
 pytest_plugins = ["clack.pytest_plugin", "vimala.pytest_plugin"]
 
 

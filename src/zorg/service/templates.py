@@ -1,8 +1,8 @@
 """Common utilities shared by multiple clack runners."""
 
 import datetime as dt
-from pathlib import Path
 import tempfile
+from pathlib import Path
 from typing import Any, Mapping
 
 import jinja2
@@ -11,7 +11,6 @@ from typist import PathLike
 
 from zorg.domain.types import TemplatePatternMapType, VarMapType
 from zorg.shared import common as c
-
 
 _LOGGER = Logger(__name__)
 

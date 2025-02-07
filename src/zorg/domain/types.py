@@ -3,9 +3,9 @@
 # pyright: reportGeneralTypeIssues=false
 
 import abc
-from dataclasses import dataclass
 import datetime as dt
 import enum
+from dataclasses import dataclass
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,
@@ -25,7 +25,6 @@ from typing import (
 
 from sqlalchemy.future import Engine
 from typist import assert_never
-
 
 if TYPE_CHECKING:
     from zorg.domain.models import Note, Section, TodoPayload

@@ -2,7 +2,6 @@
 
 from typing import Final
 
-
 APP_NAME: Final = "zorg"
 
 __author__ = "Bryan M Bugyi"

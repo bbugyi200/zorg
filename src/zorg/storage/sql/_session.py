@@ -16,7 +16,6 @@ from zorg.domain.types import CreateEngineType
 from ._engine import create_cached_engine
 from ._repo import SQLRepo
 
-
 _LOGGER = Logger(__name__)
 
 

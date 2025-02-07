@@ -1,7 +1,7 @@
 """Contains runners for the 'zorg action' command."""
 
-from pathlib import Path
 import subprocess as sp
+from pathlib import Path
 from typing import Final, Optional
 
 from logrus import Logger
@@ -11,10 +11,10 @@ from zorg.app.config import OpenActionConfig
 from zorg.domain.types import NoteTypeChar
 from zorg.service import note_utils, swog
 from zorg.service.templates import init_from_template
-from zorg.shared import common as c, dates as zdt
+from zorg.shared import common as c
+from zorg.shared import dates as zdt
 
 from ._runners import runner
-
 
 _LOCAL_LINK_LEFT_MARK: Final = "[^"
 _LOGGER = Logger(__name__)

@@ -2,16 +2,15 @@
 
 import datetime as dt
 import itertools as it
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 from typing import Any, Iterable, Iterator, TypeVar
 
 import rich
 from typist import PathLike
 
 from zorg.domain.types import Color, VarMapType
-
 
 _T = TypeVar("_T")
 

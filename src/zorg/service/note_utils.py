@@ -20,7 +20,6 @@ from zorg.shared import common as c
 from zorg.storage.file import FileManager
 from zorg.storage.sql import SQLSession
 
-
 _LOGGER: Final = Logger(__name__)
 _NOTE_PAGE_TMPL: Final = """# {headline}
 #

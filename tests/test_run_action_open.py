@@ -13,7 +13,6 @@ from zorg.app.runners._run_action import _SEARCH_END
 
 from . import common as c
 
-
 params = mark.parametrize
 
 

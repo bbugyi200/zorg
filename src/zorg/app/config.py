@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from argparse import ArgumentTypeError
 import itertools as it
+from argparse import ArgumentTypeError
 from pathlib import Path
 from typing import Any, Final, List, Literal, Optional, Sequence, cast
 
@@ -19,7 +19,6 @@ from zorg.domain.types import (
     VarMapType,
 )
 from zorg.shared import common
-
 
 Command = Literal[
     "compile",

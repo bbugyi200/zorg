@@ -5,7 +5,6 @@ from typing import Final, Union
 
 from dateutil.relativedelta import relativedelta
 
-
 _SHORT_DATE_FMT: Final = "%Y%m%d"
 _LONG_DATE_FMT: Final = "%Y-%m-%d"
 

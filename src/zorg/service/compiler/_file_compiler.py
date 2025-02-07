@@ -1,10 +1,10 @@
 """Contains service logic used to compile zorg files."""
 
-from dataclasses import dataclass, field
 import datetime as dt
-from functools import partial
 import itertools as it
 import re
+from dataclasses import dataclass, field
+from functools import partial
 from typing import Any, Final, Mapping, Optional
 
 from antlr4.error.ErrorListener import ErrorListener
@@ -26,7 +26,6 @@ from zorg.domain.types import NoteType, TagName, TodoPriorityType, TodoTypeChar
 from zorg.grammar.zorg_file.ZorgFileListener import ZorgFileListener
 from zorg.grammar.zorg_file.ZorgFileParser import ZorgFileParser
 from zorg.shared import dates as zdt
-
 
 _DEFAULT_PRIORITY: Final[TodoPriorityType] = "P3"
 _LOGGER = Logger(__name__)

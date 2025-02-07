@@ -32,7 +32,6 @@ from zorg.grammar.zorg_query.ZorgQueryListener import ZorgQueryListener
 from zorg.grammar.zorg_query.ZorgQueryParser import ZorgQueryParser
 from zorg.shared import dates as zdt
 
-
 _LOGGER = Logger(__name__)
 
 

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Any, Final, Protocol
 
-
 # datetime info used by freezegun (and tests)
 hh: Final = "12"
 mm: Final = "00"

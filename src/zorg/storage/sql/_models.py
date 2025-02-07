@@ -10,7 +10,6 @@ from sqlmodel.sql.expression import Select, SelectOfScalar
 from zorg.domain.types import NoteType
 from zorg.shared import common as c
 
-
 # HACK: see https://github.com/tiangolo/sqlmodel/issues/189
 Select.inherit_cache = True
 SelectOfScalar.inherit_cache = True

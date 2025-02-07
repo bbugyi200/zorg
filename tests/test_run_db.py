@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import sqlite3
+from pathlib import Path
 
 from pytest import fixture
 from syrupy.assertion import SnapshotAssertion as Snapshot

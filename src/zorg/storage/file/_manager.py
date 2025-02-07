@@ -6,7 +6,6 @@ from typing import NewType, Optional
 from zorg.domain.models import Note
 from zorg.shared import common as c
 
-
 Error = NewType("Error", str)
 
 

@@ -8,6 +8,9 @@ preview = true
 unstable = true
 exclude = "src/zorg/grammar/"
 
+[tool.isort]
+profile = "black"
+
 [tool.pydocstyle]
 match = '.*\.py'
 match-dir = '(?!grammar).*'

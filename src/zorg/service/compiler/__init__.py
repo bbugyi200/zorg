@@ -6,5 +6,4 @@ queries or zorg files).
 
 from ._api import build_zorg_query, walk_zorg_page
 
-
 __all__ = ["build_zorg_query", "walk_zorg_page"]

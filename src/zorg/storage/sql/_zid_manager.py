@@ -7,7 +7,6 @@ from typing import Final, Optional, cast
 
 from zorg import APP_NAME
 
-
 _UNSUPPORTED_ZID_CHARS: Final[tuple[str, ...]] = (
     "I",
     "O",

@@ -1,14 +1,13 @@
 """Contains utilities for working with saved queries."""
 
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import Final, Optional
 
 from logrus import Logger
 from typist import PathLike
 
 from zorg.shared import common as c
-
 
 _LOGGER: Final = Logger(__name__)
 

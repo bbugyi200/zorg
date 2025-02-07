@@ -10,7 +10,6 @@ from zorg.service.compiler import walk_zorg_page
 
 from ._runners import runner
 
-
 _BAD_NOTE_DICT_KEYS: Final[tuple[str, ...]] = ("file_path", "line_no")
 
 
