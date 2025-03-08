@@ -34,7 +34,7 @@ bolton-typist==0.2.0
     #   vimala
 greenlet==3.1.1
     # via sqlalchemy
-jinja2==3.1.5
+jinja2==3.1.6
     # via -r requirements.in
 markdown-it-py==3.0.0
     # via rich
@@ -67,7 +67,7 @@ six==1.17.0
     # via python-dateutil
 sqlalchemy==2.0.38
     # via sqlmodel
-sqlmodel==0.0.22
+sqlmodel==0.0.24
     # via -r requirements.in
 structlog==25.1.0
     # via bolton-logrus
