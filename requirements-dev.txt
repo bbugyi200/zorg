@@ -265,13 +265,13 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.38
+sqlalchemy==2.0.39
     # via sqlmodel
 sqlmodel==0.0.24
     # via
     #   -r requirements.in
     #   zettel-org
-structlog==25.1.0
+structlog==25.2.0
     # via bolton-logrus
 syrupy==4.9.0
     # via -r requirements-dev.in
