@@ -227,7 +227,7 @@ rich==13.9.4
     #   cookiecutter
     #   typer
     #   zettel-org
-setuptools-scm==8.2.0
+setuptools-scm==8.2.1
     # via -r requirements-dev.in
 shellingham==1.5.4
     # via typer
@@ -310,7 +310,7 @@ types-python-dateutil==2.9.0.20241206
     # via arrow
 types-requests==2.32.0.20250306
     # via types-tqdm
-types-tqdm==4.67.0.20250301
+types-tqdm==4.67.0.20250319
     # via -r requirements-dev.in
 typing-extensions==4.12.2
     # via
