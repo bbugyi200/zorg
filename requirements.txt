@@ -57,7 +57,7 @@ pygments==2.19.1
     # via rich
 python-dateutil==2.9.0.post0
     # via -r requirements.in
-python-dotenv==1.0.1
+python-dotenv==1.1.0
     # via pydantic-settings
 pyyaml==6.0.2
     # via bolton-clack

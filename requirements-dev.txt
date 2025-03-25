@@ -209,7 +209,7 @@ python-dateutil==2.9.0.post0
     #   arrow
     #   freezegun
     #   zettel-org
-python-dotenv==1.0.1
+python-dotenv==1.1.0
     # via pydantic-settings
 python-slugify==8.0.4
     # via cookiecutter
@@ -339,7 +339,7 @@ wheel==0.45.1
 # The following packages are considered to be unsafe in a requirements file:
 pip==25.0.1
     # via pip-tools
-setuptools==77.0.3
+setuptools==78.0.2
     # via
     #   pip-tools
     #   setuptools-scm
