@@ -312,7 +312,7 @@ types-requests==2.32.0.20250306
     # via types-tqdm
 types-tqdm==4.67.0.20250319
     # via -r requirements-dev.in
-typing-extensions==4.12.2
+typing-extensions==4.13.0
     # via
     #   astroid
     #   black
@@ -339,7 +339,7 @@ wheel==0.45.1
 # The following packages are considered to be unsafe in a requirements file:
 pip==25.0.1
     # via pip-tools
-setuptools==78.0.2
+setuptools==78.1.0
     # via
     #   pip-tools
     #   setuptools-scm
