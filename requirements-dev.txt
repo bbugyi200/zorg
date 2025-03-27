@@ -167,12 +167,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.12.1
     # via flake8
-pydantic==2.10.6
+pydantic==2.11.0
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.27.2
+pydantic-core==2.33.0
     # via pydantic
 pydantic-settings==2.4.0
     # via
@@ -265,7 +265,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.39
+sqlalchemy==2.0.40
     # via sqlmodel
 sqlmodel==0.0.24
     # via
@@ -323,6 +323,9 @@ typing-extensions==4.13.0
     #   sqlalchemy
     #   structlog
     #   typer
+    #   typing-inspection
+typing-inspection==0.4.0
+    # via pydantic
 urllib3==2.3.0
     # via
     #   requests
