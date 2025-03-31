@@ -75,7 +75,7 @@ cogapp==3.4.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.7.1
+coverage[toml]==7.8.0
     # via pytest-cov
 cruft[pyproject]==2.16.0
     # via -r requirements-dev.in
@@ -94,7 +94,7 @@ filelock==3.18.0
     # via
     #   tox
     #   virtualenv
-flake8==7.1.2
+flake8==7.2.0
     # via -r requirements-dev.in
 freezegun==1.5.1
     # via -r requirements-dev.in
@@ -165,9 +165,9 @@ pluggy==1.5.0
     #   tox
 py==1.11.0
     # via tox
-pycodestyle==2.12.1
+pycodestyle==2.13.0
     # via flake8
-pydantic==2.11.0
+pydantic==2.11.1
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -181,7 +181,7 @@ pydantic-settings==2.4.0
     #   zettel-org
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
-pyflakes==3.2.0
+pyflakes==3.3.2
     # via flake8
 pygments==2.19.1
     # via
@@ -308,7 +308,7 @@ typer==0.15.2
     # via cruft
 types-python-dateutil==2.9.0.20241206
     # via arrow
-types-requests==2.32.0.20250306
+types-requests==2.32.0.20250328
     # via types-tqdm
 types-tqdm==4.67.0.20250319
     # via -r requirements-dev.in
