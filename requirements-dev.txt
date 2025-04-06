@@ -167,12 +167,12 @@ py==1.11.0
     # via tox
 pycodestyle==2.13.0
     # via flake8
-pydantic==2.11.1
+pydantic==2.11.2
     # via
     #   bolton-clack
     #   pydantic-settings
     #   sqlmodel
-pydantic-core==2.33.0
+pydantic-core==2.33.1
     # via pydantic
 pydantic-settings==2.4.0
     # via
@@ -199,7 +199,7 @@ pytest==7.4.4
     #   pytest-cov
     #   pytest-mock
     #   syrupy
-pytest-cov==6.0.0
+pytest-cov==6.1.1
     # via -r requirements-dev.in
 pytest-mock==3.14.0
     # via -r requirements-dev.in
@@ -310,9 +310,9 @@ types-python-dateutil==2.9.0.20241206
     # via arrow
 types-requests==2.32.0.20250328
     # via types-tqdm
-types-tqdm==4.67.0.20250319
+types-tqdm==4.67.0.20250404
     # via -r requirements-dev.in
-typing-extensions==4.13.0
+typing-extensions==4.13.1
     # via
     #   astroid
     #   black
@@ -334,7 +334,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.29.3
+virtualenv==20.30.0
     # via tox
 wheel==0.45.1
     # via pip-tools
