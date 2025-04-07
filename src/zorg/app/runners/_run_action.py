@@ -185,7 +185,7 @@ def _open_global_link(cfg: OpenActionConfig, id_link: str) -> int:
     )
 
     if not notes:
-        print(f"ECHO No notes with found with the ID::{id_} property")
+        print(f"ECHO No notes found with the ID::{id_} property")
         return 1
 
     pages = list({note.file_path for note in notes})
@@ -216,7 +216,7 @@ def _open_rid_link(cfg: OpenActionConfig, rid_link: str) -> int:
     )
 
     if not notes:
-        print(f"ECHO No notes with found with the RID::{rid} property")
+        print(f"ECHO No notes found with the RID::{rid} property")
         return 1
 
     if len(notes) > 1:
@@ -251,7 +251,7 @@ def _open_url_link(cfg: OpenActionConfig, url_link: str) -> int:
         cfg.zettel_dir, cfg.database_url, id_, verbose=cfg.verbose
     )
     if not notes:
-        print(f"ECHO No notes with found with the ID::{id_} property")
+        print(f"ECHO No notes found with the ID::{id_} property")
         return 1
     elif len(notes) > 1:
         matched_zids = " ".join(sorted({n.zid or "" for n in notes}))
