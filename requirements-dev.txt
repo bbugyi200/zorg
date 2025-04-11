@@ -312,7 +312,7 @@ types-requests==2.32.0.20250328
     # via types-tqdm
 types-tqdm==4.67.0.20250404
     # via -r requirements-dev.in
-typing-extensions==4.13.1
+typing-extensions==4.13.2
     # via
     #   astroid
     #   black
@@ -326,7 +326,7 @@ typing-extensions==4.13.1
     #   typing-inspection
 typing-inspection==0.4.0
     # via pydantic
-urllib3==2.3.0
+urllib3==2.4.0
     # via
     #   requests
     #   types-requests
