@@ -126,3 +126,4 @@ pyrightconfig.json
 
 # zorg data files live here
 .zorg/
+.aider*
