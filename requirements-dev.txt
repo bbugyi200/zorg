@@ -102,7 +102,7 @@ gitdb==4.0.12
     # via gitpython
 gitpython==3.1.44
     # via cruft
-greenlet==3.2.0
+greenlet==3.2.1
     # via sqlalchemy
 idna==3.10
     # via requests
@@ -138,7 +138,7 @@ mistune==0.8.4
     # via m2r2
 mypy==1.15.0
     # via -r requirements-dev.in
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via
     #   black
     #   mypy
@@ -227,7 +227,7 @@ rich==13.9.4
     #   cookiecutter
     #   typer
     #   zettel-org
-setuptools-scm==8.2.0
+setuptools-scm==8.3.0
     # via -r requirements-dev.in
 shellingham==1.5.4
     # via typer
