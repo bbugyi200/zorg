@@ -62,7 +62,7 @@ certifi==2025.4.26
     # via requests
 chardet==5.2.0
     # via binaryornot
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via requests
 click==8.1.8
     # via
@@ -122,7 +122,7 @@ jinja2==3.1.6
     #   cookiecutter
     #   sphinx
     #   zettel-org
-m2r2==0.3.3.post2
+m2r2==0.3.4
     # via -r requirements-dev.in
 markdown-it-py==3.0.0
     # via rich
@@ -187,7 +187,7 @@ pygments==2.19.1
     # via
     #   rich
     #   sphinx
-pylint==3.3.6
+pylint==3.3.7
     # via -r requirements-dev.in
 pyproject-hooks==1.2.0
     # via
@@ -340,9 +340,9 @@ wheel==0.45.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==25.1
+pip==25.1.1
     # via pip-tools
-setuptools==80.1.0
+setuptools==80.3.1
     # via
     #   pip-tools
     #   setuptools-scm
