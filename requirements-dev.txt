@@ -102,7 +102,7 @@ gitdb==4.0.12
     # via gitpython
 gitpython==3.1.44
     # via cruft
-greenlet==3.2.1
+greenlet==3.2.2
     # via sqlalchemy
 idna==3.10
     # via requests
@@ -154,7 +154,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements-dev.in
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via
     #   black
     #   pylint
@@ -237,7 +237,7 @@ six==1.17.0
     #   tox
 smmap==5.0.2
     # via gitdb
-snowballstemmer==2.2.0
+snowballstemmer==3.0.1
     # via
     #   pydocstyle
     #   sphinx
@@ -334,7 +334,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.31.1
+virtualenv==20.31.2
     # via tox
 wheel==0.45.1
     # via pip-tools
@@ -342,7 +342,7 @@ wheel==0.45.1
 # The following packages are considered to be unsafe in a requirements file:
 pip==25.1.1
     # via pip-tools
-setuptools==80.3.1
+setuptools==80.4.0
     # via
     #   pip-tools
     #   setuptools-scm

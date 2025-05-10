@@ -32,7 +32,7 @@ bolton-typist==0.2.0
     #   bolton-clack
     #   bolton-eris
     #   vimala
-greenlet==3.2.1
+greenlet==3.2.2
     # via sqlalchemy
 jinja2==3.1.6
     # via -r requirements.in
