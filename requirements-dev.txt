@@ -64,7 +64,7 @@ chardet==5.2.0
     # via binaryornot
 charset-normalizer==3.4.2
     # via requests
-click==8.2.0
+click==8.1.8
     # via
     #   black
     #   cookiecutter
@@ -159,7 +159,7 @@ platformdirs==4.3.8
     #   black
     #   pylint
     #   virtualenv
-pluggy==1.5.0
+pluggy==1.6.0
     # via
     #   pytest
     #   tox
@@ -265,7 +265,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.40
+sqlalchemy==2.0.41
     # via sqlmodel
 sqlmodel==0.0.24
     # via
@@ -304,13 +304,13 @@ tqdm==4.67.1
     # via
     #   -r requirements.in
     #   zettel-org
-typer==0.15.3
+typer==0.15.4
     # via cruft
-types-python-dateutil==2.9.0.20241206
+types-python-dateutil==2.9.0.20250516
     # via arrow
-types-requests==2.32.0.20250328
+types-requests==2.32.0.20250515
     # via types-tqdm
-types-tqdm==4.67.0.20250513
+types-tqdm==4.67.0.20250516
     # via -r requirements-dev.in
 typing-extensions==4.13.2
     # via
@@ -343,7 +343,7 @@ wheel==0.45.1
 # The following packages are considered to be unsafe in a requirements file:
 pip==25.1.1
     # via pip-tools
-setuptools==80.4.0
+setuptools==80.7.1
     # via
     #   pip-tools
     #   setuptools-scm
