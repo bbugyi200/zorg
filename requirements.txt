@@ -42,7 +42,7 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.11.4
+pydantic==2.11.5
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -81,7 +81,7 @@ typing-extensions==4.13.2
     #   sqlalchemy
     #   structlog
     #   typing-inspection
-typing-inspection==0.4.0
+typing-inspection==0.4.1
     # via pydantic
 vimala==0.2.0
     # via -r requirements.in
