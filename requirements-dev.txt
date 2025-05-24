@@ -96,7 +96,7 @@ filelock==3.18.0
     #   virtualenv
 flake8==7.2.0
     # via -r requirements-dev.in
-freezegun==1.5.1
+freezegun==1.5.2
     # via -r requirements-dev.in
 gitdb==4.0.12
     # via gitpython
