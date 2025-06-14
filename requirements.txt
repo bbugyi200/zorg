@@ -42,7 +42,7 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.11.5
+pydantic==2.11.7
     # via
     #   bolton-clack
     #   pydantic-settings
