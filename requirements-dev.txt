@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.16.0
+mypy==1.16.1
     # via -r requirements-dev.in
 mypy-extensions==1.1.0
     # via
@@ -330,7 +330,7 @@ typing-extensions==4.14.0
     #   typing-inspection
 typing-inspection==0.4.1
     # via pydantic
-urllib3==2.4.0
+urllib3==2.5.0
     # via
     #   requests
     #   types-requests
