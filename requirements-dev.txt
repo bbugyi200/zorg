@@ -94,7 +94,7 @@ filelock==3.18.0
     # via
     #   tox
     #   virtualenv
-flake8==7.2.0
+flake8==7.3.0
     # via -r requirements-dev.in
 freezegun==1.5.2
     # via -r requirements-dev.in
@@ -168,7 +168,7 @@ pluggy==1.6.0
     #   tox
 py==1.11.0
     # via tox
-pycodestyle==2.13.0
+pycodestyle==2.14.0
     # via flake8
 pydantic==2.11.7
     # via
@@ -184,7 +184,7 @@ pydantic-settings==2.4.0
     #   zettel-org
 pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
-pyflakes==3.3.2
+pyflakes==3.4.0
     # via flake8
 pygments==2.19.1
     # via
