@@ -53,11 +53,11 @@ pydantic-settings==2.4.0
     # via
     #   -r requirements.in
     #   bolton-clack
-pygments==2.19.1
+pygments==2.19.2
     # via rich
 python-dateutil==2.9.0.post0
     # via -r requirements.in
-python-dotenv==1.1.0
+python-dotenv==1.1.1
     # via pydantic-settings
 pyyaml==6.0.2
     # via bolton-clack

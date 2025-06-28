@@ -186,7 +186,7 @@ pydocstyle[toml]==6.3.0
     # via -r requirements-dev.in
 pyflakes==3.4.0
     # via flake8
-pygments==2.19.1
+pygments==2.19.2
     # via
     #   rich
     #   sphinx
@@ -212,7 +212,7 @@ python-dateutil==2.9.0.post0
     #   arrow
     #   freezegun
     #   zettel-org
-python-dotenv==1.1.0
+python-dotenv==1.1.1
     # via pydantic-settings
 python-slugify==8.0.4
     # via cookiecutter
