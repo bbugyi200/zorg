@@ -338,7 +338,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.31.2
+virtualenv==20.32.0
     # via tox
 wheel==0.45.1
     # via pip-tools
