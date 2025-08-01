@@ -96,7 +96,7 @@ filelock==3.18.0
     #   virtualenv
 flake8==7.3.0
     # via -r requirements-dev.in
-freezegun==1.5.3
+freezegun==1.5.4
     # via -r requirements-dev.in
 gitdb==4.0.12
     # via gitpython
@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.17.0
+mypy==1.17.1
     # via -r requirements-dev.in
 mypy-extensions==1.1.0
     # via
@@ -154,7 +154,7 @@ pathspec==0.12.1
     # via
     #   black
     #   mypy
-pip-tools==7.4.1
+pip-tools==7.5.0
     # via -r requirements-dev.in
 platformdirs==4.3.8
     # via
@@ -344,7 +344,7 @@ wheel==0.45.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==25.1.1
+pip==25.2
     # via pip-tools
 setuptools==80.9.0
     # via
