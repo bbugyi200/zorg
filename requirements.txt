@@ -36,7 +36,7 @@ greenlet==3.2.4
     # via sqlalchemy
 jinja2==3.1.6
     # via -r requirements.in
-markdown-it-py==3.0.0
+markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.2
     # via jinja2
@@ -65,7 +65,7 @@ rich==13.9.4
     # via -r requirements.in
 six==1.17.0
     # via python-dateutil
-sqlalchemy==2.0.42
+sqlalchemy==2.0.43
     # via sqlmodel
 sqlmodel==0.0.24
     # via -r requirements.in

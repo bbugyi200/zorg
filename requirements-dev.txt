@@ -75,7 +75,7 @@ cogapp==3.5.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.10.2
+coverage[toml]==7.10.3
     # via pytest-cov
 cruft[pyproject]==2.16.0
     # via -r requirements-dev.in
@@ -124,7 +124,7 @@ jinja2==3.1.6
     #   zettel-org
 m2r2==0.3.4
     # via -r requirements-dev.in
-markdown-it-py==3.0.0
+markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.2
     # via jinja2
@@ -268,7 +268,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.42
+sqlalchemy==2.0.43
     # via sqlmodel
 sqlmodel==0.0.24
     # via
@@ -328,6 +328,7 @@ typing-extensions==4.14.1
     #   structlog
     #   typer
     #   typing-inspection
+    #   virtualenv
 typing-inspection==0.4.1
     # via pydantic
 urllib3==2.5.0
@@ -338,7 +339,7 @@ vimala==0.2.0
     # via
     #   -r requirements.in
     #   zettel-org
-virtualenv==20.33.1
+virtualenv==20.34.0
     # via tox
 wheel==0.45.1
     # via pip-tools
