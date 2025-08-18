@@ -75,7 +75,7 @@ cogapp==3.5.1
     # via -r requirements-dev.in
 cookiecutter==2.6.0
     # via cruft
-coverage[toml]==7.10.3
+coverage[toml]==7.10.4
     # via pytest-cov
 cruft[pyproject]==2.16.0
     # via -r requirements-dev.in
