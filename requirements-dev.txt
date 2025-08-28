@@ -156,7 +156,7 @@ pathspec==0.12.1
     #   mypy
 pip-tools==7.5.0
     # via -r requirements-dev.in
-platformdirs==4.3.8
+platformdirs==4.4.0
     # via
     #   black
     #   pylint
@@ -315,7 +315,7 @@ types-requests==2.32.4.20250809
     # via types-tqdm
 types-tqdm==4.67.0.20250809
     # via -r requirements-dev.in
-typing-extensions==4.14.1
+typing-extensions==4.15.0
     # via
     #   astroid
     #   black
