@@ -204,7 +204,7 @@ pytest==7.4.4
     #   syrupy
 pytest-cov==6.2.1
     # via -r requirements-dev.in
-pytest-mock==3.14.1
+pytest-mock==3.15.0
     # via -r requirements-dev.in
 python-dateutil==2.9.0.post0
     # via
@@ -307,7 +307,7 @@ tqdm==4.67.1
     # via
     #   -r requirements.in
     #   zettel-org
-typer==0.17.3
+typer==0.17.4
     # via cruft
 types-python-dateutil==2.9.0.20250822
     # via arrow
