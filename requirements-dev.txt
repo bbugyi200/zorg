@@ -202,7 +202,7 @@ pytest==7.4.4
     #   pytest-cov
     #   pytest-mock
     #   syrupy
-pytest-cov==6.2.1
+pytest-cov==6.3.0
     # via -r requirements-dev.in
 pytest-mock==3.15.0
     # via -r requirements-dev.in
