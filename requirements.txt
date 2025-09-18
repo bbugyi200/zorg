@@ -42,7 +42,7 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.11.7
+pydantic==2.11.9
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -67,7 +67,7 @@ six==1.17.0
     # via python-dateutil
 sqlalchemy==2.0.43
     # via sqlmodel
-sqlmodel==0.0.24
+sqlmodel==0.0.25
     # via -r requirements.in
 structlog==25.4.0
     # via bolton-logrus

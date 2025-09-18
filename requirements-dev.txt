@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.17.1
+mypy==1.18.1
     # via -r requirements-dev.in
 mypy-extensions==1.1.0
     # via
@@ -170,7 +170,7 @@ py==1.11.0
     # via tox
 pycodestyle==2.14.0
     # via flake8
-pydantic==2.11.7
+pydantic==2.11.9
     # via
     #   bolton-clack
     #   pydantic-settings
@@ -202,9 +202,9 @@ pytest==7.4.4
     #   pytest-cov
     #   pytest-mock
     #   syrupy
-pytest-cov==6.3.0
+pytest-cov==7.0.0
     # via -r requirements-dev.in
-pytest-mock==3.15.0
+pytest-mock==3.15.1
     # via -r requirements-dev.in
 python-dateutil==2.9.0.post0
     # via
@@ -270,7 +270,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 sqlalchemy==2.0.43
     # via sqlmodel
-sqlmodel==0.0.24
+sqlmodel==0.0.25
     # via
     #   -r requirements.in
     #   zettel-org
@@ -311,7 +311,7 @@ typer==0.17.4
     # via cruft
 types-python-dateutil==2.9.0.20250822
     # via arrow
-types-requests==2.32.4.20250809
+types-requests==2.32.4.20250913
     # via types-tqdm
 types-tqdm==4.67.0.20250809
     # via -r requirements-dev.in
