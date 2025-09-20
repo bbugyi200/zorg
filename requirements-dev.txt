@@ -24,7 +24,7 @@ babel==2.17.0
     # via sphinx
 binaryornot==0.4.4
     # via cookiecutter
-black==25.1.0
+black==25.9.0
     # via -r requirements-dev.in
 bolton-clack==0.3.12
     # via
@@ -64,7 +64,7 @@ chardet==5.2.0
     # via binaryornot
 charset-normalizer==3.4.3
     # via requests
-click==8.2.1
+click==8.3.0
     # via
     #   black
     #   cookiecutter
@@ -136,7 +136,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mistune==0.8.4
     # via m2r2
-mypy==1.18.1
+mypy==1.18.2
     # via -r requirements-dev.in
 mypy-extensions==1.1.0
     # via
@@ -216,6 +216,8 @@ python-dotenv==1.1.1
     # via pydantic-settings
 python-slugify==8.0.4
     # via cookiecutter
+pytokens==0.1.10
+    # via black
 pyyaml==6.0.2
     # via
     #   bolton-clack
@@ -307,7 +309,7 @@ tqdm==4.67.1
     # via
     #   -r requirements.in
     #   zettel-org
-typer==0.17.4
+typer==0.19.1
     # via cruft
 types-python-dateutil==2.9.0.20250822
     # via arrow
