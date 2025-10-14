@@ -46,10 +46,12 @@ def to_sql_select(
         return select(sql.Note)
 
     select_query = _BASE_SELECTOR.where(
-        or_(*[
-            _AndFilterToSqlWhere(and_filter, session).to_sql_where()
-            for and_filter in or_filter.and_filters
-        ])
+        or_(
+            *[
+                _AndFilterToSqlWhere(and_filter, session).to_sql_where()
+                for and_filter in or_filter.and_filters
+            ]
+        )
     ).order_by(cast(Column, sql.Note.zid))
     _LOGGER.debug("Converted query", query=str(select_query))
     return select_query
@@ -83,19 +85,24 @@ class _AndFilterToSqlWhere:
         if not self.and_filter.allowed_note_types:
             return None
 
-        return or_(*[
-            sql.Note.todo_status == _to_todo_status(note_type)
-            for note_type in self.and_filter.allowed_note_types
-        ])
+        return or_(
+            *[
+                sql.Note.todo_status == _to_todo_status(note_type)
+                for note_type in self.and_filter.allowed_note_types
+            ]
+        )
 
     @_to_sql_where_helper
     def priority_range(self) -> Optional[ColumnElement]:
         """Converter for priority range filters."""
         priorities = self.and_filter.priorities
         if priorities:
-            return or_(*[
-                sql.Note.todo_priority == priority for priority in priorities
-            ])
+            return or_(
+                *[
+                    sql.Note.todo_priority == priority
+                    for priority in priorities
+                ]
+            )
         else:
             return None
 
@@ -141,12 +148,14 @@ class _AndFilterToSqlWhere:
         or_conds = []
         for or_filter in or_filters:
             or_conds.append(
-                or_(*[
-                    _AndFilterToSqlWhere(
-                        and_filter, self.session
-                    ).to_sql_where()
-                    for and_filter in or_filter.and_filters
-                ])
+                or_(
+                    *[
+                        _AndFilterToSqlWhere(
+                            and_filter, self.session
+                        ).to_sql_where()
+                        for and_filter in or_filter.and_filters
+                    ]
+                )
             )
         return (
             and_(or_conds[0], *or_conds[1:])
