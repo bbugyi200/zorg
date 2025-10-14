@@ -17,10 +17,7 @@ from zorg.domain.messages import commands, events
 from zorg.domain.models import Note, Page
 from zorg.domain.types import Color
 from zorg.service import swog
-from zorg.service._parallel import (
-    hash_files_parallel,
-    process_zo_files_parallel,
-)
+from zorg.service.compiler import walk_zorg_page
 from zorg.shared import common as c, dates as zdt
 from zorg.storage.sql import SQLSession
 
@@ -110,31 +107,25 @@ def create_database(
     cmd: commands.CreateDBCommand, session: SQLSession
 ) -> None:
     """Create a new zorg DB from scratch."""
+    zorg_pages = []
+    total_num_notes = 0
     error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
     old_error_files = error_file_whitelist.read_text().split("\n")
     error_files = []
-
-    # Process all *.zo files in parallel
-    zo_paths = _get_zo_paths_to_index(cmd.zettel_dir)
-    _LOGGER.info("Processing zorg files in parallel", num_files=len(zo_paths))
-
-    # Use tqdm to show progress while processing files in parallel
-    zorg_pages = []
-    total_num_notes = 0
-
-    # Process files in parallel
-    pages = process_zo_files_parallel(cmd.zettel_dir, zo_paths)
-
-    # Add pages to database and check for errors
-    for zorg_page in tqdm(
-        pages, desc="Adding files to database", file=sys.stdout
+    for zo_path in tqdm(
+        _get_zo_paths_to_index(cmd.zettel_dir),
+        desc="Reading notes from zorg files",
+        file=sys.stdout,
     ):
+        _LOGGER.info("Starting to walk zorg file", zorg_page=str(zo_path))
+        zorg_page = walk_zorg_page(cmd.zettel_dir, zo_path)
         num_notes = len(zorg_page.notes)
         total_num_notes += num_notes
         _LOGGER.info(
-            "Adding zorg file to database",
-            zorg_page=zorg_page.path.name,
+            "Finished walking zorg file",
+            zorg_page=zo_path.name,
             num_notes=num_notes,
+            total_num_notes=total_num_notes,
         )
         session.repo.add_file(zorg_page)
         zorg_pages.append(zorg_page)
@@ -188,32 +179,15 @@ def reindex_database(
     error_file_whitelist = _get_error_file_whitelist(cmd.zettel_dir)
     error_files = error_file_whitelist.read_text().split("\n")
 
-    # Identify files that need updating
-    files_to_update = []
+    num_of_updates = 0
     for zorg_page_name, hash_ in file_to_hash.copy().items():
+        # If this file has never been indexed OR the file contents have changed
+        # since the last time it was indexed.
         if (
             zorg_page_name not in old_file_to_hash.keys()
             or old_file_to_hash[zorg_page_name] != hash_
         ):
-            files_to_update.append(zorg_page_name)
-
-    num_of_updates = len(files_to_update)
-
-    if num_of_updates == 0:
-        c.zprint("NO ZORG FILES HAVE BEEN MODIFIED")
-    else:
-        # Process files in parallel
-        _LOGGER.info(
-            "Processing updated files in parallel", num_files=num_of_updates
-        )
-        zo_paths = [Path(name) for name in files_to_update]
-        pages = process_zo_files_parallel(
-            cmd.zettel_dir, zo_paths, verbose=cmd.verbose
-        )
-
-        # Add updated pages to database
-        for zorg_page in pages:
-            zorg_page_name = c.strip_zdir(cmd.zettel_dir, zorg_page.path)
+            num_of_updates += 1
             old_zorg_page = session.repo.remove_file_by_name(zorg_page_name)
             if old_zorg_page is not None:
                 _LOGGER.debug("Removing file from DB", file=zorg_page_name)
@@ -231,6 +205,9 @@ def reindex_database(
                     bg_color=Color.GREEN,
                 )
 
+            zorg_page = walk_zorg_page(
+                cmd.zettel_dir, Path(zorg_page_name), verbose=cmd.verbose
+            )
             zorg_page_path_str = c.strip_zdir(cmd.zettel_dir, zorg_page.path)
             if not zorg_page.has_errors and zorg_page_path_str in error_files:
                 c.zprint(
@@ -249,6 +226,9 @@ def reindex_database(
             _LOGGER.debug("Adding zorg file", file=zorg_page_name)
             session.repo.add_file(zorg_page)
             session.commit()
+
+    if num_of_updates == 0:
+        c.zprint("NO ZORG FILES HAVE BEEN MODIFIED")
 
     _write_file_hash_to_disk(file_hash_path, file_to_hash)
     error_file_whitelist.write_text("\n".join(sorted(error_files)))
@@ -305,18 +285,10 @@ def _get_file_hash_map(
 ) -> dict[str, str]:
     if paths is None:
         paths = _get_zo_paths_to_index(zdir)
-
-    # Convert to list to enable parallel processing
-    path_list = list(paths) if not isinstance(paths, list) else paths
-
-    # Use parallel hashing for performance
-    absolute_to_hash = hash_files_parallel(path_list)
-
-    # Convert absolute paths to relative paths (stripped of zdir)
     file_to_hash: dict[str, str] = {}
-    for path in path_list:
+    for path in paths:
         key = c.strip_zdir(zdir, path)
-        file_to_hash[key] = absolute_to_hash[str(path)]
+        file_to_hash[key] = _hash_file(path)
     return file_to_hash
 
 
